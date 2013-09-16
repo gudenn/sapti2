@@ -143,6 +143,7 @@ class Notificacion extends Objectbase
       $n_obj->estudiante_id = $estudiante_id;
       $this->notificacion_estudiante_objs[] = $n_obj;
     }
+    /* Pendiente Tribunal
     leerClase('Notificacion_tribunal');
     foreach ($tribunales as $tribunal_id) 
     {
@@ -150,6 +151,7 @@ class Notificacion extends Objectbase
       $n_obj->tribunal_id  = $tribunal_id;
       $this->notificacion_tribunal_objs[] = $n_obj;
     }
+    */
     leerClase('Notificacion_consejo');
     foreach ($consejos as $consejo_id) 
     {
@@ -157,7 +159,9 @@ class Notificacion extends Objectbase
       $n_obj->consejo_id   = $consejo_id;
       $this->notificacion_consejo_objs[] = $n_obj;
     }
-    
+    $this->detalle = $mensaje;
+    $this->save();
+    $this->saveAllSonObjects();
     
   }
 } 
