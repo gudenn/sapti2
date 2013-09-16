@@ -6,6 +6,9 @@
 class Administrador extends Objectbase
 {
 
+  /** constant to find the admin folder  */
+  const URL                  = "admin/";
+
  /**
   * Codigo identificador del Objeto Usuario
   * @var INT(11)
