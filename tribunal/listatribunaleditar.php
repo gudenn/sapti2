@@ -38,7 +38,6 @@ try {
   leerClase("Formulario");
   leerClase("Pagination");
   leerClase("Filtro");
-  leerClase("Proyecto_tribunal");
   leerClase("Proyecto_estudiante");
   
   
@@ -67,26 +66,17 @@ try {
  $usuario_mysql  = $usuario->getAll();
  $usuario_id     = array();
  $usuario_nombre = array();
- 
- $sql="SELECT pt.`id` , u.`nombre` ,u.`apellidos`, es.`codigo_sis` , p.`nombre` as nombreproyecto
+ $sql="SELECT pt.`id` , u.`nombre` ,CONCAT(u.`apellido_paterno`,u.`apellido_materno`) as apellidos, es.`codigo_sis` , p.`nombre` as nombreproyecto
 FROM `proyecto` p , `proyecto_tribunal`  pt , `usuario` u, `estudiante` es , `proyecto_estudiante` pe
 WHERE   u.`id`=es.`usuario_id` and  es.`id`=pe.`estudiante_id` and  pe.`proyecto_id`=p.`id` and p.`id`=pt.`proyecto_id`;";
  $resultado = mysql_query($sql);
  $arraytribunal= array();
  
- while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) {
-  // $arraytribunal=$fila;
-   
-   //array('name' => $fila["id"], 'home' => $fila["nombre"],'cell' => $fila["apellidos"], 'email' => 'john@myexample.com');
-   
+ while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+ {   
    $arraytribunal[]=$fila;
  }
 
-
-//foreach ()
-
-
-//var_dump($arraytribunal);
 $smarty->assign('arraytribunal'  , $arraytribunal);
  /**
  $resultado = mysql_query($sql);
@@ -176,11 +166,9 @@ $smarty->assign('proyecto_nombre',$proyecto_nombre);
      $smarty->assign('usuariobuscado',  $usuariobuscado);
     $smarty->assign('estudiantebuscado', $estudiante);
      $smarty->assign('proyectobuscado', $proyecto);
-      $smarty->assign('proyectoarea', $proyecto->getArea());
-    
-    
+      $smarty->assign('proyectoarea', $proyecto->getArea());  
+      
    // return $proyecto;
-    
     //$proyecto->getProyectoAprobados();
     
   //  var_dump($proyecto->getProyectoAprobados());
@@ -189,22 +177,14 @@ $smarty->assign('proyecto_nombre',$proyecto_nombre);
     
   }
   
-  $proyecto_tribunal= new Proyecto_tribunal();
-  //$varfdf=$_POST['proyecto_id'];
- // $proyecto_tribunal->proyecto_id=$varfdf;
-  //if(isset($_POST['proyecto_id']))
- // echo $_POST['proyecto_id'];
-   
-  
-  
    if ( isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' )
   {
      
-     
+     /**
       $proyecto_tribunal->objBuidFromPost();
       $proyecto_tribunal->estado = Objectbase::STATUS_AC;
       $proyecto_tribunal->save();
-    
+    */
      if (isset($_POST['ids']))
      foreach ($_POST['ids'] as $id)
      {
@@ -214,7 +194,7 @@ $smarty->assign('proyecto_nombre',$proyecto_nombre);
              
                $tribunal->usuario_id =$id;
                 $tribunal->estado = Objectbase::STATUS_AC;
-               $tribunal->proyecto_tribunal_id=$proyecto_tribunal->id;;
+               //$tribunal->proyecto_tribunal_id=$proyecto_tribunal->id;;
                 $tribunal->objBuidFromPost();
                $tribunal->save();
      }

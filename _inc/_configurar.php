@@ -79,7 +79,7 @@ else
     define ("DBHOST"        , "localhost");
     define ("BDNAME"        , "sapti");
     define ("DBUSER"        , "root");
-    define ("BDPASS"        , "123");
+    define ("BDPASS"        , "");
   }
   // SERVER
   // SERVER
