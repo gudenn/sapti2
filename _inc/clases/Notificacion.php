@@ -160,6 +160,7 @@ class Notificacion extends Objectbase
       $this->notificacion_consejo_objs[] = $n_obj;
     }
     $this->detalle = $mensaje;
+    $this->estado_notificacion = self::EST_NOLEIDO;
     $this->save();
     $this->saveAllSonObjects();
     
