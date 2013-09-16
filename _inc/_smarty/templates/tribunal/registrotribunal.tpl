@@ -123,6 +123,9 @@
       <div>
         Mensaje<br/>
         <textarea name="detalle" rows="5" style="width: 90%"></textarea>
+        <script>
+          CKEDITOR.replace('detalle'{$editor})
+        </script>
       </div>
       <div>
         Observaci&oacute;n<br/>
