@@ -1,14 +1,14 @@
 <?php
 try {
-  define ("MODULO", "MODALIDA-REGISTRO");
+  define ("MODULO", "MATERIA-REGISTRO");
   require('../_start.php');
   if(!isAdminSession())
     header("Location: ../login.php");  
 
   /** HEADER */
-  $smarty->assign('title','SAPTI - Registro Modalidad');
-  $smarty->assign('description','Formulario de registro de Modalidad');
-  $smarty->assign('keywords','SAPTI,Modalidad,Registro');
+  $smarty->assign('title','SAPTI - Registro Materia');
+  $smarty->assign('description','Formulario de registro de Materia');
+  $smarty->assign('keywords','SAPTI,Materia,Registro');
 
   leerClase('Administrador');
   /**
@@ -16,7 +16,7 @@ try {
    */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administrador');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/','name'=>'Configuraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Registro de Modalidad');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Registro de Materia');
   $smarty->assign("menuList", $menuList);
 
 
@@ -44,25 +44,26 @@ try {
   $smarty->assign("ERROR", '');
 
 
-  leerClase('Modalidad');
+  leerClase('Materia');
   
-  $smarty->assign('columnacentro','admin/modalidad/columna.centro.registro.tpl');
+  $smarty->assign('columnacentro','admin/materia/columna.centro.registro.tpl');
   $id = '';
-  if (isset($_GET['modalidad_id']) && is_numeric($_GET['modalidad_id']))
-    $id = $_GET['modalidad_id'];
-  $modalidad = new Modalidad($id);
+  if (isset($_GET['materia_id']) && is_numeric($_GET['materia_id']))
+    $id = $_GET['materia_id'];
+  $materia = new Materia($id);
   if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
   {
     $EXITO = false;
     mysql_query("BEGIN");
-    $modalidad->objBuidFromPost();
-    $modalidad->estado = Objectbase::STATUS_AC;
-    $modalidad->validar();
-    $modalidad->save();
+    
+    $materia->objBuidFromPost();
+    $materia->estado = Objectbase::STATUS_AC;
+    $materia->validar();
+    $materia->save();
     $EXITO = TRUE;
     mysql_query("COMMIT");
   }
-  $smarty->assign("modalidad",$modalidad);
+  $smarty->assign("materia",$materia);
 
   //No hay ERROR
   $ERROR = ''; 
@@ -72,9 +73,9 @@ try {
   {
     $html = new Html();
     if ($EXITO)
-      $mensaje = array('mensaje'=>'Se grabo correctamente el Modalidad','titulo'=>'Registro de Modalidad' ,'icono'=> 'tick_48.png');
+      $mensaje = array('mensaje'=>'Se grabo correctamente el Materia','titulo'=>'Registro de Materia' ,'icono'=> 'tick_48.png');
     else
-      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Modalidad','titulo'=>'Registro de Modalidad' ,'icono'=> 'warning_48.png');
+      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Materia','titulo'=>'Registro de Materia' ,'icono'=> 'warning_48.png');
    $ERROR = $html->getMessageBox ($mensaje);
   }
   $smarty->assign("ERROR",$ERROR);

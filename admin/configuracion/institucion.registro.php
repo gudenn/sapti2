@@ -1,25 +1,22 @@
 <?php
 try {
-  define ("MODULO", "MODALIDA-REGISTRO");
+  define ("MODULO", "INSTITUCION-REGISTRO");
   require('../_start.php');
   if(!isAdminSession())
     header("Location: ../login.php");  
-
   /** HEADER */
-  $smarty->assign('title','SAPTI - Registro Modalidad');
-  $smarty->assign('description','Formulario de registro de Modalidad');
-  $smarty->assign('keywords','SAPTI,Modalidad,Registro');
-
+  $smarty->assign('title','SAPTI - Registro Institucion');
+  $smarty->assign('description','Formulario de registro de Institucion');
+  $smarty->assign('keywords','SAPTI,Institucion,Registro');
   leerClase('Administrador');
   /**
    * Menu superior
    */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administrador');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/','name'=>'Configuraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Registro de Modalidad');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Registro de Institucion');
   $smarty->assign("menuList", $menuList);
-
-
+ 
   //CSS
   $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_JS  . "validate/validationEngine.jquery.css";
@@ -43,26 +40,30 @@ try {
 
   $smarty->assign("ERROR", '');
 
-
-  leerClase('Modalidad');
+  //CREAR UNA DEFENSA
+  leerClase('Institucion');
   
-  $smarty->assign('columnacentro','admin/modalidad/columna.centro.registro.tpl');
+   $smarty->assign('columnacentro','admin/institucion/columna.centro.registro.tpl');
   $id = '';
-  if (isset($_GET['modalidad_id']) && is_numeric($_GET['modalidad_id']))
-    $id = $_GET['modalidad_id'];
-  $modalidad = new Modalidad($id);
+ 
+if (isset($_GET['institucion_id']) && is_numeric($_GET['institucion_id']))
+  echo  $id = $_GET['institucion_id'];
+  $institucion = new Institucion($id);
+  
   if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
   {
-    $EXITO = false;
+      
+   $EXITO = false;
     mysql_query("BEGIN");
-    $modalidad->objBuidFromPost();
-    $modalidad->estado = Objectbase::STATUS_AC;
-    $modalidad->validar();
-    $modalidad->save();
+    $institucion->objBuidFromPost();
+    $institucion->estado = Objectbase::STATUS_AC;
+    $institucion->validar();
+    $institucion->save();
     $EXITO = TRUE;
     mysql_query("COMMIT");
   }
-  $smarty->assign("modalidad",$modalidad);
+  
+  $smarty->assign("institucion",$institucion);
 
   //No hay ERROR
   $ERROR = ''; 
@@ -72,9 +73,9 @@ try {
   {
     $html = new Html();
     if ($EXITO)
-      $mensaje = array('mensaje'=>'Se grabo correctamente el Modalidad','titulo'=>'Registro de Modalidad' ,'icono'=> 'tick_48.png');
+      $mensaje = array('mensaje'=>'Se grabo correctamente la Intitucion','titulo'=>'Registro de Institucion' ,'icono'=> 'tick_48.png');
     else
-      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Modalidad','titulo'=>'Registro de Modalidad' ,'icono'=> 'warning_48.png');
+      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente la Institucion','titulo'=>'Registro de Institucion' ,'icono'=> 'warning_48.png');
    $ERROR = $html->getMessageBox ($mensaje);
   }
   $smarty->assign("ERROR",$ERROR);
