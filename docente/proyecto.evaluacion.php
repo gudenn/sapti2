@@ -3,19 +3,12 @@ try {
   require('_start.php');
   if(!isDocenteSession())
     header("Location: login.php"); 
-  global $PAISBOX;
-
-//  if(!isAdminSession())
-//    header("Location: login.php");
 
   leerClase("Evaluacion");
-    leerClase("Revision");
+  leerClase("Revision");
   leerClase("Formulario");
   leerClase("Pagination");
   leerClase("Filtro");
-
-
-  $ERROR = '';
 
   /** HEADER */
   $smarty->assign('title','Gestion de Observaciones');
@@ -24,9 +17,7 @@ try {
 
   $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
-  
   $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
-  
   $smarty->assign('CSS',$CSS);
 
   //JS
@@ -39,9 +30,7 @@ try {
   //Validation
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
-
   $smarty->assign('JS',$JS);
-  $smarty->assign("ERROR", '');
   
   function array_recibe($url_array) { 
      $tmp = stripslashes($url_array); 
@@ -77,18 +66,9 @@ AND re.proyecto_id=pr.id
 AND re.id=ob.revision_id
 GROUP BY ob.revision_id";
  $resultado1 = mysql_query($sql1);
-while ($fila1 = mysql_fetch_array($resultado1, MYSQL_ASSOC)) {
-   $arraylista1[]=$fila1;
- }
- 
-  $objs_pg    = new Pagination($resultado1, 'g_estudiante','',false,10);
-
-  $smarty->assign("objs"     ,$arraylista1);
+  $objs_pg    = new Pagination($resultado1, 'g_evaluacion','',false,10);
+  $smarty->assign("objs"     ,$objs_pg->objs);
   $smarty->assign("pages"    ,$objs_pg->p_pages);
-  
-  $token = sha1(URL . time());
-  $_SESSION['register'] = $token;
-  $smarty->assign('token',$token);
   
   $smarty->assign('mascara'     ,'docente/listas.mascara.tpl');
   $smarty->assign('lista'       ,'docente/evaluacion.proyecto.tpl');
@@ -96,17 +76,16 @@ while ($fila1 = mysql_fetch_array($resultado1, MYSQL_ASSOC)) {
   //No hay ERROR
   $smarty->assign("ERROR",'');
   $smarty->assign("URL",URL);  
-
 }
 catch(Exception $e) 
 {
   $smarty->assign("ERROR", handleError($e));
 }
-
+  $token = sha1(URL . time());
+  $_SESSION['register'] = $token;
+  $smarty->assign('token',$token);
 if (isset($_GET['tlista']) && $_GET['tlista']) //recargamos la tabla central
   $smarty->display('docente/listas.lista.tpl'); 
 else
   $smarty->display('docente/full-width.evaluacion.tpl');
-
-
 ?>

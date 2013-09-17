@@ -2,7 +2,7 @@
 <div class="wrapper row3">
   <div class="rnd">
     <div id="container">
-        <h1 class="title">REGISTRO DE EVALUACIONES</h1>
+        <h1 class="title">Registro de Evaluaciones</h1>
             <p>
                <label for="nombre de proyecto"><small>NOMBRE DE PROYECTO:</small></label>
                <span>{$nombre_pr}</span><br/>

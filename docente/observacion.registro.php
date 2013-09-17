@@ -3,7 +3,11 @@ try {
   require('_start.php');
   if(!isDocenteSession())
     header("Location: login.php");
-  global $PAISBOX;
+  
+  leerClase('Revision');
+  leerClase('Observacion');
+  leerClase('Estudiante');
+  leerClase('Usuario');
 
   /** HEADER */
   $smarty->assign('title','Proyecto Final');
@@ -13,9 +17,7 @@ try {
   //CSS
   $CSS[]  = URL_CSS . "academic/tables.css";
   $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
-  
   $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
-  
   $smarty->assign('CSS',$CSS);
 
   //JS
@@ -29,45 +31,25 @@ try {
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
   $JS[]  = URL_JS . "jquery.addfield.js";
-  $JS[]  = URL_JS . "jquery-latest.js";
-  
   $smarty->assign('JS',$JS);
-  $smarty->assign("ERROR", '');
 
-    function array_recibe($url_array) { 
-     $tmp = stripslashes($url_array); 
-     $tmp = urldecode($tmp); 
-     $tmp = unserialize($tmp); 
-
-    return $tmp; 
-  };
-    $array=$_GET['array']; 
-    $array=array_recibe($array);
-  
-  //CREAR UNA REVISION
-  leerClase('Revision');
-  leerClase('Observacion');
   if (isset($_POST['observaciones'])) 
   $observaciones=$_POST['observaciones'];
+    if (isset($_GET['id_estudiante'])) 
+  $id_estudiante=$_GET['id_estudiante'];
+    
+  $estudiante     = new Estudiante($id_estudiante);
+  $usuario        = $estudiante->getUsuario();
+  $proyecto       = $estudiante->getProyecto();
 
-  $proyecto_ids = $array['id_pr'];
-  $docente=  getSessionDocente();
-  $docente_ids=$docente->id;
-  
   $observacion = new Observacion();
   $revision = new Revision();
 
   $smarty->assign("revision", $revision);
   $smarty->assign("observacion", $observacion);
+  $smarty->assign("usuario", $usuario);
+  $smarty->assign("proyecto", $proyecto);
     
-    $nombre_n=$array['nombre'];
-    $nombre_a=$array['apellidos'];
-    $es=' ';
-    $nombre_es=$nombre_n.$es.$nombre_a;
-    $nombre_pr=$array['nombrep']; 
-    
-    $smarty->assign("nombre_es", $nombre_es);
-    $smarty->assign("nombre_pr", $nombre_pr);
     $urlpdf=".../ARCHIVO/proyecto.pdf";
     $smarty->assign("urlpdf", $urlpdf);
     
@@ -78,8 +60,9 @@ try {
     {
     $revision->objBuidFromPost();
     $revision->estado = Objectbase::STATUS_AC;
-    $revision->revisor=$docente_ids;
-    $revision->proyecto_id=$proyecto_ids;
+    $revision->revisor=4;
+    $revision->revisor_tipo='DO';
+    $revision->proyecto_id=$proyecto->id;
     $revision->save();
     foreach ($observaciones as $obser_array){
     $observacion->objBuidFromPost();
@@ -88,28 +71,22 @@ try {
     $observacion->revision_id = $revision->id;
     $observacion->save();
     }
-    $url="estudiante.lista.php";
-    $ir = "Location: $url";
+
+    $ir = "Location: estudiante.lista.php";
         header($ir);
     }
 
-  
-  $token = sha1(URL . time());
-  $_SESSION['register'] = $token;
-  $smarty->assign('token',$token);
-  
-  
-  
-
   //No hay ERROR
   $smarty->assign("ERROR",'');
-  
 } 
 catch(Exception $e) 
 {
   $smarty->assign("ERROR", handleError($e));
 }
-
+  $token = sha1(URL . time());
+  $_SESSION['register'] = $token;
+  $smarty->assign('token',$token);
+  
 $TEMPLATE_TOSHOW = 'docente/full-width.observacion.registro.tpl';
 $smarty->display($TEMPLATE_TOSHOW);
 ?>
