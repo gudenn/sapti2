@@ -22,7 +22,44 @@ class Semestre extends Objectbase
   * @var INT(11)
   */
   var $activo;
+  
+  
+ /**
+  * (Arreglo de objetos) Todas las variables para el semestre
+  * @var object|null 
+  */
+  var $configuracion_semestral_objs;
 
+
+  /**
+   * Guardamos este semestre
+   */
+  function save($copiar_configuracion = false ,$table = false , $father_id_value = false , $base = 'compania') {
+    //sacamos al activo antes d e activar este por siacaso
+    if ($copiar_configuracion)
+    {
+      $activo = new Semestre();
+      $activo->getActivo();
+      $activo->getAllObjects();
+    }
+    if ($this->activo)
+      $this->activar();
+    parent::save($table, $father_id_value, $base);
+    if ( !$copiar_configuracion )
+      return;
+    leerClase('Configuracion_semestral');
+    foreach ($activo->configuracion_semestral_objs as $config) 
+    {
+      $confi_neo = new Configuracion_semestral;
+      $confi_neo->nombre      = $config->nombre;
+      $confi_neo->valor       = $config->valor;
+      $confi_neo->estado      = $config->estado;
+      $confi_neo->semestre_id = $this->id;
+      $this->configuracion_semestral_objs[] = $confi_neo;
+    }
+    $this->saveAllSonObjects();
+  }
+  
   /**
    * Busca el semestre activo o sea el semestre actual
    */
@@ -52,16 +89,6 @@ class Semestre extends Objectbase
     $array = mysql_fetch_array($result, MYSQL_ASSOC);
     if ($array)
       parent::__construct($array);
-  }
-
-
-  /**
-   * Guardamos este semestre
-   */
-  function save($table = false , $father_id_value = false , $base = 'compania') {
-    if ($this->activo)
-      $this->activar ();
-    parent::save($table, $father_id_value, $base);
   }
 
 

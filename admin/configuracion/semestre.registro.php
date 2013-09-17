@@ -60,7 +60,7 @@ try {
     $semestre->objBuidFromPost();
     $semestre->estado = Objectbase::STATUS_AC;
     $semestre->validar();
-    $semestre->save();
+    $semestre->save(TRUE/*copiarlaconfiguraciondelalctivo*/);
     $EXITO = TRUE;
     mysql_query("COMMIT");
   }
