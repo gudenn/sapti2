@@ -3,7 +3,12 @@ try {
   require('_start.php');
   if(!isDocenteSession())
     header("Location: login.php");  
-
+    
+  leerClase('Estudiante');
+  leerClase('Inscrito');
+  leerClase('Evaluacion');
+  leerClase('Proyecto_docente');
+  
   /** HEADER */
   $smarty->assign('title','SAPTI - Inscripcion de Estudiantes');
   $smarty->assign('description','Formulario de Inscripcion de Estudiantes');
@@ -12,30 +17,16 @@ try {
   //CSS
   $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
-  
-  $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
-  
   $smarty->assign('CSS',$CSS);
 
   //JS
   $JS[]  = URL_JS . "jquery.1.9.1.js";
 
-  //Datepicker UI
-  $JS[]  = URL_JS . "ui/jquery-ui-1.10.2.custom.min.js";
-  $JS[]  = URL_JS . "ui/i18n/jquery.ui.datepicker-es.js";
-
   //Validation
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
-
   $smarty->assign('JS',$JS);
 
-
-  $smarty->assign("ERROR", '');
-
-  $columnacentro = 'docente/columna.centro.inscripcion.estudiante-cvs.tpl';
-  $smarty->assign('columnacentro',$columnacentro);
-  
     function estainscrito($sis) {
       $cond=0;
     $sql = "SELECT *
@@ -68,10 +59,7 @@ try {
     if ( isset($_GET['mat']) )
   $mat = $_GET['mat'];
   $smarty->assign('mat', $mat);
-    //CREAR UN ESTUDIANTE
-  leerClase('Estudiante');
-  leerClase('Inscrito');
-  leerClase('Evaluacion');
+
   $docente=  getSessionDocente();
   $docenteid=$docente->id;
   $inscritos=array();
@@ -92,6 +80,7 @@ try {
                   $estudiante = new Estudiante();
                   $inscrito   = new Inscrito();
                   $evaluacion = new Evaluacion();
+                  $proyecto_docente = new Proyecto_docente();
           $estudiante->getByCodigoSis($estudiante_array[1]);
             if ($estudiante->id){
                 if(estainscrito($estudiante_array[1])=='0'){
@@ -104,6 +93,9 @@ try {
                     $inscrito->dicta_id      = $idmat;
                     $inscrito->estudiante_id = $estudiante->id;
                     $inscrito->save();
+                    $proyecto_docente->dicta_id = $idmat;
+                    $proyecto       = $estudiante->getProyecto();
+                    $proyecto_docente->proyecto_id = $proyecto->proyecto_id;
                     $inscritos[]=$estudiante_array;
                     }else{
                     $yainscritos[]=$estudiante_array;
@@ -121,9 +113,10 @@ try {
       header($ir);
       mysql_query("COMMIT");
   }
+  $columnacentro = 'docente/columna.centro.inscripcion.estudiante-cvs.tpl';
+  $smarty->assign('columnacentro',$columnacentro);
   //No hay ERROR
   $smarty->assign("ERROR",'');
-  
 } 
 catch(Exception $e) 
 {

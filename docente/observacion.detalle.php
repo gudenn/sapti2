@@ -3,7 +3,6 @@ try {
   require('_start.php');
   if(!isDocenteSession())
       header("Location: login.php");
-  global $PAISBOX;
 
   /** HEADER */
   $smarty->assign('title','Registro Observaciones');
@@ -12,28 +11,20 @@ try {
 
   //CSS
   $CSS[]  = URL_CSS . "academic/3_column.css";
-  $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
-  
-  $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
- 
+  $CSS[]  = URL_JS . "calendar/css/eventCalendar.css";
+  $CSS[]  = URL_JS . "calendar/css/eventCalendar_theme.css";
   $smarty->assign('CSS',$CSS);
 
   //JS
   $JS[]  = URL_JS . "jquery.1.9.1.js";
-
-  //Datepicker UI
-  $JS[]  = URL_JS . "ui/jquery-ui-1.10.2.custom.min.js";
-  $JS[]  = URL_JS . "ui/i18n/jquery.ui.datepicker-es.js";
-
+  $JS[]  = URL_JS . "calendar/js/jquery.eventCalendar.js";
   $smarty->assign('JS',$JS);
-
-  $smarty->assign("ERROR", '');
 
   if ( isset($_GET['revisiones_id']))
   $revid=$_GET['revisiones_id'];
 
   $resul = "
-      SELECT ob.observacion as obser, pr.nombre as nomp, us.nombre as nom,us.apellidos as ap, re.fecha_revision as fere
+      SELECT ob.observacion as obser, pr.nombre as nomp, us.nombre as nom,CONCAT(us.apellido_paterno,us.apellido_materno) as ap, re.fecha_revision as fere
 FROM observacion ob, revision re, proyecto pr, docente doc, proyecto_estudiante proe, usuario us
 WHERE ob.revision_id=re.id
 AND re.proyecto_id=pr.id
@@ -54,7 +45,6 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
 
   //No hay ERROR
   $smarty->assign("ERROR",'');
-  
 } 
 catch(Exception $e) 
 {

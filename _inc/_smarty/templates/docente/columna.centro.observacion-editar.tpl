@@ -1,12 +1,16 @@
         <div id="content" style="width:685px;min-height: 450px;">
         <h1 class="title">EDICION DE OBSERVACIONES</h1>
           <p>
-            <label for="proyecto_id"><small>Nombres de Proyecto: </small></label>
-            <span>{{$array1['nombrep']}}</span>
+            <label for="revisor"><small>Nombre del Revisor: </small></label>
+            <span><i>{$arrayobser[0]['nom']}</i></b ><i>{$arrayobser[0]['ap']}</i></span>
           </p>
           <p>
-            <label for="fecha_observacion"><small>Nombre de Estudiante: </small></label>
-            <span>{{$array1['nombre']}} {{$array1['apellidos']}}</span>            
+            <label for="proyecto_id"><small>Nombres de Proyecto: </small></label>
+            <span>{$arrayobser[0]['nomp']}</span>
+          </p>
+          <p>
+            <label for="fecha_observacion"><small>Fecha de Observacion: </small></label>
+            <span>{$arrayobser[0]['fere']}</span>            
           </p>
         <h2 class="title">Formulario de Edici&oacute;n</h2>
         <head>
@@ -37,9 +41,6 @@
         </form>
         </div>
         <p>{$ERROR}</p>
-        
-        <script src="js/editablegrid-2.0.1.js"></script>   
-	<script src="js/tablaeditable.js" ></script>
         <script type="text/javascript">
                     datagrid = new DatabaseGrid('0',{$revisionesid});
         </script>

@@ -4,13 +4,50 @@
  *
  * @author Guyen Campero <guyencu@gmail.com>
  */
-class Docente extends Objectbase 
-{
+class Docente extends Objectbase{
+  /** constant to add in the begin of the key to find the date values   */
+  const URL                  = "docente/";
+  /** constant to add in the begin of the key to find the date values   */
+  const ARCHIVO_PATH         = "docente/proyecto-final";
  /**
   * Codigo identificador del Objeto Usuario
   * @var INT(11)
   */
   var $usuario_id;
+  
+    /**
+   * Codigo sis del docente
+   * @var VARCHAR(100)
+   */
+  var $codigo_sis;
+  
+    /**
+   * Constructor del Docente
+   * @param type $id id de la tabla
+   * @param type $codigo_sis codigo sis del estudiante
+   * @return docente|false
+   */
+  public function __construct($id = '', $codigo_sis = false) {
+    if ($codigo_sis) {
+      $sql = "SELECT * FROM " . $this->getTableName() . " WHERE codigo_sis = '$codigo_sis'";
+      //echo $sql;
+      $result = mysql_query($sql);
+      if (!$result)
+        return false;
+      $row = mysql_fetch_array($result, MYSQL_ASSOC);
+      foreach ($this as $key => $value) {
+        /**  if the $key refer to an object continue */
+        if ($this->isKeyObject($key))
+          continue;
+        if (isset($row[strtolower($key)]))
+          $this->$key = $row[strtolower($key)];
+      }
+      /** solo para los leidos desde la base de datos */
+      $this->datesSTH();
+    }
+    else
+      parent::__construct($id);
+  }
   
   /**
    * Retorna el nombre completo del usuario
@@ -25,12 +62,17 @@ class Docente extends Objectbase
     $usuario = new Usuario($this->usuario_id);
     return $usuario->getNombreCompleto($echo);
   }
-  
+    /**
+   * get user if exist else return 0
+   * @param type $login
+   * @param type $clave
+   * @return object 
+   */
   public function issetDocente($login, $clave) {
     if ($login == "" || $clave == "")
       return false;
     $activo = Objectbase::STATUS_AC;
-    $sql  = "select * from ".$this->getTableName()." as a , ".$this->getTableName('usuario')." as u   where u.login = '$login' and u.clave = '$clave' and a.usuario_id = u.id and u.estado = '$activo' and a.estado = '$activo'  ";
+    $sql = "select * , a.id as docente_id from " . $this->getTableName() . " as a , " . $this->getTableName('usuario') . " as u   where u.login = '$login' and u.clave = '$clave' and a.usuario_id = u.id and u.estado = '$activo' and a.estado = '$activo'  ";
     //echo $sql; 
     $resultado = mysql_query($sql);
     if (!$resultado)
@@ -77,9 +119,14 @@ class Docente extends Objectbase
       $filtro_sql .= " AND {$this->getTableName ('usuario')}.apellidos like '%{$filtro->filtro('apellidos')}%' ";
     return $filtro_sql;
   }
-  
-   function getUsuario() 
-  {
+
+    /**
+   * Get usuario de un docente
+   * @TODO hay que arreglar esta funcion
+   * @return boolean|\Usuario
+   * retorna los datos de un usuario asociado a un docente
+   */
+  function getUsuario() {
     if (!isset($this->usuario_id) || !$this->usuario_id)
       return false;
     $usuario = new Usuario($this->usuario_id);

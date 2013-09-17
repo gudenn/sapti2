@@ -3,7 +3,10 @@ try {
   require('_start.php');
   if(!isDocenteSession())
     header("Location: login.php"); 
-  global $PAISBOX;
+  
+  leerClase("Revision");
+  leerClase("Observacion");
+  
     /** HEADER */
   $smarty->assign('title','Modificacion de Observaciones');
   $smarty->assign('description','Formulario de Modificacion de Observaciones');
@@ -11,61 +14,51 @@ try {
 
   //CSS
   $CSS[]  = URL_CSS . "academic/3_column.css";
-  //$CSS[]  = URL_CSS . "/styleob.css";
   $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
-  $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
- 
   $smarty->assign('CSS',$CSS);
 
   //JS
-  $JS[]  = URL_JS . "jquery.1.9.1.js";
+  $JS[]  = URL_JS . "jquery.js";
+  $JS[]  = URL_JS . "tablaeditable/editablegrid-2.0.1.js";
+  $JS[]  = URL_JS . "tablaeditable/tabla.observacion-editar.js";
     //Validation
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
   
-  //Datepicker UI
-  $JS[]  = URL_JS . "ui/jquery-ui-1.10.2.custom.min.js";
-  $JS[]  = URL_JS . "ui/i18n/jquery.ui.datepicker-es.js";
   $JS[]  = URL_JS . "jquery.addfield.js";
 
   $smarty->assign('JS',$JS);
-  $smarty->assign("ERROR", '');
-  
-  function array_envia($url_array) 
-   {
-   $tmp = serialize($url_array);
-   $tmp = urlencode($tmp);
-       return $tmp;
-   };
-  function array_recibe($url_array) { 
-  $tmp = stripslashes($url_array); 
-  $tmp = urldecode($tmp); 
-  $tmp = unserialize($tmp); 
-    return $tmp; 
-  };
+    
   if ( isset($_GET['revisiones_id']) && is_numeric($_GET['revisiones_id']) )
-  $revisionesid = $_GET['revisiones_id'];
+  $revid=$_GET['revisiones_id'];
+
+  $resul = "
+      SELECT ob.observacion as obser, pr.nombre as nomp, us.nombre as nom,CONCAT(us.apellido_paterno,us.apellido_materno) as ap, re.fecha_revision as fere, proe.id as idestu
+FROM observacion ob, revision re, proyecto pr, docente doc, proyecto_estudiante proe, usuario us
+WHERE ob.revision_id=re.id
+AND re.proyecto_id=pr.id
+AND pr.id=proe.proyecto_id
+AND re.revisor=doc.id
+AND doc.usuario_id=us.id
+AND ob.revision_id='".$revid."' 
+          ";
+   $sql = mysql_query($resul);
+while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
+   $arrayobser[]=$fila1;
+ }
+    
+  $smarty->assign("arrayobser", $arrayobser);
 
   $docente=  getSessionDocente();
   $docente_ids=$docente->id;
 
-  $smarty->assign("revisionesid", $revisionesid);
+  $smarty->assign("revisionesid", $revid);
   
-  $columnacentro = 'docente/columna.centro.observacion-editar.tpl';
-  $smarty->assign('columnacentro',$columnacentro);
-  
-  $array1=$_GET['array']; 
-  $array1=array_recibe($array1);
-  
-  $smarty->assign("array1", $array1);
-  
-  $array=array_envia($array1);
-  leerClase("Revision");
-  leerClase("Observacion");
-  if(isset($_POST['borrar'])){
+  $idestu=$arrayobser[0]['idestu'];
+    if(isset($_POST['borrar'])){
       
-    $revision    = new Revision($revisionesid);
-    $resul = "select id from observacion where revision_id =".$revisionesid." ";
+    $revision    = new Revision($revid);
+    $resul = "select id from observacion where revision_id =".$revid." ";
     $sql=mysql_query($resul);
     $a=0;
     $sql1=array();
@@ -79,10 +72,12 @@ try {
     }
     $revision->delete();
     
-      $url="revision.lista.php?array=$array";
+      $url="revision.lista.php?id_estudiante=$idestu";
       $ir = "Location: $url";
       header($ir);
   };
+  $columnacentro = 'docente/columna.centro.observacion-editar.tpl';
+  $smarty->assign('columnacentro',$columnacentro);
 
   //No hay ERROR
   $smarty->assign("ERROR",'');

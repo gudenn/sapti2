@@ -1,27 +1,41 @@
-<table class="tbl_lista" style="width:685px;">
-  <thead>
-    <tr>
-      <th><a>Id       </a></th>
-      <th><a>Titulo   </a></th>
-      <th><a>Descripcion</a></th>
-      <th><a>Fecha </a></th>
-    <th>Opciones</th>
-    </tr>
-  </thead>
-  {section name=ic loop=$objs}
-  <tbody>
-    <tr  class="{cycle values="light,dark"}">
-      <td>{$objs[ic]['id']}</td>
-      <td>{$objs[ic]['asunto']}</td>
-      <td>{$objs[ic]['descripcion']}</td>
-      <td>{$objs[ic]['fecha_evento']}</td>
-      <td>
-        <a href="iframe2.html" class="clsVentanaIFrame clsBoton" rel="Este es el segundo iframe">{icono('detalle.png','Seguimiento')}</a>
-        <input type="hidden" name="eventoid" id="eventoid" value={$objs[ic]['id']}/>
-        <a href="observacion.registro.php?array={urlencode(serialize($objs[ic]))}" target="_blank">{icono('editar.png','Revisar')}</a>
-        <a href="proyecto.evaluacion.php?array={urlencode(serialize($objs[ic]))}" target="_blank">{icono('evaluar.png','Evaluar')}</a>
-      </td>
-    </tr>
-  </tbody>
-  {/section}
-</table>
+<div id="content" style="width:685px;min-height: 400px;">
+        <h1 class="title">Registro de Eventtos</h1>
+        <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">       	
+        </head>
+        <div id="wrap">
+        <div id="message"></div>
+        	<div id="pagecontrol">
+		<label for="pagecontrol">Filas por Pagina: </label>
+		<select id="pagesize" name="pagesize">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                    <option value="30">30</option>
+                    <option value="40">40</option>
+                    <option value="50">50</option>
+                </select>
+
+                </div>
+        	<label for="filter">Busqueda Rapida :</label>
+		<input type="text" id="filter"/>
+        
+		<div id="tablecontent"></div>
+        
+        	<div id="paginator"></div>
+        </div>
+        <script type="text/javascript">
+                editableGrid.onloadXML("loaddata.evento.lista.php?doc={$docente_ids}");
+        </script>
+        <style type="text/css">
+        tr:nth-child(even) { background: #ddd }
+        tr:nth-child(odd) { background: #fff}
+        table {
+        color: #666666;
+        }
+        </style>
+        
+    {$ERROR}
+</div>  

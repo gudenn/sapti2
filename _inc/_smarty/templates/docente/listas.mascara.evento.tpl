@@ -1,4 +1,4 @@
-<div  id="content" style="width:685px;">
+<div  id="content" style="width:685px;min-height: 450px;">
 <div  id="tlista">
   {include file="docente/listas.lista.evento.tpl"}
 </div>

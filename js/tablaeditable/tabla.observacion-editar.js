@@ -78,7 +78,7 @@ function updateCellValue1(editableGrid, rowIndex, columnIndex, oldValue, newValu
 
 function updateCellValue2(editableGrid, rowIndex, columnIndex, oldValue, newValue, row, onResponse)
 {
-    if(newValue<=100){
+    if(newValue<=100 && !isNaN(newValue)){
         $.ajax({
 		url: 'update.php',
 		type: 'POST',
@@ -102,7 +102,7 @@ function updateCellValue2(editableGrid, rowIndex, columnIndex, oldValue, newValu
 		async: true
 	});
     }else{
-        alert("LA NOTA MAXIMA PERMITIDA ES 100");
+        alert("INTRODUCIR VALORES NUMERICOS Y MENORES A 100");
     }
 }
 

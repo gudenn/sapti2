@@ -11,7 +11,7 @@
         {include file=$columnacentro}
       {/if}
       <!-- ############ -->
-      {include file="docente/columna.right.tpl"}
+      {include file="docente/columna.right.calendario.eventos.tpl"}
       <!-- ############ -->
     </div>
   </div>

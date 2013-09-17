@@ -3,19 +3,12 @@ try {
   require('_start.php');
     if(!isDocenteSession())
     header("Location: login.php"); 
-  global $PAISBOX;
-
-//  if(!isAdminSession())
-//    header("Location: login.php");
 
   leerClase("Revision");
   leerClase("Observacion");
   leerClase("Formulario");
   leerClase("Pagination");
   leerClase("Filtro");
-
-
-  $ERROR = '';
 
   /** HEADER */
   $smarty->assign('title','Gestion de Observaciones');
@@ -24,7 +17,6 @@ try {
 
   //CSS
   $CSS[]  = URL_CSS . "academic/tables.css";
-  //$CSS[]  = URL_CSS . "pg.css";
   $smarty->assign('CSS',$CSS);
 
   //JS
@@ -88,34 +80,15 @@ AND re.proyecto_id=pr.id
 AND re.id=ob.revision_id
 GROUP BY ob.revision_id";
  $resultado1 = mysql_query($sql1);
- $arraylista1= array();
- while ($fila1 = mysql_fetch_array($resultado1, MYSQL_ASSOC)) {
-   $arraylista1[]=$fila1;
- }
-
-//Filtro
-  $filtro   = new Filtro('g_revision',__FILE__);
-  $revision = new Revision();
-  $revision->iniciarFiltro($filtro);
-  $filtro_sql = $revision->filtrar($filtro);
-  $revision->id = '%';
-  
-  $o_string   = $revision->getOrderString($filtro);
-  $obj_mysql  = $revision->getAll('',$o_string,$filtro_sql,TRUE,TRUE);
-  $objs_pg    = new Pagination($obj_mysql, 'g_estudiante','',false,10);
-
-  $smarty->assign("filtros"  ,$filtro);
-  $smarty->assign("objs"     ,$arraylista1);
+  $objs_pg    = new Pagination($resultado1, 'g_observacion','',false,10);
+  $smarty->assign("objs"     ,$objs_pg->objs);
   $smarty->assign("pages"    ,$objs_pg->p_pages);
-
 
   $smarty->assign('mascara'     ,'docente/listas.mascara.tpl');
   $smarty->assign('lista'       ,'docente/observacion.lista.tpl');
 
   //No hay ERROR
   $smarty->assign("ERROR",'');
-  $smarty->assign("URL",URL);  
-
 }
 catch(Exception $e) 
 {

@@ -16,7 +16,6 @@
     {section name=js_i loop=$JS}
       <script type="text/javascript" src="{$JS[js_i]}"></script>
     {/section}
-   
 
 </head>
 <body id="top">
