@@ -1,14 +1,14 @@
 <?php
 try {
-  define ("MODULO", "SEMESTRE-REGISTRO");
+  define ("MODULO", "AREA-REGISTRO");
   require('../_start.php');
   if(!isAdminSession())
     header("Location: ../login.php");  
 
   /** HEADER */
-  $smarty->assign('title','SAPTI - Registro Semestre');
-  $smarty->assign('description','Formulario de registro de Semestre');
-  $smarty->assign('keywords','SAPTI,Semestre,Registro');
+  $smarty->assign('title','SAPTI - Registro Area');
+  $smarty->assign('description','Formulario de registro de Area');
+  $smarty->assign('keywords','SAPTI,Area,Registro');
 
   leerClase('Administrador');
   /**
@@ -16,13 +16,13 @@ try {
    */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administrador');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/','name'=>'Configuraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Registro de Semestre');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Registro de Area');
   $smarty->assign("menuList", $menuList);
 
 
   //CSS
   $CSS[]  = URL_CSS . "academic/3_column.css";
-  $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
+  $CSS[]  = URL_JS  . "validate/validationEngine.jquery.css";
   //BOX
   $CSS[]  = URL_JS . "box/box.css";
   
@@ -44,27 +44,25 @@ try {
   $smarty->assign("ERROR", '');
 
 
-  //CREAR UN ESTUDIANTE
-  leerClase('Usuario');
-  leerClase('Semestre');
+  leerClase('Area');
   
-  $smarty->assign('columnacentro','admin/semestre/columna.centro.registro.tpl');
+  $smarty->assign('columnacentro','admin/area/columna.centro.registro.tpl');
   $id = '';
-  if (isset($_GET['semestre_id']) && is_numeric($_GET['semestre_id']))
-    $id = $_GET['semestre_id'];
-  $semestre = new Semestre($id);
+  if (isset($_GET['area_id']) && is_numeric($_GET['area_id']))
+    $id = $_GET['area_id'];
+  $area = new Area($id);
   if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
   {
     $EXITO = false;
     mysql_query("BEGIN");
-    $semestre->objBuidFromPost();
-    $semestre->estado = Objectbase::STATUS_AC;
-    $semestre->validar();
-    $semestre->save();
+    $area->objBuidFromPost();
+    $area->estado = Objectbase::STATUS_AC;
+    $area->validar();
+    $area->save();
     $EXITO = TRUE;
     mysql_query("COMMIT");
   }
-  $smarty->assign("semestre",$semestre);
+  $smarty->assign("area",$area);
 
   //No hay ERROR
   $ERROR = ''; 
@@ -74,9 +72,9 @@ try {
   {
     $html = new Html();
     if ($EXITO)
-      $mensaje = array('mensaje'=>'Se grabo correctamente el Semestre','titulo'=>'Registro de Semestre' ,'icono'=> 'tick_48.png');
+      $mensaje = array('mensaje'=>'Se grabo correctamente el Area','titulo'=>'Registro de Area' ,'icono'=> 'tick_48.png');
     else
-      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Semestre','titulo'=>'Registro de Semestre' ,'icono'=> 'warning_48.png');
+      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Area','titulo'=>'Registro de Area' ,'icono'=> 'warning_48.png');
    $ERROR = $html->getMessageBox ($mensaje);
   }
   $smarty->assign("ERROR",$ERROR);

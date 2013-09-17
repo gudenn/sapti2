@@ -1,11 +1,11 @@
 <?php
 try {
-  define ("MODULO", "SEMESTRE-GESTION");
+  define ("MODULO", "AREA-GESTION");
   require('../_start.php');
   if(!isAdminSession())
     header("Location: ../login.php");  
 
-  leerClase("Semestre");
+  leerClase("Area");
   leerClase("Formulario");
   leerClase("Pagination");
   leerClase("Filtro");
@@ -14,16 +14,16 @@ try {
   $ERROR = '';
 
   /** HEADER */
-  $smarty->assign('title','Gestion de Semestres');
-  $smarty->assign('description','Pagina de gestion de Semestres');
-  $smarty->assign('keywords','Gestion,Semestre');
+  $smarty->assign('title','Gestion de Area');
+  $smarty->assign('description','Pagina de gesti&oacute;n de Area');
+  $smarty->assign('keywords','Gesti&acoute;n,Area');
   leerClase('Administrador');
   /**
    * Menu superior
    */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administrador');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/','name'=>'Configuraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Registro de Semestre');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Registro de Area');
   $smarty->assign("menuList", $menuList);
 
   //CSS
@@ -39,26 +39,19 @@ try {
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
-  if (isset($_GET['activar']) && isset($_GET['semestre_id']) && is_numeric($_GET['semestre_id']) )
-  {
-    $semestre = new Semestre($_GET['semestre_id']);
-    $semestre->activar();
-    $semestre->save();
-  }
-
   $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
-  $smarty->assign('lista'       ,'admin/semestre/lista.tpl');
+  $smarty->assign('lista'       ,'admin/area/lista.tpl');
 
   //Filtro
-  $filtro   = new Filtro('g_semestre',__FILE__);
-  $semestre = new Semestre();
-  $semestre->iniciarFiltro($filtro);
-  $filtro_sql = $semestre->filtrar($filtro);
+  $filtro   = new Filtro('g_area',__FILE__);
+  $objeto = new Area();
+  $objeto->iniciarFiltro($filtro);
+  $filtro_sql = $objeto->filtrar($filtro);
 
   
-  $o_string   = $semestre->getOrderString($filtro);
-  $obj_mysql  = $semestre->getAll('',$o_string,$filtro_sql,TRUE);
-  $objs_pg    = new Pagination($obj_mysql, 'g_semestre','',false,10);
+  $o_string   = $objeto->getOrderString($filtro);
+  $obj_mysql  = $objeto->getAll('',$o_string,$filtro_sql,TRUE);
+  $objs_pg    = new Pagination($obj_mysql, 'g_area','',false,3);
 
   $smarty->assign("filtros"  ,$filtro);
   $smarty->assign("objs"     ,$objs_pg->objs);

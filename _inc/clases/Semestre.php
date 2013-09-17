@@ -34,16 +34,6 @@ class Semestre extends Objectbase
 
 
   /**
-   * Validamos que todos los datos enviados sean correctos
-   */
-  function validar() {
-    leerClase('Formulario');
-    Formulario::validar('codigo', $this->codigo, 'texto', 'El Codigo');
-    
-  }
-
-
-  /**
    Activamos este semestre como el semestre actual
    */
   function activar() {
@@ -55,6 +45,14 @@ class Semestre extends Objectbase
     $this->activo = 1;
   }
   
+  /**
+   * Validamos que todos los datos enviados sean correctos
+   */
+  function validar() {
+    leerClase('Formulario');
+    Formulario::validar('codigo', $this->codigo, 'texto', 'El Codigo');
+    
+  }
 
   /**
    * Inicia el filtro para el admin
