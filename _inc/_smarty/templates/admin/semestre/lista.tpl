@@ -15,6 +15,7 @@
       <td>{if ($objs[ic]['activo'] === '1')}{icono('basicset/tick_48.png','Activo')}{/if}</td>
       <td>
         <a href="semestre.registro.php?semestre_id={$objs[ic]['id']}" >{icono('basicset/pencil_48.png','Activar')} Editar</a>
+        <a href="configuracion_semestral.gestion.php?semestre_id={$objs[ic]['id']}" >{icono('basicset/gear_48.png','Configurar')} Configurar</a>
         {if ($objs[ic]['activo'] === '0')}
         <a href="semestre.gestion.php?semestre_id={$objs[ic]['id']}&activar=1" >{icono('basicset/tick_48.png','Activar')} Activar</a>
         {/if}
