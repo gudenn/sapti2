@@ -1,6 +1,6 @@
 <?php
 
-class Notificacion_docente extends Objectbase 
+class Notificacion_dicta extends Objectbase 
 {
     /**
      * @var INT (11)
@@ -10,9 +10,9 @@ class Notificacion_docente extends Objectbase
     
     /**
      * @var INT (11)
-     * Codigo identificador de objeto docente
+     * Codigo identificador de objeto dicta
      */
-    var $docente_id;
+    var $dicta_id;
     
     
 

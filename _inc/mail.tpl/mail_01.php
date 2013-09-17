@@ -1,16 +1,14 @@
 <?php
   require_once("../_sistema.php");
-  leerClase('Estudiante');
+  leerClase('Usuario');
+  leerClase('Notificacion');
   leerClase('Mail');
 
-  global  $revision;
-  if ( !isset($revision) )
-    $revision = new Mercaderia(55);
-  $estudiante = new Usuario($revision->usuario_id);
-  $MATERIA = new Materia($estudiante->pais_id);
-
-  $href = $estudiante->getLinkParaconfirmarUsuario();
-  $link = "<span style=\"font-size: 15px;\"><a href=\"$href\">Descargar Documento</a></span>";
+  global  $usuario,$notificacion;
+  if (!isset($usuario) || !isset($usuario->id) || !($usuario->id))
+    $usuario  = new Usuario(1);
+  if (!isset($notificacion) || !isset($notificacion->id) || !($notificacion->id) )
+    $notificacion = new Notificacion(1);
 
   $style = "font-family: Verdana,Arial;font-size: 12px;"; 
   $date = date("F j, Y, g:i a");  ;
@@ -18,48 +16,15 @@
   
   $body_html = <<<___MAIL
     <div style="$style">
-    Estimado/a <b>$estudiante->nombre $estudiante->apellidos</b>:<br>
-    Hemos registrado Modificaciones <b>{$estudiante->codigo_sis}</b><br>
-    
-    <br><br><br>
-    Detalle:
-    <table style="$style;border:1px solid #000000;">
-      <tr>
-        <td>
-          <b>
-          Detalle:
-          </b>
-        </td>
-        <td>
-          {$revision->fecha}
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <b>
-          Comentarios:
-          </b>
-        </td>
-        <td>
-          {$revision->comentarios}
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <b>
-          Comentario:
-          </b>
-        </td>
-        <td>
-          {$revision->comentario}
-        </td>
-      </tr>
-    </table>
-
+    Estimado/a <b>$usuario->nombre $usuario->apellidos</b>:<br>
+    <br><br>
+    {$notificacion->detalle}
 
     Fecha: {$date}<br>
     </div>
 ___MAIL;
+
+  $detalleTXT = strip_tags($notificacion->detalle);
   $body_txt  = "    
     Estimado/a $estudiante->nombre $estudiante->apellidos:
     Hemos registrado correccion {$estudiante->codigo_sis}
@@ -118,7 +83,7 @@ ___MAIL;
   }
   else /** Enviamos el email */
   {
-    require(DIR_LIB.'/Mail/mime.php');
+    require_once(DIR_LIB.'/Mail/mime.php');
     
 
       $message = new Mail_mime();

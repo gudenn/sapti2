@@ -38,9 +38,10 @@ class Pagination {
    * @param type $sera_html_y_no_php para grabar un HTML o interACTUAR con un php
    * @param type $pp nomero de registros por pagina
    */
-  public function  __construct($result , $clave = 'leads', $w_like = '' , $sera_html_y_no_php = true ,$pp = 30)
+  public function  __construct($result , $clave = 'leads', $w_like = '' , $sera_html_y_no_php = true ,$pp = false)
   {
-    
+    if (!$pp)
+      $pp = 10;
 
     if ($sera_html_y_no_php)
       $this->html_php = 'HTML';

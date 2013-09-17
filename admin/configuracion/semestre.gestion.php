@@ -58,7 +58,7 @@ try {
   
   $o_string   = $semestre->getOrderString($filtro);
   $obj_mysql  = $semestre->getAll('',$o_string,$filtro_sql,TRUE);
-  $objs_pg    = new Pagination($obj_mysql, 'g_semestre','',false,10);
+  $objs_pg    = new Pagination($obj_mysql, 'g_semestre','',false);
 
   $smarty->assign("filtros"  ,$filtro);
   $smarty->assign("objs"     ,$objs_pg->objs);
