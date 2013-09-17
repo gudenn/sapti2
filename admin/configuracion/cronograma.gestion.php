@@ -44,7 +44,7 @@ try {
 
   //Filtro
   $filtro   = new Filtro('g_cronograma',__FILE__);
-  $objeto = new Cronograma();
+  $objeto = new Cronograma(); 
   $objeto->iniciarFiltro($filtro);
   $filtro_sql = $objeto->filtrar($filtro);
 
