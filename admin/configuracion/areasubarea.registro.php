@@ -1,14 +1,14 @@
 <?php
 try {
-  define ("MODULO", "MODALIDA-REGISTRO");
+  define ("MODULO", "AREA-REGISTRO");
   require('../_start.php');
   if(!isAdminSession())
     header("Location: ../login.php");  
 
   /** HEADER */
-  $smarty->assign('title','SAPTI - Registro Modalidad');
-  $smarty->assign('description','Formulario de registro de Modalidad');
-  $smarty->assign('keywords','SAPTI,Modalidad,Registro');
+  $smarty->assign('title','SAPTI - Registro Area');
+  $smarty->assign('description','Formulario de registro de Area');
+  $smarty->assign('keywords','SAPTI,Area,Registro');
 
   leerClase('Administrador');
   /**
@@ -16,7 +16,7 @@ try {
    */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administrador');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/','name'=>'Configuraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Registro de Modalidad');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Asignar subarea');
   $smarty->assign("menuList", $menuList);
 
 
@@ -42,27 +42,44 @@ try {
 
 
   $smarty->assign("ERROR", '');
+ //Asignar Semestre al estudiante
+  leerClase('Sub_area');
+  leerClase('Area_sub_area');
+  $subarea     = new Sub_area();
+  $subarea    = $subarea->getAll();
+  $subarea_values[] = '';
+  $subarea_output[] = '- Seleccione -';
+  while ($row = mysql_fetch_array($subarea[0])) 
+  {
+    $subarea_values[] = $row['id'];
+    $subarea_output[] = $row['nombre'];
+  }
+  $smarty->assign("subarea_values",  $subarea_values);
+  $smarty->assign("subarea_output",$subarea_output);
+  $smarty->assign("subarea_selected", "");
 
-
-  leerClase('Modalidad');
+  leerClase('Area');
   
-  $smarty->assign('columnacentro','admin/modalidad/columna.centro.registro.tpl');
+  $smarty->assign('columnacentro','admin/area_sub_area/columna.centro.registro.tpl');
   $id = '';
-  if (isset($_GET['modalidad_id']) && is_numeric($_GET['modalidad_id']))
-    $id = $_GET['modalidad_id'];
-  $modalidad = new Modalidad($id);
+  if (isset($_GET['area_id']) && is_numeric($_GET['area_id']))
+    $id = $_GET['area_id'];
+  $area_sub_area = new Area_sub_area();
+  
   if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
   {
     $EXITO = false;
     mysql_query("BEGIN");
-    $modalidad->objBuidFromPost();
-    $modalidad->estado = Objectbase::STATUS_AC;
-    $modalidad->validar();
-    $modalidad->save();
+   $area_sub_area->objBuidFromPost();
+   $area_sub_area->estado = Objectbase::STATUS_AC;
+ //   $area_sub_area->validar();
+    $area_sub_area->area_id=$id;
+    $area_sub_area->sub_area_id=$_POST['subarea_id'];
+    $area_sub_area->save();
     $EXITO = TRUE;
     mysql_query("COMMIT");
   }
-  $smarty->assign("modalidad",$modalidad);
+  $smarty->assign("area",$area);
 
   //No hay ERROR
   $ERROR = ''; 
@@ -72,9 +89,9 @@ try {
   {
     $html = new Html();
     if ($EXITO)
-      $mensaje = array('mensaje'=>'Se grabo correctamente el Modalidad','titulo'=>'Registro de Modalidad' ,'icono'=> 'tick_48.png');
+      $mensaje = array('mensaje'=>'Se grabo correctamente el Area','titulo'=>'Registro de Area' ,'icono'=> 'tick_48.png');
     else
-      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Modalidad','titulo'=>'Registro de Modalidad' ,'icono'=> 'warning_48.png');
+      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Area','titulo'=>'Registro de Area' ,'icono'=> 'warning_48.png');
    $ERROR = $html->getMessageBox ($mensaje);
   }
   $smarty->assign("ERROR",$ERROR);
