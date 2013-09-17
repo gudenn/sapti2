@@ -1,5 +1,3 @@
-
-
  <div id="content">
      
     <center> <strong>FORMULARIO DE REGISTRO DE TRIBUNALES</strong></td></center>

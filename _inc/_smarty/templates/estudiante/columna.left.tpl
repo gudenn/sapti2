@@ -12,6 +12,7 @@
                 </ul>
               </li>
               {/if}
+              <li><a href="{$URL}estudiante/tutores.lista.php">Solicitud Tutor</a></li>
               <li><a href="editar.cuenta.php">Modificar Cuenta</a></li>
               <li><a href="editar.cuenta.php">Preferencias</a></li>
               <li><a href="{$URL}?salirestudiante=1">Salir</a></li>
