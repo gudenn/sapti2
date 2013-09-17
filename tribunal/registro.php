@@ -65,20 +65,9 @@ FROM  `usuario` u ,`docente` d
 WHERE  u.`id`=d.`usuario_id` and u.`estado`='AC';";
  $resultado = mysql_query($sqlr);
  $arraytribunal= array();
-  $smarty->assign('contacts', array(
-                             array('phone' => '1',
-                                   'fax' => '2',
-                                   'cell' => '3'),
-                             array('phone' => '555-4444',
-                                   'fax' => '555-3333',
-                                   'cell' => '760-1234')
-                             ));
- 
+
  while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
          { 
-   
-   
-   
         $listaareas=array();
         $lista_areas=array();
         $lista_areas[] = $fila["id"];
@@ -90,70 +79,44 @@ $sqla="select  a.`nombre`
 from `docente` d , `apoyo` ap , `area` a
 where  d.`id`=ap.`docente_id` and a.`id`=ap.`area_id` and d.`estado`='AC' and ap.`estado`='AC' and a.`estado`='AC'and d.`id`=".$fila["id"];
  $resultadoa = mysql_query($sqla);
- 
+//if(mysql_fetch_array($resultadoa, MYSQL_ASSOC)){
   while ($filas = mysql_fetch_array($resultadoa, MYSQL_ASSOC)) 
   {
      $listaareas[]=$filas;
   }
+ //}else
+//{
+ //  $listaareas[]="NO HAY DATOS";
+ //}
   $lista_areas[]=$listaareas;
-  $arraytribunal[]= $lista_areas;
- }
- $smarty->assign('listadocentes'  , $arraytribunal);
+  $listatiempo=array();
   
   
-   
+$sqltiempo="select  d.`id` , d.`nombre` , t.`nombre` as nombreturno
+from `dia` d, `horario_doc` hd , `turno` t
+where  d.`id`=hd.`dia_id` and hd.`turno_id`=t.`id` and  d.`estado`='AC' and hd.`estado`='AC'and t.`estado`='AC' and hd.`docente_id`=".$fila["id"].";";
+ $resultadotiempo= mysql_query($sqltiempo);
  
- $rows = array();
-$usuario = new Usuario();
-//$smarty->assign('rows', $rows);
- $usuario_mysql  = $usuario->getAll();
- $usuario_id     = array();
- $usuario_nombre = array();
- while ($usuario_mysql && $row = mysql_fetch_array($usuario_mysql[0]))
- {
-   $usuario_id[]     = $row['id'];
-   $usuario_nombre[] = $row['nombre'];
-   $rows=$row;
+  while ($filatiempo = mysql_fetch_array($resultadotiempo, MYSQL_ASSOC)) 
+  {
+     $listatiempo[]=$filatiempo;
+  }
+  //$lista_tiempo[]= $listatiempo;
+  $lista_areas[]= $listatiempo;
+  $arraytribunal[]= $lista_areas;
+  
  }
-// $smarty->assign('filas'  , $rows);
-$smarty->assign('usuario_id'     , $usuario_id);
-$smarty->assign('usuario_nombre' , $usuario_nombre);
-
-
-
-//contruyendo el usuario
-  
-
-$proyecto= new Proyecto();
-$proyecto_sql= $proyecto->getAll();
-$proyecto_id= array();
-$proyecto_nombre=array();
-while ($proyecto_sql && $rows = mysql_fetch_array($proyecto_sql[0]))
- {
-   $proyecto_id[]     = $rows['id'];
-   $proyecto_nombre[] = $rows['nombre_proyecto'];
- }
-
-
-$smarty->assign('proyecto_id'     ,$proyecto_id);
-$smarty->assign('proyecto_nombre' ,$proyecto_nombre);
-$smarty->assign('nombrearea' ,"Redes");
-  
-
-
-  
-  //$tribunal = new Tribunal();
-  //$smarty->assign("tribunal", $tribunal);
-
-
-$contenido = 'tribunal/registrotribunal.tpl';
+  $smarty->assign('listadocentes'  , $arraytribunal);
+  $contenido = 'tribunal/registrotribunal.tpl';
   $smarty->assign('contenido',$contenido);
   
   if(isset($_POST['buscar']))
   {
    echo   $_POST['codigosis'];
+   
     $estudiante   = new Estudiante(false,$_POST['codigosis']);
     $proyecto     = new Proyecto();
+    
     $proyecto_aux = $estudiante->getProyecto();
     if ($proyecto_aux)
       $proyecto = $proyecto_aux;
@@ -173,10 +136,36 @@ $contenido = 'tribunal/registrotribunal.tpl';
   }
   
   
+if(isset($_POST['estudiante_id']) && isset($_POST['automatico']) && $_POST['automatico']='automatico')
+  {
+  echo  $_POST['estudiante_id'];
+  echo 'hola mundo';
+    $estudiante   = new Estudiante(false,$_POST['estudiante_id']);
+    $proyecto     = new Proyecto();
+    $proyecto_aux = $estudiante->getProyecto();
+    if ($proyecto_aux)
+      $proyecto = $proyecto_aux;
+    else
+    {
+      //@todo no tiene proyecto 
+       echo "<script>alert('El Estudiante no Tiene Proyecto');</script>";
+      
+    }
+  
+   $usuariobuscado= new Usuario($estudiante->usuario_id);
+   $smarty->assign('usuariobuscado',  $usuariobuscado);
+   $smarty->assign('estudiantebuscado', $estudiante);
+   $smarty->assign('proyectobuscado', $proyecto);
+   $smarty->assign('proyectoarea', $proyecto->getArea());
+}
+  
+  
+  
+  
+  
  
-   if ( isset($_POST['manual']))
+   if (isset($_POST['manual']))
    {
-     echo "Hola eli";
      echo   $_POST['estudiante_id'];
      
     $estudiante   = new Estudiante(false,$_POST['estudiante_id']);
@@ -206,48 +195,32 @@ $contenido = 'tribunal/registrotribunal.tpl';
   {
 if (isset($_POST['proyecto_id']) && $_POST['proyecto_id']!="")
  {
-     
-      $proyecto_tribunal->objBuidFromPost();
-      $proyecto_tribunal->estado = Objectbase::STATUS_AC;
-      $proyecto_tribunal->save();
+   $proyectos= new Proyecto($_POST['proyecto_id']);
+    $estudiante = array();
+    $estudiante[]=1;
       
      $notificaciones= new Notificacion();
      $notificaciones->objBuidFromPost();
-     $notificaciones->proyecto_id=$_POST['proyecto_id'];
-     $notificaciones->tipo="";
-     $notificaciones->detalle=$_POST['detalle'];
-      $notificaciones->prioridad="Baja";
-      $notificaciones->estado_notificacion="Baja";
      $notificaciones->estado = Objectbase::STATUS_AC;
-     $notificaciones->save();
-    // $notificaciones->
+      
+    // $notificaciones->enviar($_POST['detalle'],$estudiante, null,, null, null,null,null);
+    // $notificaciones->enviar($_POST['detalle'],nu, $estudiante, $tutores, $tribunales, $revisores, $consejos);
+  //  $notificaciones->save();
   
-    
      if (isset($_POST['ids']))
      foreach ($_POST['ids'] as $id)
      {
-      echo $id;
+               echo $id;
                $tribunal= new Tribunal();
-              
-          //     $smarty->assign("tribunal",$tribunal);
                 
-               
                 $tribunal->estado = Objectbase::STATUS_AC;
-                $tribunal->proyecto_tribunal_id=$proyecto_tribunal->id;
+                $tribunal->proyecto_id=$proyecto_->id;
                 $tribunal->docente_id =$id;
                 $tribunal->archivo ="";
                 $tribunal->accion="";
                 $tribunal->objBuidFromPost();
            
                 $tribunal->save();
-               
-                 $notificaciontribunal= new Notificacion_tribunal();
-                  $notificaciontribunal->notificacion_id=$notificaciones->id;
-                 $notificaciontribunal->tribunal_id=$tribunal->id;
-                 $notificaciontribunal->estado = Objectbase::STATUS_AC;
-                 $notificaciontribunal->save();
-              
-               
                
      }
      }else

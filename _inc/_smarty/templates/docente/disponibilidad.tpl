@@ -16,13 +16,8 @@
     <tr  class="selectable">
      <td>{$listadias[ic]['nombredia']} </td>
        <td>{$listadias[ic]['nombreturno']}</td>
-        
-  
-      <td>  <a href="disponibilidad.php?eliminar=1&horario_id={$listadias[ic]['id']}" onclick="return confirm('ELIMINAR EL HORARIO?');"  >{icono('borrar.png','ELIMINAR')}</a>
-     
+         <td>  <a href="disponibilidad.php?eliminar=1&horario_id={$listadias[ic]['id']}" onclick="return confirm('ELIMINAR EL HORARIO?');"  >{icono('borrar.png','ELIMINAR')}</a>
         </td>
-      
-        
     </tr>
   {/section}
     </tbody> 
@@ -31,11 +26,11 @@
             <p>
               <select name="dia_id" id="dia_id" >
               {html_options values=$diaid selected=$diaid output=$dianombre}
-              </select>
+              </select>&nbsp;<span id='Buscando'></span>
               <label for="semestre_id"><small>DIA(*)</small></label>
             </p>
             <p>
-              <select name="turno_id" id="turno_id" >
+              <select name="turno_id" id="turno_id" poblacioattri >
               {html_options values=$turnoid selected=$turnoid output=$turnonombre}
               </select>
               <label for="materia_id"><small>HORARIO(*)</small></label>
@@ -51,45 +46,26 @@
               <input name="submit" type="submit" id="submit" value="Grabar">
              </p>
           </form>
+             
+ <script>
+jQuery('#dia_id').change(function () {
+var numero =document.getElementById("dia_id").value; // valor de la id de Provincias
+var to=document.getElementById("Buscando");
+to.innerHTML="buscando....";
 
-    
+jQuery.ajax({
+type: "POST", 
+url: "buscador.php",
+data: 'iddia='+numero, // enviamos la id de la Porvincia + la id de la población
+success: function(a) {
+jQuery('#turno_id').html(a);// el resultado de la busqueda la mostramos en  #poblacionList
+var to=document.getElementById("Buscando");
+to.innerHTML="";
+}
+});
+})
+.change();
+</script> 
 
- 
-<script type="text/javascript">
-
-  jQuery(function(){
-    $("#docentes tbody").on("click", "tr", function(event){
- if ($('#asignados > tbody >tr').length==3)
-    {
-     alert ( "Solo se Permitern tres Tribunales!!" );
-      } else
-        {
-           $("#asignados").append('<tr>' + $(this).html() + '</tr>');
-         $(this).remove();
-          }
-        return false;
-      
-      
-     
-      
-    
-    
-    });
-  });
-</script>
-
-<script type="text/javascript">
-
-  jQuery(function(){
-    $("#asignados tbody").on("click", "tr", function(event){
-    
-      $("#docentes tbody").append('<tr>' + $(this).html() + '</tr>');
-      $(this).remove();
-      return false;
-    });
-  });
-
-
-</script>
-              
+  
  </div>
