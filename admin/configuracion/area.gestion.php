@@ -51,7 +51,7 @@ try {
   
   $o_string   = $objeto->getOrderString($filtro);
   $obj_mysql  = $objeto->getAll('',$o_string,$filtro_sql,TRUE);
-  $objs_pg    = new Pagination($obj_mysql, 'g_area','',false,3);
+  $objs_pg    = new Pagination($obj_mysql, 'g_area','',false);
 
   $smarty->assign("filtros"  ,$filtro);
   $smarty->assign("objs"     ,$objs_pg->objs);

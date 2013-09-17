@@ -5,7 +5,18 @@
 */
 class Notificacion extends Objectbase
 {
-
+ /**
+  * Cosntantes para manejar los estados de notificaion
+  */
+ /** EST_NOLEIDO no leido */
+  const EST_NOLEIDO    = 'E01';
+ /** EST_LEIDO leido */
+  const EST_LEIDO      = 'E02';
+ /** EST_ARCHIVO mensaje archivado */
+  const EST_ARCHIVO    = 'E03';
+ /** EST_ELIMINADO mensaje eliminado */
+  const EST_ELIMINADO  = 'E04';
+  
  /**
   * Cosntantes para manejar los tipos
   */
@@ -32,6 +43,12 @@ class Notificacion extends Objectbase
   
 
  /**
+  * Asunto del mensaje o notificacion
+  * @var VARCHAR (200)
+  */
+  var $asunto;
+
+ /**
   * Contenido del mensaje o notificacion
   * @var TEXT
   */
@@ -45,18 +62,7 @@ class Notificacion extends Objectbase
   * @var TEXT
   */
   var $prioridad;
- /**
-  * Cosntantes para manejar los estados de notificaion
-  */
- /** EST_NOLEIDO no leido */
-  const EST_NOLEIDO    = 'E01';
- /** EST_LEIDO leido */
-  const EST_LEIDO      = 'E02';
- /** EST_ARCHIVO mensaje archivado */
-  const EST_ARCHIVO    = 'E03';
- /** EST_ELIMINADO mensaje eliminado */
-  const EST_ELIMINADO  = 'E04';
-  
+
   
  /**
   * El estado_notificacion del mensaje si fue leido si esta archivado si fue eliminado
@@ -103,18 +109,45 @@ class Notificacion extends Objectbase
   var $notificacion_estudiante_objs;  
   
   /**
+   * Manda una notificacion a todos los actores de un proyecto
+   */
+  function notificarTodos() 
+  {
+    $this->notificarEstudiantes();
+    $this->notificarDocentes();
+    $this->notificarTutores();
+    $this->notificarTribunales();
+    $this->notificarRevisores();
+  }
+  
+  /**
+   * Notificamos a todos los estudiantes del proyecto
+   */
+  function notificarEstudiantes() 
+  {
+    
+  }
+  /**
    * Envio de mensajes para el sistema
    * 
-   * @param string $mensaje
-   * @param Objetos $docentes
-   * @param Objetos $estudiantes
-   * @param Objetos $tutores
-   * @param Objetos $tribunales
-   * @param Objetos $revisores
-   * @param Objetos $consejos
+   * @param type $usuarios es un Array cons las siguientes claves
+   * estudiantes = array();
+   * tribunales  = array();
+   * revisores   = array();
+   * docentes    = array();
+   * consejos    = array();
+   * tutores     = array();
    */
-  function enviar($mensaje,$docentes,$estudiantes,$tutores,$tribunales,$revisores,$consejos) 
+  
+  function enviarNotificaion($usuarios /*$docentes,$estudiantes,$tutores,$tribunales,$revisores,$consejos*/)
   {
+    $estudiantes = isset($usuarios['estudiantes'])?$usuarios['estudiantes']:array();
+    $tribunales  = isset($usuarios['tribunales' ])?$usuarios['tribunales' ]:array();
+    $revisores   = isset($usuarios['revisores'  ])?$usuarios['revisores'  ]:array();
+    $docentes    = isset($usuarios['docentes'   ])?$usuarios['docentes'   ]:array();
+    $consejos    = isset($usuarios['consejos'   ])?$usuarios['consejos'   ]:array();
+    $tutores     = isset($usuarios['tutores'    ])?$usuarios['tutores'    ]:array();
+
     leerClase('Notificaion_docente');
     foreach ($docentes as $docente_id) 
     {
@@ -143,7 +176,6 @@ class Notificacion extends Objectbase
       $n_obj->estudiante_id = $estudiante_id;
       $this->notificacion_estudiante_objs[] = $n_obj;
     }
-    /* Pendiente Tribunal
     leerClase('Notificacion_tribunal');
     foreach ($tribunales as $tribunal_id) 
     {
@@ -151,7 +183,6 @@ class Notificacion extends Objectbase
       $n_obj->tribunal_id  = $tribunal_id;
       $this->notificacion_tribunal_objs[] = $n_obj;
     }
-    */
     leerClase('Notificacion_consejo');
     foreach ($consejos as $consejo_id) 
     {
@@ -163,6 +194,22 @@ class Notificacion extends Objectbase
     $this->estado_notificacion = self::EST_NOLEIDO;
     $this->save();
     $this->saveAllSonObjects();
+    
+  }
+  
+  function sendMail() {
+    leerClase('Usuario');
+    leerClase('Docente');
+    leerClase('Tutor');
+    leerClase('Notificaion_docente');
+    foreach ($this->notificacion_docente_objs as $notificacion_docente) 
+    {
+      $docente      = new Docente($notificacion_docente->docente_id);
+      $usuario      = $docente->getUsuario();
+      $notificacion = $this;
+      //enviamos el email
+      include DIR_MAILTPL.'/mail_01.php';
+    }
     
   }
 } 

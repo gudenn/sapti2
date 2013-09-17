@@ -1,8 +1,7 @@
 <?php
 
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * @Deprecated !!! esta clase se eliminada en la procima version!!
  */
 
 class Proyecto_tribunal extends Objectbase 
