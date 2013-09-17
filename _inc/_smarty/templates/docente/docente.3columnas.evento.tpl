@@ -5,11 +5,7 @@
       <!-- ############ -->
       {include file="docente/columna.left.tpl"}
       <!-- ############ -->
-      {if !isset($mascara)}
-        {include file='docente/listas.lista.evento.tpl'}
-      {else}
-        {include file=$mascara}
-      {/if}
+        {include file=$columnacentro}
     </div>
   </div>
 </div>
