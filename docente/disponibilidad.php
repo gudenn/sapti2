@@ -13,16 +13,11 @@ try {
     $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
   
-  $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
-  
   $smarty->assign('CSS',$CSS);
 
   //JS
-  $JS[]  = URL_JS . "jquery.1.9.1.js";
+  $JS[]  = URL_JS . "jquery.min.js";
 
-  //Datepicker UI
-  $JS[]  = URL_JS . "ui/jquery-ui-1.10.2.custom.min.js";
-  $JS[]  = URL_JS . "ui/i18n/jquery.ui.datepicker-es.js";
 
   //Validation
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
@@ -71,8 +66,17 @@ $idocente=0;
 
   
 /////////////cargando los dias de la semana///////////
-  $sqldia="select d.`id` , d.`nombre`
-from dia d;";
+  $sqldia="SELECT DISTINCT(dia.id), dia.nombre
+FROM dia, turno
+WHERE NOT EXISTS (
+SELECT *
+FROM turno tu, horario_doc hd, dia d
+WHERE hd.docente_id=4
+AND tu.id=hd.turno_id
+AND d.id=hd.dia_id
+AND dia.nombre=d.nombre
+AND turno.nombre=tu.nombre
+);";
  $resultadodia = mysql_query($sqldia);
  $diaid= array();
   $dianombre= array();
@@ -85,8 +89,17 @@ from dia d;";
 $smarty->assign('diaid'  , $diaid);
 $smarty->assign('dianombre'  , $dianombre);
  ////////////////cargando los turnos de opciones de tiempo///////////
-  $sqlturno="select t.`id` , t.`nombre`
- from `turno` t;";
+  $sqlturno="SELECT DISTINCT(turno.id), turno.nombre
+FROM dia, turno
+WHERE NOT EXISTS (
+SELECT *
+FROM turno tu, horario_doc hd, dia d
+WHERE hd.docente_id=4
+AND tu.id=hd.turno_id
+AND d.id=hd.dia_id
+AND d.id=5
+AND turno.nombre=tu.nombre
+);";
  $resultadoturno = mysql_query($sqlturno);
  $turnoid= array();
   $turnonombre= array();
@@ -96,8 +109,8 @@ $smarty->assign('dianombre'  , $dianombre);
     $turnoid[]=$filaturno['id'];
     $turnonombre[]=$filaturno['nombre'];
  }
-$smarty->assign('turnoid'  , $turnoid);
-$smarty->assign('turnonombre'  , $turnonombre);  
+//$smarty->assign('turnoid'  , $turnoid);
+//$smarty->assign('turnonombre'  , $turnonombre);  
 
  $sql="select hd.`id`, d.`nombre` as nombredia, t.`nombre` as nombreturno
 from `turno` t , `dia` d , `horario_doc` hd, `usuario` u, `docente` doc
@@ -137,3 +150,7 @@ $TEMPLATE_TOSHOW = 'docente/docente.3columnas.tpl';
 $smarty->display($TEMPLATE_TOSHOW);
 
 ?>
+
+
+
+

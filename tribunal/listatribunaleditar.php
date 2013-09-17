@@ -40,11 +40,10 @@ try {
   leerClase("Filtro");
   leerClase("Proyecto_estudiante");
   
-  
- $filtro     = new Filtro('g_docente',__FILE__);
-  $docente = new Docente();
-  $docente->iniciarFiltro($filtro);
-  $filtro_sql = $docente->filtrar($filtro);
+  $filtro     =  new Filtro('g_docente',__FILE__);
+  $docente    =  new Docente();
+  $docente    -> iniciarFiltro($filtro);
+  $filtro_sql =  $docente->filtrar($filtro);
 
   $docente->usuario_id ='%';
   
@@ -55,10 +54,11 @@ try {
   $smarty->assign("filtros"  ,$filtro);
   $smarty->assign("objs"     ,$objs_pg->objs);
   $smarty->assign("pages"    ,$objs_pg->p_pages);
-   $proyectostribunales= array();
-   
+  
  
-   $proyec= new Proyecto();
+  
+   $proyectostribunales= array();
+    $proyec= new Proyecto();
     //var_dump( $proyec->getProyectoAsignados());
    
    $usuario = new Usuario();
@@ -66,43 +66,26 @@ try {
  $usuario_mysql  = $usuario->getAll();
  $usuario_id     = array();
  $usuario_nombre = array();
- $sql="SELECT pt.`id` , u.`nombre` ,CONCAT(u.`apellido_paterno`,u.`apellido_materno`) as apellidos, es.`codigo_sis` , p.`nombre` as nombreproyecto
-FROM `proyecto` p , `proyecto_tribunal`  pt , `usuario` u, `estudiante` es , `proyecto_estudiante` pe
-WHERE   u.`id`=es.`usuario_id` and  es.`id`=pe.`estudiante_id` and  pe.`proyecto_id`=p.`id` and p.`id`=pt.`proyecto_id`;";
- $resultado = mysql_query($sql);
+$sql="SELECT DISTINCT (p.id) , u.nombre ,CONCAT(u.apellido_paterno,u.apellido_materno) as apellidos, es.codigo_sis , p.nombre as nombreproyecto
+FROM proyecto p , usuario u, estudiante es , proyecto_estudiante pe, tribunal t
+WHERE  u.id=es.usuario_id and  es.id=pe.estudiante_id and  pe.proyecto_id=p.id and p.id=t.proyecto_id;";
+ $resultado= mysql_query($sql);
  $arraytribunal= array();
  
  while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
- {   
+ {
+   
    $arraytribunal[]=$fila;
  }
 
 $smarty->assign('arraytribunal'  , $arraytribunal);
- /**
- $resultado = mysql_query($sql);
- while ($fila = mysql_fetch_assoc($resultado)) {
-    echo $fila["id"];
-    echo $fila["nombre"];
-    echo $fila["apellidos"];
-}
- 
- */
+
  while ($usuario_mysql && $row = mysql_fetch_array($usuario_mysql[0]))
  {
    $usuario_id[]     = $row['id'];
    $usuario_nombre[] = $row['nombre'];
    $rows=$row;
  }
-   
- 
-   
-  
-  
-  
-  
-  
-  
-  
  
  $rows = array();
 $usuario = new Usuario();
@@ -121,10 +104,6 @@ $smarty->assign('usuario_id'  , $usuario_id);
 $smarty->assign('usuario_nombre', $usuario_nombre);
 
 
-
-//contruyendo el usuario
-  
-
 $proyecto= new Proyecto();
 $proyecto_sql= $proyecto->getAll();
 $proyecto_id= array();
@@ -140,11 +119,6 @@ $smarty->assign('proyecto_id',$proyecto_id);
 $smarty->assign('proyecto_nombre',$proyecto_nombre);
   
 
-
-  
-  //$tribunal = new Tribunal();
-  //$smarty->assign("tribunal", $tribunal);
-  
   if(isset($_POST['buscar']))
   {
    echo   $_POST['codigosis'];

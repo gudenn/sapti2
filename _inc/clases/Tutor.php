@@ -8,11 +8,6 @@ class Tutor extends Objectbase
      */
     var $usuario_id;
 
-    /**
-     * Codigo de tutor
-     * @var INT(11)
-     */
-    var $codigo;
     
     /**
      * Retorna el nombre completo del usuario

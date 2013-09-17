@@ -22,12 +22,11 @@ try {
 
 
    // Agregan el js
-  $JS[]  = URL_JS . "jquery.min.js";
-  //$JS[]  = URL_JS . "tablaeditable/jquery-1.10.0.min.js";
-  $JS[]  = URL_JS . "tablaeditable/jquery-ui-1.10.3.custom.min.js";
+  $JS[]  = URL_JS . "jquery.min_1.7.js";
+  $JS[]  = URL_JS . "jquery-ui-1.10.3.custom.min.js";
   $JS[]  = URL_JS . "tablaeditable/editablegrid-2.0.1.js";
   $JS[]  = URL_JS . "tablaeditable/tabla.evento.lista.js";
-  $JS[]  = URL_JS . "jquery.simplemodal.js";
+  $JS[]  = URL_JS . "jquery.simplemodal-1.4.4.js";
   $JS[]  = URL_JS . "evento.edicion.js";
   
     //Datepicker UI
@@ -52,7 +51,7 @@ try {
   $docente=  getSessionDocente();
   $docenteid=$docente->id;
 
-  $smarty->assign('mascara'       ,'docente/evento.lista.tpl');  
+  $smarty->assign('columnacentro' ,'docente/evento.lista.tpl');  
   //No hay ERROR
   $smarty->assign("ERROR",'');
 } 
