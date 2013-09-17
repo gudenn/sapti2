@@ -94,7 +94,7 @@ class Notificacion extends Objectbase
   * (Arreglo de objetos)  que pertenecen a un docente
   * @var object|null 
   */
-  var $notificacion_docente_objs;  
+  var $notificacion_dicta_objs;  
   
  /**
   * (Arreglo de objetos)  que pertenecen a un tutor
@@ -113,20 +113,108 @@ class Notificacion extends Objectbase
    */
   function notificarTodos() 
   {
-    $this->notificarEstudiantes();
-    $this->notificarDocentes();
-    $this->notificarTutores();
-    $this->notificarTribunales();
-    $this->notificarRevisores();
+    $proyecto = new Proyecto($this->proyecto_id);
+    $proyecto->getAllObjects();
+    $this->notificarEstudiantes($proyecto);
+    $this->notificarDictas($proyecto);
+    $this->notificarTutores($proyecto);
+    $this->notificarTribunales($proyecto);
+    $this->notificarRevisores($proyecto);
   }
   
   /**
    * Notificamos a todos los estudiantes del proyecto
    */
-  function notificarEstudiantes() 
+  function notificarEstudiantes($proyecto = false) 
   {
-    
+    if (!$proyecto)
+    {
+      $proyecto = new Proyecto($this->proyecto_id);
+      $proyecto->getAllObjects();
+    }
+    $estudiantes = array();
+    foreach ($proyecto->proyecto_estudiante_objs as $proyecto_estudiante)
+      $estudiantes[] = $proyecto_estudiante->estudiante_id;
+    $usuarios['estudiantes'] = $estudiantes;
+
+    $this->enviarNotificaion($usuarios);
   }
+  
+  /**
+   * Notificamos a todos los dicta del proyecto
+   */
+  function notificarDictas($proyecto = false) 
+  {
+    if (!$proyecto)
+    {
+      $proyecto = new Proyecto($this->proyecto_id);
+      $proyecto->getAllObjects();
+    }
+    $dictas = array();
+    foreach ($proyecto->proyecto_dicta_objs as $proyecto_dicta)
+      $dictas[] = $proyecto_dicta->dicta_id;
+    $usuarios['dictas'] = $dictas;
+
+    $this->enviarNotificaion($usuarios);
+  }
+  
+  /**
+   * Notificamos a todos los tutores del proyecto
+   */
+  function notificarTutores($proyecto = false) 
+  {
+    if (!$proyecto)
+    {
+      $proyecto = new Proyecto($this->proyecto_id);
+      $proyecto->getAllObjects();
+    }
+    $tutores = array();
+    foreach ($proyecto->proyecto_tutor_objs as $proyecto_tutor)
+      $tutores[] = $proyecto_tutor->tutor_id;
+    $usuarios['tutores'] = $tutores;
+
+    $this->enviarNotificaion($usuarios);
+  }
+
+  /**
+   * Notificamos a todos los tribunales del proyecto
+   */
+  function notificarTribunales($proyecto = false) 
+  {
+    if (!$proyecto)
+    {
+      $proyecto = new Proyecto($this->proyecto_id);
+      $proyecto->getAllObjects();
+    }
+
+    $tribunales = array();
+    foreach ($proyecto->tribunal_objs as $tribunal)
+      $tribunales[] = $tribunal->id;
+    $usuarios['tribunales'] = $tribunales;
+
+    $this->enviarNotificaion($usuarios);
+  }
+
+  /**
+   * Notificamos a todos los revisores del proyecto
+   */
+  function notificarRevisores($proyecto = false) 
+  {
+    if (!$proyecto)
+    {
+      $proyecto = new Proyecto($this->proyecto_id);
+      $proyecto->getAllObjects();
+    }
+
+    $revisores = array();
+    foreach ($proyecto->proyecto_revisor_objs as $proyecto_revisor)
+      $revisores[] = $$proyecto_revisor->revisor_id;
+    $usuarios['revisores'] = $revisores;
+
+    $this->enviarNotificaion($usuarios);
+  }
+
+
   /**
    * Envio de mensajes para el sistema
    * 
@@ -134,26 +222,26 @@ class Notificacion extends Objectbase
    * estudiantes = array();
    * tribunales  = array();
    * revisores   = array();
-   * docentes    = array();
+   * dictas      = array();
    * consejos    = array();
    * tutores     = array();
    */
   
-  function enviarNotificaion($usuarios /*$docentes,$estudiantes,$tutores,$tribunales,$revisores,$consejos*/)
+  function enviarNotificaion($usuarios /*$dictas,$estudiantes,$tutores,$tribunales,$revisores,$consejos*/)
   {
     $estudiantes = isset($usuarios['estudiantes'])?$usuarios['estudiantes']:array();
     $tribunales  = isset($usuarios['tribunales' ])?$usuarios['tribunales' ]:array();
     $revisores   = isset($usuarios['revisores'  ])?$usuarios['revisores'  ]:array();
-    $docentes    = isset($usuarios['docentes'   ])?$usuarios['docentes'   ]:array();
     $consejos    = isset($usuarios['consejos'   ])?$usuarios['consejos'   ]:array();
     $tutores     = isset($usuarios['tutores'    ])?$usuarios['tutores'    ]:array();
+    $dictas      = isset($usuarios['dictas'     ])?$usuarios['dictas'     ]:array();
 
-    leerClase('Notificaion_docente');
-    foreach ($docentes as $docente_id) 
+    leerClase('Notificaion_dicta');
+    foreach ($dictas as $dicta_id) 
     {
-      $n_obj             = new Notificacion_docente();
-      $n_obj->docente_id = $docente_id;
-      $this->notificacion_docente_objs[] = $n_obj;
+      $n_obj             = new Notificacion_dicta();
+      $n_obj->docente_id = $dicta_id;
+      $this->notificacion_dicta_objs[] = $n_obj;
     }
     leerClase('Notificaion_tutor');
     foreach ($tutores as $tutor_id) 
@@ -190,7 +278,6 @@ class Notificacion extends Objectbase
       $n_obj->consejo_id   = $consejo_id;
       $this->notificacion_consejo_objs[] = $n_obj;
     }
-    $this->detalle = $mensaje;
     $this->estado_notificacion = self::EST_NOLEIDO;
     $this->save();
     $this->saveAllSonObjects();
@@ -201,7 +288,7 @@ class Notificacion extends Objectbase
     leerClase('Usuario');
     leerClase('Docente');
     leerClase('Tutor');
-    leerClase('Notificaion_docente');
+    leerClase('Notificacion_docente');
     foreach ($this->notificacion_docente_objs as $notificacion_docente) 
     {
       $docente      = new Docente($notificacion_docente->docente_id);
