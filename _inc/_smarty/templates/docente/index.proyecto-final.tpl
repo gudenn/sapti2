@@ -2,7 +2,7 @@
         <h1 class="title"><b>Docente:</b><br />{$usuario->nombre|upper}, {$usuario->apellido_paterno|upper} {$usuario->apellido_materno|upper}</h1>
         <div class="dashboard">
           <h2>Gestion de Estudiantes</h2>
-          <a href="{$URL}docente/inscripcion.estudiante-cvs_mascara.php">
+          <a href="{$URL}docente/inscripcion.estudiante-cvs.php">
             <img src="{$URL_IMG}icons/docente/correccion.png"   width="64px" height="64" alt="Correciones">
             <h3>Registro de Estudiantes</h3>
             <p>Registro de Estudiantes Inscritos en la Materia de Proyecto Final</p>
