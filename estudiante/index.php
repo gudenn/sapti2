@@ -11,11 +11,16 @@ try {
 
   //CSS
   $CSS[]  = URL_CSS . "academic/3_column.css";
+  //Calendar
+  $CSS[]  = URL_JS . "calendar/css/eventCalendar.css";
+  $CSS[]  = URL_JS . "calendar/css/eventCalendar_theme.css";
   $smarty->assign('CSS',$CSS);
 
   //JS
-  $JS[]  = "js/jquery.js";
-  $smarty->assign('JS','');
+  $JS[]  = URL_JS ."jquery.min.js";
+  //Calendar
+  $JS[]  = URL_JS . "calendar/js/jquery.eventCalendar.js";
+  $smarty->assign('JS',$JS);
 
   // Escritorio del estuddinate
   leerClase('Usuario');

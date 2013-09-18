@@ -18,7 +18,10 @@
               <li><a href="{$URL}?salirestudiante=1">Salir</a></li>
             </ul>
           </div>
-        <div class="holder">
+        <div class="holder"></div>
+        <div class="subnav">
+          <h2>Cronograma de eventos</h2>
+
+          {include file="cronograma/cronograma.tpl"}
         </div>
-        {include file="cronograma/columna.centro.tpl"}
       </div>
