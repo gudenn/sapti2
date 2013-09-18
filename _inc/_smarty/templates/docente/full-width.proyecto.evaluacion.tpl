@@ -33,8 +33,42 @@
         	<div id="paginator"></div>
 
         <h1 class="title">Evaluaciones</h1>
-
-		<div id="tablecontent1"></div>
+        <form action="#" method="post" id="registro" name="registro" onSubmit="return acti();">
+        <table class="tbl_lista">
+              <thead>
+                <tr>
+                  <th>Evalucion 1    </th>
+                  <th>Evalucion 2    </th>
+                  <th>Evalucion 3    </th>
+                  <th>Promedio       </th>
+                  <th>Editar         </th>
+                  <th>Registrar      </th>
+                </tr>
+              </thead>
+            <tr class="dark">
+               <th>
+                   <input type="number" name="evaluacion_1" id="evaluacion_1" value="{$evaluacion->evaluacion_1}" disabled="disabled" onkeyup="promedio.value = Math.round(((parseInt(evaluacion_1.value) + parseInt(evaluacion_2.value) + parseInt(evaluacion_3.value))/3)* 1) / 1" onkeypress="return validarNro(event)" min=0 max=100>
+               </th>
+               <th>
+                   <input type="number" name="evaluacion_2" id="evaluacion_2" value="{$evaluacion->evaluacion_2}" disabled="disabled" onkeyup="promedio.value = Math.round(((parseInt(evaluacion_1.value) + parseInt(evaluacion_2.value) + parseInt(evaluacion_3.value))/3)* 1) / 1" onkeypress="return validarNro(event)" min=0 max=100>
+               </th>
+               <th>
+                   <input type="number" name="evaluacion_3" id="evaluacion_3" value="{$evaluacion->evaluacion_3}" disabled="disabled" onkeyup="promedio.value = Math.round(((parseInt(evaluacion_1.value) + parseInt(evaluacion_2.value) + parseInt(evaluacion_3.value))/3)* 1) / 1" onkeypress="return validarNro(event)" min=0 max=100>
+               </th>
+               <th>
+                   <input type="text" name="promedio" id="promedio" value="{$evaluacion->promedio}" readonly>
+               </th>
+               <th>
+                   <input type="button" onClick="activar(this)" value="Editar">
+               </th>
+               <th>
+                   <input type="hidden" name="tarea" value="registrar">
+                   <input type="hidden" name="token" value="{$token}">
+                   <input name="submit" type="submit" id="submit" value="Grabar">
+               </th>
+            </tr>
+        </table>
+        </form>       
         </div>
         <p>{$ERROR}</p>
      </div>
@@ -45,3 +79,51 @@
         <script type="text/javascript">
                 editableGrid.onloadXML("loaddata.revision.lista.php?doc={$proyecto->id}");
         </script>
+        <script type="text/javascript">
+            function activar(bott){
+            if(bott.value == 'Editar'){
+            bott.value = 'No Editar';
+            document.getElementById('evaluacion_1').disabled = false;
+            document.getElementById('evaluacion_2').disabled = false;
+            document.getElementById('evaluacion_3').disabled = false;
+            }else{
+            bott.value = 'Editar';
+            document.getElementById('evaluacion_1').disabled = 'disabled';
+            document.getElementById('evaluacion_2').disabled = 'disabled';
+            document.getElementById('evaluacion_3').disabled = 'disabled';
+            }
+            }
+            function acti(){
+            document.getElementById('evaluacion_1').disabled = false;
+            document.getElementById('evaluacion_2').disabled = false;
+            document.getElementById('evaluacion_3').disabled = false;
+            return confirm('Seguro desea modificar la evaluacion?');
+            }
+            function validarNro(e) {
+            var key;
+            if(window.event) // IE
+                    {
+                    key = e.keyCode;
+                    }
+            else if(e.which) // Netscape/Firefox/Opera
+                    {
+                    key = e.which;
+                    }
+
+            if (key < 48 || key > 57)
+                {
+                if(key == 46 || key == 8) // Detectar . (punto) y backspace (retroceso)
+                    { return true; }
+                else 
+                    { return false; }
+                }
+            return true;
+            }
+        </script>
+        <style type="text/css">
+        tr:nth-child(even) { background: #ddd }
+        tr:nth-child(odd) { background: #fff}
+        table {
+        color: #666666;
+        }
+        </style>
