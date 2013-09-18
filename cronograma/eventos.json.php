@@ -1,5 +1,5 @@
 <?php
-//header('Content-type: text/json');
+header('Content-type: text/json');
 require('../_inc/_sistema.php');
 conectar_db();
 leerClase("Evento");
