@@ -30,6 +30,42 @@ class Proyecto extends Objectbase
   */
   var $revision_objs;
 
+
+ /**
+  * (Objeto simple) Todos los proyecto_estudiante que tiene este proyecto
+  * @var object|null 
+  */
+  var $proyecto_estudiante_objs;
+
+ /**
+  * (Objeto simple) Todos los proyecto_docente que tiene este proyecto
+  * @var object|null 
+  */
+  var $proyecto_dicta_objs;
+
+ /**
+  * (Objeto simple) Todos los proyecto_tutor que tiene este proyecto
+  * @var object|null 
+  */
+  var $proyecto_tutor_objs;
+
+ /**
+  * (Objeto simple) Todos los proyecto_revisor que tiene este proyecto
+  * @var object|null 
+  */
+  var $proyecto_revisor_objs;
+
+ /**
+  * (Objeto simple) Todos los tribunales que tiene este proyecto
+  * @var object|null 
+  */
+  var $tribunal_objs;
+
+  
+  
+  
+  
+  
   /**
    * 
    * @param string $codigo_sis el codigo_sis

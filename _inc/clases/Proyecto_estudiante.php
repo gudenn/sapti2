@@ -1,17 +1,20 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * La relacion entre un proyecto y el estudiante
  */
 class Proyecto_estudiante extends Objectbase 
 {
  /**
-  * Nombre del Grupo
-  * @var INT(100)
+  * id del proyecto
+  * @var INT(11)
   */
   var $proyecto_id;
   
+ /**
+  * id del estudiante
+  * @var INT(11)
+  */
   Var $estudiante_id;
 
 }

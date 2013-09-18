@@ -3,7 +3,11 @@ try {
   require('_start.php');
   if(!isDocenteSession())
     header("Location: login.php");  
-
+  
+  leerClase("Evento");
+  leerClase("Pagination");
+  leerClase('Docente');
+  
   /** HEADER */
   $smarty->assign('title','SAPTI - Inscripcion de Estudiantes');
   $smarty->assign('description','Formulario de Inscripcion de Estudiantes');
@@ -12,57 +16,43 @@ try {
   //CSS
   $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_CSS . "academic/tables.css";
+  $CSS[]  = URL_CSS . "tablaeventolista.css";
   $CSS[]  = URL_CSS . "academic/evento.edicion.css";
-  
-   // Agregan el css
-  $CSS[]  = URL_JS . "calendar/css/eventCalendar.css";
-  $CSS[]  = URL_JS . "calendar/css/eventCalendar_theme.css";
+  $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
+
 
    // Agregan el js
-  $JS[]  = URL_JS . "jquery.js";
-  $JS[]  = URL_JS . "evento.edicion.js";
+  $JS[]  = URL_JS . "jquery.min.js";
+  //$JS[]  = URL_JS . "tablaeditable/jquery-1.10.0.min.js";
+  $JS[]  = URL_JS . "tablaeditable/jquery-ui-1.10.3.custom.min.js";
+  $JS[]  = URL_JS . "tablaeditable/editablegrid-2.0.1.js";
+  $JS[]  = URL_JS . "tablaeditable/tabla.evento.lista.js";
   $JS[]  = URL_JS . "jquery.simplemodal.js";
+  $JS[]  = URL_JS . "evento.edicion.js";
   
-  $JS[]  = URL_JS . "calendar/js/jquery.eventCalendar.js";
-
+    //Datepicker UI
+  $JS[]  = URL_JS . "ui/jquery-ui-1.10.2.custom.min.js";
+  $JS[]  = URL_JS . "ui/i18n/jquery.ui.datepicker-es.js";
   $smarty->assign('JS',$JS);
   $smarty->assign('CSS',$CSS);
-
-
-  $smarty->assign("ERROR", '');
+  
+  /**
+   * Menu superior
+   */
+  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Docente');
+  $menuList[]     = array('url'=>URL.Docente::URL.__FILE__,'name'=>'Edicion de Eventos');
+  $smarty->assign("menuList", $menuList);
+  
+  if (isset($_GET['eliminar']) && isset($_GET['evento_id']) && is_numeric($_GET['evento_id']) )
+  {
+    $evento = new Evento($_GET['evento_id']);
+    $evento->delete();
+  }
 
   $docente=  getSessionDocente();
   $docenteid=$docente->id;
-    leerClase("Evento");
-  leerClase("Pagination");
 
-  $ERROR = '';
-
-  /** HEADER */
-  $smarty->assign('title','Lista de Estudiantes');
-  $smarty->assign('description','Pagina de Lista de Incritos');
-  $smarty->assign('keywords','Gestion,Estudiantes');
-
-  $docente=  getSessionDocente();
-  $docenteid=$docente->id;
-$sql="SELECT *
-FROM evento ev
-WHERE ev.dicta_id=4
-ORDER BY ev.fecha_evento ASC";
- $resultado = mysql_query($sql);
- $arraylista= array();
- 
- while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) {
-   $arraylista[]=$fila;
- }
-  $smarty->assign('arraylista'  , $arraylista);
-  $smarty->assign('mascara'     ,'docente/listas.mascara.evento.tpl');
-  $smarty->assign('lista'       ,'docente/evento.lista.tpl');
-  
-  $objs_pg    = new Pagination($resultado, 'g_evento','',false,10);
-  $smarty->assign("objs"     ,$arraylista);
-  $smarty->assign("pages"    ,$objs_pg->p_pages);
-  
+  $smarty->assign('mascara'       ,'docente/evento.lista.tpl');  
   //No hay ERROR
   $smarty->assign("ERROR",'');
 } 
@@ -70,10 +60,5 @@ catch(Exception $e)
 {
   $smarty->assign("ERROR", handleError($e));
 }
-
-if (isset($_GET['tlista']) && $_GET['tlista']) //recargamos la tabla central
-  $smarty->display('docente/listas.lista.evento.tpl'); 
-else
   $smarty->display('docente/docente.3columnas.evento.tpl');
-
 ?>

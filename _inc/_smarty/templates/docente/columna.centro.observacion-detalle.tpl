@@ -16,7 +16,7 @@
             <table class="tbl_lista">
             <thead>
               <tr>
-                <th><a>Observaciones Realizadas:                </a></th>
+                <th><a>Observaciones Realizadas:</a></th>
               </tr>
             </thead>
             {section name=ic loop=$arrayobser}

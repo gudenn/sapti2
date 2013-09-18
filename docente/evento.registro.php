@@ -3,8 +3,10 @@ try {
   require('_start.php');
   if(!isDocenteSession())
     header("Location: login.php");
-  global $PAISBOX;
-
+  
+  leerClase('Evento');
+  leerClase('Docente');
+  
   /** HEADER */
   $smarty->assign('title','Proyecto Final');
   $smarty->assign('description','Proyecto Final');
@@ -13,9 +15,7 @@ try {
   //CSS
   $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
-  
   $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
-  
   $smarty->assign('CSS',$CSS);
 
   //JS
@@ -28,43 +28,20 @@ try {
   //Validation
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
-  
   $smarty->assign('JS',$JS);
-  $smarty->assign("ERROR", '');
-
-    function array_recibe($url_array) { 
-     $tmp = stripslashes($url_array); 
-     $tmp = urldecode($tmp); 
-     $tmp = unserialize($tmp); 
-
-    return $tmp; 
-  };
-    $array=$_GET['array']; 
-    $array=array_recibe($array);
   
-  //CREAR UN EVENTO
-  leerClase('Evento');
+  /**
+   * Menu superior
+   */
+  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Docente');
+  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Registro de Eventos');
+  $smarty->assign("menuList", $menuList);
   
   $docente=  getSessionDocente();
   $docente_ids=$docente->id;
-  $columnacentro = 'docente/columna.centro.evento.registro.tpl';
-  $smarty->assign('columnacentro',$columnacentro);  
-
   $evento = new Evento();
-  
+
   $smarty->assign("evento", $evento);
-    
-    $nombre_n=$array['nombre'];
-    $nombre_a=$array['apellidos'];
-    $es=' ';
-    $nombre_es=$nombre_n.$es.$nombre_a;
-    $nombre_pr=$array['nombrep']; 
-    
-    $smarty->assign("nombre_es", $nombre_es);
-    $smarty->assign("nombre_pr", $nombre_pr);
-    
-    //date_default_timezone_set('UTC');
-    //$evento->fecha_evento=date("d/m/Y");
     
     if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
     {
@@ -77,7 +54,9 @@ try {
     $ir = "Location: $url";
         header($ir);
     }
-  
+    
+  $columnacentro = 'docente/columna.centro.evento.registro.tpl';
+  $smarty->assign('columnacentro',$columnacentro);  
   //No hay ERROR
   $smarty->assign("ERROR",'');
   

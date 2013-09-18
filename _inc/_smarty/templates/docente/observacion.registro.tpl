@@ -4,9 +4,9 @@
           <form action="#" method="post" id="registro" name="registro" >
             <p>
                <label for="nombre de proyecto"><small>NOMBRE DE PROYECTO:</small></label>
-               <span>{$nombre_pr}</span><br/>
+               <span>{$proyecto->nombre}</span><br/>
                <label for="nombre de estudiante"><small>NOMBRE DE ESTUDIANTE:</small></label>
-               <span>{$nombre_es}</span>
+               <span>{$usuario->nombre} {$usuario->apellido_paterno} {$usuario->apellido_materno}</span>
             </p>
             <br/>
             <object data="/sapti/ARCHIVO/proyecto.pdf" type="application/pdf" width="900" height="300">
@@ -23,7 +23,7 @@
             </div>
 
             <p>
-              <input type="text" name="fecha_revision" id="fecha_revision" value="{$revision->fecha_revision}" size="22">
+              <input type="text" name="fecha_revision" id="fecha_revision" value="{$revision->fecha_revision}" size="22"/>
               <label for="fecha_revision"><small>FECHA DE REVISION</small></label>
             </p>
 
@@ -49,7 +49,7 @@
               dateFormat:'dd/mm/yy',
               changeMonth: true,
               changeYear: true,
-              yearRange: "1920:2013"
+              yearRange: "2000:2050"
             });
           });
           jQuery(document).ready(function(){

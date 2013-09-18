@@ -1,0 +1,54 @@
+/*
+ * examples/full/css/demo.css
+ * 
+ * This file is part of EditableGrid.
+ * http://editablegrid.net
+ *
+ * Copyright (c) 2011 Webismymind SPRL
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://editablegrid.net/license
+ */
+
+.ok { 
+	background-color: #0a8819; 
+	color: white; 
+	padding: 5px;
+}
+
+input.invalid {
+	background: red;
+	color: #FDFDFD;
+}
+
+#message {
+	width: 100%;
+}
+
+#edition {
+	padding-top: 5px;
+	width: 600px;
+	border: 0px;	
+}
+
+#paginator {
+	font-family:  Helvetica, Arial, sans-serif;
+  	margin: 10px 0;
+	font-size: 12px;
+	text-align: center;
+	margin-bottom: 5px;
+}
+
+#paginator a { color:  #0078cc; text-decoration: none; font-size: 12px; }           
+#paginator a:hover { color: #000; }
+#paginator a:active { color: #777; }
+#paginator a:focus { outline: 1px; }
+
+#filter { 
+	width: 250px;
+	margin-bottom: 10px; 
+}
+
+#pagecontrol {
+	padding-bottom: 5px;
+	float: right;
+}

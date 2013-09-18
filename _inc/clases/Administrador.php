@@ -34,7 +34,9 @@ class Administrador extends Objectbase
   {
     leerClase('Grupo');
     $usuario = $this->getUsuario();
-    $grupo = new Grupo($usuario->grupo_id);
+    //@TODO Error por estos lados $usuario->grupo_id
+    //$grupo = new Grupo($usuario->grupo_id);
+    $grupo = new Grupo(1);
     return $grupo;    
   }
 

@@ -1,6 +1,6 @@
       <div id="right_column">
         <div class="holder">
-          <h2 class="title">Lorem ipsum dolor</h2>
+          <h2 class="title">Calendario de Eventos</h2>
           <p>Nuncsed sed conseque a at quismodo tris mauristibus sed habiturpiscinia sed.</p>
           <ul>
             <li><a href="#">Lorem ipsum dolor sit</a></li>

@@ -3,7 +3,7 @@ try {
   require('_start.php');
   if(!isDocenteSession())
     header("Location: login.php"); 
-  global $PAISBOX;
+
   leerClase("Observacion");
   $observacion = new Observacion();
   

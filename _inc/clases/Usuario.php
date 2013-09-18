@@ -15,11 +15,16 @@ class Usuario  extends Objectbase
   var $nombre;
 
  /**
-  * Apellidos paterno y/o materno del usuario
+  * Apellido paterno del usuario
   * @var VARCHAR(100)
   */
-  var $apellidos;  
-
+  var $apellido_paterno;
+  
+ /**
+  * Apellido materno del usuario
+  * @var VARCHAR(100)
+  */
+  var $apellido_materno;
  /**
   * Email del estudiante
   * @var VARCHAR(100)
@@ -30,7 +35,7 @@ class Usuario  extends Objectbase
   * Email del estudiante
   * @var DATE(100)
   */
-  var $fecha_cumple;
+  var $fecha_nacimiento;
 
  /**
   * Login del usuario

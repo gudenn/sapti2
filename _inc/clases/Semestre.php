@@ -6,7 +6,9 @@
  */
 class Semestre extends Objectbase 
 {
-  
+  /** constant to the status able  */
+  const ACTIVO   = "1";
+  const INACTIVO = "0";
   
  /**
   * Codigo del semestre
@@ -21,6 +23,36 @@ class Semestre extends Objectbase
   */
   var $activo;
 
+  /**
+   * Busca el semestre activo o sea el semestre actual
+   */
+  function getValor($nombre)
+  {
+    leerClase('Configuracion_semestral');
+    if (!isset($this->id) || !($this->id) )
+      $this->getActivo();
+    $config              = new Configuracion_semestral();
+    $config->semestre_id = $this->id;
+    $config->getIdValue($nombre);
+    return $config->valor;
+  }
+
+  /**
+   * Busca el semestre activo o sea el semestre actual
+   */
+  function getActivo() 
+  {
+    $AC     = Objectbase::STATUS_AC;
+    $activo = self::ACTIVO;
+    $sql    = "SELECT * FROM {$this->getTableName ()} WHERE activo = '{$activo}' and estado = '{$AC}' ";
+    $result = mysql_query($sql);
+    if (!$result)
+      return false;
+    
+    $array = mysql_fetch_array($result, MYSQL_ASSOC);
+    if ($array)
+      parent::__construct($array);
+  }
 
 
   /**
@@ -37,12 +69,13 @@ class Semestre extends Objectbase
    Activamos este semestre como el semestre actual
    */
   function activar() {
-    $sql = " UPDATE  `{$this->getTableName()}` SET  `activo` =  '0' WHERE  1 ";
+    $inactivo = self::INACTIVO;
+    $sql = " UPDATE  `{$this->getTableName()}` SET  `activo` =  '$inactivo' WHERE  1 ";
     //echo $sql;
     $result = mysql_query($sql);
     if (!$result)
       return false;
-    $this->activo = 1;
+    $this->activo = self::ACTIVO;
   }
   
   /**

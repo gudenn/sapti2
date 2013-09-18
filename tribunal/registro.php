@@ -7,13 +7,13 @@ try {
   $smarty->assign('title','Proyecto Final');
   $smarty->assign('description','Proyecto Final');
   $smarty->assign('keywords','Proyecto Final');
- $CSS[]  = URL_JS . "ui/overcast/jquery-ui.css";
+  $CSS[]  = URL_JS . "ui/overcast/jquery-ui.css";
   //$CSS[]  = URL_JS . "jQfu/css/demo.css";
   $CSS[]  = URL_JS . "jQfu/css/jquery.fileupload-ui.css";
   $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_CSS . "spams.css";
   $CSS[]  = URL_JS  . "validate/validationEngine.jquery.css";
-   $CSS[]  = URL_CSS . "box/box.css";
+  $CSS[]  = URL_CSS . "box/box.css";
  
   $smarty->assign('CSS',$CSS);
   //JS
@@ -59,6 +59,11 @@ try {
   $smarty->assign("objs"     ,$objs_pg->objs);
   $smarty->assign("pages"    ,$objs_pg->p_pages);
  */
+  
+  
+  
+  
+  
   
   $sqlr="SELECT  d.`id`, u.`nombre`, CONCAT (u.`apellido_paterno`,u.`apellido_materno`) as apellidos
 FROM  `usuario` u ,`docente` d
@@ -138,8 +143,9 @@ where  d.`id`=hd.`dia_id` and hd.`turno_id`=t.`id` and  d.`estado`='AC' and hd.`
   
 if(isset($_POST['estudiante_id']) && isset($_POST['automatico']) && $_POST['automatico']='automatico')
   {
-  echo  $_POST['estudiante_id'];
-  echo 'hola mundo';
+    echo  $_POST['estudiante_id'];
+    echo 'hola mundo';
+  
     $estudiante   = new Estudiante(false,$_POST['estudiante_id']);
     $proyecto     = new Proyecto();
     $proyecto_aux = $estudiante->getProyecto();
@@ -199,14 +205,8 @@ if (isset($_POST['proyecto_id']) && $_POST['proyecto_id']!="")
     $estudiante = array();
     $estudiante[]=1;
       
-     $notificaciones= new Notificacion();
-     $notificaciones->objBuidFromPost();
-     $notificaciones->estado = Objectbase::STATUS_AC;
-      
-    // $notificaciones->enviar($_POST['detalle'],$estudiante, null,, null, null,null,null);
-    // $notificaciones->enviar($_POST['detalle'],nu, $estudiante, $tutores, $tribunales, $revisores, $consejos);
-  //  $notificaciones->save();
-  
+     //$notificaciones= new Notificacion();
+ 
      if (isset($_POST['ids']))
      foreach ($_POST['ids'] as $id)
      {
