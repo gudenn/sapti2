@@ -1,11 +1,11 @@
 <?php
 try {
-  define ("MODULO", "SEMESTRE-GESTION");
+  define ("MODULO", "AREA-GESTION");
   require('../_start.php');
   if(!isAdminSession())
     header("Location: ../login.php");  
 
-  leerClase("Semestre");
+  leerClase("Cronograma");
   leerClase("Formulario");
   leerClase("Pagination");
   leerClase("Filtro");
@@ -14,16 +14,16 @@ try {
   $ERROR = '';
 
   /** HEADER */
-  $smarty->assign('title','Gestion de Semestres');
-  $smarty->assign('description','Pagina de gestion de Semestres');
-  $smarty->assign('keywords','Gestion,Semestre');
+  $smarty->assign('title','Gestion de Cronograma');
+  $smarty->assign('description','Pagina de gesti&oacute;n de Cronograma');
+  $smarty->assign('keywords','Gesti&acoute;Cronograma');
   leerClase('Administrador');
   /**
    * Menu superior
    */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administrador');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/','name'=>'Configuraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Registro de Semestre');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Cronograma');
   $smarty->assign("menuList", $menuList);
 
   //CSS
@@ -32,33 +32,26 @@ try {
   $smarty->assign('CSS',$CSS);
 
   //JS
-  $JS[]  = URL_JS . "jquery.min.js";
+  $JS[]  = URL_JS . "jquery.js";
   $smarty->assign('JS',$JS);
 
   
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
-  if (isset($_GET['activar']) && isset($_GET['semestre_id']) && is_numeric($_GET['semestre_id']) )
-  {
-    $semestre = new Semestre($_GET['semestre_id']);
-    $semestre->activar();
-    $semestre->save();
-  }
-
   $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
-  $smarty->assign('lista'       ,'admin/semestre/lista.tpl');
+  $smarty->assign('lista'       ,'admin/cronograma/lista.tpl');
 
   //Filtro
-  $filtro   = new Filtro('g_semestre',__FILE__);
-  $semestre = new Semestre();
-  $semestre->iniciarFiltro($filtro);
-  $filtro_sql = $semestre->filtrar($filtro);
+  $filtro   = new Filtro('g_cronograma',__FILE__);
+  $objeto = new Cronograma(); 
+  $objeto->iniciarFiltro($filtro);
+  $filtro_sql = $objeto->filtrar($filtro);
 
   
-  $o_string   = $semestre->getOrderString($filtro);
-  $obj_mysql  = $semestre->getAll('',$o_string,$filtro_sql,TRUE);
-  $objs_pg    = new Pagination($obj_mysql, 'g_semestre','',false);
+  $o_string   = $objeto->getOrderString($filtro);
+  $obj_mysql  = $objeto->getAll('',$o_string,$filtro_sql,TRUE);
+  $objs_pg    = new Pagination($obj_mysql, 'g_cronograma','',false);
 
   $smarty->assign("filtros"  ,$filtro);
   $smarty->assign("objs"     ,$objs_pg->objs);
