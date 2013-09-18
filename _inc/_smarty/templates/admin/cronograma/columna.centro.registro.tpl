@@ -13,6 +13,8 @@
               <label for="codigo"><small>Nombre del Evento (*)</small></label>
             </p>
           
+            
+            
             <p>
               <textarea name="detalle_evento0" id="detalle_evento" value="{$cronograma->detalle_evento}" size="22" style="width: 650px;height: 100px;" data-validation-engine="validate[required]"></textarea>
               <label for="detalle_evento"><small>Detalle del Evento (*)</small></label>
