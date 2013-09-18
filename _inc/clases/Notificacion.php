@@ -240,7 +240,7 @@ class Notificacion extends Objectbase
     $tutores     = isset($usuarios['tutores'    ])?$usuarios['tutores'    ]:array();
     $dictas      = isset($usuarios['dictas'     ])?$usuarios['dictas'     ]:array();
 
-    leerClase('Notificaion_dicta');
+    leerClase('Notificacion_dicta');
     foreach ($dictas as $dicta_id) 
 
     {

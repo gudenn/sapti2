@@ -2,7 +2,7 @@
 try {
   require('_start.php');
   global $PAISBOX;
-
+  
   /** HEADER */
   $smarty->assign('title','Proyecto Final');
   $smarty->assign('description','Proyecto Final');
@@ -38,16 +38,32 @@ try {
   //CREAR UN TUTOR
   leerClase('Tutor');
   leerClase('Usuario');
+  leerClase('Estudiante');
   leerClase('Docente');
+  leerClase('Proyecto_tutor');
+  leerClase('Notificacion');
+  leerClase('Notificacion_tutor');
+  
   
  //$tutor = new ();
   
-  $smarty->assign("tutor", $tutor);
+ // $smarty->assign("tutor", $tutor);
     $smarty->assign('token','');
+    if (isset($_GET['estudiante_id']))
+    {
+       echo $_GET['estudiante_id'];
+       $estudiante = new Estudiante($_GET['estudiante_id']);
+       echo   $estudiante->getProyecto()->nombre;
+       $proyecto = $estudiante->getProyecto();
+      
+     
+       $smarty->assign("proyecto",$proyecto);
+    }
+    
    if (isset($_POST['buscar']) && $_POST['buscar'] == 'buscar')
   {
     
-    $docente= new Docente(false,$_POST['codigo']);
+  $docente= new Docente(false,$_POST['codigo']);
   echo   $docente->usuario_id;
   $usuario= new Usuario($docente->usuario_id);
   $smarty->assign("tutor",  $usuario);
@@ -56,9 +72,33 @@ try {
     
     
   if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
-  {
+  {  
+    $usuario = new Usuario();
+    $usuario->objBuidFromPost();
+    $usuario->estado = Objectbase::STATUS_AC;
+    $usuario->save();
+    
+    
+    $tutor= new Tutor();
     $tutor->objBuidFromPost();
-    $tutor->save();    
+    $tutor->usuario_id=$usuario->id;
+    $tutor->save(); 
+    
+    $notificacion= new Notificacion();
+    $notificacion->objBuidFromPost();
+    $notificacion->estado = Objectbase::STATUS_AC;
+    // $notificacion->proyecto_id=;
+    $lista= array();
+    $lista[]=$_POST['proyecto_id'];
+    $notificacion->enviarNotificaion($lista);
+    
+    
+    $proyectotutor= new Proyecto_tutor();
+    $proyectotutor->objBuidFromPost();
+    $proyectotutor->tutor_id=$tutor->id;
+    $proyectotutor->estado = Objectbase::STATUS_AC;
+   
+    $proyectotutor->save();
   }
 
   
