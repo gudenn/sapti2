@@ -36,13 +36,13 @@
               <input name="reset" type="reset" tabindex="3" value="Resetear">
             </p>
           </form>
-        <form action="#" method="post">
-        <input name="borrar" type="submit" value="ELIMINAR TODAS LAS OBSERVACION(ES)">
+        <form action="#" method="post" onsubmit="return confirm('Eliminar Todas las Observaciones?');">
+            <input name="borrar" type="submit" value="ELIMINAR TODAS LAS OBSERVACION(ES)">
         </form>
         </div>
         <p>{$ERROR}</p>
         <script type="text/javascript">
-                    datagrid = new DatabaseGrid('0',{$revisionesid});
+                    datagrid = new DatabaseGrid({$revisionesid});
         </script>
         <script type="text/javascript">
         {literal} 
@@ -58,11 +58,4 @@
           });
         {/literal} 
         </script>
-        <style type="text/css">
-        tr:nth-child(even) { background: #ddd }
-        tr:nth-child(odd) { background: #fff}
-        table {
-        color: #666666;
-        }
-        </style>
         </div>

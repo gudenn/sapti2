@@ -120,10 +120,3 @@
             return true;
             }
         </script>
-        <style type="text/css">
-        tr:nth-child(even) { background: #ddd }
-        tr:nth-child(odd) { background: #fff}
-        table {
-        color: #666666;
-        }
-        </style>

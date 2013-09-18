@@ -68,9 +68,9 @@ EditableGrid.prototype.initializeGrid = function()
                 
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
 		cell.innerHTML = "<a href='#' class='eventoedit' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("detalle.png") + "\" border=\"0\" alt=\"delete\" title=\"Editar Evento\"/></a>";
-                cell.innerHTML += "&nbsp;<a onclick=document.location.href='observacion.registro.php' style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("editar.png") + "\" border=\"0\" alt=\"delete\" title=\"Registrar Observacion\"/></a>";
+						 "<img src=\"" + image("editar.png") + "\" border=\"0\" alt=\"detalle\" title=\"Editar Evento\"/></a>";
+                cell.innerHTML += "&nbsp;<a onclick=\"if (confirm('Eliminar este Evento? ')){document.location.href='evento.lista.php?eliminar=1&evento_id="+getRowId(cell.rowIndex)+"'}\"  style=\"cursor:pointer\">" +
+						 "<img src=\"" + image("borrar.png") + "\" border=\"0\" alt=\"borrar\" title=\"Eliminar Evento\"/></a>";
 
 		}}));
                 //eventoedit();

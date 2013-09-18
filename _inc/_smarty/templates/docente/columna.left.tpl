@@ -18,7 +18,7 @@
                 </ul>
               </li>
 
-              <li><a href="reportes.sistema.php">Repostes del Sistema</a></li>
+              <li><a href="reportes.sistema.php">Reportes del Sistema</a></li>
               <li><a href="editar.cuenta.php">Modificar Cuenta</a></li>
               <li><a href="editar.cuenta.php">Preferencias</a></li>
               <li><a href="{$URL}?salirdocente=1">Salir</a></li>

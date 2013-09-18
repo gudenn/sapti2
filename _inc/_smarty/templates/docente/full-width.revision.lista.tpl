@@ -35,13 +35,6 @@
         <script type="text/javascript">
                 editableGrid.onloadXML("loaddata.revision.lista.php?doc={$proyecto->id}");
         </script>
-        <style type="text/css">
-        tr:nth-child(even) { background: #ddd }
-        tr:nth-child(odd) { background: #fff}
-        table {
-        color: #666666;
-        }
-        </style>
         <p>{$ERROR}</p>
      </div>
     {$ERROR}

@@ -16,7 +16,7 @@ try {
   //CSS
   $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_CSS . "academic/tables.css";
-  $CSS[]  = URL_CSS . "tablaeventolista.css";
+  $CSS[]  = URL_CSS . "editablegrid.css";
   $CSS[]  = URL_CSS . "academic/evento.edicion.css";
   $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
 

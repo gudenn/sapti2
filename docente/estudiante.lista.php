@@ -16,7 +16,7 @@ try {
 
   //CSS
   $CSS[]  = URL_CSS . "academic/tables.css";
-  $CSS[]  = URL_CSS . "tablaeditableevaluacion.css";
+  $CSS[]  = URL_CSS . "editablegrid.css";
   $smarty->assign('CSS',$CSS);
 
   //JS

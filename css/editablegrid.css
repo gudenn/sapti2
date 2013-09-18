@@ -52,3 +52,8 @@ input.invalid {
 	padding-bottom: 5px;
 	float: right;
 }
+tr:nth-child(even) { background: #ddd }
+tr:nth-child(odd) { background: #fff}
+table {
+color: #666666;
+}

@@ -46,135 +46,8 @@ function updateCellValue(editableGrid, rowIndex, columnIndex, oldValue, newValue
 	});
 }
 
-function updateCellValue1(editableGrid, rowIndex, columnIndex, oldValue, newValue, row, onResponse)
-{
-    if(newValue<=100){
-        $.ajax({
-		url: 'update.php',
-		type: 'POST',
-		dataType: "html",
-		data: {
-			tablename : editableGrid.name,
-			id: editableGrid.getRowId(rowIndex), 
-			newvalue: editableGrid.getColumnType(columnIndex) == "boolean" ? (newValue ? 1 : 0) : newValue, 
-			colname: editableGrid.getColumnName(columnIndex),
-			coltype: editableGrid.getColumnType(columnIndex)			
-		},
-		success: function (response) 
-		{ 
-			// reset old value if failed then highlight row
-			var success = onResponse ? onResponse(response) : (response == "ok" || !isNaN(parseInt(response))); // by default, a sucessfull reponse can be "ok" or a database id 
-			if (!success) editableGrid.setValueAt(rowIndex, columnIndex, oldValue);
-		    prom(editableGrid, rowIndex);
-                    highlight(row.id, success ? "ok" : "error"); 
-		},
-		error: function(XMLHttpRequest, textStatus, exception) { alert("Ajax failure\n" + errortext); },
-		async: true
-	});
-            }else{
-        alert("LA NOTA MAXIMA PERMITIDA ES 100");
-    }
-}
-
-function updateCellValue2(editableGrid, rowIndex, columnIndex, oldValue, newValue, row, onResponse)
-{
-    if(newValue<=100 && !isNaN(newValue)){
-        $.ajax({
-		url: 'update.php',
-		type: 'POST',
-		dataType: "html",
-		data: {
-			tablename : editableGrid.name,
-			id: editableGrid.getRowId(rowIndex), 
-			newvalue: editableGrid.getColumnType(columnIndex) == "boolean" ? (newValue ? 1 : 0) : newValue, 
-			colname: editableGrid.getColumnName(columnIndex),
-			coltype: editableGrid.getColumnType(columnIndex)			
-		},
-		success: function (response) 
-		{ 
-			// reset old value if failed then highlight row
-			var success = onResponse ? onResponse(response) : (response == "ok" || !isNaN(parseInt(response))); // by default, a sucessfull reponse can be "ok" or a database id 
-			if (!success)editableGrid.setValueAt(rowIndex, columnIndex, oldValue);
-                    prom2(editableGrid, rowIndex);
-		    highlight(row.id, success ? "ok" : "error"); 
-		},
-		error: function(XMLHttpRequest, textStatus, exception) { alert("Ajax failure\n" + errortext); },
-		async: true
-	});
-    }else{
-        alert("INTRODUCIR VALORES NUMERICOS Y MENORES A 100");
-    }
-}
-
-function promedio1(editableGrid){
-    est='ABA';
-    for(cant=0; cant<editableGrid.getRowCount(); cant++){
-        col1=editableGrid.getValueAt(cant, '1');
-        col2=editableGrid.getValueAt(cant, '2');
-        col3=editableGrid.getValueAt(cant, '3');
-        promed=(col1+col2+col3)/3;
-        promed=Math.round(promed * 1) / 1;
-    if(promed >='51'){
-        est='APRO';
-    }else{
-        est='REPRO';
-    }
-     editableGrid.setValueAt(cant, '4', promed);
-     editableGrid.setValueAt(cant, '5', est);
-    }
-}
-function promedio2(editableGrid){
-    est='ABA';
-    for(cant=0; cant<editableGrid.getRowCount(); cant++){
-        col1=editableGrid.getValueAt(cant, '4');
-        col2=editableGrid.getValueAt(cant, '5');
-        col3=editableGrid.getValueAt(cant, '6');
-        promed=(col1+col2+col3)/3;
-        promed=Math.round(promed * 1) / 1;
-    if(promed >='51'){
-        est='APRO';
-    }else{
-        est='REPRO';
-    }
-     editableGrid.setValueAt(cant, '7', promed);
-     editableGrid.setValueAt(cant, '8', est);
-    }        
-}
-
-function prom(editableGrid, cant){
-    est='ABA';
-        col1=editableGrid.getValueAt(cant, '1');
-        col2=editableGrid.getValueAt(cant, '2');
-        col3=editableGrid.getValueAt(cant, '3');
-        promed=(col1+col2+col3)/3;
-        promed=Math.round(promed * 1) / 1;
-    if(promed >='51'){
-        est='APRO';
-    }else{
-        est='REPRO';
-    }
-     editableGrid.setValueAt(cant, '4', promed);
-     editableGrid.setValueAt(cant, '5', est);
-}
-function prom2(editableGrid, cant){
-    est='ABA';
-        col1=editableGrid.getValueAt(cant, '4');
-        col2=editableGrid.getValueAt(cant, '5');
-        col3=editableGrid.getValueAt(cant, '6');
-        promed=(col1+col2+col3)/3;
-        promed=Math.round(promed * 1) / 1;
-    if(promed >='51'){
-        est='APRO';
-    }else{
-        est='REPRO';
-    }
-     editableGrid.setValueAt(cant, '7', promed);
-     editableGrid.setValueAt(cant, '8', est);
-}
-
-function DatabaseGrid(ac,revid) 
+function DatabaseGrid(revid) 
 { 
-	if(ac=='0'){
         this.editableGrid = new EditableGrid("observacion", {
 		enableSort: true,
    	    tableLoaded: function() { datagrid.initializeGrid(tab=this); },
@@ -182,41 +55,15 @@ function DatabaseGrid(ac,revid)
    	    	updateCellValue(this, rowIndex, columnIndex, oldValue, newValue, row);
        	}
  	});
-        }else{if(ac=='eva'){
-        this.editableGrid = new EditableGrid("evaluacion", {
-		enableSort: true,
-   	    tableLoaded: function() { datagrid.initializeGrid1(this); },
-		modelChanged: function(rowIndex, columnIndex, oldValue, newValue, row) {
-   	    	updateCellValue1(this, rowIndex, columnIndex, oldValue, newValue, row);
-       	}
- 	});         
-        }else{if(ac=='evatd'){
-            this.editableGrid = new EditableGrid("evaluacion", {
-		enableSort: true,
-   	    tableLoaded: function() { datagrid.initializeGrid2(this); },
-		modelChanged: function(rowIndex, columnIndex, oldValue, newValue, row) {
-   	    	updateCellValue2(this, rowIndex, columnIndex, oldValue, newValue, row);
-       	}
- 	});                 
-        }
-        }
-        };
+        
         rev=revid;
-	this.fetchGrid(ac,revid); 
+	this.fetchGrid(revid); 
 	
 }
-DatabaseGrid.prototype.fetchGrid = function(d,revid)  {
+DatabaseGrid.prototype.fetchGrid = function(revid)  {
 	// call a PHP script to get the data
-        if(d=='0') {
-           this.editableGrid.loadXML("loaddata.php?revid="+revid);
-        }else{if(d=='evatd'){
-           this.editableGrid.loadXML("loaddata.estudiante.proyecto.php?doc="+revid);     
-        }else{if(d=='eva'){
-           this.editableGrid.loadXML("loaddata.evaluacion.estudiante.php?eva="+revid);
-           
-        };
-        };
-        };
+           this.editableGrid.loadXML("loaddata.observacion.editar.php?revid="+revid);
+
 };
 
 DatabaseGrid.prototype.initializeGrid = function(grid) {
@@ -225,14 +72,6 @@ DatabaseGrid.prototype.initializeGrid = function(grid) {
 						 "<img src=\"" + image("delete.png") + "\" border=\"0\" alt=\"delete\" title=\"Delete row\"/></a>";
 		}}));
              grid.renderGrid("tablecontent", "testgrid");
-};
-DatabaseGrid.prototype.initializeGrid1 = function(grid) {
-             grid.renderGrid("tablecontent", "testgrid");
-             promedio1(grid);
-};
-DatabaseGrid.prototype.initializeGrid2 = function(grid) {
-             grid.renderGrid("tablecontent", "testgrid");
-             promedio2(grid);
 };
 
 function image(relativePath) {
@@ -261,7 +100,7 @@ function enviarDatosObservacion(){
 	  //la función responseText tiene todos los datos pedidos al servidor
   	if (ajax.readyState==4) {
   		//mostrar resultados en esta capa
-                datagrid = new DatabaseGrid('0',rev);
+                datagrid = new DatabaseGrid(rev);
 		//llamar a funcion para limpiar los inputs
 		LimpiarCampos();
 	}

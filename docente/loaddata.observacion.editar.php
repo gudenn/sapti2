@@ -3,8 +3,8 @@
 require_once('config.php');      
 require_once('EditableGrid.php');
 
-if(isset($_GET['eva'])){
-$evaid=$_GET['eva'];
+if(isset($_GET['revid'])){
+$obser2=$_GET['revid'];
 };
 
 // Database connection
@@ -16,16 +16,13 @@ $mysqli->real_connect($config['db_host'],$config['db_user'],$config['db_password
 $grid = new EditableGrid();
 
 $grid->addColumn('id', 'ID', 'integer', NULL, false); 
-$grid->addColumn('evaluacion_1', 'Evaluacion 1', 'integer');
-$grid->addColumn('evaluacion_2', 'Evaluacion 2', 'integer');
-$grid->addColumn('evaluacion_3', 'Evaluacion 3', 'integer');
-$grid->addColumn('promedio', 'PROMEDIO', 'integer', NULL, false);
-$grid->addColumn('rfinal', 'ESTADO', 'string', NULL, false);
+$grid->addColumn('observacion', 'Observacion', 'string');
+$grid->addColumn('action', 'Borrar', 'html', NULL, false);
 
 $result = $mysqli->query('
-SELECT *
-FROM evaluacion
-WHERE id="'.$evaid.'"');
+SELECT ob.id AS id, ob.observacion AS observacion
+FROM observacion ob
+WHERE revision_id="'.$obser2.'"');
 
 $mysqli->close();
 
