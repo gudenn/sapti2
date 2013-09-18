@@ -20,4 +20,5 @@
           </div>
         <div class="holder">
         </div>
+        {include file="cronograma/columna.centro.tpl"}
       </div>

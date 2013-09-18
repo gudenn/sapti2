@@ -485,11 +485,11 @@ class Objectbase
     //echo $sql;
     $result = mysql_query($sql);
     if (!$result)
-      return array(false,0);
+      return array(false,0,$sql);
     if ($just_mysql)
       return $result;
     $num_rows = mysql_num_rows($result);
-    return array($result,$num_rows);
+    return array($result,$num_rows,$sql);
   }
 
  /**

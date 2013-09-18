@@ -20,7 +20,7 @@ try {
   $JS[]  = URL_JS . "jquery.min.js";
   $JS[]  = URL_JS . "tablaeditable/editablegrid-2.0.1.js";
   $JS[]  = URL_JS . "tablaeditable/tabla.revision.lista.revisor.js";
-  $JS[]  = URL_JS . "tablaeditable/tabla.revision.lista.evaluacion.js";
+  //$JS[]  = URL_JS . "tablaeditable/tabla.revision.lista.evaluacion.js";
   $smarty->assign('JS',$JS);
 
     if (isset($_GET['id_estudiante'])) 
