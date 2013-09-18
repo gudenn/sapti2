@@ -1,10 +1,14 @@
 <?php
-header('Content-type: text/json');
+//header('Content-type: text/json');
 require('../_inc/_sistema.php');
 conectar_db();
 leerClase("Evento");
 leerClase("Semestre");
 leerClase("Cronograma");
+leerClase('Estudiante');
+leerClase('Dicta');
+leerClase('Docente');
+leerClase('Materia');
 $semestre = new Semestre();
 $semestre->getActivo();
 
@@ -67,9 +71,6 @@ ______SALIDAS;
   // Si es estudiante para todas las materias que tiene inscrito
   if(isEstudianteSession())
   {
-    leerClase('Estudiante');
-    leerClase('Materia');
-    leerClase('Dicta');
     $estudiante_aux = getSessionEstudiante();
     $estudiante     = new Estudiante($estudiante_aux->estudiante_id);
     $estudiante->getAllObjects();
@@ -97,10 +98,8 @@ ________SALIDAS;
   // Si es docente para todas las materias que dicta
   if(isDocenteSession())
   {
-    leerClase('Docente');
-    leerClase('Materia');
     $docente_aux    = getSessionDocente();
-    $docente        = new Estudiante($docente_aux->docente_id);
+    $docente        = new Docente($docente_aux->docente_id);
     $docente->getAllObjects();
 
     $evento = new Evento();
