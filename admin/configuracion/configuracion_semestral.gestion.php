@@ -33,7 +33,7 @@ try {
   $smarty->assign('CSS',$CSS);
 
   //JS
-  $JS[]  = URL_JS . "jquery.js";
+  $JS[]  = URL_JS . "jquery.min.js";
   $smarty->assign('JS',$JS);
 
   $semestre_id = false;
