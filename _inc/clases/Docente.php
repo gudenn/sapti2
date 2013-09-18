@@ -20,7 +20,13 @@ class Docente extends Objectbase{
    * @var VARCHAR(100)
    */
   var $codigo_sis;
-  
+
+ /**
+  * (Objeto simple) Todas las materias que dicta este docente
+  * @var object|null 
+  */
+  var $dicta_objs;
+
     /**
    * Constructor del Docente
    * @param type $id id de la tabla
