@@ -10,7 +10,7 @@
  */
 
 // create our editable grid
-var editableGrid = new EditableGrid("listarevision", {
+var editableGrid = new EditableGrid("listarevisionrevisor", {
 	enableSort: true, // true is the default, set it to false if you don't want sorting to be enabled
 	editmode: "absolute", // change this to "fixed" to test out editorzone, and to "static" to get the old-school mode
 	editorzoneid: "edition", // will be used only if editmode is set to "fixed"
@@ -24,7 +24,7 @@ function displayMessage(text, style) {
 
 // helper function to get path of a demo image
 function image(relativePath) {
-	return "/images/icons/" + relativePath;
+	return "../images/icons/" + relativePath;
 };
 
 // this will be used to render our table headers
@@ -93,7 +93,7 @@ EditableGrid.prototype.onloadXML = function(url)
 {
 	// register the function that will be called when the XML has been fully loaded
 	this.tableLoaded = function() { 
-		displayMessage("Numero de Estudiantes Inscritos " + this.getRowCount()); 
+		displayMessage("Numero de Revisiones al Proyecto " + this.getRowCount()); 
 		this.initializeGrid();
 	};
 
