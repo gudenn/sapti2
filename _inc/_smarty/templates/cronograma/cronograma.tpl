@@ -1,11 +1,8 @@
-<br/>
-<br/>
-<h2 class="subhead">Salidas</h2>
-<div id="calendariosalidas"></div>
+<div id="calendarioprincipal"></div>
 <script type="text/javascript">
   {literal}
   $(document).ready(function() {
-    $("#calendariosalidas").eventCalendar({
+    $("#calendarioprincipal").eventCalendar({
   {/literal}
       eventsjson: '{$URL}cronograma/eventos.json.php',
   {literal}
@@ -24,7 +21,7 @@
     txt_GoToEventUrl: "Ver detalle",
     showDescription: true,
     openEventInNewWindow: true,
-    eventsLimit: 10,
+    //eventsLimit: 10,
     jsonDateFormat: 'human',
     cacheJson: false
     });
