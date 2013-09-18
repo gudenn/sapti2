@@ -44,6 +44,4 @@
 {include file="footer.tpl"}
         <script type="text/javascript">
                 editableGrid.onloadXML("loaddata.revision.lista.php?doc={$proyecto->id}");
-
-                //datagrid = new DatabaseGrid('eva',1);
         </script>
