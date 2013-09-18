@@ -72,7 +72,7 @@ class Cronograma extends Objectbase
    */
   public function filtrar(&$filtro) {
     parent::filtrar($filtro);
-    $filtro_sql = '';
+    $filtro_sql = ' ';
     if ($filtro->filtro('id'))
       $filtro_sql .= " AND {$this->getTableName()}.id like '%{$filtro->filtro('id')}%' ";
     if ($filtro->filtro('nombre_evento'))
