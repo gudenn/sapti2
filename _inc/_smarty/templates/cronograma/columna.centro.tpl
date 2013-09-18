@@ -1,7 +1,7 @@
       <div id="content">
         <h1 class="title">Cronograma de actividades y Eventos para el semestre: <b>{$semestre->codigo}</b></h1>
-        <div class="imgholder"><img src="{$URL_IMG}academic/410x215.gif" alt=""></div>
         {if isset($con_cronograma)}{include file=$con_cronograma}{/if}
+        <div class="imgholder"><img src="{$URL_IMG}academic/410x215.gif" alt=""></div>
 
         <p>This is a W3C compliant free website template from <a href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a>. This template is distributed using a <a href="http://www.os-templates.com/template-terms">Website Template Licence</a>.</p>
         <p>You can use and modify the template for both personal and commercial use. You must keep all copyright information and credit links in the template and associated files. For more CSS templates visit <a href="http://www.os-templates.com/">Free Website Templates</a>.</p>
