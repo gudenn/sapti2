@@ -12,8 +12,9 @@
               <input type="text" name="nombre_evento" value="{$cronograma->nombre_evento}"  data-validation-engine="validate[required]">
               <label for="codigo"><small>Nombre del Evento (*)</small></label>
             </p>
+          
             <p>
-              <input type="text" name="detalle_evento" value="{$cronograma->detalle_evento}"  data-validation-engine="validate[required]">
+              <textarea name="detalle_evento" id="detalle_evento" value="{$cronograma->detalle_evento}" size="22" style="width: 650px;height: 100px;" data-validation-engine="validate[required]"></textarea>
               <label for="codigo"><small>Detalle del Evento (*)</small></label>
             </p>
              <p> 
