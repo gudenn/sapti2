@@ -24,6 +24,12 @@ class Estudiante extends Objectbase {
    */
   var $codigo_sis;
 
+ /**
+  * (Objeto simple) Todas las materias en la que esta inscrito este estudiante
+  * @var object|null 
+  */
+  var $inscrito_objs;
+  
   /**
    * Constructor del estudiante
    * @param type $id id de la tabla

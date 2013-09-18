@@ -6,6 +6,7 @@ try {
     header("Location: ../login.php");  
 
   leerClase("Cronograma");
+  leerClase('Semestre');
   leerClase("Formulario");
   leerClase("Pagination");
   leerClase("Filtro");
@@ -41,6 +42,15 @@ try {
   //////////////////////////////////////////////////////////////////
   $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
   $smarty->assign('lista'       ,'admin/cronograma/lista.tpl');
+  
+  
+  if (isset($_GET['eliminar']) && isset($_GET['cronograma_id']) && is_numeric($_GET['cronograma_id']) )
+  {
+    $evento = new Cronograma($_GET['cronograma_id']);
+   
+   
+    $evento->delete();
+  }
 
   //Filtro
   $filtro   = new Filtro('g_cronograma',__FILE__);

@@ -69,10 +69,10 @@ INSERT INTO `proyecto_estudiante` (`id`, `proyecto_id`, `estudiante_id`, `estado
 INSERT INTO `proyecto_estudiante` (`id`, `proyecto_id`, `estudiante_id`, `estado`) VALUES (NULL, '3', '3', 'AC');
 INSERT INTO `proyecto_estudiante` (`id`, `proyecto_id`, `estudiante_id`, `estado`) VALUES (NULL, '4', '4', 'AC');
 
-INSERT INTO `proyecto_docente` (`id`, `proyecto_id`, `dicta_id`, `estado`) VALUES (NULL, '1', '4', 'AC');
-INSERT INTO `proyecto_docente` (`id`, `proyecto_id`, `dicta_id`, `estado`) VALUES (NULL, '2', '4', 'AC');
-INSERT INTO `proyecto_docente` (`id`, `proyecto_id`, `dicta_id`, `estado`) VALUES (NULL, '3', '4', 'AC');
-INSERT INTO `proyecto_docente` (`id`, `proyecto_id`, `dicta_id`, `estado`) VALUES (NULL, '4', '4', 'AC');
+INSERT INTO `proyecto_dicta` (`id`, `proyecto_id`, `dicta_id`, `estado`) VALUES (NULL, '1', '4', 'AC');
+INSERT INTO `proyecto_dicta` (`id`, `proyecto_id`, `dicta_id`, `estado`) VALUES (NULL, '2', '4', 'AC');
+INSERT INTO `proyecto_dicta` (`id`, `proyecto_id`, `dicta_id`, `estado`) VALUES (NULL, '3', '4', 'AC');
+INSERT INTO `proyecto_dicta` (`id`, `proyecto_id`, `dicta_id`, `estado`) VALUES (NULL, '4', '4', 'AC');
 
 
 INSERT INTO `materia` (`id`, `nombre`, `estado`) VALUES (NULL, 'Proyecto Final', 'AC');
@@ -89,7 +89,7 @@ INSERT INTO `inscrito` (`id`, `evaluacion_id`, `dicta_id`, `estudiante_id`, `sem
 INSERT INTO `inscrito` (`id`, `evaluacion_id`, `dicta_id`, `estudiante_id`, `semestre_id`, `estado`) VALUES (NULL, NULL, '4', '2', '2', 'AC');
 INSERT INTO `inscrito` (`id`, `evaluacion_id`, `dicta_id`, `estudiante_id`, `semestre_id`, `estado`) VALUES (NULL, NULL, '4', '3', '3', 'AC');
 INSERT INTO `inscrito` (`id`, `evaluacion_id`, `dicta_id`, `estudiante_id`, `semestre_id`, `estado`) VALUES (NULL, NULL, '4', '4', '4', 'AC');
-INSERT INTO `proyecto_docente` (`id`, `proyecto_id`, `dicta_id`, `estado`) VALUES (NULL, '1', '1', 'AC');
+INSERT INTO `proyecto_dicta` (`id`, `proyecto_id`, `dicta_id`, `estado`) VALUES (NULL, '1', '1', 'AC');
 INSERT INTO `proyecto_tutor` (`id`, `proyecto_id`, `tutor_id`, `estado`) VALUES (NULL, '1', '1', 'AC');
 
 
