@@ -18,6 +18,7 @@ try {
 
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
+  //Calendar
   $JS[]  = URL_JS . "calendar/js/jquery.eventCalendar.js";
   $smarty->assign('JS',$JS);
 
