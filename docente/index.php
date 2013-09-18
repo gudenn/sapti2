@@ -20,7 +20,7 @@ try {
 
 // Agregan el js
   //JS
-  $JS[]  = URL_JS . "jquery.js";
+  $JS[]  = URL_JS . "jquery.min.js";
   $JS[]  = URL_JS . "calendar/js/jquery.eventCalendar.js";
   $smarty->assign('CSS',$CSS);
   $smarty->assign('JS',$JS);

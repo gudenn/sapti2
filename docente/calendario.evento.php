@@ -19,7 +19,7 @@ try {
   $CSS[]  = URL_JS . "calendar/css/eventCalendar_theme.css";
 
   //JS
-  $JS[]  = URL_JS . "jquery.js";
+  $JS[]  = URL_JS . "jquery.min.js";
   $JS[]  = URL_JS . "calendar/js/jquery.eventCalendar.js";
 
   $smarty->assign('JS',$JS);

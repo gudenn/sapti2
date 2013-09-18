@@ -229,6 +229,10 @@ class Notificacion extends Objectbase
   
   function enviarNotificaion($usuarios /*$dictas,$estudiantes,$tutores,$tribunales,$revisores,$consejos*/)
   {
+
+    leerClase('Notificacion_docente');
+    foreach ($docentes as $docente_id) 
+
     $estudiantes = isset($usuarios['estudiantes'])?$usuarios['estudiantes']:array();
     $tribunales  = isset($usuarios['tribunales' ])?$usuarios['tribunales' ]:array();
     $revisores   = isset($usuarios['revisores'  ])?$usuarios['revisores'  ]:array();
@@ -238,12 +242,13 @@ class Notificacion extends Objectbase
 
     leerClase('Notificaion_dicta');
     foreach ($dictas as $dicta_id) 
+
     {
       $n_obj             = new Notificacion_dicta();
       $n_obj->docente_id = $dicta_id;
       $this->notificacion_dicta_objs[] = $n_obj;
     }
-    leerClase('Notificaion_tutor');
+    leerClase('Notificacion_tutor');
     foreach ($tutores as $tutor_id) 
     {
       $n_obj           = new Notificacion_tutor();

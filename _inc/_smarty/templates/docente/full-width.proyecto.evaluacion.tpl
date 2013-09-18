@@ -2,7 +2,7 @@
 <div class="wrapper row3">
   <div class="rnd">
     <div id="container">
-        <h1 class="title">Seguimiento de Proyecto</h1>
+        <h1 class="title">Registro de Evaluaciones</h1>
             <p>
                <label for="nombre de proyecto"><small>NOMBRE DE PROYECTO:</small></label>
                <span>{$proyecto->nombre}</span><br/>
@@ -31,20 +31,19 @@
 		<div id="tablecontent"></div>
         
         	<div id="paginator"></div>
+
+        <h1 class="title">Evaluaciones</h1>
+
+		<div id="tablecontent1"></div>
         </div>
-        <script type="text/javascript">
-                editableGrid.onloadXML("loaddata.revision.lista.php?doc={$proyecto->id}");
-        </script>
-        <style type="text/css">
-        tr:nth-child(even) { background: #ddd }
-        tr:nth-child(odd) { background: #fff}
-        table {
-        color: #666666;
-        }
-        </style>
         <p>{$ERROR}</p>
      </div>
     {$ERROR}
     </div>
 </div>
 {include file="footer.tpl"}
+        <script type="text/javascript">
+                editableGrid.onloadXML("loaddata.revision.lista.php?doc={$proyecto->id}");
+
+                //datagrid = new DatabaseGrid('eva',1);
+        </script>

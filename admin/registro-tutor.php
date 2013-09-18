@@ -17,10 +17,10 @@ try {
   $smarty->assign('CSS',$CSS);
 
   //JS
-  $JS[]  = URL_JS . "jquery.1.9.1.js";
+  $JS[]  = URL_JS . "jquery.min.js";
 
   //Datepicker UI
-  $JS[]  = URL_JS . "ui/jquery-ui-1.10.2.custom.min.js";
+  $JS[]  = URL_JS . "jquery-ui-1.10.2.custom.min.js";
   $JS[]  = URL_JS . "ui/i18n/jquery.ui.datepicker-es.js";
 
   //Validation
@@ -37,12 +37,24 @@ try {
 
   //CREAR UN TUTOR
   leerClase('Tutor');
+  leerClase('Usuario');
+  leerClase('Docente');
   
-  $tutor = new Tutor();
+ //$tutor = new ();
   
   $smarty->assign("tutor", $tutor);
     $smarty->assign('token','');
-  
+   if (isset($_POST['buscar']) && $_POST['buscar'] == 'buscar')
+  {
+    
+    $docente= new Docente(false,$_POST['codigo']);
+  echo   $docente->usuario_id;
+  $usuario= new Usuario($docente->usuario_id);
+  $smarty->assign("tutor",  $usuario);
+   
+  }
+    
+    
   if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
   {
     $tutor->objBuidFromPost();
