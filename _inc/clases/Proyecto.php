@@ -126,6 +126,18 @@ class Proyecto extends Objectbase
   */
   var $tribunal_objs;
 
+ /**
+  * (Objeto simple) Todas las areas asignadas a este proyecto
+  * @var object|null 
+  */
+  var $proyecto_area_objs;
+
+ /**
+  * (Objeto simple) Todas las subareas asignadas a este proyecto
+  * @var object|null 
+  */
+  var $proyecto_sub_area_objs;
+
   
   
   

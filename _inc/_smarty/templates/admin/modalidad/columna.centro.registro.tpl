@@ -12,6 +12,11 @@
               <input type="text" name="descripcion" value="{$modalidad->descripcion}"  data-validation-engine="validate[required]">
               <label for="codigo"><small>Descripcion del Modalidad (*)</small></label>
             </p>
+            <p>
+              {html_radios name="datos_adicionales" options=$datos_adicionales selected=$modalidad->datos_adicionales separator="<br>"}
+              <label for="codigo"><small>Requiere Institucion y Responsable (*)</small></label>
+            </p>
+            
             <h2 class="title">Grabar Modalidad</h2>
             <p>
               <input type="hidden" name="id"    value="{$modalidad->id}">

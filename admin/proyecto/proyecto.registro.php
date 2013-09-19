@@ -46,6 +46,7 @@ try {
   leerClase('Carrera');
   leerClase('Proyecto');
   leerClase('Semestre');
+  leerClase('Modalidad');
   leerClase('Estudiante');
 
   $semestre   = new Semestre(false,true);
@@ -57,8 +58,9 @@ try {
   $smarty->assign('estudiante', $estudiante);
   $smarty->assign('proyecto'  , $proyecto);
   $smarty->assign('semestre'  , $semestre);
-  $smarty->assign('base'      , '2');
-  $smarty->assign('TOTAL'     , '20');
+  //Objetivos especicicos
+  $smarty->assign('base'      , '2'); // cuantos se muestran mas 1
+  $smarty->assign('TOTAL'     , '20');// cuantos se van a guardas
 
   //carrera
   $carrera         = new Carrera();
@@ -91,8 +93,25 @@ try {
   }
   $smarty->assign('areas'    ,  $areas);
   $smarty->assign('areas_ids',  $areas_ids);
-  $smarty->assign('areas_sel',  $areas_ids[0]);
+  $smarty->assign('areas_sel',  $areas_ids[0]); //@TODO editar areas
+  //Muchas Areas
+  $smarty->assign('baseareas'      , '0');// cuantos se muestran mas 1
+  $smarty->assign('TOTALAREAS'     , '10');// cuantos se van a guardas
   
+  //modalidad
+  $modalidad         = new Modalidad();
+  $modalidad->estado = Objectbase::STATUS_AC;
+  $modalidads_resp   = $modalidad->getAll();
+  $modalidads_ids[]  = '';
+  $modalidads[]      = '-- Seleccione --';
+  while (isset($modalidads_resp[0]) && $modalidads_resp[0] && $array = mysql_fetch_array($modalidads_resp[0], MYSQL_ASSOC))
+  {
+    $modalidads[]     = $array['nombre'];
+    $modalidads_ids[] = $array['id'];
+  }
+  $smarty->assign('modalidads'    ,  $modalidads);
+  $smarty->assign('modalidads_ids',  $modalidads_ids);
+
   //CREAR UN ESTUDIANTE
   
   if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])

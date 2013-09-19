@@ -41,6 +41,7 @@ try {
   $smarty->assign('JS',$JS);
 
 
+
   $smarty->assign("ERROR", '');
 
 
@@ -51,11 +52,20 @@ try {
   if (isset($_GET['modalidad_id']) && is_numeric($_GET['modalidad_id']))
     $id = $_GET['modalidad_id'];
   $modalidad = new Modalidad($id);
+
+  //trabajo conjunto
+  $smarty->assign('datos_adicionales', array(
+                                 Modalidad::DATOS_AD_SI => 'Si',
+                                 Modalidad::DATOS_AD_NO => 'No'));
+
+  
+  
   if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
   {
     $EXITO = false;
     mysql_query("BEGIN");
     $modalidad->objBuidFromPost();
+    $modalidad->datos_adicionales = ($modalidad->datos_adicionales == Modalidad::DATOS_AD_SI)?Modalidad::DATOS_AD_SI:Modalidad::DATOS_AD_NO;
     $modalidad->estado = Objectbase::STATUS_AC;
     $modalidad->validar();
     $modalidad->save();

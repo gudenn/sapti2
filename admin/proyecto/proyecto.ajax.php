@@ -1,5 +1,4 @@
 <?php
-try {
   define ("MODULO", "PROYECTO-REGISTRO");
   require('../../_inc/_sistema.php');
   if(!isAdminSession())
@@ -7,23 +6,25 @@ try {
 
   conectar_db();
   leerClase("Area");
-  leerClase("Ciudad");
-  if (isset($_GET['ajax'])){
-    $resp         = '';
-    $departamento = new Departamento($_GET['departamento']);
-    $departamento->getAllObjects();
-    $ciudad = new Ciudad();
-    foreach ($departamento->ciudad_objs as $ciudad) {
-      //$ciudad->nombre = utf8_encode ($ciudad->nombre);
-      //$ciudad['ciudad'] = elimina_acentos($ciudad['ciudad']);
-      $resp .= '{"optionValue":"'.$ciudad->id.'", "optionDisplay": "'.$ciudad->nombre.'"},';
-    }
-    $resp = rtrim($resp,',');
-    echo <<<HERE_DOC
-      [{"optionValue":"", "optionDisplay": "-- Seleccione --"},$resp]
+  if (isset($_GET['ajax']))
+  {
+    /**
+     * Buscamos todas las subareas de un area
+     */
+    if (isset($_GET['area_id']) && is_numeric($_GET['area_id']))
+    {
+      $resp         = '';
+      $area = new Area($_GET['area_id']);
+      $area->getAllObjects();
+      foreach ($area->sub_area_objs as $subarea) {
+        $resp .= '{"optionValue":"'.$subarea->id.'", "optionDisplay": "'.$subarea->nombre.'"},';
+      }
+      $resp = rtrim($resp,',');
+      echo <<<HERE_DOC
+        [{"optionValue":"", "optionDisplay": "-- Seleccione --"},$resp]
 HERE_DOC;
-    exit();
-
+      exit();
+    }
   }
   echo <<<HERE_DOC
     [{"optionValue":0, "optionDisplay": "Select"}]
