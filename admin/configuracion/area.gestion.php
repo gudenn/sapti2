@@ -15,15 +15,15 @@ try {
 
   /** HEADER */
   $smarty->assign('title','Gestion de Area');
-  $smarty->assign('description','Pagina de gesti&oacute;n de Area');
-  $smarty->assign('keywords','Gesti&acoute;n,Area');
+  $smarty->assign('description','Pagina de gesti&oacute;n de Areas');
+  $smarty->assign('keywords','Gesti&acoute;n,Areas');
   leerClase('Administrador');
   /**
    * Menu superior
    */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administrador');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/','name'=>'Configuraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Registro de Area');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Gesti&oacute;n de Areas');
   $smarty->assign("menuList", $menuList);
 
   //CSS

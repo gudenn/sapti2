@@ -16,7 +16,10 @@ try {
    */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administrador');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/','name'=>'Configuraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Registro de  Sub-Area');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/area.gestion.php','name'=>'Gesti&oacute;n de Areas');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/subarea.gestion.php','name'=>'Gesti&oacute;n de Sub-Areas');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Registro de Sub-Area');
+
   $smarty->assign("menuList", $menuList);
 
 
@@ -44,7 +47,21 @@ try {
   $smarty->assign("ERROR", '');
 
 
+  leerClase('Area');
   leerClase('Sub_area');
+  
+  //Son las subareas de un area asi que si o si tenemos una area
+  $area_id = false;
+  if (isset($_SESSION['area_id']) && is_numeric($_SESSION['area_id']))
+    $area_id = $_SESSION['area_id'];
+  if (isset($_GET['area_id']) && is_numeric($_GET['area_id']))
+  {
+    $_SESSION['area_id'] = $_GET['area_id'];
+    $area_id             = $_GET['area_id'];
+  }
+  $area = new Area($area_id);
+  $smarty->assign("area"  ,$area);
+
   
   $smarty->assign('columnacentro','admin/sub_area/columna.centro.registro.tpl');
   $id = '';
@@ -56,7 +73,8 @@ try {
     $EXITO = false;
     mysql_query("BEGIN");
     $subarea->objBuidFromPost();
-    $subarea->estado = Objectbase::STATUS_AC;
+    $subarea->estado  = Objectbase::STATUS_AC;
+    $subarea->area_id = $area->id;
     $subarea->validar();
     $subarea->save();
     $EXITO = TRUE;
