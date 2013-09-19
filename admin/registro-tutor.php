@@ -62,6 +62,7 @@ try {
     
    if (isset($_POST['buscar']) && $_POST['buscar'] == 'buscar')
   {
+   
     
   $docente= new Docente(false,$_POST['codigo']);
   echo   $docente->usuario_id;
@@ -69,8 +70,7 @@ try {
   $smarty->assign("tutor",  $usuario);
    
   }
-    
-    
+  
   if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
   {  
     $usuario = new Usuario();
@@ -85,14 +85,23 @@ try {
     $tutor->save(); 
     
     $notificacion= new Notificacion();
-    $notificacion->objBuidFromPost();
+    $notificacion->proyecto_id=1;
+    $notificacion->tipo="normal";
+    $notificacion->fecha_envio="";
+    $notificacion->asunto="hola mundo";
+    $notificacion->detalle="fasdf";
+    $notificacion->prioridad=1;
     $notificacion->estado = Objectbase::STATUS_AC;
-    // $notificacion->proyecto_id=;
-    $lista= array();
-    $lista[]=$_POST['proyecto_id'];
-    $notificacion->enviarNotificaion($lista);
     
+    //$usuarios  = array();
+    $tutores= array();
+    $tutores[]=1;
+     $tutores[]=4;
+    $usuarios= array('tutores'=>array(1,4),'estudiantes'=>array(1,4));
+     //$usuarios[]=$tutores;
+    $notificacion->enviarNotificaion($usuarios);
     
+  
     $proyectotutor= new Proyecto_tutor();
     $proyectotutor->objBuidFromPost();
     $proyectotutor->tutor_id=$tutor->id;
