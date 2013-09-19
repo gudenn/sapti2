@@ -14,7 +14,7 @@
       <td>{$objs[ic]['nombre']}</td>
       <td>{$objs[ic]['descripcion']}</td>
       <td>
-        <a href="subarea.crear.php?subarea_id={$objs[ic]['id']}" >{icono('basicset/pencil_48.png','Editar')} Editar</a>
+        <a href="subarea.registro.php?subarea_id={$objs[ic]['id']}" >{icono('basicset/pencil_48.png','Editar')} Editar</a>
       </td>
     </tr>
   </tbody>

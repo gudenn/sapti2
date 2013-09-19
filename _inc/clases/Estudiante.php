@@ -139,6 +139,20 @@ class Estudiante extends Objectbase {
   }
 
   /**
+   * Retorna el nombre completo del usuario
+   * @param boolean $echo si muestra o solo devuelve
+   * @return boolean
+   */
+  function getNombreCompleto($echo = false) 
+  {
+    leerClase('Usuario');
+    if (!$this->usuario_id)
+      return false;
+    $usuario = new Usuario($this->usuario_id);
+    return $usuario->getNombreCompleto($echo);
+  }
+
+  /**
    * Validamos al usuario ya sea para actualizar o para crear uno nuevo
    * @param type $es_nuevo
    */

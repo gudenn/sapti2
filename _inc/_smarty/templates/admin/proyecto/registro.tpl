@@ -2,7 +2,7 @@
 <div class="wrapper row3">
   <div class="rnd">
     <div id="container" >
-      <h1 class="title">FORMULARIO APROBACI&Oacute;N TEMA DE PROYECTO FINAL</h1>
+      <h1 class="title"><span class="tipo_mona">FORMULARIO APROBACI&Oacute;N TEMA DE PROYECTO FINAL</span><span class="tipo_moda">FORMULARIO APROBACI&Oacute;N TEMA DE TRABAJO DIRIGIDO</span></h1>
       <div id="respond">
       <form action="" method="post" id="registro" name="registro" >
       <table >
@@ -114,7 +114,7 @@
                   Cambio de tema:
                 </td>
                 <td>
-                  @TODO radio
+                  {$cambio_tema}
                 </td>
               </tr>
             </table>
@@ -140,25 +140,74 @@
           </td>
         </tr>
         <tr class="tableholder" >
-          <td>
+          <td style="padding-bottom: 10px;">
+                  &Aacute;rea(s):
             <table>
-              <tr>
-                <td style="height: 34px;">
-                  &Aacute;rea:
-                </td>
-                <td>
-                  <select  name="proyecto_area_id[]" id="proyecto_area_id_1" class="area" correlativo="1" data-validation-engine="validate[required]" >
-                    {html_options values=$areas_ids selected='' output=$areas}
-                  </select>
-                </td>
-                <td>
-                  Sub-&Aacute;rea:
-                </td>
-                <td>
-                  <select  name="proyecto_subarea_id[]" id="proyecto_subarea_id_1" class="subarea" correlativo="1" data-validation-engine="validate[required]" >
-                  </select>
-                </td>
-              </tr>
+              {$i = 0}
+              {$j = 0}
+              {section name=area start=0 loop=$proyecto->proyecto_area_objs}
+                {$i = $smarty.section.area.index + 1}
+                {$j = $smarty.section.area.index}
+                <tr id="tb_area_{$i}">
+                  <td>
+                    <input type="hidden" name="area_activa[]" id="activa_area_{$i}" value="1" >
+                    <select  name="proyecto_area_id[]" id="proyecto_area_id_{$i}" class="area" correlativo="{$i}" data-validation-engine="validate[required]" >
+                      {html_options values=$areas_ids selected='' output=$areas}
+                    </select>
+                    <span id="actualizando_subareas{$i}" style="display: none">
+                      {icono('basicset/loading.gif','Buscando','50px','10px')}
+                    </span>
+                  </td>
+                  <td>
+                    Sub-&Aacute;rea:
+                  </td>
+                  <td>
+                    <select  name="proyecto_subarea_id[]" id="proyecto_subarea_id_{$i}" class="subarea" correlativo="{$i}" data-validation-engine="validate[required]" >
+                    </select>
+                  </td>
+                  <td>
+                    <a href="#mas"   title="Agregar otra Area" onfocus="addmore(this)" onclick="addmore(this);return false;" xfile="area_{$i+1}" ><img src="{$URL_IMG}activar.png" width="15px" height="15px" alt="Agregar"/></a> 
+                    {if ($i>1)}
+                    <a href="#mas"   title="Quitar este elemento" onclick="remover(this);return false;" xfile="area_{$i}"  ><img src="{$URL_IMG}delete.png" width="15px" height="15px" alt="Agregar"/></a> 
+                    {/if}
+                  </td>
+                </tr>
+              {/section}
+
+              {section name=area start=($i + 1) loop=$TOTALAREAS step=1}
+                {$i = $smarty.section.area.index}
+                <tr id="tb_area_{$i}"  {if ($i-($j+1)>$baseareas)} style="display:none;"  {/if} >
+                  <td>
+                    <input type="hidden" name="area_activa[]" id="activa_area_{$i}" value="{if ($i-($j+1)>$baseareas)}0{else}1{/if}" >
+                    <select  name="proyecto_area_id[]" id="proyecto_area_id_{$i}" class="area" correlativo="{$i}" data-validation-engine="validate[required]" >
+                      {html_options values=$areas_ids selected='' output=$areas}
+                    </select>
+                    <span id="actualizando_subareas{$i}" style="display: none">
+                      {icono('basicset/loading.gif','Buscando','50px','10px')}
+                    </span>
+                  </td>
+                  <td>
+                    Sub-&Aacute;rea:
+                  </td>
+                  <td>
+                    <div id="nueva_subarea_{$i}" style="display: none">
+                      <input type="text" name="nueva_subarea_nombre[]" id="nueva_subarea_nombrearea_{$i}" value="" >
+                      <a href="#mas"   title="Quitar este elemento" onclick="removersubarea(this);return false;" xfile="area_{$i}"  >{icono('basicset/delete_48.png','Quitar','15px')}</a> 
+                    </div>
+                    <div id="delista_subarea_{$i}">
+                      <select  name="proyecto_subarea_id[]" id="proyecto_subarea_id_{$i}" class="subarea" correlativo="{$i}" data-validation-engine="validate[required]" >
+                      </select>
+                      <a href="#mas"   title="Agregar otra SubArea" onclick="addsubarea(this);return false;" xfile="area_{$i}" >{icono('basicset/agregarboton.png','Agregar','15px')}</a> 
+                    </div>
+                  </td>
+                  <td>
+                    <a href="#mas"   title="Agregar otra Area" onfocus="addmore(this,true);" onclick="addmore(this,true);return false;" xfile="area_{$i+1}" >{icono('basicset/plus_48.png','Agregar','15px')}</a> 
+                    {if ($i>1)}
+                    <a href="#mas"   title="Quitar este elemento" onclick="remover(this,true);return false;" xfile="area_{$i}"  >{icono('basicset/delete_48.png','Quitar','15px')}</a> 
+                    {/if}
+                  </td>
+                </tr>
+              {/section}
             </table>
             
           </td>
@@ -171,7 +220,12 @@
                   Modalidad:
                 </td>
                 <td>
-                  <select></select>
+                  <select  name="proyecto_modalidad_id" id="proyecto_modalidad_id" data-validation-engine="validate[required]" class="modalidad" >
+                    {html_options values=$modalidads_ids selected=$proyecto->modalidad_id output=$modalidads}
+                  </select>
+                  <span id="actualizando_modalidad" style="display: none">
+                    {icono('basicset/loading.gif','Buscando','50px','10px')}
+                  </span>
                 </td>
               </tr>
             </table>
@@ -202,6 +256,7 @@
                 </td>
                 <td>
                   <table id="ojbs_es">
+                  {$i = 0}
                   {section name=foo start=0 loop=$proyecto->objetivo_especifico_objs}
                     {$i = $smarty.section.foo.index + 1}
                     {$j = $smarty.section.foo.index}
@@ -210,9 +265,9 @@
                         <input type="text" name="objetivo_especifico[]" id="objetivo_especifico_{$i}" value=""  data-validation-engine="validate[required]">
                       </td>
                       <td>
-                        <a href="#mas"   title="Agregar otra caja" onfocus="addmore(this)" onclick="addmore(this);return false;" xfile="{$i+1}" ><img src="{$URL_IMG}activar.png" width="15px" height="15px" alt="Agregar"/></a> 
+                        <a href="#mas"   title="Agregar otra caja" onfocus="addmore(this,false);" onclick="addmore(this,false);return false;" xfile="{$i+1}" ><img src="{$URL_IMG}activar.png" width="15px" height="15px" alt="Agregar"/></a> 
                         {if ($i>1)}
-                        <a href="#mas"   title="Quitar este elemento" onclick="remover(this);return false;" xfile="{$i}"  ><img src="{$URL_IMG}delete.png" width="15px" height="15px" alt="Agregar"/></a> 
+                        <a href="#mas"   title="Quitar este elemento" onclick="remover(this,false);return false;" xfile="{$i}"  ><img src="{$URL_IMG}delete.png" width="15px" height="15px" alt="Agregar"/></a> 
                         {/if}
                       </td>
                     </tr>
@@ -225,9 +280,9 @@
                         <input type="text" name="objetivo_especifico[]" id="objetivo_especifico_{$i}" value=""  data-validation-engine="validate[required]">
                       </td>
                       <td>
-                        <a href="#mas"   title="Agregar otra caja" onfocus="addmore(this)" onclick="addmore(this);return false;" xfile="{$i+1}" >{icono('basicset/plus_48.png','Agregar','15px')}</a> 
+                        <a href="#mas"   title="Agregar otra caja" onfocus="addmore(this,false)" onclick="addmore(this,false);return false;" xfile="{$i+1}" >{icono('basicset/plus_48.png','Agregar','15px')}</a> 
                         {if ($i>1)}
-                        <a href="#mas"   title="Quitar este elemento" onclick="remover(this);return false;" xfile="{$i}"  >{icono('basicset/delete_48.png','Quitar','15px')}</a> 
+                        <a href="#mas"   title="Quitar este elemento" onclick="remover(this,false);return false;" xfile="{$i}"  >{icono('basicset/delete_48.png','Quitar','15px')}</a> 
                         {/if}
                       </td>
                     </tr>
@@ -260,16 +315,23 @@
             <table id="firmmas">
               <tr>
                 <td style="height: 32px;">
-                  <input type="text" name="proyecto_director_carrera" value="{$proyecto->director_carrera}"  data-validation-engine="validate[required]">
+                  <input type="text" name="proyecto_director_carrera" value="{$director_carrera}"  data-validation-engine="validate[required]">
                 </td>
                 <td>
-                  <input type="text" name="proyecto_docente_materia" value="{$proyecto->docente_materia}"  data-validation-engine="validate[required]">
+                  <select  name="proyecto_docente_materia" id="proyecto_docente_materia" data-validation-engine="validate[required]" >
+                    {html_options values=$docentes_materia selected=$docente_seleccionado output=$docentes_materia}
+                  </select>
                 </td>
                 <td>
                   Tutor
                 </td>
+                <td class="tipo_moda">
+                  <select  name="proyecto_responsable" id="proyecto_responsable" data-validation-engine="validate[required]" >
+                    {html_options values=$docresp selected=$docresp_sel output=$docresp}
+                  </select>
+                </td>
                 <td>
-                  Estudiante
+                  {$estudiante->getNombreCompleto()}
                 </td>
               </tr>
               <tr>
@@ -281,6 +343,9 @@
                 </td>
                 <td>
                   Tutor:
+                </td>
+                <td class="tipo_moda">
+                  Responsable:
                 </td>
                 <td>
                   Estudiante:
@@ -301,13 +366,13 @@
                   Registrado por:
                 </td>
                 <td>
-                  <input type="text" name="proyecto_registrado_por" value="{$proyecto->registrado_por}"  data-validation-engine="validate[required]">
+                  <input type="text" name="proyecto_registrado_por" value="{$registrado_por}"  data-validation-engine="validate[required]">
                 </td>
                 <td>
                   Fecha:
                 </td>
                 <td>
-                  fecha
+                  {$fecha}
                 </td>
               </tr>
             </table>
@@ -339,28 +404,71 @@
   <p>Todos los campos con (*) son obligatorios.</p>
   <script type="text/javascript">
   {literal} 
-    function addmore(test)
+    function addmore(test,tipoarea)
     {
-      //console.log("#"+$(test).attr("xfile"));
       jQuery("#tb_"+$(test).attr("xfile")).fadeIn('slow');
+      if (!tipoarea)
       jQuery("#objetivo_especifico_"+$(test).attr("xfile")).focus();
+      else
+      jQuery("#activa_"+$(test).attr("xfile")).val('1');
     }
-    function remover(test)
+    function remover(test,tipoarea)
     {
-      console.log("#tb_"+$(test).attr("xfile"));
       jQuery("#tb_"+$(test).attr("xfile")).fadeOut('slow');
+      if (!tipoarea)
       jQuery("#objetivo_especifico_"+$(test).attr("xfile")).val('');
+      else
+      jQuery("#activa_"+$(test).attr("xfile")).val('0');
     }
+    function addsubarea(test)
+    {
+      //nueva_subarea_ delista_subarea_
+      jQuery("#nueva_sub"+$(test).attr("xfile")).show();
+      jQuery("#delista_sub"+$(test).attr("xfile")).hide();
+    }
+    function removersubarea(test)
+    {
+      //nueva_subarea_ delista_subarea_
+      jQuery("#nueva_sub"+$(test).attr("xfile")).hide();
+      jQuery("#delista_sub"+$(test).attr("xfile")).show();
+      jQuery("#nueva_subarea_nombre"+$(test).attr("xfile")).val('');
+      
+    }
+    
     jQuery(function(){
+      jQuery("select.modalidad").change(function(){
+        jQuery("#actualizando_modalidad").show();
+        jQuery.getJSON("proyecto.ajax.php",{modalidad_id: jQuery(this).val(), ajax: 'true'}, function(j){
+          //console.log(j[0].datos);
+          {/literal}
+          if (j.length && j[0].datos === '{$adicionales_SI}' )
+          {
+          {literal}
+            //console.log(j[0].datos);
+            jQuery(".tipo_mona").hide();
+            jQuery(".tipo_moda").fadeIn('slow');
+          }
+          else
+          {
+            jQuery(".tipo_moda").hide();
+            jQuery(".tipo_mona").fadeIn('slow');
+          }
+          jQuery("#actualizando_modalidad").fadeOut('slow');
+        });
+      });
       jQuery("select.area").change(function(){
+        var correlavivo = jQuery(this).attr('correlativo');
+        jQuery("#actualizando_subareas"+correlavivo).show();
         jQuery.getJSON("proyecto.ajax.php",{area_id: jQuery(this).val(), ajax: 'true'}, function(j){
           var options = '';
           for (var i = 0; i < j.length; i++) {
             options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
           }
-          jQuery("select#proyecto_subarea_id_1").html(options);
-        })
-      })
+          //console.log("select#proyecto_subarea_id_"+correlavivo);
+          jQuery("select#proyecto_subarea_id_"+correlavivo).html(options);
+          jQuery("#actualizando_subareas"+correlavivo).fadeOut('slow');
+        });
+      });
     });
     jQuery(document).ready(function(){
       jQuery("#registro").validationEngine();

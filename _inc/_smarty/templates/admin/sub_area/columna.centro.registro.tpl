@@ -1,5 +1,5 @@
       <div id="content">
-        <h1 class="title">Registro de Sub-Area</h1>
+        <h1 class="title">Registro de Sub-Area para la Area <b>{$area->nombre}</b></h1>
         <p>Formulario de registro de Sub-Area</p>
         <h2 class="title">Formulario de Sub-Area</h2>
         <div id="respond">

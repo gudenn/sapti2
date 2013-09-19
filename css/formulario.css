@@ -10,6 +10,7 @@
   background-position: 20px 20px;
   min-height: 800px;*/
 }
+.tipo_moda{display: none}
 
 #container input[type="radio"] { width: 80px!important; }
 #proyecto_numero_asignado { width: 30px!important; }

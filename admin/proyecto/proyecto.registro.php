@@ -42,14 +42,17 @@ try {
   $smarty->assign('JS',$JS);
 
   leerClase('Area');
+  leerClase('Dicta');
   leerClase('Usuario');
   leerClase('Carrera');
   leerClase('Proyecto');
   leerClase('Semestre');
+  leerClase('Modalidad');
   leerClase('Estudiante');
 
   $semestre   = new Semestre(false,true);
   $estudiante = new Estudiante(1);
+  $estudiante->getAllObjects();
   $usuario    = $estudiante->getUsuario();
   $proyecto   = new Proyecto();
 
@@ -57,8 +60,10 @@ try {
   $smarty->assign('estudiante', $estudiante);
   $smarty->assign('proyecto'  , $proyecto);
   $smarty->assign('semestre'  , $semestre);
-  $smarty->assign('base'      , '2');
-  $smarty->assign('TOTAL'     , '20');
+
+  //Objetivos especicicos
+  $smarty->assign('base'      , '2'); // cuantos se muestran mas 1
+  $smarty->assign('TOTAL'     , '20');// cuantos se van a guardas
 
   //carrera
   $carrera         = new Carrera();
@@ -78,6 +83,7 @@ try {
                                  Proyecto::TRABAJO_CONJUNTO_SI => 'Si',
                                  Proyecto::TRABAJO_CONJUNTO_NO => 'No'));
   $smarty->assign('trabajo_conjunto_selected', ($proyecto->trabajo_conjunto==Proyecto::TRABAJO_CONJUNTO_SI)?Proyecto::TRABAJO_CONJUNTO_SI:Proyecto::TRABAJO_CONJUNTO_NO);
+
   //area
   $area         = new Area();
   $area->estado = Objectbase::STATUS_AC;
@@ -91,9 +97,65 @@ try {
   }
   $smarty->assign('areas'    ,  $areas);
   $smarty->assign('areas_ids',  $areas_ids);
-  $smarty->assign('areas_sel',  $areas_ids[0]);
+  $smarty->assign('areas_sel',  $areas_ids[0]); //@TODO editar areas
+
+  //Muchas Areas
+  $smarty->assign('baseareas'      , '0');// cuantos se muestran mas 1
+  $smarty->assign('TOTALAREAS'     , '10');// cuantos se van a guardas
   
-  //CREAR UN ESTUDIANTE
+  //modalidad
+  $modalidad         = new Modalidad();
+  $modalidad->estado = Objectbase::STATUS_AC;
+  $modalidads_resp   = $modalidad->getAll();
+  $modalidads_ids[]  = '';
+  $modalidads[]      = '-- Seleccione --';
+  while (isset($modalidads_resp[0]) && $modalidads_resp[0] && $array = mysql_fetch_array($modalidads_resp[0], MYSQL_ASSOC))
+  {
+    $modalidads[]     = $array['nombre'];
+    $modalidads_ids[] = $array['id'];
+  }
+  $smarty->assign('modalidads'    ,  $modalidads);
+  $smarty->assign('modalidads_ids',  $modalidads_ids);
+  $smarty->assign('adicionales_SI',  Modalidad::DATOS_AD_SI);
+
+  //Director de carrera
+  $smarty->assign('director_carrera',  $semestre->getValor('director_carrera'));
+
+  //Docente de la materia
+  $docentes[]      = '-- Seleccione --';
+  foreach ($estudiante->inscrito_objs as $inscrito) 
+  {
+    $dicta = new Dicta($inscrito->dicta_id);
+    $docentes[] = $dicta->getNombreCompretoDocente();
+  }
+  $smarty->assign('docentes_materia', $docentes);
+  $smarty->assign('docente_seleccionado', $proyecto->docente_materia);
+  
+  //Registrado por
+  $administrador_aux = getSessionAdmin();
+  $administrador_user  = new Usuario($administrador_aux->usuario_id);
+  $smarty->assign('registrado_por', $administrador_user->getNombreCompleto());
+  
+  //fecha
+  $smarty->assign('fecha', date('d/m/Y'));
+  
+  //cambio de tema
+  $smarty->assign('cambio_tema', 'No');
+  
+  //Responsable Todos los Docentes
+  $docentes_responsables = new Docente();
+  $docentes_responsables->estado = Objectbase::STATUS_AC;
+  $docresp_resp = $docentes_responsables->getAll();
+  $docresp[]      = '-- Seleccione --';
+  while (isset($docresp_resp[0]) && $docresp_resp[0] && $array = mysql_fetch_array($docresp_resp[0], MYSQL_ASSOC))
+  {
+    $docente_aux = new Docente($array['id']);
+    $docresp[]     = $docente_aux->getNombreCompleto();
+  }
+  $smarty->assign('docresp'    ,  $docresp);
+  $smarty->assign('docresp_sel',  $proyecto->responsable);
+  
+  
   
   if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
   {

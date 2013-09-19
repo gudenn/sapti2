@@ -1,7 +1,13 @@
 <?php
 class Sub_area extends Objectbase
 {
-   /**
+ /**
+  * Id del Area
+  * @var INT(11)
+  */
+  var $area_id;
+
+ /**
   * Codigo del Sub-Area
   * @var INT(45)
   */
