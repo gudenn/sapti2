@@ -33,14 +33,6 @@
         <script type="text/javascript">
                 editableGrid.onloadXML("loaddata.estudiante.lista.php?doc={$docente_ids}");
         </script>
-        <style type="text/css">
-        tr:nth-child(even) { background: #ddd }
-        tr:nth-child(odd) { background: #fff}
-        table {
-        color: #666666;
-        }
-        </style>
-        
     </div>
     {$ERROR}
   </div>

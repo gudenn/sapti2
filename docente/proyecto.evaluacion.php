@@ -6,6 +6,7 @@ try {
 
   leerClase("Estudiante");
   leerClase("Usuario");
+  leerClase("Evaluacion");
 
   /** HEADER */
   $smarty->assign('title','Gestion de Observaciones');
@@ -13,14 +14,13 @@ try {
   $smarty->assign('keywords','Gestion,Observaciones');
 
   $CSS[]  = URL_CSS . "academic/tables.css";
-  $CSS[]  = URL_CSS . "tablaeditableevaluacion.css";
+  $CSS[]  = URL_CSS . "editablegrid.css";
   $smarty->assign('CSS',$CSS);
 
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
   $JS[]  = URL_JS . "tablaeditable/editablegrid-2.0.1.js";
   $JS[]  = URL_JS . "tablaeditable/tabla.revision.lista.revisor.js";
-  //$JS[]  = URL_JS . "tablaeditable/tabla.revision.lista.evaluacion.js";
   $smarty->assign('JS',$JS);
 
     if (isset($_GET['id_estudiante'])) 
@@ -31,26 +31,28 @@ try {
   $estudiante     = new Estudiante($id_estudiante);
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();
+  $evaluacion     = new Evaluacion(1);
 
   $smarty->assign("usuario", $usuario);
   $smarty->assign("proyecto", $proyecto);
+  $smarty->assign("evaluacion", $evaluacion);
   
-    $sql1="SELECT re.id as 'id_re', pr.nombre as 'nombrep', pr.id as 'id_pr', re.fecha_revision as 'fecha', COUNT(ob.revision_id) as num
-FROM docente dt, proyecto pr, revision re, observacion ob
-WHERE dt.id='".$docente_ids."'
-AND pr.id='".$proyecto_ids."'
-AND re.proyecto_id=pr.id
-AND re.id=ob.revision_id
-GROUP BY ob.revision_id";
- $resultado1 = mysql_query($sql1);
+     if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
+    {
+    $evaluacion->objBuidFromPost();
+    $evaluacion->save();
+    }
 
   //No hay ERROR
   $smarty->assign("ERROR",'');
-  $smarty->assign("URL",URL);  
 }
 catch(Exception $e) 
 {
   $smarty->assign("ERROR", handleError($e));
 }
+
+  $token                = sha1(URL . time());
+  $_SESSION['register'] = $token;
+  $smarty->assign('token',$token);
   $smarty->display('docente/full-width.proyecto.evaluacion.tpl');
 ?>

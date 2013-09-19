@@ -14,14 +14,13 @@ try {
 
   //CSS
   $CSS[]  = URL_CSS . "academic/tables.css";
-  $CSS[]  = URL_CSS . "tablaeditableevaluacion.css";
+  $CSS[]  = URL_CSS . "editablegrid.css";
   $smarty->assign('CSS',$CSS);
 
   //JS
-  $JS[]  = URL_JS . "tablaeditable/jquery-1.6.4.min.js";
-  $JS[]  = URL_JS . "tablaeditable/jquery-ui-1.8.16.custom.min.js";
+  $JS[]  = URL_JS . "jquery.min.js";
   $JS[]  = URL_JS . "tablaeditable/editablegrid-2.0.1.js";
-  $JS[]  = URL_JS . "tablaeditable/tablaeditableevaluacion.js";
+  $JS[]  = URL_JS . "tablaeditable/tabla.editable.evaluacion.js";
   $smarty->assign('JS',$JS);
 
    /**
