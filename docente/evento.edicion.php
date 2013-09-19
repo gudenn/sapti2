@@ -72,7 +72,7 @@ function smcf_send($titulo, $fecha, $descripcion,$eve) {
     $evento->dicta_id=4;
     $evento->asunto=$titulo;
     $evento->fecha_evento=$fecha;
-    $evento->descripcion=$descripcion;
+    $evento->descripcion=preg_replace("/\r\n+|\r+|\n+|\t+/i", " ", $descripcion);
     $evento->save();
 }
 

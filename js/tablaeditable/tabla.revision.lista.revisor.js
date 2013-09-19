@@ -67,7 +67,7 @@ EditableGrid.prototype.initializeGrid = function()
 		};
                 
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
-		cell.innerHTML = "<a onclick=document.location.href='observacion.detalle.php?revisiones_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
+		cell.innerHTML = "<a href='#' class='eventoedit' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("detalle.png") + "\" border=\"0\" alt=\"delete\" title=\"Detalle Revision\"/></a>";
                 }}));
             	setCellRenderer("revtipo", new CellRenderer({
