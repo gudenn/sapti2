@@ -1,20 +1,16 @@
       <div id="content">
-        <h1 class="title">Registro de Modalidad</h1>
-        <p>Formulario de registro de Modalidad</p>
-        <h2 class="title">Formulario de Modalidad</h2>
+        <h1 class="title">Registro de Carrera</h1>
+        <p>Formulario de registro de Carrera</p>
+        <h2 class="title">Formulario de Registro</h2>
         <div id="respond">
           <form action="" method="post" id="registro" name="registro" >
             <p>
-              <input type="text" name="nombre" value="{$modalidad->nombre}"  data-validation-engine="validate[required]">
-              <label for="codigo"><small>Nombre del Modalidad (*)</small></label>
+              <input type="text" name="nombre"  id="nombre" value="{$carrera->nombre}"  data-validation-engine="validate[required]">
+              <label for="codigo"><small>Nombre de Carrera (*)</small></label>
             </p>
+            <h2 class="title">Grabar Carrera</h2>
             <p>
-              <input type="text" name="descripcion" value="{$modalidad->descripcion}"  data-validation-engine="validate[required]">
-              <label for="codigo"><small>Descripcion del Modalidad (*)</small></label>
-            </p>
-            <h2 class="title">Grabar Modalidad</h2>
-            <p>
-              <input type="hidden" name="id"    value="{$modalidad->id}">
+              <input type="hidden" name="id"    value="{$carrera->id}">
               <input type="hidden" name="tarea" value="registrar">
               <input type="hidden" name="token" value="{$token}">
               <input name="submit" type="submit" id="submit" value="Grabar">
@@ -23,7 +19,7 @@
             </p>
           </form>
         </div>
-        <p>{$ERROR}</p>
+        <p>{$ERROR}adwadw</p>
         <p>Todos los campos con (*) son obligatorios.</p>
         <script type="text/javascript">
         {literal} 
@@ -40,4 +36,3 @@
         {/literal} 
         </script>
       </div>
-        

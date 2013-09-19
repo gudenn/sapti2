@@ -1,23 +1,4 @@
       <div id="content">
-        
-         <h1 class="title">BUSCAR USUARIO</h1>
-        <h2 class="title">INGRESE SU CODIGO SIS</h2>
-         <div id="respond">
-          <form action="#" method="post" id="registro" name="registro" >
-            <p>
-              <input type="text" name="codigo" id="ci" value="{$usuario->codigo_sis}" size="100"  data-validation-engine="validate[required]" >
-              <label for="ci"><small>CODIGO SIS(*)</small></label>
-            </p>
-           
-            <p>
-              <input type="hidden" name="id" value="{$tutor->id}">
-              <input type="hidden" name="buscar" value="buscar">
-              <input type="hidden" name="token" value="{$token}">
-
-              <input name="submit" type="submit" id="submit" value="BUSCAR">
-            </p>
-          </form>
-        </div>
         <h1 class="title">Registro de Tutores</h1>
         <p>Formulario de registro de tutor</p>
         <h2 class="title">Formulario de Registro</h2>
@@ -34,7 +15,12 @@
               <label for="nombre"><small>Nombre (*)</small></label>
             </p>
             <p>
-              <input type="text" name="apellidos" id="apellidos" value="{$tutor->apellido_paterno}" size="200">
+              <input type="text" name="apellidos" id="apellido_paterno" value="{$tutor->apellido_paterno}" size="200">
+              <label for="apellidos"><small>Apellidos</small></label>
+            </p>
+            
+            <p>
+              <input type="text" name="apellidos" id="apellido_materno" value="{$tutor->apellido_materno}" size="200">
               <label for="apellidos"><small>Apellidos</small></label>
             </p>
             <p>
@@ -42,7 +28,7 @@
               <label for="email"><small>E-Mail</small></label>
             </p>
             <p>
-              <input type="text" name="fecha_cumple" id="fecha_cumple" value="{$tutor->fecha_nacimiento}" size="22">
+              <input type="text" name="fecha_cumple" id="fecha_nacimiento" value="{$tutor->fecha_nacimiento}" size="22">
               <label for="fecha_cumple"><small>Fecha de Cumplea&ntilde;os</small></label>
             </p>
             <p>
@@ -52,6 +38,11 @@
             <p>
               <input type="text" name="clave" id="clave" value="{$tutor->clave}" size="22">
               <label for="clave"><small>Clave de Ingreso</small></label>
+            </p>
+            
+            <p>
+              <input type="hidden" name="proyecto_id" id="proyecto_id" value="{$proyecto->id}" size="22">
+              <label for="clave"><small>codigo proyecto</small></label>
             </p>
             <h2 class="title">Grabar Estudiante</h2>
             <p>

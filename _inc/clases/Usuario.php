@@ -25,8 +25,15 @@ class Usuario  extends Objectbase
   * @var VARCHAR(100)
   */
   var $apellido_materno;
+
  /**
-  * Email del estudiante
+  * telefono del usuario
+  * @var VARCHAR(100)
+  */
+  var $telefono;
+
+ /**
+  * Email del usuario
   * @var VARCHAR(100)
   */
   var $email;
