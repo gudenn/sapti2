@@ -146,7 +146,7 @@
         Mensaje<br/>
         <textarea name="detalle" rows="5" style="width: 90%"></textarea>
         <script>
-          CKEDITOR.replace('detalle'{$editor})
+          CKEDITOR.replace('detalle'{$editores})
         </script>
       </div>
       <div>

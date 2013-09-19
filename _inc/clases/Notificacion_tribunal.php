@@ -14,6 +14,10 @@ class Notificacion_tribunal extends Objectbase
      */
     var $tribunal_id;
     
+    var $estado_notificacion;
+    
+    var $fecha_visto;
+    
 
    
 }
