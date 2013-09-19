@@ -43,6 +43,7 @@ try {
 
   leerClase('Area');
   leerClase('Dicta');
+  leerClase('Docente');
   leerClase('Usuario');
   leerClase('Carrera');
   leerClase('Proyecto');

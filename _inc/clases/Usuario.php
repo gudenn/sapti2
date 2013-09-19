@@ -7,7 +7,9 @@
  */
 class Usuario  extends Objectbase 
 {
-
+  /** si es profecional o no  */
+  const PROFECIONAL   = "1";
+  const NOPROFECIONAL = "0";
  /**
   * Nombre del usuario
   * @var VARCHAR(100)
@@ -63,11 +65,17 @@ class Usuario  extends Objectbase
   */
   var $ci;
 
-  /**
+ /**
   * Sexo del usuario Puede ser M de Masculino o F de Femenino y en el futoro se puede manejas otros datos
   * @var VARCHAR(45)
   */
   var $sexo;
+
+ /**
+  * Si el usuario puede ser tutor de algun estudiante
+  * @var VARCHAR(45)
+  */
+  var $puede_ser_tutor;
   
  /**
   * (Arreglo de objetos) El Tutor que esta asignado a este usuario
