@@ -30,6 +30,21 @@ class Semestre extends Objectbase
   */
   var $configuracion_semestral_objs;
 
+ /**
+  * Object return the object with some id
+  *
+   * 
+   * @param INT(11) $id el id del semestre
+   * @param BOOL $getactivo si obtenemos el semestre activo o no
+   */
+  public function __construct($id = '',$getactivo = false)
+  {
+    if ($id)
+      parent::__construct ($id);
+    if ($getactivo)
+      $this->getActivo ();
+    
+  }
 
   /**
    * Guardamos este semestre

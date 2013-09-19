@@ -1,0 +1,60 @@
+#container{
+  width:920px;
+  padding:20px;
+  line-height:1.6em;
+  background:url("images/round_bot.gif") bottom left no-repeat;
+  width:690px;
+  /*
+  background: url("borrame/proyectofinal.png") top left no-repeat;
+  background-size: 695px;
+  background-position: 20px 20px;
+  min-height: 800px;*/
+}
+
+#container input[type="radio"] { width: 80px!important; }
+#proyecto_numero_asignado { width: 30px!important; }
+#proyecto_titulo { width: 600px!important; }
+
+#container table {
+  margin:0px;
+  border: none;
+}
+
+#firmmas td{
+  border: 1px solid #DEDACB!important;
+  text-align: center;
+}
+
+#container table td{
+  padding:0px;
+  border: none;
+  vertical-align: middle;
+}
+
+.tableholder{
+  border: 1px solid #DEDACB;
+}
+#container #ojbs_es input
+{
+  width: 460px;
+}
+#container #proyecto_objetivo_general
+{
+  margin: 2px;
+  width: 552px;
+  height: 59px; 
+  max-width: 552px;
+  max-height: 200px;
+  min-width: 552px;
+
+}
+#container #proyecto_descripcion
+{
+  margin: 2px;
+  height: 80px;
+  width: 680px;
+  max-width: 680px;
+  max-height: 200px;
+  min-width: 680px;
+
+}
