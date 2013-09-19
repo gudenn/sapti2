@@ -1,6 +1,11 @@
 <?php
 class Modalidad extends Objectbase 
 {
+  /** Constante para el tipo de trabajo en grupo o en conjunto  */
+  const DATOS_AD_NO  = "0";
+  /** Constante para el tipo de trabajo solo */
+  const DATOS_AD_SI  = "1";
+
   /**
   * Nombre del Modalida
   * @var INT(45)
@@ -12,6 +17,12 @@ class Modalidad extends Objectbase
   * @var INT(45)
   */
   var $descripcion;
+  
+ /**
+  * Si esta modalidad tiene datos adicionales como que exige revisor o institucion
+  * @var BOOLEAN
+  */
+  var $datos_adicionales;
   
   /**
    * Validamos que todos los datos enviados sean correctos

@@ -34,7 +34,7 @@ try {
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Docente');
-  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Registro de Eventos');
+  $menuList[]     = array('url'=>URL.Docente::URL.basename(__FILE__),'name'=>'Registro de Eventos');
   $smarty->assign("menuList", $menuList);
   
   $docente=  getSessionDocente();
@@ -47,6 +47,8 @@ try {
     {
     $evento->objBuidFromPost();
     $evento->estado = Objectbase::STATUS_AC;
+    $quitarsaltos=$evento->descripcion;
+    $evento->descripcion=preg_replace("/\r\n+|\r+|\n+|\t+/i", " ", $quitarsaltos);
     $evento->dicta_id=4;
     $evento->save();
 

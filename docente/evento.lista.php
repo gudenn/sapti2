@@ -17,17 +17,17 @@ try {
   $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_CSS . "academic/tables.css";
   $CSS[]  = URL_CSS . "editablegrid.css";
-  $CSS[]  = URL_CSS . "academic/evento.edicion.css";
+  $CSS[]  = URL_JS . "ventanasmodales/simplemodal.css";
   $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
 
 
    // Agregan el js
-  $JS[]  = URL_JS . "jquery.min_1.7.js";
+  $JS[]  = URL_JS . "jquery.min.js";
   $JS[]  = URL_JS . "jquery-ui-1.10.3.custom.min.js";
   $JS[]  = URL_JS . "tablaeditable/editablegrid-2.0.1.js";
   $JS[]  = URL_JS . "tablaeditable/tabla.evento.lista.js";
-  $JS[]  = URL_JS . "jquery.simplemodal-1.4.4.js";
-  $JS[]  = URL_JS . "evento.edicion.js";
+  $JS[]  = URL_JS . "ventanasmodales/jquery.simplemodal-1.4.4.js";
+  $JS[]  = URL_JS . "ventanasmodales/evento.edicion.js";
   
     //Datepicker UI
   $JS[]  = URL_JS . "ui/jquery-ui-1.10.2.custom.min.js";
@@ -39,7 +39,7 @@ try {
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Docente');
-  $menuList[]     = array('url'=>URL.Docente::URL.__FILE__,'name'=>'Edicion de Eventos');
+  $menuList[]     = array('url'=>URL.Docente::URL.basename(__FILE__),'name'=>'Edicion de Eventos');
   $smarty->assign("menuList", $menuList);
   
   if (isset($_GET['eliminar']) && isset($_GET['evento_id']) && is_numeric($_GET['evento_id']) )

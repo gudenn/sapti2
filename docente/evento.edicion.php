@@ -3,15 +3,6 @@
 $to ='ola' ;  
 $ideve1=$_GET['idev'];
   leerClase("Evento");
-      $resul = "
-      SELECT *
-FROM evento ev
-WHERE ev.id='".$ideve1."' 
-          ";
-   $sql = mysql_query($resul);
-while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
-   $arrayeve[]=$fila1;
- }
  $evento1=new Evento($ideve1);
  
 // Process
@@ -81,7 +72,7 @@ function smcf_send($titulo, $fecha, $descripcion,$eve) {
     $evento->dicta_id=4;
     $evento->asunto=$titulo;
     $evento->fecha_evento=$fecha;
-    $evento->descripcion=$descripcion;
+    $evento->descripcion=preg_replace("/\r\n+|\r+|\n+|\t+/i", " ", $descripcion);
     $evento->save();
 }
 

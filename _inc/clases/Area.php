@@ -12,7 +12,13 @@ class Area extends Objectbase
   * @var INT(45)
   */
   var $descripcion;
-  
+
+ /**
+  * (Objeto simple)  Todos las sub areas de un area
+  * @var object|null 
+  */
+  var $sub_area_objs;
+
   /**
    * Validamos que todos los datos enviados sean correctos
    */
