@@ -85,7 +85,7 @@ class Semestre extends Objectbase
       $this->getActivo();
     $config              = new Configuracion_semestral();
     $config->semestre_id = $this->id;
-    $config->getIdValue($nombre);
+    $config->getValor($nombre);
     return $config->valor;
   }
 

@@ -2,7 +2,7 @@
 <div class="wrapper row3">
   <div class="rnd">
     <div id="container" >
-      <h1 class="title">FORMULARIO APROBACI&Oacute;N TEMA DE PROYECTO FINAL</h1>
+      <h1 class="title"><span class="tipo_mona">FORMULARIO APROBACI&Oacute;N TEMA DE PROYECTO FINAL</span><span class="tipo_moda">FORMULARIO APROBACI&Oacute;N TEMA DE TRABAJO DIRIGIDO</span></h1>
       <div id="respond">
       <form action="" method="post" id="registro" name="registro" >
       <table >
@@ -114,7 +114,7 @@
                   Cambio de tema:
                 </td>
                 <td>
-                  @TODO radio
+                  {$cambio_tema}
                 </td>
               </tr>
             </table>
@@ -154,6 +154,9 @@
                     <select  name="proyecto_area_id[]" id="proyecto_area_id_{$i}" class="area" correlativo="{$i}" data-validation-engine="validate[required]" >
                       {html_options values=$areas_ids selected='' output=$areas}
                     </select>
+                    <span id="actualizando_subareas{$i}" style="display: none">
+                      {icono('basicset/loading.gif','Buscando','50px','10px')}
+                    </span>
                   </td>
                   <td>
                     Sub-&Aacute;rea:
@@ -179,6 +182,9 @@
                     <select  name="proyecto_area_id[]" id="proyecto_area_id_{$i}" class="area" correlativo="{$i}" data-validation-engine="validate[required]" >
                       {html_options values=$areas_ids selected='' output=$areas}
                     </select>
+                    <span id="actualizando_subareas{$i}" style="display: none">
+                      {icono('basicset/loading.gif','Buscando','50px','10px')}
+                    </span>
                   </td>
                   <td>
                     Sub-&Aacute;rea:
@@ -214,9 +220,12 @@
                   Modalidad:
                 </td>
                 <td>
-                  <select  name="proyecto_modalidad_id" id="proyecto_modalidad_id" data-validation-engine="validate[required]" >
+                  <select  name="proyecto_modalidad_id" id="proyecto_modalidad_id" data-validation-engine="validate[required]" class="modalidad" >
                     {html_options values=$modalidads_ids selected=$proyecto->modalidad_id output=$modalidads}
                   </select>
+                  <span id="actualizando_modalidad" style="display: none">
+                    {icono('basicset/loading.gif','Buscando','50px','10px')}
+                  </span>
                 </td>
               </tr>
             </table>
@@ -306,16 +315,23 @@
             <table id="firmmas">
               <tr>
                 <td style="height: 32px;">
-                  <input type="text" name="proyecto_director_carrera" value="{$proyecto->director_carrera}"  data-validation-engine="validate[required]">
+                  <input type="text" name="proyecto_director_carrera" value="{$director_carrera}"  data-validation-engine="validate[required]">
                 </td>
                 <td>
-                  <input type="text" name="proyecto_docente_materia" value="{$proyecto->docente_materia}"  data-validation-engine="validate[required]">
+                  <select  name="proyecto_docente_materia" id="proyecto_docente_materia" data-validation-engine="validate[required]" >
+                    {html_options values=$docentes_materia selected=$docente_seleccionado output=$docentes_materia}
+                  </select>
                 </td>
                 <td>
                   Tutor
                 </td>
+                <td class="tipo_moda">
+                  <select  name="proyecto_responsable" id="proyecto_responsable" data-validation-engine="validate[required]" >
+                    {html_options values=$docresp selected=$docresp_sel output=$docresp}
+                  </select>
+                </td>
                 <td>
-                  Estudiante
+                  {$estudiante->getNombreCompleto()}
                 </td>
               </tr>
               <tr>
@@ -327,6 +343,9 @@
                 </td>
                 <td>
                   Tutor:
+                </td>
+                <td class="tipo_moda">
+                  Responsable:
                 </td>
                 <td>
                   Estudiante:
@@ -347,13 +366,13 @@
                   Registrado por:
                 </td>
                 <td>
-                  <input type="text" name="proyecto_registrado_por" value="{$proyecto->registrado_por}"  data-validation-engine="validate[required]">
+                  <input type="text" name="proyecto_registrado_por" value="{$registrado_por}"  data-validation-engine="validate[required]">
                 </td>
                 <td>
                   Fecha:
                 </td>
                 <td>
-                  fecha
+                  {$fecha}
                 </td>
               </tr>
             </table>
@@ -417,17 +436,39 @@
     }
     
     jQuery(function(){
+      jQuery("select.modalidad").change(function(){
+        jQuery("#actualizando_modalidad").show();
+        jQuery.getJSON("proyecto.ajax.php",{modalidad_id: jQuery(this).val(), ajax: 'true'}, function(j){
+          //console.log(j[0].datos);
+          {/literal}
+          if (j.length && j[0].datos === '{$adicionales_SI}' )
+          {
+          {literal}
+            //console.log(j[0].datos);
+            jQuery(".tipo_mona").hide();
+            jQuery(".tipo_moda").fadeIn('slow');
+          }
+          else
+          {
+            jQuery(".tipo_moda").hide();
+            jQuery(".tipo_mona").fadeIn('slow');
+          }
+          jQuery("#actualizando_modalidad").fadeOut('slow');
+        });
+      });
       jQuery("select.area").change(function(){
         var correlavivo = jQuery(this).attr('correlativo');
+        jQuery("#actualizando_subareas"+correlavivo).show();
         jQuery.getJSON("proyecto.ajax.php",{area_id: jQuery(this).val(), ajax: 'true'}, function(j){
           var options = '';
           for (var i = 0; i < j.length; i++) {
             options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
           }
-          console.log("select#proyecto_subarea_id_"+correlavivo);
+          //console.log("select#proyecto_subarea_id_"+correlavivo);
           jQuery("select#proyecto_subarea_id_"+correlavivo).html(options);
-        })
-      })
+          jQuery("#actualizando_subareas"+correlavivo).fadeOut('slow');
+        });
+      });
     });
     jQuery(document).ready(function(){
       jQuery("#registro").validationEngine();

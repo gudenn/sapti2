@@ -5,14 +5,27 @@
     header("Location: ../login.php");  
 
   conectar_db();
-  leerClase("Area");
   if (isset($_GET['ajax']))
   {
+    /**
+     * Buscamos las opciones de la modalidad
+     */
+    if (isset($_GET['modalidad_id']) && is_numeric($_GET['modalidad_id']))
+    {
+      leerClase("Modalidad");
+      $modalidad    = new Modalidad($_GET['modalidad_id']);
+      $resp = '{"datos":"'.$modalidad->datos_adicionales.'"}';
+      echo <<<HERE_DOC
+        [$resp]
+HERE_DOC;
+      exit();
+    }
     /**
      * Buscamos todas las subareas de un area
      */
     if (isset($_GET['area_id']) && is_numeric($_GET['area_id']))
     {
+      leerClase("Area");
       $resp         = '';
       $area = new Area($_GET['area_id']);
       $area->getAllObjects();

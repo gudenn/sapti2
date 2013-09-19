@@ -84,6 +84,18 @@ class Proyecto extends Objectbase
   var $fecha_registro;
 
  /**
+  * Quien registro el proyecto
+  * @var VARCHAR(300)
+  */
+  var $registrado_por;
+
+ /**
+  * Quien es reponsable por el proyecto en caso de adcripcion o trabajo dirigido
+  * @var VARCHAR(300)
+  */
+  var $responsable;
+
+ /**
   * (Objeto simple)  Todos los Objetivos Especificos del proyecto
   * @var object|null 
   */
