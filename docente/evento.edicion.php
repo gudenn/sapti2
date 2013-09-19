@@ -3,15 +3,6 @@
 $to ='ola' ;  
 $ideve1=$_GET['idev'];
   leerClase("Evento");
-      $resul = "
-      SELECT *
-FROM evento ev
-WHERE ev.id='".$ideve1."' 
-          ";
-   $sql = mysql_query($resul);
-while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
-   $arrayeve[]=$fila1;
- }
  $evento1=new Evento($ideve1);
  
 // Process

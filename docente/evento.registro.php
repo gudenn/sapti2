@@ -34,7 +34,7 @@ try {
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Docente');
-  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Registro de Eventos');
+  $menuList[]     = array('url'=>URL.Docente::URL.basename(__FILE__),'name'=>'Registro de Eventos');
   $smarty->assign("menuList", $menuList);
   
   $docente=  getSessionDocente();

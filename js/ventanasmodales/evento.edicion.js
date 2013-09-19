@@ -12,7 +12,7 @@ jQuery(function ($) {
 	var contact = {
 		message: null,
 		init: function () {
-			$('#content a.eventoedit').live('click', function (e) {
+			$('#content').on('click','a.eventoedit',function (e) {
 				e.preventDefault();
                                 var idc=$(this).attr('id');
 				// load the contact form using ajax

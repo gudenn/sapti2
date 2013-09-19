@@ -11,9 +11,6 @@
 
 // create our editable grid
 var editableGrid = new EditableGrid("listaevento", {
-	enableSort: true, // true is the default, set it to false if you don't want sorting to be enabled
-	editmode: "absolute", // change this to "fixed" to test out editorzone, and to "static" to get the old-school mode
-	editorzoneid: "edition", // will be used only if editmode is set to "fixed"
 	pageSize: 10
 });
 
@@ -54,8 +51,7 @@ EditableGrid.prototype.initializeGrid = function()
 
 		// register the function that will handle model changes
 		modelChanged = function(rowIndex, columnIndex, oldValue, newValue, row) { 
-                               updateCellValue(this, rowIndex, columnIndex, oldValue, newValue, row);
-		};
+        	};
 		
 		// update paginator whenever the table is rendered (after a sort, filter, page change, etc.)
 		tableRendered = function() { this.updatePaginator(); };
@@ -76,7 +72,7 @@ EditableGrid.prototype.initializeGrid = function()
                 //eventoedit();
 		
 		// render the grid (parameters will be ignored if we have attached to an existing HTML table)
-		renderGrid("tablecontent", "testgrid", "tableid");
+		renderGrid("tablecontent", "testgrid");
                 		
 		// set active (stored) filter if any
 		_$('filter').value = currentFilter ? currentFilter : '';
@@ -145,134 +141,3 @@ EditableGrid.prototype.updatePaginator = function()
 	else link.css("cursor", "pointer").click(function(event) { editableGrid.lastPage(); });
 	paginator.append(link);
 };
-function eventoedit(){
-jQuery(document).ready(function ($) {
-    
-	var contact = {
-		message: null,
-		init: function () {
-			$('#content a.eventoedit').click(function (e) {
-				e.preventDefault();alert("escucha")
-                                var idc=$(this).attr('id');
-				// load the contact form using ajax
-				$.get("evento.edicion.php?idev="+idc, function(data){
-					// create a modal dialog with the data
-                                        
-					$(data).modal({
-						closeHTML: "<a href='#' title='Close' class='modal-close'>x</a>",
-						position: ["15%",],
-						overlayId: 'contact-overlay',
-						containerId: 'contact-container',
-						onOpen: contact.open,
-						onShow: contact.show,
-						onClose: contact.close
-					});
-				});
-			});
-		},
-                open: function (dialog) {
-			// dynamically determine height
-			var h = 280;
-			var title = $('#contact-container .contact-title').html();
-			$('#contact-container .contact-title').html('Cargando Eventos...');
-			dialog.overlay.fadeIn(200, function () {
-				dialog.container.fadeIn(200, function () {
-					dialog.data.fadeIn(200, function () {
-						$('#contact-container .contact-content').animate({
-							height: h
-						}, function () {
-							$('#contact-container .contact-title').html(title);
-							$('#contact-container form').fadeIn(200, function () {
-								$('#contact-container #contact-title').focus();
-							});
-						});
-					});
-				});
-			});
-		},
-		show: function (dialog) {
-			$('#contact-container .contact-send').click(function (e) {
-				e.preventDefault();
-				// validate form
-				if (contact.validate()) {
-					var msg = $('#contact-container .contact-message');
-					msg.fadeOut(function () {
-						msg.removeClass('contact-error').empty();
-					});
-					$('#contact-container .contact-title').html('Grabando...');
-					$('#contact-container form').fadeOut(200);
-					$('#contact-container .contact-content').animate({
-						height: '80px'
-					}, function () {
-						$('#contact-container .contact-loading').fadeIn(200, function () {
-							$.ajax({
-								url: 'evento.edicion.php',
-								data: $('#contact-container form').serialize() + '&action=send',
-								type: 'post',
-								cache: false,
-								dataType: 'html',
-								success: function (data) {
-									$('#contact-container .contact-loading').fadeOut(200, function () {
-										$('#contact-container .contact-titulo').html('Disculpas');
-										msg.html(data).fadeIn(200);
-									});
-								},
-								error: contact.error
-							});
-						});
-					});
-				}
-				else {
-					if ($('#contact-container .contact-message:visible').length > 0) {
-						var msg = $('#contact-container .contact-message div');
-						msg.fadeOut(200, function () {
-							msg.empty();
-							contact.showError();
-							msg.fadeIn(200);
-						});
-					}
-					else {
-						$('#contact-container .contact-message').animate({
-							height: '30px'
-						}, contact.showError);
-					}
-					
-				}
-			});
-		},
-		close: function (dialog) {
-			$('#contact-container .contact-message').fadeOut();
-			$('#contact-container .contact-title').html('Gracias...');
-			$('#contact-container form').fadeOut(200);
-			$('#contact-container .contact-content').animate({
-				height: 40
-			}, function () {
-				dialog.data.fadeOut(200, function () {
-					dialog.container.fadeOut(200, function () {
-						dialog.overlay.fadeOut(200, function () {
-							$.modal.close(window.location.reload());
-						});
-					});
-				});
-			});
-		},
-		error: function (xhr) {
-			alert(xhr.statusText);
-		},
-		validate: function () {
-				return true;
-			
-		},
-		showError: function () {
-			$('#contact-container .contact-message')
-				.html($('<div class="contact-error"></div>').append(contact.message))
-				.fadeIn(200);
-		}
-	};
-
-	contact.init();
-
-});
-};
-
-
