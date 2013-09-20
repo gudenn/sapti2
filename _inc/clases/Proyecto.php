@@ -124,6 +124,8 @@ class Proyecto extends Objectbase
   * (Objeto simple) Todos los proyecto_tutor que tiene este proyecto
   * @var object|null 
   */
+  
+  
   var $proyecto_tutor_objs;
 
  /**
