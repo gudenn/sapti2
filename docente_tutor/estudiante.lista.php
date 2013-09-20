@@ -7,6 +7,7 @@ try {
   leerClase("Evento");
   leerClase("Pagination");
   leerClase('Docente');
+  leerClase("Usuario");
   $ERROR = '';
 
   /** HEADER */
@@ -21,8 +22,8 @@ try {
 
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
-  $JS[]  = URL_JS . "tablaeditable/editablegrid-2.0.1.js";
-  $JS[]  = URL_JS . "tablaeditable/tabla.estudiante.lista.js";
+  $JS[]  = URL_JS . "tablaeditabletutor/editablegrid-2.0.1.js";
+  $JS[]  = URL_JS . "tablaeditabletutor/tabla.estudiante.lista.js";
   $smarty->assign('JS',$JS);
   
    /**
@@ -32,9 +33,10 @@ try {
   $menuList[]     = array('url'=>URL.Docente::URL.basename(__FILE__),'name'=>'Estudiantes Registrados');
   $smarty->assign("menuList", $menuList);
   
+ 
+
   $docente=  getSessionDocente();
-  //$docenteid=$docente->id;
-  $docenteid=4;
+  $docenteid=$docente->docente_id;
   
   $smarty->assign("docente_ids", $docenteid);
 
@@ -45,5 +47,5 @@ catch(Exception $e)
 {
   $smarty->assign("ERROR", handleError($e));
 }
-  $smarty->display('docente/full-width.estudiante.lista.tpl');
+  $smarty->display('docente_tutor/full-width.estudiante.lista.tpl');
 ?>

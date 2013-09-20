@@ -37,9 +37,9 @@
         <table class="tbl_lista">
               <thead>
                 <tr>
-                  <th>Evalucion 1    </th>
-                  <th>Evalucion 2    </th>
-                  <th>Evalucion 3    </th>
+                  <th>Evaluacion 1    </th>
+                  <th>Evaluacion 2    </th>
+                  <th>Evaluacion 3    </th>
                   <th>Promedio       </th>
                   <th>Editar         </th>
                   <th>Registrar      </th>

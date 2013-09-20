@@ -12,7 +12,7 @@
 #contact-overlay {background-color:#000;}
 
 /* Container */
-#contact-container {font: 16px/22px Georgia, "Times New Roman", Times, serif; text-align:left; width:650px;}
+#contact-container {font: 16px/22px Georgia, "Times New Roman", Times, serif; text-align:left; width:650px; float:left;}
 #contact-container .contact-content {background-color:#06213F; color:#ddd; height:410px;}
 #contact-container h1 {color:#8F8F8F; font-size:20px; line-height:20px; margin:0; padding:0 0 6px 12px; text-align:left;}
 #contact-container .contact-loading {background:url(../../images/loading.gif) no-repeat; height:55px; margin:-14px 0 0 190px; padding:0; position:absolute; width:54px; z-index:8000;}
@@ -20,7 +20,7 @@
 #contact-container .contact-error {background:#000; border:2px solid #ccc; font-size:14px; font-weight:bold; line-height:18px; margin:0 auto; padding:2px; width:92%;}
 #contact-container br {clear:both;}
 #contact-container form {margin:0; padding:0;}
-#contact-container label {clear:left; display:block; float:left; font-weight:bold; padding-right:4px; text-align:right; width:100px;}
+#contact-container label {clear:left; display:block; float:left; font-weight:bold; padding-right:10px; text-align:right; width:200px;}
 #contact-container .contact-input {background:#eee; border:1px solid #fff; font-family:Georgia, "Times New Roman", Times, serif; float:left; padding:2px; margin:2px; width:300px;}
 #contact-container textarea {height:114px;}
 #contact-container .contact-cc {cursor:default; font-size:14px; vertical-align:top;}

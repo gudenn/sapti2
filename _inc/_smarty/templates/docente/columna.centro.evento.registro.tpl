@@ -1,6 +1,6 @@
       <div id="content" style="width:685px;min-height: 400px;">
         <div id="respond">
-             <h1 class="title">REGISTRO DE EVENTOS</h1>
+             <h1 class="title">Registro de Eventos</h1>
           <form action="#" method="post" id="registro" name="registro" >
             <p>
               <input type="text" name="asunto" id="asunto" value="{$evento->asunto}" size="22" data-validation-engine="validate[required]">

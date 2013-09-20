@@ -6,21 +6,6 @@ require_once('../docente/EditableGrid.php');
 if(isset($_GET['doc'])){
 $docid=$_GET['doc'];
 };
-/**
- public function conectar($selecionar_la_db = true) {
-		$this->enlace = mysql_connect(DBHOST,DBUSER,BDPASS);
-		if (!$this->enlace)
-			throw new Exception('Could not connect: ' . mysql_error());
-		if (!$selecionar_la_db)
-			return true;
-		$this->db = mysql_select_db(BDNAME,$this->enlace);
-		if (!$this->db)
-			throw new Exception('Can\'t use the db: ' . mysql_error());
-		//echo 'Connected successfully';
-		return true;
-	}
- 
- */
 
 
 // Database connection

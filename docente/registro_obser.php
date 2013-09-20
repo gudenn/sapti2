@@ -12,6 +12,7 @@ if(isset($_GET['obser'])){
     $observacion->estado = Objectbase::STATUS_AC;
     $observacion->observacion=$_GET['obser'];
     $observacion->revision_id =$_GET['revid'];
+    $observacion->estado_observacion='CR';
     $observacion->save();
   };
 }

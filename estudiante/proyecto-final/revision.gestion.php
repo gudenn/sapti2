@@ -64,6 +64,8 @@ try {
   
   $o_string   = $revision->getOrderString($filtro);
   $obj_mysql  = $revision->getAll('',$o_string,$filtro_sql,TRUE,TRUE);
+  
+ 
   $objs_pg    = new Pagination($obj_mysql, 'e_revision','',false,10);
 
   $smarty->assign("filtros"  ,$filtro);

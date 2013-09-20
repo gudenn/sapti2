@@ -54,7 +54,6 @@ EditableGrid.prototype.initializeGrid = function()
 
 		// register the function that will handle model changes
 		modelChanged = function(rowIndex, columnIndex, oldValue, newValue, row) { 
-                               updateCellValue(this, rowIndex, columnIndex, oldValue, newValue, row);
 		};
 		
 		// update paginator whenever the table is rendered (after a sort, filter, page change, etc.)
@@ -68,11 +67,17 @@ EditableGrid.prototype.initializeGrid = function()
                 
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
 		cell.innerHTML = "<a href='#' class='eventoedit' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("detalle.png") + "\" border=\"0\" alt=\"delete\" title=\"Detalle Revision\"/></a>";
+						 "<img src=\"" + image("detalle.png") + "\" border=\"0\" alt=\"detalle\" title=\"Detalle Revision\"/>Detalle</a>";
                 }}));
-            	setCellRenderer("revtipo", new CellRenderer({
-			render: function(cell, value) { cell.innerHTML = value ? "<img src='" + image("flags/" + value.toLowerCase() + ".png") + "' alt='" + value + "'/>" : ""; }
+                setCellRenderer("revtipo", new CellRenderer({
+                    
+                    render: function(cell, value) { cell.innerHTML ="<a>"+"<img src='" + image("flags/" + value.toLowerCase() + ".png") + "' alt='" + value + "' title=\"Tipo de Revisor\"/>"+nombreRevisor(value)+"</a>";}
+			//render: function(cell, value) { cell.innerHTML = value ? "<img src='" + image("flags/" + value.toLowerCase() + ".png") + "' alt='" + value + "' title=\"Tipo de Revisor\"/>" : ""; }
 		})); 
+                setCellRenderer("estado", new CellRenderer({
+			render: function(cell, value){ cell.innerHTML ="<a>"+"<img src='" + image("flags/" + value.toLowerCase() + ".png") + "' alt='" + value + "' title=\"Estado de Revicion\"/>"+estadoRevision(value)+"</a>";} 
+                        //{ cell.innerHTML = value ? "<img src='" + image("flags/" + value.toLowerCase() + ".png") + "' alt='" + value + "' title=\"Estado de Revicion\"/>" : ""; }
+		}));
 		
 		// render the grid (parameters will be ignored if we have attached to an existing HTML table)
 		renderGrid("tablecontent", "testgrid", "tableid");
@@ -144,47 +149,38 @@ EditableGrid.prototype.updatePaginator = function()
 	else link.css("cursor", "pointer").click(function(event) { editableGrid.lastPage(); });
 	paginator.append(link);
 };
-function highlightRow(rowId, bgColor, after)
-{
-	var rowSelector = $("#" + rowId);
-	rowSelector.css("background-color", bgColor);
-	rowSelector.fadeTo("normal", 0.5, function() { 
-		rowSelector.fadeTo("fast", 1, function() { 
-			rowSelector.css("background-color", '');
-		});
-	});
-}
+function nombreRevisor(tipo){
+    nombre='';
+    if(tipo=='DO'){
+        nombre='DOCENTE';
+    }else{
+        if(tipo=='TR'){
+            nombre='TRIBUNAL';
+        }else{
+            if(tipo=='DP'){
+                nombre='DOCENTE PERFIL';
+            }else{
+                if(tipo=='TU'){
+                    nombre='TUTOR';                    
+                }
 
-function highlight(div_id, style) {
-	highlightRow(div_id, style == "error" ? "#e5afaf" : style == "warning" ? "#ffcc00" : "#8dc70a");
-}
-function updateCellValue(editableGrid, rowIndex, columnIndex, oldValue, newValue, row, onResponse)
-{
-    if(newValue<=100){
-	$.ajax({
-		url: 'update.php',
-		type: 'POST',
-		dataType: "html",
-		data: {
-			tablename : 'evaluacion',
-			id: editableGrid.getRowId(rowIndex), 
-			newvalue: editableGrid.getColumnType(columnIndex) == "boolean" ? (newValue ? 1 : 0) : newValue, 
-			colname: editableGrid.getColumnName(columnIndex),
-			coltype: editableGrid.getColumnType(columnIndex)			
-		},
-		success: function (response) 
-		{ 
-			// reset old value if failed then highlight row
-			var success = onResponse ? onResponse(response) : (response == "ok" || !isNaN(parseInt(response))); // by default, a sucessfull reponse can be "ok" or a database id 
-			if (!success) editableGrid.setValueAt(rowIndex, columnIndex, oldValue);
-		    highlight(row.id, success ? "ok" : "error"); 
-		},
-		error: function(XMLHttpRequest, textStatus, exception) { alert("Ajax failure\n" + errortext); },
-		async: true
-	});
-                }else{
-        alert("LA NOTA MAXIMA PERMITIDA ES 100");
+            }
+        }
     }
-   
+    return nombre;
 }
-
+function estadoRevision(tipo){
+    nombre='';
+    if(tipo=='CR'){
+        nombre='Creado';
+    }else{
+        if(tipo=='VI'){
+            nombre='Visto';
+        }else{
+            if(tipo=='RE'){
+                nombre='Respondido';
+            }
+        }
+    }
+    return nombre;
+}

@@ -58,14 +58,14 @@ EditableGrid.prototype.initializeGrid = function()
 
 
 		rowSelected = function(oldRowIndex, newRowIndex) {
-			if (oldRowIndex < 0) displayMessage("Selecionada Fila '" + this.getRowId(newRowIndex) + "'");
-			else displayMessage("Selecionada Fila y Cambiada por '" + this.getRowId(oldRowIndex) + "' to '" + this.getRowId(newRowIndex) + "'");
+			if (oldRowIndex < 0) displayMessage("Fila Selecionada '" + this.getRowId(newRowIndex) + "'");
+			else displayMessage("Fila Selecionada y Cambiada por '" + this.getRowId(oldRowIndex) + "' to '" + this.getRowId(newRowIndex) + "'");
 		};
                 
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
 		cell.innerHTML = "<a href='#' class='eventoedit' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("editar.png") + "\" border=\"0\" alt=\"detalle\" title=\"Editar Evento\"/></a>";
-                cell.innerHTML += "&nbsp;<a onclick=\"if (confirm('Eliminar este Evento? ')){document.location.href='evento.lista.php?eliminar=1&evento_id="+getRowId(cell.rowIndex)+"'}\"  style=\"cursor:pointer\">" +
+                cell.innerHTML += "<br><a onclick=\"if (confirm('Eliminar este Evento? ')){document.location.href='evento.lista.php?eliminar=1&evento_id="+getRowId(cell.rowIndex)+"'}\"  style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("borrar.png") + "\" border=\"0\" alt=\"borrar\" title=\"Eliminar Evento\"/></a>";
 
 		}}));
@@ -90,7 +90,7 @@ EditableGrid.prototype.onloadXML = function(url)
 {
 	// register the function that will be called when the XML has been fully loaded
 	this.tableLoaded = function() { 
-		displayMessage("Numero de Estudiantes Inscritos " + this.getRowCount()); 
+		displayMessage("Numero de Eventos Registrados: " + this.getRowCount()); 
 		this.initializeGrid();
 	};
 

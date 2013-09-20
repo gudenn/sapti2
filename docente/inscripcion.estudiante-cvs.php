@@ -61,7 +61,7 @@ try {
   $smarty->assign('mat', $mat);
 
   $docente=  getSessionDocente();
-  $docenteid=$docente->id;
+  $docenteid=$docente->docente_id;
   $inscritos=array();
   $yainscritos=array();
   $noestudiante=array();
@@ -80,7 +80,7 @@ try {
                   $estudiante = new Estudiante();
                   $inscrito   = new Inscrito();
                   $evaluacion = new Evaluacion();
-                  $proyecto_docente = new Proyecto_docente();
+                  $proyecto_dicta = new Proyecto_dicta();
           $estudiante->getByCodigoSis($estudiante_array[1]);
             if ($estudiante->id){
                 if(estainscrito($estudiante_array[1])=='0'){
@@ -93,9 +93,9 @@ try {
                     $inscrito->dicta_id      = $idmat;
                     $inscrito->estudiante_id = $estudiante->id;
                     $inscrito->save();
-                    $proyecto_docente->dicta_id = $idmat;
+                    $proyecto_dicta->dicta_id = $idmat;
                     $proyecto       = $estudiante->getProyecto();
-                    $proyecto_docente->proyecto_id = $proyecto->proyecto_id;
+                    $proyecto_dicta->proyecto_id = $proyecto->proyecto_id;
                     $inscritos[]=$estudiante_array;
                     }else{
                     $yainscritos[]=$estudiante_array;
