@@ -2,12 +2,13 @@
 try {
   require('_start.php');
   if(!isDocenteSession())
-    header("Location: login.php");
+  header("Location: login.php");
+  leerClase('Visto_bueno');
   leerClase('Docente');
-  leerClase('Revision');
-  leerClase('Observacion');
+ 
   leerClase('Estudiante');
   leerClase('Usuario');
+  leerClase('Proyecto');
 
   /** HEADER */
   $smarty->assign('title','Proyecto Final');
@@ -41,52 +42,33 @@ try {
   $estudiante     = new Estudiante($id_estudiante);
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();
-
-  $observacion = new Observacion();
-  $revision = new Revision();
-
-  $smarty->assign("revision", $revision);
-  $smarty->assign("observacion", $observacion);
+  echo  $usuario->tutor_id;
+    //////creando la clase de visto bueno para realizar el visto bueno del proyecto de un estudiante
+ 
+  
   $smarty->assign("usuario", $usuario);
   $smarty->assign("proyecto", $proyecto);
     
     $urlpdf=".../ARCHIVO/proyecto.pdf";
     $smarty->assign("urlpdf", $urlpdf);
-    
+      $vistobueno= new Visto_bueno();
     date_default_timezone_set('UTC');
-    $revision->fecha_revision=date("d/m/Y");
+    $vistobueno->fecha_visto_buena=date("d/m/Y");
 
     if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
     {
-       $docente=  getSessionDocente();
-  
-      
-    $sql="select t.id
-from usuario u , tutor t
-where u.id=t.usuario_id and u.id=$docente->id;";
-    $resultados  =  mysql_query($sql);
+    $vistobueno                    =       new Visto_bueno();
+    $docente                       =       getSessionDocente();
+    $vistobueno->objBuidFromPost();
+   // $vistobueno->proyecto_id       =       $_POST['pro'];
+    $vistobueno->visto_bueno_tipo  =        Visto_bueno::E2_TUTOR;
+    $vistobueno->visto_bueno_id    =        4;
+    $vistobueno->estado            =        Objectbase::STATUS_AC;
+   
+    $vistobueno->save();
     
-    $iddocente   =  0;
- 
- while ($fila = mysql_fetch_array($resultados)) 
- {
-    $iddocente=$fila['id'];
- }  
-    $revision->objBuidFromPost();
-    $revision->estado = Objectbase::STATUS_AC;
-    $revision->revisor=$iddocente;
-    $revision->revisor_tipo='TU';
-    $revision->estado_revision=Revision::E1_CREADO;
-    $revision->proyecto_id=$proyecto->id;
-    $revision->save();
-    foreach ($observaciones as $obser_array){
-    $observacion->objBuidFromPost();
-    $observacion->estado = Objectbase::STATUS_AC;
-    $observacion->observacion=$obser_array;
-    $observacion->revision_id = $revision->id;
-     $observacion->estado_observacion = Observacion::E1_CREADO;
-    $observacion->save();
-    }
+    $proyecto = new Proyecto($vistobueno->proyecto_id);
+    $proyecto->pro;
 
     $ir = "Location: estudiante.lista.php";
         header($ir);
@@ -103,6 +85,6 @@ catch(Exception $e)
   $_SESSION['register'] = $token;
   $smarty->assign('token',$token);
   
-$TEMPLATE_TOSHOW = 'docente_tutor/full-width.observacion.registro.tpl';
+$TEMPLATE_TOSHOW = 'docente_tutor/full-width.visto.registro.tpl';
 $smarty->display($TEMPLATE_TOSHOW);
 ?>

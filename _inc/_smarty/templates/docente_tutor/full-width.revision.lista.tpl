@@ -2,10 +2,13 @@
 <div class="wrapper row3">
   <div class="rnd">
     <div id="container">
-        <h1 class="title">Lista de Estudiantes Inscritos</h1>
-        <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">       	
-        </head>
+        <h1 class="title">Seguimiento de Proyecto</h1>
+            <p>
+               <label for="nombre de proyecto"><small>NOMBRE DE PROYECTO:</small></label>
+               <span>{$proyecto->nombre}</span><br/>
+               <label for="nombre de estudiante"><small>NOMBRE DE ESTUDIANTE:</small></label>
+               <span>{$usuario->nombre} {$usuario->apellido_paterno} {$usuario->apellido_materno}</span>
+            </p>
         <div id="wrap">
         <div id="message"></div>
         	<div id="pagecontrol">
@@ -29,12 +32,12 @@
         
         	<div id="paginator"></div>
         </div>
-            <a href="observacion.estudiante-cvs.php" type="button">CARGAR OBSERVACION(ES) POR CVS</a>
         <script type="text/javascript">
-                editableGrid.onloadXML("loaddata.estudiante.lista.php?doc={$docente_ids}");
+                editableGrid.onloadXML("loaddata.revision.lista.php?doc={$proyecto->id}");
         </script>
-    </div>
+        <p>{$ERROR}</p>
+     </div>
     {$ERROR}
-  </div>
+    </div>
 </div>
 {include file="footer.tpl"}
