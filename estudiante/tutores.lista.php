@@ -57,7 +57,7 @@ try {
   $o_string   = $docente->getOrderString($filtro);
   $obj_mysql  = $docente->getAll('',$o_string,$filtro_sql,TRUE,TRUE);
   $objs_pg    = new Pagination($obj_mysql, 'g_estudiante','',false,10);
-
+  var_dump($obj_mysql);
   $smarty->assign("filtros"  ,$filtro);
   $smarty->assign("objs"     ,$objs_pg->objs);
   $smarty->assign("pages"    ,$objs_pg->p_pages);

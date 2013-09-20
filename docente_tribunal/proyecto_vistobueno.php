@@ -61,7 +61,7 @@ try {
     $docente                       =       getSessionDocente();
     $vistobueno->objBuidFromPost();
    // $vistobueno->proyecto_id       =       $_POST['pro'];
-    $vistobueno->visto_bueno_tipo  =        Visto_bueno::E2_TUTOR;
+    $vistobueno->visto_bueno_tipo  =        Visto_bueno::E3_TRIBUNAL;
     $vistobueno->visto_bueno_id    =        4;
     $vistobueno->estado            =        Objectbase::STATUS_AC;
    

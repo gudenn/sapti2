@@ -87,6 +87,6 @@ catch(Exception $e)
   $_SESSION['register'] = $token;
   $smarty->assign('token',$token);
   
-$TEMPLATE_TOSHOW = 'docente/full-width.observacion.registro.tpl';
+$TEMPLATE_TOSHOW = 'docente_tribunal/full-width.observacion.registro.tpl';
 $smarty->display($TEMPLATE_TOSHOW);
 ?>
