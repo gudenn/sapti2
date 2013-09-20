@@ -265,6 +265,8 @@ class Usuario  extends Objectbase
     $filtro_sql = '';
     return $filtro_sql;
   }
+
+    
 }
 
 ?>

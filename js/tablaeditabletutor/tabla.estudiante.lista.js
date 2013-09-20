@@ -10,7 +10,7 @@
  */
 
 // create our editable grid
-var editableGrid = new EditableGrid("listarevision", {
+var editableGrid = new EditableGrid("listaestudiantes", {
 	enableSort: true, // true is the default, set it to false if you don't want sorting to be enabled
 	editmode: "absolute", // change this to "fixed" to test out editorzone, and to "static" to get the old-school mode
 	editorzoneid: "edition", // will be used only if editmode is set to "fixed"
@@ -67,14 +67,13 @@ EditableGrid.prototype.initializeGrid = function()
 		};
                 
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
-		         cell.innerHTML = "<a onclick=document.location.href='observacion.detalle.php?revisiones_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("detalle.png") + "\" border=\"0\" alt=\"delete\" title=\"Detalle Revision\"/></a>";
-                cell.innerHTML += "&nbsp;<a onclick=document.location.href='observacion.editar.php?revisiones_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("editar.png") + "\" border=\"0\" alt=\"delete\" title=\"Editar Revision\"/></a>";
-                }}));
-            	setCellRenderer("revtipo", new CellRenderer({
-			render: function(cell, value) { cell.innerHTML = value ? "<img src='" + image("flags/" + value.toLowerCase() + ".png") + "' alt='" + value + "'/>" : ""; }
-		})); 
+		cell.innerHTML = "<a onclick=document.location.href='revision.lista.php?id_estudiante="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
+						 "<img src=\"" + image("detalle.png") + "\" border=\"0\" alt=\"delete\" title=\"Seguimiento\"/></a>";
+                cell.innerHTML += "&nbsp;<a onclick=document.location.href='observacion.registro.php?id_estudiante="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
+						 "<img src=\"" + image("editar.png") + "\" border=\"0\" alt=\"delete\" title=\"Registrar Observacion\"/></a>";
+                cell.innerHTML += "&nbsp;<a onclick=document.location.href='proyecto_vistobueno.php?id_estudiante="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
+						 "<img src=\"" + image("basicset/tick_48.png") + "\" border=\"0\" alt=\"delete\" title=\"Dar Visto Bueno\"/></a>";
+		}}));
 		
 		// render the grid (parameters will be ignored if we have attached to an existing HTML table)
 		renderGrid("tablecontent", "testgrid", "tableid");
