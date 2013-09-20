@@ -3,7 +3,7 @@
 $to ='ola' ;  
 $ideve1=$_GET['idev'];
   $resul = "
-      SELECT ob.observacion as obser, pr.nombre as nomp, us.nombre as nom,CONCAT(us.apellido_paterno,us.apellido_materno) as ap, re.fecha_revision as fere
+      SELECT ob.observacion as obser, pr.nombre as nomp, us.nombre as nom,CONCAT(us.apellido_paterno,us.apellido_materno) as ap, re.fecha_revision as fere, ob.estado_observacion as estado
 FROM observacion ob, revision re, proyecto pr, docente doc, proyecto_estudiante proe, usuario us
 WHERE ob.revision_id=re.id
 AND re.proyecto_id=pr.id
@@ -45,6 +45,7 @@ if (empty($action)) {
             <thead>
               <tr>
                 <th><a>Observaciones Realizadas:</a></th>
+                <th><a>Estado Observaciones:</a></th>
               </tr>
             </thead>
             <tbody>";
@@ -53,6 +54,9 @@ if (empty($action)) {
             $output .="
                       <tr class=".classtabla($g).">
                       <td>{$arrayobser[$g]['obser']}</td>
+                      <td>
+                          <a>".estado($arrayobser[$g]['estado'])."</a>
+                      </td>
                       </tr>";
             }
             
@@ -83,6 +87,24 @@ function tabla(){
             }  
    return $output1;
 }
+function estado($va){
+    $clas='';
+    if($va == 'CR'){
+    $clas='CREADO';
+    $res=$clas." <img src=../images/icons/flags/CR.png title=\"Estado Observacion\"/>";
+    }else{
+        if($va == 'CO'){
+            $clas='CORREGIDO';
+            $res="<img src=../images/icons/flags/RE.png title=\"Estado Observacion\"/>".$clas;
+        }else{
+            if($va == 'AP'){
+                $clas='APROBADO';
+                $res="<img src=../images/icons/flags/RE.png title=\"Estado Observacion\"/>".$clas;
+            }
+        }
+    }
+    return $res;
+};
 
 exit;
 

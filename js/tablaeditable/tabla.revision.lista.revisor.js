@@ -67,11 +67,17 @@ EditableGrid.prototype.initializeGrid = function()
                 
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
 		cell.innerHTML = "<a href='#' class='eventoedit' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("detalle.png") + "\" border=\"0\" alt=\"delete\" title=\"Detalle Revision\"/></a>";
+						 "<img src=\"" + image("detalle.png") + "\" border=\"0\" alt=\"detalle\" title=\"Detalle Revision\"/>Detalle</a>";
                 }}));
-            	setCellRenderer("revtipo", new CellRenderer({
-			render: function(cell, value) { cell.innerHTML = value ? "<img src='" + image("flags/" + value.toLowerCase() + ".png") + "' alt='" + value + "'/>" : ""; }
+                setCellRenderer("revtipo", new CellRenderer({
+                    
+                    render: function(cell, value) { cell.innerHTML ="<a>"+"<img src='" + image("flags/" + value.toLowerCase() + ".png") + "' alt='" + value + "' title=\"Tipo de Revisor\"/>"+nombreRevisor(value)+"</a>";}
+			//render: function(cell, value) { cell.innerHTML = value ? "<img src='" + image("flags/" + value.toLowerCase() + ".png") + "' alt='" + value + "' title=\"Tipo de Revisor\"/>" : ""; }
 		})); 
+                setCellRenderer("estado", new CellRenderer({
+			render: function(cell, value){ cell.innerHTML ="<a>"+"<img src='" + image("flags/" + value.toLowerCase() + ".png") + "' alt='" + value + "' title=\"Estado de Revicion\"/>"+estadoRevision(value)+"</a>";} 
+                        //{ cell.innerHTML = value ? "<img src='" + image("flags/" + value.toLowerCase() + ".png") + "' alt='" + value + "' title=\"Estado de Revicion\"/>" : ""; }
+		}));
 		
 		// render the grid (parameters will be ignored if we have attached to an existing HTML table)
 		renderGrid("tablecontent", "testgrid", "tableid");
@@ -143,3 +149,38 @@ EditableGrid.prototype.updatePaginator = function()
 	else link.css("cursor", "pointer").click(function(event) { editableGrid.lastPage(); });
 	paginator.append(link);
 };
+function nombreRevisor(tipo){
+    nombre='';
+    if(tipo=='DO'){
+        nombre='DOCENTE';
+    }else{
+        if(tipo=='TR'){
+            nombre='TRIBUNAL';
+        }else{
+            if(tipo=='DP'){
+                nombre='DOCENTE PERFIL';
+            }else{
+                if(tipo=='TU'){
+                    nombre='TUTOR';                    
+                }
+
+            }
+        }
+    }
+    return nombre;
+}
+function estadoRevision(tipo){
+    nombre='';
+    if(tipo=='CR'){
+        nombre='Creado';
+    }else{
+        if(tipo=='VI'){
+            nombre='Visto';
+        }else{
+            if(tipo=='RE'){
+                nombre='Respondido';
+            }
+        }
+    }
+    return nombre;
+}
