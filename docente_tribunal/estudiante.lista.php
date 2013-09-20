@@ -21,8 +21,8 @@ try {
 
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
-  $JS[]  = URL_JS . "tablaeditable/editablegrid-2.0.1.js";
-  $JS[]  = URL_JS . "tablaeditable/tabla.estudiante.lista.js";
+  $JS[]  = URL_JS . "tablaeditabletribunal/editablegrid-2.0.1.js";
+  $JS[]  = URL_JS . "tablaeditabletribunal/tabla.estudiante.lista.js";
   $smarty->assign('JS',$JS);
   
    /**
@@ -45,5 +45,5 @@ catch(Exception $e)
 {
   $smarty->assign("ERROR", handleError($e));
 }
-  $smarty->display('docente/full-width.estudiante.lista.tpl');
+  $smarty->display('docente_tribunal/full-width.estudiante.lista.tpl');
 ?>
