@@ -8,6 +8,11 @@
 class Usuario  extends Objectbase 
 {
 
+  /**
+  * Nombre del usuario
+  * @var VARCHAR(100)
+  */
+  var $titulo_honorifico;
  /**
   * Nombre del usuario
   * @var VARCHAR(100)
@@ -208,8 +213,11 @@ class Usuario  extends Objectbase
         array('Todos' ,'Confirmados','No Confirmado','Desctivado'  ,'Eliminado' ));
     $filtro->nombres[] = 'Nombre';
     $filtro->valores[] = array ('input' ,'nombre',$filtro->filtro('nombre'));
-    $filtro->nombres[] = 'Apellidos';
-    $filtro->valores[] = array ('input' ,'apellidos',$filtro->filtro('apellidos'));
+    $filtro->nombres[] = 'Apellido Paterno';
+    $filtro->valores[] = array ('input' ,'apellido_paterno',$filtro->filtro('apellido_paterno'));
+    
+    $filtro->nombres[] = 'Apellido Materno';
+    $filtro->valores[] = array ('input' ,'apellido_materno',$filtro->filtro('apellido_materno'));
     $filtro->nombres[] = 'Login';
     $filtro->valores[] = array ('input' ,'login',$filtro->filtro('login'));
     $filtro->nombres[] = 'Email';
@@ -226,7 +234,8 @@ class Usuario  extends Objectbase
     $order_array                        = array();
     $order_array['id']                  = " {$this->getTableName ()}.id ";
     $order_array['nombre']              = " {$this->getTableName ()}.nombre ";
-    $order_array['apellidos']           = " {$this->getTableName ()}.apellidos ";
+    $order_array['apellido_paterno']           = " {$this->getTableName ()}.apellido_paterno";
+    $order_array['apellido_materno']           = " {$this->getTableName ()}.apellido_materno";
     $order_array['login']               = " {$this->getTableName ()}.login ";
     $order_array['email']               = " {$this->getTableName ()}.email ";
     $order_array['estado']              = " {$this->getTableName ()}.estado ";

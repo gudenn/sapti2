@@ -7,6 +7,7 @@ try {
   leerClase("Evento");
   leerClase("Pagination");
   leerClase('Docente');
+  leerClase("Usuario");
   $ERROR = '';
 
   /** HEADER */
@@ -32,9 +33,10 @@ try {
   $menuList[]     = array('url'=>URL.Docente::URL.basename(__FILE__),'name'=>'Estudiantes Registrados');
   $smarty->assign("menuList", $menuList);
   
+ 
+
   $docente=  getSessionDocente();
-  //$docenteid=$docente->id;
-  $docenteid=4;
+  $docenteid=$docente->id;
   
   $smarty->assign("docente_ids", $docenteid);
 

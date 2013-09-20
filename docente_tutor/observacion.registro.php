@@ -71,13 +71,12 @@ where u.id=t.usuario_id and u.id=$docente->id;";
  while ($fila = mysql_fetch_array($resultados)) 
  {
     $iddocente=$fila['id'];
- }
-       
-      
+ }  
     $revision->objBuidFromPost();
     $revision->estado = Objectbase::STATUS_AC;
     $revision->revisor=$iddocente;
     $revision->revisor_tipo='TU';
+    $revision->estado_revision=Revision::E1_CREADO;
     $revision->proyecto_id=$proyecto->id;
     $revision->save();
     foreach ($observaciones as $obser_array){
@@ -85,6 +84,7 @@ where u.id=t.usuario_id and u.id=$docente->id;";
     $observacion->estado = Objectbase::STATUS_AC;
     $observacion->observacion=$obser_array;
     $observacion->revision_id = $revision->id;
+     $observacion->estado_observacion = Observacion::E1_CREADO;
     $observacion->save();
     }
 
