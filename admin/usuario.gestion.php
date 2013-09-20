@@ -54,6 +54,21 @@ try {
   $usuario->departamento_id = '%';
   $usuario->ciudad_id       = '%';
 */
+  //Habilitamos para proffecionales y para no profecionales
+  if ( isset($_GET['es_profecional']) && is_numeric($_GET['es_profecional']) )
+  {
+    $usuario_aux = new Usuario($_GET['es_profecional']);
+    $usuario_aux->puede_ser_tutor = Usuario::PROFECIONAL;
+    $usuario_aux->save();
+  }
+  //Habilitamos para proffecionales y para no profecionales
+  if ( isset($_GET['noes_profecional']) && is_numeric($_GET['noes_profecional']) )
+  {
+    $usuario_aux = new Usuario($_GET['noes_profecional']);
+    $usuario_aux->puede_ser_tutor = Usuario::NOPROFECIONAL;
+    $usuario_aux->save();
+  }
+  
   
   $o_string   = $usuario->getOrderString($filtro);
   $obj_mysql  = $usuario->getAll('',$o_string,$filtro_sql,TRUE,TRUE);

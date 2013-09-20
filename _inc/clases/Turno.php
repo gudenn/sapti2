@@ -16,7 +16,7 @@ class Turno extends Objectbase
    function validar() {
     leerClase('Formulario');
     Formulario::validar('nombre'     , $this->nombre     , 'texto', 'El Nombre');
-  Formulario::validar('sigla'     , $this->nombre     , 'texto', 'El Nombre');
+   Formulario::validar('descripcion'     , $this->descripcion     , 'texto', 'El Descrpcion');
     
   }
 

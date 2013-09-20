@@ -1,6 +1,6 @@
 <?php
 try {
-  require('_start.php');
+  require('../_start.php');
   global $PAISBOX;
   
   /** HEADER */
@@ -13,11 +13,11 @@ try {
   $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
   
   $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
-
+  
   $smarty->assign('CSS',$CSS);
 
   //JS
-   $JS[]  = URL_JS . "jquery.min.js";
+  $JS[]  = URL_JS . "jquery.min.js";
 
   //Datepicker UI
   $JS[]  = URL_JS . "jquery-ui-1.10.2.custom.min.js";
@@ -85,16 +85,20 @@ try {
     $tutor->save(); 
     
     $notificacion= new Notificacion();
-    $notificacion->proyecto_id=$_POST['proyecto_id'];
-    $notificacion->tipo=$tutor->id;
-    $notificacion->fecha_envio= date('D:M:Y');
-    $notificacion->asunto="Asignacion de Tutores";
+    $notificacion->proyecto_id=1;
+    $notificacion->tipo="normal";
+    $notificacion->fecha_envio="";
+    $notificacion->asunto="hola mundo";
     $notificacion->detalle="fasdf";
-    $notificacion->prioridad=5;
+    $notificacion->prioridad=1;
     $notificacion->estado = Objectbase::STATUS_AC;
     
-  
-    $usuarios= array('tutores'=>array($tutor->id));
+    //$usuarios  = array();
+    $tutores= array();
+    $tutores[]=1;
+     $tutores[]=4;
+    $usuarios= array('tutores'=>array(1,4),'estudiantes'=>array(1,4));
+     //$usuarios[]=$tutores;
     $notificacion->enviarNotificaion($usuarios);
     
   

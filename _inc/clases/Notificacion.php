@@ -281,6 +281,8 @@ class Notificacion extends Objectbase
     {
       $n_obj               = new Notificacion_tribunal();
       $n_obj->tribunal_id  = $tribunal_id;
+      $n_obj->estado_notificacion ="SV";
+      $n_obj->estado = Objectbase::STATUS_AC;
       $this->notificacion_tribunal_objs[] = $n_obj;
     }
     leerClase('Notificacion_consejo');
@@ -293,7 +295,7 @@ class Notificacion extends Objectbase
     
 
     $this->save();
-    $this->saveAllSonObjects();
+    $this->saveAllSonObjects(TRUE);
     
   }
   

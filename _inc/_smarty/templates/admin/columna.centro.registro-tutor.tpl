@@ -28,8 +28,8 @@
               <label for="email"><small>E-Mail</small></label>
             </p>
             <p>
-              <input type="text" name="fecha_cumple" id="fecha_nacimiento" value="{$tutor->fecha_nacimiento}" size="22">
-              <label for="fecha_cumple"><small>Fecha de Cumplea&ntilde;os</small></label>
+              <input type="text" name="fecha_nacimiento" id="fecha_nacimiento" value="{$tutor->fecha_nacimiento}" size="22">
+              <label for="fecha_nacimiento"><small>Fecha de Nacimiento</small></label>
             </p>
             <p>
               <input type="text" name="login" id="login" value="{$tutor->login}" size="22">
@@ -61,7 +61,7 @@
         <script type="text/javascript">
         {literal} 
           $(function(){
-            $('#fecha_cumple').datepicker({
+            $('#fecha_nacimiento').datepicker({
               dateFormat:'dd/mm/yy',
               changeMonth: true,
               changeYear: true,

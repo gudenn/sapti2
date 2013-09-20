@@ -8,6 +8,17 @@
 class Usuario  extends Objectbase 
 {
 
+
+  /**
+  * Nombre del usuario
+  * @var VARCHAR(100)
+  */
+  var $titulo_honorifico;
+
+  /** si es profecional o no  */
+  const PROFECIONAL   = "1";
+  const NOPROFECIONAL = "0";
+
  /**
   * Nombre del usuario
   * @var VARCHAR(100)
@@ -63,11 +74,17 @@ class Usuario  extends Objectbase
   */
   var $ci;
 
-  /**
+ /**
   * Sexo del usuario Puede ser M de Masculino o F de Femenino y en el futoro se puede manejas otros datos
   * @var VARCHAR(45)
   */
   var $sexo;
+
+ /**
+  * Si el usuario puede ser tutor de algun estudiante
+  * @var VARCHAR(45)
+  */
+  var $puede_ser_tutor;
   
  /**
   * (Arreglo de objetos) El Tutor que esta asignado a este usuario
@@ -208,8 +225,11 @@ class Usuario  extends Objectbase
         array('Todos' ,'Confirmados','No Confirmado','Desctivado'  ,'Eliminado' ));
     $filtro->nombres[] = 'Nombre';
     $filtro->valores[] = array ('input' ,'nombre',$filtro->filtro('nombre'));
-    $filtro->nombres[] = 'Apellidos';
-    $filtro->valores[] = array ('input' ,'apellidos',$filtro->filtro('apellidos'));
+    $filtro->nombres[] = 'Apellido Paterno';
+    $filtro->valores[] = array ('input' ,'apellido_paterno',$filtro->filtro('apellido_paterno'));
+    
+    $filtro->nombres[] = 'Apellido Materno';
+    $filtro->valores[] = array ('input' ,'apellido_materno',$filtro->filtro('apellido_materno'));
     $filtro->nombres[] = 'Login';
     $filtro->valores[] = array ('input' ,'login',$filtro->filtro('login'));
     $filtro->nombres[] = 'Email';
@@ -226,7 +246,8 @@ class Usuario  extends Objectbase
     $order_array                        = array();
     $order_array['id']                  = " {$this->getTableName ()}.id ";
     $order_array['nombre']              = " {$this->getTableName ()}.nombre ";
-    $order_array['apellidos']           = " {$this->getTableName ()}.apellidos ";
+    $order_array['apellido_paterno']           = " {$this->getTableName ()}.apellido_paterno";
+    $order_array['apellido_materno']           = " {$this->getTableName ()}.apellido_materno";
     $order_array['login']               = " {$this->getTableName ()}.login ";
     $order_array['email']               = " {$this->getTableName ()}.email ";
     $order_array['estado']              = " {$this->getTableName ()}.estado ";
