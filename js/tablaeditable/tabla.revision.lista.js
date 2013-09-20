@@ -54,7 +54,6 @@ EditableGrid.prototype.initializeGrid = function()
 
 		// register the function that will handle model changes
 		modelChanged = function(rowIndex, columnIndex, oldValue, newValue, row) { 
-                               updateCellValue(this, rowIndex, columnIndex, oldValue, newValue, row);
 		};
 		
 		// update paginator whenever the table is rendered (after a sort, filter, page change, etc.)
@@ -67,7 +66,7 @@ EditableGrid.prototype.initializeGrid = function()
 		};
                 
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
-		cell.innerHTML = "<a onclick=document.location.href='observacion.detalle.php?revisiones_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
+		cell.innerHTML = "<a href='#' class='eventoedit' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("detalle.png") + "\" border=\"0\" alt=\"delete\" title=\"Detalle Revision\"/></a>";
                 cell.innerHTML += "&nbsp;<a onclick=document.location.href='observacion.editar.php?revisiones_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("editar.png") + "\" border=\"0\" alt=\"delete\" title=\"Editar Revision\"/></a>";
@@ -146,47 +145,3 @@ EditableGrid.prototype.updatePaginator = function()
 	else link.css("cursor", "pointer").click(function(event) { editableGrid.lastPage(); });
 	paginator.append(link);
 };
-function highlightRow(rowId, bgColor, after)
-{
-	var rowSelector = $("#" + rowId);
-	rowSelector.css("background-color", bgColor);
-	rowSelector.fadeTo("normal", 0.5, function() { 
-		rowSelector.fadeTo("fast", 1, function() { 
-			rowSelector.css("background-color", '');
-		});
-	});
-}
-
-function highlight(div_id, style) {
-	highlightRow(div_id, style == "error" ? "#e5afaf" : style == "warning" ? "#ffcc00" : "#8dc70a");
-}
-function updateCellValue(editableGrid, rowIndex, columnIndex, oldValue, newValue, row, onResponse)
-{
-    if(newValue<=100){
-	$.ajax({
-		url: 'update.php',
-		type: 'POST',
-		dataType: "html",
-		data: {
-			tablename : 'evaluacion',
-			id: editableGrid.getRowId(rowIndex), 
-			newvalue: editableGrid.getColumnType(columnIndex) == "boolean" ? (newValue ? 1 : 0) : newValue, 
-			colname: editableGrid.getColumnName(columnIndex),
-			coltype: editableGrid.getColumnType(columnIndex)			
-		},
-		success: function (response) 
-		{ 
-			// reset old value if failed then highlight row
-			var success = onResponse ? onResponse(response) : (response == "ok" || !isNaN(parseInt(response))); // by default, a sucessfull reponse can be "ok" or a database id 
-			if (!success) editableGrid.setValueAt(rowIndex, columnIndex, oldValue);
-		    highlight(row.id, success ? "ok" : "error"); 
-		},
-		error: function(XMLHttpRequest, textStatus, exception) { alert("Ajax failure\n" + errortext); },
-		async: true
-	});
-                }else{
-        alert("LA NOTA MAXIMA PERMITIDA ES 100");
-    }
-   
-}
-

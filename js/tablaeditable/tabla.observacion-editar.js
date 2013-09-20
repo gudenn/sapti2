@@ -69,13 +69,13 @@ DatabaseGrid.prototype.fetchGrid = function(revid)  {
 DatabaseGrid.prototype.initializeGrid = function(grid) {
              grid.setCellRenderer("action", new CellRenderer({render: function(cell, value) {
 		cell.innerHTML = "<a onclick=\"if (confirm('Esta seguro de eliminar esta Observacion ? ')) {deletete(" + grid.getRowId(cell.rowIndex) + "); updatetable("+cell.rowIndex+");} \" style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("delete.png") + "\" border=\"0\" alt=\"delete\" title=\"Delete row\"/></a>";
+						 "<img src=\"" + image("borrar.png") + "\" border=\"0\" alt=\"delete\" title=\"Delete row\"/></a>";
 		}}));
              grid.renderGrid("tablecontent", "testgrid");
 };
 
 function image(relativePath) {
-	return "js/images/" + relativePath;
+	return "../images/icons/" + relativePath;
 }
 function deletete(obser){
    ajax=objetoAjax();
