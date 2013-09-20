@@ -14,7 +14,6 @@ try {
   
   $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
   
-  $smarty->assign('CSS',$CSS);
 
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
@@ -27,87 +26,66 @@ try {
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
 
+  //BOX
+  $JS[]  = URL_JS ."box/jquery.box.js";
+  $CSS[]  = URL_JS . "box/box.css";
+
   $smarty->assign('JS',$JS);
+  $smarty->assign('CSS',$CSS);
+
 
 
   $smarty->assign("ERROR", '');
 
-  $columnacentro = 'admin/columna.centro.registro-tutor.tpl';
-  $smarty->assign('columnacentro',$columnacentro);
+  $smarty->assign('columnacentro','admin/tutor/columna.centro.registro.tpl');
 
   //CREAR UN TUTOR
   leerClase('Tutor');
   leerClase('Usuario');
   leerClase('Estudiante');
-  leerClase('Docente');
-  leerClase('Proyecto_tutor');
-  leerClase('Notificacion');
-  leerClase('Notificacion_tutor');
   
-  
- //$tutor = new ();
-  
- // $smarty->assign("tutor", $tutor);
-    $smarty->assign('token','');
-    if (isset($_GET['estudiante_id']))
-    {
-       echo $_GET['estudiante_id'];
-       $estudiante = new Estudiante($_GET['estudiante_id']);
-       echo   $estudiante->getProyecto()->nombre;
-       $proyecto = $estudiante->getProyecto();
-      
-     
-       $smarty->assign("proyecto",$proyecto);
-    }
-    
-   if (isset($_POST['buscar']) && $_POST['buscar'] == 'buscar')
+  if (isset($_GET['estudiante_id']) && is_numeric($_GET['estudiante_id']))
   {
-   
-    
-  $docente= new Docente(false,$_POST['codigo']);
-  echo   $docente->usuario_id;
-  $usuario= new Usuario($docente->usuario_id);
-  $smarty->assign("tutor",  $usuario);
-   
+     $estudiante = new Estudiante($_GET['estudiante_id']);
+     $smarty->assign("estudiante",$estudiante);
   }
+
   
   if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
-  {  
+  {
+    
+    $EXITO = false;
+    mysql_query("BEGIN");
+    
+
+    
     $usuario = new Usuario();
     $usuario->objBuidFromPost();
+    $usuario->puede_ser_tutor = Usuario::PROFECIONAL;
     $usuario->estado = Objectbase::STATUS_AC;
     $usuario->save();
     
     
     $tutor= new Tutor();
     $tutor->objBuidFromPost();
-    $tutor->usuario_id=$usuario->id;
-    $tutor->save(); 
+    $tutor->usuario_id = $usuario->id;
+    $tutor->save();
     
-    $notificacion= new Notificacion();
-    $notificacion->proyecto_id=1;
-    $notificacion->tipo="normal";
-    $notificacion->fecha_envio="";
-    $notificacion->asunto="hola mundo";
-    $notificacion->detalle="fasdf";
-    $notificacion->prioridad=1;
-    $notificacion->estado = Objectbase::STATUS_AC;
+    if (isset($_POST['estudiante_id']) && is_numeric($_POST['estudiante_id']) )
+    {
+      // Primero quitamos al tutor anterior
+      if ( isset($_GET['cambiartutor_id']) && is_numeric($_GET['cambiartutor_id']) )
+      {
+        $tutoantiguo = new Tutor($_GET['cambiartutor_id']);
+        $tutoantiguo->finalizarTutoria($estudiante->id);
+      }
+      $tutor->asignarTutoria ($_POST['estudiante_id']);
+      
+    }
     
-    //$usuarios  = array();
-    $tutores= array();
-    $tutores[]=1;
-     $tutores[]=4;
-    $usuarios= array('tutores'=>array(1,4),'estudiantes'=>array(1,4));
-     //$usuarios[]=$tutores;
-    $notificacion->enviarNotificaion($usuarios);
-    
-  
-    $proyectotutor= new Proyecto_tutor();
-    $proyectotutor->objBuidFromPost();
-    $proyectotutor->tutor_id=$tutor->id;
-    $proyectotutor->estado = Objectbase::STATUS_AC;
-   
-    $proyectotutor->save();
+
+    $EXITO = TRUE;
+    mysql_query("COMMIT");
   }
 
   
@@ -119,15 +97,28 @@ try {
   
 
   //No hay ERROR
-  $smarty->assign("ERROR",'');
+  $ERROR = ''; 
+  leerClase('Html');
+  $html  = new Html();
+  if (isset($EXITO))
+  {
+    $html = new Html();
+    if ($EXITO)
+      $mensaje = array('mensaje'=>'Se asigno correctamente el Tutor','titulo'=>'Registro de Tutor' ,'icono'=> 'tick_48.png');
+    else
+      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Tutor','titulo'=>'Registro de Tutor' ,'icono'=> 'warning_48.png');
+   $ERROR = $html->getMessageBox ($mensaje);
+  }
+  $smarty->assign("ERROR",$ERROR);
   
 } 
 catch(Exception $e) 
 {
+  mysql_query("ROLLBACK");
   $smarty->assign("ERROR", handleError($e));
 }
 
-$TEMPLATE_TOSHOW = 'admin/3columnas.tpl';
+$TEMPLATE_TOSHOW = 'admin/2columnas.tpl';
 $smarty->display($TEMPLATE_TOSHOW);
 
 ?>

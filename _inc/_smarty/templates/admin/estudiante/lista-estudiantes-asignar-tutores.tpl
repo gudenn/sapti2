@@ -20,24 +20,12 @@
       <td>{$objs[ic]['usuario_email']}</td>
      
       <td>
-        <a href="asignar.tutor.php?estudiante_id={$objs[ic]['id']}" target="_blank" >{icono('basicset/agregarboton.png','ASIGNAR TUTOR')}</a>
+        <a href="../tutor/tutor.gestion.php?estudiante_id={$objs[ic]['id']}" target="_blank" >{icono('basicset/people.png','Tutores')} Ver Tutores</a>
         
       </td>
     </tr>
   </tbody>
   {/section}
 </table>
-         
- 
-    
-    
-    
-    </tbody> 
-    
-    
-   </div>         
-   
-  </form>
-    </div>
  
  
