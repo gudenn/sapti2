@@ -77,7 +77,7 @@ class Modulo extends Objectbase
   
   function iniciarPermisos($grupo_id = false)
   {
-    echo "<br>iniciandoPermisos<br>";
+    //echo "<br>iniciandoPermisos<br>";
     leerClase('Permiso');
     $permiso = new Permiso();
     if (!$grupo_id)

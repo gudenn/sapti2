@@ -107,6 +107,7 @@ try {
   
   $o_string   = $tutor->getOrderString($filtro);
   $obj_mysql  = $tutor->getAll('',$o_string,$filtro_sql,TRUE,TRUE);
+  echo($obj_mysql[2]);
  
 
   $objs_pg    = new Pagination($obj_mysql, 'tutor','',false);

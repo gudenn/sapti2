@@ -16,6 +16,8 @@ Licence: <a href="http://www.os-templates.com/template-terms">Website Template L
 	overflow:hidden;
 	color:#666666;
 	background-color:#FFFFFF;
+  border-radius: 13px;
+  box-shadow: 1px 1px 12px #050505;
 	}
 
 #featured_slide a{

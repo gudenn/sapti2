@@ -28,6 +28,12 @@ class Proyecto extends Objectbase {
   var $carrera_id;
 
   /**
+   * Codigo iden de la Institucion
+   * @var INT(11)
+   */
+  var $institucion_id;
+
+  /**
    * Nombre del proyecto
    * @var VARCHAR(300)
    */
