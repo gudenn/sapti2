@@ -70,7 +70,7 @@ try {
   
   $sqlr="SELECT  d.`id`, u.`nombre`, CONCAT (u.`apellido_paterno`,u.`apellido_materno`) as apellidos
 FROM  `usuario` u ,`docente` d
-WHERE  u.`id`=d.`usuario_id` and u.`estado`='AC';";
+WHERE  u.`id`=d.`usuario_id` and u.`estado`='AC'";
  $resultado = mysql_query($sqlr);
  $arraytribunal= array();
 

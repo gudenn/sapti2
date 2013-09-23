@@ -62,6 +62,7 @@ try {
     $vistobueno->objBuidFromPost();
    // $vistobueno->proyecto_id       =       $_POST['pro'];
     $vistobueno->visto_bueno_tipo  =        Visto_bueno::E3_TRIBUNAL;
+    $vistobueno->fecha_visto_bueno =       date("d/m/Y");
     $vistobueno->visto_bueno_id    =        4;
     $vistobueno->estado            =        Objectbase::STATUS_AC;
    

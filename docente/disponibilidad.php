@@ -94,7 +94,7 @@ FROM dia, turno
 WHERE NOT EXISTS (
 SELECT *
 FROM turno tu, horario_doc hd, dia d
-WHERE hd.docente_id=4
+WHERE hd.docente_id=".$docente_ids."
 AND tu.id=hd.turno_id
 AND d.id=hd.dia_id
 AND d.id=5
@@ -142,7 +142,7 @@ catch(Exception $e)
 }
 
 $columnacentro = 'docente/disponibilidad.tpl';
-  $smarty->assign('columnacentro',$columnacentro);
+$smarty->assign('columnacentro',$columnacentro);
 
 
 

@@ -41,7 +41,7 @@ try {
   leerClase("Proyecto_tribunal");
   leerClase("Proyecto_estudiante");
   
-  
+  /**
  $filtro     = new Filtro('g_docente',__FILE__);
   $docente = new Docente();
   $docente->iniciarFiltro($filtro);
@@ -57,6 +57,8 @@ try {
   $smarty->assign("filtros"  ,$filtro);
   $smarty->assign("objs"     ,$objs_pg->objs);
   $smarty->assign("pages"    ,$objs_pg->p_pages);
+   
+   */
    $proyectostribunales= array();
    
  
@@ -68,9 +70,9 @@ try {
  $usuario_mysql  = $usuario->getAll();
  $usuario_id     = array();
  $usuario_nombre = array();
- $sql="SELECT pt.`id` , u.`nombre` ,u.`apellidos`, es.`codigo_sis` , p.`nombre` as nombreproyecto
-FROM `proyecto` p , `proyecto_tribunal`  pt , `usuario` u, `estudiante` es , `proyecto_estudiante` pe
-WHERE   u.`id`=es.`usuario_id` and  es.`id`=pe.`estudiante_id` and  pe.`proyecto_id`=p.`id` and p.`id`=pt.`proyecto_id`;";
+ $sql="SELECT  DISTINCT(d.id), u.nombre, CONCAT (u.apellido_paterno,u.apellido_materno) as apellidos 
+FROM  usuario u , docente d, apoyo  ap , area a
+WHERE  u.id=d.usuario_id  and d.id=ap.docente_id and ap.area_id=a.id LIKE a.nombre='Sistemas Expertos';";
  $resultado = mysql_query($sql);
  $arraytribunal= array();
  
