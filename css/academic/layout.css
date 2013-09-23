@@ -20,7 +20,14 @@ body{
 	font-size: 13px;
 	font-family:Georgia, "Times New Roman", Times, serif;
 	color:#979797;
-	background-color:#06213F;
+	/*background-color:#06213F;*/
+  /*background:#FFF   left top;*/
+  background-image: url(images/backheader.png), url(images/img01.jpg);
+  background-position: center top,left top;
+  background-repeat: no-repeat,repeat-x;
+  background-position-y: 0px,-46px;
+
+
 	}
 
 img{margin:0; padding:0; border:none;}
@@ -35,7 +42,7 @@ img{margin:0; padding:0; border:none;}
 html[xmlns] .clear{display:block;}
 * html .clear{height:1%;}
 
-a{outline:none; text-decoration:none; color:#55ABDA; background-color:#F9F9F9;}
+a{outline:none; text-decoration:none; color:#55ABDA; /*background-color:#F9F9F9;*/}
 
 .fl_left{float:left;}
 .fl_right{float:right;}
@@ -62,9 +69,10 @@ div.wrapper h1, div.wrapper h2, div.wrapper h3, div.wrapper h4, div.wrapper h5, 
 	line-height:normal;
 	}
 
-.row1{color:#999999; background-color:#06213F;}
-.row1 a{color:#FCFCFC; background-color:#06213F;}
-.row2, .row3, .row4{color:#979797; background-color:#F9F9F9;}
+.row1{color:#999999; /*background-color:#06213F;*/}
+.row1 a{color:#FCFCFC; /*background-color:#06213F;*/}
+.row2, .row3, .row4{color:#979797;background-color:#F9F9F9; border-radius: 13px;}
+.row3, .row4{ box-shadow: 1px 1px 12px #050505;}
 
 /* ----------------------------------------------Generalise-------------------------------------*/
 
@@ -77,7 +85,7 @@ div.wrapper h1, div.wrapper h2, div.wrapper h3, div.wrapper h4, div.wrapper h5, 
 	display:block;
 	width:960px;
 	padding:12px 0 0 0;
-	background:url("images/round_top.gif") top left no-repeat;
+	/*background:url("images/round_top.gif") top left no-repeat;*/
 	}
 
 /* ----------------------------------------------Header-------------------------------------*/
@@ -122,7 +130,7 @@ div.wrapper h1, div.wrapper h2, div.wrapper h3, div.wrapper h4, div.wrapper h5, 
 	width:920px;
 	padding:20px;
 	line-height:1.6em;
-	background:url("images/round_bot.gif") bottom left no-repeat;
+	/*background:url("images/round_bot.gif") bottom left no-repeat;*/
 	}
 
 #container a{
@@ -309,7 +317,7 @@ div.wrapper h1, div.wrapper h2, div.wrapper h3, div.wrapper h4, div.wrapper h5, 
 #footer{
 	width:920px;
 	padding:5px 20px 15px 20px;
-	background:url("images/round_bot.gif") bottom left no-repeat;
+	/*background:url("images/round_bot.gif") bottom left no-repeat;*/
 	}
 
 #footer .fl_left img{margin-bottom:30px;}
@@ -351,5 +359,5 @@ div.wrapper h1, div.wrapper h2, div.wrapper h3, div.wrapper h4, div.wrapper h5, 
 
 #copyright, #copyright a{
 	color:#55ABDA;
-	background-color:#06213F;
+	/*background-color:#06213F;*/
 	}

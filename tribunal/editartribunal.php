@@ -178,7 +178,7 @@ $resultado = mysql_query($sqll);
        echo $_POST['codigo'];
     
        $sqlls="SELECT t.id as llaveid FROM tribunal t WHERE  t.proyecto_tribunal_id=".$_POST['codigo'].";";
-      $resultadoff = mysql_query($sqlls);
+       $resultadoff = mysql_query($sqlls);
 
  $contador=0;
  while ($filas = mysql_fetch_array($resultadoff, MYSQL_ASSOC))

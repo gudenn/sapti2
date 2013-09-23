@@ -3,7 +3,7 @@
         <p>Formulario de registro de Modalidad</p>
         <h2 class="title">Formulario de Modalidad</h2>
         <div id="respond">
-          <form action="#" method="post" id="registro" name="registro" >
+          <form action="" method="post" id="registro" name="registro" >
             <p>
               <input type="text" name="nombre" value="{$modalidad->nombre}"  data-validation-engine="validate[required]">
               <label for="codigo"><small>Nombre del Modalidad (*)</small></label>
@@ -12,6 +12,11 @@
               <input type="text" name="descripcion" value="{$modalidad->descripcion}"  data-validation-engine="validate[required]">
               <label for="codigo"><small>Descripcion del Modalidad (*)</small></label>
             </p>
+            <p>
+              {html_radios name="datos_adicionales" options=$datos_adicionales selected=$modalidad->datos_adicionales separator="<br>"}
+              <label for="codigo"><small>Requiere Institucion y Responsable (*)</small></label>
+            </p>
+            
             <h2 class="title">Grabar Modalidad</h2>
             <p>
               <input type="hidden" name="id"    value="{$modalidad->id}">

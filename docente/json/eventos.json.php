@@ -58,7 +58,7 @@ if ( isset($_GET['year']) && isset($_GET['month']) && isset($_GET['day']) )
       $separador=',';
       }
   	$rsal .= <<<______SALIDAS
-      \n{ "date": "{$row['fecha_evento']} 08:00:00", "type": "Evento", "title": "{$row['asunto']}", "description": "{$row['descripcion']}", "url": "" }{$separador}
+      \n{ "date": "{$row['fecha_evento']}", "type": "Evento", "title": "{$row['asunto']}", "description": "{$row['descripcion']}", "url": "" }{$separador}
 ______SALIDAS;
       $i++;
   }

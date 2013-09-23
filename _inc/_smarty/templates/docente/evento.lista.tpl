@@ -1,5 +1,5 @@
 <div id="content" style="width:685px;min-height: 400px;">
-        <h1 class="title">Registro de Eventtos</h1>
+        <h1 class="title">Registro de Eventos</h1>
         <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">       	
         </head>

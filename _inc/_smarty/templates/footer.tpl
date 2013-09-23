@@ -20,19 +20,17 @@
         <div id="social" class="clear">
           <p>Stay Up to Date With Whats Happening</p>
           <ul>
-            <li><a style="background-position:0 0;" href="#">Twitter</a></li>
-            <li><a style="background-position:-72px 0;" href="#">LinkedIn</a></li>
-            <li><a style="background-position:-142px 0;" href="#">Facebook</a></li>
-            <li><a style="background-position:-212px 0;" href="#">Flickr</a></li>
-            <li><a style="background-position:-282px 0;" href="#">RSS</a></li>
+            <li><a style="background-position:0 0;" href="https://twitter.com/fcytumss">Twitter</a></li>
+            <li><a style="background-position:-142px 0;" href="https://www.facebook.com/pages/Ingenieria-de-Sistemas-UMSS/362198733809625">Facebook</a></li>
+            <li><a style="background-position:-282px 0;" href="http://www.lostiempos.com/rss/lostiempos-ultimas.xml">RSS</a></li>
           </ul>
         </div>
         <div id="newsletter">
-          <form action="www.fcyt.umss.edu.bo/lista/nueva.php" method="post">
+          <form action="http://www.fcyt.umss.edu.bo/lista/nueva.php" method="post">
             <fieldset>
               <legend>Registrese en la lista de noticias:</legend>
               <input type="text" name="xemail" value="Ingrese su E-mail Aca&hellip;" onfocus="this.value=(this.value=='Ingrese su E-mail Aca&hellip;')? '' : this.value ;" />
-              <input type="text" name="btn22"  id="subscribe" value="Aceptar" />
+              <input type="submit" name="btn22"  id="subscribe" value="Aceptar" />
             </fieldset>
           </form>
         </div>
@@ -44,8 +42,7 @@
 <!-- ####################################################################################################### -->
 <div class="wrapper">
   <div id="copyright" class="clear">
-    <p class="fl_left">Copyright &copy; 2011 - All Rights Reserved - <a href="#">Domain Name</a></p>
-    <p class="fl_right">Template by <a href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
+    <p class="fl_left">Derechos de autor &copy; 2013 - Todos los derechos reservados - Equipo SAPTI</p>
   </div>
 </div>
 </body>

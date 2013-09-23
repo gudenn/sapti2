@@ -41,7 +41,7 @@ class Pagination {
   public function  __construct($result , $clave = 'leads', $w_like = '' , $sera_html_y_no_php = true ,$pp = false)
   {
     if (!$pp)
-      $pp = 10;
+      $pp = 3;
 
     if ($sera_html_y_no_php)
       $this->html_php = 'HTML';

@@ -17,7 +17,7 @@ try {
  
   $smarty->assign('CSS',$CSS);
   //JS
-  $JS[]  = URL_JS . "jquery.1.9.1.js";
+  $JS[]  = URL_JS . "jquery.min.js";
   //Validation
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
@@ -60,14 +60,17 @@ try {
   $smarty->assign("pages"    ,$objs_pg->p_pages);
  */
   
+      $editores = ",
+                {toolbar: [ 
+                  [ 'Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
+                  [ 'FontSize', 'TextColor', 'BGColor' ]]}";
   
-  
-  
+  $smarty->assign("editores", $editores);
   
   
   $sqlr="SELECT  d.`id`, u.`nombre`, CONCAT (u.`apellido_paterno`,u.`apellido_materno`) as apellidos
 FROM  `usuario` u ,`docente` d
-WHERE  u.`id`=d.`usuario_id` and u.`estado`='AC';";
+WHERE  u.`id`=d.`usuario_id` and u.`estado`='AC'";
  $resultado = mysql_query($sqlr);
  $arraytribunal= array();
 
@@ -144,7 +147,7 @@ where  d.`id`=hd.`dia_id` and hd.`turno_id`=t.`id` and  d.`estado`='AC' and hd.`
 if(isset($_POST['estudiante_id']) && isset($_POST['automatico']) && $_POST['automatico']='automatico')
   {
     echo  $_POST['estudiante_id'];
-    echo 'hola mundo';
+    echo 'hola mundo  q  tal';
   
     $estudiante   = new Estudiante(false,$_POST['estudiante_id']);
     $proyecto     = new Proyecto();
@@ -201,18 +204,28 @@ if(isset($_POST['estudiante_id']) && isset($_POST['automatico']) && $_POST['auto
   {
 if (isset($_POST['proyecto_id']) && $_POST['proyecto_id']!="")
  {
-   $proyectos= new Proyecto($_POST['proyecto_id']);
-    $estudiante = array();
-    $estudiante[]=1;
-      
-     //$notificaciones= new Notificacion();
- 
-     if (isset($_POST['ids']))
+   $proyectos   = new Proyecto($_POST['proyecto_id']);
+   //$estudiante  = array();
+    
+   $notificacion= new Notificacion();
+   $notificacion->objBuidFromPost();
+  // $notificacion->proyecto_id=$_POST['proyecto_id'];
+    $notificacion->tipo="Solicitud";
+    $notificacion->fecha_envio= date("j/n/Y");
+    $notificacion->asunto="Asignacion de Tribunales";
+    //$notificacion->detalle="fasdf";
+    $notificacion->prioridad=5;
+    $notificacion->estado = Objectbase::STATUS_AC;
+  
+   
+     if(isset($_POST['ids']))
+     {
+      // 'tutores'=>array($tutor->id) 
      foreach ($_POST['ids'] as $id)
      {
                echo $id;
                $tribunal= new Tribunal();
-                
+              
                 $tribunal->estado = Objectbase::STATUS_AC;
                 $tribunal->proyecto_id=$proyecto_->id;
                 $tribunal->docente_id =$id;
@@ -220,8 +233,11 @@ if (isset($_POST['proyecto_id']) && $_POST['proyecto_id']!="")
                 $tribunal->accion="";
                 $tribunal->objBuidFromPost();
            
-                $tribunal->save();
+                 $tribunal->save();
+                 $noticaciones= array('tribunales'=>array($tribunal->id));
+                 $notificacion->enviarNotificaion( $noticaciones);
                
+     }
      }
      }else
  {

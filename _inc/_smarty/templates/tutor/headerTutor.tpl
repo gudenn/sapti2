@@ -27,8 +27,9 @@
 <div class="wrapper row1">
   <div id="header" class="clear">
     <div class="fl_left">
-        <h1 class="title"><b>Tutor(ra)</b><br />{$usuario->nombre} {$usuario->apellidos}</h1>
-      <p>Licenciatura en Ingenier&iacute;a De Sistemas.</p>
+      <h1>
+        <a href="{$URL}">{icono('SAPTI_241x58.png','SAPTI','241px','58px')}</a>
+      </h1>
     </div>
     {include file="../tutor/menuTutor.up.derecha.tpl"}
   </div>

@@ -47,6 +47,8 @@ try {
     {
     $evento->objBuidFromPost();
     $evento->estado = Objectbase::STATUS_AC;
+    $quitarsaltos=$evento->descripcion;
+    $evento->descripcion=preg_replace("/\r\n+|\r+|\n+|\t+/i", " ", $quitarsaltos);
     $evento->dicta_id=4;
     $evento->save();
 

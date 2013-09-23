@@ -24,6 +24,8 @@ class Notificacion extends Objectbase
   const TIPO_MENSAJE    = 'N01';
  /** TIPO_TIEMPO mensaje de tiempo  */
   const TIPO_TIEMPO     = 'N02';
+ /** TIPO_MENSAJE mensaje normal  */
+  const TIPO_ASIGNACION = 'N03';
 
  /**
   * Codigo identificador del Del proyecto
@@ -34,11 +36,18 @@ class Notificacion extends Objectbase
 
  /**
   * Tipo de notificacion
-  * Mensaje normal, Mensaje de tiempo se acaba, y otros 
+  * Mensaje normal (NR), Mensaje de tiempo se acaba, y otros 
   * consultad contantes
   * @var VARCHAR(45)
   */
   var $tipo;
+  
+  /**
+  * Fecha de notificacion
+  * 
+  * @var date
+  */
+  var $fecha_envio;
 
   
 
@@ -68,9 +77,9 @@ class Notificacion extends Objectbase
   * El estado_notificacion del mensaje si fue leido si esta archivado si fue eliminado
   * Consultar constantes de estado
   * @var TEXT
-  */
+  *
   var $estado_notificacion;
-
+*/
   
  /**
   * (Arreglo de objetos)  que pertenecen a un consejo
@@ -230,8 +239,6 @@ class Notificacion extends Objectbase
   function enviarNotificaion($usuarios /*$dictas,$estudiantes,$tutores,$tribunales,$revisores,$consejos*/)
   {
 
-    leerClase('Notificacion_docente');
-    foreach ($docentes as $docente_id) 
 
     $estudiantes = isset($usuarios['estudiantes'])?$usuarios['estudiantes']:array();
     $tribunales  = isset($usuarios['tribunales' ])?$usuarios['tribunales' ]:array();
@@ -239,18 +246,20 @@ class Notificacion extends Objectbase
     $consejos    = isset($usuarios['consejos'   ])?$usuarios['consejos'   ]:array();
     $tutores     = isset($usuarios['tutores'    ])?$usuarios['tutores'    ]:array();
     $dictas      = isset($usuarios['dictas'     ])?$usuarios['dictas'     ]:array();
-
-    leerClase('Notificaion_dicta');
+   /// leerClase('Notificacion_dicta');
     foreach ($dictas as $dicta_id) 
-
     {
       $n_obj             = new Notificacion_dicta();
       $n_obj->docente_id = $dicta_id;
       $this->notificacion_dicta_objs[] = $n_obj;
     }
     leerClase('Notificacion_tutor');
+    //var_dump($usuarios['tutores']);
+    //$tutores=$usuarios[0];
     foreach ($tutores as $tutor_id) 
     {
+ 
+    
       $n_obj           = new Notificacion_tutor();
       $n_obj->tutor_id = $tutor_id;
       $this->notificacion_tutor_objs[] = $n_obj;
@@ -274,6 +283,8 @@ class Notificacion extends Objectbase
     {
       $n_obj               = new Notificacion_tribunal();
       $n_obj->tribunal_id  = $tribunal_id;
+      $n_obj->estado_notificacion ="SV";
+      $n_obj->estado = Objectbase::STATUS_AC;
       $this->notificacion_tribunal_objs[] = $n_obj;
     }
     leerClase('Notificacion_consejo');
@@ -283,9 +294,10 @@ class Notificacion extends Objectbase
       $n_obj->consejo_id   = $consejo_id;
       $this->notificacion_consejo_objs[] = $n_obj;
     }
-    $this->estado_notificacion = self::EST_NOLEIDO;
+    
+
     $this->save();
-    $this->saveAllSonObjects();
+    $this->saveAllSonObjects(TRUE);
     
   }
   
@@ -293,7 +305,7 @@ class Notificacion extends Objectbase
     leerClase('Usuario');
     leerClase('Docente');
     leerClase('Tutor');
-    leerClase('Notificacion_docente');
+    leerClase('Notificacion_dicta');
     foreach ($this->notificacion_docente_objs as $notificacion_docente) 
     {
       $docente      = new Docente($notificacion_docente->docente_id);

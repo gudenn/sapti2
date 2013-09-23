@@ -4,7 +4,7 @@
     <title>{$title}</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta http-equiv="imagetoolbar" content="no" />
-
+    <link rel="shortcut icon" alt= "Cargo Directory" href="{$URL_IMG}favicon.ico"  />
     <meta name="description" content="{$description}" />
     <meta name="keywords" content="{$keywords}" />
 
@@ -31,8 +31,9 @@
 <div class="wrapper row1">
   <div id="header" class="clear">
     <div class="fl_left">
-      <h1><a href="{$URL}">SAPTI</a></h1>
-      <p>Licenciatura en Ingenier&iacute;a De Sistemas.</p>
+      <h1>
+        <a href="{$URL}">{icono('SAPTI_241x58.png','SAPTI','241px','58px')}</a>
+      </h1>
     </div>
     {include file="menu.up.derecha.tpl"}
   </div>

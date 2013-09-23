@@ -101,8 +101,8 @@ INSERT INTO `grupo` (`id`, `codigo`, `descripcion`, `estado`) VALUES
 (NULL, 'TRIBUNALES'  , 'tribunales', 'AC');
 
 
-INSERT INTO `sapti`.`area` (`id`, `nombre`, `descripcion`, `estado`) VALUES (NULL, 'Ingeniería de Software', NULL, 'AC');
-INSERT INTO `sapti`.`area` (`id`, `nombre`, `descripcion`, `estado`) VALUES (NULL, 'Sistemas Expertos', NULL, 'AC');
+INSERT INTO `area` (`id`, `nombre`, `descripcion`, `estado`) VALUES (NULL, 'Ingeniería de Software', NULL, 'AC');
+INSERT INTO `area` (`id`, `nombre`, `descripcion`, `estado`) VALUES (NULL, 'Sistemas Expertos', NULL, 'AC');
 
-INSERT INTO `sapti`.`evaluacion` (`id`, `evaluacion_1`, `evaluacion_2`, `evaluacion_3`, `promedio`, `rfinal`, `estado`) VALUES (NULL, '0', '0', '0', NULL, NULL, NULL), (NULL, '0', '0', '0', NULL, NULL, NULL), (NULL, '0', '0', '0', NULL, NULL, NULL);
-UPDATE `sapti`.`inscrito` SET `evaluacion_id` = '1' WHERE `inscrito`.`id` = 1; UPDATE `sapti`.`inscrito` SET `evaluacion_id` = '2' WHERE `inscrito`.`id` = 2; UPDATE `sapti`.`inscrito` SET `evaluacion_id` = '3' WHERE `inscrito`.`id` = 3; UPDATE `sapti`.`inscrito` SET `evaluacion_id` = '4' WHERE `inscrito`.`id` = 4;
+INSERT INTO `evaluacion` (`id`, `evaluacion_1`, `evaluacion_2`, `evaluacion_3`, `promedio`, `rfinal`, `estado`) VALUES (NULL, '0', '0', '0', NULL, NULL, NULL), (NULL, '0', '0', '0', NULL, NULL, NULL), (NULL, '0', '0', '0', NULL, NULL, NULL);
+UPDATE `inscrito` SET `evaluacion_id` = '1' WHERE `inscrito`.`id` = 1; UPDATE `inscrito` SET `evaluacion_id` = '2' WHERE `inscrito`.`id` = 2; UPDATE `inscrito` SET `evaluacion_id` = '3' WHERE `inscrito`.`id` = 3; UPDATE `inscrito` SET `evaluacion_id` = '4' WHERE `inscrito`.`id` = 4;

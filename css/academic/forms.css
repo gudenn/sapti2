@@ -35,7 +35,7 @@ input, textarea, select{
 	padding:7px 15px 0 0;
 	text-transform:uppercase;
 	color:#C6CDD6;
-	background-color:#06213F;
+	/*background-color:#06213F;*/
 	}
 
 #sitesearch input{
@@ -46,8 +46,9 @@ input, textarea, select{
 	margin:0 15px 0 0;
 	padding:0 5px;
 	color:#979797;
-	background:url("images/form_input_long.gif") 0 0 no-repeat #F9F9F9;
+	/*background:url("images/form_input_long.gif") 0 0 no-repeat #F9F9F9;*/
 	border:none;
+  border-radius: 10px;
 	}
 
 #sitesearch input#search{

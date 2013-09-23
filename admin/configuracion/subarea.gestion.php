@@ -5,6 +5,7 @@ try {
   if(!isAdminSession())
     header("Location: ../login.php");  
 
+  leerClase("Area");
   leerClase("Sub_area");
   leerClase("Formulario");
   leerClase("Pagination");
@@ -23,7 +24,8 @@ try {
    */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administrador');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/','name'=>'Configuraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Registro de Area');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/area.gestion.php','name'=>'Gesti&oacute;n de Areas');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Gesti&oacute;n de Sub-Areas');
   $smarty->assign("menuList", $menuList);
 
   //CSS
@@ -42,20 +44,35 @@ try {
   $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
   $smarty->assign('lista'       ,'admin/sub_area/lista.tpl');
 
+  //Son las subareas de un area asi que si o si tenemos una area
+  $area_id = false;
+  if (isset($_SESSION['area_id']) && is_numeric($_SESSION['area_id']))
+    $area_id = $_SESSION['area_id'];
+  if (isset($_GET['area_id']) && is_numeric($_GET['area_id']))
+  {
+    $_SESSION['area_id'] = $_GET['area_id'];
+    $area_id             = $_GET['area_id'];
+  }
+  $area = new Area($area_id);
+  $smarty->assign("area"  ,$area);
+
+  
   //Filtro
-  $filtro   = new Filtro('g_area',__FILE__);
-  $objeto = new Sub_area();
+  $filtro   = new Filtro('g_subarea',__FILE__);
+  $objeto   = new Sub_area();
+  $objeto->area_id = $area->id;
   $objeto->iniciarFiltro($filtro);
   $filtro_sql = $objeto->filtrar($filtro);
 
   
   $o_string   = $objeto->getOrderString($filtro);
   $obj_mysql  = $objeto->getAll('',$o_string,$filtro_sql,TRUE);
-  $objs_pg    = new Pagination($obj_mysql, 'g_area','',false,3);
+  $objs_pg    = new Pagination($obj_mysql, 'g_subarea','',false,3);
 
-  $smarty->assign("filtros"  ,$filtro);
-  $smarty->assign("objs"     ,$objs_pg->objs);
-  $smarty->assign("pages"    ,$objs_pg->p_pages);
+  $smarty->assign("crear_nuevo"  ,"subarea.registro.php?area_id={$area->id}");
+  $smarty->assign("filtros"      ,$filtro);
+  $smarty->assign("objs"         ,$objs_pg->objs);
+  $smarty->assign("pages"        ,$objs_pg->p_pages);
 
 
 

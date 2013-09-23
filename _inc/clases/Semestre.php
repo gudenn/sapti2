@@ -30,6 +30,21 @@ class Semestre extends Objectbase
   */
   var $configuracion_semestral_objs;
 
+ /**
+  * Object return the object with some id
+  *
+   * 
+   * @param INT(11) $id el id del semestre
+   * @param BOOL $getactivo si obtenemos el semestre activo o no
+   */
+  public function __construct($id = '',$getactivo = false)
+  {
+    if ($id)
+      parent::__construct ($id);
+    if ($getactivo)
+      $this->getActivo ();
+    
+  }
 
   /**
    * Guardamos este semestre
@@ -62,15 +77,25 @@ class Semestre extends Objectbase
   
   /**
    * Busca el semestre activo o sea el semestre actual
+   * @param string $nombre nombre de la variable a buscar
+   * @param bool $grabarsinoexiste 
+   * @return Configuracion_semestral 
    */
-  function getValor($nombre)
+  function getValor($nombre, $valordefecto = '',$grabarsinoexiste = true)
   {
     leerClase('Configuracion_semestral');
     if (!isset($this->id) || !($this->id) )
       $this->getActivo();
     $config              = new Configuracion_semestral();
     $config->semestre_id = $this->id;
-    $config->getIdValue($nombre);
+    $config->getValor($nombre);
+    if ($grabarsinoexiste && (!$config->id))
+    {
+      $config->semestre_id = $this->id;
+      $config->valor       = $valordefecto;
+      $config->estado      = Objectbase::STATUS_AC;
+      $config->save();
+    }
     return $config->valor;
   }
 
