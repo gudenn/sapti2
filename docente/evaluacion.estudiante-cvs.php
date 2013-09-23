@@ -5,6 +5,7 @@ try {
     header("Location: login.php");  
   
   leerClase('Evaluacion');
+  leerClase('Docente');
   
   /** HEADER */
   $smarty->assign('title','SAPTI - Inscripcion de Estudiantes');
@@ -15,7 +16,13 @@ try {
   $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
   $smarty->assign('CSS',$CSS);
-
+  
+   /**
+   * Menu superior
+   */
+  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Docente');
+  $menuList[]     = array('url'=>URL.Docente::URL.basename(__FILE__),'name'=>'Evaluaciones de estudiantes por cvs');
+  $smarty->assign("menuList", $menuList);
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
 
