@@ -1,7 +1,13 @@
       <div id="content">
-        <h1 class="title">Registro de Tutores</h1>
-        <p>Formulario de registro de tutor</p>
-        <h2 class="title">Formulario de Registro</h2>
+        {if (isset($estudiante))}
+          <h1 class="title">Registro de Tutor para
+            <br>Estudiante: <b>{$estudiante->getNombreCompleto()}</b>
+            <br>C&oacute;digo SIS: <b>{$estudiante->codigo_sis}</b>
+          </h1>
+        {else}
+          <h1 class="title">Registro de Tutor</h1>
+        {/if}
+        <h2 class="title">Formulario de registro de tutor</h2>
         
         
         <div id="respond">
@@ -15,13 +21,13 @@
               <label for="nombre"><small>Nombre (*)</small></label>
             </p>
             <p>
-              <input type="text" name="apellidos" id="apellido_paterno" value="{$tutor->apellido_paterno}" size="200">
-              <label for="apellidos"><small>Apellidos</small></label>
+              <input type="text" name="apellido_paterno" id="apellido_paterno" value="{$tutor->apellido_paterno}" size="200">
+              <label for="apellidos"><small>Apellido Paterno</small></label>
             </p>
             
             <p>
-              <input type="text" name="apellidos" id="apellido_materno" value="{$tutor->apellido_materno}" size="200">
-              <label for="apellidos"><small>Apellidos</small></label>
+              <input type="text" name="apellido_materno" id="apellido_materno"  value="{$tutor->apellido_materno}" size="200">
+              <label for="apellido_materno"><small>Apellido Materno</small></label>
             </p>
             <p>
               <input type="text" name="email" id="email" value="{$tutor->email}" size="22" data-validation-engine="validate[],custom[email]"  >
@@ -32,20 +38,18 @@
               <label for="fecha_nacimiento"><small>Fecha de Nacimiento</small></label>
             </p>
             <p>
-              <input type="text" name="login" id="login" value="{$tutor->login}" size="22">
-              <label for="login"><small>Nombre de usuario</small></label>
+              <input type="text" name="login" id="login" value="{$tutor->login}" size="22"  data-validation-engine="validate[required]">
+              <label for="login"><small>Nombre de usuario (*)</small></label>
             </p>
             <p>
-              <input type="text" name="clave" id="clave" value="{$tutor->clave}" size="22">
-              <label for="clave"><small>Clave de Ingreso</small></label>
+              <input type="text" name="clave" id="clave" value="{$tutor->clave}" size="22"  data-validation-engine="validate[required]">
+              <label for="clave"><small>Clave de Ingreso (*)</small></label>
             </p>
-            
+            <h2 class="title">Registrar Tutor</h2>
             <p>
-              <input type="hidden" name="proyecto_id" id="proyecto_id" value="{$proyecto->id}" size="22">
-              <label for="clave"><small>codigo proyecto</small></label>
-            </p>
-            <h2 class="title">Grabar Estudiante</h2>
-            <p>
+              {if (isset($estudiante))}
+              <input type="hidden" name="estudiante_id" id="estudiante_id" value="{$estudiante->id}" size="22">
+              {/if}
               <input type="hidden" name="id" value="{$tutor->id}">
               <input type="hidden" name="tarea" value="registrar">
               <input type="hidden" name="token" value="{$token}">
@@ -56,7 +60,7 @@
             </p>
           </form>
         </div>
-        <p>{$ERROR}ERReo</p>
+        <p>{$ERROR}</p>
         <p>Todos los campos con (*) son obligatorios.</p>
         <script type="text/javascript">
         {literal} 

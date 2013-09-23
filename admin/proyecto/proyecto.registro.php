@@ -50,12 +50,13 @@ try {
   leerClase('Semestre');
   leerClase('Modalidad');
   leerClase('Estudiante');
+  leerClase('Institucion');
 
   $semestre   = new Semestre(false,true);
   $estudiante = new Estudiante(1);
   $estudiante->getAllObjects();
   $usuario    = $estudiante->getUsuario();
-  $proyecto   = new Proyecto();
+  $proyecto   = $estudiante->getProyecto();
 
   $smarty->assign('usuario'   , $usuario);
   $smarty->assign('estudiante', $estudiante);
@@ -118,6 +119,21 @@ try {
   $smarty->assign('modalidads'    ,  $modalidads);
   $smarty->assign('modalidads_ids',  $modalidads_ids);
   $smarty->assign('adicionales_SI',  Modalidad::DATOS_AD_SI);
+
+  //institucion
+  $institucion         = new Institucion();
+  $institucion->estado = Objectbase::STATUS_AC;
+  $institucions_resp   = $institucion->getAll();
+  $institucions_ids[]  = '';
+  $institucions[]      = '-- Seleccione --';
+  while (isset($institucions_resp[0]) && $institucions_resp[0] && $array = mysql_fetch_array($institucions_resp[0], MYSQL_ASSOC))
+  {
+    $institucions[]     = $array['nombre'];
+    $institucions_ids[] = $array['id'];
+  }
+  $smarty->assign('instituciones'    ,  $institucions);
+  $smarty->assign('instituciones_ids',  $institucions_ids);
+
 
   //Director de carrera
   $smarty->assign('director_carrera',  $semestre->getValor('director_carrera'));

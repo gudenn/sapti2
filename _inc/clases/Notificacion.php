@@ -24,6 +24,8 @@ class Notificacion extends Objectbase
   const TIPO_MENSAJE    = 'N01';
  /** TIPO_TIEMPO mensaje de tiempo  */
   const TIPO_TIEMPO     = 'N02';
+ /** TIPO_MENSAJE mensaje normal  */
+  const TIPO_ASIGNACION = 'N03';
 
  /**
   * Codigo identificador del Del proyecto
@@ -34,7 +36,7 @@ class Notificacion extends Objectbase
 
  /**
   * Tipo de notificacion
-  * Mensaje normal, Mensaje de tiempo se acaba, y otros 
+  * Mensaje normal (NR), Mensaje de tiempo se acaba, y otros 
   * consultad contantes
   * @var VARCHAR(45)
   */

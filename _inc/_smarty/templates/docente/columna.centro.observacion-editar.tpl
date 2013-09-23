@@ -22,19 +22,23 @@
 			<div id="tablecontent"></div>
 
 	    <form name="nueva_observacion" id="nueva_observacion" action="" onsubmit="enviarDatosObservacion(); return false">
-		<h3>Nueva Observacion</h3>
-                <table>
+		<h1>Nueva Observacion</h1>
+            <table>
                 <tr>
-                <td>Observacion: </td>
-                <td><label><input name="observacion" type="text" style="width:300px;" data-validation-engine="validate[required]"/></label></td>
-               	</tr>
-                </table>
-            <h4 class="title">Grabar Revision</h4>
+                <td>
+            <h2 class="title">Observacion: </h2>
+                <input name="observacion" type="text" style="width:300px;" data-validation-engine="validate[required]"/>
+                </td>
+                <td>
+            <h2 class="title">Grabar Observacion:</h2>
             <p>
               <input name="submit" type="submit" value="Grabar">
               &nbsp;
               <input name="reset" type="reset" tabindex="3" value="Resetear">
             </p>
+                </td>
+                </tr>
+            </table>
           </form>
         <form action="#" method="post" onsubmit="return confirm('Eliminar Todas las Observaciones?');">
             <input name="borrar" type="submit" value="ELIMINAR TODAS LAS OBSERVACION(ES)">

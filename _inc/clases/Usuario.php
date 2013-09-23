@@ -219,16 +219,18 @@ class Usuario  extends Objectbase
     if (isset($_GET['order']))
       $filtro->order($_GET['order']);
 
+    /*
     $filtro->nombres[] = 'Estado';
     $filtro->valores[] = array ('select','estado'  ,$filtro->filtro('estado'),
         array(''      ,'AC'         ,'NC'           ,'IN'          ,'DE'        ),
         array('Todos' ,'Confirmados','No Confirmado','Desctivado'  ,'Eliminado' ));
+     */
     $filtro->nombres[] = 'Nombre';
     $filtro->valores[] = array ('input' ,'nombre',$filtro->filtro('nombre'));
-    $filtro->nombres[] = 'Apellido Paterno';
+    $filtro->nombres[] = 'Ap. Paterno';
     $filtro->valores[] = array ('input' ,'apellido_paterno',$filtro->filtro('apellido_paterno'));
     
-    $filtro->nombres[] = 'Apellido Materno';
+    $filtro->nombres[] = 'Ap. Materno';
     $filtro->valores[] = array ('input' ,'apellido_materno',$filtro->filtro('apellido_materno'));
     $filtro->nombres[] = 'Login';
     $filtro->valores[] = array ('input' ,'login',$filtro->filtro('login'));

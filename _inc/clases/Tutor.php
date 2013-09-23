@@ -2,47 +2,179 @@
 
 class Tutor extends Objectbase
 {
-    /**
-     * Codigo identificador del Objeto Usuario
-     * @var INT(11)
-     */
-    var $usuario_id;
+  /** Numero maximo de tutores activos asignados a un estudiante */
+  const MAXIMO   = "2";
 
+  
+  /**
+   * Codigo identificador del Objeto Usuario
+   * @var INT(11)
+   */
+  var $usuario_id;
+
+
+ /**
+  * (Objeto simple) Todos los proyecto_tutor que tiene este tutor
+  * @var object|null 
+  */
+  var $proyecto_tutor_objs;
+  
+
+  /**
+   * Retorna el nombre completo del usuario
+   * @param boolean $echo si muestra o solo devuelve
+   * @return boolean
+   */
+  function getNombreCompleto($echo = false) 
+  {
+    leerClase('Usuario');
+    if (!$this->usuario_id)
+      return false;
+    $usuario = new Usuario($this->usuario_id);
+    return $usuario->getNombreCompleto($echo);
+  }
+
+  /**
+   * Finalizamos la tutoria de un totur a un estudiante
+   * @param INT(11) $estudiante_id codigo del estudiante
+   */
+  function finalizarTutoria($estudiante_id) 
+  {
+    leerClase('Proyecto');
+    leerClase('Estudiante');
+    leerClase('Proyecto_tutor');
+    $estudiante = new Estudiante($estudiante_id);
+    $proyecto   = $estudiante->getProyecto();
+    $asignado   = $this->esTutorEnProyecto($proyecto);
+
+    if ( !$asignado )// No se puede asignar porque ya  esta asignado
+      return;
     
-    /**
-     * Retorna el nombre completo del usuario
-     * @param boolean $echo si muestra o solo devuelve
-     * @return boolean
-     */
-    function getNombreCompleto($echo = false) 
-    {
-      leerClase('Usuario');
-      if (!$this->usuario_id)
-        return false;
-      $usuario = new Usuario($this->usuario_id);
-      return $usuario->getNombreCompleto($echo);
-    }
+    $asignado->estado_tutoria = Proyecto_tutor::FINALIZADO;
+    $asignado->fecha_final    = date('d/m/Y');
+    $asignado->save();
+    $this->notificarFinalizacionTutor($estudiante, $proyecto);
 
-    /**
-     * buscamos el tutor por el login y la clave
-     * @param type $login
-     * @param type $clave
-     * @return object
-     */
-    public function issetTutor($login, $clave) {
-        if ($login == "" || $clave == "") {
-            return false;
-        }
-        $activo = Objectbase::STATUS_AC;
-        $sql = "select * , a.id as tutor_id from ".$this->getTableName()." as a , ".$this->getTableName('usuario')." as u   where u.login = '$login' and u.clave = '$clave' and a.usuario_id = u.id and u.estado = '$activo' and a.estado = '$activo'  ";
-        //echo $sql;
-        $resultado = mysql_query($sql);
-        if (!$resultado) {
-            return false;
-        }
-        $user = mysql_fetch_object($resultado);
-        return $user;
+  }
+
+  /**
+   * Asignamos Tutor a un estudiante
+   * @param INT(11) $estudiante_id codigo del estudiante
+   */
+  function asignarTutoria($estudiante_id) 
+  {
+    leerClase('Proyecto');
+    leerClase('Estudiante');
+    leerClase('Proyecto_tutor');
+    $estudiante = new Estudiante($estudiante_id);
+    $proyecto   = $estudiante->getProyecto();
+    if ( $this->esTutorEnProyecto($proyecto) )// No se puede asignar porque ya  esta asignado
+      return;
+    
+    $asignado   = new Proyecto_tutor();
+    $asignado->proyecto_id      = $proyecto->id;
+    $asignado->tutor_id         = $this->id;
+    $asignado->estado_tutoria   = Proyecto_tutor::PENDIENTE;
+    $asignado->estado           = Objectbase::STATUS_AC;
+    $asignado->fecha_asignacion = date('d/m/Y');
+    $asignado->save();
+    $this->notificarAsignacionTutor($estudiante, $proyecto);
+    
+  }
+
+  /**
+   * Buscamos si es tutor en el Proyecto
+   * @param Proyecto $proyecto
+   * @return Proyecto_tutor
+   */
+  function esTutorEnProyecto($proyecto) 
+  {
+    $this->getAllObjects();
+    foreach ($this->proyecto_tutor_objs as $proyecto_tutor) 
+    {
+      if ($proyecto_tutor->proyecto_id == $proyecto->id)
+      {
+        if ($proyecto_tutor->estado_tutoria == Proyecto_tutor::PENDIENTE //Es pero esta pendiente
+            || $proyecto_tutor->estado_tutoria == Proyecto_tutor::ACEPTADO )//Es y esta activo 
+          return $proyecto_tutor;
+      }
     }
+    return false;
+  }
+  
+  
+  /**
+   * Notificamos al estudiante y al tutor
+   * que se ha hecho una solicitud de asignacion de tutor
+   * @param Estudiante $estudiante
+   * @param Proyecto $proyecto
+   */
+  function notificarAsignacionTutor($estudiante,$proyecto) 
+  {
+    leerClase('Notificacion');
+    leerClase('Notificacion_tutor');
+    $notificacion              = new Notificacion();
+    $notificacion->proyecto_id = $proyecto->id;
+    $notificacion->tipo        = Notificacion::TIPO_ASIGNACION;
+    $notificacion->fecha_envio = date('d/m/Y');
+    $notificacion->asunto      = 'Peticion de Tutor';
+    $notificacion->detalle     = "El estudiante {$estudiante->getNombreCompleto()} solicita que {$this->getNombreCompleto()} sea su tutor para el proyecto {$proyecto->nombre} ";
+    $notificacion->prioridad   = 5;
+    $notificacion->estado      = Objectbase::STATUS_AC;
+    
+    $tutores[]     = $this->id;
+    $estudiantes[] = $estudiante->id;
+    $usuarios      = array('tutores'=>$tutores,'estudiantes'=>$estudiantes);
+    $notificacion->enviarNotificaion($usuarios);
+    
+  }
+  
+  /**
+   * Notificamos al estudiante y al tutor
+   * que se ha finalizado la tutoria de un docente
+   * @param Estudiante $estudiante
+   * @param Proyecto $proyecto
+   */
+  function notificarFinalizacionTutor($estudiante,$proyecto) 
+  {
+    leerClase('Notificacion');
+    leerClase('Notificacion_tutor');
+    $notificacion              = new Notificacion();
+    $notificacion->proyecto_id = $proyecto->id;
+    $notificacion->tipo        = Notificacion::TIPO_MENSAJE;
+    $notificacion->fecha_envio = date('d/m/Y');
+    $notificacion->asunto      = 'Finalizacion de Tutoria';
+    $notificacion->detalle     = "El estudiante {$estudiante->getNombreCompleto()} agradece a {$this->getNombreCompleto()} toda su colaboraci&ocaute;n en el proyecto {$proyecto->nombre} y da por concluida su tutoria";
+    $notificacion->prioridad   = 3;
+    $notificacion->estado      = Objectbase::STATUS_AC;
+    
+    $tutores[]     = $this->id;
+    $estudiantes[] = $estudiante->id;
+    $usuarios      = array('tutores'=>$tutores,'estudiantes'=>$estudiantes);
+    $notificacion->enviarNotificaion($usuarios);
+    
+  }
+  
+  /**
+   * buscamos el tutor por el login y la clave
+   * @param type $login
+   * @param type $clave
+   * @return object
+   */
+  public function issetTutor($login, $clave) {
+    if ($login == "" || $clave == "") {
+        return false;
+    }
+    $activo = Objectbase::STATUS_AC;
+    $sql = "select * , a.id as tutor_id from ".$this->getTableName()." as a , ".$this->getTableName('usuario')." as u   where u.login = '$login' and u.clave = '$clave' and a.usuario_id = u.id and u.estado = '$activo' and a.estado = '$activo'  ";
+    //echo $sql;
+    $resultado = mysql_query($sql);
+    if (!$resultado) {
+        return false;
+    }
+    $user = mysql_fetch_object($resultado);
+    return $user;
+  }
 
   
   /**

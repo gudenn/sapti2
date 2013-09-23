@@ -8,10 +8,10 @@ Licence: <a href="http://www.os-templates.com/template-terms">Website Template L
 
 #topnav{
 	display:block;
-	width:960px;
-	margin:0;
-	padding:0 0 12px 0;
-	background:url("images/round_bot.gif") bottom left no-repeat;
+width: 948px;
+margin: 0;
+padding: 0 0 12px 12px;
+	/*background:url("images/round_bot.gif") bottom left no-repeat;*/
 	text-align:left;
 	}
 

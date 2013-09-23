@@ -74,6 +74,7 @@
                   <a href="">Asignar o Modificar</a> | <a href="">Actualizar</a>
                 </td>
               </tr>
+              <!--
               <tr>
                 <td  style="height: 29px;">
                   Tribunales:
@@ -81,6 +82,7 @@
                 <td>
                 </td>
               </tr>
+              -->
             </table>
           </td>
         </tr>
@@ -132,7 +134,7 @@
                   T&iacute;tulo:
                 </td>
                 <td>
-                  <input type="text" name="proyecto_titulo"  id="proyecto_titulo" value="{$proyecto->titulo}"  data-validation-engine="validate[required]">
+                  <input type="text" name="proyecto_titulo"  id="proyecto_titulo" value="{$proyecto->nombre}"  data-validation-engine="validate[required]">
                 </td>
               </tr>
             </table>
@@ -225,6 +227,23 @@
                   </select>
                   <span id="actualizando_modalidad" style="display: none">
                     {icono('basicset/loading.gif','Buscando','50px','10px')}
+                  </span>
+                </td>
+                <td style="height: 35px;" class="tipo_moda">
+                  Instituci&oacute;n:
+                </td>
+                <td class="tipo_moda">
+                  <span id="instituciones_lista">
+                  <select  name="proyecto_institucion_id" id="proyecto_institucion_id" data-validation-engine="validate[required]" >
+                    {html_options values=$instituciones_ids selected=$proyecto->institucion_id output=$instituciones}
+                  </select>
+                    <a href="#mas"   title="Actualizar Instituciones" onclick="agregarinstitucion();return false;"  >
+                     {icono('basicset/agregarboton.png','Actualizar','15px')} Nueva
+                    </a> 
+                  </span>
+                  <span id="instituciones_nueva" style="display: none">
+                    <input type="text" name="proyecto_institucion_nueva" id="proyecto_institucion_nueva" value="" >
+                    <a href="#mas"   title="Quitar este elemento" onclick="removerinstitucion();return false;" >{icono('basicset/delete_48.png','Quitar','15px')} Quitar</a> 
                   </span>
                 </td>
               </tr>
@@ -419,6 +438,20 @@
       jQuery("#objetivo_especifico_"+$(test).attr("xfile")).val('');
       else
       jQuery("#activa_"+$(test).attr("xfile")).val('0');
+    }
+    function agregarinstitucion()
+    {
+      //nueva_subarea_ delista_subarea_
+      jQuery("#instituciones_nueva").show();
+      jQuery("#instituciones_lista").hide();
+    }
+    function removerinstitucion()
+    {
+      //nueva_subarea_ delista_subarea_
+      jQuery("#instituciones_nueva").hide();
+      jQuery("#instituciones_lista").show();
+      jQuery("#proyecto_institucion_nueva").val('');
+      
     }
     function addsubarea(test)
     {

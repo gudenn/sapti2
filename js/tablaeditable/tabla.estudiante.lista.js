@@ -67,11 +67,11 @@ EditableGrid.prototype.initializeGrid = function()
                 
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
 		cell.innerHTML = "<a onclick=document.location.href='revision.lista.php?id_estudiante="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("detalle.png") + "\" border=\"0\" alt=\"delete\" title=\"Seguimiento\"/></a>";
-                cell.innerHTML += "&nbsp;<a onclick=document.location.href='observacion.registro.php?id_estudiante="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("editar.png") + "\" border=\"0\" alt=\"delete\" title=\"Registrar Observacion\"/></a>";
-                cell.innerHTML += "&nbsp;<a onclick=document.location.href='proyecto.evaluacion.php?id_estudiante="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("evaluar.png") + "\" border=\"0\" alt=\"delete\" title=\"Evaluar Proyecto\"/></a>";
+						 "<img src=\"" + image("detalle.png") + "\" border=\"0\" alt=\"detalle\" title=\"Seguimiento\"/>Seguimiento</a>";
+                cell.innerHTML += "<br><a onclick=document.location.href='observacion.registro.php?id_estudiante="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
+						 "<img src=\"" + image("editar.png") + "\" border=\"0\" alt=\"editar\" title=\"Registrar Observacion\"/>Editar</a>";
+                cell.innerHTML += "<br><a onclick=document.location.href='proyecto.evaluacion.php?id_estudiante="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
+						 "<img src=\"" + image("evaluar.png") + "\" border=\"0\" alt=\"evaluar\" title=\"Evaluar Proyecto\"/>Evaluar</a>";
 		}}));
 		
 		// render the grid (parameters will be ignored if we have attached to an existing HTML table)

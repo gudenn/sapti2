@@ -24,10 +24,7 @@ try {
   //CSS
   $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_JS  . "validate/validationEngine.jquery.css";
-  //BOX
-  $CSS[]  = URL_JS . "box/box.css";
   
-  $smarty->assign('CSS',$CSS);
 
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
@@ -39,7 +36,10 @@ try {
 
   //BOX
   $JS[]  = URL_JS ."box/jquery.box.js";
+  $CSS[]  = URL_JS . "box/box.css";
+
   $smarty->assign('JS',$JS);
+  $smarty->assign('CSS',$CSS);
 
 
   $smarty->assign("ERROR", '');
