@@ -38,6 +38,7 @@
             
             <h2 class="title">Grabar </h2>
             <p>
+              <input type="hidden" name="iddocente"    value="{$iddocente}">
               <input type="hidden" name="usuario_id"    value="{$usuario->id}">
               <input type="hidden" name="estudiante_id" value="{$estudiante->id}">
               <input type="hidden" name="tarea" value="registrar">
@@ -49,14 +50,15 @@
              
  <script>
 jQuery('#dia_id').change(function () {
-var numero =document.getElementById("dia_id").value; // valor de la id de Provincias
+var numero =document.getElementById("dia_id").value;
+// valor de la id de Provincias
 var to=document.getElementById("Buscando");
 to.innerHTML="buscando....";
 
 jQuery.ajax({
 type: "POST", 
 url: "buscador.php",
-data: 'iddia='+numero, // enviamos la id de la Porvincia + la id de la población
+data: 'iddia='+numero,// enviamos la id de la Porvincia + la id de la población
 success: function(a) {
 jQuery('#turno_id').html(a);// el resultado de la busqueda la mostramos en  #poblacionList
 var to=document.getElementById("Buscando");
