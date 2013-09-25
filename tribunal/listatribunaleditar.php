@@ -39,7 +39,7 @@ try {
   leerClase("Pagination");
   leerClase("Filtro");
   leerClase("Proyecto_estudiante");
-  
+/**
   $filtro     =  new Filtro('g_docente',__FILE__);
   $docente    =  new Docente();
   $docente    -> iniciarFiltro($filtro);
@@ -54,7 +54,7 @@ try {
   $smarty->assign("filtros"  ,$filtro);
   $smarty->assign("objs"     ,$objs_pg->objs);
   $smarty->assign("pages"    ,$objs_pg->p_pages);
-  
+*/
  
   
    $proyectostribunales= array();
@@ -63,7 +63,7 @@ try {
    
    $usuario = new Usuario();
 //$smarty->assign('rows', $rows);
- $usuario_mysql  = $usuario->getAll();
+
  $usuario_id     = array();
  $usuario_nombre = array();
 $sql="SELECT DISTINCT (p.id) , u.nombre ,CONCAT(u.apellido_paterno,u.apellido_materno) as apellidos, es.codigo_sis , p.nombre as nombreproyecto

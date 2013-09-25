@@ -38,8 +38,9 @@ try {
   leerClase("Filtro");
   leerClase("Proyecto_tribunal");
   leerClase("Proyecto_estudiante");
+    leerClase("Modalidad");
   
-  
+  /**
  $filtro     = new Filtro('g_docente',__FILE__);
   $docente = new Docente();
   $docente->iniciarFiltro($filtro);
@@ -55,7 +56,7 @@ try {
   $smarty->assign("objs"     ,$objs_pg->objs);
   $smarty->assign("pages"    ,$objs_pg->p_pages);
 
-  
+  */
  $rows = array();
 $usuario = new Usuario();
 //$smarty->assign('rows', $rows);
@@ -87,14 +88,12 @@ while ($proyecto_sql && $rows = mysql_fetch_array($proyecto_sql[0]))
 $smarty->assign('proyecto_id',$proyecto_id);
 $smarty->assign('proyecto_nombre',$proyecto_nombre);
   
-  if(isset($_GET['tribunal_id']))
+  if(isset($_GET['proyecto_id']))
   {
-    
-   // echo $_GET['tribunal_id'];
-     $sql="
-SELECT d.id, u.nombre , u.apellidos
-FROM  usuario u, docente d, tribunal t, proyecto_tribunal pt
-WHERE  u.`id`=d.`usuario_id` and d.`id`=t.`docente_id` and  t.`proyecto_tribunal_id`=pt.`id` and pt.`id`=".$_GET['tribunal_id'];
+$sql="
+SELECT d.id, u.nombre , CONCAT (u.apellido_paterno, u.apellido_materno) as apellidos
+FROM  usuario u, docente d, tribunal t, proyecto p
+WHERE  u.id=d.usuario_id and d.id=t.docente_id   and p.id=".$_GET['proyecto_id'];
  $resultado = mysql_query($sql);
  $arraytribunal= array();
  
@@ -104,51 +103,22 @@ WHERE  u.`id`=d.`usuario_id` and d.`id`=t.`docente_id` and  t.`proyecto_tribunal
  }
 $smarty->assign('arraytribunal'  , $arraytribunal);
     
-  
-  $sqllt=  "SELECT u.nombre , u.apellidos , e.codigo_sis , p.nombre as nombreproyecto
-FROM  usuario u , estudiante e , proyecto_estudiante pe , proyecto p, proyecto_tribunal pt
-WHERE u.id= e.usuario_id and e.id=pe.estudiante_id and p.id= pe.proyecto_id and p.id=pt.proyecto_id and pt.id=".$_GET['tribunal_id'];
-
-$resultados = mysql_query($sqllt);
- $arraytribunaldatos= array();
- 
- while ($filas = mysql_fetch_array($resultados, MYSQL_ASSOC))
- { 
-   $arraytribunaldatos[]=$filas;
- }
-      
-      $smarty->assign('arraytribunaldatos'  , $arraytribunaldatos);
-  }
-
-  
-  //$tribunal = new Tribunal();
-  //$smarty->assign("tribunal", $tribunal);
-  
-  if(isset($_POST['buscar']))
-  {
-   echo   $_POST['codigosis'];
-    $estudiante = new Estudiante(false,$_POST['codigosis']);
-    $proyecto   = new Proyecto();
-    $proyecto_aux = $estudiante->getProyecto();
-    if ($proyecto_aux)
-      $proyecto = $proyecto_aux;
-    else
-    {
-      //@todo no tiene proyecto 
-      
-    }
-  
-    $usuariobuscado= new Usuario($estudiante->usuario_id);
-  //echo  $estudiante->i;
-  //  var_dump( $proyecto->getArea());
-   // echo $estudiante->codigo_sis;
-     $smarty->assign('usuariobuscado',  $usuariobuscado);
-    $smarty->assign('estudiantebuscado', $estudiante);
-     $smarty->assign('proyectobuscado', $proyecto);
-      $smarty->assign('proyectoarea', $proyecto->getArea());
    
+      $proyectos =  new Proyecto($_GET['proyecto_id']);
+      
+      $estudiante= $proyectos->getEstudiante();
+      $usuario =  new Usuario($estudiante->usuario_id);
+      $modalidad=  new Modalidad( $proyectos->modalidad_id);
+      $areaproyecto= $proyectos->getArea();
+  
+       $smarty->assign('proyecto'  , $proyectos);
+        $smarty->assign('modalidad'  , $modalidad);
+        $smarty->assign('usuario'  , $usuario);
+        $smarty->assign('estudiante'  ,$estudiante); 
+        $smarty->assign('area', $areaproyecto);
+        
   }
-
+  
   
   $smarty->assign("ERROR", $ERROR);
   

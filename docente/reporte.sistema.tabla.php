@@ -10,7 +10,7 @@ function selectmuestra($mat,$eva){
     $ab="";
     if($mat!='')
         $ab.="
-            es.codigo_sis as CodigoSis, CONCAT(us.nombre,us.apellidos) as Estudiante, pro.nombre as Nombre_Proyecto";
+            es.codigo_sis as CodigoSis, CONCAT(us.nombre,us.apellido_paterno) as Estudiante, pro.nombre as Nombre_Proyecto";
     if($eva!='')
         $ab.="
             , eva.promedio as Promedio";
@@ -57,6 +57,7 @@ class MysqlFunciones{
      {
         $query =  mysql_query($a);
         echo "<table class='tbl_lista'><thead><tr>";
+        var_dump($query); 
             for($i=0;$i<mysql_num_fields($query);$i++)
                 {
                     echo "<th>".mysql_field_name($query,$i)."</th>";

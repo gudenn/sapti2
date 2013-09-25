@@ -26,25 +26,25 @@ try {
   $smarty->assign('JS',$JS);
   leerClase("Horario_doc");
   
-  
-$horario_doc= new Horario_doc();
-
   $docente     =  getSessionDocente();
   $docente_ids =  $docente->id;
-    $sqldocente="select  d.`id`
-from `usuario` u , `docente` d
-where u.`id`= d.`usuario_id` and u.`estado`='AC' and d.`estado`='AC' and u.`id`=".$docente_ids.";";
+
+  echo $docente_ids;
+  
+   
+  
+$horario_doc= new Horario_doc();
+ $sqldocente="select  d.id
+from usuario u , docente d
+where u.id= d.usuario_id and u.estado='AC' and d.estado='AC' and u.id=$docente_ids;";
  $resultadodocente= mysql_query($sqldocente);
 $idocente=0;
- 
  while ($filadocente = mysql_fetch_array($resultadodocente)) 
  {
    $idocente=$filadocente['id'];
     
  }
   
-  
-
 
  if ( isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' )
   {     
@@ -63,6 +63,7 @@ $idocente=0;
     $horarioborrar->delete();
   }
 
+  
 
   
 /////////////cargando los dias de la semana///////////
@@ -71,7 +72,7 @@ FROM dia, turno
 WHERE NOT EXISTS (
 SELECT *
 FROM turno tu, horario_doc hd, dia d
-WHERE hd.docente_id=4
+WHERE hd.docente_id=$idocente
 AND tu.id=hd.turno_id
 AND d.id=hd.dia_id
 AND dia.nombre=d.nombre
@@ -88,35 +89,10 @@ AND turno.nombre=tu.nombre
  }
 $smarty->assign('diaid'  , $diaid);
 $smarty->assign('dianombre'  , $dianombre);
- ////////////////cargando los turnos de opciones de tiempo///////////
-  $sqlturno="SELECT DISTINCT(turno.id), turno.nombre
-FROM dia, turno
-WHERE NOT EXISTS (
-SELECT *
-FROM turno tu, horario_doc hd, dia d
-WHERE hd.docente_id=".$docente_ids."
-AND tu.id=hd.turno_id
-AND d.id=hd.dia_id
-AND d.id=5
-AND turno.nombre=tu.nombre
-);";
- $resultadoturno = mysql_query($sqlturno);
- $turnoid= array();
-  $turnonombre= array();
  
- while ($filaturno = mysql_fetch_array($resultadoturno)) 
-                {
-    $turnoid[]=$filaturno['id'];
-    $turnonombre[]=$filaturno['nombre'];
- }
-//$smarty->assign('turnoid'  , $turnoid);
-//$smarty->assign('turnonombre'  , $turnonombre);  
-
- $sql="select hd.`id`, d.`nombre` as nombredia, t.`nombre` as nombreturno
-from `turno` t , `dia` d , `horario_doc` hd, `usuario` u, `docente` doc
-where hd.`turno_id`= t.`id`  and hd.`dia_id`= d.`id` and u.`id`= doc.`usuario_id` and
- t.`estado`='AC' and d.`estado`='AC' and hd.`estado`='AC' and u.`estado`='AC' and doc.`estado`='AC'
- and u.`id`=".$docente_ids;
+$sql="select DISTINCT(hd.id), d.nombre as nombredia, t.nombre as nombreturno
+from turno t , dia d , horario_doc hd
+where hd.turno_id= t.id and d.id=hd.dia_id and hd.docente_id=".$idocente.";";
  $resultado = mysql_query($sql);
  $listadias= array();
  
@@ -125,6 +101,7 @@ where hd.`turno_id`= t.`id`  and hd.`dia_id`= d.`id` and u.`id`= doc.`usuario_id
     $listadias[]=$fila;
  }
 $smarty->assign('listadias'  , $listadias);
+$smarty->assign('iddocente'  , $idocente);
 
 
 

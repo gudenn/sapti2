@@ -213,7 +213,27 @@ class Proyecto extends Objectbase {
     $area = new Area($areas);
     return $area;
   }
+  
+  /**
+   * 
+   * @return boolean|\Estudiante
+   * retorna el estudiante del proyectto
+   */
+    function getEstudiante() {
+    //@TODO revisar
+    leerClase('Estudiante');
 
+    $activo = Objectbase::STATUS_AC;
+    $sql = "select e.* from " . $this->getTableName('Proyecto_estudiante') . " as pe , " . $this->getTableName('Estudiante') . " as e   where pe.proyecto_id = '$this->id' and pe.estudiante_id = e.id and pe.estado = '$activo' and e.estado = '$activo' ";
+    $resultados= mysql_query($sql);
+    if (!$resultados)
+      return false;
+    $estudiantes= mysql_fetch_array($resultados);
+    $estudiante = new Estudiante($estudiantes);
+    return $estudiante;
+  }
+
+  
   /**
    * Consultamos el estado del tutor
    * @param type $tutor_id
