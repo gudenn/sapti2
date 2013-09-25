@@ -27,9 +27,10 @@
   <thead>
   <tr>
     <th><a >ID          </a></th>
-    <th><a >NOMBRE      </a></th>
-    <th><a  >APELLIDOS     </a></th>
-    <th><a >ESPECIALIDAD</a></th>
+    <th><a >Nombre      </a></th>
+    <th><a  >Apellidos    </a></th>
+    <th><a >Area</a></th>
+      <th><a >Tiempo</a></th>
      </tr>
   </thead>
   <tbody>
@@ -37,14 +38,14 @@
    
     <tr  class="selectable">
    
-      <td>{$objs[ic][0]}
-        <input type="hidden" name="ids[]" value="{$objs[ic][0]}">
+      <td>{$listadocentes[ic][0]}
+        <input type="hidden" name="ids[]" value="{$listadocentes[ic][0]}">
       </td>
       <td>
-        {$objs[ic][1]}
+        {$listadocentes[ic][1]}
       </td>
-      <td>{$objs[ic][2]}</td>
-          <td>     <a  class="tooltip"> VER
+      <td>{$listadocentes[ic][2]}</td>
+  <td>     <a  class="tooltip"> VER
   <span>
   <b>
  </b>
@@ -58,7 +59,19 @@
         
        </a>
 </td>
-
+<td>     <a  class="tooltip"> DIS
+  <span>
+  <b>
+ </b>
+{foreach name=outer item=contact from=$listadocentes[ic][4]}
+  <hr />
+  {foreach key=key item=item from=$contact}
+  {$item}
+  {/foreach}
+{/foreach}
+ </span> 
+    </a>
+</td>
      
     </tr>
   {/section}
@@ -81,14 +94,55 @@
         <thead>
           <tr>
             <th>ID          </th>
-            <th>NOMBRE       </th>
-            <th>APELLIDOS   </th>
-             <th>ESPECIALIDAD</th>
+            <th>Nnombre     </th>
+            <th>Apellidos   </th>
+             <th>Area</th>
+             <th>Tiempo</th>
            
           </tr>
         </thead>
         <tbody>
-  
+   {section name=ic loop=$listadocenteselec}
+   
+    <tr  class="selectable">
+   
+      <td>{$listadocenteselec[ic][0]}
+        <input type="hidden" name="ids[]" value="{$listadocenteselec[ic][0]}">
+      </td>
+      <td>
+        {$listadocenteselec[ic][1]}
+      </td>
+      <td>{$listadocenteselec[ic][2]}</td>
+  <td>     <a  class="tooltip"> VER
+  <span>
+  <b>
+ </b>
+{foreach name=outer item=contact from=$listadocenteselec[ic][3]}
+  <hr />
+  {foreach key=key item=item from=$contact}
+  {$item}<br />
+  {/foreach}
+{/foreach}
+ </span> 
+        
+       </a>
+</td>
+<td>     <a  class="tooltip"> DIS
+  <span>
+  <b>
+ </b>
+{foreach name=outer item=contact from=$listadocenteselec[ic][4]}
+  <hr />
+  {foreach key=key item=item from=$contact}
+  {$item}
+  {/foreach}
+{/foreach}
+ </span> 
+    </a>
+</td>
+     
+    </tr>
+  {/section}
         </tbody>
       </table>
         

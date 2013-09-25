@@ -4,13 +4,14 @@
         
    <form action="" method="post">
       <h1> DETALLE DEL PROYECTO </h1>
-        {section name=ic loop=$arraytribunaldatos}
-       <label for="nombre">NOMBRE:  {$arraytribunaldatos[ic]['nombre']}</label><br />
-        <label for="nombre">APELLIDOS:  {$arraytribunaldatos[ic]['apellidos']}</label><br />
-         <label for="nombre">CODIGO SIS:  {$arraytribunaldatos[ic]['codigo_sis']}</label><br />
-          <label for="nombre">PROYECTO:  {$arraytribunaldatos[ic]['nombreproyecto']}</label><br />
+        
+       <label for="nombre">Nombre:  {$usuario->nombre}</label><br />
+        <label for="nombre">Apellidos:  {$usuario->apellido_paterno} {$usuario->apellido_materno}</label><br />
+         <label for="nombre">Codigo Sis:  {$estudiante->codigo_sis}</label><br />
+          <label for="nombre">Proyecto:  {$proyecto->nombre}</label><br />
+            <label for="nombre">Modalidad:  {$modalidad->nombre}</label><br />
        
-       {/section}
+   
  </form>
   <div style="width: 50%;float: left;" class="tbl_filtro">  </div>
    <h1> TRIBUNALES </h1>

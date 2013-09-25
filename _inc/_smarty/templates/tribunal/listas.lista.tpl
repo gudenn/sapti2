@@ -9,10 +9,10 @@
      <table class="tbl_lista">
   <thead>
     <tr>
-      <th><a href='?order=id'                    accesskey="" class="tajax"  title='Ordenar por Id'           >ID        {$filtros->iconOrder('id')}</a></th>
-      <th><a href='?order=proyecto_id'                        class="tajax"  title='Ordenar por Proyecto'     >ESTUDIANTE    {$filtros->iconOrder('proyecto_id')}</a></th>
-      <th><a href='?order=fecha_observacion'                  class="tajax"  title='Ordenar por Fecha'        >PROYECTO       {$filtros->iconOrder('fecha_observacion')}</a></th>
-      <th><a href='?order=revisor'                            class="tajax"  title='Ordenar por Revisor'      >VER TRIBUNALES     {$filtros->iconOrder('revisor')}</a></th>
+      <th><a href='?order=id'                    accesskey="" class="tajax"  title='Ordenar por Id'           >ID      </a></th>
+      <th><a href='?order=proyecto_id'                        class="tajax"  title='Ordenar por Proyecto'     >ESTUDIANTE    </a></th>
+      <th><a href='?order=fecha_observacion'                  class="tajax"  title='Ordenar por Fecha'        >PROYECTO   </a></th>
+      <th><a href='?order=revisor'                            class="tajax"  title='Ordenar por Revisor'      >VER TRIBUNALES  </a></th>
       <th>OPCIONES</th>
     </tr>
   </thead>
