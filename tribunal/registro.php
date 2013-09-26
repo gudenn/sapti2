@@ -134,6 +134,40 @@ where  d.`id`=hd.`dia_id` and hd.`turno_id`=t.`id` and  d.`estado`='AC' and hd.`
        echo "<script>alert('El Estudiante no Tiene Proyecto');</script>";
       
     }
+    $sqldocentes="select  d.`id` , d.`nombre` , t.`nombre` as nombreturno
+from `dia` d, `horario_doc` hd , `turno` t
+where  d.`id`=hd.`dia_id` and hd.`turno_id`=t.`id` and  d.`estado`='AC' and hd.`estado`='AC'and t.`estado`='AC' and hd.`docente_id`=".$fila["id"].";";
+ $resultadocentes= mysql_query($sqldocentes);
+ 
+  while ($filadoc = mysql_fetch_array($resultadocentes, MYSQL_ASSOC)) 
+  {
+     $docentes[]=$filadoc;
+  }
+    
+    $areas=array(1,2,3,4);
+    
+    for ($i=0; $i<count($areas); $i++){
+      
+    }
+    
+    
+   $area= $proyecto->getArea();
+  
+    echo $area[0]->nombre;
+    
+ 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
   
    $usuariobuscado= new Usuario($estudiante->usuario_id);
    $smarty->assign('usuariobuscado',  $usuariobuscado);
@@ -141,15 +175,11 @@ where  d.`id`=hd.`dia_id` and hd.`turno_id`=t.`id` and  d.`estado`='AC' and hd.`
    $smarty->assign('proyectobuscado', $proyecto);
    $smarty->assign('proyectoarea', $proyecto->getArea());
     
-  }
-  
-  
+  }  
 if(isset($_POST['estudiante_id']) && isset($_POST['automatico']) && $_POST['automatico']='automatico')
   {
-    echo  $_POST['estudiante_id'];
-    echo 'hola mundo  q  tal';
-  
-    $estudiante   = new Estudiante(false,$_POST['estudiante_id']);
+   
+  $estudiante   = new Estudiante(false,$_POST['estudiante_id']);
     $proyecto     = new Proyecto();
     $proyecto_aux = $estudiante->getProyecto();
     if ($proyecto_aux)
@@ -223,19 +253,26 @@ if (isset($_POST['proyecto_id']) && $_POST['proyecto_id']!="")
       // 'tutores'=>array($tutor->id) 
      foreach ($_POST['ids'] as $id)
      {
-               echo $id;
-               $tribunal= new Tribunal();
-              
-                $tribunal->estado = Objectbase::STATUS_AC;
-                $tribunal->proyecto_id=$proyecto_->id;
-                $tribunal->docente_id =$id;
-                $tribunal->archivo ="";
-                $tribunal->accion="";
+                 echo $id;
+               
+                $tribunal= new Tribunal();
                 $tribunal->objBuidFromPost();
+               
+                $tribunal->proyecto_id=$proyectos->id;
+                $tribunal->docente_id =$id;
+                $tribunal->detalle="";
+                $tribunal->accion="";
+                $tribunal->visto=  Tribunal::VISTO_NV;
+                $tribunal->fecha_asignacion= date("j/n/Y");
+               
+               $tribunal->estado = Objectbase::STATUS_AC;
+            
+                
            
                  $tribunal->save();
-                 $noticaciones= array('tribunales'=>array($tribunal->id));
-                 $notificacion->enviarNotificaion( $noticaciones);
+                 
+                // $noticaciones= array('tribunales'=>array($tribunal->id));
+                // $notificacion->enviarNotificaion( $noticaciones);
                
      }
      }

@@ -2,6 +2,26 @@
 
 class Tribunal extends Objectbase 
 {
+  /**
+   *  ACCION DE LOS TRIBUNALES   ACEPTAR
+   */
+  const  ACCION_AC  = "AC";
+  /**
+   *  ACCION DE LOS TRIBUNALES  RECHAZAR 
+   */
+  const  ACCION_RE  = "RC";
+  
+  
+   /**
+   *  ACCION DE VISTO
+   */
+  const  VISTO  = "V";
+  /**
+   *  ACCION DE LOS TRIBUNALES NO VISTO
+   */
+  const  VISTO_NV  = "NV";
+  
+  
     /**
      *
      * @var type 
@@ -9,9 +29,13 @@ class Tribunal extends Objectbase
      */
      var $docente_id;
      var $proyecto_id;
-    
-     var $archivo;
+     var $detalle;
      var $accion;
+     
+     var $visto;
+     var $fecha_asignacion;
+     var $fecha_aceptacion;
+     
 
   /**
    * Retorna el nombre completo del usuario
