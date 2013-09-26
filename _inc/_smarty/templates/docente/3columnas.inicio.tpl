@@ -7,8 +7,6 @@
       <!-- ############ -->
         {include file=$columnacentro}
       <!-- ############ -->
-      {include file=$columnaderecha}
-      <!-- ############ -->
     </div>
   </div>
 </div>
