@@ -20,6 +20,8 @@ try {
   $JS[]  = URL_JS . "calendar/js/jquery.eventCalendar.js";
   $smarty->assign('JS',$JS);
 
+  
+  
   if ( isset($_GET['revisiones_id']))
   $revid=$_GET['revisiones_id'];
 

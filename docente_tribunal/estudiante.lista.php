@@ -25,12 +25,7 @@ try {
   $JS[]  = URL_JS . "tablaeditabletribunal/tabla.estudiante.lista.js";
   $smarty->assign('JS',$JS);
   
-   /**
-   * Menu superior
-   */
-  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Docente');
-  $menuList[]     = array('url'=>URL.Docente::URL.basename(__FILE__),'name'=>'Estudiantes Registrados');
-  $smarty->assign("menuList", $menuList);
+
   
   $docente=  getSessionDocente();
   //$docenteid=$docente->id;

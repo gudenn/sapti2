@@ -49,5 +49,32 @@
             <p>Mensajes para el Proyecto Final</p>
           </a>
         </div>
+        
+          <div class="dashboard">
+          <h2>Configuracion y Vistos Buienos</h2>
+          <a href="{$URL}docente/disponibilidad.php">
+            <img src="{$URL_IMG}icons/docente/notificacion.png"   width="64px" height="64" alt="Correciones">
+            <h3>Tiempo</h3>
+            <p>Agregue Disponibilidad de tiempo</p>
+          </a>
+          <a href="{$URL}docente/configuracion.php">
+            <img src="{$URL_IMG}icons/docente/notificacion.png"   width="64px" height="64" alt="Correciones">
+            <h3>Areas</h3>
+            <p>Agregue las de interes para ser tribunal</p>
+          </a>
+            
+             <a href="{$URL}docente_tutor/estudiante.lista.php">
+            <img src="{$URL_IMG}icons/docente/notificacion.png"   width="64px" height="64" alt="Correciones">
+            <h3>Tutor</h3>
+            <p>Lista de Estudiantes</p>
+          </a>
+             <a href="{$URL}docente_tribunal/estudiante.lista.php">
+            <img src="{$URL_IMG}icons/docente/notificacion.png"   width="64px" height="64" alt="Correciones">
+            <h3>Tribunal</h3>
+            <p>Lista de Estudiantes</p>
+          </a>
+        </div>
+        
+        
         <div  style="clear: both;" ></div>
       </div>

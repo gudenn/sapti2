@@ -25,13 +25,16 @@ try {
 
   $smarty->assign('JS',$JS);
   leerClase("Horario_doc");
+  leerClase("Docente");
   
   $docente     =  getSessionDocente();
   $docente_ids =  $docente->id;
 
   echo $docente_ids;
   
-   
+  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Docente');
+  $menuList[]     = array('url'=>URL.Docente::URL.basename(__FILE__),'name'=>'Tiempo');
+  $smarty->assign("menuList", $menuList);  
   
 $horario_doc= new Horario_doc();
  $sqldocente="select  d.id
