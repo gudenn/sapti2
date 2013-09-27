@@ -57,8 +57,11 @@
     </tbody> 
     
 </table>
+     <center>
       <a href="postergado-pdf.php?id_p={$semestre->id}" target="_blank" >{icono('filepd.png','descargar')}</a>
-   </div> 
+        <a href="postergadoexcel.php?id_p={$semestre->id}" target="_blank" >{icono('boton_excel.png','descargar')}</a>
+</center>
+</div> 
 </body>
    
 

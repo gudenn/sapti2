@@ -51,14 +51,20 @@
      
     
      </tr>
-    </tr>
+   
     
   {/section}
     </tbody> 
     
-</table>
-      <a href="proceso-pdf.php?id_p={$semestre->id}" target="_blank" >{icono('filepd.png','descargar')}</a>
-   </div> 
+   
+    
+    </table>  
+     
+         <center> 
+ <a href="proceso-pdf.php?id_p={$semestre->id}" target="_blank" >{icono('filepd.png','descargar')}</a>
+      <a href="procesoexcel.php?id_p={$semestre->id}" target="_blank" >{icono('boton_excel.png','descargar')}</a>
+</center>
+</div> 
 </body>
    
 

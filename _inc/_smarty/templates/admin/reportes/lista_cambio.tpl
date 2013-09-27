@@ -61,8 +61,11 @@
     </tbody> 
     
 </table>
+        <center> 
       <a href="cambio-pdf.php?id_p={$semestre->id}" target="_blank" >{icono('filepd.png','descargar')}</a>
-   </div> 
+        <a href="cambiosexcel.php?id_p={$semestre->id}" target="_blank" >{icono('boton_excel.png','descargar')}</a>
+   </center>
+</div> 
 </body>
    
 

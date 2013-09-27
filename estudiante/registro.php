@@ -47,6 +47,7 @@ try {
   
 
   $estudiante = new Estudiante($id);
+  //echo $estudiante->codigo_sis;
   $usuario    = new Usuario($estudiante->usuario_id);
   
   $smarty->assign("usuario"   , $usuario);
