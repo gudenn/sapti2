@@ -33,6 +33,7 @@ try {
   $JS[]  = URL_JS . "jquery.addfield.js";
   $smarty->assign('JS',$JS);
 
+  
   if (isset($_POST['observaciones'])) 
   $observaciones=$_POST['observaciones'];
     if (isset($_GET['id_estudiante'])) 

@@ -1,33 +1,45 @@
 <?php
-class Automatico extends Objectbase
-{
+/**
+ * Esta clase es para guardar los tribunales de cada proyecto
+ */
+class Automatico extends Objectbase 
+{ 
  /**
-  * Codigo del Area
-  * @var INT(45)
+  * Id del tribunal
+  * @var INT(11)
+  */
+  var $area_id;
+  
+ /**
+  * Id del docente
+  * @var INT(11)
   */
   var $docente_id;
   
- /**
-  * Descripcion del Area
-  * @var INT(45)
-  */
-  var $area_id;
-
- /**
-  * (Objeto simple)  Todos las sub areas de un area
-  * @var object|null 
+   /**
+  * Id del docente
+  * @var INT(11)
   */
   var $valor_area;
+  
+   /**
+  * Id del docente
+  * @var INT(11)
+  */
+  var $numero_aceptados;
+  
+     /**
+  * Id del docente
+  * @var INT(11)
+  */
+  var $valor_tiempo;
+  
+     /**
+  * Id del docente
+  * @var INT(11)
+  */
+  var $dia;
 
-  /**
-   * Validamos que todos los datos enviados sean correctos
-   */
-
-  var $valor_turno;
-
-  /**
-   * Validamos que todos los datos enviados sean correctos
-   */
-var $numero_aceptado;
 }
+
 ?>
