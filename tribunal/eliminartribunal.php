@@ -66,9 +66,9 @@ try {
  $usuario_mysql  = $usuario->getAll();
  $usuario_id     = array();
  $usuario_nombre = array();
- $sql="SELECT pt.`id` , u.`nombre` ,u.`apellidos`, es.`codigo_sis` , p.`nombre` as nombreproyecto
-FROM `proyecto` p , `proyecto_tribunal`  pt , `usuario` u, `estudiante` es , `proyecto_estudiante` pe
-WHERE   u.`id`=es.`usuario_id` and  es.`id`=pe.`estudiante_id` and  pe.`proyecto_id`=p.`id` and p.`id`=pt.`proyecto_id`;";
+ $sql="SELECT DISTINCT (p.id) , u.nombre ,CONCAT(u.apellido_paterno,u.apellido_materno) as apellidos, es.codigo_sis , p.nombre as nombreproyecto
+FROM proyecto p , usuario u, estudiante es , proyecto_estudiante pe, tribunal t
+WHERE  u.id=es.usuario_id and  es.id=pe.estudiante_id and  pe.proyecto_id=p.id and p.id=t.proyecto_id;";
  $resultado = mysql_query($sql);
  $arraytribunal= array();
  
@@ -193,11 +193,12 @@ $smarty->assign('proyecto_nombre',$proyecto_nombre);
   {
       echo $_GET['tribunaleliminar_id'];
       
-    $proyectotribunals = new Proyecto_tribunal($_GET['tribunaleliminar_id']);
-    $proyectotribunals->delete();
+    //$proyecto= new Proyecto($_GET['tribunaleliminar_id']);
+   // $proyectotribunals->delete();
    
-    $sqlss= "DELETE FROM tribunal WHERE proyecto_tribunal_id=$proyectotribunals->id";
+    $sqlss= "DELETE FROM tribunal WHERE proyecto_id=".$_GET['tribunaleliminar_id'];
     mysql_query( $sqlss);
+    
     echo "<script>window.location.href='listatribunal.php'</script>";
   }
   
@@ -241,7 +242,7 @@ catch(Exception $e)
 }
 
 
-$contenido = 'tribunal/listas.lista.tpl';
+  $contenido = 'tribunal/listas.lista.tpl';
   $smarty->assign('contenido',$contenido);
 
 
