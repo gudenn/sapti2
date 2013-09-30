@@ -42,15 +42,17 @@ try {
   $menuList[]     = array('url'=>URL.Docente::URL.basename(__FILE__),'name'=>'Edicion de Eventos');
   $smarty->assign("menuList", $menuList);
   
+  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
+  {
+     $iddicta = $_GET['iddicta'];
+  }
+  
   if (isset($_GET['eliminar']) && isset($_GET['evento_id']) && is_numeric($_GET['evento_id']) )
   {
     $evento = new Evento($_GET['evento_id']);
     $evento->delete();
   }
-
-  $docente=  getSessionDocente();
-  $docenteid=$docente->id;
-
+  $smarty->assign('iddicta' ,$iddicta);
   $smarty->assign('columnacentro' ,'docente/calendario/evento.lista.tpl');  
   //No hay ERROR
   $smarty->assign("ERROR",'');

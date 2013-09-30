@@ -30,7 +30,7 @@
             <h3>Registro de Eventos</h3>
             <p>Registro de Eventos y en la Materia de Proyecto Final</p>
           </a>
-          <a href="{$URL}docente/calendario/evento.lista.php">
+          <a href="{$URL}docente/calendario/evento.lista.php?iddicta={$iddicta}">
             <img src="{$URL_IMG}icons/docente/edicion.png"   width="64px" height="64" alt="Correciones">
             <h3>Edici&oacute;n de Eventos</h3>
             <p>Edici&oacute;n de Eventos de la Materia de Proyecto Final</p>

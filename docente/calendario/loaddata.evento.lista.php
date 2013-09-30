@@ -3,8 +3,8 @@
 require_once('../config.php');      
 require_once('../EditableGrid.php');
 
-if(isset($_GET['doc'])){
-$docid=$_GET['doc'];
+if(isset($_GET['iddicta'])){
+$iddicta=$_GET['iddicta'];
 };
          
 // Database connection
@@ -24,7 +24,7 @@ $grid->addColumn('action', 'Opciones', 'html', NULL, false);
 $result = $mysqli->query('
 SELECT *
 FROM evento ev
-WHERE ev.dicta_id=4
+WHERE ev.dicta_id='.$iddicta.'
 ORDER BY ev.fecha_evento ASC
 ');
 $mysqli->close();
