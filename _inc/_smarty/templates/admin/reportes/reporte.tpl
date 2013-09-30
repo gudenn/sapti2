@@ -1,4 +1,23 @@
 
+<form action="#" method="post" id="registro" name="registro" >
+     <p>
+              <select name="semestre_selec" id="semestre_selec" >
+              {html_options values=$semestre_values selected=$semestre_selected output=$semestre_output}
+              </select>
+              <label for="semestre_selec"><small>Seleccione Semestre(*)</small></label>
+            </p>
+            
+            
+            <h2 class="title">Generar </h2>
+            <p>
+              <input type="hidden" name="usuario_id"    value="{$usuario->id}">
+              <input type="hidden" name="estudiante_id" value="{$estudiante->id}">
+              <input type="hidden" name="tarea" value="registrar">
+              <input type="hidden" name="token" value="{$token}">
+
+              <input name="submit" type="submit" id="submit" value="Generar">
+             </p>
+          </form>
    <script type="text/javascript">
          
             var chart;
@@ -11,7 +30,7 @@
                         plotShadow: false
                     },
                     title: {
-                        text: 'Ranking de Navegadores, 2011'
+                        text: 'Estadisticos Diagrama  de Tortas'
                     },
                     tooltip: {
                         formatter: function() {
@@ -32,17 +51,12 @@
                         type: 'pie',
                         name: 'Browser share',
                         data: [
-                            ['Firefox',   45.0],
-                            ['IE',       26.8],
-                            {
-                                name: 'Chrome',    
-                                y: 12.8,
-                                sliced: true,
-                                selected: true
-                            },
-                            ['Safari',    8.5],
-                            ['Opera',     6.2],
-                            ['Others',   0.7]
+                            ['Postergado', {$pos}],
+                            ['Prorroga',      {$pr}],
+                            
+                            ['Cambios',   {$cam} ],
+                            ['Vencidos',   {$v}],
+                            
                         ]
                     }]
                 });

@@ -1,5 +1,7 @@
 <?php
 try {
+  if (!defined('TIPO'))
+    define ('TIPO', 'PR');
   define ("MODULO", "PROYECTO-REGISTRO");
   require('../_start.php');
   if(!isAdminSession())
@@ -48,20 +50,27 @@ try {
   leerClase('Carrera');
   leerClase('Proyecto');
   leerClase('Semestre');
+  leerClase('Sub_area');
   leerClase('Modalidad');
   leerClase('Estudiante');
   leerClase('Institucion');
 
+  leerClase('Objetivo_especifico');
+
+  
   $semestre   = new Semestre(false,true);
   $estudiante = new Estudiante(1);
   $estudiante->getAllObjects();
   $usuario    = $estudiante->getUsuario();
   $proyecto   = $estudiante->getProyecto();
+  $proyecto->getAllObjects();
+  
 
   $smarty->assign('usuario'   , $usuario);
   $smarty->assign('estudiante', $estudiante);
   $smarty->assign('proyecto'  , $proyecto);
   $smarty->assign('semestre'  , $semestre);
+  $smarty->assign('tipo_moda' , 'tipo_moda');
 
   //Objetivos especicicos
   $smarty->assign('base'      , '2'); // cuantos se muestran mas 1
@@ -136,7 +145,7 @@ try {
 
 
   //Director de carrera
-  $smarty->assign('director_carrera',  $semestre->getValor('director_carrera'));
+  $smarty->assign('director_carrera',  $semestre->getValor('Director carrera Sistemas','Director Sistemas'));
 
   //Docente de la materia
   $docentes[]      = '-- Seleccione --';
@@ -146,7 +155,6 @@ try {
     $docentes[] = $dicta->getNombreCompretoDocente();
   }
   $smarty->assign('docentes_materia', $docentes);
-  $smarty->assign('docente_seleccionado', $proyecto->docente_materia);
   
   //Registrado por
   $administrador_aux = getSessionAdmin();
@@ -174,17 +182,68 @@ try {
   
   
   
-  if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
+  if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token']  )
   {
     $EXITO = false;
     mysql_query("BEGIN");
-    $semestre->objBuidFromPost();
-    $semestre->estado = Objectbase::STATUS_AC;
-    $semestre->validar();
-    $semestre->save(TRUE/*copiarlaconfiguraciondelalctivo*/);
+    $proyecto = new Proyecto();
+    $proyecto->objBuidFromPost('proyecto_');
+    $proyecto->estado         = Objectbase::STATUS_AC;
+    $proyecto->fecha_registro = date('d/m/Y');
+    $smarty->assign('proyecto'  , $proyecto);
+
+    //Objetivos especificos
+    $contador = 0;
+    foreach ($_POST['objetivo_especifico'] as $post_especifico) {
+      $contador ++;
+      if ( trim($post_especifico) == '' )
+        continue;
+      $especifico = new Objetivo_especifico($contador);
+      $especifico->descripcion = $post_especifico;
+      $especifico->estado      = Objectbase::STATUS_AC;
+      $especifico->validar();
+      $proyecto->objetivo_especifico_objs[] = $especifico;
+    }
+    $proyecto->asignarEstudiante($estudiante->id);
+    
+    //areas y subareas
+    $contador = 0;
+    foreach ($_POST['area_activa'] as $a_activa) {
+      if ( !$a_activa || !($_POST['proyecto_area_id'][$contador]) || ( !($_POST['proyecto_subarea_id'][$contador]) && trim($_POST['nueva_subarea_nombre'][$contador]) == '' ) )
+        continue;
+      $area_id    = $_POST['proyecto_area_id'][$contador];
+      $subarea_id = $_POST['proyecto_subarea_id'][$contador];
+      if (  trim($_POST['nueva_subarea_nombre'][$contador]) != '' )
+      {
+        $subarea = new Sub_area();
+        $subarea->nombre      = $_POST['nueva_subarea_nombre'][$contador];
+        $subarea->descripcion = $_POST['nueva_subarea_nombre'][$contador];
+        $subarea->area_id     = $area_id;
+        $subarea->estado      = Objectbase::STATUS_AC;
+        $subarea->validar();
+        $subarea->save();
+        $subarea_id = $subarea->id;
+      }
+      $proyecto->asignarAreaSubArea($area_id,$subarea_id);
+      $contador ++;
+
+      
+    }
+    if ($proyecto->modalidad_id)
+    {
+      $modalidad    = new Modalidad($proyecto->modalidad_id);
+      $smarty->assign('tipo_moda',($modalidad->datos_adicionales)?'':'tipo_moda');
+    }
+    $proyecto->validar();
+    $proyecto->tipo_proyecto = TIPO;
+    $proyecto->save();
+    $proyecto->saveAllSonObjects(TRUE);
+    $estudiante->marcarComoProyectoActual($proyecto->id);
     $EXITO = TRUE;
     mysql_query("COMMIT");
-  }
+  }// FIN GRABAR PROYECTO
+  
+  
   $smarty->assign("semestre",$semestre);
 
   //No hay ERROR
@@ -195,9 +254,9 @@ try {
   {
     $html = new Html();
     if ($EXITO)
-      $mensaje = array('mensaje'=>'Se grabo correctamente el Semestre','titulo'=>'Registro de Semestre' ,'icono'=> 'tick_48.png');
+      $mensaje = array('mensaje'=>'Se grabo correctamente el Proyecto','titulo'=>'Registro de Proyecto' ,'icono'=> 'tick_48.png');
     else
-      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Semestre','titulo'=>'Registro de Semestre' ,'icono'=> 'warning_48.png');
+      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Proyecto','titulo'=>'Registro de Proyecto' ,'icono'=> 'warning_48.png');
    $ERROR = $html->getMessageBox ($mensaje);
   }
   $smarty->assign("ERROR",$ERROR);

@@ -112,7 +112,7 @@ class Usuario  extends Objectbase
 
   function getNombreCompleto($echo = false) 
   {
-    $nombreCompleto = strtoupper("{$this->nombre} {$this->apellidos} ");
+    $nombreCompleto = strtoupper("{$this->nombre}");
     if ($echo)
     {
       echo $nombreCompleto;

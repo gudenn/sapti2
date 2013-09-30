@@ -122,6 +122,8 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`proyecto` (
   `trabajo_conjunto` VARCHAR(2) NULL COMMENT 'si es trabajo conjunto (TC) o si es trabajo solitario (TS)' ,
   `asignacion_tribunal` VARCHAR(45) NULL ,
   `asignacion_defensa` VARCHAR(45) NULL ,
+  `es_actual` TINYINT(1) NULL COMMENT 'si es o no el proyecto actual del estudiante' ,
+  `tipo_proyecto` VARCHAR(2) NULL COMMENT 'Tipo perfil (PE), tipo Proyecto (PR)' ,
   `estado_proyecto` VARCHAR(2) NULL COMMENT 'Iniciado (IN), Visto Bueno de Docente, Tutores y Revisores (VB) , TRibunales asignados (TA), tribunales Visto Bueno (TV), con defensa (LD)' ,
   `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
   PRIMARY KEY (`id`) )
@@ -227,6 +229,7 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`proyecto_estudiante` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `proyecto_id` INT NULL ,
   `estudiante_id` INT NULL ,
+  `fecha_asignacion` DATE NULL ,
   `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
