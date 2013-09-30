@@ -40,7 +40,9 @@ try {
     leerClase("Usuario");
     leerClase("Docente");
 
- 
+   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Docente');
+  $menuList[]     = array('url'=>URL.Docente::URL.basename(__FILE__),'name'=>'Areas');
+  $smarty->assign("menuList", $menuList);
     
      
    if ( isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' )

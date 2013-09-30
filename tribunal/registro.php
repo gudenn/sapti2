@@ -67,10 +67,184 @@ try {
   
   $smarty->assign("editores", $editores);
   
+    
+  $sqlr="SELECT  DISTINCT(d.id), u.nombre, CONCAT (u.apellido_paterno,u.apellido_materno) as apellidos
+FROM  usuario u ,docente d, automatico a
+WHERE  u.id=d.usuario_id and   a.docente_id = d.id  and u.estado='AC'
+ORDER BY  a.valor_area , a.dia;";
+ $resultado = mysql_query($sqlr);
+ $arraytribunal= array();
+
+ while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+         { 
+        $listaareas=array();
+        $lista_areas=array();
+        $lista_areas[] = $fila["id"];
+        $lista_areas[] =  $fila["nombre"];
+        $lista_areas[] =  $fila["apellidos"];
+ 
+ 
+$sqla="select  a.`nombre`
+from `docente` d , `apoyo` ap , `area` a
+where  d.`id`=ap.`docente_id` and a.`id`=ap.`area_id` and d.`estado`='AC' and ap.`estado`='AC' and a.`estado`='AC'and d.`id`=".$fila["id"];
+ $resultadoa = mysql_query($sqla);
+//if(mysql_fetch_array($resultadoa, MYSQL_ASSOC)){
+  while ($filas = mysql_fetch_array($resultadoa, MYSQL_ASSOC)) 
+  {
+     $listaareas[]=$filas;
+  }
+ //}else
+//{
+ //  $listaareas[]="NO HAY DATOS";
+ //}
+  $lista_areas[]=$listaareas;
+  $listatiempo=array();
   
-  $sqlr="SELECT  d.`id`, u.`nombre`, CONCAT (u.`apellido_paterno`,u.`apellido_materno`) as apellidos
-FROM  `usuario` u ,`docente` d
-WHERE  u.`id`=d.`usuario_id` and u.`estado`='AC'";
+  
+$sqltiempo="select  d.`id` , d.`nombre` , t.`nombre` as nombreturno
+from `dia` d, `horario_doc` hd , `turno` t
+where  d.`id`=hd.`dia_id` and hd.`turno_id`=t.`id` and  d.`estado`='AC' and hd.`estado`='AC'and t.`estado`='AC' and hd.`docente_id`=".$fila["id"].";";
+ $resultadotiempo= mysql_query($sqltiempo);
+ 
+  while ($filatiempo = mysql_fetch_array($resultadotiempo, MYSQL_ASSOC)) 
+  {
+     $listatiempo[]=$filatiempo;
+  }
+  //$lista_tiempo[]= $listatiempo;
+  $lista_areas[]= $listatiempo;
+  $arraytribunal[]= $lista_areas;
+  
+ }
+  $smarty->assign('listadocentes'  , $arraytribunal);
+  $contenido = 'tribunal/registrotribunal.tpl';
+  $smarty->assign('contenido',$contenido);
+  if(isset($_POST['buscar']))
+  {
+   echo   $_POST['codigosis'];
+   
+   
+   
+    $estudiante   = new Estudiante(false,$_POST['codigosis']);
+    $proyecto     = new Proyecto();
+    
+    $proyecto_aux = $estudiante->getProyecto();
+    if ($proyecto_aux)
+      $proyecto = $proyecto_aux;
+    else
+    {
+      //@todo no tiene proyecto 
+       echo "<script>alert('El Estudiante no Tiene Proyecto');</script>";
+      
+    }
+   
+   $usuariobuscado= new Usuario($estudiante->usuario_id);
+   $smarty->assign('usuariobuscado',  $usuariobuscado);
+   $smarty->assign('estudiantebuscado', $estudiante);
+   $smarty->assign('proyectobuscado', $proyecto);
+   $smarty->assign('proyectoarea', $proyecto->getArea());
+   
+   leerClase("Automatico");
+  $automatico=new Automatico();
+  $automatico->deleteAllSonObjects();
+  
+  $automatico->objBuidFromPost();
+//LISTA DOCENTES
+  $sqldoc="SELECT DISTINCT ap.docente_id AS iddoc
+ FROM apoyo ap";
+ $resultadodoc = mysql_query($sqldoc);
+ while ($filadoc = mysql_fetch_array($resultadodoc, MYSQL_ASSOC)) {
+   $arraylistadoc[]=$filadoc;
+ }
+ //ID DE AREA DEL PROYECTO
+ $array=array();
+ $array= $proyecto->getArea();
+ $idareaproyecto=$array[0];
+ $maxvalor=100;
+   if(count($arraylistadoc)>0){
+       //LLENADO DE AREAS CON VALORES
+ $arraylistaarea[]=array('idarea' => $idareaproyecto, 'valor' => $maxvalor);
+  $sqlarea="SELECT DISTINCT apoyo.area_id AS idarea
+FROM apoyo
+WHERE NOT EXISTS(
+SELECT DISTINCT area.id
+FROM area
+WHERE apoyo.area_id=".$idareaproyecto."
+)";
+ $resultadoarea = mysql_query($sqlarea);
+ while ($filaarea = mysql_fetch_array($resultadoarea, MYSQL_ASSOC)) {
+   $arraylistaarea[]=array('idarea' =>$filaarea['idarea'], 'valor' =>$maxvalor-1);
+   $maxvalor--;
+ }
+ foreach ($arraylistaarea as $valuearea) {
+       $sqldocarea="SELECT apoyo.docente_id as iddoc FROM apoyo WHERE apoyo.area_id=".$valuearea['idarea']."";
+ $resultadodocarea = mysql_query($sqldocarea);
+ while ($filadocarea = mysql_fetch_array($resultadodocarea, MYSQL_ASSOC)) {
+   $arraylistadocarea[]=$filadocarea;
+ }
+    foreach ($arraylistadocarea as $valuedocarea)
+      {
+       
+        $valor_turno=0;
+        $sqldocturno="SELECT hd.dia_id as dia, hd.turno_id as turno
+        FROM horario_doc hd
+        WHERE hd.docente_id=".$valuedocarea['iddoc']."
+        ORDER BY dia ASC";
+        $resultadodocturno = mysql_query($sqldocturno);
+        while ($filadocturno = mysql_fetch_array($resultadodocturno, MYSQL_ASSOC)) {
+        $arraylistadocturno[]=$filadocturno;
+        }
+
+            foreach ($arraylistadocturno as $valuedocturno) 
+              {
+                
+                switch ($valuedocturno['dia']){
+                    case 1:
+                           $valor_turno=$valor_turno1+$valuedocturno['turno']*30;
+                    break;
+                    case 2: 
+                           $valor_turno=$valor_turno2+$valuedocturno['turno']*30;
+                    break;
+                    case 3:
+                           $valor_turno=$valor_turno3+$valuedocturno['turno']*30;
+                    break;
+                    case 4:
+                           $valor_turno=$valor_turno4+$valuedocturno['turno']*30;
+                    break;
+                    case 5:
+                           $valor_turno=$valor_turno5+$valuedocturno['turno']*30;
+                    break;
+                    case 6:
+                           $valor_turno=$valor_turno6+$valuedocturno['turno']*30;
+                    break;
+                    default:
+                    
+                }
+            }
+          
+              $valturno='$valor_turno' ;
+                $automatico=new Automatico();
+                $automatico->objBuidFromPost();
+                $automatico->docente_id=$valuedocarea['iddoc'];
+                $automatico->area_id=$valuearea['idarea'];
+                $automatico->valor_area=$valuearea['valor'];            
+                $automatico->dia=$valuedocturno['dia'];
+                $automatico->valor_tiempo=$valor_turno;
+                $automatico->save();
+             //   echo 'olas';
+              
+            
+
+        
+    }
+ }
+  
+    
+  }  
+   
+  $sqlr="SELECT  DISTINCT(d.id), u.nombre, CONCAT (u.apellido_paterno,u.apellido_materno) as apellidos
+FROM  usuario u ,docente d, automatico a
+WHERE  u.id=d.usuario_id and   a.docente_id = d.id  and u.estado='AC'
+ORDER BY  a.valor_area , a.dia;";
  $resultado = mysql_query($sqlr);
  $arraytribunal= array();
 
@@ -118,38 +292,11 @@ where  d.`id`=hd.`dia_id` and hd.`turno_id`=t.`id` and  d.`estado`='AC' and hd.`
   $contenido = 'tribunal/registrotribunal.tpl';
   $smarty->assign('contenido',$contenido);
   
-  if(isset($_POST['buscar']))
-  {
-   echo   $_POST['codigosis'];
-   
-    $estudiante   = new Estudiante(false,$_POST['codigosis']);
-    $proyecto     = new Proyecto();
-    
-    $proyecto_aux = $estudiante->getProyecto();
-    if ($proyecto_aux)
-      $proyecto = $proyecto_aux;
-    else
-    {
-      //@todo no tiene proyecto 
-       echo "<script>alert('El Estudiante no Tiene Proyecto');</script>";
-      
-    }
-  
-   $usuariobuscado= new Usuario($estudiante->usuario_id);
-   $smarty->assign('usuariobuscado',  $usuariobuscado);
-   $smarty->assign('estudiantebuscado', $estudiante);
-   $smarty->assign('proyectobuscado', $proyecto);
-   $smarty->assign('proyectoarea', $proyecto->getArea());
-    
   }
-  
-  
 if(isset($_POST['estudiante_id']) && isset($_POST['automatico']) && $_POST['automatico']='automatico')
   {
-    echo  $_POST['estudiante_id'];
-    echo 'hola mundo  q  tal';
-  
-    $estudiante   = new Estudiante(false,$_POST['estudiante_id']);
+   
+  $estudiante   = new Estudiante(false,$_POST['estudiante_id']);
     $proyecto     = new Proyecto();
     $proyecto_aux = $estudiante->getProyecto();
     if ($proyecto_aux)
@@ -223,19 +370,26 @@ if (isset($_POST['proyecto_id']) && $_POST['proyecto_id']!="")
       // 'tutores'=>array($tutor->id) 
      foreach ($_POST['ids'] as $id)
      {
-               echo $id;
-               $tribunal= new Tribunal();
-              
-                $tribunal->estado = Objectbase::STATUS_AC;
-                $tribunal->proyecto_id=$proyecto_->id;
-                $tribunal->docente_id =$id;
-                $tribunal->archivo ="";
-                $tribunal->accion="";
+                 echo $id;
+               
+                $tribunal= new Tribunal();
                 $tribunal->objBuidFromPost();
+               
+                $tribunal->proyecto_id=$proyectos->id;
+                $tribunal->docente_id =$id;
+                $tribunal->detalle="";
+                $tribunal->accion="";
+                $tribunal->visto=  Tribunal::VISTO_NV;
+                $tribunal->fecha_asignacion= date("j/n/Y");
+               
+               $tribunal->estado = Objectbase::STATUS_AC;
+            
+                
            
                  $tribunal->save();
-                 $noticaciones= array('tribunales'=>array($tribunal->id));
-                 $notificacion->enviarNotificaion( $noticaciones);
+                 
+                // $noticaciones= array('tribunales'=>array($tribunal->id));
+                // $notificacion->enviarNotificaion( $noticaciones);
                
      }
      }
@@ -244,6 +398,7 @@ if (isset($_POST['proyecto_id']) && $_POST['proyecto_id']!="")
    
    echo "<script>alert('No Existe elProyecto Para Asignar Tribunales');</script>";
  }
+ 
  }
 
   

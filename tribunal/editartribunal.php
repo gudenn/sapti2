@@ -42,6 +42,7 @@ try {
   leerClase("Formulario");
   leerClase("Pagination");
   leerClase("Filtro");
+  leerClase("Modalidad");
   leerClase("Proyecto_tribunal");
   leerClase("Proyecto_estudiante");
 
@@ -118,49 +119,30 @@ $smarty->assign('proyecto_nombre',$proyecto_nombre);
    }
 $contador++;
    }      
- //echo "<script>window.location.href='listatribunaleditar.php'</script>";
     
    }
 
-
-
-
-
-
-  
-  //$tribunal = new Tribunal();
-  //$smarty->assign("tribunal", $tribunal);
-  
-  if(isset($_POST['buscar']))
-  {
-   echo   $_POST['codigosis'];
-    $estudiante = new Estudiante(false,$_POST['codigosis']);
-    $proyecto   = new Proyecto();
-    $proyecto_aux = $estudiante->getProyecto();
-    if ($proyecto_aux)
-      $proyecto = $proyecto_aux;
-    else
-    {
-      //@todo no tiene proyecto 
-      
-    }
-  
-    $usuariobuscado= new Usuario($estudiante->usuario_id);
-  //echo  $estudiante->i;
-    var_dump( $proyecto->getArea());
-   // echo $estudiante->codigo_sis;
-     $smarty->assign('usuariobuscado',  $usuariobuscado);
-    $smarty->assign('estudiantebuscado', $estudiante);
-     $smarty->assign('proyectobuscado', $proyecto);
-      $smarty->assign('proyectoarea', $proyecto->getArea());
-    
-    
-  }
- // editar&tribunaleditar_id
    if(isset($_GET['editar']) && isset($_GET['proyecto_id']) && is_numeric($_GET['proyecto_id']) )
   {
      
+       $proyectos =  new Proyecto($_GET['proyecto_id']);
+      
+      $estudiante= $proyectos->getEstudiante();
+      $usuario =  new Usuario($estudiante->usuario_id);
+      $modalidad=  new Modalidad( $proyectos->modalidad_id);
+      $areaproyecto= $proyectos->getArea();
+  
+       $smarty->assign('proyecto'  , $proyectos);
+        $smarty->assign('modalidad'  , $modalidad);
+        $smarty->assign('usuario'  , $usuario);
+        $smarty->assign('estudiante'  ,$estudiante); 
+        $smarty->assign('area', $areaproyecto);
+     
     
+     
+     
+     
+     
   $sqlr="SELECT  d.id, u.nombre, CONCAT(u.apellido_paterno, u.apellido_materno) as apellidos
 FROM  usuario u ,docente d
 WHERE  u.id=d.usuario_id and u.estado='AC' and  d.estado='AC' and d.id not in(

@@ -104,5 +104,17 @@ INSERT INTO `grupo` (`id`, `codigo`, `descripcion`, `estado`) VALUES
 INSERT INTO `area` (`id`, `nombre`, `descripcion`, `estado`) VALUES (NULL, 'Ingeniería de Software', NULL, 'AC');
 INSERT INTO `area` (`id`, `nombre`, `descripcion`, `estado`) VALUES (NULL, 'Sistemas Expertos', NULL, 'AC');
 
+INSERT INTO `dia` (`id`, `nombre`, `descripcion`, `estado`) VALUES
+(2, 'Martes', 'el primer dia de la  semana', 'AC'),
+(4, 'Miercoles', NULL, 'AC'),
+(5, 'Jueves', NULL, 'AC');
+
+
+INSERT INTO `turno` (`id`, `nombre`, `descripcion`, `estado`) VALUES
+(4, 'Tarde', 'afsd', 'AC'),
+(5, 'Mañana', 'fasdf', 'AC');
+
+
+
 INSERT INTO `evaluacion` (`id`, `evaluacion_1`, `evaluacion_2`, `evaluacion_3`, `promedio`, `rfinal`, `estado`) VALUES (NULL, '0', '0', '0', NULL, NULL, NULL), (NULL, '0', '0', '0', NULL, NULL, NULL), (NULL, '0', '0', '0', NULL, NULL, NULL);
 UPDATE `inscrito` SET `evaluacion_id` = '1' WHERE `inscrito`.`id` = 1; UPDATE `inscrito` SET `evaluacion_id` = '2' WHERE `inscrito`.`id` = 2; UPDATE `inscrito` SET `evaluacion_id` = '3' WHERE `inscrito`.`id` = 3; UPDATE `inscrito` SET `evaluacion_id` = '4' WHERE `inscrito`.`id` = 4;

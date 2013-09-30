@@ -4,5 +4,6 @@
   if(!isEstudianteSession())
     header("Location: login.php");  
   include('registro.php');
+  
 
 ?>

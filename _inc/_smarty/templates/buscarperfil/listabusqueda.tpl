@@ -42,18 +42,19 @@
   {section name=ic loop=$listadocentes}
    
     <tr  class="selectable">
+    <tr  class="{cycle values="light,dark"}">
+        <td>{str_replace($q,"<span style='background-color: #88AAEE'>$q</span>",$listadocentes[ic]['numero'])}</td>
+        <td>{str_replace($q,"<span style='background-color: #88AAEE'>$q</span>",$listadocentes[ic]['nombre'])}</td>
+        <td>{str_replace($q,"<span style='background-color: #88AAEE'>$q</span>",$listadocentes[ic]['apellidos'])}</td>
+        <td>{str_replace($q,"<span style='background-color: #88AAEE'>$q</span>",$listadocentes[ic]['titulo'])}</td>
+        <td>{str_replace($q,"<span style='background-color: #88AAEE'>$q</span>",$listadocentes[ic]['codigo'])}</td>
       
-      <td>{$listadocentes[ic]['numero']}</td>
-      <td>{$listadocentes[ic]['nombre']}</td>
-      <td>{$listadocentes[ic]['apellidos']}</td>
-      <td>{$listadocentes[ic]['titulo']}</td>
-        <td>{$listadocentes[ic]['gestionaprobacion']}</td>
      
      <td>
-        <a href="observacion.detalle.php?revisiones_id={$objs[ic]['id_re']}" target="_blank" >{icono('detalle.png','Detalle')}</a>
+        <a href="perfil.detalle.php?id_perfil={$listadocentes[ic]['id']}" target="_blank" >{icono('detalle.png','Detalle')}</a>
    
           </td>
-     
+     </tr>
     </tr>
     
   {/section}

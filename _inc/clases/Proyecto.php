@@ -20,6 +20,13 @@ class Proyecto extends Objectbase {
   const TRABAJO_CONJUNTO_SI = "TC";
   /** Constante para el tipo de trabajo solo */
   const TRABAJO_CONJUNTO_NO = "TS";
+  
+  
+  /**
+   * Codigo iden de la modalidad
+   * @var INT(11)
+   */
+  var $modalidad_id;
 
   /**
    * Codigo iden de la carrera
@@ -203,15 +210,19 @@ class Proyecto extends Objectbase {
     //@TODO revisar
     //  leerClase('Proyecto_area');
     leerClase('Area');
-
+    $areas= array();
     $activo = Objectbase::STATUS_AC;
     $sql = "select a.* from " . $this->getTableName('Proyecto_area') . " as pa , " . $this->getTableName('Area') . " as a   where pa.proyecto_id = '$this->id' and pa.area_id = a.id and pa.estado = '$activo' and a.estado = '$activo'  ";
     $resultado = mysql_query($sql);
     if (!$resultado)
       return false;
-    $areas = mysql_fetch_array($resultado);
-    $area = new Area($areas);
-    return $area;
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+         { 
+        $areas[] =new Area($fila);
+          }
+    //$areas = mysql_fetch_array($resultado);
+   // $area = new Area($areas);
+    return $areas;
   }
   
   /**

@@ -17,12 +17,12 @@
               <label for="nombre"><small>Nombres (*)</small></label>
             </p>
             <p>
-              <input type="text" name="apellidos" id="apellidos" value="{$usuario->apellidos}" size="200">
+              <input type="text" name="apellidos" id="apellidos" value="{$usuario->apellido_paterno}" size="200">
               <label for="apellidos"><small>Apellidos</small></label>
             </p>
             <p>
-              <input type="text" name="fecha_cumple" id="fecha_cumple" value="{$usuario->fecha_cumple}" size="22">
-              <label for="fecha_cumple"><small>Fecha de Cumplea&ntilde;os</small></label>
+              <input type="text" name="fecha_cumple" id="fecha_cumple" value="{$usuario->fecha_nacimiento}" size="22">
+              <label for="fecha_cumple"><small>Fecha de Nacimiento</small></label>
             </p>
             <p>
               <input type="text" name="email" id="email" value="{$usuario->email}" size="22" data-validation-engine="validate[],custom[email]"  >

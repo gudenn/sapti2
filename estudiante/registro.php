@@ -3,8 +3,9 @@ try {
   require_once('_start.php');
 
   /** HEADER */
-  $smarty->assign('title','SAPTI - Registro Estudiantes');
-  $smarty->assign('description','Formulario de registro de estudiantes');
+  $smarty->assign('title','SAPTI - Registro Estudiante');
+  
+  $smarty->assign('description','Formulario de registro de estudiante');
   $smarty->assign('keywords','SAPTI,Estudiantes,Registro');
 
   //CSS
@@ -24,6 +25,8 @@ try {
 
   //Validation
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
+  
+  
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
 
   $smarty->assign('JS',$JS);
@@ -38,15 +41,23 @@ try {
 
   $id     = '';
   $editar = FALSE;
+  
+  
   if (isEstudianteSession())
   {
+      
+      
+      
     $estudiante = getSessionEstudiante();
+    
+    
     $editar = TRUE;
     $id     = $estudiante->id;
   }
   
 
   $estudiante = new Estudiante($id);
+  //echo $estudiante->codigo_sis;
   $usuario    = new Usuario($estudiante->usuario_id);
   
   $smarty->assign("usuario"   , $usuario);
