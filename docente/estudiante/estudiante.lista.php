@@ -32,11 +32,12 @@ try {
   $menuList[]     = array('url'=>URL.Docente::URL.basename(__FILE__),'name'=>'Estudiantes Registrados');
   $smarty->assign("menuList", $menuList);
   
-  $docente=  getSessionDocente();
-  //$docenteid=$docente->id;
-  $docenteid=4;
-  
-  $smarty->assign("docente_ids", $docenteid);
+  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
+  {
+     $iddicta = $_GET['iddicta'];
+  }
+
+  $smarty->assign("iddicta", $iddicta);
 
   //No hay ERROR
   $smarty->assign("ERROR",$ERROR);

@@ -13,7 +13,7 @@ $pdf->ezSetCmMargins(1,1,1.5,1.5);
 
  $p=$_GET['id_p'];
  
- $fechahoy=  date('d/m/y');
+  $fechahoy=  date('Y-m-d');
  
  
 $queEmp = "SELECT p.id,u.nombre,s.codigo,CONCAT(apellido_paterno,apellido_materno) as apellidos ,p.nombre as titulo

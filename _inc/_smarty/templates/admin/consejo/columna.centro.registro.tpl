@@ -1,28 +1,30 @@
-      <div id="content" style="width:685px;min-height: 400px;">
+      <div id="content">
+        <h1 class="title">Registro de Area</h1>
+        <p>Formulario de registro de Area</p>
+        <h2 class="title">Formulario de Registro</h2>
         <div id="respond">
-           <h1 class="title">FORMULARIO DE INSCRIPCION DE ESTUDIANTES A {$materiagrupo[0]['materia']}</h1>
-            <p>
-               <label for="nombre de materia"><small>NOMBRE DE MATERIA:</small></label>
-               <span>{$materiagrupo[0]['materia']} Grupo: {$materiagrupo[0]['grupo']}</span><br/>
-            </p>
           <form action="#" method="post" id="registro" name="registro" >
             <p>
-              <textarea name="cvs" rows="4" cols="60" style="width: 650px;height: 305px;" data-validation-engine="validate[required]"></textarea>
-              <label for="cvs"><small>Ingrese Contenido CVS (*)</small></label>
+              <input type="text" name="nombre" value="{$area->nombre}"  data-validation-engine="validate[required]">
+              <label for="codigo"><small>Nombre del Area (*)</small></label>
             </p>
-            <h2 class="title">Grabar Estudiantes</h2>
             <p>
+              <input type="text" name="descripcion" value="{$area->descripcion}"  data-validation-engine="validate[required]">
+              <label for="codigo"><small>Descripcion del Area (*)</small></label>
+            </p>
+            <h2 class="title">Grabar Area</h2>
+            <p>
+              <input type="hidden" name="id"    value="{$area->id}">
               <input type="hidden" name="tarea" value="registrar">
               <input type="hidden" name="token" value="{$token}">
-
-              
               <input name="submit" type="submit" id="submit" value="Grabar">
               &nbsp;
-              <input name="reset" type="reset" id="reset" tabindex="5" value="Resetear">
+              <input name="reset" type="reset" id="reset" tabindex="5" value="Cancelar">
             </p>
           </form>
         </div>
         <p>{$ERROR}</p>
+        <p>Todos los campos con (*) son obligatorios.</p>
         <script type="text/javascript">
         {literal} 
           jQuery(document).ready(function(){

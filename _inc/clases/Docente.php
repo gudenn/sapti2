@@ -138,6 +138,69 @@ class Docente extends Objectbase{
     $usuario = new Usuario($this->usuario_id);
     return $usuario;
   }
+  /**
+   * 
+   * @param type $var
+   * @return boolean
+   * retorna el peso dado un dia
+   */
+  function  getDiaPeso($var)
+  {
+     //@TODO revisar
+    //leerClase('Horario_doc');
+    leerClase('Dia');
+    leerClase('Turno');
+    $activo = Objectbase::STATUS_AC;
+    /**
+     * select  DISTINCT (d.id), t.peso  as pesos
+from  horario_doc hd ,dia d, turno  t
+where  hd.dia_id=d.id and hd.turno_id=t.id  and hd.docente_id=1 and d.id=1;
+     */
+    // $sql = "select p.* from ".$this->getTableName('Proyecto_estudiante')." as pe , ".$this->getTableName('Proyecto')." as p   where pe.estudiante_id = '$this->id' and pe.proyecto_id = p.id and pe.estado = '$activo' and p.estado = '$activo'  ";
+
+    $contador=0;
+    $sql = "select DISTINCT (d.id), t.peso  as pesos from ".$this->getTableName('Horario_doc')." as hd , " . $this->getTableName('Dia') . " as d,".$this->getTableName('Turno')."as t   where hd.dia_id=d.id  and hd.turno_id=t.id and hd.docente_id='$this->id' and and d.id='$var' and hd.estado = '$activo' and d.estado = '$activo' and t.estado = '$activo'  ";
+    $resultado = mysql_query($sql);
+    if (!$resultado)
+      return false;
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+         { 
+        $contador =$contador+$fila['pesos'];
+          }
+       return $contador;
+   
+  }
+  
+  /**
+   * 
+   * @
+   */
+  
+    function  getDias()
+  {
+     //@TODO revisar
+    leerClase('Horario_doc');
+    leerClase('Dia');
+    leerClase('Turno');
+    $activo = Objectbase::STATUS_AC;
+    /**
+     *select  DISTINCT (d.`id`) as iddia
+                               from  horario_doc hd, dia  d , turno t
+                               where  hd.`dia_id`=d.`id` and hd.`turno_id`=t.`id` and hd.`docente_id`=1;                                                                                                                                                       hd.`dia_id`=d.`id` and hd.`turno_id`=t.`id` and hd.`docente_id`=1;
+     */
+    $dias=array();
+    $sql = "DISTINCT (d.id) as iddia from  horario_doc hd, dia  d , turno t where hd.dia_id=d.id and hd.turno_id=t.id and hd.docente_id=1";
+    $resultado = mysql_query($sql);
+    var_dump($resultado);
+     if (!$resultado)
+      return false;
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+         { 
+        $dias[]=new Area($fila['iddia']);
+          }
+       return $dias;  
+  }
+  
   
   
 }
