@@ -8,25 +8,25 @@
             
           </p>
           <p>
-            <label for="nombre"><small>Nombres:</small></label>
+            <label for="nombre"><small>Nombres(*):</small></label>
             <span>{$usuario->nombre}</span>
           </p>
           <p>
-            <label for="apellidos"><small>Apellidos:</small></label>
+            <label for="apellidos"><small>Apellidos(*):</small></label>
             <span>{$usuario->apellido_paterno}</span>
           </p>
           <p>
-            <label for="apellidos"><small>Apellidos:</small></label>
+            <label for="apellidos"><small>Apellidos(*):</small></label>
             <span>{$usuario->apellido_materno}</span>
           </p>
           <p>
             
-            <label for="fecha_cumple"><small>Fecha de Nacimiento:</small></label>
+            <label for="fecha_cumple"><small>Fecha de Nacimiento(*):</small></label>
             <span>{$usuario->fecha_nacimiento}</span>
           </p>
           <p>
             
-            <label for="email"><small>E-Mail:</small></label>
+            <label for="email"><small>E-Mail(*):</small></label>
             <span>{$usuario->email}</span>
           </p>
           <p>
