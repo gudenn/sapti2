@@ -33,7 +33,7 @@ $options = array(
             'upload_dir' => PATH.'/'.Estudiante::ARCHIVO_PATH.'/'.Proyecto::ARCHIVO_PATH.'/'.$estudiante->codigo_sis.'/'.$proyecto->getFolder().'/'.$_SESSION['avancedirectorio'].'/',
             'upload_url' => URL.'/'.Estudiante::ARCHIVO_PATH.'/'.Proyecto::ARCHIVO_PATH.'/'.$estudiante->codigo_sis.'/'.$proyecto->getFolder().'/'.$_SESSION['avancedirectorio'].'/',
             //'user_dirs' => false,
-            'mkdir_mode' => 0755,
+            'mkdir_mode' => MKDIRMMODE,
             'param_name' => 'files',
         );
 $upload_handler = new UploadHandler($options);

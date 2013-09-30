@@ -24,7 +24,7 @@ function highlight(div_id, style) {
 function updateCellValue(editableGrid, rowIndex, columnIndex, oldValue, newValue, row, onResponse)
 {
 	$.ajax({
-		url: 'update.php',
+		url: '../update.php',
 		type: 'POST',
 		dataType: "html",
 		data: {
@@ -75,7 +75,7 @@ DatabaseGrid.prototype.initializeGrid = function(grid) {
 };
 
 function image(relativePath) {
-	return "../images/icons/" + relativePath;
+	return "../../images/icons/" + relativePath;
 }
 function deletete(obser){
    ajax=objetoAjax();

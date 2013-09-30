@@ -79,8 +79,7 @@ try {
                     $dicta_aux0 = new Dicta($array20['id']);
                     $dicta_aux0->delete();
                     }
-            }
-            
+            }         
            $resul = "SELECT di.id
             FROM dicta di, semestre se
             WHERE di.semestre_id=se.id

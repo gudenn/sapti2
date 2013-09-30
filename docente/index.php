@@ -17,6 +17,7 @@ try {
   $CSS[]  = URL_JS . "calendar/css/eventCalendar.css";
   $CSS[]  = URL_JS . "calendar/css/eventCalendar_theme.css";
   $CSS[]  = URL_CSS . "dashboard.css";
+  $CSS[]  = URL_CSS . "acordion.css";
 
 // Agregan el js
   //JS

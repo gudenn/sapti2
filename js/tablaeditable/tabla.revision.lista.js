@@ -24,7 +24,7 @@ function displayMessage(text, style) {
 
 // helper function to get path of a demo image
 function image(relativePath) {
-	return "../images/icons/" + relativePath;
+	return "../../images/icons/" + relativePath;
 };
 
 // this will be used to render our table headers

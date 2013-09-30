@@ -7,10 +7,11 @@
   // Begin the session
   session_start();
 
-  require("_configurar.php");
-  require("_sesion.php");
-  leerClase('Exceptions');
-  leerClase('Objectbase');
+  require("_configurar.php"); // Configuracion del sistema
+  require("_sesion.php");     // Sessiones del sistema
+  leerClase('Exceptions');    // Manejo de ecepciones y errores
+  leerClase('Objectbase');    // Componente ecencial de todos los  objetos
+  leerClase('Helpdesk');      // Ayuda presente en todo el sistema
   
   if (isset($_GET['salir'])||isset($_POST['salir']))
   {  
@@ -254,7 +255,15 @@ ____IMG;
     return;
   }
 
-
+  /**
+   * getHelp function hat helps to handle the helpdesk
+   */
+  function getHelp($ancla = '') 
+  {
+    $help = new Helpdesk();
+    $help->getHelp($ancla);
+  }
+  
 /**
  * Cerrar tags abiertos
  * @param string $html

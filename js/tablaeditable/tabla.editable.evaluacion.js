@@ -166,7 +166,7 @@ function updateCellValue(editableGrid, rowIndex, columnIndex, oldValue, newValue
 {
     if(newValue<=100){
 	$.ajax({
-		url: 'update.php',
+		url: '../update.php',
 		type: 'POST',
 		dataType: "html",
 		data: {
