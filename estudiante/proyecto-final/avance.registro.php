@@ -10,25 +10,22 @@ try {
   $smarty->assign('keywords','Proyecto Final,registro,avance');
 
   //CSS
-  $CSS[]  = URL_JS . "ui/overcast/jquery-ui.css";
-  //$CSS[]  = URL_JS . "jQfu/css/demo.css";
-  $CSS[]  = URL_JS . "jQfu/css/jquery.fileupload-ui.css";
   $CSS[]  = URL_CSS . "academic/3_column.css";
-  //BOX
-  $CSS[]  = URL_JS . "box/box.css";
-  
-  $smarty->assign('CSS',$CSS);
-
   
   //FileUpload
   $JS[]  = URL_JS . "jquery.min.js";
   $JS[]  = URL_JS . "ui/jquery-ui.min.js";
+  $CSS[]  = URL_JS . "ui/overcast/jquery-ui.css";
+  //$CSS[]  = URL_JS . "jQfu/css/demo.css";
+  $CSS[]  = URL_JS . "jQfu/css/jquery.fileupload-ui.css";
 
   //CK Editor
   $JS[]  = URL_JS . "ckeditor/ckeditor.js";
   //BOX
+  $CSS[]  = URL_JS . "box/box.css";
   $JS[]  = URL_JS ."box/jquery.box.js";
   $smarty->assign('JS',$JS);
+  $smarty->assign('CSS',$CSS);
 
   // Escritorio del estuddinate
   leerClase('Usuario');

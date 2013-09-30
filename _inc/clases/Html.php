@@ -44,6 +44,54 @@ class Html
     ob_end_clean();
     return $mensaje_OUT;
   }
+
+
+  /**
+   * Graba un template para helpDesk
+   * @param type $template
+   * @param type $somecontent
+   * @param type $path
+   * @return type
+   */
+  function grabarTemplate($filename, $somecontent) {
+    fopen($filename, "wb");
+    // Let's make sure the file exists and is writable first.
+    if (is_writable($filename)) {
+
+      // In our example we're opening $filename in append mode.
+      // The file pointer is at the bottom of the file hence
+      // that's where $somecontent will go when we fwrite() it.
+      if (!$handle = fopen($filename, 'a')) {
+        return "No se pudo abrir el archivo ($filename)";
+      }
+
+      // Write $somecontent to our opened file.
+      if (fwrite($handle, $somecontent) === FALSE) {
+        return "No se pudo escribir en el archivo ($filename)";
+      }
+
+      //echo "Success, wrote (html) to file ($filename)<br/>";
+
+      fclose($handle);
+    } else {
+      return "El Archivo $filename tiene permisos de escritura";
+    }
+  }
+  /**
+   * Leemos un template para el Helpdesk
+   * @param type $template
+   * @return string
+   */
+  function leerTemplate($template) 
+  {
+    if (!file_exists($template))
+      return '';
+    ob_start();
+    include $template;
+    $template = ob_get_contents();
+    ob_end_clean();
+    return $template;
+  }
 }
 
 ?>
