@@ -506,18 +506,20 @@ if (isset($_POST['proyecto_id']))
    // echo $_POST['proyecto_id'];
    $proyectos   = new Proyecto($_POST['proyecto_id']);
    //$estudiante  = array();
-    
+    $estudiante   = new Estudiante(false,$_POST['estudiante_id']);
    $notificacion= new Notificacion();
    $notificacion->objBuidFromPost();
-  // $notificacion->proyecto_id=$_POST['proyecto_id'];
-   /** 
+  // $notificacion->enviarNotificaion($usuarios);
+   $notificacion->proyecto_id=$_POST['proyecto_id']; 
    $notificacion->tipo="Solicitud";
     $notificacion->fecha_envio= date("j/n/Y");
     $notificacion->asunto="Asignacion de Tribunales";
     $notificacion->detalle="fasdf";
     $notificacion->prioridad=5;
     $notificacion->estado = Objectbase::STATUS_AC;
-  */
+
+    $noticaciones= array('estudiantes'=>array($estudiante->id));
+    $notificacion->enviarNotificaion( $noticaciones);
    
      if(isset($_POST['ids']))
      { 
@@ -535,6 +537,21 @@ if (isset($_POST['proyecto_id']))
                 $tribunal->fecha_asignacion= date("j/n/Y");
                 $tribunal->estado = Objectbase::STATUS_AC;
                 $tribunal->save();
+                
+                
+    $notificacions= new Notificacion();
+    $notificacions->objBuidFromPost();
+    $notificacions->proyecto_id=$_POST['proyecto_id']; 
+    $notificacions->tipo="Solicitud";
+    $notificacions->fecha_envio= date("j/n/Y");
+    $notificacions->asunto="Asignacion de Tribunales";
+    $notificacions->detalle="fasdf";
+    $notificacions->prioridad=5;
+    $notificacions->estado = Objectbase::STATUS_AC;
+
+    $noticaciones= array('tribunales'=>array( $tribunal->id));
+    $notificacions->enviarNotificaion( $noticaciones);
+                
                
      }
      }
