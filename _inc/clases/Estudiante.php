@@ -113,7 +113,7 @@ class Estudiante extends Objectbase {
     $activo = Objectbase::STATUS_AC;
     // $sql = "select p.* from ".$this->getTableName('Proyecto_estudiante')." as pe , ".$this->getTableName('Proyecto')." as p   where pe.estudiante_id = '$this->id' and pe.proyecto_id = p.id and pe.estado = '$activo' and p.estado = '$activo'  ";
 
-    $sql = "select p.* from " . $this->getTableName('Proyecto_estudiante') . " as pe , " . $this->getTableName('Proyecto') . " as p   where pe.estudiante_id = '$this->id' and pe.proyecto_id = p.id and pe.estado = '$activo' and p.estado = '$activo'  ";
+    $sql = "select p.* from " . $this->getTableName('Proyecto_estudiante') . " as pe , " . $this->getTableName('Proyecto') . " as p   where pe.estudiante_id = '$this->id' and pe.proyecto_id = p.id and  p.es_actual = '1' and pe.estado = '$activo' and p.estado = '$activo'  ";
 
     $resultado = mysql_query($sql);
     if (!$resultado)
@@ -123,6 +123,25 @@ class Estudiante extends Objectbase {
     $proyecto_array = mysql_fetch_array($resultado);
     $proyecto       = new Proyecto($proyecto_array);
     return $proyecto;
+  }
+  
+  /**
+   * Si un estudiante tiene muchos proyectos pasados o ha hecho muchos cambios 
+   * esta variable senialara ($proyecto->es_actual en el proyecto)
+   * si es que este proyecto es el proyecto actual del estudiante o no
+   * @param type $proyecto_id
+   */
+  function marcarComoProyectoActual($proyecto_id)
+  {
+    leerClase('Proyecto');
+    $todos_mis_proyectos = "SELECT proyecto_id as id FROM ".$this->getTableName('Proyecto_estudiante')." WHERE `estudiante_id` = '{$this->id}' ";
+    $sql = "UPDATE  ".$this->getTableName('Proyecto')." SET  `es_actual` =  '0' WHERE  `id` IN ($todos_mis_proyectos) ";
+    $resultado = mysql_query($sql);
+    if (!$resultado)
+      return false;
+    $proyecto = new Proyecto($proyecto_id);
+    $proyecto->es_actual = '1';
+    $proyecto->save();
   }
 
   /**

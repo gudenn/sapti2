@@ -11,7 +11,7 @@
         {literal}
           $(document).ready(function() {
             $("#calendariosalidas").eventCalendar({
-              eventsjson: 'json/eventos.json.php',
+              eventsjson: '../../cronograma/eventos.json.php',
               jsonDateFormat: "human",
               eventsScrollable: true,
               monthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",

@@ -20,6 +20,13 @@ class Proyecto extends Objectbase {
   const TRABAJO_CONJUNTO_SI = "TC";
   /** Constante para el tipo de trabajo solo */
   const TRABAJO_CONJUNTO_NO = "TS";
+
+  /** Constante para el tipo de proyecto si es perfil o proyecto final */
+  /** Tipo perfil (PE)*/
+  const TIPO_PERFIL = "PE";
+  /** Tipo Proyecto (PR) */
+  const TIPO_PROYECTO = "PR";
+
   
   
   /**
@@ -51,12 +58,6 @@ class Proyecto extends Objectbase {
    * @var VARCHAR(45)
    */
   var $numero_asignado;
-
-  /**
-   * titulo del proyecto
-   * @var TEXT
-   */
-  var $titulo;
 
   /**
    * Objetivo General del proyecto
@@ -105,6 +106,21 @@ class Proyecto extends Objectbase {
    * @var VARCHAR(300)
    */
   var $responsable;
+
+  /**
+   * Si un estudiante tiene muchos proyectos pasados o ha hecho muchos cambios 
+   * esta variable senialara ($proyecto->es_actual en el proyecto)
+   * si es que este proyecto es el proyecto actual del estudiante o no
+   * BOOL
+   */
+  var $es_actual;
+  
+  /**
+   * El tipo de proyecto si es perfil o proyecto final
+   * Tipo perfil (PE), tipo Proyecto Final (PR)
+   * @var VARCHAR(2)
+   */
+  var $tipo_proyecto;
 
   /**
    * (Objeto simple)  Todos los Objetivos Especificos del proyecto
@@ -222,6 +238,72 @@ class Proyecto extends Objectbase {
           }
        return $areas;
   }
+  
+  /**
+   * Asignamos Estudiante
+   * @param INT(11) $estudiante_id codigo del estudiante
+   */
+  function asignarEstudiante($estudiante_id) 
+  {
+    leerClase('Estudiante');
+    leerClase('Proyecto_estudiante');
+    $estudiante = new Estudiante($estudiante_id);
+    
+    $asignado   = new Proyecto_estudiante();
+    $asignado->proyecto_id      = $this->id;
+    $asignado->estudiante_id    = $estudiante->id;
+    $asignado->estado           = Objectbase::STATUS_AC;
+    $asignado->fecha_asignacion = date('d/m/Y');
+    $this->proyecto_estudiante_objs[] = $asignado;
+  }
+
+  /**
+   * Asignamos Estudiante
+   * @param INT(11) $estudiante_id codigo del estudiante
+   */
+  function asignarAreaSubArea($area_id,$subarea_id) 
+  {
+    if (!$area_id || !$subarea_id)
+      return false;
+    leerClase('Proyecto_area');
+    leerClase('Proyecto_sub_area');
+    // Area
+    $p_area = new Proyecto_area();
+    $p_area->area_id            = $area_id;
+    $p_area->estado             = Objectbase::STATUS_AC;
+    $this->proyecto_area_objs[] = $p_area;
+    
+    //Subarea
+    $ps_area = new Proyecto_sub_area($subarea_id);
+    $ps_area->sub_area_id           = $subarea_id;
+    $ps_area->estado                = Objectbase::STATUS_AC;
+    $this->proyecto_sub_area_objs[] = $ps_area;
+  }
+  
+  /**
+   * Validamos proyecto
+   */
+  function validar() {
+    leerClase('Formulario');
+    Formulario::validar('proyecto_nombre'                   ,$this->nombre           ,'texto','El Nombre');
+    Formulario::validar('proyecto_objetivo_general'         ,$this->objetivo_general ,'texto','El Objetivo General');
+    Formulario::validar('proyecto_descripcion'              ,$this->descripcion      ,'texto','La descripci&oacute;n del Proyecto');
+    Formulario::validar('proyecto_director_carrera'         ,$this->director_carrera ,'texto','El Nombre de Director de Carrera');
+    Formulario::validar('proyecto_docente_materia'          ,$this->docente_materia  ,'texto','El Nombre del Docente de la Materia');
+    Formulario::validar('proyecto_responsable'              ,$this->docente_materia  ,'texto','El Nombre del Responsable del Proyecto',TRUE);
+    
+    leerClase('Semestre');
+    $semestre = new Semestre('',TRUE);
+    // Por lo menos un area y una sub area
+    if (sizeof($this->proyecto_area_objs) < $semestre->getValor('Minimo numero de areas asignadas al proyecto',1) )
+      throw new Exception("?proyecto_area_id_1&m=No Asigno el <b>m&iacute;nimo n&uacute;mero de &Aacute;rea(s)</b> requerido para un Proyecto.");
+    if (sizeof($this->proyecto_sub_area_objs)  < $semestre->getValor('Minimo numero de sub areas',1) )
+      throw new Exception("?proyecto_subarea_id_1&m=No Asigno el <b>m&iacute;nimo n&uacute;mero de sub &Aacute;rea</b> requerido para un Proyecto.");
+    if (sizeof($this->objetivo_especifico_objs) < $semestre->getValor('Minimo de objetivos especificos',2)  )
+      throw new Exception("?objetivo_especifico_1&m=No cumple la cantidad de Objetivos Espec&iacute;ficos M&iacute;nimo para un Proyecto.");
+    //
+  }
+  
   
   /**
    * 

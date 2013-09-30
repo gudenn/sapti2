@@ -37,8 +37,10 @@ try {
   $menuList[]     = array('url'=>URL.Docente::URL.basename(__FILE__),'name'=>'Registro de Eventos');
   $smarty->assign("menuList", $menuList);
   
-  $docente=  getSessionDocente();
-  $docente_ids=$docente->id;
+  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
+  {
+     $iddicta = $_GET['iddicta'];
+  }
   $evento = new Evento();
 
   $smarty->assign("evento", $evento);
@@ -49,7 +51,7 @@ try {
     $evento->estado = Objectbase::STATUS_AC;
     $quitarsaltos=$evento->descripcion;
     $evento->descripcion=preg_replace("/\r\n+|\r+|\n+|\t+/i", " ", $quitarsaltos);
-    $evento->dicta_id=4;
+    $evento->dicta_id=$iddicta;
     $evento->save();
 
     $url="calendario.evento.php";
