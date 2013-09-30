@@ -5,9 +5,9 @@ try {
     header("Location: login.php");  
 
   /** HEADER */
-  $smarty->assign('title','Configuraci&oacute;n de SAPTI');
-  $smarty->assign('description','Configuraci&oacute;n de SAPTI');
-  $smarty->assign('keywords','Configuraci&oacute;n de SAPTI');
+  $smarty->assign('title','Docentes');
+  $smarty->assign('description','Gestion Docentes');
+  $smarty->assign('keywords','Docentes Gestion');
 
   //CSS
   $CSS[]  = URL_CSS . "dashboard.css";
@@ -24,24 +24,18 @@ try {
   leerClase('Administrador');
   
   $menuList[]     = array('url'=>URL.Administrador::URL,'name'=>'Administraci&oacute;n');
-  $smarty->assign("menuList", $menuList);
 
-  /**
-   * Menu superior
-   */
-  $menuList[]     = array('url'=>URL.Administrador::URL,'name'=>'Administraci&oacute;n');
-  $menuList[]     = array('url'=>URL.Administrador::URL.'configuracion/','name'=>'Configuraci&oacute;n');
+  $menuList[]     = array('url'=>URL.Administrador::URL.'Docente/','name'=>'Gestion Docentes');
   $smarty->assign("menuList", $menuList);
-
   /**
    * Menu central
    */
   //----------------------------------//
   leerClase('Menu');
   $menu = new Menu('Cronograma');
-  $link = Administrador::URL."configuracion/cronograma.gestion.php";
-  $menu->agregarItem('Gesti&oacute;n de Cronograma','Lista completa de todos eventos para el Semestre','basicset/calendar_48.png',$link);
-  $link = Administrador::URL."configuracion/cronograma.registro.php";
+  $link = Administrador::URL."docente/docentegestion.gestion.php";
+  $menu->agregarItem('Gestion Docentes','Lista completa de todos los docentes','basicset/calendar_48.png',$link);
+  $link = Administrador::URL."configuracion/registro-docente.php";
   $menu->agregarItem('Registro de un Evento','Registro de un nuevo evento para el semestre actual','basicset/timetable.png',$link);
   $menus[] = $menu;
   $menu = new Menu('Semestre');
@@ -110,8 +104,6 @@ try {
   var_dump($pendientes);
   $smarty->assign("pendientes", $pendientes);
   
-  $smarty->assign("columnacentro", 'admin/configuracion/columna.centro.tpl');
-
   
   $smarty->assign("ERROR", $ERROR);
   
