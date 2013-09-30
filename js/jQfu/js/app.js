@@ -16,7 +16,7 @@
     'use strict';
 
     var isOnGitHub = window.location.hostname === 'blueimp.github.io',
-        url = isOnGitHub ? '//jquery-file-upload.appspot.com/' : 'archivo/';
+        url = isOnGitHub ? '//jquery-file-upload.appspot.com/' : $('#fileupload').attr('action') ; // 'archivo/';
 
     angular.module('demo', [
         'blueimp.fileupload'

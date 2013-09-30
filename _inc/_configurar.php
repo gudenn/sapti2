@@ -27,6 +27,7 @@ else
   ////////////////////////////////////////////////////////
   // Directorios
   ////////////////////////////////////////////////////////
+  define ("MKDIRMMODE"   , '0755'); //PERMISOS para crear directorios
   define ("PATH"         , getBasePath()); //RUTA
 
   // SITE: SE MODIFICAN ARCHIVOS

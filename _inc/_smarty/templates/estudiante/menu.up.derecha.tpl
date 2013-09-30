@@ -3,7 +3,7 @@
         <li><a href="{$URL}estudiante/editar.cuenta.php">Modificar Cuenta</a></li>
         <li><a href="{$URL}estudiante/editar.cuenta.php">Preferencias</a></li>
         <li><a href="{$URL}?salirestudiante=1">Cerrar Sesion</a></li>
-        <li class="last"><a href="{$URL}ayuda/estudiante.pdf" target="_blank">Ayuda {icono('basicset/helpdesk_48.png','Ayuda')}</a></li>
+        {include file="helpdesk/help.tpl"}
       </ul>
       <form action="#" method="post" id="sitesearch">
         <fieldset>
