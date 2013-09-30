@@ -19,9 +19,17 @@ try {
   $ERROR = '';
 
   /** HEADER */
-  $smarty->assign('title','Gestion de Usuarios');
-  $smarty->assign('description','Pagina de gestion de Usuarios');
-  $smarty->assign('keywords','Gestion,Usuarios');
+  $smarty->assign('title','Reportes');
+  $smarty->assign('description','Reportes');
+  $smarty->assign('keywords','Reportes');
+/**
+   * Menu superior
+   */
+  
+  $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administrador');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'reportes/','name'=>'Reportes');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'reportes/'.basename(__FILE__),'name'=>'Reportes De Estadisticos');
+  $smarty->assign("menuList", $menuList);
 
   //CSS
   $CSS[]  = URL_CSS . "academic/tables.css";
@@ -34,6 +42,8 @@ try {
   $JS[]  = URL_JS ."reporte/jquery.js";
   $JS[]  = URL_JS . "reporte/highcharts.js";
   $JS[]  = URL_JS . "reporte/themes/grid.js"; 
+  
+  
   $JS[]  = URL_JS . "reporte/modules/exporting.js";
      
   $smarty->assign('JS',$JS);
@@ -41,54 +51,150 @@ try {
   
   
   $smarty->assign('JS',$JS);
+   $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
+   
+   
+  $smarty->assign('lista'       ,'admin/reportes/reporte.tpl');
+  
+  $sql2 = "SELECT *
+                FROM semestre";
+   $resultsem = mysql_query($sql2);
+   
+   $semestre_values[] = '';
+   $semestre_output[] = '- Seleccione -';
+  while ($row2 = mysql_fetch_array($resultsem, MYSQL_ASSOC)) {
+       $semestre_values[] = $row2['id'];
+       $semestre_output[] = $row2['codigo'];
+ }
+  $smarty->assign("semestre_values", $semestre_values);
+  $smarty->assign("semestre_output", $semestre_output);
+  $smarty->assign("semestre_selected", "");
 
   
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
+  if($_POST['semestre_selec']){
+  
+  $p=$_POST['semestre_selec'];
+  $sqlr="SELECT Count(*)as c
+FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe
+WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado='AC' and s.id='".$p."'";
+ $resultado = mysql_query($sqlr);
+ $arraylista= array();
+  
+ while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+ {
+  // $arraytribunal=$fila;
+   
+   //array('name' => $fila["id"], 'home' => $fila["nombre"],'cell' => $fila["apellidos"], 'email' => 'john@myexample.com');
+   
+   $arraylista[]=$fila;
+ }
+ 
+ $cont = $arraylista[0]['c'];
+  
+ echo $cont; 
+ // $objs_pg    = new Pagination($obj_mysql, 'g_cambios','',false,10);
+ //$smarty->assign('cont'  , $cont);
 
+  $sqlr="SELECT count(*) as p
+FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
+WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
+=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado='AC' AND p.id=v.proyecto_id AND v.estado_vigencia='PO' and s.id='".$p."'";
+ $resultado = mysql_query($sqlr);
+ $arraytribunal= array();
+  
+ while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+ {
+  // $arraytribunal=$fila;
+   
+   //array('name' => $fila["id"], 'home' => $fila["nombre"],'cell' => $fila["apellidos"], 'email' => 'john@myexample.com');
+   
+   $arraytribunal[]=$fila;
+ }
+ 
+ $post = $arraytribunal[0]['p'];
+ echo $post;
+ if ($cont) {
+ $pos=((double)$post/(float)$cont)*100;}
+ // $objs_pg    = new Pagination($obj_mysql, 'g_cambios','',false,10);
+ $smarty->assign('pos'  , $pos);
 
-  //$smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
-   $smarty->assign('columnacentro','admin/reportes/reporte.tpl');
-
+ // $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
+ $sqlr="SELECT count(*)as pr
+FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
+WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
+=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado='AC' AND p.id=v.proyecto_id AND v.estado_vigencia='PR' and s.id='".$p."'";
+ $resultado = mysql_query($sqlr);
+ $arraytribunal= array();
+  
+ while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+ {
+  
+   $arraytribunal[]=$fila;
+ }
+ 
+ $pro= $arraytribunal[0]['pr'];
+ if ($pro) {
+ $pr=((double)$pro/(double)$cont)*100;}
+ 
+ $smarty->assign('pr'  , $pr);  
+ 
+ 
+ 
   //Filtro
-  $filtro     = new Filtro('usuario',__FILE__);
-  $usuario = new Usuario();
-  $usuario->iniciarFiltro($filtro);
-  $filtro_sql = $usuario->filtrar($filtro);
-
-  /*
-  $usuario->pais_id         = '%';
-  $usuario->departamento_id = '%';
-  $usuario->ciudad_id       = '%';
-*/
-  //Habilitamos para proffecionales y para no profecionales
-  if ( isset($_GET['es_profecional']) && is_numeric($_GET['es_profecional']) )
-  {
-    $usuario_aux = new Usuario($_GET['es_profecional']);
-    $usuario_aux->puede_ser_tutor = Usuario::PROFECIONAL;
-    $usuario_aux->save();
-  }
-  //Habilitamos para proffecionales y para no profecionales
-  if ( isset($_GET['noes_profecional']) && is_numeric($_GET['noes_profecional']) )
-  {
-    $usuario_aux = new Usuario($_GET['noes_profecional']);
-    $usuario_aux->puede_ser_tutor = Usuario::NOPROFECIONAL;
-    $usuario_aux->save();
-  }
+  $sqlr="SELECT  COUNT( * ) AS cam
+FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe, cambio c
+WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
+=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado='AC'AND c.proyecto_id=p.id and s.id='".$p."'
+";
+ $resultado = mysql_query($sqlr);
+ $arraytribunal= array();
   
+ while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+ {
+  // $arraytribunal=$fila;
+   
+   //array('name' => $fila["id"], 'home' => $fila["nombre"],'cell' => $fila["apellidos"], 'email' => 'john@myexample.com');
+   
+   $arraytribunal[]=$fila;
+ }
+ 
+ $camb  = $arraytribunal[0]['cam'];
+ if ($camb) {
+ $cam=((double)$camb/(double)$cont)*100;}
+ // $objs_pg    = new Pagination($obj_mysql, 'g_cambios','',false,10);
+ $smarty->assign('cam'  , $cam); 
+
+//vencidos
+ 
+ $fechahoy=  date('Y-m-d');
+  $sqlr="SELECT count(*) as vencido
+FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
+WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
+=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado='AC' AND p.id=v.proyecto_id AND ('".$fechahoy."'>=v.fecha_fin)and s.id='".$p."'";
+ $resultado = mysql_query($sqlr);
+ $arraytribunal= array();
   
-  $o_string   = $usuario->getOrderString($filtro);
-  $obj_mysql  = $usuario->getAll('',$o_string,$filtro_sql,TRUE,TRUE);
-  $objs_pg    = new Pagination($obj_mysql, 'usuario','',false,10);
-
-
-  $smarty->assign("filtros"  ,$filtro);
-  $smarty->assign("objs"     ,$objs_pg->objs);
-  $smarty->assign("pages"    ,$objs_pg->p_pages);
-
-
-
+ while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+ {
+  // $arraytribunal=$fila;
+   
+   //array('name' => $fila["id"], 'home' => $fila["nombre"],'cell' => $fila["apellidos"], 'email' => 'john@myexample.com');
+   
+   $arraytribunal[]=$fila;
+ }
+ 
+  $ve = $arraytribunal[0]['vencido'];
+ // $objs_pg    = new Pagination($obj_mysql, 'g_cambios','',false,10);
+ if ($ve) {
+     $v=((double)$ve/(double)$cont)*100;
+     
+ }
+ 
+ $smarty->assign('v'  , $v);
+}
 
   //No hay ERROR
   $smarty->assign("ERROR",'');
@@ -99,8 +205,7 @@ catch(Exception $e)
 {
   $smarty->assign("ERROR", handleError($e));
 }
-$TEMPLATE_TOSHOW = 'admin/2columnas.tpl';
-$smarty->display($TEMPLATE_TOSHOW);
+ $smarty->display('admin/full-width_1.tpl');
 
 
 ?>
