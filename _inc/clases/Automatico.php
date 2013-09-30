@@ -16,7 +16,19 @@ class Automatico extends Objectbase
   */
   var $docente_id;
   
-   /**
+  
+    /**
+  * Id del docente
+  * @var INT(11)
+  */
+  var $valor_tiempo;
+  
+     /**
+  * Id del docente
+  * @var INT(11)
+  */
+  var $dia;
+  /**
   * Id del docente
   * @var INT(11)
   */
@@ -28,18 +40,7 @@ class Automatico extends Objectbase
   */
   var $numero_aceptados;
   
-     /**
-  * Id del docente
-  * @var INT(11)
-  */
-  var $valor_tiempo;
-  
-     /**
-  * Id del docente
-  * @var INT(11)
-  */
-  var $dia;
-
+   
 }
 
 ?>

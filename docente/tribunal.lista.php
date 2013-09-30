@@ -130,7 +130,7 @@ WHERE apoyo.area_id=".$idareaproyecto."
                 $automatico->dia=$valuedocturno['dia'];
                 $automatico->valor_tiempo=$valor_turno;
                 $automatico->save();
-                echo 'olas';
+             //   echo 'olas';
         
     }
  }

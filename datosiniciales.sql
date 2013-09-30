@@ -116,5 +116,8 @@ INSERT INTO `turno` (`id`, `nombre`, `descripcion`, `estado`) VALUES
 
 
 
+INSERT INTO `sapti`.`proyecto_area` (`id`, `area_id`, `proyecto_id`, `estado`) VALUES (NULL, '2', '1', 'AC'), (NULL, '3', '3', 'AC');
+INSERT INTO `sapti`.`proyecto_area` (`id`, `area_id`, `proyecto_id`, `estado`) VALUES (NULL, '4', '4', 'AC');
+
 INSERT INTO `evaluacion` (`id`, `evaluacion_1`, `evaluacion_2`, `evaluacion_3`, `promedio`, `rfinal`, `estado`) VALUES (NULL, '0', '0', '0', NULL, NULL, NULL), (NULL, '0', '0', '0', NULL, NULL, NULL), (NULL, '0', '0', '0', NULL, NULL, NULL);
 UPDATE `inscrito` SET `evaluacion_id` = '1' WHERE `inscrito`.`id` = 1; UPDATE `inscrito` SET `evaluacion_id` = '2' WHERE `inscrito`.`id` = 2; UPDATE `inscrito` SET `evaluacion_id` = '3' WHERE `inscrito`.`id` = 3; UPDATE `inscrito` SET `evaluacion_id` = '4' WHERE `inscrito`.`id` = 4;
