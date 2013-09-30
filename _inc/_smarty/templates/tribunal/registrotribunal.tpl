@@ -13,7 +13,7 @@
            <tr>
             
                  <td>
-                      <input type="text" name="codigosis"  id="codigosis" value="" />
+                      <input type="text" name="codigosis"  id="codigosis" value="{$estudiantebuscado->codigo_sis}" />
                   </td>
         <td><input type="submit" value="Buscar" name="buscar" class="sendme" /></td>
            </tr>
@@ -30,27 +30,30 @@
          <label for="nombre">CODIGO SIS:   {$estudiantebuscado->codigo_sis}</label><br />
          <label for="nombre">PROYECTO:   {$proyectobuscado->nombre}</label><br />
          <label for="Area">NUMERO:   {$proyectobuscado->id}</label><br />
-         <label for="nombre">AREA:   {$proyectoarea->nombre}</label><br />
+         <label for="nombre">AREA:   {foreach from=$proyectoarea item=curr_id}
+                                    Nombre: {$curr_id->nombre}<br />
+                                   {/foreach}</label><br />
 </div>   
           <div style ="clear:both;"></div>
   <hr>
 <div >
-        
+  <h1 style="text-align: center" > MODO DE ASIGNACION</h1>
    <form action="" method="post">
-      <h1 style="text-align: center" > MODO DE ASIGNACION</h1>
-      <input type="hidden" id="proyecto_id" name="proyecto_id" value="{$proyectobuscado->id}" /><br />
+ 
+      <input type="text" id="proyecto_id" name="proyecto_id" value="{$proyectobuscado->id}" /><br />
       <input type="text" id="proyecto_id" name="estudiante_id" value="{$estudiantebuscado->codigo_sis}" /><br />
       
     
      <div style="text-align: center">
-         <input type="hidden" name="automatico" value="automatico">
-         <input type="hidden" name="token" value="{$token}">
-         <input name="submit" type="submit" id="submit" value="AUTOMATICO">
-           &nbsp;
-        <input name="reset" type="reset" id="reset" tabindex="5" value="MANUAL">   
+       
+       <input type="submit" name="a" value ="A">
+        <input type="submit" name="ma" value ="Ma">
+        <input type="hidden" name="token" value="{$token}">
+       
+                  &nbsp;
      </div>
    </form>
-         
+ 
  </div>
     <div style ="clear:both;"></div>  
   <hr>
@@ -58,9 +61,9 @@
 <div >
   
   
-   <div style="width: 100%;float: left;" class="tbl_filtro">
+   <div style='height: 200px; width: 100%; font-size: 12px; overflow: auto;'>
      <Hi> LISTA DE LOS DOCENTES</Hi>
-    <table class="tbl_lista" id="docentes"  mane="docentes">
+<table class="tbl_lista" id="docentes"  mane="docentes">
   <thead>
     <tr>
     <th><a >ID          </a></th>
@@ -71,8 +74,10 @@
      </tr>
   </thead>
   <tbody>
+  
+    
   {section name=ic loop=$listadocentes}
-   
+    
     <tr  class="selectable">
    
       <td>{$listadocentes[ic][0]}
@@ -111,11 +116,12 @@
 </td>
      
     </tr>
+    
   {/section}
     </tbody> 
 </table>
    </div>          
-<div style="width: 100%;float: left; padding-left:27px"> 
+<div style="width: 100%;float: left; padding-left:0px"> 
  <form action="" method="post" id="pedido_form" >
    <Hi> LISTA DE LOS DOCENTES ASIGNADOS</Hi>
      <table  multiple id="asignados" >
@@ -130,8 +136,49 @@
           </tr>
         </thead>
         <tbody>
-          
-          
+   
+  {section name=ic loop=$asignados}
+    
+    <tr  class="selectable">
+   
+      <td>{$asignados[ic][0]}
+        <input type="hidden" name="ids[]" value="{$asignados[ic][0]}">
+      </td>
+      <td>
+        {$asignados[ic][1]}
+      </td>
+      <td>{$asignados[ic][2]}</td>
+  <td>     <a  class="tooltip"> VER
+  <span>
+  <b>
+ </b>
+{foreach name=outer item=contact from=$asignados[ic][3]}
+  <hr />
+  {foreach key=key item=item from=$contact}
+  {$item}<br />
+  {/foreach}
+{/foreach}
+ </span> 
+        
+       </a>
+</td>
+<td>     <a  class="tooltip"> DIS
+  <span>
+  <b>
+ </b>
+{foreach name=outer item=contact from=$asignados[ic][4]}
+  <hr />
+  {foreach key=key item=item from=$contact}
+  {$item}
+  {/foreach}
+{/foreach}
+ </span> 
+    </a>
+</td>
+     
+    </tr>
+    
+  {/section}
           
   
         </tbody>

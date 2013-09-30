@@ -220,9 +220,7 @@ class Proyecto extends Objectbase {
          { 
         $areas[] =new Area($fila);
           }
-    //$areas = mysql_fetch_array($resultado);
-   // $area = new Area($areas);
-    return $areas;
+       return $areas;
   }
   
   /**
