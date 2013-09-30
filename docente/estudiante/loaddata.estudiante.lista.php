@@ -3,8 +3,8 @@
 require_once('../config.php');      
 require_once('../EditableGrid.php');
 
-if(isset($_GET['doc'])){
-$docid=$_GET['doc'];
+if(isset($_GET['iddicta'])){
+$iddicta=$_GET['iddicta'];
 };
          
 // Database connection
@@ -30,7 +30,7 @@ AND it.estudiante_id=es.id
 AND es.usuario_id=us.id
 AND pe.estudiante_id=es.id
 AND pe.proyecto_id=pr.id
-AND di.id="'.$docid.'"');
+AND di.id="'.$iddicta.'"');
 $mysqli->close();
 
 $grid->renderXML($result);

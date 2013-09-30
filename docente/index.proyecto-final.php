@@ -37,28 +37,21 @@ try {
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Docente');
   $smarty->assign("menuList", $menuList);
 
+    if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
+  {
+     $iddicta = $_GET['iddicta'];
+  }
+
   $docente_aux = getSessionDocente();
   $docente     = new Docente($docente_aux->docente_id);
   $usuario     = $docente->getUsuario();
   
-  $docmaterias = "SELECT di.id as iddicta, ma.id as idmat, ma.nombre as materia, di.grupo as grupo
-FROM dicta di, semestre se, materia ma
-WHERE di.materia_id=ma.id
-AND di.semestre_id=se.id
-AND se.activo=1
-AND di.docente_id=".$docente_aux->docente_id."
-ORDER BY ma.id";
-  $resultmate = mysql_query($docmaterias);
-  while ($row2 = mysql_fetch_array($resultmate, MYSQL_ASSOC)) {
-       $docmateriassemestre[] = $row2;
- }
-
-  $smarty->assign("docmateriassemestre", $docmateriassemestre);
   $smarty->assign("docente", $docente);
   $smarty->assign("usuario", $usuario);
+  $smarty->assign("iddicta", $iddicta);
   $smarty->assign("ERROR", $ERROR);
   
-  $smarty->assign("columnacentro", 'docente/index.centro.tpl');
+  $smarty->assign("columnacentro", 'docente/index.proyecto-final.tpl');
   $columnaderecha = 'docente/columna.right.calendario.eventos.tpl';
   $smarty->assign('columnaderecha',$columnaderecha);
   //No hay ERROR

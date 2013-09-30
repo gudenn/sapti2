@@ -26,13 +26,29 @@ try {
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
   $smarty->assign('JS',$JS);
+  
+      if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
+  {
+     $iddicta = $_GET['iddicta'];
+  }
+  
+    $docmaterias = "SELECT ma.nombre as materia, di.grupo as grupo
+FROM dicta di, materia ma
+WHERE di.materia_id=ma.id
+AND di.id='$iddicta'";
+  $resultmate = mysql_query($docmaterias);
+  while ($row2 = mysql_fetch_array($resultmate, MYSQL_ASSOC)) {
+       $materiagrupo[] = $row2;
+ }
 
-    function estainscrito($sis) {
+ $smarty->assign('materiagrupo',$materiagrupo);
+    function estainscrito($sis,$idd) {
       $cond=0;
     $sql = "SELECT *
-    FROM inscrito it, estudiante es
-    WHERE it.estudiante_id=es.id
-    AND es.codigo_sis='$sis'";
+FROM inscrito it, estudiante es
+WHERE it.estudiante_id=es.id
+AND it.dicta_id='$idd'
+AND es.codigo_sis='$sis'";
     $result = mysql_query($sql);
     if (mysql_num_rows($result)){
         $cond=1;
@@ -53,15 +69,7 @@ try {
 
     return $tmp; 
   };
-  if ( isset($_GET['ids']))
-  $idmat = $_GET['ids'];
-  $smarty->assign('ids', $idmat);
-    if ( isset($_GET['mat']) )
-  $mat = $_GET['mat'];
-  $smarty->assign('mat', $mat);
 
-  $docente=  getSessionDocente();
-  $docenteid=$docente->docente_id;
   $inscritos=array();
   $yainscritos=array();
   $noestudiante=array();
@@ -83,17 +91,17 @@ try {
                   $proyecto_dicta = new Proyecto_dicta();
           $estudiante->getByCodigoSis($estudiante_array[1]);
             if ($estudiante->id){
-                if(estainscrito($estudiante_array[1])=='0'){
+                if(estainscrito($estudiante_array[1], $iddicta)=='0'){
                     $evaluacion->evaluacion_1=0;
                     $evaluacion->evaluacion_2=0;
                     $evaluacion->evaluacion_3=0;
                     $evaluacion->save();
                     $inscrito->evaluacion_id = $evaluacion->id;
                     $inscrito->estado        = Objectbase::STATUS_AC;
-                    $inscrito->dicta_id      = $idmat;
+                    $inscrito->dicta_id      = $iddicta;
                     $inscrito->estudiante_id = $estudiante->id;
                     $inscrito->save();
-                    $proyecto_dicta->dicta_id = $idmat;
+                    $proyecto_dicta->dicta_id = $iddicta;
                     $proyecto       = $estudiante->getProyecto();
                     $proyecto_dicta->proyecto_id = $proyecto->proyecto_id;
                     $inscritos[]=$estudiante_array;
