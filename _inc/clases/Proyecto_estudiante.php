@@ -16,7 +16,12 @@ class Proyecto_estudiante extends Objectbase
   * @var INT(11)
   */
   Var $estudiante_id;
-
+  
+ /**
+  * fecha que fue asignado como tutor
+  * @var DATE
+  */
+  Var $fecha_asignacion;
 }
 
 ?>

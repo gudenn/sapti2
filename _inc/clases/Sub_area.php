@@ -18,7 +18,8 @@ class Sub_area extends Objectbase
   * @var INT(45)
   */
   var $descripcion;
-  
+
+
   /**
    * Validamos que todos los datos enviados sean correctos
    */
