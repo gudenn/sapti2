@@ -1,6 +1,6 @@
 <?php
 try {
-  require('_start.php');
+  require('../_start.php');
   if(!isDocenteSession())
     header("Location: login.php");  
 
@@ -43,7 +43,7 @@ try {
     $smarty->assign("inscritos"  ,$inscritos);
     $smarty->assign("noestudiante"  ,$noestudiante);
     
-  $columnacentro = 'docente/columna.centro.inscripcion.estudiante-cvs-lista.tpl';
+  $columnacentro = 'docente/estudiante/columna.centro.inscripcion.estudiante-cvs-lista.tpl';
   $smarty->assign('columnacentro',$columnacentro);
   //No hay ERROR
   $smarty->assign("ERROR",'');
@@ -52,6 +52,6 @@ catch(Exception $e)
 {
   $smarty->assign("ERROR", handleError($e));
 }
-$TEMPLATE_TOSHOW = 'docente/estudiante/docente.3columnas.tpl';
+$TEMPLATE_TOSHOW = 'docente/docente.3columnas.tpl';
 $smarty->display($TEMPLATE_TOSHOW);
 ?>

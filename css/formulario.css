@@ -14,7 +14,7 @@
 
 #container input[type="radio"] { width: 80px!important; }
 #proyecto_numero_asignado { width: 30px!important; }
-#proyecto_titulo { width: 600px!important; }
+#proyecto_nombre { width: 600px!important; }
 
 #container table {
   margin:0px;

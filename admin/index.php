@@ -61,7 +61,7 @@ try {
   $menu = new Menu('Perfil');
   $link = Administrador::URL."proyeco/";
   $menu->agregarItem('Gesti&oacute;n de Perfiles','Gestionar los perfiles de tesis para los estudiantes','basicset/licence.png',$link);
-  $link = Administrador::URL."proyeco/";
+  $link = Administrador::URL."reportes/";
   $menu->agregarItem('Reportes de Perfiles','Reportes correspondientes a los Perfiles','basicset/graph.png',$link);
   $menus[] = $menu;
   $menu = new Menu('Proyecto Final');

@@ -3,8 +3,8 @@
 require_once('../config.php');      
 require_once('../EditableGrid.php');
 
-if(isset($_GET['doc'])){
-$docid=$_GET['doc'];
+if(isset($_GET['iddicta'])){
+$iddicta=$_GET['iddicta'];
 };
          
 // Database connection
@@ -27,15 +27,14 @@ $grid->addColumn('rfinal', 'Aprobacion', 'string', NULL, false);
 
 $result = $mysqli->query('
 SELECT ev.id as id, us.nombre as nombre, CONCAT(us.apellido_paterno,us.apellido_materno) as apellidos, pr.nombre as nombrep, pr.id as id_pr, ev.evaluacion_1, ev.evaluacion_2, ev.evaluacion_3, ev.promedio as pro, ev.rfinal as apro
-FROM docente dt, dicta di, estudiante es, usuario us, inscrito it, proyecto pr, proyecto_estudiante pe, evaluacion ev
-WHERE dt.id="'.$docid.'"
-AND di.docente_id=dt.id 
-AND di.id=it.dicta_id
+FROM dicta di, estudiante es, usuario us, inscrito it, proyecto pr, proyecto_estudiante pe, evaluacion ev
+WHERE di.id=it.dicta_id
 AND it.estudiante_id=es.id
 AND es.usuario_id=us.id
 AND pe.estudiante_id=es.id
 AND pe.proyecto_id=pr.id
 AND it.evaluacion_id=ev.id
+AND di.id="'.$iddicta.'"
 ');
 $mysqli->close();
 

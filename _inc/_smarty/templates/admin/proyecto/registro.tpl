@@ -2,7 +2,7 @@
 <div class="wrapper row3">
   <div class="rnd">
     <div id="container" >
-      <h1 class="title"><span class="tipo_mona">FORMULARIO APROBACI&Oacute;N TEMA DE PROYECTO FINAL</span><span class="tipo_moda">FORMULARIO APROBACI&Oacute;N TEMA DE TRABAJO DIRIGIDO</span></h1>
+      <h1 class="title"><span class="tipo_mona">FORMULARIO APROBACI&Oacute;N TEMA DE PROYECTO FINAL</span><span class="{$tipo_moda}">FORMULARIO APROBACI&Oacute;N TEMA DE TRABAJO DIRIGIDO</span></h1>
       <div id="respond">
       <form action="" method="post" id="registro" name="registro" >
       <table >
@@ -134,7 +134,7 @@
                   T&iacute;tulo:
                 </td>
                 <td>
-                  <input type="text" name="proyecto_titulo"  id="proyecto_titulo" value="{$proyecto->nombre}"  data-validation-engine="validate[required]">
+                  <input type="text" name="proyecto_nombre"  id="proyecto_nombre" value="{$proyecto->nombre}"  data-validation-engine="validate[required]">
                 </td>
               </tr>
             </table>
@@ -150,11 +150,12 @@
               {section name=area start=0 loop=$proyecto->proyecto_area_objs}
                 {$i = $smarty.section.area.index + 1}
                 {$j = $smarty.section.area.index}
+                {assign var="proyecto_area" value=$proyecto->proyecto_area_objs[area]}
                 <tr id="tb_area_{$i}">
                   <td>
                     <input type="hidden" name="area_activa[]" id="activa_area_{$i}" value="1" >
                     <select  name="proyecto_area_id[]" id="proyecto_area_id_{$i}" class="area" correlativo="{$i}" data-validation-engine="validate[required]" >
-                      {html_options values=$areas_ids selected='' output=$areas}
+                      {html_options values=$areas_ids selected=$proyecto_area->area_id output=$areas}
                     </select>
                     <span id="actualizando_subareas{$i}" style="display: none">
                       {icono('basicset/loading.gif','Buscando','50px','10px')}
@@ -164,13 +165,17 @@
                     Sub-&Aacute;rea:
                   </td>
                   <td>
+                      {if ( isset($proyecto->proyecto_sub_area_objs[area]) )}
+                      {assign var="proyecto_subarea" value=$proyecto->proyecto_sub_area_objs[area]}
                     <select  name="proyecto_subarea_id[]" id="proyecto_subarea_id_{$i}" class="subarea" correlativo="{$i}" data-validation-engine="validate[required]" >
+                      {html_options values=$proyecto_subarea->sub_area_id selected=$proyecto_subarea->sub_area_id output=$proyecto_subarea->getNombreSelect()}
                     </select>
+                      {/if}
                   </td>
                   <td>
-                    <a href="#mas"   title="Agregar otra Area" onfocus="addmore(this)" onclick="addmore(this);return false;" xfile="area_{$i+1}" ><img src="{$URL_IMG}activar.png" width="15px" height="15px" alt="Agregar"/></a> 
+                    <a href="#mas"   title="Agregar otra Area" onfocus="addmore(this,true);" onclick="addmore(this,true);return false;" xfile="area_{$i+1}" >{icono('basicset/plus_48.png','Agregar','15px')}</a> 
                     {if ($i>1)}
-                    <a href="#mas"   title="Quitar este elemento" onclick="remover(this);return false;" xfile="area_{$i}"  ><img src="{$URL_IMG}delete.png" width="15px" height="15px" alt="Agregar"/></a> 
+                    <a href="#mas"   title="Quitar este elemento" onclick="remover(this,true);return false;" xfile="area_{$i}"  >{icono('basicset/delete_48.png','Quitar','15px')}</a> 
                     {/if}
                   </td>
                 </tr>
@@ -229,10 +234,10 @@
                     {icono('basicset/loading.gif','Buscando','50px','10px')}
                   </span>
                 </td>
-                <td style="height: 35px;" class="tipo_moda">
+                <td style="height: 35px;" class="{$tipo_moda}">
                   Instituci&oacute;n:
                 </td>
-                <td class="tipo_moda">
+                <td class="{$tipo_moda}">
                   <span id="instituciones_lista">
                   <select  name="proyecto_institucion_id" id="proyecto_institucion_id" data-validation-engine="validate[required]" >
                     {html_options values=$instituciones_ids selected=$proyecto->institucion_id output=$instituciones}
@@ -281,12 +286,12 @@
                     {$j = $smarty.section.foo.index}
                     <tr id="tb_{$i}">
                       <td>
-                        <input type="text" name="objetivo_especifico[]" id="objetivo_especifico_{$i}" value=""  data-validation-engine="validate[required]">
+                        <input type="text" name="objetivo_especifico[]" id="objetivo_especifico_{$i}" value="{$proyecto->objetivo_especifico_objs[foo]->descripcion}"  data-validation-engine="validate[required]">
                       </td>
                       <td>
-                        <a href="#mas"   title="Agregar otra caja" onfocus="addmore(this,false);" onclick="addmore(this,false);return false;" xfile="{$i+1}" ><img src="{$URL_IMG}activar.png" width="15px" height="15px" alt="Agregar"/></a> 
+                        <a href="#mas"   title="Agregar otra caja" onfocus="addmore(this,false)" onclick="addmore(this,false);return false;" xfile="{$i+1}" >{icono('basicset/plus_48.png','Agregar','15px')}</a> 
                         {if ($i>1)}
-                        <a href="#mas"   title="Quitar este elemento" onclick="remover(this,false);return false;" xfile="{$i}"  ><img src="{$URL_IMG}delete.png" width="15px" height="15px" alt="Agregar"/></a> 
+                        <a href="#mas"   title="Quitar este elemento" onclick="remover(this,false);return false;" xfile="{$i}"  >{icono('basicset/delete_48.png','Quitar','15px')}</a> 
                         {/if}
                       </td>
                     </tr>
@@ -338,15 +343,15 @@
                 </td>
                 <td>
                   <select  name="proyecto_docente_materia" id="proyecto_docente_materia" data-validation-engine="validate[required]" >
-                    {html_options values=$docentes_materia selected=$docente_seleccionado output=$docentes_materia}
+                    {html_options values=$docentes_materia selected=$proyecto->docente_materia output=$docentes_materia}
                   </select>
                 </td>
                 <td>
                   Tutor
                 </td>
-                <td class="tipo_moda">
+                <td class="{$tipo_moda}">
                   <select  name="proyecto_responsable" id="proyecto_responsable" data-validation-engine="validate[required]" >
-                    {html_options values=$docresp selected=$docresp_sel output=$docresp}
+                    {html_options values=$docresp selected=$proyecto->responsable output=$docresp}
                   </select>
                 </td>
                 <td>
@@ -363,7 +368,7 @@
                 <td>
                   Tutor:
                 </td>
-                <td class="tipo_moda">
+                <td class="{$tipo_moda}">
                   Responsable:
                 </td>
                 <td>
@@ -503,6 +508,7 @@
         });
       });
     });
+    /*
     jQuery(document).ready(function(){
       jQuery("#registro").validationEngine();
       var wo = 'bottomRight';
@@ -512,7 +518,7 @@
       jQuery('textarea').data('promptPosition',wo);
       jQuery('select').attr('data-prompt-position',wo);
       jQuery('select').data('promptPosition',wo);
-    });
+    });*/
   {/literal} 
   </script>
   </div>

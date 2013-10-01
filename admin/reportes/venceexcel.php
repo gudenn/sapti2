@@ -14,7 +14,7 @@ header("content-disposition: attachment;filename=perfilesVencidos.xls");
 <?php
  $p=$_GET['id_p'];
  
- $fechahoy=  date('d/m/y');
+ $fechahoy=  date('Y-m-d');;
 
 $sql = "SELECT p.id,u.nombre,s.codigo,CONCAT(apellido_paterno,apellido_materno) as apellidos ,p.nombre as titulo
 FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v

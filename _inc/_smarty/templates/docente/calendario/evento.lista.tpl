@@ -27,7 +27,7 @@
         	<div id="paginator"></div>
         </div>
         <script type="text/javascript">
-                editableGrid.onloadXML("loaddata.evento.lista.php?doc={$docente_ids}");
+                editableGrid.onloadXML("loaddata.evento.lista.php?iddicta={$iddicta}");
         </script>
  
     {$ERROR}

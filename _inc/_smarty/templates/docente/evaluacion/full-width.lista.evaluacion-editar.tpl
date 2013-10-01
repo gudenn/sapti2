@@ -31,7 +31,7 @@
         </div>
         <a href="evaluacion.estudiante-cvs.php" type="button">CARGAR NOTAS POR CVS</a>
         <script type="text/javascript">
-                editableGrid.onloadXML("loaddata.evaluacion-editar.php?doc={$docente_ids}");
+                editableGrid.onloadXML("loaddata.evaluacion-editar.php?iddicta={$iddicta}");
         </script>
     </div>
     {$ERROR}
