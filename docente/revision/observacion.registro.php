@@ -64,13 +64,13 @@ try {
     $revision->estado = Objectbase::STATUS_AC;
     $revision->revisor=$docente_aux->docente_id;
     $revision->revisor_tipo='DO';
-    $revision->estado_revision='CR';
+    $revision->estado_revision=Revision::E1_CREADO;
     $revision->proyecto_id=$proyecto->id;
     $revision->save();
     foreach ($observaciones as $obser_array){
     $observacion->objBuidFromPost();
     $observacion->estado = Objectbase::STATUS_AC;
-    $observacion->estado_observacion='CR';
+    $observacion->estado_observacion=Observacion::E1_CREADO;
     $observacion->observacion=$obser_array;
     $observacion->revision_id = $revision->id;
     $observacion->save();
