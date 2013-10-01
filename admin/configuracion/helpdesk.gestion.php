@@ -21,7 +21,7 @@ try {
   /**
    * Menu superior
    */
-  $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administrador');
+  $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/','name'=>'Configuraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Gesti&oacute;n de Temas de Ayuda');
   $smarty->assign("menuList", $menuList);

@@ -278,7 +278,7 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`dicta` (
   `docente_id` INT NULL ,
   `materia_id` INT NULL ,
   `semestre_id` INT NULL ,
-  `grupo` INT NULL ,
+  `codigo_grupo` VARCHAR(45) NULL ,
   `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;

@@ -14,7 +14,7 @@ try {
   /**
    * Menu superior
    */
-  $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administrador');
+  $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/','name'=>'Configuraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/area.gestion.php','name'=>'Gesti&oacute;n de Areas');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/subarea.gestion.php','name'=>'Gesti&oacute;n de Sub-Areas');
