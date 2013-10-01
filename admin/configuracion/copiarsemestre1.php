@@ -34,9 +34,6 @@ try {
   $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Configuraci&oacute;n Copiar');
   $smarty->assign("menuList", $menuList);
 
-  $docente=  getSessionDocente();
-  $docenteid=$docente->id;
-  
   $semestre=new Semestre();
   $semestre->getActivo();
   $smarty->assign("semestre", $semestre);
