@@ -8,6 +8,13 @@ try {
   $smarty->assign('title','SAPTI - Registro Estudiantes');
   $smarty->assign('description','Formulario de registro de estudiantes');
   $smarty->assign('keywords','SAPTI,Estudiantes,Registro');
+  /**
+   * Menu superior
+   */
+  $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administrador');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'estudiante/','name'=>' Estudiantes');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'estudiante/'.basename(__FILE__),'name'=>'Registro de estudiante');
+  $smarty->assign("menuList", $menuList);
 
   //CSS
   $CSS[]  = URL_CSS . "academic/3_column.css";
@@ -15,7 +22,6 @@ try {
   /////css del calendario
   $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
   
-  $smarty->assign('CSS',$CSS);
 
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
@@ -27,7 +33,12 @@ try {
   //Validation
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
+  //BOX
+  $CSS[] = URL_JS . "box/box.css";
+  $JS[]  = URL_JS ."box/jquery.box.js";
 
+  
+  $smarty->assign('CSS',$CSS);
   $smarty->assign('JS',$JS);
 
 
@@ -82,25 +93,30 @@ try {
   $smarty->assign("materia_output", $materia_output);
   $smarty->assign("materia_selected", "");  
   
+  //Sexo del usuario
+  $smarty->assign('sexo', array(
+      Usuario::FEMENINO  => 'Femenino',
+      Usuario::MASCULINO => 'Masculino'));
+  $smarty->assign('sexo_selected', ($usuario->sexo==Usuario::FEMENINO)?Usuario::FEMENINO:Usuario::MASCULINO);
   
   
   if (!$editar)
-    $columnacentro = 'admin/columna.centro.estudiante-registro.tpl';
+    $columnacentro = 'admin/estudiante/columna.centro.estudiante-registro.tpl';
   else
-    $columnacentro = 'admin/columna.centro.estudiante-registro-editar.tpl';
+    $columnacentro = 'admin/estudiante/columna.centro.estudiante-registro-editar.tpl';
   $smarty->assign('columnacentro',$columnacentro);
   
-  if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
+  if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar'  && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
   {
-    
+    $EXITO = false;
     mysql_query("BEGIN");
     $usuario->objBuidFromPost();
+    $estudiante->objBuidFromPost();
     $usuario->estado = Objectbase::STATUS_AC;
     $es_nuevo = (!isset($_POST['usuario_id'])||trim($_POST['usuario_id'])=='' )?TRUE:FALSE;
     $usuario->validar($es_nuevo);
     $usuario->save();
 
-    $estudiante->objBuidFromPost();
     $estudiante->estado = Objectbase::STATUS_AC;
     $estudiante->usuario_id = $usuario->id;
     $estudiante->validar($es_nuevo);
@@ -119,13 +135,26 @@ try {
       
     }
     
+    $EXITO = true;
     mysql_query("COMMIT");
   }
 
   
 
   //No hay ERROR
-  $smarty->assign("ERROR",'');
+  $ERROR = ''; 
+  leerClase('Html');
+  $html  = new Html();
+  if (isset($EXITO))
+  {
+    $html = new Html();
+    if ($EXITO)
+      $mensaje = array('mensaje'=>'Se grabo correctamente el Estudiante','titulo'=>'Registro de Estudiante' ,'icono'=> 'tick_48.png');
+    else
+      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Estudiante','titulo'=>'Registro de Estudiante' ,'icono'=> 'warning_48.png');
+   $ERROR = $html->getMessageBox ($mensaje);
+  }
+  $smarty->assign("ERROR",$ERROR);
   
 } 
 catch(Exception $e) 

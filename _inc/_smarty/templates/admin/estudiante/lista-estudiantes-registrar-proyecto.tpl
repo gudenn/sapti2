@@ -6,7 +6,7 @@
       <th><a href='?order=apellidos'           class="tajax"  title='Ordenar por Apellidos'    >Apellidos    {$filtros->iconOrder('apellidos')}</a></th>
       <th><a href='?order=login'               class="tajax"  title='Ordenar por Login'        >Login        {$filtros->iconOrder('login')}</a></th>
       <th><a href='?order=email'               class="tajax"  title='Ordenar por Email'        >Email        {$filtros->iconOrder('email')}</a></th>
-      <th><a href='?order=codigo_sis'          class="tajax"  title='Ordenar por Codigo Sis'   >Codigo Sis   {$filtros->iconOrder('codigo_sis')}</a></th>
+     
       <th>Opciones</th>
     </tr>
   </thead>
@@ -18,13 +18,14 @@
       <td>{$objs[ic]['usuario_apellidos']}</td>
       <td>{$objs[ic]['usuario_login']}</td>
       <td>{$objs[ic]['usuario_email']}</td>
-      <td>{$objs[ic]['codigo_sis']}</td>
+     
       <td>
-        <a href="estudiante.detalle.php?estudiante_id={$objs[ic]['id']}" target="_blank" >{icono('detalle.png','Detalle')}</a>
-        <a href="estudiante.editar.php?estudiante_id={$objs[ic]['id']}" target="_blank">{icono('editar.png','Editar')}</a>
-        <a href="estudiante.gestion.php?eliminar=1&estudiante_id={$objs[ic]['id']}" onclick="return confirm('Eliminar este Estudiante?');"  >{icono('borrar.png','Eliminar')}</a>
+        <a href="../tutor/tutor.gestion.php?estudiante_id={$objs[ic]['id']}" target="_blank" >{icono('basicset/people.png','Tutores')} Ver Tutores</a>
+        
       </td>
     </tr>
   </tbody>
   {/section}
 </table>
+ 
+ 

@@ -27,6 +27,30 @@ class Proyecto extends Objectbase {
   /** Tipo Proyecto (PR) */
   const TIPO_PROYECTO = "PR";
 
+  /** 
+   * Estado Proyecto 
+   * Iniciado (IN)
+   */
+  const EST1_INI = "IN";
+
+  /** 
+   * Estado Proyecto 
+   * Visto Bueno de Docente, Tutores y Revisores (VB)
+   */
+  const EST2_BUE = "VB";
+  
+  /** 
+   * Estado Proyecto 
+   * tribunales Visto Bueno (TV)
+   */
+  const EST3_TRI = "TV";
+
+  /** 
+   * Estado Proyecto 
+   * con defensa (LD)
+   */ 
+  const EST4_DEF = "LD";
+  
   
   
   /**
@@ -111,7 +135,7 @@ class Proyecto extends Objectbase {
    * Si un estudiante tiene muchos proyectos pasados o ha hecho muchos cambios 
    * esta variable senialara ($proyecto->es_actual en el proyecto)
    * si es que este proyecto es el proyecto actual del estudiante o no
-   * BOOL
+   * @var BOOLEAN
    */
   var $es_actual;
   
@@ -121,6 +145,13 @@ class Proyecto extends Objectbase {
    * @var VARCHAR(2)
    */
   var $tipo_proyecto;
+  
+  /**
+   * Iniciado (IN), Visto Bueno de Docente, Tutores y Revisores (VB) , 
+   * TRibunales asignados (TA), tribunales Visto Bueno (TV), con defensa (LD)
+   * @var VARCHAR(2)
+   */
+  var $estado_proyecto;
 
   /**
    * (Objeto simple)  Todos los Objetivos Especificos del proyecto
@@ -222,6 +253,21 @@ class Proyecto extends Objectbase {
     return self::ARCHIVO_PREFOLDER . $this->id;
   }
 
+  /**
+   * Creamos un proyecto inicial de tal manera que los estudiantes nunca estnen sin proyectos
+   */
+  function crearProyectoInicial($estudiante_id,$grabar = true) 
+  {
+    $this->estado_proyecto = Proyecto::EST1_INI;
+    $this->es_actual       = 1;
+    $this->estado          = Objectbase::STATUS_AC;
+    if ($grabar)
+      $this->save();
+    $this->asignarEstudiante($estudiante_id);
+    if ($grabar)
+      $this->saveAllSonObjects(TRUE);
+  }
+  
   function getArea() {
     //@TODO revisar
     //  leerClase('Proyecto_area');
@@ -247,11 +293,11 @@ class Proyecto extends Objectbase {
   {
     leerClase('Estudiante');
     leerClase('Proyecto_estudiante');
-    $estudiante = new Estudiante($estudiante_id);
+    //$estudiante = new Estudiante($estudiante_id);
     
     $asignado   = new Proyecto_estudiante();
     $asignado->proyecto_id      = $this->id;
-    $asignado->estudiante_id    = $estudiante->id;
+    $asignado->estudiante_id    = $estudiante_id;
     $asignado->estado           = Objectbase::STATUS_AC;
     $asignado->fecha_asignacion = date('d/m/Y');
     $this->proyecto_estudiante_objs[] = $asignado;

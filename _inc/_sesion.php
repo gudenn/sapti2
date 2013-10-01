@@ -55,6 +55,29 @@ function initEstudianteSession($login, $passwd) {
 }
 
 /**
+ * Inicia la session del consejo
+ */
+function initConsejoSession($login, $passwd) {
+  global $SYSTEM_NAME,$SESSION_TIME;
+  leerClase("Consejo");
+  $consejo = new Consejo();
+  $consejo = $consejo->issetConsejo($login, $passwd);
+  if ($consejo) {
+    saveObject($consejo, "$SYSTEM_NAME-CONSEJO");
+    setcookie("$SYSTEM_NAME-CONSEJO", $login, time() + $SESSION_TIME, '/');
+    return true;
+  }
+  else
+    return false;
+}
+
+
+
+
+
+
+
+/**
  * Inicia la session del docente
  */
 function initDocenteSession($login, $passwd) {
@@ -151,6 +174,33 @@ function isEstudianteSession() {
 
   return isset($_SESSION["$SYSTEM_NAME-ESTUDIANTE"]) ? 1 : 0;
 }
+
+
+function isConsejoSession() {
+  global $SYSTEM_NAME,$SESSION_TIME;
+  if(!isset($_SESSION))
+    session_start();
+  if ( !isset($_COOKIE["$SYSTEM_NAME-CONSEJO"]) )
+  {
+    closeConsejoSession();
+    return 0;
+  }
+  // renovamos en tiempo de la session pq hay actividad del usuario
+  $login = $_COOKIE["$SYSTEM_NAME-CONSEJO"];
+  setcookie("$SYSTEM_NAME-CONSEJO", $login, time() + $SESSION_TIME, '/');
+
+  return isset($_SESSION["$SYSTEM_NAME-CONSEJO"]) ? 1 : 0;
+}
+
+function closeConsejoSession() {
+  global $SYSTEM_NAME,$SESSION_TIME;
+  if(isset($_SESSION)) {
+    setcookie("$SYSTEM_NAME-CONSEJO", "" , 1 - ($SESSION_TIME * 2), '/');
+    unset($_SESSION["$SYSTEM_NAME-CONSEJO"]);
+  }
+}
+
+
 
 function isDocenteSession() {
   global $SYSTEM_NAME,$SESSION_TIME;
@@ -292,6 +342,8 @@ function closeDocenteSession() {
     unset($_SESSION["$SYSTEM_NAME-DOCENTE"]);
   }
 }
+
+
 function closeTutorSession() {
   global $SYSTEM_NAME,$SESSION_TIME;
   if(isset($_SESSION)) {

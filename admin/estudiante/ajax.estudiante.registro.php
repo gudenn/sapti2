@@ -1,6 +1,6 @@
 <?php
 define ("MODULO", "DOCENTES-VER");
-require_once("../_inc/_sistema.php");
+require_once("../../_inc/_sistema.php");
 if(!isAdminSession())
   exit('No tiene permiso');
 
