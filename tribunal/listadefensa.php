@@ -36,10 +36,9 @@ try {
   // $modalidad->objBuidFromPost();
   //$modalidad->save();
   
- $sql="select u.`nombre`, u.`apellido_paterno`, pt.id , p.`nombre` as nombreproyecto
+ $sql="select   pe.`estudiante_id` as id, u.nombre  , CONCAT(u.`apellido_paterno`, u.`apellido_materno`) as apellidos , p.`nombre`  as nombreproyecto
 from `proyecto` p , `proyecto_estudiante` pe, `estudiante` e, `usuario` u
-where p.`id`=pe.`proyecto_id` and pe.`estudiante_id`=e.id and e.`usuario_id`=u.id and p.`id`= pt.`proyecto_id` and p.`estado`='AC' and
-pt.`estado`='AC' and pe.`estado`='AC' and e.`estado`='AC' and u.`estado`='AC';
+where p.`id`=pe.`proyecto_id`  and pe.`estudiante_id`=e.`id`  and e.`usuario_id`=u.`id`;
 ";
     $resultado   =  mysql_query($sql);
     $listasignacion= array();
