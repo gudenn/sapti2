@@ -339,6 +339,33 @@ class Proyecto extends Objectbase {
       return Proyecto_tutor::FINALIZADO;
     return $proyecto_tutor->estado_tutoria;
   }
+  
+  
+    
+  /**
+   * 
+   * @return
+   * retorna la vigencia del proyecto
+   */
+  
+   function getVigencia() {
+    //@TODO revisar
+    //  leerClase('Proyecto_area');
+    leerClase('Vigencia');
+    $areas= array();
+    $activo = Objectbase::STATUS_AC;
+    $sql = "select v.* from " . $this->getTableName('Vigencia') . " as v    where v.proyecto_id = '$this->id' and v.estado = '$activo'";
+    $resultado = mysql_query($sql);
+    if (!$resultado)
+      return false;
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+         { 
+        $vigencias[] =new Vigencia($fila);
+          }
+       return $vigencias;
+  }
+  
+  
 
 }
 

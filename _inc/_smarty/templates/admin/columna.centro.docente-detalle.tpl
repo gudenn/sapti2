@@ -12,11 +12,11 @@
             <span>{$usuario->nombre}</span>
           </p>
           <p>
-            <label for="apellidos"><small>Apellidos(*):</small></label>
+            <label for="apellido_paterno"><small>Apellido Paterno(*):</small></label>
             <span>{$usuario->apellido_paterno}</span>
           </p>
           <p>
-            <label for="apellidos"><small>Apellidos(*):</small></label>
+            <label for="apellido_materno"><small>Apellido Materno(*):</small></label>
             <span>{$usuario->apellido_materno}</span>
           </p>
           <p>

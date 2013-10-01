@@ -125,6 +125,8 @@ class Estudiante extends Objectbase {
     return $proyecto;
   }
   
+  
+  
   /**
    * Si un estudiante tiene muchos proyectos pasados o ha hecho muchos cambios 
    * esta variable senialara ($proyecto->es_actual en el proyecto)
