@@ -1,6 +1,6 @@
 <?php
 define ("MODULO", "DOCENTES-VER");
-require_once("../_inc/_sistema.php");
+require_once("../../_inc/_sistema.php");
 if(!isAdminSession())
   exit('No tiene permiso');
 
@@ -12,13 +12,15 @@ if (isset($_GET['ajax'])){
   {
     leerClase('Materia');
     $materia = new Materia($_GET['materia']);
-    $docentesDictan = $materia->getDocentesDictan($_GET['semestre']);
-    
-    foreach ($docentesDictan as $docente) {
-      leerClase('Usuario');
-      $usuario = new Usuario($docente->usuario_id);
+    $dictan  = $materia->getGruposDictan($_GET['semestre']);
+    /*
+    echo "<!--";
+    print_r($dictan);
+    echo "-->";
+    */
+    foreach ($dictan as $grupo) {
       // mandamos el id de Dicta 
-      $resp .= '{"optionValue":"'.$docente->dicta_id.'", "optionDisplay": "'.$usuario->nombre.'"},';
+      $resp .= '{"optionValue":"'.$grupo['id'].'", "optionDisplay": "'.$grupo['codigo_grupo'].'"},';
     }
     $resp = rtrim($resp,',');
     echo <<<____HERE_DOC

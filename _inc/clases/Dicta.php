@@ -25,6 +25,12 @@ class Dicta extends Objectbase
   */
   var $semestre_id;
   
+ /**
+  * Codigo del grupo para identificar el grupo
+  * @var VARCHAR(45)
+  */
+  var $codigo_grupo;
+  
   /**
    * Obtiene el nombre completo del docente que dicta la materia
    * @return string el nombre completo del docente que dicta la materia

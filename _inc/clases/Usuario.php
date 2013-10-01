@@ -19,6 +19,10 @@ class Usuario  extends Objectbase
   const PROFECIONAL   = "1";
   const NOPROFECIONAL = "0";
 
+  /** Constantes para el sexo del usuario */
+  const MASCULINO   = "M";
+  const FEMENINO    = "F";
+
  /**
   * Nombre del usuario
   * @var VARCHAR(100)
@@ -50,7 +54,7 @@ class Usuario  extends Objectbase
   var $email;
 
  /**
-  * Email del estudiante
+  * fecha_nacimiento
   * @var DATE(100)
   */
   var $fecha_nacimiento;
@@ -112,7 +116,7 @@ class Usuario  extends Objectbase
 
   function getNombreCompleto($echo = false) 
   {
-    $nombreCompleto = strtoupper("{$this->nombre}");
+    $nombreCompleto = trim(strtoupper("{$this->nombre} {$this->apellido_paterno} {$this->apellido_materno}"));
     if ($echo)
     {
       echo $nombreCompleto;
@@ -187,10 +191,11 @@ class Usuario  extends Objectbase
    */
   function validar($es_nuevo = true) {
     leerClase('Formulario');
-    Formulario::validar('ci'                ,$this->ci          ,'texto','El CI');
-    Formulario::validar('nombre'            ,$this->nombre      ,'texto','El Nombre');
-    Formulario::validar('apellidos'         ,$this->apellidos   ,'texto','Los Apellidos',TRUE);
-    Formulario::validar('login'             ,$this->login      ,'texto','El Login');
+    Formulario::validar('ci'                ,$this->ci                 ,'texto','El CI');
+    Formulario::validar('nombre'            ,$this->nombre             ,'texto','El Nombre');
+    Formulario::validar('apellido_materno'  ,$this->apellido_materno   ,'texto','Apellido Materno',TRUE);
+    Formulario::validar('apellido_paterno'  ,$this->apellido_paterno   ,'texto','Apellido Paterno',TRUE);
+    Formulario::validar('login'             ,$this->login              ,'texto','El Login');
     if ( $es_nuevo ) // nuevo
     {
       $this->getByLogin($this->login,true);
@@ -204,7 +209,7 @@ class Usuario  extends Objectbase
       Formulario::validarCambioPassword('password',$this->clave,$pas1,$pas2,$pas3,true,'texto','La Clave de acceso',FALSE);
       $this->password = $pas2;
     }
-    Formulario::validar_fecha('fecha_cumple',$this->fecha_cumple,TRUE);
+    Formulario::validar_fecha('fecha_nacimiento',$this->fecha_nacimiento,TRUE);
   }
   
   
@@ -248,8 +253,8 @@ class Usuario  extends Objectbase
     $order_array                        = array();
     $order_array['id']                  = " {$this->getTableName ()}.id ";
     $order_array['nombre']              = " {$this->getTableName ()}.nombre ";
-    $order_array['apellido_paterno']           = " {$this->getTableName ()}.apellido_paterno";
-    $order_array['apellido_materno']           = " {$this->getTableName ()}.apellido_materno";
+    $order_array['apellido_paterno']    = " {$this->getTableName ()}.apellido_paterno";
+    $order_array['apellido_materno']    = " {$this->getTableName ()}.apellido_materno";
     $order_array['login']               = " {$this->getTableName ()}.login ";
     $order_array['email']               = " {$this->getTableName ()}.email ";
     $order_array['estado']              = " {$this->getTableName ()}.estado ";
