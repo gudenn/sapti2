@@ -63,6 +63,9 @@ try {
  $ERROR = ''; 
   leerClase('Html');
   $html  = new Html();
+  leerClase('Html');
+  $html  = new Html();
+ 
  
 
   if (isset($_GET['postergar']) )
