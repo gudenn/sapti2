@@ -42,7 +42,8 @@ try {
   $estudiante     = new Estudiante($id_estudiante);
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();
-  echo  $usuario->tutor_id;
+  //echo  $proyecto->nombre;
+  //echo  "Hola elis";
     //////creando la clase de visto bueno para realizar el visto bueno del proyecto de un estudiante
  
   
@@ -59,11 +60,11 @@ try {
     {
     $vistobueno                    =       new Visto_bueno();
     $docente                       =       getSessionDocente();
-    $vistobueno->objBuidFromPost();
-   // $vistobueno->proyecto_id       =       $_POST['pro'];
+    $vistobueno->objBuidFromPost();    
+    $vistobueno->proyecto_id       =        $_POST['proyecto_id'];
     $vistobueno->visto_bueno_tipo  =        Visto_bueno::E3_TRIBUNAL;
-    $vistobueno->fecha_visto_bueno =       date("d/m/Y");
-    $vistobueno->visto_bueno_id    =        4;
+    $vistobueno->fecha_visto_bueno =        date("d/m/Y");
+    $vistobueno->visto_bueno_id    =        $docente->docente_id;;
     $vistobueno->estado            =        Objectbase::STATUS_AC;
    
     $vistobueno->save();
@@ -87,6 +88,6 @@ catch(Exception $e)
   $_SESSION['register'] = $token;
   $smarty->assign('token',$token);
   
-$TEMPLATE_TOSHOW = 'docente_tutor/full-width.visto.registro.tpl';
+$TEMPLATE_TOSHOW = 'docente_tribunal/full-width.visto.registro.tpl';
 $smarty->display($TEMPLATE_TOSHOW);
 ?>

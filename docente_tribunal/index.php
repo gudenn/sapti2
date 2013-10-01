@@ -11,7 +11,7 @@ try {
 
   //CSS
   $CSS[]  = URL_CSS . "academic/3_column.css";
-    $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
+  $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
   
    // Agregan el css
   $CSS[]  = URL_JS . "calendar/css/eventCalendar.css";
@@ -41,7 +41,7 @@ try {
   $docente     = new Docente($docente_aux->docente_id);
   $usuario     = $docente->getUsuario();
   
-  $docmaterias = "SELECT di.id as iddicta, ma.id as idmat, ma.nombre as materia, di.codigo_grupo as grupo
+  $docmaterias = "SELECT di.id as iddicta, ma.id as idmat, ma.nombre as materia, di.grupo as grupo
 FROM dicta di, semestre se, materia ma
 WHERE di.materia_id=ma.id
 AND di.semestre_id=se.id
