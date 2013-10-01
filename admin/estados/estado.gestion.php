@@ -73,7 +73,7 @@ try {
     $fechafin=$vigencia->fecha_fin;
 
     echo date("Y-m-d",strtotime("$fechafin +6 month") );;;
- $vigencia->fecha_fin=  date("d/m/Y",strtotime("$fechafin +12 month") );
+ $vigencia->fecha_fin=  date("d/m/Y",strtotime("$fechafin +12 month") );;
      
      $vigencia->estado_vigencia='PO';
      $vigencia->save();
