@@ -40,11 +40,8 @@
                     </td>
                 </tr>
                 <tr>
-                
-                
-                </tr>
-                <tr>
                 <td>
+              <tr>
              <p>
               <input type="text" name="nombre" value="{$semestre->codigo}"  readonly>
               <label for="codigo"><small>Codigo Semestre Actual (*)</small></label>
@@ -55,6 +52,8 @@
               </select>
               <label for="docente_id"><small>Seleccione Docente(*)</small></label>
              </p>
+             </tr>
+             <tr>
             <p>
               <select name="materia_id" id="materia_id" >
               {html_options values=$materia_values selected=$materia_selected output=$materia_output}
@@ -65,6 +64,7 @@
               <input type="text" name="grupo" id="grupo" data-validation-engine="validate[required]">
               <label for="grupo"><small>Codigo de Grupo(*)</small></label>
             </p>
+            </tr>
                 </td>
                 <td>
             
