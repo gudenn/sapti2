@@ -18,7 +18,7 @@
             </p>
             <p>
               <select name="dicta_id" id="dicta_id" ></select>
-              <label for="dicta_id"><small>Docente (*)</small></label>
+              <label for="dicta_id"><small>Grupo (*)</small></label>
             </p>
             <p>
               <input type="text" name="codigo_sis" id="codigo_sis" value="{$estudiante->codigo_sis}" size="100"  data-validation-engine="validate[required]">

@@ -77,12 +77,12 @@ INSERT INTO `proyecto_dicta` (`id`, `proyecto_id`, `dicta_id`, `estado`) VALUES 
 
 INSERT INTO `materia` (`id`, `nombre`, `estado`) VALUES (NULL, 'Proyecto Final', 'AC');
 INSERT INTO `materia` (`id`, `nombre`, `estado`) VALUES (NULL, 'Perfil', 'AC');
-INSERT INTO `semestre` (`id`, `codigo`, `estado`) VALUES (NULL, 'I-2013', 'AC'), (NULL, 'II-2013', 'AC');
+INSERT INTO `semestre` (`id`, `codigo`, `activo`, `estado`) VALUES (NULL, 'I-2013','0', 'AC'), (NULL, 'II-2013','1', 'AC');
 -- agrego docentes a las materias
-INSERT INTO `dicta` (`id`, `docente_id`, `materia_id`, `semestre_id`, `estado`) VALUES (NULL, '1', '1', '1', 'AC');
-INSERT INTO `dicta` (`id`, `docente_id`, `materia_id`, `semestre_id`, `estado`) VALUES (NULL, '2', '1', '1', 'AC');
-INSERT INTO `dicta` (`id`, `docente_id`, `materia_id`, `semestre_id`, `estado`) VALUES (NULL, '4', '2', '1', 'AC');
-INSERT INTO `dicta` (`id`, `docente_id`, `materia_id`, `semestre_id`, `estado`) VALUES (NULL, '5', '1', '1', 'AC');
+INSERT INTO `dicta` (`id`, `docente_id`, `materia_id`, `semestre_id`, `codigo_grupo`, `estado`) VALUES (NULL, '1', '1', '1','Grupo A', 'AC');
+INSERT INTO `dicta` (`id`, `docente_id`, `materia_id`, `semestre_id`, `codigo_grupo`, `estado`) VALUES (NULL, '2', '1', '1','Grupo B', 'AC');
+INSERT INTO `dicta` (`id`, `docente_id`, `materia_id`, `semestre_id`, `codigo_grupo`, `estado`) VALUES (NULL, '4', '2', '1','Grupo C', 'AC');
+INSERT INTO `dicta` (`id`, `docente_id`, `materia_id`, `semestre_id`, `codigo_grupo`, `estado`) VALUES (NULL, '5', '1', '1','Grupo D', 'AC');
 
 
 INSERT INTO `inscrito` (`id`, `evaluacion_id`, `dicta_id`, `estudiante_id`, `semestre_id`, `estado`) VALUES (NULL, NULL, '4', '1', '1', 'AC');
