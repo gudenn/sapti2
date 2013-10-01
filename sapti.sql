@@ -53,6 +53,8 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`estudiante` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `usuario_id` INT NOT NULL ,
   `codigo_sis` VARCHAR(20) NULL ,
+  `numero_cambio_leve` TINYINT NULL ,
+  `numero_cambio_total` TINYINT NULL ,
   `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
@@ -122,8 +124,8 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`proyecto` (
   `trabajo_conjunto` VARCHAR(2) NULL COMMENT 'si es trabajo conjunto (TC) o si es trabajo solitario (TS)' ,
   `asignacion_tribunal` VARCHAR(45) NULL ,
   `asignacion_defensa` VARCHAR(45) NULL ,
-  `es_actual` TINYINT(1) NULL COMMENT 'si es o no el proyecto actual del estudiante' ,
-  `tipo_proyecto` VARCHAR(2) NULL COMMENT 'Tipo perfil (PE), tipo Proyecto (PR)' ,
+  `es_actual` TINYINT NULL COMMENT 'si es que este proyecto es el proyecto actual del estudiante o no' ,
+  `tipo_proyecto` VARCHAR(2) NULL DEFAULT 'PR' COMMENT 'Tipo perfil (PE), tipo Proyecto Final (PR)' ,
   `estado_proyecto` VARCHAR(2) NULL COMMENT 'Iniciado (IN), Visto Bueno de Docente, Tutores y Revisores (VB) , TRibunales asignados (TA), tribunales Visto Bueno (TV), con defensa (LD)' ,
   `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
   PRIMARY KEY (`id`) )
@@ -213,8 +215,11 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`tribunal` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `docente_id` INT NOT NULL ,
   `proyecto_id` INT NOT NULL ,
-  `archivo` VARCHAR(100) NULL ,
-  `accion` VARCHAR(45) NULL COMMENT 'aceptar, rechazar' ,
+  `detalle` TEXT NULL ,
+  `accion` VARCHAR(2) NULL COMMENT 'aceptar , rechazar' ,
+  `visto` VARCHAR(2) NULL COMMENT 'no visto (NV), Visto(V)' ,
+  `fecha_asignacion` DATE NULL ,
+  `fecha_aceptacion` DATE NULL ,
   `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
@@ -645,6 +650,7 @@ DROP TABLE IF EXISTS `sapti`.`turno` ;
 CREATE  TABLE IF NOT EXISTS `sapti`.`turno` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `nombre` VARCHAR(45) NULL ,
+  `peso` INT NULL ,
   `descripcion` VARCHAR(45) NULL ,
   `estado` VARCHAR(2) NULL ,
   PRIMARY KEY (`id`) )
@@ -887,8 +893,11 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`automatico` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `area_id` INT NOT NULL ,
   `docente_id` INT NOT NULL ,
+  `valor_tiempo` INT NULL ,
+  `dia` INT NULL ,
   `valor_area` INT NULL ,
-  `proyectos_asignados` INT NULL ,
+  `numero_aceptados` INT NULL ,
+  `estado` VARCHAR(2) NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 

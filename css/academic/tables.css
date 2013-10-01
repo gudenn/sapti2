@@ -51,3 +51,14 @@ table tbody tr.dark{
 	color:#666666;
 	background-color:#E8E8E8;
 	}
+  
+/** Tabla de Filtro */
+.tbl_filtro{}
+.tbl_filtro th{color: #FFF;
+background-color: #06213F;
+border: 0px solid #fff;
+border-collapse: collapse;
+text-align: center;
+table-layout: auto;
+vertical-align: middle;font-weight: normal;}
+.tbl_filtro input{width: 90px;}

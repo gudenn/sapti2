@@ -33,12 +33,19 @@
               <label for="nombre"><small>Nombres (*)</small></label>
             </p>
             <p>
-              <input type="text" name="apellidos" id="apellidos" value="{$usuario->apellidos}" size="200">
-              <label for="apellidos"><small>Apellidos</small></label>
+              <input type="text" name="apellido_paterno" id="apellido_paterno" value="{$usuario->apellido_paterno}" size="200">
+              <label for="apellido_paterno"><small>Apellido Paterno</small></label>
             </p>
             <p>
-              <input type="text" name="fecha_cumple" id="fecha_cumple" value="{$usuario->fecha_cumple}" size="22">
-              <label for="fecha_cumple"><small>Fecha de Cumplea&ntilde;os</small></label>
+              <input type="text" name="apellido_materno" id="apellido_materno" value="{$usuario->apellido_materno}" size="200">
+              <label for="apellido_materno"><small>Apellido Materno</small></label>
+            </p>
+            <p>
+              <input type="text" name="fecha_nacimiento" id="fecha_nacimiento" value="{$usuario->fecha_nacimiento}" size="22">
+              <label for="fecha_nacimiento"><small>Fecha de Nacimiento</small></label>
+            </p>
+            <p>
+              {html_radios name="sexo" options=$sexo selected=$sexo_selected separator="<br>"}
             </p>
             <p>
               <input type="text" name="email" id="email" value="{$usuario->email}" size="22" data-validation-engine="validate[],custom[email]"  >
@@ -74,11 +81,13 @@
         <script type="text/javascript">
         {literal} 
           $(function(){
-            $('#fecha_cumple').datepicker({
+            $('#fecha_nacimiento').datepicker({
               dateFormat:'dd/mm/yy',
               changeMonth: true,
               changeYear: true,
-              yearRange: "1920:2013"
+        {/literal} 
+              yearRange: "1920:{date('Y')}"
+        {literal} 
             });
           });
           jQuery(document).ready(function(){

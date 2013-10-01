@@ -14,16 +14,10 @@ try {
   $ERROR ='';
 
   /** HEADER */
-  $smarty->assign('title','Gestionar Tutores');
-  $smarty->assign('description','Pagina para asignar tutores');
-  $smarty->assign('keywords','Docentes');
-  /**
-   * Menu superior
-   */
-  $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'estudiante/','name'=>' Estudiantes');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'estudiante/'.basename(__FILE__),'name'=>'Asignar Tutor');
-  $smarty->assign("menuList", $menuList);
+  $smarty->assign('title','Registro de Proyecto Final');
+  $smarty->assign('description','Registro de Proyecto Final');
+  $smarty->assign('keywords','Proyecto Final,estudiante,registro');
+
   //CSS
   $CSS[]  = URL_CSS . "academic/tables.css";
   //$CSS[]  = URL_CSS . "pg.css";

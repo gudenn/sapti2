@@ -21,9 +21,16 @@ try {
   $ERROR = '';
 
   /** HEADER */
-  $smarty->assign('title','Gestion de Tutores');
-  $smarty->assign('description','Pagina de gestion de Tutores');
-  $smarty->assign('keywords','Gestion,Tutores');
+  $smarty->assign('title','Gesti&oacute;n de Tutores');
+  $smarty->assign('description','Gesti&oacute;n de Tutores');
+  $smarty->assign('keywords','Gesti&oacute;n,Tutores');
+  /**
+   * Menu superior
+   */
+  $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administrador');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'tutor/','name'=>'Tutores');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'tutor/'.basename(__FILE__),'name'=>'Gesti&oacute;n de Tutores');
+  $smarty->assign("menuList", $menuList);
 
   //CSS
   $CSS[]  = URL_CSS . "academic/tables.css";
@@ -49,7 +56,7 @@ try {
   }
   $estudiante = new Estudiante($estudiante_id);
   $proyecto   = $estudiante->getProyecto();
-
+  
   $smarty->assign('estudiante'     ,$estudiante);
   $smarty->assign('proyecto'       ,($proyecto->id)?$proyecto:false );
   
@@ -93,7 +100,7 @@ try {
   
   
   //Filtro
-  $filtro     = new Filtro('tutor',__FILE__);
+  $filtro     = new Filtro('tutores_asignados',__FILE__);
   $tutor      = new Tutor();
   
   
@@ -102,6 +109,7 @@ try {
   $filtro_sql = $tutor->filtrar($filtro);
 
   $tutor->usuario_id   = '%';
+
   if ($proyecto->id)
     $filtro_sql =  $filtro_mis_tutores . $filtro_sql;
   
@@ -110,7 +118,7 @@ try {
   echo($obj_mysql[2]);
  
 
-  $objs_pg    = new Pagination($obj_mysql, 'tutor','',false);
+  $objs_pg    = new Pagination($obj_mysql, 'tutores_asignados','',false);
 
 
   $smarty->assign("filtros"  ,$filtro);

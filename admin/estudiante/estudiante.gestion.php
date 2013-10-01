@@ -18,9 +18,16 @@ try {
   $ERROR = '';
 
   /** HEADER */
-  $smarty->assign('title','Gestion de Usuarios');
-  $smarty->assign('description','Pagina de gestion de Usuarios');
-  $smarty->assign('keywords','Gestion,Usuarios');
+  $smarty->assign('title','Gesti&oacute;n de Estudiantes');
+  $smarty->assign('description','Pagina de Gesti&oacute;n de Estudiantes');
+  $smarty->assign('keywords','Gesti&oacute;n,Estudiantes');
+  /**
+   * Menu superior
+   */
+  $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'estudiante/','name'=>' Estudiantes');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'estudiante/'.basename(__FILE__),'name'=>'Gesti&oacute;n de Estudiantes');
+  $smarty->assign("menuList", $menuList);
 
   //CSS
   $CSS[]  = URL_CSS . "academic/tables.css";
@@ -28,7 +35,7 @@ try {
   $smarty->assign('CSS',$CSS);
 
   //JS
-  $JS[]  = URL_JS . "jquery.js";
+  $JS[]  = URL_JS . "jquery.min.js";
   $smarty->assign('JS',$JS);
 
   
@@ -44,10 +51,10 @@ try {
   }
 
   $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
-  $smarty->assign('lista'       ,'admin/estudiante.lista.tpl');
+  $smarty->assign('lista'       ,'admin/estudiante/estudiante.lista.tpl');
 
   //Filtro
-  $filtro     = new Filtro('g_estudiante',__FILE__);
+  $filtro     = new Filtro('g_estudiantetod',__FILE__);
   $estudiante = new Estudiante();
   $estudiante->iniciarFiltro($filtro);
   $filtro_sql = $estudiante->filtrar($filtro);
@@ -56,7 +63,7 @@ try {
   
   $o_string   = $estudiante->getOrderString($filtro);
   $obj_mysql  = $estudiante->getAll('',$o_string,$filtro_sql,TRUE,TRUE);
-  $objs_pg    = new Pagination($obj_mysql, 'g_estudiante','',false,10);
+  $objs_pg    = new Pagination($obj_mysql, 'g_estudiantetod','',false);
 
   $smarty->assign("filtros"  ,$filtro);
   $smarty->assign("objs"     ,$objs_pg->objs);

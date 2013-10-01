@@ -44,7 +44,7 @@ try {
   $smarty->assign("usuario"   , $usuario);
   $smarty->assign("estudiante", $estudiante);
   
-  $columnacentro = 'admin/columna.centro.estudiante-detalle.tpl';
+  $columnacentro = 'admin/estudiante/columna.centro.estudiante-detalle.tpl';
   $smarty->assign('columnacentro',$columnacentro);
 
   //No hay ERROR
