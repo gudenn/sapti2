@@ -32,47 +32,42 @@
 		<h1>Registrar Materias</h1>
             <table>
                 <tr>
-                    <td>
+                    <td colspan="2">
                         <h2 class="title">Crear Grupo: </h2>
                     </td>
+
                     <td>
                         <h2 class="title">Grabar Grupo:</h2>
                     </td>
                 </tr>
                 <tr>
-                
-                
-                </tr>
-                <tr>
-                <td>
-             <p>
+                    <td>
               <input type="text" name="nombre" value="{$semestre->codigo}"  readonly>
               <label for="codigo"><small>Codigo Semestre Actual (*)</small></label>
-             </p>
-             <p>
+                    </td>
+                    <td>
               <select name="docente_id" id="docente_id" >
               {html_options values=$docentes_values selected=$docentes_selected output=$docentes_output}
               </select>
-              <label for="docente_id"><small>Seleccione Docente(*)</small></label>
-             </p>
-            <p>
+              <label for="docente_id"><small>Seleccione Docente(*)</small></label>     
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                <td>
               <select name="materia_id" id="materia_id" >
               {html_options values=$materia_values selected=$materia_selected output=$materia_output}
               </select>
-              <label for="materia_id"><small>Seleccione Materia(*)</small></label>
-            </p>
-            <p>
-              <input type="text" name="grupo" id="grupo" data-validation-engine="validate[required]">
-              <label for="grupo"><small>Codigo de Grupo(*)</small></label>
-            </p>
+              <label for="materia_id"><small>Seleccione Materia(*)</small></label>                   
                 </td>
                 <td>
-            
-            <p>
+              <input type="text" name="grupo" id="grupo" data-validation-engine="validate[required]">
+              <label for="grupo"><small>Codigo de Grupo(*)</small></label>
+                </td>
+                <td>
               <input name="submit" type="submit" value="Grabar">
               &nbsp;
               <input name="reset" type="reset" tabindex="3" value="Resetear">
-            </p>
                 </td>
                 </tr>
             </table>

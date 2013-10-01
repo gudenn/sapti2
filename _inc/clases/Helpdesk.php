@@ -29,11 +29,18 @@ class Helpdesk extends Objectbase
   var $keywords;
 
  /**
-  * descripcion
+  * El estado de el tema de ayuda
   * @var VARCHAR(2) 
   */
   var $estado_helpdesk;
 
+
+ /**
+  * (Objeto simple)  Todos los tooltips que tenga una pagina
+  * @var Tooltip|array
+  */
+  var $tooltip_objs;
+  
   /**
    * Creamos la ayuda
    * @param type $id
@@ -85,6 +92,17 @@ class Helpdesk extends Objectbase
       <li class="last"><a class="ayudapopup" href="{$URL}ayuda/?codigo={$this->codigo}{$ancla}" target="_blank" >Ayuda {$icono}</a></li>
       <script type="text/javascript">
         $(function() {
+            $('a.ayudatip').click(function(){
+              $("#" + $(this).attr('tooltip')).dialog({
+       position: { my: "left center", at: "left center", of: $(this) },
+      buttons: {
+        Cerrar: function() {
+          $( this ).dialog( "close" );
+        }
+      }
+    });
+              return false;
+            });
             $('a.ayudapopup').click(function(){
               //screen.height;
               var x = screen.width - 510;
@@ -96,6 +114,35 @@ class Helpdesk extends Objectbase
       </script>
 ____TEST;
     echo $link;
+  }
+  
+  
+  /**
+   * Mostramos la ayuda disponible en el sistema
+   */
+  function getTooltip($codigo)
+  {
+    $existe = FALSE;
+    foreach ($this->tooltip_objs as $tooltip) {
+      if ($tooltip->codigo == $codigo)
+      {
+        $tooltip->mostrar();
+        $existe = TRUE;
+      }
+    }
+    if (!$existe)
+    {
+      // Creamos el tooltip
+      leerClase('Tooltip');
+      $tooltip = new Tooltip();
+      $tooltip->helpdesk_id    = $this->id;
+      $tooltip->codigo         = $codigo;
+      // Clonamos si es que hay algunno ya aprobado con el mismo codigo
+      // sino solo se graba
+      $tooltip->clonarPorCodigo($codigo);
+      $tooltip->save();
+      $tooltip->mostrar();
+    }
   }
   
   /**
@@ -123,6 +170,38 @@ ____TEST;
         break;
     }
   }
+  
+  /**
+   * Mostramos el total de Tooltips pendiesntes
+   * 
+   * @param INT(11) $helpdesk_id el id del helpdesk
+   * @return icon
+   */
+  function getContadorTooltipsLita($helpdesk_id = '', $estado_tooltip = 'RC',$link = 'tooltip.gestion.php',$conicono = true) 
+  {
+    /**
+    const EST01_RECIEN  = "RC";
+    const EST01_CLONAD  = "CL";
+    const EST02_APROBA  = "AP";
+    */
+    
+    
+    if ($helpdesk_id == '')
+      $helpdesk_id = $this->id;
+    leerClase('Tooltip');
+    $tooltips    = new Tooltip();
+    $where       = "  helpdesk_id = '{$helpdesk_id}' AND estado_tooltip = '{$estado_tooltip}' ";
+    $pendientes  = $tooltips->contar($where);
+    
+    if ($conicono)
+      $conicono = $tooltips->getIconEstadoHD($estado_tooltip);
+    
+    if (!$link)
+      $resp = " {$conicono} $pendientes"; 
+    else
+      $resp = "<a href='{$link}?helpdesk_id=$helpdesk_id&estado_tooltip=$estado_tooltip' >{$conicono} $pendientes</a>"; 
+    return $resp;
+  }
 
   /**
    * Creamos un helpdesk a partir del codigo
@@ -143,7 +222,7 @@ ____TEST;
   }
   
   /**
-   * Validamos al usuario ya sea para actualizar o para crear uno nuevo
+   * Validamos al helpdesk ya sea para actualizar o para crear uno nuevo
    * @param type $es_nuevo
    */
   function validar($es_nuevo = true) {

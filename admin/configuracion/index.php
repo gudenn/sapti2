@@ -75,7 +75,17 @@ try {
   $pendientes = Helpdesk::EST01_RECIEN;
   $pendientes = $helpdesk->contar(" estado_helpdesk = '{$pendientes}' ");
   // -CONTADOR //
-  $menu->agregarItem('Helpdesk Pedientes','Registro de una nueva Carrera.','basicset/tag.png',$link,$pendientes);
+  $menu->agregarItem('Helpdesk Pedientes','Temas de ayuda que estan pendientes.','basicset/tag.png',$link,$pendientes);
+  $menus[] = $menu;
+  $menu = new Menu('Helpdesk Tooltips');
+  $link = Administrador::URL."configuracion/helpdesk.tooltips.php?todos";
+  // CONTADOR //
+  leerClase('Tooltip');
+  $tooltips   = new Tooltip();
+  $pendientes = Tooltip::EST02_APROBA;
+  $pendientes = $tooltips->contar(" estado_tooltip != '{$pendientes}' ");
+  // -CONTADOR //
+  $menu->agregarItem('Tooltips Pedientes','Ventanas flotantes que ofrece el sistema, Ayudas pendientes.','basicset/tag.png',$link,$pendientes);
   $menus[] = $menu;
   $menu = new Menu('Instituciones');
   $link = Administrador::URL."configuracion/institucion.gestion.php";

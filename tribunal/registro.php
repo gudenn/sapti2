@@ -42,10 +42,8 @@ try {
   leerClase("Notificacion");
   leerClase("Notificacion_tribunal");
    leerClase("Automatico");
-  
-   
-    
-      $editores = ",
+ 
+ $editores = ",
                 {toolbar: [ 
                   [ 'Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
                   [ 'FontSize', 'TextColor', 'BGColor' ]]}";
