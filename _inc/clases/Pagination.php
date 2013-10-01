@@ -109,7 +109,7 @@ class Pagination {
     $p_pages   = array();
     // the first elemnet
     if (1 != $_SESSION[$clave]['pg'])
-      $p_pages[] = '<span><a href="'.self::getUrlLink(1).'" class="tajax" >'.Pagination::Prev.'</a></span>';
+      $p_pages[] = '<span><a href="'.self::getUrlLink(1).'" class="tajax" >'.Pagination::First.'</a></span>';
     else
       $p_pages[] = '<span class="nextprev">'.Pagination::First.'</span>';
 

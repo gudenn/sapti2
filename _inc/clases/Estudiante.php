@@ -34,7 +34,7 @@ class Estudiante extends Objectbase {
    * Constructor del estudiante
    * @param type $id id de la tabla
    * @param type $codigo_sis codigo sis del estudiante
-   * @return estudiante`|false
+   * @return Estudiante|false
    */
   public function __construct($id = '', $codigo_sis = false) {
     if ($codigo_sis) {

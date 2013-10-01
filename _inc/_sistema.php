@@ -12,7 +12,8 @@
   leerClase('Exceptions');    // Manejo de ecepciones y errores
   leerClase('Objectbase');    // Componente ecencial de todos los  objetos
   leerClase('Helpdesk');      // Ayuda presente en todo el sistema
-  
+  global $help;
+
   if (isset($_GET['salir'])||isset($_POST['salir']))
   {  
     closeSession();
@@ -260,8 +261,28 @@ ____IMG;
    */
   function getHelp($ancla = '') 
   {
-    $help = new Helpdesk();
+    global $help;
+    if (!is_object($help) || get_class($help) != 'Helpdesk' )
+    {
+      $help = new Helpdesk();
+      $help->getAllObjects();
+    }
     $help->getHelp($ancla);
+  }
+  
+  /**
+   * mostraremos las los toolstips para las ayudas
+   * codigo optimizado para no leer cada vez las ayudas
+   */
+  function getHelpTip($codigo) 
+  {
+    global $help;
+    if (!is_object($help) || get_class($help) != 'Helpdesk' )
+    {
+      $help = new Helpdesk();
+      $help->getAllObjects();
+    }
+    $help->getTooltip( strtolower($codigo) );
   }
   
 /**

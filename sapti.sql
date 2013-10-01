@@ -917,6 +917,24 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`helpdesk` (
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `sapti`.`tooltip`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `sapti`.`tooltip` ;
+
+CREATE  TABLE IF NOT EXISTS `sapti`.`tooltip` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `helpdesk_id` INT NULL ,
+  `titulo` VARCHAR(150) NULL ,
+  `codigo` VARCHAR(150) NULL ,
+  `descripcion` VARCHAR(1000) NULL ,
+  `mostrar` TINYINT NULL COMMENT 'si se muestra el tool tip o no' ,
+  `estado_tooltip` VARCHAR(2) NULL COMMENT 'Recien creado RC, Clonados (CL) , Aprobado AP' ,
+  `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
 USE `sapti` ;
 
 
