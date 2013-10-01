@@ -8,7 +8,7 @@
            <tr class="dark">
                <th>
              <p>
-              <input type="text" name="nombre" value="{$semestre->codigo}"  data-validation-engine="validate[required]">
+              <input type="text" name="nombre" value="{$semestre->codigo}"  readonly>
               <label for="codigo"><small>Cod Semestre Actual (*)</small></label>
             </p>
                </th>

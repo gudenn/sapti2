@@ -79,7 +79,7 @@ function image(relativePath) {
 }
 function deletete(obser){
    ajax=objetoAjax();
-   ajax.open("POST", "eliminar.php?ob="+obser);
+   ajax.open("POST", "edicion.observacion.php?observacioneliminar="+obser);
    ajax.send(null);
 };
 function updatetable(rowIndex)
@@ -94,7 +94,7 @@ function enviarDatosObservacion(){
   ajax=objetoAjax();
   //uso del medotod POST
   //archivo que realizará la operacion
-  ajax.open("POST", "registro_obser.php?obser="+observacion+"&revid="+rev,true);
+  ajax.open("POST", "edicion.observacion.php?observacionregistro="+observacion+"&revid="+rev,true);
     //cuando el objeto XMLHttpRequest cambia de estado, la función se inicia
   ajax.onreadystatechange=function() {
 	  //la función responseText tiene todos los datos pedidos al servidor
