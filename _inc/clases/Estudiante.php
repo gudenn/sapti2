@@ -57,6 +57,41 @@ class Estudiante extends Objectbase {
     else
       parent::__construct($id);
   }
+  
+  /**
+   * Save Or Update the data of the estudiante in the data base
+   * but if he dont have a proyect we create a new one
+   *
+   * @param string $table puede recivir el valor de la tabla
+   * @param int $father_id_value el id del padre  por ejemplo al grabar los hijos de una compania aca se dara el id de la compania
+   * @param string $base  asociado a $father_id_value traera la clase del padre para guardar el dato
+   * @return boolean
+   * @throws Exception 
+   */
+  function save($table = false , $father_id_value = false , $base = 'compania') 
+  {
+    $grabar_proyecto_inicial = false;
+    if (!$this->id)
+      $grabar_proyecto_inicial = true;
+    parent::save($table, $father_id_value, $base);
+      
+    /**
+     * creamos el nuevo proyecto
+     */
+    if ($grabar_proyecto_inicial)
+      $this->crearProyectoInicial();
+  }
+
+  /**
+   * Creamos un proyecto inicial de tal manera que los estudiantes nunca estnen sin proyectos
+   */
+  function crearProyectoInicial() 
+  {
+    leerClase('Proyecto');
+    $proyecto_inicial = new Proyecto();
+    $proyecto_inicial->crearProyectoInicial($this->id);
+
+  }
 
   /**
    * Crear un estudiante a partir de su codigo sis o verificar que se puede usar un nuevo estudiante
@@ -207,12 +242,13 @@ class Estudiante extends Objectbase {
     $order_array = array();
     $order_array['codigo_sis'] = " {$this->getTableName()}.codigo_sis ";
 
-    $order_array['id'] = " {$this->getTableName('Usuario')}.id ";
-    $order_array['nombre'] = " {$this->getTableName('Usuario')}.nombre ";
-    $order_array['apellidos'] = " {$this->getTableName('Usuario')}.apellidos ";
-    $order_array['login'] = " {$this->getTableName('Usuario')}.login ";
-    $order_array['email'] = " {$this->getTableName('Usuario')}.email ";
-    $order_array['estado'] = " {$this->getTableName('Usuario')}.estado ";
+    $order_array['id']               = " {$this->getTableName('Usuario')}.id ";
+    $order_array['nombre']           = " {$this->getTableName('Usuario')}.nombre ";
+    $order_array['apellido_paterno'] = " {$this->getTableName('Usuario')}.apellido_paterno ";
+    $order_array['apellido_materno'] = " {$this->getTableName('Usuario')}.apellido_materno ";
+    $order_array['login']            = " {$this->getTableName('Usuario')}.login ";
+    $order_array['email']            = " {$this->getTableName('Usuario')}.email ";
+    $order_array['estado']           = " {$this->getTableName('Usuario')}.estado ";
     return $filtro->getOrderString($order_array);
   }
 

@@ -5,8 +5,8 @@ try {
     header("Location: login.php");  
 
   /** HEADER */
-  $smarty->assign('title','Proyecto Final');
-  $smarty->assign('description','Proyecto Final');
+  $smarty->assign('title','Administraci&oacute;n');
+  $smarty->assign('description','Panel de Administraci&oacute;n del Sistema SAPTI');
   $smarty->assign('keywords','Proyecto Final');
 
   //CSS

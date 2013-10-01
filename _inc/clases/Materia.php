@@ -76,7 +76,11 @@ class Materia extends Objectbase
   }
   
   
-  
+  /**
+   * Obtenemos todos los docentes que dictan una materia
+   * @param type $semestre_id
+   * @return boolean|\Docente
+   */
   function getDocentesDictan($semestre_id)
   {
     leerClase('Dicta');
@@ -96,6 +100,31 @@ class Materia extends Objectbase
       $docentes[]  = $docente_aux;
     }
     return $docentes;    
+    
+  }
+  
+  /**
+   * Obtenemos una lista de todas los grupos
+   * @param type $semestre_id
+   * @return boolean|array
+   */
+  function getGruposDictan($semestre_id)
+  {
+    leerClase('Dicta');
+    leerClase('Docente');
+    $gruposQueDictan = new Dicta();
+    $gruposQueDictan->materia_id  = $this->id;
+    $gruposQueDictan->semestre_id = $semestre_id;
+    $gruposQueDictan->estado      = Objectbase::STATUS_AC;
+    $result                       =  $gruposQueDictan->getAll();
+    if (!$result)
+      return false;
+    $dictan = array();
+    while ($row = mysql_fetch_array($result[0],MYSQL_ASSOC))
+    {
+      $dictan[]  = $row;
+    }
+    return $dictan;    
     
   }
 }

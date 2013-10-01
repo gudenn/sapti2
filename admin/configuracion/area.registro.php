@@ -14,7 +14,7 @@ try {
   /**
    * Menu superior
    */
-  $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administrador');
+  $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/','name'=>'Configuraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Registro de Area');
   $smarty->assign("menuList", $menuList);
@@ -23,10 +23,8 @@ try {
   //CSS
   $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_JS  . "validate/validationEngine.jquery.css";
-  //BOX
-  $CSS[]  = URL_JS . "box/box.css";
   
-  $smarty->assign('CSS',$CSS);
+  
 
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
@@ -37,7 +35,10 @@ try {
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
 
   //BOX
+  $CSS[]  = URL_JS . "box/box.css";
   $JS[]  = URL_JS ."box/jquery.box.js";
+
+  $smarty->assign('CSS',$CSS);
   $smarty->assign('JS',$JS);
 
 

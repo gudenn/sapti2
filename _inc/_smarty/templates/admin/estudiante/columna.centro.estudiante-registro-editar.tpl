@@ -1,25 +1,9 @@
       <div id="content">
-        <h1 class="title">Registro de Estudiantes</h1>
-        <p>Formulario de registro de estudiantes</p>
-        <h2 class="title">Formulario de Registro</h2>
+        <h1 class="title">Edici&oacute;n del Estudiante "<i>{$usuario->nombre} {$usuario->apellidos}</i>"</h1>
+        <p>Formulario de Edici&oacute;n de estudiantes</p>
+        <h2 class="title">Formulario de Edici&oacute;n</h2>
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
-            <p>
-              <select name="semestre_id" id="semestre_id" >
-              {html_options values=$semestre_values selected=$semestre_selected output=$semestre_output}
-              </select>
-              <label for="semestre_id"><small>Semestre (*)</small></label>
-            </p>
-            <p>
-              <select name="materia_id" id="materia_id" >
-              {html_options values=$materia_values selected=$materia_selected output=$materia_output}
-              </select>
-              <label for="materia_id"><small>Materia (*)</small></label>
-            </p>
-            <p>
-              <select name="dicta_id" id="dicta_id" ></select>
-              <label for="dicta_id"><small>Docente (*)</small></label>
-            </p>
             <p>
               <input type="text" name="codigo_sis" id="codigo_sis" value="{$estudiante->codigo_sis}" size="100"  data-validation-engine="validate[required]">
               <label for="codigo_sis"><small>C&oacute;digo SIS (*)</small></label>
@@ -33,12 +17,19 @@
               <label for="nombre"><small>Nombres (*)</small></label>
             </p>
             <p>
-              <input type="text" name="apellidos" id="apellidos" value="{$usuario->apellidos}" size="200">
-              <label for="apellidos"><small>Apellidos</small></label>
+              <input type="text" name="apellido_paterno" id="apellido_paterno" value="{$usuario->apellido_paterno}" size="200">
+              <label for="apellido_paterno"><small>Apellido Paterno</small></label>
             </p>
             <p>
-              <input type="text" name="fecha_cumple" id="fecha_cumple" value="{$usuario->fecha_cumple}" size="22">
-              <label for="fecha_cumple"><small>Fecha de Cumplea&ntilde;os</small></label>
+              <input type="text" name="apellido_materno" id="apellido_materno" value="{$usuario->apellido_materno}" size="200">
+              <label for="apellido_materno"><small>Apellido Materno</small></label>
+            </p>
+            <p>
+              <input type="text" name="fecha_nacimiento" id="fecha_nacimiento" value="{$usuario->fecha_nacimiento}" size="22">
+              <label for="fecha_nacimiento"><small>Fecha de Nacimiento</small></label>
+            </p>
+            <p>
+              {html_radios name="sexo" options=$sexo selected=$sexo_selected separator="<br>"}
             </p>
             <p>
               <input type="text" name="email" id="email" value="{$usuario->email}" size="22" data-validation-engine="validate[],custom[email]"  >
@@ -63,9 +54,8 @@
               <input type="hidden" name="tarea" value="registrar">
               <input type="hidden" name="token" value="{$token}">
 
-              <input name="submit" type="submit" id="submit" value="Grabar">
+              <input name="submit" type="submit" id="submit" value="Modificar">
               &nbsp;
-              <input name="reset" type="reset" id="reset" tabindex="5" value="Resetear">
             </p>
           </form>
         </div>
@@ -74,11 +64,14 @@
         <script type="text/javascript">
         {literal} 
           $(function(){
-            $('#fecha_cumple').datepicker({
+            $('#fecha_nacimiento').datepicker({
               dateFormat:'dd/mm/yy',
               changeMonth: true,
               changeYear: true,
-              yearRange: "1920:2013"
+        {/literal} 
+              yearRange: "1920:{date('Y')}"
+        {literal} 
+
             });
           });
           jQuery(document).ready(function(){
@@ -90,20 +83,6 @@
             jQuery('textarea').data('promptPosition',wo);
             jQuery('select').attr('data-prompt-position',wo);
             jQuery('select').data('promptPosition',wo);
-          });
-          jQuery(function(){
-            jQuery("select#materia_id").change(function(){
-              if (jQuery('#semestre_id').val() == '')
-                return jQuery('#semestre_id').validationEngine('showPrompt', 'Seleccione un semestre', 'error', true);;
-                
-              jQuery.getJSON("ajax.estudiante.registro.php",{'materia': jQuery(this).val(),'semestre': jQuery('#semestre_id').val(),  ajax: 'true'}, function(j){
-                var options = '';
-                for (var i = 0; i < j.length; i++) {
-                  options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
-                }
-                jQuery("select#dicta_id").html(options);
-              })
-            })
           });
         {/literal} 
         </script>

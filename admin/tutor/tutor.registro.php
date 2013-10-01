@@ -7,6 +7,13 @@ try {
   $smarty->assign('title','Proyecto Final');
   $smarty->assign('description','Proyecto Final');
   $smarty->assign('keywords','Proyecto Final');
+  /**
+   * Menu superior
+   */
+  $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'tutor/','name'=>'Tutor');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'tutor/'.basename(__FILE__),'name'=>'Registrar Tutor');
+  $smarty->assign("menuList", $menuList);
 
   //CSS
   $CSS[]  = URL_CSS . "academic/3_column.css";
@@ -43,14 +50,24 @@ try {
   leerClase('Tutor');
   leerClase('Usuario');
   leerClase('Estudiante');
+
   
+  //Sexo del usuario
+  $smarty->assign('sexo', array(
+      Usuario::FEMENINO  => 'Femenino',
+      Usuario::MASCULINO => 'Masculino'));
+  $smarty->assign('sexo_selected', ($usuario->sexo==Usuario::FEMENINO)?Usuario::FEMENINO:Usuario::MASCULINO);
+
   if (isset($_GET['estudiante_id']) && is_numeric($_GET['estudiante_id']))
   {
      $estudiante = new Estudiante($_GET['estudiante_id']);
      $smarty->assign("estudiante",$estudiante);
   }
 
-  
+  //tutor
+  $tutor= new Tutor();
+  $tutor= new Tutor();
+
   if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
   {
     
@@ -87,6 +104,9 @@ try {
     $EXITO = TRUE;
     mysql_query("COMMIT");
   }
+  
+  $smarty->assign('usuario',$usuario);
+  $smarty->assign('tutor',$tutor);
 
   
   $token = sha1(URL . time());

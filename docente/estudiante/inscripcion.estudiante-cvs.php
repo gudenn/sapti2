@@ -92,6 +92,7 @@ AND es.codigo_sis='$sis'";
           $estudiante->getByCodigoSis($estudiante_array[1]);
             if ($estudiante->id){
                 if(estainscrito($estudiante_array[1], $iddicta)=='0'){
+                    $evaluacion->estado= Objectbase::STATUS_AC;
                     $evaluacion->evaluacion_1=0;
                     $evaluacion->evaluacion_2=0;
                     $evaluacion->evaluacion_3=0;
@@ -101,6 +102,7 @@ AND es.codigo_sis='$sis'";
                     $inscrito->dicta_id      = $iddicta;
                     $inscrito->estudiante_id = $estudiante->id;
                     $inscrito->save();
+                    $proyecto_dicta->estado= Objectbase::STATUS_AC;
                     $proyecto_dicta->dicta_id = $iddicta;
                     $proyecto       = $estudiante->getProyecto();
                     $proyecto_dicta->proyecto_id = $proyecto->proyecto_id;
