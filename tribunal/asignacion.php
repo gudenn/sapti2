@@ -8,9 +8,9 @@ try {
   $smarty->assign('description','Proyecto Final');
   $smarty->assign('keywords','Proyecto Final');
 
-    $CSS[]  = URL_CSS . "academic/3_column.css";
+  $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
-  
+  $CSS[]  = URL_CSS . "spams.css";
   $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
   
   $smarty->assign('CSS',$CSS);
@@ -122,47 +122,100 @@ $smarty->assign('tipo_nombre',$tipo_nombre);
 
 
 
-  if(isset($_GET['tribunal_id']))
+  if(isset($_GET['estudiante_id']))
   {
     
-   // echo $_GET['tribunal_id'];
-     $sql="
-SELECT d.id, u.nombre , u.apellidos
-FROM  usuario u, docente d, tribunal t, proyecto_tribunal pt
-WHERE  u.`id`=d.`usuario_id` and d.`id`=t.`docente_id` and  t.`proyecto_tribunal_id`=pt.`id` and pt.`id`=".$_GET['tribunal_id'];
- $resultado = mysql_query($sql);
- $arraytribunal= array();
- 
- while ($fila = mysql_fetch_array($resultado)) 
-                {
-    $arraytribunal[]=$fila;
- }
-$smarty->assign('arraytribunal'  , $arraytribunal);
-    
-  
-  $sqllt=  "SELECT  pt.id as idproyecto, u.nombre , u.apellidos , e.codigo_sis , p.nombre as nombreproyecto
-FROM  usuario u , estudiante e , proyecto_estudiante pe , proyecto p, proyecto_tribunal pt
-WHERE u.id= e.usuario_id and e.id=pe.estudiante_id and p.id= pe.proyecto_id and p.id=pt.proyecto_id and pt.id=".$_GET['tribunal_id'];
-
-$resultados = mysql_query($sqllt);
- $arraytribunaldatos= array();
- 
- while ($filas = mysql_fetch_array($resultados, MYSQL_ASSOC))
- { 
-   $arraytribunaldatos[]=$filas;
- }
+  //  echo $_GET['estudiante_id'];
+      $estudiante = new Estudiante($_GET['estudiante_id']);
       
-      $smarty->assign('arraytribunaldatos'  , $arraytribunaldatos);
+       $proyecto     = new Proyecto();
+   
+    $proyecto_aux = $estudiante->getProyecto();
+    if ($proyecto_aux)
+      $proyecto = $proyecto_aux;
+    else
+    {
+      //@todo no tiene proyecto 
+       echo "<script>alert('El Estudiante no Tiene Proyecto');</script>";
+      
+    }
+      
+     $usuariobuscado= new Usuario($estudiante->usuario_id);
+   $smarty->assign('usuariobuscado',  $usuariobuscado);
+   $smarty->assign('estudiantebuscado', $estudiante);
+   $smarty->assign('proyectobuscado', $proyecto);
+   
+   $smarty->assign('proyectoarea', $proyecto->getArea());
+
+
+ $sqlr="SELECT  DISTINCT(d.id), u.nombre, CONCAT (u.apellido_paterno,u.apellido_materno) as apellidos
+FROM  usuario u ,docente d ,  tribunal  t
+WHERE  u.`id`= d.`usuario_id` and   d.`id`= t.`docente_id` and  u.`estado`='AC'  and d.`estado`='AC' and t.`proyecto_id`=1;";
+ $resultado = mysql_query($sqlr);
+ $arraytribunal= array();
+
+ while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+{ 
+       
+        $lista_areas=array();
+        $lista_areas[] = $fila["id"];
+        $lista_areas[] =  $fila["nombre"];
+        $lista_areas[] =  $fila["apellidos"];
+ 
+ 
+
+ //}else
+//{
+ //  $listaareas[]="NO HAY DATOS";
+ //}
+  
+  $listatiempo=array();
+  
+  
+$sqltiempo="select  d.`id` , d.`nombre` , t.`nombre` as nombreturno
+from `dia` d, `horario_doc` hd , `turno` t
+where  d.`id`=hd.`dia_id` and hd.`turno_id`=t.`id` and  d.`estado`='AC' and hd.`estado`='AC'and t.`estado`='AC' and hd.`docente_id`=".$fila["id"].";";
+ $resultadotiempo= mysql_query($sqltiempo);
+ 
+  while ($filatiempo = mysql_fetch_array($resultadotiempo, MYSQL_ASSOC)) 
+  {
+     $listatiempo[]=$filatiempo;
   }
-        $defensa= new Defensa();
-         if( isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' )
+  //$lista_tiempo[]= $listatiempo;
+  $lista_areas[]= $listatiempo;
+  $arraytribunal[]= $lista_areas;
+  
+ }
+  $smarty->assign('listadocentes'  , $arraytribunal);
+      
+  }
+  
+  
+  
+  
+        
+         if( isset($_POST['tarea']) && $_POST['tarea'] =='Guardar')
             {
-          if (isset($_POST['proyecto_tribunal_id']))
-             {
-       $defensa->objBuidFromPost();
-       $defensa->estado = Objectbase::STATUS_AC;
-       $defensa->save();
-                   }
+          
+            // echo "Hola eli";
+             /*
+             echo  $_POST['estudiante_id'];
+             echo  $_POST['proyecto_id'];
+              */
+               $defensa= new Defensa();
+              $defensa->objBuidFromPost();
+             
+              $defensa->fecha_asignacion= date("j/n/Y");
+              $defensa->hora_asignacion=date("H:i:s");
+              //$defensa->fecha_defensa="";
+              $defensa->hora_inicio= '8:15';
+              $defensa->hora_final= '8:15';
+              //$defensa->tipo_defensa_id=tipo_defensa_id;
+              //$defensa->lugar_id=1;
+           //   $defensa->proyecto_id;
+              $defensa->estado = Objectbase::STATUS_AC;
+              $defensa->save();
+             
    
             }
 

@@ -1,5 +1,6 @@
 
 <div id="content">
+  
 
     <h1 style="text-align: center;margin: 5px 0;">
     LISTA DE PROYECTOS ASIGNADOS
@@ -25,7 +26,7 @@
       <td>{$arraytribunal[ic]['id']}</td>
       <td>{$arraytribunal[ic]['nombre']} {$arraytribunal[ic]['apellidos']}</td>
       <td>{$arraytribunal[ic]['nombreproyecto']}</td>
-      <td> <a href="mostrartribunal.php?proyecto_id={$arraytribunal[ic]['id']}" target="_blank" >{icono('detalle.png','Ver Tribunales')}</a>
+      <td> <a href="mostrartribunal.php?proyecto_id={$arraytribunal[ic]['id']}" target="_self" >{icono('detalle.png','Ver Tribunales')}</a>
       </td>
       <td>
     <a href="eliminartribunal.php?eliminar&tribunaleliminar_id={$arraytribunal[ic]['id']}" onclick="return confirm('Eliminar la Asignacion de Tribunales?');"  >{icono('borrar.png','Eliminar')}</a>
