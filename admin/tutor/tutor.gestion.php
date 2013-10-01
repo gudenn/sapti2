@@ -27,7 +27,7 @@ try {
   /**
    * Menu superior
    */
-  $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administrador');
+  $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'tutor/','name'=>'Tutores');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'tutor/'.basename(__FILE__),'name'=>'Gesti&oacute;n de Tutores');
   $smarty->assign("menuList", $menuList);

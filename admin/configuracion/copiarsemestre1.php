@@ -29,14 +29,11 @@ try {
   /**
    * Menu superior
    */
-  $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administrador');
+  $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/','name'=>'Configuraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Configuraci&oacute;n Copiar');
   $smarty->assign("menuList", $menuList);
 
-  $docente=  getSessionDocente();
-  $docenteid=$docente->id;
-  
   $semestre=new Semestre();
   $semestre->getActivo();
   $smarty->assign("semestre", $semestre);

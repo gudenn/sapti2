@@ -1,11 +1,15 @@
 <?php
 try {
-  define ("MODULO", "TURNO-GESTION");
+  define ("MODULO", "ESTUDIANTE-GESTION");
   require('../_start.php');
   if(!isAdminSession())
-    header("Location: ../login.php");  
+    header("Location: login.php");  
 
-  leerClase("Turno");
+
+  
+
+  leerClase("Usuario");
+  leerClase("Estudiante");
   leerClase("Formulario");
   leerClase("Pagination");
   leerClase("Filtro");
@@ -14,17 +18,9 @@ try {
   $ERROR = '';
 
   /** HEADER */
-  $smarty->assign('title','Gestion de Turno');
-  $smarty->assign('description','Pagina de gesti&oacute;n de Turno');
-  $smarty->assign('keywords','Gesti&acoute;n,Turno');
-  leerClase('Administrador');
-  /**
-   * Menu superior
-   */
-  $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/','name'=>'Configuraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Registro de Turno');
-  $smarty->assign("menuList", $menuList);
+  $smarty->assign('title','Gestion de Usuarios');
+  $smarty->assign('description','Pagina de gestion de Usuarios');
+  $smarty->assign('keywords','Gestion,Usuarios');
 
   //CSS
   $CSS[]  = URL_CSS . "academic/tables.css";
@@ -39,19 +35,28 @@ try {
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
+  if (isset($_GET['eliminar']) && isset($_GET['estudiante_id']) && is_numeric($_GET['estudiante_id']) )
+  {
+    $estudiante = new Estudiante($_GET['estudiante_id']);
+    $usaurio    = new Usuario($estudiante->usuario_id);
+    $usaurio->delete();
+    $estudiante->delete();
+  }
+
   $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
-  $smarty->assign('lista'       ,'admin/turno/lista.tpl');
+  $smarty->assign('lista'       ,'admin/estado/gestion.estado.tpl');
 
   //Filtro
-  $filtro   = new Filtro('g_turno',__FILE__);
-  $objeto = new Turno();
-  $objeto->iniciarFiltro($filtro);
-  $filtro_sql = $objeto->filtrar($filtro);
+  $filtro     = new Filtro('g_estudiante',__FILE__);
+  $estudiante = new Estudiante();
+  $estudiante->iniciarFiltro($filtro);
+  $filtro_sql = $estudiante->filtrar($filtro);
 
+  $estudiante->usuario_id = '%';
   
-  $o_string   = $objeto->getOrderString($filtro);
-  $obj_mysql  = $objeto->getAll('',$o_string,$filtro_sql,TRUE);
-  $objs_pg    = new Pagination($obj_mysql, 'g_turno','',false,3);
+  $o_string   = $estudiante->getOrderString($filtro);
+  $obj_mysql  = $estudiante->getAll('',$o_string,$filtro_sql,TRUE,TRUE);
+  $objs_pg    = new Pagination($obj_mysql, 'g_estudiante','',false,10);
 
   $smarty->assign("filtros"  ,$filtro);
   $smarty->assign("objs"     ,$objs_pg->objs);

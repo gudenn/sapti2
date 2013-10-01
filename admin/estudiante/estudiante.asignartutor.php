@@ -22,7 +22,7 @@ try {
    */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'estudiante/','name'=>' Estudiantes');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'estudiante/'.basename(__FILE__),'name'=>'Asignar Tutor');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'estudiante/'.basename(__FILE__),'name'=>'VER Tutores');
   $smarty->assign("menuList", $menuList);
   //CSS
   $CSS[]  = URL_CSS . "academic/tables.css";
