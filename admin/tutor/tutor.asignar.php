@@ -18,7 +18,15 @@ try {
   $smarty->assign('title','Enviar Solicitud');
   $smarty->assign('description','Pagina de listado de tutores');
   $smarty->assign('keywords','Docentes');
+  /**
+   * Menu superior
+   */
+  $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'tutor/','name'=>'Tutor');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'tutor/'.basename(__FILE__),'name'=>'Posibles tutores');
+  $smarty->assign("menuList", $menuList);
 
+  
   //CSS
   $CSS[]  = URL_CSS . "academic/tables.css";
   //$CSS[]  = URL_CSS . "pg.css";

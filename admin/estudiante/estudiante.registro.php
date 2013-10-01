@@ -11,7 +11,7 @@ try {
   /**
    * Menu superior
    */
-  $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administrador');
+  $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'estudiante/','name'=>' Estudiantes');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'estudiante/'.basename(__FILE__),'name'=>'Registro de estudiante');
   $smarty->assign("menuList", $menuList);
@@ -73,10 +73,12 @@ try {
   {
     $semestre_values[] = $row['id'];
     $semestre_output[] = $row['codigo'];
+    if ($row['activo'])
+      $semestre_selected = $row['id'];
   }
   $smarty->assign("semestre_values", $semestre_values);
   $smarty->assign("semestre_output", $semestre_output);
-  $smarty->assign("semestre_selected", ""); 
+  $smarty->assign("semestre_selected", $semestre_selected); 
   
   //Asignar Materia al estudiante
   leerClase('Materia');
