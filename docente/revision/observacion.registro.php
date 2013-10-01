@@ -8,6 +8,7 @@ try {
   leerClase('Observacion');
   leerClase('Estudiante');
   leerClase('Usuario');
+  leerClase('Docente');
 
   /** HEADER */
   $smarty->assign('title','Proyecto Final');
@@ -32,6 +33,8 @@ try {
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
   $JS[]  = URL_JS . "jquery.addfield.js";
   $smarty->assign('JS',$JS);
+  
+  $docente_aux = getSessionDocente();
 
   if (isset($_POST['observaciones'])) 
   $observaciones=$_POST['observaciones'];
@@ -53,14 +56,13 @@ try {
     $urlpdf=".../ARCHIVO/proyecto.pdf";
     $smarty->assign("urlpdf", $urlpdf);
     
-    date_default_timezone_set('UTC');
     $revision->fecha_revision=date("d/m/Y");
 
     if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
     {
     $revision->objBuidFromPost();
     $revision->estado = Objectbase::STATUS_AC;
-    $revision->revisor=4;
+    $revision->revisor=$docente_aux->docente_id;
     $revision->revisor_tipo='DO';
     $revision->estado_revision='CR';
     $revision->proyecto_id=$proyecto->id;
@@ -74,7 +76,7 @@ try {
     $observacion->save();
     }
 
-    $ir = "Location: ../estudiante/estudiante.lista.php";
+    $ir = "Location: ../estudiante/estudiante.lista.php?";
         header($ir);
     }
 
