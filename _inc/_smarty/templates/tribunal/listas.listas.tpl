@@ -3,6 +3,7 @@
 
     <h1 style="text-align: center;margin: 5px 0;">
     Lista de Proyectos Asignados
+    
     </h1>
   
         <form action="" method="get" >

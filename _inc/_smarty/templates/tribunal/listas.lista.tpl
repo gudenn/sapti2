@@ -14,6 +14,7 @@
       <th><a href='?order=fecha_observacion'                  class="tajax"  title='Ordenar por Fecha'        >PROYECTO   </a></th>
       <th><a href='?order=revisor'                            class="tajax"  title='Ordenar por Revisor'      >VER TRIBUNALES  </a></th>
       <th>OPCIONES</th>
+      
     </tr>
   </thead>
   
