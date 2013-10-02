@@ -1,14 +1,14 @@
 <?php
 try {
-  define ("MODULO", "AREA-REGISTRO");
+  define ("MODULO", "TITULOHONORIFICO-REGISTRO");
   require('../_start.php');
   if(!isAdminSession())
     header("Location: ../login.php");  
 
   /** HEADER */
-  $smarty->assign('title','SAPTI - Registro Area');
-  $smarty->assign('description','Formulario de registro de Area');
-  $smarty->assign('keywords','SAPTI,Area,Registro');
+  $smarty->assign('title','SAPTI - Registro de T&iacute;tulo honor&iacute;fico');
+  $smarty->assign('description','Formulario de registro de T&iacute;tulos honor&iacute;ficos');
+  $smarty->assign('keywords','SAPTI,T&iacute;tulos honor&iacute;ficos,Registro');
 
   leerClase('Administrador');
   /**
@@ -16,7 +16,7 @@ try {
    */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/','name'=>'Configuraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Registro de Area');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Registro de T&iacute;tulos honor&iacute;ficos');
   $smarty->assign("menuList", $menuList);
 
 
@@ -48,25 +48,25 @@ try {
   $smarty->assign("ERROR", '');
 
 
-  leerClase('Area');
+  leerClase('Titulo_honorifico');
   
-  $smarty->assign('columnacentro','admin/area/columna.centro.registro.tpl');
+  $smarty->assign('columnacentro','admin/titulo_honorifico/registro.tpl');
   $id = '';
-  if (isset($_GET['area_id']) && is_numeric($_GET['area_id']))
-    $id = $_GET['area_id'];
-  $area = new Area($id);
+  if (isset($_GET['titulo_honorifico_id']) && is_numeric($_GET['titulo_honorifico_id']))
+    $id = $_GET['titulo_honorifico_id'];
+  $titulo = new Titulo_honorifico($id);
   if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
   {
     $EXITO = false;
     mysql_query("BEGIN");
-    $area->objBuidFromPost();
-    $area->estado = Objectbase::STATUS_AC;
-    $area->validar();
-    $area->save();
+    $titulo->objBuidFromPost();
+    $titulo->estado = Objectbase::STATUS_AC;
+    $titulo->validar();
+    $titulo->save();
     $EXITO = TRUE;
     mysql_query("COMMIT");
   }
-  $smarty->assign("area",$area);
+  $smarty->assign("titulo",$titulo);
 
   //No hay ERROR
   $ERROR = ''; 

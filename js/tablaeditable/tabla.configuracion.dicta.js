@@ -198,7 +198,7 @@ function enviarDatosGrupo(){
 //función para limpiar los campos
 function LimpiarCampos(){
   document.nueva_grupo.grupo.value="";
-  document.nueva_grupo.docente_id.value="";
+  document.nueva_grupo.docente_id.value="4";
   document.nueva_grupo.materia_id.value="";
   document.nueva_grupo.grupo.focus();
 };

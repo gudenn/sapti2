@@ -266,8 +266,10 @@ class Estudiante extends Objectbase {
       $filtro_sql .= " AND {$this->getTableName('usuario')}.login like '%{$filtro->filtro('login')}%' ";
     if ($filtro->filtro('nombre'))
       $filtro_sql .= " AND {$this->getTableName('usuario')}.nombre like '%{$filtro->filtro('nombre')}%' ";
-    if ($filtro->filtro('apellidos'))
-      $filtro_sql .= " AND {$this->getTableName('usuario')}.apellidos like '%{$filtro->filtro('apellidos')}%' ";
+    if ($filtro->filtro('apellido_paterno'))
+      $filtro_sql .= " AND {$this->getTableName('usuario')}.apellido_paterno like '%{$filtro->filtro('apellido_paterno')}%' ";
+    if ($filtro->filtro('apellido_materno'))
+      $filtro_sql .= " AND {$this->getTableName('usuario')}.apellido_materno like '%{$filtro->filtro('apellido_materno')}%' ";
     return $filtro_sql;
   }
 

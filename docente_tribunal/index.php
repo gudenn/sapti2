@@ -4,6 +4,9 @@ try {
   if(!isDocenteSession())
     header("Location: login.php");  
 
+  
+  
+  
   /** HEADER */
   $smarty->assign('title','Proyecto Final');
   $smarty->assign('description','Proyecto Final');

@@ -1,9 +1,9 @@
 <?php
 try {
   define ("MODULO", "GRUPO-GESTION");
-  require('_start.php');
+  require('../_start.php');
   if(!isAdminSession())
-    header("Location: login.php");  
+    header("Location: ../login.php");  
 
 
   
@@ -17,10 +17,10 @@ try {
   $ERROR = '';
 
   /** HEADER */
-  $smarty->assign('title','Gestion de Grupos');
-  $smarty->assign('description','Pagina de gestion de Grupos');
-  $smarty->assign('keywords','Gestion,Grupos');
-  $smarty->assign('menudirslast','Gestion Grupos');
+  $smarty->assign('title','Gesti&oacute;n de Grupos');
+  $smarty->assign('description','Pagina de Gesti&oacute;n  de Grupos');
+  $smarty->assign('keywords','Gesti&oacute;n ,Grupos');
+//  $smarty->assign('menudirslast','Gestion Grupos');
 
   //CSS
   $CSS[]  = URL_CSS . "academic/tables.css";
@@ -35,10 +35,17 @@ try {
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
+  /**
+   * Menu superior
+   */
+  $menuList[]     = array('url'=>URL.Administrador::URL,'name'=>'Administraci&oacute;n');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'seguridad/','name'=>'Control de Permisos');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'seguridad/'.basename(__FILE__),'name'=>'Gesti&oacute;n de Permisos');
+  $smarty->assign("menuList", $menuList);
 
 
   $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
-  $smarty->assign('lista'       ,'admin/grupo.lista.tpl');
+  $smarty->assign('lista'       ,'admin/seguridad/grupo.lista.tpl');
 
   //Filtro
   $filtro     = new Filtro('grupo',__FILE__);
@@ -50,7 +57,7 @@ try {
 
   $o_string   = $grupo->getOrderString($filtro);
   $obj_mysql  = $grupo->getAll('',$o_string,$filtro_sql,TRUE,FALSE);
-  $objs_pg    = new Pagination($obj_mysql, 'grupo','',false,30);
+  $objs_pg    = new Pagination($obj_mysql, 'grupo','',false);
 
 
   $smarty->assign("filtros"  ,$filtro);

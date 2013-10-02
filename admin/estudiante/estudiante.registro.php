@@ -18,24 +18,25 @@ try {
 
   //CSS
   $CSS[]  = URL_CSS . "academic/3_column.css";
-  $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
   /////css del calendario
-  $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
   
 
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
 
-  //Datepicker UI
-  $JS[]  = URL_JS . "jquery-ui-1.10.3.custom.min.js";
-  $JS[]  = URL_JS . "ui/i18n/jquery.ui.datepicker-es.js";
+  //Datepicker & Tooltips $ Dialogs UI
+  $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
+  $JS[]   = URL_JS . "jquery-ui-1.10.3.custom.min.js";
+  $JS[]   = URL_JS . "ui/i18n/jquery.ui.datepicker-es.js";
 
   //Validation
+  $CSS[] = URL_JS . "/validate/validationEngine.jquery.css";
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
+
   //BOX
   $CSS[] = URL_JS . "box/box.css";
-  $JS[]  = URL_JS ."box/jquery.box.js";
+  $JS[]  = URL_JS . "box/jquery.box.js";
 
   
   $smarty->assign('CSS',$CSS);
@@ -101,6 +102,20 @@ try {
       Usuario::MASCULINO => 'Masculino'));
   $smarty->assign('sexo_selected', ($usuario->sexo==Usuario::FEMENINO)?Usuario::FEMENINO:Usuario::MASCULINO);
   
+   
+  //Asignar titulo al usuario
+  leerClase('Titulo_honorifico');
+  $titulo_h     = new Titulo_honorifico();
+  $titulo_hs    = $titulo_h->getAll();
+  $titulo_h_values[] = '';
+  $titulo_h_output[] = '- Seleccione -';
+  while ($row = mysql_fetch_array($titulo_hs[0])) 
+  {
+    $titulo_h_values[] = $row['nombre'];
+    $titulo_h_output[] = $row['nombre'];
+  }
+  $smarty->assign("titulo_h_values", $titulo_h_values);
+  $smarty->assign("titulo_h_output", $titulo_h_output);
   
   if (!$editar)
     $columnacentro = 'admin/estudiante/columna.centro.estudiante-registro.tpl';

@@ -1,24 +1,29 @@
       <div id="content">
-        {if (isset($estudiante))}
-          <h1 class="title">Registro de Tutor para
-            <br>Estudiante: <b>{$estudiante->getNombreCompleto()}</b>
-            <br>C&oacute;digo SIS: <b>{$estudiante->codigo_sis}</b>
-          </h1>
-        {else}
-          <h1 class="title">Registro de Tutor</h1>
-        {/if}
-        <h2 class="title">Formulario de registro de tutor</h2>
+        <h1 class="title">REGISTRO DE OBSERVACIONES</h1>
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
-            <!-- ############ -->
-            {include file="admin/usuario/registro.base.tpl"}
-            <!-- ############ -->
-            <h2 class="title">Registrar Tutor</h2>
             <p>
-              {if (isset($estudiante))}
-              <input type="hidden" name="estudiante_id" id="estudiante_id" value="{$estudiante->id}" size="22">
-              {/if}
-              <input type="hidden" name="id" value="{$tutor->id}">
+               <label for="nombre de proyecto"><small>NOMBRE DE PROYECTO:</small></label>
+               <span>{$proyecto->nombre}</span><br/>
+               <label for="nombre de estudiante"><small>NOMBRE DE ESTUDIANTE:</small></label>
+               <span>{$usuario->nombre} {$usuario->apellido_paterno} {$usuario->apellido_materno}</span>
+            </p>
+            <br/>
+           
+            
+        
+            
+              <p>
+              <input type="text" name="nota_tribunal" id="nota_tribunal" value="{$nota->nota_tribunal}" size="22"/>
+              <label for="Nota"><small>Ingrese la Nota</small></label>
+            </p>
+           
+            
+            <h2 class="title">Grabar Revision</h2>
+            <p>
+               <input type="hidden" name="estudiante_id" value="{$estudiante->id}">
+              <input type="hidden" name="proyecto_id" value="{$proyecto->id}">
+              <input type="hidden" name="visto_bueno_id" value="{$usuario->id}">
               <input type="hidden" name="tarea" value="registrar">
               <input type="hidden" name="token" value="{$token}">
 
@@ -33,11 +38,11 @@
         <script type="text/javascript">
         {literal} 
           $(function(){
-            $('#fecha_nacimiento').datepicker({
+            $('#fecha_revision').datepicker({
               dateFormat:'dd/mm/yy',
               changeMonth: true,
               changeYear: true,
-              yearRange: "1920:2013"
+              yearRange: "2000:2050"
             });
           });
           jQuery(document).ready(function(){
