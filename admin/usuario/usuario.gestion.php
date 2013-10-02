@@ -1,8 +1,8 @@
 <?php
 try {
-  require('_start.php');
+  require('../_start.php');
   if(!isAdminSession())
-    header("Location: login.php");  
+    header("Location: ../login.php");  
   
   //MODULO -> REGISTRO DE MERCADERIA
   //ACCION -> GESTION
@@ -35,13 +35,22 @@ try {
   $smarty->assign('JS',$JS);
 
   
+  /**
+   * Menu superior
+   */
+  $menuList[]     = array('url'=>URL . Administrador::URL,'name'=>'Administraci&oacute;n');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'usuario/','name'=>'Usuarios');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'usuario/'.basename(__FILE__),'name'=>'Gesti&oacute;n Usuarios');
+  $smarty->assign("menuList", $menuList);
+
+
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
 
 
   $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
-  $smarty->assign('lista'       ,'admin/usuario.lista.tpl');
+  $smarty->assign('lista'       ,'admin/usuario/lista.tpl');
 
   //Filtro
   $filtro     = new Filtro('usuario',__FILE__);

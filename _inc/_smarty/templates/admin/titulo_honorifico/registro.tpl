@@ -1,20 +1,20 @@
       <div id="content">
-        <h1 class="title">Registro de Area</h1>
-        <p>Formulario de registro de Area</p>
+        <h1 class="title">Registro de T&iacute;tulo honor&iacute;fico</h1>
+        <p>Formulario de registro de T&iacute;tulo honor&iacute;fico</p>
         <h2 class="title">Formulario de Registro</h2>
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
             <p>
-              <input type="text" name="nombre" value="{$area->nombre}"  data-validation-engine="validate[required]">
-              <label for="codigo"><small>Nombre del Area (*){getHelpTip('nombre')}</small></label>
+              <input type="text" name="nombre" value="{$titulo->nombre}"  data-validation-engine="validate[required]">
+              <label for="codigo"><small>Nombre del T&iacute;tulo honor&iacute;fico (*){getHelpTip('nombre')}</small></label>
             </p>
             <p>
-              <input type="text" name="descripcion" value="{$area->descripcion}"  data-validation-engine="validate[required]">
-              <label for="codigo"><small>Descripcion del Area (*){getHelpTip('descripcion')}</small></label>
+              <input type="text" name="descripcion" value="{$titulo->descripcion}"  data-validation-engine="validate[required]">
+              <label for="codigo"><small>Descripcion del T&iacute;tulo honor&iacute;fico (*){getHelpTip('descripcion')}</small></label>
             </p>
-            <h2 class="title">Grabar Area</h2>
+            <h2 class="title">Grabar T&iacute;tulo honor&iacute;fico</h2>
             <p>
-              <input type="hidden" name="id"    value="{$area->id}">
+              <input type="hidden" name="id"    value="{$titulo->id}">
               <input type="hidden" name="tarea" value="registrar">
               <input type="hidden" name="token" value="{$token}">
               <input name="submit" type="submit" id="submit" value="Grabar">

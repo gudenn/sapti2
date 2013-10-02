@@ -1,9 +1,9 @@
 <?php
 try {
   define ("MODULO", "PERMISO-GESTION");
-  require('_start.php');
+  require('../_start.php');
   if(!isAdminSession())
-    header("Location: login.php");  
+    header("Location: ../login.php");  
 
 
   
@@ -36,10 +36,18 @@ try {
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
+  /**
+   * Menu superior
+   */
+  $menuList[]     = array('url'=>URL.Administrador::URL,'name'=>'Administraci&oacute;n');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'seguridad/','name'=>'Control de Permisos');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'seguridad/grupo.gestion.php','name'=>'Gesti&oacute;n de Permisos');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'seguridad/'.basename(__FILE__),'name'=>'Asignaci&oacute;n de Permisos');
+  $smarty->assign("menuList", $menuList);
 
 
   $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
-  $smarty->assign('lista'       ,'admin/grupo.permiso.tpl');
+  $smarty->assign('lista'       ,'admin/seguridad/grupo.permiso.tpl');
 
   //Filtro
   $filtro     = new Filtro('premisos',__FILE__);
@@ -62,7 +70,7 @@ try {
 
   $o_string   = $permiso->getOrderString($filtro);
   $obj_mysql  = $permiso->getAll('',$o_string,$filtro_sql,TRUE,TRUE);
-  $objs_pg    = new Pagination($obj_mysql, 'grupo','',false,30);
+  $objs_pg    = new Pagination($obj_mysql, 'grupo','',false);
 
   
   $smarty->assign("filtros"  ,$filtro);

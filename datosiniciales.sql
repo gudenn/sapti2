@@ -120,7 +120,15 @@ INSERT INTO `turno` (`id`, `nombre`, `descripcion`, `estado`) VALUES
 (4, 'Tarde', 'afsd', 'AC'),
 (5, 'Mañana', 'fasdf', 'AC');
 
-
+INSERT INTO `titulo_honorifico` ( `nombre`, `descripcion`, `estado`) VALUES
+( 'Est.', 'Est.', 'AC'),
+( 'Lic.', 'Lic.', 'AC'),
+( 'Ing.', 'Ing.', 'AC'),
+( 'Msc.', 'Msc.', 'AC'),
+( 'Msc. Lic.', 'Msc. Lic.', 'AC'),
+( 'Msc. Ing.', 'Msc. Ing.', 'AC'),
+( 'Dr.', 'Dr.', 'AC'),
+( 'Ph.D.', 'Ph.D.', 'AC');
 
 INSERT INTO `sapti`.`proyecto_area` (`id`, `area_id`, `proyecto_id`, `estado`) VALUES (NULL, '2', '1', 'AC'), (NULL, '3', '3', 'AC');
 INSERT INTO `sapti`.`proyecto_area` (`id`, `area_id`, `proyecto_id`, `estado`) VALUES (NULL, '4', '4', 'AC');
