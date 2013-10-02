@@ -27,8 +27,6 @@ try {
   
   if (isset($_GET['id_estudiante'])) 
   $id_estudiante=$_GET['id_estudiante'];
-  $docente=  getSessionDocente();
-  $docente_ids=$docente->id;
   
   $estudiante     = new Estudiante($id_estudiante);
   $usuario        = $estudiante->getUsuario();

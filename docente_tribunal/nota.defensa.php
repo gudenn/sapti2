@@ -3,12 +3,16 @@ try {
   require('_start.php');
   if(!isDocenteSession())
   header("Location: login.php");
+ 
   leerClase('Visto_bueno');
   leerClase('Docente');
- 
   leerClase('Estudiante');
   leerClase('Usuario');
   leerClase('Proyecto');
+  leerClase('Usuario');
+  leerClase('Nota');
+  leerClase('Nota_tribunal');
+  leerClase('Tribunal');
 
   /** HEADER */
   $smarty->assign('title','Proyecto Final');
@@ -59,9 +63,29 @@ try {
 
     if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
     {
-   
-   echo $_POST['estudiante_id'];
-   
+     
+      
+      $docente=  getSessionDocente();
+      $docenteid=$docente->docente_id;
+      //echo  $docenteid;
+      //echo $_POST['estudiante_id'];
+     // echo  $_POST['nota_tribunal'];
+      $estudiantes= new Estudiante($_POST['estudiante_id']);
+      
+      $proyecto= $estudiantes ->getProyecto();
+    $tribunal=  $proyecto->getTribunal($docenteid, $proyecto->id);
+      
+       $notatribunal= new Nota_tribunal();
+       $notatribunal->objBuidFromPost();
+       $notatribunal->tribunal_id=$tribunal->id;
+      // $notatribunal->nota_tribunal=
+       $notatribunal->proyecto_id=$proyecto->id;
+       $notatribunal->estado=  Objectbase::STATUS_AC;
+       $notatribunal->save();
+    
+     // echo $tribunal->id;
+      
+      
     }
 
   //No hay ERROR

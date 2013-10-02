@@ -501,10 +501,20 @@ if ( isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' )
 
 if (isset($_POST['proyecto_id']))
  {
-   // echo $_POST['proyecto_id'];
+   echo $_POST['proyecto_id'];
+   
+   
+   
+   //UPDATE items,month SET items.price=month.price
+//WHERE items.id=month.id;
    $proyectos   = new Proyecto($_POST['proyecto_id']);
+   $proyectos->objBuidFromPost();
+   $proyectos->estado_proyecto='TA';
+
+  // var_dump($proyectos->save());
+  
    //$estudiante  = array();
-    $estudiante   = new Estudiante(false,$_POST['estudiante_id']);
+   $estudiante   = new Estudiante(false,$_POST['estudiante_id']);
    $notificacion= new Notificacion();
    $notificacion->objBuidFromPost();
   // $notificacion->enviarNotificaion($usuarios);
@@ -518,6 +528,8 @@ if (isset($_POST['proyecto_id']))
 
     $noticaciones= array('estudiantes'=>array($estudiante->id));
     $notificacion->enviarNotificaion( $noticaciones);
+    
+     
    
      if(isset($_POST['ids']))
      { 
@@ -553,6 +565,9 @@ if (isset($_POST['proyecto_id']))
                
      }
      }
+    
+     
+     
      }else
  {
    

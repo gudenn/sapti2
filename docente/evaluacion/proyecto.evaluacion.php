@@ -23,21 +23,33 @@ try {
   $JS[]  = URL_JS . "tablaeditable/editablegrid-2.0.1.js";
   $JS[]  = URL_JS . "tablaeditable/tabla.revision.lista.revisor.js";
   $JS[]  = URL_JS . "ventanasmodales/observacion.detalle.js";
+  $JS[]  = URL_JS . "ventanasmodales/historial.notas.js";
   $JS[]  = URL_JS . "ventanasmodales/jquery.simplemodal-1.4.4.js";
   $smarty->assign('JS',$JS);
 
     if (isset($_GET['id_estudiante'])) 
   $id_estudiante=$_GET['id_estudiante'];
-  $docente=  getSessionDocente();
-  $docente_ids=$docente->id;
-  
+      if (isset($_GET['iddicta'])) 
+  $iddicta=$_GET['iddicta'];
   $estudiante     = new Estudiante($id_estudiante);
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();
-  $evaluacion     = new Evaluacion(1);
+  $resul = "
+      SELECT it.evaluacion_id as id
+FROM dicta di, inscrito it
+WHERE it.dicta_id=di.id
+AND it.estudiante_id='".$estudiante->id."'
+AND di.id='".$iddicta."' 
+          ";
+   $sql = mysql_query($resul);
+while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
+   $idevaluacion[]=$fila1;
+ }
+  $evaluacion     = new Evaluacion($idevaluacion[0]['id']);  
 
   $smarty->assign("usuario", $usuario);
   $smarty->assign("proyecto", $proyecto);
+  $smarty->assign("estudiante", $estudiante);
   $smarty->assign("evaluacion", $evaluacion);
   
      if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])

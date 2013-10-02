@@ -28,7 +28,9 @@ try {
 
   
   $docente=  getSessionDocente();
-  $docenteid=$docente->id;
+  $docenteid=$docente->docente_id;
+  // echo $docente->id;
+  echo $docenteid;
  // $docenteid=4;
   
   $smarty->assign("docente_ids", $docenteid);
