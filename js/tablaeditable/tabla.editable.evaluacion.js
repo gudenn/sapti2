@@ -24,7 +24,7 @@ function displayMessage(text, style) {
 
 // helper function to get path of a demo image
 function image(relativePath) {
-	return "../images/" + relativePath;
+	return "../../images/" + relativePath;
 };
 
 // this will be used to render our table headers
@@ -76,6 +76,11 @@ EditableGrid.prototype.initializeGrid = function()
 			if (oldRowIndex < 0) displayMessage("Selecionada Fila '" + this.getRowId(newRowIndex) + "'");
 			else displayMessage("Selecionada Fila y Cambiada por '" + this.getRowId(oldRowIndex) + "' to '" + this.getRowId(newRowIndex) + "'");
 		};
+                
+                setCellRenderer("action", new CellRenderer({render: function(cell, value) {
+		cell.innerHTML = "<a href='#' class='historial' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
+						 "<img src=\"" + image("icons/basicset/graph.png") + "\" border=\"0\" alt=\"historial\" title=\"Seguimiento\"/>Historial de Notas</a>";
+                }}));
 		
 		// render the grid (parameters will be ignored if we have attached to an existing HTML table)
 		renderGrid("tablecontent", "testgrid", "tableid");
