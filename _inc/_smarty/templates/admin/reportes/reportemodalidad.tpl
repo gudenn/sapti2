@@ -51,12 +51,10 @@
                         type: 'pie',
                         name: 'Browser share',
                         data: [
-                            ['Postergado', {$pos}],
-                            ['Prorroga',    {$pr}],
-                            
-                            ['Cambios',   {$cam} ],
-                            
-                            ['Vencidos',  {$v}],
+                            ['Adcripcion', {$cont}],
+                          
+                            ['Trabajo Dirigido', {$post}],
+                             ['Proyecto de Grado', {$pro}],
                             
                         ]
                     }]

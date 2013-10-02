@@ -24,7 +24,8 @@ try {
    */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/','name'=>'Configuraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Gesti&oacute;n de Temas de Ayuda');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/helpdesk.tooltips.php?todos','name'=>'Gesti&oacute;n de Temas de Ayuda');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Gesti&oacute;n de Tips de Ayuda');
   $smarty->assign("menuList", $menuList);
 
   //CSS

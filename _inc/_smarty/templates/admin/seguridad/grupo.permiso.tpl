@@ -1,4 +1,5 @@
 <table class="tbl_lista">
+  <thead>
   <tr>
     <th><a href='?order=id'                  class="tajax"  title='Ordenar por Id'           >Id           {$filtros->iconOrder('id')}</a></th>
     <th><a href='?order=estado'              class="tajax"  title='Ordenar por Estado'       >Estado       {$filtros->iconOrder('estado')}</a></th>
@@ -9,6 +10,8 @@
     <th><a href='?order=editar'              class="tajax"  title='Ordenar por Editar'       >Editar       {$filtros->iconOrder('editar')}</a></th>
     <th><a href='?order=eliminar'            class="tajax"  title='Ordenar por Eliminar'     >Eliminar     {$filtros->iconOrder('eliminar')}</a></th>
   </tr>
+  </thead>
+  <tbody>
   {section name=ic loop=$objs}
     <tr>
       <td>{$objs[ic]['id']}</td>
@@ -21,4 +24,5 @@
       <td><input type="checkbox" name="id{$objs[ic]['eliminar']}_editar" value="1" {if ($objs[ic]['eliminar'])}  checked="checked" {/if} ></td>
     </tr>
   {/section}
+  </tbody>
 </table>

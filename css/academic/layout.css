@@ -58,6 +58,7 @@ div.wrapper{
 	margin:0 auto 20px;
 	width:960px;
 	text-align:left;
+
 	}
 
 div.wrapper h1, div.wrapper h2, div.wrapper h3, div.wrapper h4, div.wrapper h5, div.wrapper h6{
@@ -73,6 +74,7 @@ div.wrapper h1, div.wrapper h2, div.wrapper h3, div.wrapper h4, div.wrapper h5, 
 .row1 a{color:#FCFCFC; /*background-color:#06213F;*/}
 .row2, .row3, .row4{color:#979797;background-color:#F9F9F9; border-radius: 13px;}
 .row3, .row4{ box-shadow: 1px 1px 12px #050505;}
+.row3{   min-height:300px;}
 
 /* ----------------------------------------------Generalise-------------------------------------*/
 

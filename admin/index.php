@@ -58,6 +58,16 @@ try {
   $link = Administrador::URL."autoridad/";
   $menu->agregarItem('Reportes de Autoridades','Reportes correspondientes a los Autoridades','basicset/graph.png',$link);
   $menus[] = $menu;
+  $menu = new Menu('Permisos');
+  $link = Administrador::URL."seguridad/";
+  $menu->agregarItem('Gesti&oacute;n de Permisos','Control y restricciones de los grupos para usuarios del Sistema SAPTI','basicset/login.png',$link);
+  $menus[] = $menu;
+  $menu = new Menu('Usuarios');
+  $link = Administrador::URL."usuario/";
+  $menu->agregarItem('Gesti&oacute;n de Usuarios','Registro y modificaciones para Usuarios','basicset/people.png',$link);
+  $link = Administrador::URL."usuario/";
+  $menu->agregarItem('Reportes de Usuarios','Reportes correspondientes a los Todos los Usuarios','basicset/graph.png',$link);
+  $menus[] = $menu;  
   $menu = new Menu('Perfil');
   $link = Administrador::URL."proyeco/";
   $menu->agregarItem('Gesti&oacute;n de Perfiles','Gestionar los perfiles de tesis para los estudiantes','basicset/licence.png',$link);
