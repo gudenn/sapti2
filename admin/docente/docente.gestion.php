@@ -21,10 +21,17 @@ try {
 
   $ERROR = '';
 
-  /** HEADER */
-  $smarty->assign('title','Gestion de Usuarios');
-  $smarty->assign('description','Pagina de gestion de Usuarios');
-  $smarty->assign('keywords','Gestion,Usuarios');
+   /** HEADER */
+  $smarty->assign('title','Gesti&oacute;n de Docentes');
+  $smarty->assign('description','Pagina de Gesti&oacute;n de Docente');
+  $smarty->assign('keywords','Gesti&oacute;n,Docentes');
+  /**
+   * Menu superior
+   */
+  $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'docente/','name'=>' Docentes');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'docente/'.basename(__FILE__),'name'=>'Gesti&oacute;n de Docente');
+  $smarty->assign("menuList", $menuList);
 
   //CSS
   $CSS[]  = URL_CSS . "academic/tables.css";

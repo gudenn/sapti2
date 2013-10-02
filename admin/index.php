@@ -62,6 +62,10 @@ try {
   $link = Administrador::URL."seguridad/";
   $menu->agregarItem('Gesti&oacute;n de Permisos','Control y restricciones de los grupos para usuarios del Sistema SAPTI','basicset/login.png',$link);
   $menus[] = $menu;
+  $menu = new Menu('Reprogramaciones');
+  $link = Administrador::URL."estados/";
+  $menu->agregarItem('Gesti&oacute;n de Reprogramaciones','Postergar y dar Prorroga a Proyectos ','basicset/calendar.png',$link);
+  $menus[] = $menu;
   $menu = new Menu('Usuarios');
   $link = Administrador::URL."usuario/";
   $menu->agregarItem('Gesti&oacute;n de Usuarios','Registro y modificaciones para Usuarios','basicset/people.png',$link);

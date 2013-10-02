@@ -30,6 +30,7 @@ try {
   leerClase('Usuario');
   leerClase('Docente');
   leerClase('Semestre');
+  
 
       /**
    * Menu superior
