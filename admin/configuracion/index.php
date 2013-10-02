@@ -102,6 +102,12 @@ try {
   $link = Administrador::URL."configuracion/modalidad.registro.php";
   $menu->agregarItem('Registro de Modalidad','Registro de una nueva Modalidad de titulaci&oacute;n.','basicset/plus_48.png',$link);
   $menus[] = $menu;
+  $menu = new Menu('T&iacute;tulos honor&iacute;ficos');
+  $link = Administrador::URL."configuracion/titulo_honorifico.gestion.php";
+  $menu->agregarItem('Gesti&oacute;n de T&iacute;tulos honor&iacute;ficos','Lista de todos los T&iacute;tulos honor&iacute;ficos configurados para el sistema.','basicset/licence.png',$link);
+  $link = Administrador::URL."configuracion/titulo_honorifico.registro.php";
+  $menu->agregarItem('Registro de T&iacute;tulos honor&iacute;ficos','Registro de una nuevos T&iacute;tulos honor&iacute;ficos.','basicset/plus_48.png',$link);
+  $menus[] = $menu;
   $menu = new Menu('Turnos');
   $link = Administrador::URL."configuracion/turno.gestion.php";
   $menu->agregarItem('Gesti&oacute;n de Turnos','Los turnos para los horarios.','basicset/timetable.png',$link);

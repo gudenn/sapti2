@@ -63,7 +63,19 @@ try {
      $estudiante = new Estudiante($_GET['estudiante_id']);
      $smarty->assign("estudiante",$estudiante);
   }
-
+  //Asignar titulo al usuario
+  leerClase('Titulo_honorifico');
+  $titulo_h     = new Titulo_honorifico();
+  $titulo_hs    = $titulo_h->getAll();
+  $titulo_h_values[] = '';
+  $titulo_h_output[] = '- Seleccione -';
+  while ($row = mysql_fetch_array($titulo_hs[0])) 
+  {
+    $titulo_h_values[] = $row['nombre'];
+    $titulo_h_output[] = $row['nombre'];
+  }
+  $smarty->assign("titulo_h_values", $titulo_h_values);
+  $smarty->assign("titulo_h_output", $titulo_h_output);
   //tutor
   $tutor= new Tutor();
   $tutor= new Tutor();
