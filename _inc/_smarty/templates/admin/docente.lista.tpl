@@ -25,11 +25,9 @@
       <td>
         <a href="docente.detalle.php?docente_id={$objs[ic]['id']}" target="_blank" >{icono('detalle.png','Detalle')}</a>
         <a href="registro-docente.php?docente_id={$objs[ic]['id']}" target="_blank">{icono('editar.png','Editar')}</a>
-        <a href="docente.gestion.php?eliminar=1&docente_id={$objs[ic]['id']}" onclick="return confirm('Eliminar este Estudiante?');"  >{icono('borrar.png','Eliminar')}</a>
+        <a href="docente.gestion.php?eliminar=1&docente_id={$objs[ic]['id']}" onclick="return confirm('Eliminar este Docente?');"  >{icono('borrar.png','Eliminar')}</a>
       </td>
-      <td>
-           <a href="materia.docente.php?docente_id={$objs[ic]['id']}" >{icono('basicset/pencil_48.png','Editar')} A&ntildeadir Materia </a>
-      </td>
+     
     </tr>
   </tbody>
   {/section}
