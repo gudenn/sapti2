@@ -44,7 +44,7 @@
 
         <div class="dashboard">
           <h2>Reportes Estadisticos Modalidad</h2>
-          <a href="{$URL}{Administrador::URL}reportes/reporte.php">
+          <a href="{$URL}{Administrador::URL}reportes/reportemodalidad.php">
             <img src="{$URL_IMG}icons/basicset/graph.png"   width="48px" height="48px" alt="Reportes">
             <h3>Reportes de Perfil</h3>
             <p>Reportes correspondientes a la Modalidad</p>

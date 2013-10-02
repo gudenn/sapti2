@@ -122,7 +122,7 @@ catch(Exception $e)
 if (isset($_GET['tlista']) && $_GET['tlista']) //recargamos la tabla central
   $smarty->display('admin/listas.lista.tpl'); 
 else
-  $smarty->display('admin/full-width.tpl');
+  $smarty->display('admin/full-width_1.tpl');
 
 
 ?>
