@@ -43,7 +43,7 @@ try {
     ";
  $resultadomateria = mysql_query($sqlmateria);
     $materia_values[] = '';
-    $materia_output[] = '- Seleccione -';
+    $materia_output[] = '- Seleccione Materia -';
  while ($filamateria = mysql_fetch_array($resultadomateria, MYSQL_ASSOC)){
     $materia_values[] = $filamateria['id'];
     $materia_output[] = $filamateria['nombre'];
@@ -57,7 +57,7 @@ AND dc.estado='AC'
     ";
  $resultadodoc = mysql_query($sqldoc);
     $docentes_values[] = '';
-    $docentes_output[] = '- Por Designar -';
+    $docentes_output[] = '- Seleccione Docente -';
  while ($filadoc = mysql_fetch_array($resultadodoc, MYSQL_ASSOC)){
     $docentes_values[] = $filadoc['id'];
     $docentes_output[] = $filadoc['nombre'];
@@ -85,29 +85,7 @@ ORDER BY ma.nombre, di.codigo_grupo
     $smarty->assign('materia_values'  , $materia_values);
     $smarty->assign('materia_output'  , $materia_output);
     $smarty->assign('materia_selected'  , '');    
-    
-    if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
-  {
-        if ( isset($_POST['grupo']) )
-    {
-      $dicta=new Dicta();
-      $dicta->objBuidFromPost();
-      $dicta->estado        = Objectbase::STATUS_AC;
-      $dicta->docente_id    = $_POST['docente_id'];
-      $dicta->materia_id    = $_POST['materia_id'];
-      $dicta->semestre_id   = $semestre->id;
-      $dicta->codigo_grupo  = $_POST['grupo'];
-      $dicta->save();    
-    }
-     
-  }
-  
-   if (isset($_GET['eliminar']) && isset($_GET['horario_id']) && is_numeric($_GET['horario_id']) )
-  {
-       $dicta=new Dicta();
-       $dicta->delete();
-  }
-  
+          
   //No hay ERROR
   $smarty->assign("ERROR",'');
   
