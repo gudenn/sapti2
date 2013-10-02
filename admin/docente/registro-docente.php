@@ -51,19 +51,7 @@ try {
 echo  $semestrecod=$semestre->id;
   
 
-   leerClase('Materia');
-  $materia     = new Materia();
-  $materias    = $materia->getAll();
-  $materia_values[] = '';
-  $materia_output[] = '- Seleccione -';
-  while ($row = mysql_fetch_array($materias[0])) 
-  {
-    $materia_values[] = $row['id'];
-    $materia_output[] = $row['nombre'];
-  }
-  $smarty->assign("materia_values", $materia_values);
-  $smarty->assign("materia_output", $materia_output);
-  $smarty->assign("materia_selected", ""); 
+   
   //CREAR UN TUTOR
   leerClase('Docente');
   leerClase('Usuario');
@@ -75,11 +63,10 @@ echo  $semestrecod=$semestre->id;
       $usuario = new Usuario($docente->usuario_id); 
   
   
-  $usuario=new Usuario();
- $docente=new Docente();
+  
     if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
   {
-            echo'holaaaaaaa';
+           
 
    $EXITO = false;
     mysql_query("BEGIN");

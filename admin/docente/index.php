@@ -38,7 +38,7 @@ try {
   leerClase('Menu');
   $menu = new Menu('Docente');
   $link = Administrador::URL."docente/docente.gestion.php";
-  $menu->agregarItem('Gesti&oacute;n de Docentes','Registro y modificaciones para Estudiantes','basicset/people.png',$link);
+  $menu->agregarItem('Gesti&oacute;n de Docentes','Registro y modificaciones para Docentes','basicset/people.png',$link);
   $link = Administrador::URL."docente/registro-docente.php";
   $menu->agregarItem('Registro de Docente','Registro de un nuevo Docente','basicset/user4.png',$link);
   

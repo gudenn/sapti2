@@ -9,7 +9,7 @@
       <th><a href='?order=email'               class="tajax"  title='Ordenar por Email'        >Email        {$filtros->iconOrder('email')}</a></th>
      
       <th>Opciones</th>
-       <th>Agregar Materia Dicta</th>
+     
     </tr>
   </thead>
   {section name=ic loop=$objs}
