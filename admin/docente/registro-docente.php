@@ -4,10 +4,17 @@ try {
    require('../_start.php');
   global $PAISBOX;
  
-  /** HEADER */
-  $smarty->assign('title','Proyecto Final');
-  $smarty->assign('description','Proyecto Final');
-  $smarty->assign('keywords','Proyecto Final');
+   /** HEADER */
+  $smarty->assign('title','Registro de Docentes');
+  $smarty->assign('description','Pagina de Registro de Docente');
+  $smarty->assign('keywords','Registro,Docentes');
+  /**
+   * Menu superior
+   */
+  $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'docente/','name'=>' Docentes');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'docente/'.basename(__FILE__),'name'=>'Registro de Docente');
+  $smarty->assign("menuList", $menuList);
 
 //CSS
   $CSS[]  = URL_CSS . "academic/3_column.css";

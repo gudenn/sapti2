@@ -27,7 +27,7 @@ try {
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Administrador::URL,'name'=>'Administraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'docente/','name'=>'Docente');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'Reprogramar/','name'=>'Reprogramar');
   $smarty->assign("menuList", $menuList);
 
 
@@ -36,18 +36,12 @@ try {
    */
   //----------------------------------//
   leerClase('Menu');
-  $menu = new Menu('Docente');
-  $link = Administrador::URL."docente/docente.gestion.php";
-  $menu->agregarItem('Gesti&oacute;n de Docentes','Registro y modificaciones para Docentes','basicset/people.png',$link);
-  $link = Administrador::URL."docente/registro-docente.php";
-  $menu->agregarItem('Registro de Docente','Registro de un nuevo Docente','basicset/user4.png',$link);
-  
-  
+  $menu = new Menu('Reprogramacion');
+  $link = Administrador::URL."estados/lista.estudiantes.php";
+  $menu->agregarItem('Busqeda de estudiantes para Reprogramar','Reprogramacion','basicset/people.png',$link);
+ 
   $menus[] = $menu;
-  $menu = new Menu('Reportes');
-  $link = Administrador::URL."docente/";
-  $menu->agregarItem('Reportes de Docente','Reportes correspondientes a los Docentes','basicset/graph.png',$link);
-  $menus[] = $menu;
+ 
   //----------------------------------//
   
   
