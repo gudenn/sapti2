@@ -3,7 +3,7 @@ try {
   require('../_start.php');
   if(!isAdminSession())
     header("Location: ../login.php");
-//////////  
+  
   leerClase("Dicta");
   leerClase("Docente");
   leerClase("Materia");
