@@ -356,7 +356,8 @@ class Proyecto extends Objectbase {
    * @return boolean|\Estudiante
    * retorna el estudiante del proyectto
    */
-    function getEstudiante() {
+    function getEstudiante() 
+  {
     //@TODO revisar
     leerClase('Estudiante');
 
@@ -367,6 +368,33 @@ class Proyecto extends Objectbase {
       return false;
     $estudiantes= mysql_fetch_array($resultados);
     $estudiante = new Estudiante($estudiantes);
+    return $estudiante;
+  }
+  /**
+   * 
+   * @param type $docente
+   * @param type $idproyecto
+   * @return boolean|\Estudiante
+   * retorna un tribunal del proyecto dado el docente_id , proyecto_id 
+   */
+   function getTribunal($docente,$idproyecto) 
+  {
+    //@TODO revisar
+    //leerClase('Estudiante');
+    //
+     /**
+      * select  t.`id`
+  from  `proyecto` p, `tribunal` t
+where  p.`id`=t.`proyecto_id` and p.`id`=1 and t.`docente_id`=1;
+      */
+    leerClase('Tribunal');
+    $activo = Objectbase::STATUS_AC;
+    $sql = "select t.* from " . $this->getTableName('Tribunal') . " as t  where t.proyecto_id = '$this->id' and t.docente_id='$docente' and t.estado = '$activo' and  '$idproyecto'='$this->id'  and '$this->estado' = '$activo' ";
+    $resultados= mysql_query($sql);
+    if (!$resultados)
+      return false;
+    $estudiantes= mysql_fetch_array($resultados);
+    $estudiante = new Tribunal($estudiantes);
     return $estudiante;
   }
 
