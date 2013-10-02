@@ -503,6 +503,8 @@ if (isset($_POST['proyecto_id']))
  {
    echo $_POST['proyecto_id'];
    
+   
+   
    //UPDATE items,month SET items.price=month.price
 //WHERE items.id=month.id;
    $proyectos   = new Proyecto($_POST['proyecto_id']);
