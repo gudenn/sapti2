@@ -23,9 +23,6 @@ try {
   */
   leerClase('Administrador');
   
-  $menuList[]     = array('url'=>URL.Administrador::URL,'name'=>'Administraci&oacute;n');
-  $smarty->assign("menuList", $menuList);
-
   /**
    * Menu superior
    */
@@ -117,7 +114,6 @@ try {
   $smarty->assign("menus", $menus);
   
 
-  var_dump($pendientes);
   $smarty->assign("pendientes", $pendientes);
   
   $smarty->assign("columnacentro", 'admin/configuracion/columna.centro.tpl');
