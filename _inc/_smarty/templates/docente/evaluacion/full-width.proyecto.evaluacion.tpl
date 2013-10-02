@@ -43,6 +43,7 @@
                   <th>Promedio       </th>
                   <th>Editar         </th>
                   <th>Registrar      </th>
+                  <th>Historial      </th>
                 </tr>
               </thead>
             <tr class="dark">
@@ -65,6 +66,9 @@
                    <input type="hidden" name="tarea" value="registrar">
                    <input type="hidden" name="token" value="{$token}">
                    <input name="submit" type="submit" id="submit" value="Grabar">
+               </th>
+               <th>
+                   <a href='#' class='historial' id={$estudiante->id} >{icono('basicset/graph.png','Historial de Notas')}Historial</a>
                </th>
             </tr>
         </table>

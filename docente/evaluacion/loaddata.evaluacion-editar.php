@@ -24,6 +24,7 @@ $grid->addColumn('evaluacion_2', 'Evaluacion 2', 'integer');
 $grid->addColumn('evaluacion_3', 'Evaluacion 3', 'integer');
 $grid->addColumn('promedio', 'Promedio', 'integer', NULL, false);
 $grid->addColumn('rfinal', 'Aprobacion', 'string', NULL, false);
+$grid->addColumn('action', 'Historial', 'html', NULL, false);
 
 $result = $mysqli->query('
 SELECT ev.id as id, us.nombre as nombre, CONCAT(us.apellido_paterno,us.apellido_materno) as apellidos, pr.nombre as nombrep, pr.id as id_pr, ev.evaluacion_1, ev.evaluacion_2, ev.evaluacion_3, ev.promedio as pro, ev.rfinal as apro
