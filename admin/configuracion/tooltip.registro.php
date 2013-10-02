@@ -1,14 +1,14 @@
 <?php
 try {
-  define ("MODULO", "HELPDESK-REGISTRO");
+  define ("MODULO", "TOOLTIPS-REGISTRO");
   require('../_start.php');
   if(!isAdminSession())
     header("Location: ../login.php");  
 
   /** HEADER */
-  $smarty->assign('title','SAPTI - Registro Helpdesk');
-  $smarty->assign('description','Formulario de registro de Helpdesk');
-  $smarty->assign('keywords','SAPTI,Helpdesk,Registro');
+  $smarty->assign('title','SAPTI - Registro Tooltips');
+  $smarty->assign('description','Formulario de registro de Tooltips');
+  $smarty->assign('keywords','SAPTI,tooltips,Registro');
 
   leerClase('Administrador');
   leerClase('Html');
@@ -17,8 +17,8 @@ try {
    */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/','name'=>'Configuraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/helpdesk.gestion.php','name'=>'Gesti&oacute;n de Temas de Ayuda');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Registro de Temas de ayuda');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/tooltip.gestion.php','name'=>'Gesti&oacute;n de Tooltips');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Registro de Tooltips de ayuda');
   $smarty->assign("menuList", $menuList);
 
 
@@ -58,15 +58,16 @@ try {
 
 
   //CREAR 
-  leerClase('Helpdesk');
+  leerClase('Tooltip');
+  $smarty->assign('columnacentro','admin/tooltip/registro.tpl');
+  
   
   $id = '';
-  if (isset($_GET['helpdesk_id']) && is_numeric($_GET['helpdesk_id']))
-    $id = $_GET['helpdesk_id'];
-  $helpdesk = new Helpdesk($id);
+  if (isset($_GET['tooltip_id']) && is_numeric($_GET['tooltip_id']))
+    $id = $_GET['tooltip_id'];
+  $tooltip = new Tooltip($id);
   // guardamos en la session para recuperar los archivos
-  $_SESSION['helpdesk_id'] = $id;
-  $template = TEMPLATES_DIR."helpdesk/archivo/{$helpdesk->codigo}.tpl";
+  $_SESSION['tooltip_id'] = $id;
   
   if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
   {
@@ -74,19 +75,13 @@ try {
     mysql_query("BEGIN");
 
     //Primero lo grabamos grabamos si es que hay post
-    if ( get_magic_quotes_gpc() )
-      $value = stripslashes($_POST['contenido']);
-    else
-      $value = $_POST['contenido']; 
-    $ERROR = Html::grabarTemplate($template,$value);
-
-    $helpdesk->objBuidFromPost();
-    $helpdesk->estado = Objectbase::STATUS_AC;
-    $helpdesk->validar();
-    if ( $helpdesk->estado_helpdesk != Helpdesk::EST03_APROBA )
-      $helpdesk->estado_helpdesk = Helpdesk::EST02_EDITAD;
+    $tooltip->objBuidFromPost();
+    $tooltip->estado = Objectbase::STATUS_AC;
+    $tooltip->validar();
+    if ( $tooltip->estado_tooltip != Tooltip::EST02_APROBA)
+      $tooltip->estado_tooltip = Tooltip::EST02_APROBA;
     
-    $helpdesk->save();
+    $tooltip->save();
     $EXITO = TRUE;
     mysql_query("COMMIT");
   }
@@ -95,7 +90,7 @@ try {
   $template = Html::leerTemplate($template);
 
   $smarty->assign('template' ,$template);
-  $smarty->assign("helpdesk",$helpdesk);
+  $smarty->assign("tooltip"  ,$tooltip);
 
   //No hay ERROR
   $ERROR = ''; 
@@ -105,9 +100,9 @@ try {
   {
     $html = new Html();
     if ($EXITO)
-      $mensaje = array('mensaje'=>'Se grabo correctamente La Ayuda','titulo'=>'Registro de Helpdesk' ,'icono'=> 'tick_48.png');
+      $mensaje = array('mensaje'=>'Se grabo correctamente el La Ayuda','titulo'=>'Registro de Tooltip' ,'icono'=> 'tick_48.png');
     else
-      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Helpdesk','titulo'=>'Registro de Helpdesk' ,'icono'=> 'warning_48.png');
+      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Tooltip','titulo'=>'Registro de Tooltip' ,'icono'=> 'warning_48.png');
    $ERROR = $html->getMessageBox ($mensaje);
   }
   $smarty->assign("ERROR",$ERROR);
@@ -122,6 +117,8 @@ catch(Exception $e)
 $token                = sha1(URL . time());
 $_SESSION['register'] = $token;
 $smarty->assign('token',$token);
-$smarty->display('admin/helpdesk/registro.tpl');
+
+$TEMPLATE_TOSHOW = 'admin/2columnas.tpl';
+$smarty->display($TEMPLATE_TOSHOW);
 
 ?>
