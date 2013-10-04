@@ -38,12 +38,11 @@ try {
 
 
   $docente     =  getSessionDocente();
-    $docente_ids =  $docente->id;
+    $docente_ids =  $docente->docente_id;
     //echo $docente_ids;
-    $sql="select u.`nombre` as nombreusuario, u.`apellidos` , p.`id`,p.`nombre`, t.`id` as idtribunal, d.`id` as iddocente
-from proyecto p, `proyecto_tribunal` pt, `tribunal` t, `docente` d , usuario u
-where  p.`id`=pt.`proyecto_id` and pt.`id`=t.`proyecto_tribunal_id` and d.`id`=t.`docente_id` and  u.`id`=d.`usuario_id` and p.`estado`='AC' and pt.`estado`='AC'
- and t.`estado`='AC' and u.`estado`='AC' and d.`estado`='AC'  and u.`id`=".$docente_ids.";";
+    $sql="select  p.id, t.id as idtribunal, d.id as iddocente, u.nombre as nombreusuario, CONCAT (u.apellido_paterno, u.apellido_paterno) as apellidos ,p.nombre as nombreproyecto
+        from proyecto p,  `tribunal` t, `docente` d , usuario u
+where   p.id=t.proyecto_id and t.docente_id=d.id and d.usuario_id= u.id  and p.estado='AC' and t.estado='AC' and d.estado='AC' and u.estado= 'AC'  and d.id= $docente_ids;";
     $resultado   =  mysql_query($sql);
     $notitribunal_id= array();
  

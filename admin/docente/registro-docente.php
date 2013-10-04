@@ -4,10 +4,17 @@ try {
    require('../_start.php');
   global $PAISBOX;
  
-  /** HEADER */
-  $smarty->assign('title','Proyecto Final');
-  $smarty->assign('description','Proyecto Final');
-  $smarty->assign('keywords','Proyecto Final');
+   /** HEADER */
+  $smarty->assign('title','Registro de Docentes');
+  $smarty->assign('description','Pagina de Registro de Docente');
+  $smarty->assign('keywords','Registro,Docentes');
+  /**
+   * Menu superior
+   */
+  $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'docente/','name'=>' Docentes');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'docente/'.basename(__FILE__),'name'=>'Registro de Docente');
+  $smarty->assign("menuList", $menuList);
 
 //CSS
   $CSS[]  = URL_CSS . "academic/3_column.css";
@@ -51,22 +58,30 @@ try {
 echo  $semestrecod=$semestre->id;
   
 
-   leerClase('Materia');
-  $materia     = new Materia();
-  $materias    = $materia->getAll();
-  $materia_values[] = '';
-  $materia_output[] = '- Seleccione -';
-  while ($row = mysql_fetch_array($materias[0])) 
-  {
-    $materia_values[] = $row['id'];
-    $materia_output[] = $row['nombre'];
-  }
-  $smarty->assign("materia_values", $materia_values);
-  $smarty->assign("materia_output", $materia_output);
-  $smarty->assign("materia_selected", ""); 
+   
   //CREAR UN TUTOR
   leerClase('Docente');
   leerClase('Usuario');
+  
+  
+  //Sexo del usuario
+  $smarty->assign('sexo', array(
+      Usuario::FEMENINO  => 'Femenino',
+      Usuario::MASCULINO => 'Masculino'));
+  $smarty->assign('sexo_selected', ($usuario->sexo==Usuario::FEMENINO)?Usuario::FEMENINO:Usuario::MASCULINO);
+  //Asignar titulo al usuario
+  leerClase('Titulo_honorifico');
+  $titulo_h     = new Titulo_honorifico();
+  $titulo_hs    = $titulo_h->getAll();
+  $titulo_h_values[] = '';
+  $titulo_h_output[] = '- Seleccione -';
+  while ($row = mysql_fetch_array($titulo_hs[0])) 
+  {
+    $titulo_h_values[] = $row['nombre'];
+    $titulo_h_output[] = $row['nombre'];
+  }
+  $smarty->assign("titulo_h_values", $titulo_h_values);
+  $smarty->assign("titulo_h_output", $titulo_h_output);
   
    if (isset($_GET['docente_id']) && is_numeric($_GET['docente_id']))
     $id = $_GET['docente_id'];
@@ -75,11 +90,10 @@ echo  $semestrecod=$semestre->id;
       $usuario = new Usuario($docente->usuario_id); 
   
   
-  $usuario=new Usuario();
- $docente=new Docente();
+  
     if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
   {
-            echo'holaaaaaaa';
+           
 
    $EXITO = false;
     mysql_query("BEGIN");

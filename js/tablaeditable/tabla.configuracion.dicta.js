@@ -54,9 +54,9 @@ EditableGrid.prototype.initializeGrid = function()
             
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
 		cell.innerHTML = "<a onclick=\"if (confirm('Esta seguro de eliminar esta Materia? ')) {deletete(" + getRowId(cell.rowIndex) + "); updatetable("+cell.rowIndex+");} \" style=\"cursor:pointer\">" +
-		//cell.innerHTML = "<a onclick=\"if (confirm('Esta seguro de eliminar esta Materia? ')) {deletete(" + getRowId(cell.rowIndex) + "); actualizar();} \" style=\"cursor:pointer\">" +
-
-                                "<img src=\"" + image("icons/borrar.png") + "\" border=\"0\" alt=\"delete\" title=\"Delete row\"/></a>";
+                                "<img src=\"" + image("icons/borrar.png") + "\" border=\"0\" alt=\"delete\" title=\"Delete Materia\"/>Borrar</a>";
+                cell.innerHTML += "<br><a onclick=\"if (confirm('Esta seguro de Editar esta Materia? ')) {editar(" + getRowId(cell.rowIndex) + "); updatetable("+cell.rowIndex+");} \" style=\"cursor:pointer\">" +
+                                "<img src=\"" + image("icons/editar.png") + "\" border=\"0\" alt=\"editar\" title=\"Editar Materia\"/>Editar</a>";
 		}}));
 
 		// register the function that will handle model changes

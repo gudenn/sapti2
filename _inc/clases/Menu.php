@@ -79,6 +79,10 @@ class Menu
     $link = Administrador::URL."usuario/";
     $thise->agregarItem('Reportes de Usuarios','Reportes correspondientes a los Todos los Usuarios','basicset/graph.png',$link);
     $menus[] = $thise;  
+    $thise = new Menu('Reprogramaciones');
+    $link = Administrador::URL."estados/";
+    $thise->agregarItem('Gesti&oacute;n de Reprogramaciones','Postergar y dar Prorroga a Proyectos','basicset/calendar.png',$link);
+    $menus[] = $thise;
     $thise = new Menu('Perfil');
     $link = Administrador::URL."proyeco/";
     $thise->agregarItem('Gesti&oacute;n de Perfiles','Gestionar los perfiles de tesis para los estudiantes','basicset/licence.png',$link);

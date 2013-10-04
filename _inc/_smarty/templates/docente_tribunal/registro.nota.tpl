@@ -35,6 +35,23 @@
         </div>
         <p>{$ERROR}</p>
         <p>Todos los campos con (*) son obligatorios.</p>
+        
+        
+        <script>
+         jQuery.validator.setDefaults({
+         debug: true,
+         success: "valid"
+         });
+         $( "#registro" ).validate({
+        rules: {
+         nota_tribunal: {
+         required: true,
+         range: [13, 23]
+         }
+         }
+         });
+</script>
+        
         <script type="text/javascript">
         {literal} 
           $(function(){

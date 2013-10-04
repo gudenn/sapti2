@@ -7,8 +7,10 @@
            
               
               <p>
-              <input type="text" name="titulo_honorifico" id="titulo_honorifico" value="{$usuario->titulo_honorifico}" size="100"  data-validation-engine="validate[required]">
-              <label for="titulo_honorifico"><small>Titulo Honorifico (*)</small></label>
+              <select name="titulo_honorifico" id="titulo_honorifico" >
+              {html_options values=$titulo_h_values selected=$usuario->titulo_honorifico output=$titulo_h_output}
+              </select>
+              <label for="semestre_id"><small>T&iacute;tulo (*)</small></label>
             </p>
          
             <p>
@@ -38,6 +40,9 @@
             <p>
               <input type="text" name="email" id="email" value="{$usuario->email}" size="22" data-validation-engine="validate[],custom[email]"  >
               <label for="email"><small>E-Mail</small></label>
+            </p>
+             <p>
+              {html_radios name="sexo" options=$sexo selected=$sexo_selected separator="<br>"}
             </p>
             {if !($usuario->login)}
             <p>

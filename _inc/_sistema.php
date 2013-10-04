@@ -51,6 +51,14 @@
    * FIN
    */
   
+  
+     if (isset($_GET['salirconsejo'])||isset($_POST['salirconsejo']))
+  {  
+       closeConsejoSession();
+    header("Location: index.php");
+    exit();
+  }
+  
   conectar_db();
   mysql_query('SET NAMES \'utf8\'');
 

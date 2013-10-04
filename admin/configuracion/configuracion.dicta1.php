@@ -9,8 +9,16 @@ try {
   
   $semestre=new Semestre();
   $semestre->getActivo();
-  
-  if ( isset($_GET['registrardicta'])==1 )
+
+    $sqlmateria="SELECT *
+FROM dicta di
+WHERE di.materia_id=".$_GET['materia_id']."
+AND di.codigo_grupo=".$_GET['grupo']."
+AND di.semestre_id=".$semestre->id."
+    ";
+    $resultadomateria = mysql_query($sqlmateria);
+
+  if ( isset($_GET['registrardicta'])==1 && !$resultadomateria )
     {
       $dicta=new Dicta();
       $dicta->objBuidFromPost();
@@ -19,7 +27,10 @@ try {
       $dicta->materia_id    = $_GET['materia_id'];
       $dicta->semestre_id   = $semestre->id;
       $dicta->codigo_grupo  = $_GET['grupo'];
-      $dicta->save();    
+      $dicta->save();
+      echo $return ? "ok" : "error";
+    }  else {
+        echo $return="error";
     }
 if(isset($_GET['eliminardicta'])==1){
        $dicta=new Dicta($_GET['iddicta']);

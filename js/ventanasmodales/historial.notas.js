@@ -12,11 +12,11 @@ jQuery(function ($) {
 	var contact = {
 		message: null,
 		init: function () {
-			$('#container').on('click','a.observaciondetalle',function (e) {
+			$('#container').on('click','a.historial',function (e) {
 				e.preventDefault();
                                 var idc=$(this).attr('id');
 				// load the contact form using ajax
-				$.get("observacion.detalle1.php?idev="+idc, function(data){
+				$.get("historial.notas.php?idev="+idc, function(data){
 					// create a modal dialog with the data
                                         
 					$(data).modal({
@@ -34,7 +34,7 @@ jQuery(function ($) {
 			// dynamically determine height
 			var h = 410;
                         var title = $('#contact-container .contact-title').html();
-                        $('#contact-container .contact-title').html('Cargando Detalles...');
+                        $('#contact-container .contact-title').html('Cargando Historial...');
 			dialog.overlay.fadeIn(200, function () {
 				dialog.container.fadeIn(200, function () {
 					dialog.data.fadeIn(200, function () {

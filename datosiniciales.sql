@@ -135,3 +135,23 @@ INSERT INTO `sapti`.`proyecto_area` (`id`, `area_id`, `proyecto_id`, `estado`) V
 
 INSERT INTO `evaluacion` (`id`, `evaluacion_1`, `evaluacion_2`, `evaluacion_3`, `promedio`, `rfinal`, `estado`) VALUES (NULL, '0', '0', '0', NULL, NULL, NULL), (NULL, '0', '0', '0', NULL, NULL, NULL), (NULL, '0', '0', '0', NULL, NULL, NULL);
 UPDATE `inscrito` SET `evaluacion_id` = '1' WHERE `inscrito`.`id` = 1; UPDATE `inscrito` SET `evaluacion_id` = '2' WHERE `inscrito`.`id` = 2; UPDATE `inscrito` SET `evaluacion_id` = '3' WHERE `inscrito`.`id` = 3; UPDATE `inscrito` SET `evaluacion_id` = '4' WHERE `inscrito`.`id` = 4;
+
+
+--
+-- datos Vigencia
+--
+
+
+INSERT INTO `vigencia` (`id`, `proyecto_id`, `fecha_inicio`, `fecha_fin`, `fecha_actualizado`, `estado_vigencia`, `estado`) VALUES
+(1, 1, '2013-09-26', '2000-01-22', '2013-10-15', 'PR', 'AC'),
+(2, 2, '2013-01-02', '2015-07-02', '2013-10-22', 'PO', 'AC');
+
+
+--
+-- datos Cambio
+--
+
+
+
+INSERT INTO `cambio` (`id`, `proyecto_id`, `tipo`, `fecha_cambio`, `estado`) VALUES
+(1, 4, 'CAMBIO TEMA', '2013-09-19', 'AC');

@@ -85,6 +85,7 @@ try {
             while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
                     $arrayobser[]=$fila1;
             }
+            if(count($arrayobser)>0){
                 foreach ($arrayobser as $array2){
                     $dicta_aux = new Dicta($array2['id']);
                     $dicta = new Dicta();
@@ -94,7 +95,9 @@ try {
                     $dicta->materia_id=$dicta_aux->materia_id;
                     $dicta->semestre_id=$semestre->id;
                     $dicta->save();
-                    }
+                    }                
+            }
+
         }
         if($seleccion[0]=='conf'|| $seleccion[1]=='conf'){
                 $resul11 = "SELECT cs.id
@@ -119,7 +122,7 @@ try {
             while ($fila2 = mysql_fetch_array($sql1, MYSQL_ASSOC)) {
                     $arrayconf[]=$fila2;
             }
-            echo $arrayconf['id'][0];
+            if(count($arrayconf)>0){
                 foreach ($arrayconf as $array3){
                     $conf_aux = new Configuracion_semestral($array3['id']);
                     $conf = new Configuracion_semestral();
@@ -129,13 +132,14 @@ try {
                     $conf->estado=$conf_aux->estado;
                     $conf->semestre_id=$semestre->id;
                     $conf->save();
-                    }
+                    }                
+            }
    
         }
-            
+           $EXITO = TRUE;
+           mysql_query("COMMIT");     
     }
-    $EXITO = TRUE;
-    mysql_query("COMMIT");
+
   }
 
   //No hay ERROR

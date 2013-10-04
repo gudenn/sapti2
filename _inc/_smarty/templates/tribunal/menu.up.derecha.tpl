@@ -2,7 +2,7 @@
       <ul>
         <li><a href="{$URL}tribunal/editar.cuenta.php">Modificar Cuenta</a></li>
         <li><a href="{$URL}tribunal/editar.cuenta.php">Preferencias</a></li>
-        <li class="last"><a href="{$URL}?salirestudiante=1">Cerrar Sesion</a></li>
+        <li class="last"><a href="{$URL}?salirconsejo=1">Cerrar Sesion</a></li>
       </ul>
       <form action="#" method="post" id="sitesearch">
         <fieldset>
