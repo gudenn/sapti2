@@ -61,7 +61,9 @@
               <label for="materia_id"><small>Seleccione Materia(*)</small></label>                   
                 </td>
                 <td>
-              <input type="text" name="grupo" id="grupo" data-validation-engine="validate[required]">
+              <select name="grupo" id="grupo" >
+              {html_options values=$grupo_values selected=$grupo_selected output=$grupo_output}
+              </select>                    
               <label for="grupo"><small>Codigo de Grupo(*)</small></label>
                 </td>
                 <td>
@@ -71,13 +73,14 @@
                 </td>
                 </tr>
             </table>
+              <span id=”comprobarusuario”></span><br/>
         </form>
         </div>
         <script type="text/javascript">
                 editableGrid.onloadXML("configuracion.dicta2.php");
         </script>
     </div> 
-                  {$ERROR}
+               {$ERROR}
     </div>
 </div>
 {include file="footer.tpl"}

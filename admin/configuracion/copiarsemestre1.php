@@ -93,6 +93,7 @@ try {
                     $dicta->docente_id=$dicta_aux->docente_id;
                     $dicta->estado=$dicta_aux->estado;
                     $dicta->materia_id=$dicta_aux->materia_id;
+                    $dicta->codigo_grupo=$dicta_aux->codigo_grupo;
                     $dicta->semestre_id=$semestre->id;
                     $dicta->save();
                     }                
