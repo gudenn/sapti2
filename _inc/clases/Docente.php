@@ -138,6 +138,31 @@ class Docente extends Objectbase{
     $usuario = new Usuario($this->usuario_id);
     return $usuario;
   }
+  
+   /**
+   * Get usuario de un docente
+   * @TODO hay que arreglar esta funcion
+   * @return boolean|\Usuario
+   * retorna los datos de un usuario asociado a un docente
+   */
+  function getDicta() {
+
+    //@TODO revisar
+    //  leerClase('Proyecto_area');
+    leerClase('Dicta');
+    $dictas= array();
+    $activo = Objectbase::STATUS_AC;
+    $sql = "select d.* from " . $this->getTableName('Dicta') . " as d ,where d.docente_id = '$this->id'  and d.estado = '$activo'  ";
+    $resultado = mysql_query($sql);
+    if (!$resultado)
+      return false;
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+         { 
+        $dictas[] =new Dicta($fila);
+          }
+       return $dictas;
+  
+  }
   /**
    * 
    * @param type $var

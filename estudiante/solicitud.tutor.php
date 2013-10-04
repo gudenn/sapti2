@@ -36,7 +36,7 @@ try {
   leerClase('Revision');
   leerClase('Estudiante');
   leerClase('Avance');
-
+  leerClase('Dicta');
   /**
    * Menu superior
    */
@@ -62,7 +62,12 @@ try {
     
   }
   $smarty->assign("editores", $editores);
-  
+  leerClase('Docente');
+  $id=$_GET['docente_id'];
+  $docente=new Docente($id);
+   $docente->codigo_sis;
+   $d=$docente->getDicta();
+   echo $d->id_docente;
   $estudiante_aux = getSessionEstudiante();
   $estudiante     = new Estudiante($estudiante_aux->estudiante_id);
   $usuario        = $estudiante->getUsuario();
@@ -74,7 +79,11 @@ try {
   if ( isset($_POST['tarea']) && $_POST['tarea'] == 'registrar_avance' && isset($_SESSION['registrar_avance']) && isset($_POST['token']) && $_SESSION['registrar_avance'] == $_POST['token']  )
   {
     $EXITO = false;
-    if ($proyecto->id)
+   // if ($proyecto->id)
+        leerClase ('Notificacion');
+    leerClase('Notificacion_dicta');
+    
+    $noticacion;
       $avance = $estudiante->grabarAvance();
     $EXITO = true;
   }
