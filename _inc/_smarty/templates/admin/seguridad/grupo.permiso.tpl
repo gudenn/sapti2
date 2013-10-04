@@ -1,8 +1,6 @@
 <table class="tbl_lista">
   <thead>
   <tr>
-    <th><a href='?order=id'                  class="tajax"  title='Ordenar por Id'           >Id           {$filtros->iconOrder('id')}</a></th>
-    <th><a href='?order=estado'              class="tajax"  title='Ordenar por Estado'       >Estado       {$filtros->iconOrder('estado')}</a></th>
     <th><a href='?order=codigo'              class="tajax"  title='Ordenar por Codigo'       >Codigo       {$filtros->iconOrder('codigo')}</a></th>
     <th><a href='?order=descripcion'         class="tajax"  title='Ordenar por Descipcion'   >Descripcion  {$filtros->iconOrder('descripcion')}</a></th>
     <th><a href='?order=ver'                 class="tajax"  title='Ordenar por Ver'          >Ver          {$filtros->iconOrder('ver')}</a></th>
@@ -14,8 +12,6 @@
   <tbody>
   {section name=ic loop=$objs}
     <tr>
-      <td>{$objs[ic]['id']}</td>
-      <td>{$objs[ic]['estado']}</td>
       <td>{$objs[ic]['modulo_codigo']}</td>
       <td>{$objs[ic]['modulo_descripcion']}</td>
       <td><input type="checkbox" name="id{$objs[ic]['id']}_ver"          value="1" {if ($objs[ic]['ver'])}       checked="checked" {/if} ></td>

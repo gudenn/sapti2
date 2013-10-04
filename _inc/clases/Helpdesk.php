@@ -44,19 +44,21 @@ class Helpdesk extends Objectbase
   /**
    * Creamos la ayuda
    * @param type $id
+   * @param type $autogenerar generaa la autoayuda para la pagina actual
    */
-  public function __construct($id = '') 
+  public function __construct($id = '' , $autogenerar = true) 
   {
-    if ('' == $id)
+    if ('' == $id && $autogenerar)
     {
-      $dir    = basename( dirname($_SERVER['SCRIPT_NAME']));
-      $script = basename( $_SERVER['SCRIPT_NAME']);
-      $this->codigo = sha1($dir.$script);
+      $script       = $_SERVER['SCRIPT_NAME'];
+      $this->codigo = sha1($script);
+      if (defined('MODULO'))
+        $this->codigo = sha1(MODULO);
       $this->getByCodigo($this->codigo);
       if (!$this->id)
       {
-        $this->descripcion     = "$dir - $script";
-        $this->keywords        = "$dir,".  str_replace('.', ',', str_replace('.php', ',ayuda', $script));
+        $this->descripcion     = "$script";
+        $this->keywords        = ltrim(str_replace(array('.','/'), ',', str_replace('.php', ',ayuda', $script)),',');
         $this->estado_helpdesk = Helpdesk::EST01_RECIEN;
         $this->estado          = Objectbase::STATUS_AC;
         $this->save ();
@@ -142,6 +144,7 @@ ____TEST;
       $tooltip->clonarPorCodigo($codigo);
       $tooltip->save();
       $tooltip->mostrar();
+      $this->getAllObjects();
     }
   }
   
@@ -219,6 +222,28 @@ ____TEST;
     $help = mysql_fetch_array($result, MYSQL_BOTH);
     if ($help)
     self::__construct($help['id']);
+  }
+
+  
+  /**
+   * Iniciamos los permisos para visitar las ayudas
+   * @param INT(11) $grupo_id Id del grupo
+   */
+  function iniciarPermisos($grupo_id = false)
+  {
+    leerClase('Permiso');
+    $permiso = new Permiso();
+    if (!$grupo_id)
+      $permiso->grupo_id  = Grupo::SUPERADMINGRUOP;
+    else
+      $permiso->grupo_id  = $grupo_id;
+    $permiso->ver       = Permiso::SI;
+    $permiso->crear     = Permiso::SI;
+    $permiso->editar    = Permiso::SI;
+    $permiso->eliminar  = Permiso::SI;
+    $permiso->helpdesk_id = $this->id;
+    $permiso->estado      = Objectbase::STATUS_AC;
+    $permiso->save();
   }
   
   /**

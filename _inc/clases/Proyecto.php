@@ -22,37 +22,35 @@ class Proyecto extends Objectbase {
   const TRABAJO_CONJUNTO_NO = "TS";
 
   /** Constante para el tipo de proyecto si es perfil o proyecto final */
-  /** Tipo perfil (PE)*/
+  /** Tipo perfil (PE) */
   const TIPO_PERFIL = "PE";
   /** Tipo Proyecto (PR) */
   const TIPO_PROYECTO = "PR";
 
-  /** 
+  /**
    * Estado Proyecto 
    * Iniciado (IN)
    */
   const EST1_INI = "IN";
 
-  /** 
+  /**
    * Estado Proyecto 
    * Visto Bueno de Docente, Tutores y Revisores (VB)
    */
   const EST2_BUE = "VB";
-  
-  /** 
+
+  /**
    * Estado Proyecto 
    * tribunales Visto Bueno (TV)
    */
   const EST3_TRI = "TV";
 
-  /** 
+  /**
    * Estado Proyecto 
    * con defensa (LD)
-   */ 
+   */
   const EST4_DEF = "LD";
-  
-  
-  
+
   /**
    * Codigo iden de la modalidad
    * @var INT(11)
@@ -138,14 +136,14 @@ class Proyecto extends Objectbase {
    * @var BOOLEAN
    */
   var $es_actual;
-  
+
   /**
    * El tipo de proyecto si es perfil o proyecto final
    * Tipo perfil (PE), tipo Proyecto Final (PR)
    * @var VARCHAR(2)
    */
   var $tipo_proyecto;
-  
+
   /**
    * Iniciado (IN), Visto Bueno de Docente, Tutores y Revisores (VB) , 
    * TRibunales asignados (TA), tribunales Visto Bueno (TV), con defensa (LD)
@@ -256,49 +254,46 @@ class Proyecto extends Objectbase {
   /**
    * Creamos un proyecto inicial de tal manera que los estudiantes nunca estnen sin proyectos
    */
-  function crearProyectoInicial($estudiante_id,$grabar = true) 
-  {
+  function crearProyectoInicial($estudiante_id, $grabar = true) {
     $this->estado_proyecto = Proyecto::EST1_INI;
-    $this->es_actual       = 1;
-    $this->estado          = Objectbase::STATUS_AC;
+    $this->es_actual = 1;
+    $this->estado = Objectbase::STATUS_AC;
     if ($grabar)
       $this->save();
     $this->asignarEstudiante($estudiante_id);
     if ($grabar)
       $this->saveAllSonObjects(TRUE);
   }
-  
+
   function getArea() {
     //@TODO revisar
     //  leerClase('Proyecto_area');
     leerClase('Area');
-    $areas= array();
+    $areas = array();
     $activo = Objectbase::STATUS_AC;
     $sql = "select a.* from " . $this->getTableName('Proyecto_area') . " as pa , " . $this->getTableName('Area') . " as a   where pa.proyecto_id = '$this->id' and pa.area_id = a.id and pa.estado = '$activo' and a.estado = '$activo'  ";
     $resultado = mysql_query($sql);
     if (!$resultado)
       return false;
-    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
-         { 
-        $areas[] =new Area($fila);
-          }
-       return $areas;
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) {
+      $areas[] = new Area($fila);
+    }
+    return $areas;
   }
-  
+
   /**
    * Asignamos Estudiante
    * @param INT(11) $estudiante_id codigo del estudiante
    */
-  function asignarEstudiante($estudiante_id) 
-  {
+  function asignarEstudiante($estudiante_id) {
     leerClase('Estudiante');
     leerClase('Proyecto_estudiante');
     //$estudiante = new Estudiante($estudiante_id);
-    
-    $asignado   = new Proyecto_estudiante();
-    $asignado->proyecto_id      = $this->id;
-    $asignado->estudiante_id    = $estudiante_id;
-    $asignado->estado           = Objectbase::STATUS_AC;
+
+    $asignado = new Proyecto_estudiante();
+    $asignado->proyecto_id = $this->id;
+    $asignado->estudiante_id = $estudiante_id;
+    $asignado->estado = Objectbase::STATUS_AC;
     $asignado->fecha_asignacion = date('d/m/Y');
     $this->proyecto_estudiante_objs[] = $asignado;
   }
@@ -307,76 +302,98 @@ class Proyecto extends Objectbase {
    * Asignamos Estudiante
    * @param INT(11) $estudiante_id codigo del estudiante
    */
-  function asignarAreaSubArea($area_id,$subarea_id) 
-  {
+  function asignarAreaSubArea($area_id, $subarea_id) {
     if (!$area_id || !$subarea_id)
       return false;
     leerClase('Proyecto_area');
     leerClase('Proyecto_sub_area');
     // Area
     $p_area = new Proyecto_area();
-    $p_area->area_id            = $area_id;
-    $p_area->estado             = Objectbase::STATUS_AC;
+    $p_area->area_id = $area_id;
+    $p_area->estado = Objectbase::STATUS_AC;
     $this->proyecto_area_objs[] = $p_area;
-    
+
     //Subarea
     $ps_area = new Proyecto_sub_area($subarea_id);
-    $ps_area->sub_area_id           = $subarea_id;
-    $ps_area->estado                = Objectbase::STATUS_AC;
+    $ps_area->sub_area_id = $subarea_id;
+    $ps_area->estado = Objectbase::STATUS_AC;
     $this->proyecto_sub_area_objs[] = $ps_area;
   }
-  
+
   /**
    * Validamos proyecto
    */
   function validar() {
     leerClase('Formulario');
-    Formulario::validar('proyecto_nombre'                   ,$this->nombre           ,'texto','El Nombre');
-    Formulario::validar('proyecto_objetivo_general'         ,$this->objetivo_general ,'texto','El Objetivo General');
-    Formulario::validar('proyecto_descripcion'              ,$this->descripcion      ,'texto','La descripci&oacute;n del Proyecto');
-    Formulario::validar('proyecto_director_carrera'         ,$this->director_carrera ,'texto','El Nombre de Director de Carrera');
-    Formulario::validar('proyecto_docente_materia'          ,$this->docente_materia  ,'texto','El Nombre del Docente de la Materia');
-    Formulario::validar('proyecto_responsable'              ,$this->docente_materia  ,'texto','El Nombre del Responsable del Proyecto',TRUE);
-    
+    Formulario::validar('proyecto_nombre', $this->nombre, 'texto', 'El Nombre');
+    Formulario::validar('proyecto_objetivo_general', $this->objetivo_general, 'texto', 'El Objetivo General');
+    Formulario::validar('proyecto_descripcion', $this->descripcion, 'texto', 'La descripci&oacute;n del Proyecto');
+    Formulario::validar('proyecto_director_carrera', $this->director_carrera, 'texto', 'El Nombre de Director de Carrera');
+    Formulario::validar('proyecto_docente_materia', $this->docente_materia, 'texto', 'El Nombre del Docente de la Materia');
+    Formulario::validar('proyecto_responsable', $this->docente_materia, 'texto', 'El Nombre del Responsable del Proyecto', TRUE);
+
     leerClase('Semestre');
-    $semestre = new Semestre('',TRUE);
+    $semestre = new Semestre('', TRUE);
     // Por lo menos un area y una sub area
-    if (sizeof($this->proyecto_area_objs) < $semestre->getValor('Minimo numero de areas asignadas al proyecto',1) )
+    if (sizeof($this->proyecto_area_objs) < $semestre->getValor('Minimo numero de areas asignadas al proyecto', 1))
       throw new Exception("?proyecto_area_id_1&m=No Asigno el <b>m&iacute;nimo n&uacute;mero de &Aacute;rea(s)</b> requerido para un Proyecto.");
-    if (sizeof($this->proyecto_sub_area_objs)  < $semestre->getValor('Minimo numero de sub areas',1) )
+    if (sizeof($this->proyecto_sub_area_objs) < $semestre->getValor('Minimo numero de sub areas', 1))
       throw new Exception("?proyecto_subarea_id_1&m=No Asigno el <b>m&iacute;nimo n&uacute;mero de sub &Aacute;rea</b> requerido para un Proyecto.");
-    if (sizeof($this->objetivo_especifico_objs) < $semestre->getValor('Minimo de objetivos especificos',2)  )
+    if (sizeof($this->objetivo_especifico_objs) < $semestre->getValor('Minimo de objetivos especificos', 2))
       throw new Exception("?objetivo_especifico_1&m=No cumple la cantidad de Objetivos Espec&iacute;ficos M&iacute;nimo para un Proyecto.");
     //
   }
-  
-  
+
   /**
    * 
    * @return boolean|\Estudiante
    * retorna el estudiante del proyectto
    */
-    function getEstudiante() {
+  function getEstudiante() {
     //@TODO revisar
     leerClase('Estudiante');
 
     $activo = Objectbase::STATUS_AC;
     $sql = "select e.* from " . $this->getTableName('Proyecto_estudiante') . " as pe , " . $this->getTableName('Estudiante') . " as e   where pe.proyecto_id = '$this->id' and pe.estudiante_id = e.id and pe.estado = '$activo' and e.estado = '$activo' ";
-    $resultados= mysql_query($sql);
+    $resultados = mysql_query($sql);
     if (!$resultados)
       return false;
-    $estudiantes= mysql_fetch_array($resultados);
+    $estudiantes = mysql_fetch_array($resultados);
     $estudiante = new Estudiante($estudiantes);
     return $estudiante;
   }
 
-  
   /**
    * Consultamos el estado del tutor
    * @param type $tutor_id
    */
-  function consultarEstadoTutor($tutor_id) 
-  {
+  function getTutores($estado_tutoria = '') {
+    leerClase('Tutor');
+    leerClase('Proyecto_tutor');
+
+    if ($estado_tutoria == '')
+      $estado_tutoria = Proyecto_tutor::ACEPTADO;
+
+    $activo = Objectbase::STATUS_AC;
+
+    $sql = "select * from " . $this->getTableName('Proyecto_tutor') . " where proyecto_id = '$this->id' and estado_tutoria = '$estado_tutoria' AND estado = '$activo'";
+    //echo $sql;
+    $resultado = mysql_query($sql);
+    if (!$resultado)
+      return false;
+    $tutores = array();
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) {
+      $tutores[] = new Tutor($fila['tutor_id']);
+    }
+    return $tutores;
+
+  }
+
+  /**
+   * Consultamos el estado del tutor
+   * @param type $tutor_id
+   */
+  function consultarEstadoTutor($tutor_id) {
     leerClase('Tutor');
     $tutor = new Tutor($tutor_id);
 
@@ -385,33 +402,27 @@ class Proyecto extends Objectbase {
       return Proyecto_tutor::FINALIZADO;
     return $proyecto_tutor->estado_tutoria;
   }
-  
-  
-    
+
   /**
    * 
    * @return
    * retorna la vigencia del proyecto
    */
-  
-   function getVigencia() {
+  function getVigencia() {
     //@TODO revisar
     //  leerClase('Proyecto_area');
     leerClase('Vigencia');
-    $areas= array();
+    $areas = array();
     $activo = Objectbase::STATUS_AC;
     $sql = "select v.* from " . $this->getTableName('Vigencia') . " as v    where v.proyecto_id = '$this->id' and v.estado = '$activo'";
     $resultado = mysql_query($sql);
     if (!$resultado)
       return false;
-    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
-         { 
-        $vigencias[] =new Vigencia($fila);
-          }
-       return $vigencias;
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) {
+      $vigencias[] = new Vigencia($fila);
+    }
+    return $vigencias;
   }
-  
-  
 
 }
 

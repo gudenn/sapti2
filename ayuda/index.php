@@ -18,10 +18,32 @@ try {
   if ( isset($_GET['codigo']) )
     $helpdesk->getByCodigo ($_GET['codigo']);
           
+  //obtenemos el grupo del usuario actual
+  //TODO permisos
+  if(isAdminSession())
+  {
+    leerClase('Usuario');
+    $admin_aux = getSessionAdmin();
+    $usuario   = new Usuario($admin_aux->usuario_id);
+    $grupos    = $usuario->getMisGrupos();
+    $tieneAccesoHelpdesk = false;
+    foreach ($grupos as $grupo) 
+    {
+      $permiso = $grupo->tieneAccesoHelpdesk($helpdesk->id);
+      if ($permiso->ver)
+      {
+        $tieneAccesoHelpdesk = true;
+      }
+    }
+  }
+  
+  
   $template = TEMPLATES_DIR."helpdesk/archivo/{$helpdesk->codigo}.tpl";
   if (!file_exists($template))
     $template = TEMPLATES_DIR."helpdesk/archivo/defecto.tpl";
-
+  if (!$tieneAccesoHelpdesk)
+    $template = TEMPLATES_DIR."helpdesk/archivo/denegado.tpl";
+  
   $smarty->assign('template' , $template);
 
   $smarty->assign('listadefensas'  , "");

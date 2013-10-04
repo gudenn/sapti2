@@ -1,12 +1,12 @@
 <?php
 try {
-  if (!defined('TIPO'))
-    define ('TIPO', 'PR');
-  define ("MODULO", "PROYECTO-REGISTRO");
+  define ("MODULO", "ADMIN-PROYECTO-REGISTRO");
   require('../_start.php');
   if(!isAdminSession())
     header("Location: ../login.php");  
 
+  if (!defined('TIPO'))
+    define ('TIPO', 'PR');
   /** HEADER */
   $smarty->assign('title','SAPTI - Registro de Proyecto');
   $smarty->assign('description','Formulario de registro de Proyecto');
@@ -29,7 +29,6 @@ try {
   //BOX
   $CSS[]  = URL_JS . "box/box.css";
   
-  $smarty->assign('CSS',$CSS);
 
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
@@ -41,6 +40,13 @@ try {
 
   //BOX
   $JS[]  = URL_JS ."box/jquery.box.js";
+
+  //Datepicker & Tooltips $ Dialogs UI
+  $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
+  $JS[]   = URL_JS . "jquery-ui-1.10.3.custom.min.js";
+  $JS[]   = URL_JS . "ui/i18n/jquery.ui.datepicker-es.js";
+
+  $smarty->assign('CSS',$CSS);
   $smarty->assign('JS',$JS);
 
   leerClase('Area');
@@ -49,6 +55,7 @@ try {
   leerClase('Usuario');
   leerClase('Carrera');
   leerClase('Proyecto');
+  leerClase('Formulario');
   leerClase('Semestre');
   leerClase('Sub_area');
   leerClase('Modalidad');
@@ -59,10 +66,21 @@ try {
 
   
   $semestre   = new Semestre(false,true);
-  $estudiante = new Estudiante(1);
+  //si o si trabajamos aca con un estudiante asi que lo guardaremos en session
+  $estudiante_id = false;
+  if (isset($_SESSION['estudiante_id']) && is_numeric($_SESSION['estudiante_id']))
+    $estudiante_id = $_SESSION['estudiante_id'];
+  if (isset($_GET['estudiante_id']) && is_numeric($_GET['estudiante_id']))
+  {
+    $_SESSION['estudiante_id'] = $_GET['estudiante_id'];
+    $estudiante_id             = $_GET['estudiante_id'];
+  }
+  $estudiante = new Estudiante($estudiante_id);
   $estudiante->getAllObjects();
   $usuario    = $estudiante->getUsuario();
   $proyecto   = $estudiante->getProyecto();
+
+  
   $proyecto->getAllObjects();
   
 
@@ -95,6 +113,16 @@ try {
                                  Proyecto::TRABAJO_CONJUNTO_NO => 'No'));
   $smarty->assign('trabajo_conjunto_selected', ($proyecto->trabajo_conjunto==Proyecto::TRABAJO_CONJUNTO_SI)?Proyecto::TRABAJO_CONJUNTO_SI:Proyecto::TRABAJO_CONJUNTO_NO);
 
+  //Tutores
+  $tutores = $proyecto->getTutores();
+  $smarty->assign('tutores', $tutores);
+  $registro_tutor[] = '-- Selecione --';
+  foreach ($tutores as $tutor) {
+    $registro_tutor[] = $tutor->getNombreCompleto();    
+  }
+  $smarty->assign('registro_tutor'    ,  $registro_tutor);
+  
+  
   //area
   $area         = new Area();
   $area->estado = Objectbase::STATUS_AC;
@@ -186,12 +214,23 @@ try {
   {
     $EXITO = false;
     mysql_query("BEGIN");
-    $proyecto = new Proyecto();
+    
+    // SOLO PARA CAMBIOS DE TEMA
+    //$proyecto = new Proyecto();
     $proyecto->objBuidFromPost('proyecto_');
     $proyecto->estado         = Objectbase::STATUS_AC;
     $proyecto->fecha_registro = date('d/m/Y');
     $smarty->assign('proyecto'  , $proyecto);
 
+    //proyecto_institucion_nueva
+    if ( isset($_POST['proyecto_institucion_nueva']) && trim($_POST['proyecto_institucion_nueva'])!= '' )
+    {
+      $nuevainstitucion = new Institucion();
+      $nuevainstitucion->saveFast($_POST['proyecto_institucion_nueva']);
+      $proyecto->institucion_id = $nuevainstitucion->id;
+    }
+    
+    
     //Objetivos especificos
     $contador = 0;
     foreach ($_POST['objetivo_especifico'] as $post_especifico) {
@@ -239,6 +278,21 @@ try {
     $proyecto->save();
     $proyecto->saveAllSonObjects(TRUE);
     $estudiante->marcarComoProyectoActual($proyecto->id);
+    //guardamos datos extra
+    if ( isset($_POST['telefono']) )
+    {
+      $usuario->telefono = $_POST['telefono'];
+      Formulario::validar('telefono',$usuario->telefono,'texto','El Tel&eacute;fono',TRUE);
+    }
+    if ( isset($_POST['email']) )
+    {
+      $usuario->email = $_POST['email'];
+      Formulario::validar('email',$usuario->telefono,'texto','El E-mail',TRUE);
+    }
+    if ( isset($_POST['email']) || isset($_POST['telefono']) )
+      $usuario->save();
+
+    
     $EXITO = TRUE;
     mysql_query("COMMIT");
   }// FIN GRABAR PROYECTO

@@ -1,9 +1,10 @@
 <?php
 try {
-  define ("MODULO", "AREA-REGISTRO");
+  define ("MODULO", "ADMIN-CONFIGURACION-CRONOGRAMA-REGISTRO");
   require('../_start.php');
   if(!isAdminSession())
     header("Location: ../login.php");  
+
 
   /** HEADER */
   $smarty->assign('title','SAPTI - Cronograma Crear');

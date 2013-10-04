@@ -1,9 +1,11 @@
 <?php
 try {
+  define ("MODULO", "ESTUDIANTE-INDEX");
   require('_start.php');
   if(!isEstudianteSession())
     header("Location: login.php");  
 
+  
   /** HEADER */
   $smarty->assign('title','Proyecto Final');
   $smarty->assign('description','Proyecto Final');

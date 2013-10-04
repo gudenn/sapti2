@@ -1,12 +1,11 @@
 <?php
 try {
-  define ("MODULO", "HELPDESK-TOOLTIPS");
+  define ("MODULO", "ADMIN-HELPDESK-GESTION");
   require('../_start.php');
   if(!isAdminSession())
     header("Location: ../login.php");  
 
   leerClase("Helpdesk");
-  leerClase("Tooltip");
   leerClase("Formulario");
   leerClase("Pagination");
   leerClase("Filtro");
@@ -15,16 +14,16 @@ try {
   $ERROR = '';
 
   /** HEADER */
-  $smarty->assign('title','Gesti&oacute;n de Ayudas Pendientes');
-  $smarty->assign('description','Gesti&oacute;n de ventanas de Ayuda para el sistema');
-  $smarty->assign('keywords','Helpdesk,tooltips,Semestre');
+  $smarty->assign('title','Gesti&oacute;n de Ayuda');
+  $smarty->assign('description','Gestion de Ayuda para el sistema');
+  $smarty->assign('keywords','Helpdesk,Semestre');
   leerClase('Administrador');
   /**
    * Menu superior
    */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/','name'=>'Configuraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Gesti&oacute;n de Temas de Ayuda');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'helpdesk/','name'=>'Helpdesk SAPTI');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'helpdesk/'.basename(__FILE__),'name'=>'Gesti&oacute;n de Temas de Ayuda');
   $smarty->assign("menuList", $menuList);
 
   //CSS
@@ -36,14 +35,24 @@ try {
   $JS[]  = URL_JS . "jquery.min.js";
   $smarty->assign('JS',$JS);
 
+  if (isset($_GET['helpdesk_id']) && is_numeric($_GET['helpdesk_id']) && isset($_GET['activar']) && $_GET['activar'] )
+  {
+    $helpdesk = new Helpdesk($_GET['helpdesk_id']);
+    if ($helpdesk->id)
+    {
+      $helpdesk->estado_helpdesk = Helpdesk::EST03_APROBA;
+      $helpdesk->save();
+    }
+  }
+  
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
   $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
-  $smarty->assign('lista'       ,'admin/helpdesk/lista.opciones.tooltips.tpl');
+  $smarty->assign('lista'       ,'admin/helpdesk/lista.tpl');
 
   //Filtro
-  $filtro   = new Filtro('g_helptoolt',__FILE__);
+  $filtro   = new Filtro('g_helpdesk',__FILE__);
   if (isset($_GET['todos']))
     $filtro->clearFiltro();
   $helpdesk = new Helpdesk();
@@ -53,7 +62,7 @@ try {
   
   $o_string   = $helpdesk->getOrderString($filtro);
   $obj_mysql  = $helpdesk->getAll('',$o_string,$filtro_sql,TRUE);
-  $objs_pg    = new Pagination($obj_mysql, 'g_helptoolt','',false);
+  $objs_pg    = new Pagination($obj_mysql, 'g_helpdesk','',false);
 
   $smarty->assign("helpdesk"  ,$helpdesk);
   $smarty->assign("filtros"  ,$filtro);

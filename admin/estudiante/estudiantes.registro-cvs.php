@@ -1,8 +1,9 @@
 <?php
 try {
-  require('_start.php');
+  define ("MODULO", "ADMIN-ESTUDIANTE-REGISTRO-CVS");
+  require('../_start.php');
   if(!isAdminSession())
-    header("Location: login.php");  
+    header("Location: ../login.php");  
 
   /** HEADER */
   $smarty->assign('title','SAPTI - Registro Estudiantes');

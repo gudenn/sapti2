@@ -1,6 +1,6 @@
 <h2>Helpdesk SAPTI</h2>
 
-<p><img alt="Seguro y Confiable" class="leftalign" src="{$URL}ayuda/imagenes/86d934e7d3fb4f2d92bb263cf8820ade966d6406/helpdesk-web.jpg" style="background-color:rgb(238, 238, 238); border:1px solid rgb(221, 221, 221); color:rgb(128, 128, 128); display:block; float:left; font-family:verdana,geneva,sans-serif; font-size:12px; height:283px; line-height:normal; margin:0px 10px 0px 0px; padding:8px; width:425px" title="Seguro y Confiable" /></p>
+<p><img alt="Seguro y Confiable" class="leftalign" src="{$URL}ayuda/imagenes/defecto/helpdesk-web.jpg" style="background-color:rgb(238, 238, 238); border:1px solid rgb(221, 221, 221); color:rgb(128, 128, 128); display:block; float:left; font-family:verdana,geneva,sans-serif; font-size:12px; height:283px; line-height:normal; margin:0px 10px 0px 0px; padding:8px; width:425px" title="Seguro y Confiable" /></p>
 
 <p>Nuestra Base de Conocimiento le ayuda a organizar informaci&oacute;n relevante y ponerla a trabajar para usted. Posibilita la f&aacute;cil colaboraci&oacute;n de sus agentes en la creaci&oacute;n documentos estructurados, que luego pueden usar tanto agentes como usuarios.</p>
 
