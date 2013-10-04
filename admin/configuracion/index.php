@@ -114,6 +114,15 @@ try {
   $link = Administrador::URL."configuracion/turno.registro.php";
   $menu->agregarItem('Registro de Turno','Registro de un nuevo Turno.','basicset/plus_48.png',$link);
   $menus[] = $menu;
+  
+  
+  
+   $menu = new Menu('Consejo');
+  $link = Administrador::URL."configuracion/consejo.gestion.php";
+  $menu->agregarItem('Gesti&oacute;n de Consejo','Los Consejo .','basicset/timetable.png',$link);
+  $link = Administrador::URL."configuracion/consejo.registro.php";
+  $menu->agregarItem('Registro de Consejo','Registro de un nuevo Turno.','basicset/plus_48.png',$link);
+  $menus[] = $menu;
   //----------------------------------//
   
   

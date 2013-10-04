@@ -200,23 +200,33 @@ where  d.`id`=hd.`dia_id` and hd.`turno_id`=t.`id` and  d.`estado`='AC' and hd.`
             // echo "Hola eli";
              /*
              echo  $_POST['estudiante_id'];
-             echo  $_POST['proyecto_id'];
+     
               */
+      $horaini=$_POST['hora_ini'];
+         $minutoini=$_POST['minuto_ini'];
+           
+           $var=$horaini.":".$minutoini;
+           echo $var;
+           $horafin=$_POST['hora_fin'];
+           $minutofin=$_POST['minuto_fin'];
+           $varfin=$horafin.":".$minutofin;
+            $idproyecto= $_POST['proyecto_id'];
                $defensa= new Defensa();
               $defensa->objBuidFromPost();
              
               $defensa->fecha_asignacion= date("j/n/Y");
               $defensa->hora_asignacion=date("H:i:s");
-              //$defensa->fecha_defensa="";
-              $defensa->hora_inicio= '8:15';
-              $defensa->hora_final= '8:15';
+              $defensa->fecha_defensa=$_POST['fecha_defensa'];
+              $defensa->hora_inicio=$var;
+              $defensa->hora_final= $varfin;
               //$defensa->tipo_defensa_id=tipo_defensa_id;
               //$defensa->lugar_id=1;
            //   $defensa->proyecto_id;
               $defensa->estado = Objectbase::STATUS_AC;
               $defensa->save();
              
-   
+   $query = "UPDATE proyecto p SET p.estado_proyecto='LD'  WHERE p.id=$idproyecto";
+  mysql_query($query);
             }
 
   

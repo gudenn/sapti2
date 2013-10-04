@@ -1,10 +1,10 @@
  <div id="content">
 
-    <center> <strong>EDITANDO</strong></td></center>
+    <center> <strong>Editando</strong></td></center>
      
           
      <form action="" method="post">
-      <h1> DETALLE DEL PROYECTO </h1>
+      <h1> Detalle Del Proyecto </h1>
         
        <label for="nombre">Nombre:  {$usuario->nombre}</label><br />
         <label for="nombre">Apellidos:  {$usuario->apellido_paterno} {$usuario->apellido_materno}</label><br />

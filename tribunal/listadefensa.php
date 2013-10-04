@@ -31,10 +31,48 @@ try {
   $smarty->assign('JS',$JS);
   //CREAR UNA DEFENSA
   leerClase('Carrera');
+  leerClase('Consejo');
+  leerClase('Usuario');
+  leerClase('Estudiante');
+  leerClase('Proyecto');
   $carrera = new Carrera();
+  
+  $menuList[]     = array('url'=>URL.Consejo::URL,'name'=>'Consejo');
+  $menuList[]     = array('url'=>URL . Consejo::URL ,'name'=>'Asignar Fechas de Defensa');
+  $smarty->assign("menuList", $menuList);
+ 
+  
   $smarty->assign("carrera", $carrera);
   // $modalidad->objBuidFromPost();
   //$modalidad->save();
+   $proyecto= new Proyecto();
+    $proyecto_mysql  = $proyecto->getAll();
+ $listasignacion= array();
+ while ($proyecto_mysql && $row = mysql_fetch_array($proyecto_mysql[0]))
+ {
+    $datos= array();
+  $proyec= new Proyecto($row['id']);
+  
+  if($proyec->getTotalVB()!=0 &&  $proyec->estado_proyecto!="LD")
+  {
+  if(($proyec->getTribunales())==($proyec->getTotalVB()))
+  {
+    echo 'hola eli';
+    
+   $estudiantes= $proyec->getEstudiante();
+   $usuarios= new Usuario($estudiantes->usuario_id);
+
+     $datos["id"]=$estudiantes->id;
+    $datos["nombre"]=$usuarios->nombre;
+     $datos["apellidos"]=$usuarios->getNombreCompleto();
+      $datos["nombreproyecto"]=$proyec->nombre;
+      
+      
+     $listasignacion[]=$datos;
+  }  
+  }
+ }
+  /**
   
  $sql="select   pe.`estudiante_id` as id, u.nombre  , CONCAT(u.`apellido_paterno`, u.`apellido_materno`) as apellidos , p.`nombre`  as nombreproyecto
 from `proyecto` p , `proyecto_estudiante` pe, `estudiante` e, `usuario` u
@@ -48,7 +86,8 @@ where p.`id`=pe.`proyecto_id`  and pe.`estudiante_id`=e.`id`  and e.`usuario_id`
      $listasignacion[]=$fila;
     
  }
- //var_dump($notitribunal_id);
+   
+   */
   $smarty->assign('listasignacion',$listasignacion);
     
   

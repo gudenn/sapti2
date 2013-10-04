@@ -55,8 +55,8 @@ $menuList[]     = array('url'=>URL.Consejo::URL,'name'=>'Consejo');
  $usuario_id     = array();
  $usuario_nombre = array();
 $sql="SELECT DISTINCT (p.id) , u.nombre ,CONCAT(u.apellido_paterno,u.apellido_materno) as apellidos, es.codigo_sis , p.nombre as nombreproyecto
-FROM proyecto p , usuario u, estudiante es , proyecto_estudiante pe, tribunal t
-WHERE  u.id=es.usuario_id and  es.id=pe.estudiante_id and  pe.proyecto_id=p.id and p.id=t.proyecto_id;";
+FROM proyecto p , usuario u, estudiante es , proyecto_estudiante pe, defensa d
+WHERE  u.id=es.usuario_id and  es.id=pe.estudiante_id and  pe.proyecto_id=p.id and p.id=d.proyecto_id;";
  $resultado= mysql_query($sql);
  $arraytribunal= array();
  
@@ -176,7 +176,7 @@ catch(Exception $e)
   $smarty->assign("ERROR", handleError($e));
 }
 
-$contenido = 'tribunal/listas.listas.tpl';
+$contenido = 'tribunal/lista.defensa.tpl';
 $smarty->assign('contenido',$contenido);
 
 

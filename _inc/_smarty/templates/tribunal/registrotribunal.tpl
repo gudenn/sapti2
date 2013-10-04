@@ -24,24 +24,28 @@
   </div>
 <div style="width: 50%;float: left;" class="tbl_filtro">
         
-      <h1> RESULTADO DE LA BUSQUEDA</h1>
-        <label for="nombre">NOMBRE:  {$usuariobuscado->nombre}</label><br />
-        <label for="nombre">APELLIDOS:   {$usuariobuscado->apellidos}</label><br />
-         <label for="nombre">CODIGO SIS:   {$estudiantebuscado->codigo_sis}</label><br />
-         <label for="nombre">PROYECTO:   {$proyectobuscado->nombre}</label><br />
-         <label for="Area">NUMERO:   {$proyectobuscado->id}</label><br />
-         <label for="nombre">AREA:   {foreach from=$proyectoarea item=curr_id}
-                                    Nombre: {$curr_id->nombre}<br />
+      <h1> Resultado </h1>
+        <label for="nombre">Nombre:  {$usuariobuscado->nombre}</label><br />
+        <label for="nombre">Apellidos:   {$usuariobuscado->apellido_paterno}{$usuariobuscado->apellido_materno}</label><br />
+         <label for="nombre">Codigo Sis:   {$estudiantebuscado->codigo_sis}</label><br />
+         <label for="nombre">Proyecto:   {$proyectobuscado->nombre}</label><br />
+    
+         <label for="nombre">Area(as):   {foreach from=$proyectoarea item=curr_id}
+                                     {$curr_id->nombre}<br />
+                                   {/foreach}</label><br />
+        <label for="nombre">Tutor:   {foreach from=$tutores item=curr_id}
+                                     {$curr_id->nombre}<br />
+                                      {$curr_id->apellido_paterno}<br />
                                    {/foreach}</label><br />
 </div>   
           <div style ="clear:both;"></div>
   <hr>
 <div >
-  <h1 style="text-align: center" > MODO DE ASIGNACION</h1>
+  <h1 style="text-align: center" > Modo De Asignaci&oacute;n</h1>
    <form action="" method="post">
  
-      <input type="text" id="proyecto_id" name="proyecto_id" value="{$proyectobuscado->id}" /><br />
-      <input type="text" id="proyecto_id" name="estudiante_id" value="{$estudiantebuscado->codigo_sis}" /><br />
+      <input type="hidden" id="proyecto_id" name="proyecto_id" value="{$proyectobuscado->id}" /><br />
+      <input type="hidden" id="proyecto_id" name="estudiante_id" value="{$estudiantebuscado->codigo_sis}" /><br />
       
     
      <div style="text-align: center">
@@ -62,7 +66,7 @@
   
   
    <div style='height: 200px; width: 100%; font-size: 12px; overflow: auto;'>
-     <Hi> LISTA DE LOS DOCENTES</Hi>
+     <Hi> Lista de Docentes</Hi>
 <table class="tbl_lista" id="docentes"  mane="docentes">
   <thead>
     <tr>
@@ -123,7 +127,7 @@
    </div>          
 <div style="width: 100%;float: left; padding-left:0px"> 
  <form action="" method="post" id="pedido_form" >
-   <Hi> LISTA DE LOS DOCENTES ASIGNADOS</Hi>
+   <Hi> Lista de Docentes Asignados</Hi>
      <table  multiple id="asignados" >
         <thead>
           <tr>

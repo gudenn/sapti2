@@ -30,6 +30,7 @@ try {
   leerClase('Usuario');
   leerClase('Docente');
   leerClase('Semestre');
+  leerClase('Consejo');
   
 
       /**
@@ -38,6 +39,15 @@ try {
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Docente');
   $smarty->assign("menuList", $menuList);
 
+  
+  leerClase('Menu');
+  $menu = new Menu('Docentes');
+  $link = Docente::URL."docente_tribunal/";
+  $menu->agregarItem('Gesti&oacute;n de Docentes','Registro y modificaciones para Docentes','basicset/user4.png',$link);
+  $link = Docente::URL."docente_tribunal/";
+  $menu->agregarItem('Reportes de Docentes','Reportes correspondientes a los Docentes','basicset/graph.png',$link);
+  $menus[] = $menu;
+  
   $docente_aux = getSessionDocente();
   $docente     = new Docente($docente_aux->docente_id);
   $usuario     = $docente->getUsuario();

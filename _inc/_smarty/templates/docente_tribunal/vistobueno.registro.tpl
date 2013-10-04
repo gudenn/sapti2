@@ -1,5 +1,5 @@
       <div id="content">
-        <h1 class="title">REGISTRO DE OBSERVACIONES</h1>
+        <h1 class="title">REGISTRO DE VISTO BUENO</h1>
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
             <p>
@@ -18,10 +18,10 @@
            
             <p>
               <input type="text" name="fecha_revision" id="fecha_revision" value="{$revision->fecha_revision}" size="22"/>
-              <label for="fecha_revision"><small>FECHA DE REVISION</small></label>
+              <label for="fecha_revision"><small>FECHA DE VISTO BUENO</small></label>
             </p>
 
-            <h2 class="title">Grabar Revision</h2>
+            <h2 class="title">Grabar </h2>
             <p>
               <input type="hidden" name="proyecto_id" value="{$proyecto->id}">
               <input type="hidden" name="visto_bueno_id" value="{$usuario->id}">

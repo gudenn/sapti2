@@ -39,6 +39,11 @@ try {
   leerClase("Filtro");
   leerClase("Proyecto_tribunal");
   leerClase("Proyecto_estudiante");
+   leerClase("Consejo");
+  
+  $menuList[]     = array('url'=>URL.Consejo::URL,'name'=>'Consejo');
+  $menuList[]     = array('url'=>URL . Consejo::URL ,'name'=>'Etitar Tribunales');
+  $smarty->assign("menuList", $menuList);
   
   
  $filtro     = new Filtro('g_docente',__FILE__);

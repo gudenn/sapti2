@@ -3,7 +3,7 @@
     <div >
         
    <form action="" method="post">
-      <h1> DETALLE DEL PROYECTO </h1>
+      <h1> Detalle del Proyecto </h1>
         
        <label for="nombre">Nombre:  {$usuario->nombre}</label><br />
         <label for="nombre">Apellidos:  {$usuario->apellido_paterno} {$usuario->apellido_materno}</label><br />
@@ -14,7 +14,7 @@
    
  </form>
   <div style="width: 50%;float: left;" class="tbl_filtro">  </div>
-   <h1> TRIBUNALES </h1>
+   <h1> Tribunales </h1>
 </div>  
 
         <table class="tbl_lista">

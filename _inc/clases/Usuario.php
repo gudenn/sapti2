@@ -124,7 +124,7 @@ class Usuario  extends Objectbase
     }
     return $nombreCompleto;
   }
-
+   
   
   /**
    * Crear un usario a partir de su login o verificar que se puede usar un login
