@@ -1,6 +1,6 @@
  <div id="content">
         <div class="clear"></div>
-    <center> <td bgcolor="#F7F7F7" style="text-align:center"><strong>FORMULARIO DE REGISTRO DE TRIBUNALES</strong></td></center>
+    <center> <td bgcolor="#F7F7F7" style="text-align:center"><strong>Formulario De Registro de Tribunales</strong></td></center>
     
     <div class="clear"></div>
     

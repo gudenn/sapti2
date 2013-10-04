@@ -1,6 +1,6 @@
 <?php
 try {
-  define ("MODULO", "PERMISO-GESTION");
+  define ("MODULO", "ADMIN-SEGURIDAD-PERMISOS");
   require('../_start.php');
   if(!isAdminSession())
     header("Location: ../login.php");  
@@ -49,28 +49,27 @@ try {
   $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
   $smarty->assign('lista'       ,'admin/seguridad/grupo.permiso.tpl');
 
+  //si o si trabajamos aca con un estudiante asi que lo guardaremos en session
+  $grupo_id = false;
+  if (isset($_SESSION['grupo_id']) && is_numeric($_SESSION['grupo_id']))
+    $grupo_id = $_SESSION['grupo_id'];
+  if (isset($_GET['grupo_id']) && is_numeric($_GET['grupo_id']))
+  {
+    $_SESSION['grupo_id'] = $_GET['grupo_id'];
+    $grupo_id             = $_GET['grupo_id'];
+  }
   //Filtro
-  $filtro     = new Filtro('premisos',__FILE__);
-  
-  if (isset($_GET['grupo_id']))
-    $_SESSION['grpasigpermi_id'] = $_GET['grupo_id'];
-  elseif (!isset ($_SESSION['grpasigpermi_id']))
-    $_SESSION['grpasigpermi_id'] = 1;
-  else
-    $_SESSION['grpasigpermi_id'] = $_SESSION['grpasigpermi_id'];
-    
-  $grupo_id = $_SESSION['grpasigpermi_id'];
-  
-  $permiso = new Permiso();
-  $permiso->grupo_id = $grupo_id;
+  $filtro     = new Filtro('gestpermisos',__FILE__);
+  $permiso    = new Permiso();
   $permiso->iniciarFiltro($filtro);
   $filtro_sql = $permiso->filtrar($filtro);
   
+  $permiso->grupo_id  = $grupo_id;
   $permiso->modulo_id = '%';
 
   $o_string   = $permiso->getOrderString($filtro);
   $obj_mysql  = $permiso->getAll('',$o_string,$filtro_sql,TRUE,TRUE);
-  $objs_pg    = new Pagination($obj_mysql, 'grupo','',false);
+  $objs_pg    = new Pagination($obj_mysql, 'gestpermisos','',false);
 
   
   $smarty->assign("filtros"  ,$filtro);

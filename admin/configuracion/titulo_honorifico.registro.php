@@ -1,9 +1,10 @@
 <?php
 try {
-  define ("MODULO", "TITULOHONORIFICO-REGISTRO");
+  define ("MODULO", "ADMIN-CONFIGURACION-TITULOHONORIFICO-REGISTRO");
   require('../_start.php');
   if(!isAdminSession())
     header("Location: ../login.php");  
+
 
   /** HEADER */
   $smarty->assign('title','SAPTI - Registro de T&iacute;tulo honor&iacute;fico');

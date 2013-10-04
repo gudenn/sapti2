@@ -1,5 +1,5 @@
       <div id="content">
-        <h1 class="title">REGISTRO DE OBSERVACIONES</h1>
+        <h1 class="title">NOTA DE LA DEFENSA</h1>
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
             <p>
@@ -19,7 +19,7 @@
             </p>
            
             
-            <h2 class="title">Grabar Revision</h2>
+            <h2 class="title">Grabar  Nota</h2>
             <p>
                <input type="hidden" name="estudiante_id" value="{$estudiante->id}">
               <input type="hidden" name="proyecto_id" value="{$proyecto->id}">

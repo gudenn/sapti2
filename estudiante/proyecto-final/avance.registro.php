@@ -1,6 +1,7 @@
 <?php
 try {
-  require('_start.php');
+  define ("MODULO", "ESTUDIANTE-PROYECTO-AVANCE-REGISTRO");
+  require('../_start.php');
   if(!isEstudianteSession())
     header("Location: ../login.php");  
 

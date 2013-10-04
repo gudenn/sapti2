@@ -1,8 +1,9 @@
 <?php
 try {
-  require('_start.php');
+  define ("MODULO", "ESTUDIANTE-PROYECTO-CORRECCIONES-GESTION");
+  require('../_start.php');
   if(!isEstudianteSession())
-    header("Location: login.php");  
+    header("Location: ../login.php");  
 
   /** HEADER */
   $smarty->assign('title','SAPTI - Registro Correciones');

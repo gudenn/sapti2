@@ -14,13 +14,14 @@
                   Nombre <br>Estudiante:
                 </td>
                 <td>
-                  <input type="text" name="apellido_paterno" value="{$usuario->apellido_paterno}" >
+                  
+                  <input type="text" name="apellido_paterno" readonly="readonly" value="{$usuario->apellido_paterno}" >
                 </td>
                 <td>
-                  <input type="text" name="apellido_paterno" value="{$usuario->apellido_materno}" >
+                  <input type="text" name="apellido_materno" readonly="readonly"  value="{$usuario->apellido_materno}" >
                 </td>
                 <td>
-                  <input type="text" name="nombre" value="{$usuario->nombre}"  data-validation-engine="validate[required]">
+                  <input type="text" name="nombre" value="{$usuario->nombre}"  readonly="readonly" >
                 </td>
                 <td>
                   <input type="text" class="numero" name="proyecto_numero_asignado" id="proyecto_numero_asignado" value="{$proyecto->numero_asignado}"  data-validation-engine="validate[required]">
@@ -28,16 +29,16 @@
               </tr>
               <tr>
                 <td>
-                  Ap. Paterno:
+                  Ap. Paterno:{getHelpTip('apellido_paterno')}
                 </td>
                 <td>
-                  Ap. Materno:
+                  Ap. Materno:{getHelpTip('apellido_materno')}
                 </td>
                 <td>
-                  Nombres:
+                  Nombres:{getHelpTip('nombre')}
                 </td>
                 <td>
-                  No. ...
+                  No. ...{getHelpTip('numero')}
                 </td>
               </tr>
             </table>
@@ -48,13 +49,13 @@
             <table>
               <tr>
                 <td>
-                  Tel&eacute;fono:
+                  Tel&eacute;fono:{getHelpTip('telefono')}
                 </td>
                 <td>
                   <input type="text" name="telefono" value="{$usuario->telefono}" >
                 </td>
                 <td>
-                  Email:
+                  Email:{getHelpTip('email')}
                 </td>
                 <td>
                   <input type="text" name="email" value="{$usuario->email}" >
@@ -68,10 +69,19 @@
             <table>
               <tr>
                 <td  style="height: 29px;">
-                  Tutor(es):
+                  Tutor(es):{getHelpTip('tutor')}
                 </td>
+              </tr>
+              <tr>
+                <td id="lista_tutores" style="height: 29px;padding-left: 40px">
+                {section name=tutor start=0 loop=$tutores}
+                   {$tutores[tutor]->getNombreCompleto()}<br>
+                {/section}
+                </td>
+              </tr>
+              <tr>
                 <td>
-                  <a href="">Asignar o Modificar</a> | <a href="">Actualizar</a>
+                  <a href="../tutor/tutor.gestion.php?estudiante_id={$estudiante->id}" target="_blank">Asignar o Modificar</a><!-- | <a href="">Actualizar</a>-->
                 </td>
               </tr>
               <!--
@@ -91,7 +101,7 @@
             <table>
               <tr class="tableholder" >
                 <td style="height: 31px;">
-                  Carrera:
+                  Carrera:{getHelpTip('carrera_id')}
                 </td>
                 <td>
                   <select  name="proyecto_carrera_id" id="proyecto_carrera_id"  data-validation-engine="validate[required]" >
@@ -99,7 +109,7 @@
                   </select>
                 </td>
                 <td>
-                  Trabajo&nbsp;Conjunto:
+                  Trabajo&nbsp;Conjunto:{getHelpTip('trabajo_conjunto')}
                 </td>
                 <td>
                   {html_radios name="proyecto_trabajo_conjunto" options=$trabajo_conjunto selected=$trabajo_conjunto_selected separator=""}
@@ -107,13 +117,13 @@
               </tr>
               <tr class="tableholder" >
                 <td style="height: 31px;">
-                  Gesti&oacute;n de Aprobaci&oacute;n:
+                  Gesti&oacute;n de Aprobaci&oacute;n:{getHelpTip('semestre')}
                 </td>
                 <td>
                   {$semestre->codigo}
                 </td>
                 <td>
-                  Cambio de tema:
+                  Cambio de tema:{getHelpTip('cambio_tema')}
                 </td>
                 <td>
                   {$cambio_tema}
@@ -131,7 +141,7 @@
             <table>
               <tr>
                 <td style="height: 32px;">
-                  T&iacute;tulo:
+                  T&iacute;tulo:{getHelpTip('proyecto_nombre')}
                 </td>
                 <td>
                   <input type="text" name="proyecto_nombre"  id="proyecto_nombre" value="{$proyecto->nombre}"  data-validation-engine="validate[required]">
@@ -143,7 +153,7 @@
         </tr>
         <tr class="tableholder" >
           <td style="padding-bottom: 10px;">
-                  &Aacute;rea(s):
+                  &Aacute;rea(s):{getHelpTip('areas')}
             <table>
               {$i = 0}
               {$j = 0}
@@ -157,12 +167,13 @@
                     <select  name="proyecto_area_id[]" id="proyecto_area_id_{$i}" class="area" correlativo="{$i}" data-validation-engine="validate[required]" >
                       {html_options values=$areas_ids selected=$proyecto_area->area_id output=$areas}
                     </select>
+                    {getHelpTip('areas')}
                     <span id="actualizando_subareas{$i}" style="display: none">
                       {icono('basicset/loading.gif','Buscando','50px','10px')}
                     </span>
                   </td>
                   <td>
-                    Sub-&Aacute;rea:
+                    Sub-&Aacute;rea:{getHelpTip('subareas')}
                   </td>
                   <td>
                       {if ( isset($proyecto->proyecto_sub_area_objs[area]) )}
@@ -173,8 +184,10 @@
                       {/if}
                   </td>
                   <td>
+                    {getHelpTip('agregarareas')}
                     <a href="#mas"   title="Agregar otra Area" onfocus="addmore(this,true);" onclick="addmore(this,true);return false;" xfile="area_{$i+1}" >{icono('basicset/plus_48.png','Agregar','15px')}</a> 
                     {if ($i>1)}
+                    {getHelpTip('quitarareas')}
                     <a href="#mas"   title="Quitar este elemento" onclick="remover(this,true);return false;" xfile="area_{$i}"  >{icono('basicset/delete_48.png','Quitar','15px')}</a> 
                     {/if}
                   </td>
@@ -189,12 +202,13 @@
                     <select  name="proyecto_area_id[]" id="proyecto_area_id_{$i}" class="area" correlativo="{$i}" data-validation-engine="validate[required]" >
                       {html_options values=$areas_ids selected='' output=$areas}
                     </select>
+                    {getHelpTip('areas')}
                     <span id="actualizando_subareas{$i}" style="display: none">
                       {icono('basicset/loading.gif','Buscando','50px','10px')}
                     </span>
                   </td>
                   <td>
-                    Sub-&Aacute;rea:
+                    Sub-&Aacute;rea:{getHelpTip('subareas')}
                   </td>
                   <td>
                     <div id="nueva_subarea_{$i}" style="display: none">
@@ -205,11 +219,14 @@
                       <select  name="proyecto_subarea_id[]" id="proyecto_subarea_id_{$i}" class="subarea" correlativo="{$i}" data-validation-engine="validate[required]" >
                       </select>
                       <a href="#mas"   title="Agregar otra SubArea" onclick="addsubarea(this);return false;" xfile="area_{$i}" >{icono('basicset/agregarboton.png','Agregar','15px')}</a> 
+                      {getHelpTip('nuevasubarea ')}
                     </div>
                   </td>
                   <td>
+                    {getHelpTip('agregarareas')}
                     <a href="#mas"   title="Agregar otra Area" onfocus="addmore(this,true);" onclick="addmore(this,true);return false;" xfile="area_{$i+1}" >{icono('basicset/plus_48.png','Agregar','15px')}</a> 
                     {if ($i>1)}
+                    {getHelpTip('quitarareas')}
                     <a href="#mas"   title="Quitar este elemento" onclick="remover(this,true);return false;" xfile="area_{$i}"  >{icono('basicset/delete_48.png','Quitar','15px')}</a> 
                     {/if}
                   </td>
@@ -224,7 +241,7 @@
             <table>
               <tr>
                 <td style="height: 35px;">
-                  Modalidad:
+                  Modalidad:{getHelpTip('modalidad')}
                 </td>
                 <td>
                   <select  name="proyecto_modalidad_id" id="proyecto_modalidad_id" data-validation-engine="validate[required]" class="modalidad" >
@@ -235,7 +252,7 @@
                   </span>
                 </td>
                 <td style="height: 35px;" class="{$tipo_moda}">
-                  Instituci&oacute;n:
+                  Instituci&oacute;n:{getHelpTip('institucion')}
                 </td>
                 <td class="{$tipo_moda}">
                   <span id="instituciones_lista">
@@ -243,7 +260,7 @@
                     {html_options values=$instituciones_ids selected=$proyecto->institucion_id output=$instituciones}
                   </select>
                     <a href="#mas"   title="Actualizar Instituciones" onclick="agregarinstitucion();return false;"  >
-                     {icono('basicset/agregarboton.png','Actualizar','15px')} Nueva
+                     {icono('basicset/agregarboton.png','Actualizar','15px')} Nueva {getHelpTip('nuevainstitucion')}
                     </a> 
                   </span>
                   <span id="instituciones_nueva" style="display: none">
@@ -261,7 +278,7 @@
             <table>
               <tr>
                 <td style="height: 61px;vertical-align: top; ">
-                  Objetivo General:
+                  Objetivo General:{getHelpTip('objetivogeneral')}
                 </td>
                 <td>
                   <textarea  name="proyecto_objetivo_general"   id="proyecto_objetivo_general"  >{$proyecto->objetivo_general}</textarea>
@@ -276,7 +293,7 @@
             <table>
               <tr>
                 <td style="height: 87px;vertical-align: top; ">
-                  Objetivos Espec&iacute;ficos:
+                  Objetivos Espec&iacute;ficos:{getHelpTip('objetivoespecificos')}
                 </td>
                 <td>
                   <table id="ojbs_es">
@@ -289,8 +306,10 @@
                         <input type="text" name="objetivo_especifico[]" id="objetivo_especifico_{$i}" value="{$proyecto->objetivo_especifico_objs[foo]->descripcion}"  data-validation-engine="validate[required]">
                       </td>
                       <td>
+                        {getHelpTip('agregarobjetivo')}
                         <a href="#mas"   title="Agregar otra caja" onfocus="addmore(this,false)" onclick="addmore(this,false);return false;" xfile="{$i+1}" >{icono('basicset/plus_48.png','Agregar','15px')}</a> 
                         {if ($i>1)}
+                        {getHelpTip('quitarobjetivo')}
                         <a href="#mas"   title="Quitar este elemento" onclick="remover(this,false);return false;" xfile="{$i}"  >{icono('basicset/delete_48.png','Quitar','15px')}</a> 
                         {/if}
                       </td>
@@ -304,8 +323,10 @@
                         <input type="text" name="objetivo_especifico[]" id="objetivo_especifico_{$i}" value=""  data-validation-engine="validate[required]">
                       </td>
                       <td>
+                        {getHelpTip('agregarobjetivo')}
                         <a href="#mas"   title="Agregar otra caja" onfocus="addmore(this,false)" onclick="addmore(this,false);return false;" xfile="{$i+1}" >{icono('basicset/plus_48.png','Agregar','15px')}</a> 
                         {if ($i>1)}
+                        {getHelpTip('quitarobjetivo')}
                         <a href="#mas"   title="Quitar este elemento" onclick="remover(this,false);return false;" xfile="{$i}"  >{icono('basicset/delete_48.png','Quitar','15px')}</a> 
                         {/if}
                       </td>
@@ -323,7 +344,7 @@
             <table>
               <tr>
                 <td>
-                  Descripci&oacute;n:
+                  Descripci&oacute;n:{getHelpTip('descripcion')}
                 </td>
               </tr>
               <tr>
@@ -339,7 +360,7 @@
             <table id="firmmas">
               <tr>
                 <td style="height: 32px;">
-                  <input type="text" name="proyecto_director_carrera" value="{$director_carrera}"  data-validation-engine="validate[required]">
+                  <input type="text" name="proyecto_director_carrera" readonly="readonly" value="{$director_carrera}"  data-validation-engine="validate[required]">
                 </td>
                 <td>
                   <select  name="proyecto_docente_materia" id="proyecto_docente_materia" data-validation-engine="validate[required]" >
@@ -347,7 +368,10 @@
                   </select>
                 </td>
                 <td>
-                  Tutor
+                  <select  name="proyecto_registro_tutor" id="proyecto_registro_tutor" data-validation-engine="validate[required]" >
+                    {html_options values=$registro_tutor selected=$proyecto->registro_tutor output=$registro_tutor}
+                  </select>
+
                 </td>
                 <td class="{$tipo_moda}">
                   <select  name="proyecto_responsable" id="proyecto_responsable" data-validation-engine="validate[required]" >
@@ -360,19 +384,19 @@
               </tr>
               <tr>
                 <td style="height: 64px;">
-                  Director de Carrera:
+                  Director de Carrera:{getHelpTip('director_carrera')}
                 </td>
                 <td>
-                  Docente Materia:
+                  Docente Materia:{getHelpTip('docente_materia')}
                 </td>
                 <td>
-                  Tutor:
+                  Tutor:{getHelpTip('tutor')}
                 </td>
                 <td class="{$tipo_moda}">
-                  Responsable:
+                  Responsable:{getHelpTip('responsable')}
                 </td>
                 <td>
-                  Estudiante:
+                  Estudiante:{getHelpTip('estudiante')}
                 </td>
               </tr>
             </table>
@@ -387,13 +411,13 @@
             <table>
               <tr>
                 <td style="height: 33px;">
-                  Registrado por:
+                  Registrado por:{getHelpTip('registrado_por')}
                 </td>
                 <td>
                   <input type="text" name="proyecto_registrado_por" value="{$registrado_por}"  data-validation-engine="validate[required]">
                 </td>
                 <td>
-                  Fecha:
+                  Fecha:{getHelpTip('fecha_registro')}
                 </td>
                 <td>
                   {$fecha}
@@ -415,7 +439,7 @@
               <input type="hidden" name="token" value="{$token}">
               <input name="submit" type="submit" id="submit" value="Grabar">
               &nbsp;
-              <input name="reset" type="reset" id="reset" tabindex="5" value="Cancelar">
+              <input name="reset" type="reset" id="reset" tabindex="5" value="Limpiar">
             </p>
           </td>
         </tr>
@@ -423,9 +447,10 @@
 
     </form>
     </div>
-  </div>
   <p>{$ERROR}</p>
   <p>Todos los campos con (*) son obligatorios.</p>
+  </div>
+  <div class="clear"></div>
   <script type="text/javascript">
   {literal} 
     function addmore(test,tipoarea)

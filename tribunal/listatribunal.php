@@ -38,23 +38,11 @@ try {
   leerClase("Formulario");
   leerClase("Pagination");
   leerClase("Filtro");
+  leerClase("Consejo");
   leerClase("Proyecto_estudiante");
-/**
-  $filtro     =  new Filtro('g_docente',__FILE__);
-  $docente    =  new Docente();
-  $docente    -> iniciarFiltro($filtro);
-  $filtro_sql =  $docente->filtrar($filtro);
-
-  $docente->usuario_id ='%';
-  
-  $o_string   = $docente->getOrderString($filtro);
-  $obj_mysql  = $docente->getAll('',$o_string,$filtro_sql,TRUE,TRUE);
-  $objs_pg    = new Pagination($obj_mysql, 'g_docente','',false,10);
-
-  $smarty->assign("filtros"  ,$filtro);
-  $smarty->assign("objs"     ,$objs_pg->objs);
-  $smarty->assign("pages"    ,$objs_pg->p_pages);
-*/
+$menuList[]     = array('url'=>URL.Consejo::URL,'name'=>'Consejo');
+  $menuList[]     = array('url'=>URL . Consejo::URL ,'name'=>'Proyectos Asignados');
+  $smarty->assign("menuList", $menuList);
  
   
    $proyectostribunales= array();

@@ -1,9 +1,10 @@
 <?php
 try {
-  define ("MODULO", "TURNO-GESTION");
+  define ("MODULO", "ADMIN-CONFIGURACION-TURNO-GESTION");
   require('../_start.php');
   if(!isAdminSession())
     header("Location: ../login.php");  
+
 
   leerClase("Turno");
   leerClase("Formulario");

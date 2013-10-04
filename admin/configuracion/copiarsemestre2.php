@@ -5,7 +5,7 @@ $semestre=$_POST['semestre'];
 
 $var=0;
 function consulta($sem){
-    $sql="SELECT ma.nombre as Materia, CONCAT(us.apellido_paterno,us.apellido_materno,us.nombre) as Docente, se.codigo as Semestre
+    $sql="SELECT ma.nombre as Materia, di.codigo_grupo as Grupo,CONCAT(us.apellido_paterno,us.apellido_materno,us.nombre) as Docente, se.codigo as Semestre
 FROM dicta di, semestre se, docente dc, materia ma, usuario us
 WHERE di.semestre_id=se.id
 AND di.materia_id=ma.id

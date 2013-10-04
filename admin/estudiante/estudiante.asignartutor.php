@@ -1,7 +1,9 @@
 <?php
 try {
+  define ("MODULO", "ADMIN-ESTUDIANTE-CAMBIOTEMA");
   require('../_start.php');
-  global $PAISBOX;
+  if(!isAdminSession())
+    header("Location: ../login.php");
 
   /** HEADER */
    leerClase("Usuario");
@@ -24,6 +26,7 @@ try {
   $menuList[]     = array('url'=>URL . Administrador::URL . 'estudiante/','name'=>' Estudiantes');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'estudiante/'.basename(__FILE__),'name'=>'VER Tutores');
   $smarty->assign("menuList", $menuList);
+  
   //CSS
   $CSS[]  = URL_CSS . "academic/tables.css";
   //$CSS[]  = URL_CSS . "pg.css";
