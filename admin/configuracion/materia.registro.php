@@ -1,9 +1,10 @@
 <?php
 try {
-  define ("MODULO", "MATERIA-REGISTRO");
+  define ("MODULO", "ADMIN-CONFIGURACION-MATERIA-REGISTRO");
   require('../_start.php');
   if(!isAdminSession())
     header("Location: ../login.php");  
+
 
   /** HEADER */
   $smarty->assign('title','SAPTI - Registro Materia');

@@ -1,7 +1,9 @@
 <?php
 try {
+  define ("MODULO", "ADMIN-ESTUDIANTE-ASIGNARPROYECTO");
   require('../_start.php');
-  global $PAISBOX;
+  if(!isAdminSession())
+    header("Location: ../login.php");  
 
   /** HEADER */
    leerClase("Usuario");
@@ -17,7 +19,13 @@ try {
   $smarty->assign('title','Registro de Proyecto Final');
   $smarty->assign('description','Registro de Proyecto Final');
   $smarty->assign('keywords','Proyecto Final,estudiante,registro');
-
+  /**
+   * Menu superior
+   */
+  $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'estudiante/','name'=>' Estudiantes');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'estudiante/'.basename(__FILE__),'name'=>'Registrar Proyecto Final');
+  $smarty->assign("menuList", $menuList);
   //CSS
   $CSS[]  = URL_CSS . "academic/tables.css";
   //$CSS[]  = URL_CSS . "pg.css";
@@ -28,7 +36,7 @@ try {
   $smarty->assign('JS',$JS);
 
   $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
-  $smarty->assign('lista'       ,'admin/estudiante/lista-estudiantes-asignar-tutores.tpl');
+  $smarty->assign('lista'       ,'admin/estudiante/lista-estudiantes-asignar-proyecto.tpl');
 
   //Filtro
   $filtro     = new Filtro('g_estudianteas',__FILE__);

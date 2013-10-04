@@ -1,15 +1,9 @@
 <?php
 try {
+  define ("MODULO", "ADMIN-USUARIO-GESTION");
   require('../_start.php');
   if(!isAdminSession())
     header("Location: ../login.php");  
-  
-  //MODULO -> REGISTRO DE MERCADERIA
-  //ACCION -> GESTION
-  
-
-  
-  
   
   
   leerClase("Usuario");
@@ -21,8 +15,8 @@ try {
   $ERROR = '';
 
   /** HEADER */
-  $smarty->assign('title','Gestion de Usuarios');
-  $smarty->assign('description','Pagina de gestion de Usuarios');
+  $smarty->assign('title','Gesti&oacute;n de Usuarios');
+  $smarty->assign('description','P&aacute;gina de gesti&oacute;n de Usuarios');
   $smarty->assign('keywords','Gestion,Usuarios');
 
   //CSS
@@ -81,7 +75,7 @@ try {
   
   $o_string   = $usuario->getOrderString($filtro);
   $obj_mysql  = $usuario->getAll('',$o_string,$filtro_sql,TRUE,TRUE);
-  $objs_pg    = new Pagination($obj_mysql, 'usuario','',false,10);
+  $objs_pg    = new Pagination($obj_mysql, 'usuario','',false);
 
 
   $smarty->assign("filtros"  ,$filtro);

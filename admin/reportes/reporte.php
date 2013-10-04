@@ -69,33 +69,23 @@ try {
   $smarty->assign("semestre_values", $semestre_values);
   $smarty->assign("semestre_output", $semestre_output);
   $smarty->assign("semestre_selected", "");
-
+  
+  
+  leerClase('Proyecto');
+  
+  $proyecto=new Proyecto();
+  
+  $cont=$proyecto->contar();
+  
+  
+  $p=$_POST['semestre_selec'];;
   
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
   if($_POST['semestre_selec']){
   
- echo $p=$_POST['semestre_selec'];
-  $sqlr="SELECT Count(*)as c
-FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe
-WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado='AC' and s.id='".$p."'";
- $resultado = mysql_query($sqlr);
- $arraylista= array();
-  
- while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
- {
-  // $arraytribunal=$fila;
-   
-   //array('name' => $fila["id"], 'home' => $fila["nombre"],'cell' => $fila["apellidos"], 'email' => 'john@myexample.com');
-   
-   $arraylista[]=$fila;
- }
- 
- $cont = $arraylista[0]['c'];
-  
- 
- $smarty->assign('cont'  , $cont);
+
 
   $sqlr="SELECT count(*) as p
 FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
@@ -114,9 +104,8 @@ WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
  }
  
  $post = $arraytribunal[0]['p'];
- echo $post;
- if ($cont) {
- echo $pos=((double)$post/(float)$cont)*100;}
+ 
+ echo $pos=((double)$post/(float)$cont)*100;
  // $objs_pg    = new Pagination($obj_mysql, 'g_cambios','',false,10);
  $smarty->assign('pos'  , $pos);
 
@@ -135,8 +124,7 @@ WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
  }
  
  $pro= $arraytribunal[0]['pr'];
- if ($pro) {
-echo $pr=((double)$pro/(double)$cont)*100;}
+ $pr=((double)$pro/(double)$cont)*100;
  
  $smarty->assign('pr'  , $pr);  
  
@@ -161,14 +149,13 @@ WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
  }
  
  $camb  = $arraytribunal[0]['cam'];
- if ($camb) {
- $cam=((double)$camb/(double)$cont)*100;}
+ $cam=((double)$camb/(double)$cont)*100;
  // $objs_pg    = new Pagination($obj_mysql, 'g_cambios','',false,10);
  $smarty->assign('cam'  , $cam); 
 
 //vencidos
  
- $fechahoy=  date('Y-m-d');
+echo  $fechahoy=  date('Y-m-d');
   $sqlr="SELECT count(*) as vencido
 FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
 WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
@@ -187,10 +174,10 @@ WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
  
   $ve = $arraytribunal[0]['vencido'];
  // $objs_pg    = new Pagination($obj_mysql, 'g_cambios','',false,10);
- if ($ve) {
+
      $v=((double)$ve/(double)$cont)*100;
      
- }
+ 
  
  $smarty->assign('v'  , $v);
 }

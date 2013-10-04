@@ -1,6 +1,6 @@
 <?php
 try {
-  define ("MODULO", "HELPDESK-GESTION");
+  define ("MODULO", "ADMIN-HELPDESK-TOOLTIPS-GESTION");
   require('../_start.php');
   if(!isAdminSession())
     header("Location: ../login.php");  
@@ -23,9 +23,9 @@ try {
    * Menu superior
    */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/','name'=>'Configuraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/helpdesk.tooltips.php?todos','name'=>'Gesti&oacute;n de Temas de Ayuda');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Gesti&oacute;n de Tips de Ayuda');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'helpdesk/','name'=>'Helpdesk SAPTI');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'helpdesk/helpdesk.tooltips.php?todos','name'=>'Gesti&oacute;n de Temas de Ayuda');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'helpdesk/'.basename(__FILE__),'name'=>'Gesti&oacute;n de Tips de Ayuda');
   $smarty->assign("menuList", $menuList);
 
   //CSS

@@ -1,8 +1,9 @@
 <?php
 try {
+  define ("MODULO", "ADMIN-CONFIGURACION-INDEX");
   require('../_start.php');
   if(!isAdminSession())
-    header("Location: login.php");  
+    header("Location: ../login.php");  
 
   /** HEADER */
   $smarty->assign('title','Configuraci&oacute;n de SAPTI');
@@ -63,27 +64,6 @@ try {
   $link = Administrador::URL."configuracion/carrera.registro.php";
   $menu->agregarItem('Registro de Carrera','Registro de una nueva Carrera.','basicset/plus_48.png',$link);
   $menus[] = $menu;
-  $menu = new Menu('Helpdesk');
-  $link = Administrador::URL."configuracion/helpdesk.gestion.php?todos";
-  $menu->agregarItem('Gesti&oacute;n de Helpdesk','Gesti&oacute;n de Helpdesk para el sistema SAPTI.','basicset/helpdesk_48.png',$link);
-  $link = Administrador::URL."configuracion/helpdesk.gestion.php?estado_helpdesk=".Helpdesk::EST01_RECIEN;
-  // CONTADOR //
-  $helpdesk   = new Helpdesk();
-  $pendientes = Helpdesk::EST01_RECIEN;
-  $pendientes = $helpdesk->contar(" estado_helpdesk = '{$pendientes}' ");
-  // -CONTADOR //
-  $menu->agregarItem('Helpdesk Pedientes','Temas de ayuda que estan pendientes.','basicset/tag.png',$link,$pendientes);
-  $menus[] = $menu;
-  $menu = new Menu('Helpdesk Tooltips');
-  $link = Administrador::URL."configuracion/helpdesk.tooltips.php?todos";
-  // CONTADOR //
-  leerClase('Tooltip');
-  $tooltips   = new Tooltip();
-  $pendientes = Tooltip::EST02_APROBA;
-  $pendientes = $tooltips->contar(" estado_tooltip != '{$pendientes}' ");
-  // -CONTADOR //
-  $menu->agregarItem('Tooltips Pedientes','Ventanas flotantes que ofrece el sistema, Ayudas pendientes.','basicset/tag.png',$link,$pendientes);
-  $menus[] = $menu;
   $menu = new Menu('Instituciones');
   $link = Administrador::URL."configuracion/institucion.gestion.php";
   $menu->agregarItem('Gesti&oacute;n de Instituciones','Lista de todas las instituciones configuradas para el sistema.','basicset/home.png',$link);
@@ -113,6 +93,15 @@ try {
   $menu->agregarItem('Gesti&oacute;n de Turnos','Los turnos para los horarios.','basicset/timetable.png',$link);
   $link = Administrador::URL."configuracion/turno.registro.php";
   $menu->agregarItem('Registro de Turno','Registro de un nuevo Turno.','basicset/plus_48.png',$link);
+  $menus[] = $menu;
+  
+  
+  
+   $menu = new Menu('Consejo');
+  $link = Administrador::URL."configuracion/consejo.gestion.php";
+  $menu->agregarItem('Gesti&oacute;n de Consejo','Los Consejo .','basicset/timetable.png',$link);
+  $link = Administrador::URL."configuracion/consejo.registro.php";
+  $menu->agregarItem('Registro de Consejo','Registro de un nuevo Turno.','basicset/plus_48.png',$link);
   $menus[] = $menu;
   //----------------------------------//
   

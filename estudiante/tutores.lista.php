@@ -13,7 +13,8 @@ try {
   leerClase("Formulario");
   leerClase("Pagination");
   leerClase("Filtro");
-
+ leerClase('Estudiante');
+  leerClase('Proyecto');
 
   $ERROR = '';
 
@@ -21,7 +22,14 @@ try {
   $smarty->assign('title','Enviar Solicitud');
   $smarty->assign('description','Pagina de listado de tutores');
   $smarty->assign('keywords','Docentes');
-
+/**
+   * Menu superior
+   */
+  $menuList[]     = array('url'=>URL.Estudiante::URL,'name'=>'Estudiante');
+  $menuList[]     = array('url'=>URL.Estudiante::URL.Proyecto::URL,'name'=>'Enviar Carta');
+  $menuList[]     = array('url'=>URL.Estudiante::URL.Proyecto::URL.basename(__FILE__),'name'=>'Solicitud Tutor');
+  $smarty->assign("menuList", $menuList);
+  $editores = '';
   //CSS
   $CSS[]  = URL_CSS . "academic/tables.css";
   //$CSS[]  = URL_CSS . "pg.css";
@@ -44,7 +52,7 @@ try {
   }
 
   $smarty->assign('mascara'     ,'estudiante/listas.mascara.tpl');
-  $smarty->assign('lista'       ,'estudiante/lista-tutores.tpl');
+  $smarty->assign('lista'       ,'estudiante/docente.lista.tpl');
 
   //Filtro
   $filtro     = new Filtro('g_estudiante',__FILE__);

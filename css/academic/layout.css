@@ -185,8 +185,8 @@ div.wrapper h1, div.wrapper h2, div.wrapper h3, div.wrapper h4, div.wrapper h5, 
 
 #column{
 	display:block;
-	float:right;
-	width:300px;
+	float:left;
+	width:200px;
 	}
 
 #column .holder, #column #featured{

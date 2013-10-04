@@ -11,7 +11,8 @@ try {
   $smarty->assign('keywords','Proyecto Final');
 
   //CSS
-   $CSS[]  = URL_CSS . "academic/3_column.css";
+    $CSS[]  = URL_CSS . "dashboard.css";
+     $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
   
   $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
@@ -28,6 +29,32 @@ try {
   //Validation
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
+  
+  leerClase('Consejo');
+  leerClase('Menu');
+  leerClase('Tribunal');
+  leerClase('Administrador');
+
+  
+    /**
+   * Menu superior
+   */
+  $menuList[]     = array('url'=>URL. Consejo::URL,'name'=>'Consejo');
+  $smarty->assign("menuList", $menuList);
+  
+    /**
+   * Menu central
+   */
+  //----------------------------------//
+
+  $menu = new Menu('Asignacion de tribunales');
+  $link = Consejo::URL."registro.php";
+  $menu->agregarItem('Gesti&oacute;n de Asignac&oacute;n','Registro y modificacion de tribunales','basicset/user4.png',$link);
+  $link = Consejo::URL."/";
+  $menu->agregarItem('Reportes de Docentes','Reportes correspondientes a los Docentes','basicset/graph.png',$link);
+  $menus[] = $menu;
+  
+ $smarty->assign("menus", $menus);
 
   $smarty->assign('JS',$JS);
   $smarty->assign("ERROR", $ERROR);
@@ -41,7 +68,7 @@ catch(Exception $e)
 {
   $smarty->assign("ERROR", handleError($e));
 }
-$TEMPLATE_TOSHOW = 'tribunal/tribunal.3columnas.tpl';
+$TEMPLATE_TOSHOW = 'tribunal/2columnas.tpl';
 $smarty->display($TEMPLATE_TOSHOW);
 
 ?>

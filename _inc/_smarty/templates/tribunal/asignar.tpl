@@ -1,17 +1,17 @@
  <div id="content">
      <form action="" method="post">
       <h1> Detalle del Proyecto </h1>
-       <label for="nombre">NOMBRE:  {$usuariobuscado->nombre}</label><br />
-        <label for="nombre">APELLIDOS:   {$usuariobuscado->apellidos}</label><br />
-         <label for="nombre">CODIGO SIS:   {$estudiantebuscado->codigo_sis}</label><br />
-         <label for="nombre">PROYECTO:   {$proyectobuscado->nombre}</label><br />
-         <label for="Area">NUMERO:   {$proyectobuscado->id}</label><br />
-         <label for="nombre">AREA:   {foreach from=$proyectoarea item=curr_id}
+       <label for="nombre">Nombre:  {$usuariobuscado->nombre}</label><br />
+        <label for="nombre">Apellidos:   {$usuariobuscado->apellidos}</label><br />
+         <label for="nombre">Codigo sis:   {$estudiantebuscado->codigo_sis}</label><br />
+         <label for="nombre">Proyecto:   {$proyectobuscado->nombre}</label><br />
+ 
+         <label for="nombre">Area:   {foreach from=$proyectoarea item=curr_id}
                                     Nombre: {$curr_id->nombre}<br />
                                    {/foreach}</label><br />
        <p>
          
-              <Hi> LISTA DE LOS DOCENTES</Hi>
+              <Hi> Lista De Docentes</Hi>
 <table class="tbl_lista" id="docentes"  mane="docentes">
   <thead>
     <tr>
@@ -77,7 +77,7 @@
             </p>
             
             <p>
-             <select name="Time_Hour">
+<select name="hora_ini">
 <option value="00">00</option>
 <option value="01">01</option>
 <option value="02">02</option>
@@ -103,7 +103,7 @@
 <option value="22">22</option>
 <option value="23">23</option>
 </select>
-<select name="Time_Minute">
+<select name="minuto_ini">
 <option value="00">00</option>
 <option value="01">01</option>
 <option value="02">02</option>
@@ -169,7 +169,7 @@
             </p>
             
             <p>
-             <select name="Time_Hour">
+<select name="hora_fin">
 <option value="00">00</option>
 <option value="01">01</option>
 <option value="02">02</option>
@@ -195,7 +195,7 @@
 <option value="22">22</option>
 <option value="23">23</option>
 </select>
-<select name="Time_Minute">
+<select name="minuto_fin">
 <option value="00">00</option>
 <option value="01">01</option>
 <option value="02">02</option>

@@ -42,6 +42,12 @@ try {
   leerClase("Notificacion");
   leerClase("Notificacion_tribunal");
    leerClase("Automatico");
+   leerClase("Consejo");
+   
+  $menuList[]     = array('url'=>URL.Consejo::URL,'name'=>'Consejo');
+  $menuList[]     = array('url'=>URL . Consejo::URL ,'name'=>'Asignaci&oacute;n');
+  $smarty->assign("menuList", $menuList);
+
  
  $editores = ",
                 {toolbar: [ 
@@ -56,6 +62,7 @@ try {
     $sqldelite='DELETE  FROM automatico';
     mysql_query($sqldelite);
     
+    
     $estudiante   = new Estudiante(false,$_POST['codigosis']);
    
     $proyecto     = new Proyecto();
@@ -69,12 +76,26 @@ try {
        echo "<script>alert('El Estudiante no Tiene Proyecto');</script>";
       
     }
+    
+    if($proyecto->estado_proyecto!='TA')
+    {
+    
+    $tutores= $proyecto->getTutores();
+    $arraytutores= array();
+    foreach ($tutores as $valor)
+    {
+       $arraytutores[]=  new Usuario($valor->usuario_id);
+    }
+    
+    
+    
    $proyeareas=$proyecto->getArea();
    $usuariobuscado= new Usuario($estudiante->usuario_id);
    $smarty->assign('usuariobuscado',  $usuariobuscado);
    $smarty->assign('estudiantebuscado', $estudiante);
    $smarty->assign('proyectobuscado', $proyecto);
    $smarty->assign('proyectoarea', $proyecto->getArea());
+   $smarty->assign('tutores', $arraytutores);
 
    
     $array=  $proyecto->getArea();
@@ -135,8 +156,7 @@ while ($filapeso = mysql_fetch_array($resulpeso, MYSQL_ASSOC))
 
 }
   
-              
-               
+            
                    
  }
  ///////////////array aux no docente//////////
@@ -213,6 +233,31 @@ while ($filapesosig = mysql_fetch_array($resulpesosig, MYSQL_ASSOC))
 }
  }
 
+    $tutores= $proyecto->getTutores();
+    $arraytutores= array();
+    foreach ($tutores as $valor)
+    {
+      
+$sqlp="select  d.id
+from usuario  u, docente  d
+where   u.id=d.usuario_id  and  u.id=$valor->usuario_id;";  
+  $resulp = mysql_query($sqlp);
+while ($filap = mysql_fetch_array($resulp, MYSQL_ASSOC))
+{
+  $vars=$filap['id'];
+$sqldeliteau="
+delete from `automatico`  where  docente_id=$vars;";
+ mysql_query($sqldeliteau);
+}
+
+}  
+    }else
+    {
+      
+        echo "<script>alert('El Proyecto ya tiene Tribunales');</script>";
+    }
+        
+ 
  }
  
  
@@ -501,17 +546,17 @@ if ( isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' )
 
 if (isset($_POST['proyecto_id']))
  {
-   echo $_POST['proyecto_id'];
+ $idproyecto=$_POST['proyecto_id'];
    
    
-   
+   $query = "UPDATE proyecto p SET p.estado_proyecto='TA'  WHERE p.id=$idproyecto";
+  mysql_query($query);
    //UPDATE items,month SET items.price=month.price
 //WHERE items.id=month.id;
-   $proyectos   = new Proyecto($_POST['proyecto_id']);
-   $proyectos->objBuidFromPost();
-   $proyectos->estado_proyecto='TA';
-
-  // var_dump($proyectos->save());
+   $proyectos   = new Proyecto($idproyecto);
+  // $proyectos->objBuidFromPost();
+  // $proyectos->estado_proyecto='TA';
+   //$proyectos->save() ;
   
    //$estudiante  = array();
    $estudiante   = new Estudiante(false,$_POST['estudiante_id']);

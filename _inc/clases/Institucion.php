@@ -12,10 +12,67 @@ class Institucion extends Objectbase
   * @var INT(45)
   */
   var $descripcion;
-    
-    
-    
-     /**
+
+  /**
+   * Grabamos una institucion
+   * @param type $table
+   * @param type $father_id_value
+   * @param type $base
+   */
+  public function save($table = false, $father_id_value = false, $base = 'compania') {
+    // los nombres de ins con mayusculas
+    $this->nombre = strtoupper($this->nombre);
+    //para evitar duplicados buscamos que no exista ya este nombre
+    if (!$this->id)//si es nuevo
+    {
+      $otrasConMismoNombre = $this->getByNombre();
+      if (sizeof($otrasConMismoNombre) > 0)
+      {
+        //no grabamos
+        self::__construct($otrasConMismoNombre[0]->id);
+        return true;
+      }
+    }
+    parent::save($table, $father_id_value, $base);
+  }
+  
+  /**
+   * Grabamos rapidamente a partir de los datos 
+   * que envian en el formulario
+   * @param string $nombre
+   */
+  function saveFast($nombre) {
+    $this->nombre      = $nombre;
+    $this->descripcion = $nombre;
+    $this->estado      = Objectbase::STATUS_AC;
+    $this->validar();
+    $this->save();
+  }
+  
+  /**
+   * Buscamos todas las instituciones con el nombre igual
+   * @param type $nombre nombre de la institucion
+   * @return boolean|\Institucion
+   */
+  function getByNombre($nombre = '') {
+    if ('' == $nombre)
+      $nombre = $this->nombre;
+
+    $activo = Objectbase::STATUS_AC;
+    $sql = "select * from " . $this->getTableName() . " where nombre = '$nombre'  AND estado = '$activo'";
+    //echo $sql;
+    $resultado = mysql_query($sql);
+    if (!$resultado)
+      return false;
+    $intituciones = array();
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) {
+      $intituciones[] = new Institucion($fila['id']);
+    }
+    return $intituciones;
+  }
+  
+  
+  /**
    * Validamos que todos los datos enviados sean correctos
    */
   function validar() {
@@ -76,8 +133,5 @@ class Institucion extends Objectbase
   
 }
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 ?>

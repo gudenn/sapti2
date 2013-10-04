@@ -16,6 +16,12 @@ class Permiso extends Objectbase
   * @var INT
   */
   var $modulo_id;
+  
+ /**
+  * Codigo del helpdesk
+  * @var INT
+  */
+  var $helpdesk_id;
 
  /**
   * Codigo del grupo
@@ -52,12 +58,34 @@ class Permiso extends Objectbase
    * @param type $id
    * @param type $modulo_id id del modulo
    * @param type $grupo_id id del grupo
+   * @param type $helpdesk_id id del helpdesk
    * @return boolean
    */
-  function __construct($id = '',$modulo_id = false , $grupo_id = false) {
+  function __construct($id = '',$modulo_id = false , $grupo_id = false, $helpdesk_id = false) {
     if ($modulo_id && $grupo_id)
     {
       $sql = "SELECT * FROM ".$this->getTableName()." WHERE modulo_id = '$modulo_id' AND grupo_id = '$grupo_id' ";
+      //echo $sql;
+      $result = mysql_query($sql);
+      if (!$result)
+        return false;
+      if (mysql_num_rows($result) == 0)
+        return false;
+      $row = mysql_fetch_array($result, MYSQL_ASSOC);
+      foreach($this as $key => $value)
+      {
+        /**  if the $key refer to an object continue */
+        if ($this->isKeyObject($key))
+          continue;
+        if (isset($row[strtolower($key)]))
+          $this->$key   = $row[strtolower($key)];
+      }
+      /** solo para los leidos desde la base de datos */
+      $this->datesSTH();
+    }
+    elseif ($helpdesk_id && $grupo_id)
+    {
+      $sql = "SELECT * FROM ".$this->getTableName()." WHERE helpdesk_id = '$helpdesk_id' AND grupo_id = '$grupo_id' ";
       //echo $sql;
       $result = mysql_query($sql);
       if (!$result)
@@ -108,8 +136,8 @@ class Permiso extends Objectbase
   {
     $order_array                        = array();
     $order_array['id']                  = " {$this->getTableName ()}.id ";
-    $order_array['nombre']              = " {$this->getTableName ()}.codigo ";
-    $order_array['apellidos']           = " {$this->getTableName ()}.descripcion ";
+    $order_array['modulo_codigo']       = " {$this->getTableName ('modulo')}.codigo ";
+    $order_array['modulo_descripcion']  = " {$this->getTableName ('modulo')}.descripcion ";
     $order_array['estado']              = " {$this->getTableName ()}.estado ";
     return $filtro->getOrderString($order_array);
   }
@@ -123,6 +151,10 @@ class Permiso extends Objectbase
   {
     parent::filtrar($filtro);
     $filtro_sql = '';
+    if ($filtro->filtro('modulo_codigo'))
+      $filtro_sql .= " AND {$this->getTableName('modulo')}.codigo like '%{$filtro->filtro('modulo_codigo')}%' ";
+    if ($filtro->filtro('modulo_descripcion'))
+      $filtro_sql .= " AND {$this->getTableName('modulo')}.descripcion like '%{$filtro->filtro('modulo_descripcion')}%' ";
     return $filtro_sql;
   }  
 } 

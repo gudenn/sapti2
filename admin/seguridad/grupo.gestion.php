@@ -1,6 +1,6 @@
 <?php
 try {
-  define ("MODULO", "GRUPO-GESTION");
+  define ("MODULO", "ADMIN-SEGURIDAD-GRUPO-GESTION");
   require('../_start.php');
   if(!isAdminSession())
     header("Location: ../login.php");  
@@ -40,7 +40,7 @@ try {
    */
   $menuList[]     = array('url'=>URL.Administrador::URL,'name'=>'Administraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'seguridad/','name'=>'Control de Permisos');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'seguridad/'.basename(__FILE__),'name'=>'Gesti&oacute;n de Permisos');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'seguridad/'.basename(__FILE__),'name'=>'Gesti&oacute;n de Grupos');
   $smarty->assign("menuList", $menuList);
 
 

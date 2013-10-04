@@ -14,6 +14,8 @@ try {
   
   $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
   
+   
+  
   $smarty->assign('CSS',$CSS);
 
   //JS
@@ -38,7 +40,12 @@ try {
   leerClase("Formulario");
   leerClase("Pagination");
   leerClase("Filtro");
+  leerClase("Consejo");
   leerClase("Proyecto_estudiante");
+  
+  $menuList[]     = array('url'=>URL.Consejo::URL,'name'=>'Consejo');
+  $menuList[]     = array('url'=>URL . Consejo::URL ,'name'=>'Etitar Tribunales');
+  $smarty->assign("menuList", $menuList);
 /**
   $filtro     =  new Filtro('g_docente',__FILE__);
   $docente    =  new Docente();

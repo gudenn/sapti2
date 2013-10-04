@@ -1,8 +1,10 @@
 <?php
 try {
-  require('_start.php');
+  define ("MODULO", "ESTUDIANTE-PROYECTO-AVANCE-GESTION");
+  require('../_start.php');
   if(!isEstudianteSession())
     header("Location: ../login.php");  
+
 
   leerClase("Estudiante");
   leerClase("Usuario");

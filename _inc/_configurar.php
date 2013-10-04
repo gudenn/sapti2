@@ -56,7 +56,7 @@ else
   define ("URL_CSS"    , URL."css/");
   define ("URL_IMG"    , URL."images/");
 
-  define ("PATH_IMG"   , PATH."/images/");
+  define ("PATH_IMG"   , PATH."images/");
 
   ////////////////////////////////////////////////////////
   // Smarty

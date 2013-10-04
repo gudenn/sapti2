@@ -1,6 +1,6 @@
 
     <div id="content">
-   <center> <td bgcolor="#F7F7F7" style="text-align:center"><strong>ASIGNAR FECHA DE DEFENSA</strong></td></center>
+   <center> <td bgcolor="#F7F7F7" style="text-align:center"><strong>Asignar Fechas de defensa</strong></td></center>
       <form action="" method="post">
         
         <table class="tbl_lista">

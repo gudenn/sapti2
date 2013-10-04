@@ -1,9 +1,10 @@
 <?php
 try {
-  define ("MODULO", "AREA-GESTION");
+  define ("MODULO", "ADMIN-CONFIGURACION-CRONOGRAMA-GESTION");
   require('../_start.php');
   if(!isAdminSession())
     header("Location: ../login.php");  
+
 
   leerClase("Cronograma");
   leerClase('Semestre');
