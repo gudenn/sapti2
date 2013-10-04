@@ -82,7 +82,7 @@ class Html
    * @param type $template
    * @return string
    */
-  function leerTemplate($template) 
+  static function leerTemplate($template) 
   {
     if (!file_exists($template))
       return '';

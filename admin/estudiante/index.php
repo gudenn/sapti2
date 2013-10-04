@@ -1,8 +1,9 @@
 <?php
 try {
+  define ("MODULO", "ADMIN-ESTUDIANTE-INDEX");
   require('../_start.php');
   if(!isAdminSession())
-    header("Location: login.php");  
+    header("Location: ../login.php");  
 
   /** HEADER */
   $smarty->assign('title','Gesti&oacute;n de Estudiantes');

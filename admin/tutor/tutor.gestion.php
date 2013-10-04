@@ -1,6 +1,6 @@
 <?php
 try {
-  define ("MODULO", "TUTOR-GESTION");
+  define ("MODULO", "ADMIN-TUTOR-GESTION");
   require('../_start.php');
   if(!isAdminSession())
     header("Location: ../login.php");  
@@ -115,7 +115,6 @@ try {
   
   $o_string   = $tutor->getOrderString($filtro);
   $obj_mysql  = $tutor->getAll('',$o_string,$filtro_sql,TRUE,TRUE);
-  echo($obj_mysql[2]);
  
 
   $objs_pg    = new Pagination($obj_mysql, 'tutores_asignados','',false);

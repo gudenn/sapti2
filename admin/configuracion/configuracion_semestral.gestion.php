@@ -1,9 +1,10 @@
 <?php
 try {
-  define ("MODULO", "CONFIGURACIONSEMESTRAL-GESTION");
+  define ("MODULO", "ADMIN-CONFIGURACION-CONFIGURACIONSEMESTRAL-GESTION");
   require('../_start.php');
   if(!isAdminSession())
     header("Location: ../login.php");  
+
 
   leerClase("Configuracion_semestral");
   leerClase("Semestre");

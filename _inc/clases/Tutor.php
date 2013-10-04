@@ -166,13 +166,28 @@ class Tutor extends Objectbase
         return false;
     }
     $activo = Objectbase::STATUS_AC;
-    $sql = "select * , a.id as tutor_id from ".$this->getTableName()." as a , ".$this->getTableName('usuario')." as u   where u.login = '$login' and u.clave = '$clave' and a.usuario_id = u.id and u.estado = '$activo' and a.estado = '$activo'  ";
+    $sql = "select * , a.id as tutor_id , u.id as usuario_id  from ".$this->getTableName()." as a , ".$this->getTableName('usuario')." as u   where u.login = '$login' and u.clave = '$clave' and a.usuario_id = u.id and u.estado = '$activo' and a.estado = '$activo'  ";
     //echo $sql;
     $resultado = mysql_query($sql);
     if (!$resultado) {
         return false;
     }
     $user = mysql_fetch_object($resultado);
+    //grabamos en la tabla pertenece si es que no tiene 
+    leerClase('Grupo');
+    leerClase('Pertenece');
+    $grupo    = new Grupo('', Grupo::GR_TU);
+    if ($grupo->id && isset($user->usuario_id) && $user->usuario_id )
+    {
+      $pertenece = new Pertenece('',$grupo->id,$user->usuario_id );
+      if (!$pertenece->id)
+      {
+        $pertenece->usuario_id = $user->usuario_id;
+        $pertenece->grupo_id   = $grupo->id;
+        $pertenece->estado     = Objectbase::STATUS_AC;
+        $pertenece->save();
+      }
+    }
     return $user;
   }
 

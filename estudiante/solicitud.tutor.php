@@ -41,7 +41,7 @@ try {
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Estudiante::URL,'name'=>'Estudiante');
-  $menuList[]     = array('url'=>URL.Estudiante::URL.Proyecto::URL,'name'=>'Perfil');
+  $menuList[]     = array('url'=>URL.Estudiante::URL.Proyecto::URL,'name'=>'Enviar Carta');
   $menuList[]     = array('url'=>URL.Estudiante::URL.Proyecto::URL.basename(__FILE__),'name'=>'Solicitud Tutor');
   $smarty->assign("menuList", $menuList);
   $editores = '';
@@ -96,9 +96,9 @@ try {
   {
     $html = new Html();
     if ($EXITO)
-      $mensaje = array('mensaje'=>'Se grabo correctamente el Avance','titulo'=>'Registro de Avance' ,'icono'=> 'tick_48.png');
+      $mensaje = array('mensaje'=>'Se Envio Correctamente la Carta','titulo'=>'Enviar Carta Solicitud' ,'icono'=> 'tick_48.png');
     else
-      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Avance','titulo'=>'Registro de Avance' ,'icono'=> 'warning_48.png');
+      $mensaje = array('mensaje'=>'Hubo un problema, No se Envio Correctamente la Carta','titulo'=>'Enviar Carta Solicitud' ,'icono'=> 'warning_48.png');
    $ERROR = $html->getMessageBox ($mensaje);
   }
   $smarty->assign("ERROR",$ERROR);

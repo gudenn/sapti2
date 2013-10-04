@@ -1,6 +1,6 @@
 <?php
 try {
-  define ("MODULO", "MATERIA-GESTION");
+  define ("MODULO", "ADMIN-CONFIGURACION-MATERIA-GESTION");
   require('../_start.php');
   if(!isAdminSession())
     header("Location: ../login.php");  

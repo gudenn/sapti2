@@ -1,9 +1,10 @@
 <?php
 try {
-  define ("MODULO", "CARRERAS-REGISTRO");
+  define ("MODULO", "ADMIN-CONFIGURACION-CARRERA-REGISTRO");
   require('../_start.php');
   if(!isAdminSession())
     header("Location: ../login.php");  
+
 
   /** HEADER */
   $smarty->assign('title','SAPTI - Registro De Carreras');

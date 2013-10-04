@@ -1,7 +1,6 @@
 <?php
 try {
   require('_start.php');
-  global $PAISBOX;
 
   leerClase("Administrador");
   leerClase("Formulario");

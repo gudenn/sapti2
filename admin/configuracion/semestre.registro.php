@@ -1,9 +1,10 @@
 <?php
 try {
-  define ("MODULO", "SEMESTRE-REGISTRO");
+  define ("MODULO", "ADMIN-CONFIGURACION-SEMESTRE-REGISTRO");
   require('../_start.php');
   if(!isAdminSession())
     header("Location: ../login.php");  
+
 
   /** HEADER */
   $smarty->assign('title','SAPTI - Registro Semestre');

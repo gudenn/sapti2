@@ -6,27 +6,12 @@ CREATE SCHEMA IF NOT EXISTS `sapti` DEFAULT CHARACTER SET utf8 COLLATE utf8_gene
 USE `sapti` ;
 
 -- -----------------------------------------------------
--- Table `sapti`.`titulo_honorifico`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `sapti`.`titulo_honorifico` ;
-
-CREATE  TABLE IF NOT EXISTS `sapti`.`titulo_honorifico` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `nombre` VARCHAR(45) NULL ,
-  `descripcion` VARCHAR(45) NULL ,
-  `estado` VARCHAR(2) NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `sapti`.`usuario`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `sapti`.`usuario` ;
 
 CREATE  TABLE IF NOT EXISTS `sapti`.`usuario` (
   `id` INT NOT NULL AUTO_INCREMENT ,
-  `titulo_honorifico_id` INT NULL ,
   `nombre` VARCHAR(100) NULL ,
   `titulo_honorifico` VARCHAR(100) NULL ,
   `apellido_paterno` VARCHAR(45) NULL ,
@@ -118,6 +103,7 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`proyecto` (
   `descripcion` TEXT NULL ,
   `director_carrera` VARCHAR(300) NULL ,
   `docente_materia` VARCHAR(300) NULL ,
+  `registro_tutor` VARCHAR(300) NULL ,
   `fecha_registro` DATE NULL ,
   `registrado_por` VARCHAR(300) NULL ,
   `responsable` VARCHAR(300) NULL ,
@@ -337,8 +323,8 @@ DROP TABLE IF EXISTS `sapti`.`pertenece` ;
 
 CREATE  TABLE IF NOT EXISTS `sapti`.`pertenece` (
   `id` INT NOT NULL AUTO_INCREMENT ,
-  `usuario_id` INT NOT NULL ,
-  `grupo_id` INT NOT NULL ,
+  `usuario_id` INT NULL ,
+  `grupo_id` INT NULL ,
   `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
@@ -571,9 +557,25 @@ DROP TABLE IF EXISTS `sapti`.`modulo` ;
 
 CREATE  TABLE IF NOT EXISTS `sapti`.`modulo` (
   `id` INT NOT NULL AUTO_INCREMENT ,
-  `codigo` VARCHAR(40) NULL ,
+  `codigo` VARCHAR(100) NULL ,
   `descripcion` VARCHAR(300) NULL ,
   `estado` VARCHAR(2) NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `sapti`.`helpdesk`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `sapti`.`helpdesk` ;
+
+CREATE  TABLE IF NOT EXISTS `sapti`.`helpdesk` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `codigo` VARCHAR(100) NULL ,
+  `descripcion` VARCHAR(500) NULL ,
+  `keywords` VARCHAR(500) NULL ,
+  `estado_helpdesk` VARCHAR(2) NULL COMMENT 'Recien creado RC , Editado ED, Aprobado AP' ,
+  `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
@@ -587,6 +589,7 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`permiso` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `grupo_id` INT NULL ,
   `modulo_id` INT NULL ,
+  `helpdesk_id` INT NULL ,
   `ver` TINYINT(1) NULL ,
   `crear` TINYINT(1) NULL ,
   `editar` TINYINT(1) NULL ,
@@ -779,6 +782,20 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `sapti`.`titulo_honorifico`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `sapti`.`titulo_honorifico` ;
+
+CREATE  TABLE IF NOT EXISTS `sapti`.`titulo_honorifico` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `nombre` VARCHAR(150) NULL ,
+  `descripcion` VARCHAR(300) NULL ,
+  `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `sapti`.`configuracion_semestral`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `sapti`.`configuracion_semestral` ;
@@ -879,7 +896,7 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`objetivo_especifico` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `proyecto_id` INT NOT NULL ,
   `descripcion` TEXT NULL ,
-  `estadko` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
+  `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
@@ -903,22 +920,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `sapti`.`helpdesk`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `sapti`.`helpdesk` ;
-
-CREATE  TABLE IF NOT EXISTS `sapti`.`helpdesk` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `codigo` VARCHAR(100) NULL ,
-  `descripcion` VARCHAR(500) NULL ,
-  `keywords` VARCHAR(500) NULL ,
-  `estado_helpdesk` VARCHAR(2) NULL COMMENT 'Recien creado RC , Editado ED, Aprobado AP' ,
-  `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `sapti`.`tooltip`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `sapti`.`tooltip` ;
@@ -932,6 +933,37 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`tooltip` (
   `mostrar` TINYINT NULL COMMENT 'si se muestra el tool tip o no' ,
   `estado_tooltip` VARCHAR(2) NULL COMMENT 'Recien creado RC, Clonados (CL) , Aprobado AP' ,
   `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `sapti`.`nota`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `sapti`.`nota` ;
+
+CREATE  TABLE IF NOT EXISTS `sapti`.`nota` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `nota_proyecto` INT NULL COMMENT 'nota del proyecto final' ,
+  `nota_defensa` VARCHAR(45) NULL COMMENT 'nota del defensa del proyecto' ,
+  `nota_final` TINYINT(1) NULL COMMENT 'nota final del proyecto' ,
+  `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
+  `proyecto_id` INT NOT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `sapti`.`nota_tribunal`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `sapti`.`nota_tribunal` ;
+
+CREATE  TABLE IF NOT EXISTS `sapti`.`nota_tribunal` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `nota_tribunal` INT NULL COMMENT 'nota del proyecto final' ,
+  `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
+  `proyecto_id` INT NOT NULL ,
+  `tribunal_id` INT NOT NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 

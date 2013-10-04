@@ -63,6 +63,26 @@ echo  $semestrecod=$semestre->id;
   leerClase('Docente');
   leerClase('Usuario');
   
+  
+  //Sexo del usuario
+  $smarty->assign('sexo', array(
+      Usuario::FEMENINO  => 'Femenino',
+      Usuario::MASCULINO => 'Masculino'));
+  $smarty->assign('sexo_selected', ($usuario->sexo==Usuario::FEMENINO)?Usuario::FEMENINO:Usuario::MASCULINO);
+  //Asignar titulo al usuario
+  leerClase('Titulo_honorifico');
+  $titulo_h     = new Titulo_honorifico();
+  $titulo_hs    = $titulo_h->getAll();
+  $titulo_h_values[] = '';
+  $titulo_h_output[] = '- Seleccione -';
+  while ($row = mysql_fetch_array($titulo_hs[0])) 
+  {
+    $titulo_h_values[] = $row['nombre'];
+    $titulo_h_output[] = $row['nombre'];
+  }
+  $smarty->assign("titulo_h_values", $titulo_h_values);
+  $smarty->assign("titulo_h_output", $titulo_h_output);
+  
    if (isset($_GET['docente_id']) && is_numeric($_GET['docente_id']))
     $id = $_GET['docente_id'];
       $docente=new Docente($id);

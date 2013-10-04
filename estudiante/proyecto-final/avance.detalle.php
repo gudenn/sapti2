@@ -1,8 +1,10 @@
 <?php
 try {
-  require('_start.php');
+  define ("MODULO", "ESTUDIANTE-PROYECTO-AVANCE-DETALLE");
+  require('../_start.php');
   if(!isEstudianteSession())
     header("Location: ../login.php");  
+
 
   /** HEADER */
   $smarty->assign('title','Proyecto Final - Detalle de Avance ');

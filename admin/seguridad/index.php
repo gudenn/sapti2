@@ -1,5 +1,6 @@
 <?php
 try {
+  define ("MODULO", "ADMIN-SEGURIDAD-INDEX");
   require('../_start.php');
   if(!isAdminSession())
     header("Location: ../login.php");  
@@ -36,9 +37,15 @@ try {
    */
   //----------------------------------//
   leerClase('Menu');
-  $menu = new Menu('Usuarios');
-  $link = Administrador::URL."seguridad/grupo.gestion.php";
+  $menu = new Menu('Permisos');
+  $link = Administrador::URL."seguridad/grupo.asignarpermiso.php";
   $menu->agregarItem('Gesti&oacute;n de Permisos','Gesti&oacute;n de Permisos para Usuarios del Sistema SAPTI','basicset/people.png',$link);
+  $menus[] = $menu;
+  $menu = new Menu('Grupos');
+  $link = Administrador::URL."seguridad/grupo.gestion.php";
+  $menu->agregarItem('Gesti&oacute;n de Grupos','Gesti&oacute;n de Grupos','basicset/people.png',$link);
+  $link = Administrador::URL."seguridad/grupo.registro.php";
+  $menu->agregarItem('Registro de Grupo','Registro de un grupo para Usuarios ','basicset/plus_48.png',$link);
   $menus[] = $menu;
   //----------------------------------//
   

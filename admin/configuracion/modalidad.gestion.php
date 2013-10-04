@@ -1,9 +1,10 @@
 <?php
 try {
-  define ("MODULO", "AREA-GESTION");
+  define ("MODULO", "ADMIN-CONFIGURACION-MODALIDAD-GESTION");
   require('../_start.php');
   if(!isAdminSession())
     header("Location: ../login.php");  
+
 
   leerClase("Modalidad");
   leerClase("Formulario");

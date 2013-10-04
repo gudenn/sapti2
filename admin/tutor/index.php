@@ -1,5 +1,6 @@
 <?php
 try {
+  define ("MODULO", "ADMIN-TUTOR-INDEX");
   require('../_start.php');
   if(!isAdminSession())
     header("Location: ../login.php");  

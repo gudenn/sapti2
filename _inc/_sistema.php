@@ -15,11 +15,14 @@
   global $help;
 
   if (isset($_GET['salir'])||isset($_POST['salir']))
-  {  
+  {
     closeSession();
     header("Location: index.php");
     exit();
   }
+  /**
+   * PRobablemente DEPRECATED FUNCTION!!!
+   */
   if (isset($_GET['saliradmin'])||isset($_POST['saliradmin']))
   {  
     closeAdminSession();
@@ -38,14 +41,15 @@
     header("Location: index.php");
     exit();
   }
-
-  
-    if (isset($_GET['salirdocente'])||isset($_POST['salirdocente']))
+   if (isset($_GET['salirdocente'])||isset($_POST['salirdocente']))
   {  
         closeDocenteSession();
     header("Location: index.php");
     exit();
   }
+  /**
+   * FIN
+   */
   
   
      if (isset($_GET['salirconsejo'])||isset($_POST['salirconsejo']))

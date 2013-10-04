@@ -1,7 +1,9 @@
 <?php
 try {
+  define ("MODULO", "ADMIN-ESTUDIANTE-CAMBIOTEMA");
   require('../_start.php');
-  global $PAISBOX;
+  if(!isAdminSession())
+    header("Location: ../login.php");  
 
   /** HEADER */
    leerClase("Usuario");

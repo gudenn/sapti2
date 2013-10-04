@@ -1,7 +1,7 @@
 <?php
 try {
   require('_start.php');
-  global $PAISBOX;
+
 
   leerClase("Estudiante");
   leerClase("Formulario");
@@ -35,7 +35,7 @@ try {
   {
     $estudiante = new Estudiante();
     $formulario = new Formulario('');
-    $formulario->validar('login'   ,$_POST["login"]   ,'texto','Login ');
+    $formulario->validar('login'   ,$_POST["login"]   ,'texto','El nombre de usuario ');
     $formulario->validarPassword('clave',$_POST["clave"], false,TRUE);
 
     if (!initEstudianteSession($_POST["login"] ,($_POST["clave"])))

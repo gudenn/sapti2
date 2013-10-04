@@ -73,7 +73,7 @@ try {
   
   $proyecto=new Proyecto();
   
-  echo $num=$proyecto->contar();
+  $num=$proyecto->contar();
   
   
 

@@ -124,8 +124,30 @@ class Usuario  extends Objectbase
     }
     return $nombreCompleto;
   }
-   
-  
+
+
+  /**
+   * Obtenemos todos los grupos de un usuario
+   * @param Grupo $tutor_id
+   */
+  function getMisGrupos() {
+
+    leerClase('Grupo');
+    $activo = Objectbase::STATUS_AC;
+
+    $sql = "select * from " . $this->getTableName('pertenece') . " where usuario_id = '{$this->id}' AND estado = '$activo'";
+    //echo $sql;
+    $resultado = mysql_query($sql);
+    if (!$resultado)
+      return false;
+    $grupos = array();
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) {
+      $grupos[] = new Grupo($fila['grupo_id']);
+    }
+    return $grupos;
+
+  }  
+
   /**
    * Crear un usario a partir de su login o verificar que se puede usar un login
    * 
@@ -186,6 +208,21 @@ class Usuario  extends Objectbase
   }
 
   /**
+   * vemos si un usuario pertenece a un grupo dado
+   * @param INT(11) $grupo_id   Codigo identificador del grupo
+   * @param INT(11) $usuario_id Codigo identificador del usuario
+   * @return \Pertenece
+   */
+  function perteneceGrupo($grupo_id,$usuario_id ='') {
+    leerClase('Pertenece');
+    if (!$usuario_id)
+      $usuario_id = $this->id;
+    $pertenece = new Pertenece('',$grupo_id,$usuario_id);
+    return $pertenece;
+  }
+  
+  
+  /**
    * Validamos al usuario ya sea para actualizar o para crear uno nuevo
    * @param type $es_nuevo
    */
@@ -196,6 +233,7 @@ class Usuario  extends Objectbase
     Formulario::validar('apellido_materno'  ,$this->apellido_materno   ,'texto','Apellido Materno',TRUE);
     Formulario::validar('apellido_paterno'  ,$this->apellido_paterno   ,'texto','Apellido Paterno',TRUE);
     Formulario::validar('login'             ,$this->login              ,'texto','El Login');
+    Formulario::validar('telefono'          ,$this->telefono           ,'texto','El Tel&eacute;fono',TRUE);
     if ( $es_nuevo ) // nuevo
     {
       $this->getByLogin($this->login,true);
@@ -270,6 +308,18 @@ class Usuario  extends Objectbase
   {
     parent::filtrar($filtro);
     $filtro_sql = '';
+    /*
+    if ($filtro->filtro('email'))
+      $filtro_sql .= " AND {$this->getTableName('')}.email like '%{$filtro->filtro('email')}%' ";
+    if ($filtro->filtro('login'))
+      $filtro_sql .= " AND {$this->getTableName('')}.login like '%{$filtro->filtro('login')}%' ";
+    if ($filtro->filtro('nombre'))
+      $filtro_sql .= " AND {$this->getTableName('')}.nombre like '%{$filtro->filtro('nombre')}%' ";
+    if ($filtro->filtro('apellido_paterno'))
+      $filtro_sql .= " AND {$this->getTableName('')}.apellido_paterno like '%{$filtro->filtro('apellido_paterno')}%' ";
+    if ($filtro->filtro('apellido_materno'))
+      $filtro_sql .= " AND {$this->getTableName('')}.apellido_materno like '%{$filtro->filtro('apellido_materno')}%' ";
+      */
     return $filtro_sql;
   }
 
