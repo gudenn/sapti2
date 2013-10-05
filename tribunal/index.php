@@ -50,9 +50,24 @@ try {
   $menu = new Menu('Asignacion de tribunales');
   $link = Consejo::URL."registro.php";
   $menu->agregarItem('Gesti&oacute;n de Asignac&oacute;n','Registro y modificacion de tribunales','basicset/user4.png',$link);
-  $link = Consejo::URL."/";
+  $link = Consejo::URL."";
   $menu->agregarItem('Reportes de Docentes','Reportes correspondientes a los Docentes','basicset/graph.png',$link);
   $menus[] = $menu;
+  
+   $menu = new Menu('Asignacion de Fecha  de Defensa');
+  $link = Consejo::URL."listadefensa.php";
+  $menu->agregarItem('Gesti&oacute;n de Asignac&oacute;n','Registro y modificacion de tribunales','basicset/user4.png',$link);
+  $link = Consejo::URL."";
+  $menu->agregarItem('Reportes de Docentes','Reportes correspondientes a los Docentes','basicset/graph.png',$link);
+  $menus[] = $menu;
+  
+  $menu = new Menu('Asignacion de Fecha  de Defensa');
+  $link = Consejo::URL."listadefensa.php";
+  $menu->agregarItem('Gesti&oacute;n de Asignac&oacute;n','Registro y modificacion de tribunales','basicset/user4.png',$link);
+  $link = Consejo::URL."";
+  $menu->agregarItem('Reportes de Docentes','Reportes correspondientes a los Docentes','basicset/graph.png',$link);
+  $menus[] = $menu;
+  
   
  $smarty->assign("menus", $menus);
 

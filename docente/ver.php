@@ -40,10 +40,19 @@ try {
     $docente      =  getSessionDocente();
     $docente_ids  =  $docente->id;
     //echo $docente_ids;
-    if ( isset($_GET['tribunal_id']))
-  {
+if ( isset($_GET['tribunal_id']))
+{
+     $tribunal = new Tribunal($_GET['tribunal_id']);
+     $tribunal->visto="V";
+     $tribunal->save();
       
-  $sql="select n.`detalle`
+  
+     $smarty->assign('accion', array(
+     Tribunal::ACCION_AC =>  Tribunal::ACCION_AC,
+     Tribunal::ACCION_RE =>  Tribunal::ACCION_RE
+                                     ));
+     
+$sql="select n.`detalle`
 from `notificacion` n, `notificacion_tribunal` nt, `tribunal` t
 where n.`id`=nt.`notificacion_id` and nt.`tribunal_id`=t.`id` and n.`estado`='AC' and nt.`estado`='AC' and t.`estado`='AC' and t.`id`=".$_GET['tribunal_id'].";";
     $resultado   =  mysql_query($sql);
@@ -55,9 +64,9 @@ where n.`id`=nt.`notificacion_id` and nt.`tribunal_id`=t.`id` and n.`estado`='AC
     
  }
  //var_dump($notitribunal_id);
-  $smarty->assign('detalle',$detalle);
-    $smarty->assign('docente',$docente);
-     $smarty->assign('idtribunal',$_GET['tribunal_id']);
+$smarty->assign('detalle',$detalle);
+$smarty->assign('docente',$docente);
+$smarty->assign('idtribunal',$_GET['tribunal_id']);
   
  }
  
@@ -65,14 +74,19 @@ where n.`id`=nt.`notificacion_id` and nt.`tribunal_id`=t.`id` and n.`estado`='AC
   
 if ( isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' )
   {
+  
+  
      if(isset($_POST['ids']))
      {
-       
+        echo "Hola eli";
        $tribunal = new Tribunal($_POST['ids']);
-       
-       $tribunal->visto=$_POST['visto'];
-       $tribunal->descripcion=$_POST['descripcion'];
+       $tribunal->visto="V";
+       $tribunal->accion=$_POST['accion'];
+       $tribunal->detalle=$_POST['descripcion'];
        $tribunal->save();
+       
+       
+      
      }
     
   

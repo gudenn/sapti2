@@ -6,7 +6,7 @@
       {include file="docente/columna.left.tpl"}
       <!-- ############ -->
       {if !isset($columnacentro)}
-        {include file="docente/columna.centro.tpl"}
+        {include file="docente/index.centro.tpl"}
       {else}
         {include file=$columnacentro}
       {/if}
