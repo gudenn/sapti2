@@ -55,9 +55,7 @@ EditableGrid.prototype.initializeGrid = function()
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
 		cell.innerHTML = "<a onclick=\"if (confirm('Esta seguro de eliminar esta Materia? ')) {deletete(" + getRowId(cell.rowIndex) + "); updatetable("+cell.rowIndex+");} \" style=\"cursor:pointer\">" +
                                 "<img src=\"" + image("icons/borrar.png") + "\" border=\"0\" alt=\"delete\" title=\"Delete Materia\"/>Borrar</a>";
-                cell.innerHTML += "<br><a onclick=\"if (confirm('Esta seguro de Editar esta Materia? ')) {editar(" + getRowId(cell.rowIndex) + "); updatetable("+cell.rowIndex+");} \" style=\"cursor:pointer\">" +
-                                "<img src=\"" + image("icons/editar.png") + "\" border=\"0\" alt=\"editar\" title=\"Editar Materia\"/>Editar</a>";
-		}}));
+                }}));
 
 		// register the function that will handle model changes
 		modelChanged = function(rowIndex, columnIndex, oldValue, newValue, row) { 
@@ -170,25 +168,31 @@ function enviarDatosGrupo(){
   docente_id=document.nueva_grupo.docente_id.value;
   materia_id=document.nueva_grupo.materia_id.value;
   grupo=document.nueva_grupo.grupo.value;
-  if(grupo!=''){
-        //instanciamos el objetoAjax
-  ajax=objetoAjax();
-  //uso del medotod POST
-  //archivo que realizará la operacion
-  ajax.open("POST", "configuracion.dicta1.php?registrardicta=1&docente_id="+docente_id+"&materia_id="+materia_id+"&grupo="+grupo,true);
-    //cuando el objeto XMLHttpRequest cambia de estado, la función se inicia
-  ajax.onreadystatechange=function() {
-	  //la función responseText tiene todos los datos pedidos al servidor
-  	if (ajax.readyState==4) {
-  		//mostrar resultados en esta capa
-                actualizar();
-		//llamar a funcion para limpiar los inputs
-		LimpiarCampos();
-	}
- }
-	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-	//enviando los valores a registro.php para que inserte los datos
-	ajax.send(null);
+  if(grupo!=''&&docente_id!=''&&materia_id!=''){
+	$.ajax({ 
+		url: 'configuracion.dicta1.php',
+		type: 'POST',
+		dataType: "html",
+		data: { 
+			docente_id :    docente_id,
+			materia_id:     materia_id, 
+			grupo:          grupo,
+                        registrardicta: '1'
+		},
+		success: function (response) 
+		{ 
+                    if(response=="ok"){
+                        LimpiarCampos();
+                        actualizar();
+                        alert("Grupo Registrado");
+                    }else{
+                       alert("Grupo ya asignado");
+                    }
+                        
+		},
+		error: function(XMLHttpRequest, textStatus, exception) { alert("Ajax failure\n" + errortext); },
+		async: true
+	});
   }else{
       alert("INTRODUSCA DATOS PARA CREAR GRUPO");
   };
