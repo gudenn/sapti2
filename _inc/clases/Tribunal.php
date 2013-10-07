@@ -5,11 +5,11 @@ class Tribunal extends Objectbase
   /**
    *  ACCION DE LOS TRIBUNALES   ACEPTAR
    */
-  const  ACCION_AC  = "AC";
+  const  ACCION_AC  = "ACEPTAR";
   /**
    *  ACCION DE LOS TRIBUNALES  RECHAZAR 
    */
-  const  ACCION_RE  = "RC";
+  const  ACCION_RE  = "RECHAZAR";
   
   
    /**

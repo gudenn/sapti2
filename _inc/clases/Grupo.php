@@ -16,6 +16,8 @@ class Grupo extends Objectbase
   const GR_DO = 'DOCENTES';
   const GR_TU = 'TUTORES';
   const GR_TR = 'TRIBUNALES';
+  const GR_CO = 'CONSEJOS';
+  const GR_AU = 'AUTORIDADES';
   
  /**
   * Nombre del grupo

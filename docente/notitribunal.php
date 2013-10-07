@@ -57,10 +57,9 @@ where   p.id=t.proyecto_id and t.docente_id=d.id and d.usuario_id= u.id  and p.e
   
   
    if ( isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' )
-  {
-    
-  
- }
+  {  
+     echo "Hola elki";
+  }
   
   
   $columnacentro = 'docente/notitribunal.tpl';

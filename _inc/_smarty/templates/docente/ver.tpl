@@ -5,10 +5,10 @@
    <p>{$docente->nombre}</p>
    <p>{$detalle}</p>
    <input type="hidden"  name="ids" value="{$idtribunal}" /><br />
-   <select name=visto>
-    <option  value="ACEPTAR" selected="selected" >ACEPTAR</option>
-    <option value="RECHAZAR" >RECHAZAR</option>
-   </select>
+
+   <select name=accion>
+   {html_options options=$accion}
+  </select>
   
        <div>
         Observaci&oacute;n<br/>
@@ -20,5 +20,5 @@
         <input type="hidden" name="salida_id" value="25" />
         <input type="submit" value="grabar" name="tarea" class="sendme"  />
         </div>
+ </form>
   </div>    
- </div>

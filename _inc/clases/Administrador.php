@@ -7,7 +7,7 @@ class Administrador extends Objectbase
 {
 
   /** constant to find the admin folder  */
-  const URL                  = "admin/";
+  const URL                  = "autoridad/";
 
  /**
   * Codigo identificador del Objeto Usuario
