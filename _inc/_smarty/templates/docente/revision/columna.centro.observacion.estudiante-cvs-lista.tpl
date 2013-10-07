@@ -5,7 +5,7 @@
               <thead>
                 <tr>
                   <th><a>CODIGO SIS             </a></th>
-                  <th><a>APELLIDOS Y NOMBRE     </a></th>
+                  <th><a>APELLIDOS Y NOMBRES     </a></th>
                   <th><a>OBSERVACION(ES)          </a></th>
 
                 </tr>
@@ -26,7 +26,7 @@
               <thead>
                 <tr>
                   <th><a>CODIGO SIS             </a></th>
-                  <th><a>APELLIDOS Y NOMBRE     </a></th>
+                  <th><a>APELLIDOS Y NOMBRES    </a></th>
                   <th><a>OBSERVACION(ES)          </a></th>
 
                 </tr>

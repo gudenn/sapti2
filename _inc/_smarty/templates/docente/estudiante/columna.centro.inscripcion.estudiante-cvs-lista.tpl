@@ -5,8 +5,7 @@
               <thead>
                 <tr>
                   <th><a>CODIGO SIS      </a></th>
-                  <th><a>NOMBRE          </a></th>
-                  <th><a>APELLIDOS       </a></th>
+                  <th><a>APELLIDOS Y NOMBRES          </a></th>
                 </tr>
               </thead>
               {section name=ic loop=$inscritos}
@@ -14,7 +13,6 @@
                 <tr  class="{cycle values="light,dark"}">
                   <td>{$inscritos[ic]['1']}</td>
                   <td>{$inscritos[ic]['2']}</td>
-                  <td>{$inscritos[ic]['3']}</td>
                 </tr>
               </tbody>
               {/section}
@@ -24,8 +22,7 @@
               <thead>
                 <tr>
                   <th><a>CODIGO SIS      </a></th>
-                  <th><a>NOMBRE          </a></th>
-                  <th><a>APELLIDOS       </a></th>
+                  <th><a>APELLIDOS Y NOMBRES          </a></th>
                 </tr>
               </thead>
               {section name=ic loop=$yainscritos}
@@ -33,7 +30,6 @@
                 <tr  class="{cycle values="light,dark"}">
                   <td>{$yainscritos[ic]['1']}</td>
                   <td>{$yainscritos[ic]['2']}</td>
-                  <td>{$yainscritos[ic]['3']}</td>
                 </tr>
               </tbody>
               {/section}
@@ -43,8 +39,7 @@
               <thead>
                 <tr>
                   <th><a>CODIGO SIS      </a></th>
-                  <th><a>NOMBRE          </a></th>
-                  <th><a>APELLIDOS       </a></th>
+                  <th><a>APELLIDOS Y NOMBRES          </a></th>
                 </tr>
               </thead>
               {section name=ic loop=$noestudiante}
@@ -52,7 +47,6 @@
                 <tr  class="{cycle values="light,dark"}">
                   <td>{$noestudiante[ic]['1']}</td>
                   <td>{$noestudiante[ic]['2']}</td>
-                  <td>{$noestudiante[ic]['3']}</td>
                 </tr>
               </tbody>
               {/section}

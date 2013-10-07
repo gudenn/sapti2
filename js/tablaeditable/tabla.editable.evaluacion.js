@@ -84,7 +84,7 @@ EditableGrid.prototype.initializeGrid = function()
 		
 		// render the grid (parameters will be ignored if we have attached to an existing HTML table)
 		renderGrid("tablecontent", "testgrid", "tableid");
-                promedio2(editableGrid);
+                //promedio2(editableGrid);
 		
 		// set active (stored) filter if any
 		_$('filter').value = currentFilter ? currentFilter : '';

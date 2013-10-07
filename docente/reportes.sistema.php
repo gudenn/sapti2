@@ -29,13 +29,14 @@ try {
   $smarty->assign("menuList", $menuList);
 
   $docente=  getSessionDocente();
-  $docenteid=$docente->id;
+  $docenteid=$docente->docente_id;
   
-     $sql1 = "SELECT di.id as dic, ma.nombre as mat
-              FROM dicta di, docente dt, materia ma
-              WHERE di.docente_id=dt.id
-              AND di.materia_id=ma.id
-              AND dt.id='".$docenteid."'";
+     $sql1 = "SELECT di.id as dic, CONCAT(ma.nombre, ' ',di.codigo_grupo) as mat
+FROM dicta di, docente dt, materia ma
+WHERE di.docente_id=dt.id
+AND di.materia_id=ma.id
+AND dt.id='".$docenteid."'
+ORDER BY ma.nombre, di.codigo_grupo";
    $resultmate = mysql_query($sql1);
    
    $materia_values[] = '';

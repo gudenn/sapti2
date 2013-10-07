@@ -55,6 +55,11 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
      if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
     {
     $evaluacion->objBuidFromPost();
+    $eva1=$evaluacion->evaluacion_1;
+    $eva2=$evaluacion->evaluacion_2;
+    $eva3=$evaluacion->evaluacion_3;
+    $promedio=  round((($eva1+$eva2+$eva3)/3));
+    $evaluacion->promedio=$promedio;
     $evaluacion->save();
     }
 
