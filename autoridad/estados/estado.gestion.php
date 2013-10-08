@@ -46,8 +46,8 @@ try {
   $p=new Proyecto($proyecto->id);
   $v=$p->getVigencia();
   $a=$p->getArea();
- echo $p->nombre;
-  echo $a->nombre;
+  $p->nombre;
+  $a->nombre;
   $vigencia= new Vigencia($proyecto->id);
 
  
