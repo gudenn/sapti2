@@ -155,3 +155,7 @@ INSERT INTO `vigencia` (`id`, `proyecto_id`, `fecha_inicio`, `fecha_fin`, `fecha
 
 INSERT INTO `cambio` (`id`, `proyecto_id`, `tipo`, `fecha_cambio`, `estado`) VALUES
 (1, 4, 'CAMBIO TEMA', '2013-09-19', 'AC');
+
+
+INSERT INTO `consejo` (`id`, `usuario_id`, `login`, `clave`, `estado`) VALUES
+(1, 2, 'consejo', 'consejo', 'AC');

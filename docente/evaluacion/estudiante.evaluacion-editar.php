@@ -1,6 +1,7 @@
 <?php
 try {
   require('../_start.php');
+
     if(!isDocenteSession())
     header("Location: login.php"); 
     

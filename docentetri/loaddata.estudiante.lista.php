@@ -1,8 +1,7 @@
 <?php     
-include '_start.php';
-include '../_inc/_configurar.php';
-//require_once('config.php');      
-require_once('../docente/EditableGrid.php');
+require  './_start.php';
+require '../_inc/_configurar.php';
+require('../docente/EditableGrid.php');
 if(isset($_GET['doc'])){
 $docid=$_GET['doc'];
 };
