@@ -1,5 +1,5 @@
 <?php
-  require_once("../_inc/_sistema.php");
+  require_once dirname(dirname(__FILE__))."/_inc/_sistema.php";
   
   /** Smarty */
   require(DIR_LIB.'/smarty/Smarty.class.php');
@@ -24,4 +24,6 @@
   $smarty->caching        = false;
   $smarty->cache_lifetime = 120;
 
+  // El menu de la izquierda
+  // require('menu.left.php');
 ?>

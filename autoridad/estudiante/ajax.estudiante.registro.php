@@ -1,6 +1,5 @@
 <?php
 define ("MODULO", "ADMIN-ESTUDIANTE-AJAX");
-define ("MODULO", "DOCENTES-VER");
 require_once("../../_inc/_sistema.php");
 if(!isAdminSession())
   exit('No tiene permiso');
@@ -21,7 +20,7 @@ if (isset($_GET['ajax'])){
     */
     foreach ($dictan as $grupo) {
       // mandamos el id de Dicta 
-      $resp .= '{"optionValue":"'.$grupo['id'].'", "optionDisplay": "'.$grupo['codigo_grupo'].'"},';
+      $resp .= '{"optionValue":"'.$grupo['id'].'", "optionDisplay": "'.$grupo['codigo_grupo'].": ".$grupo['docente'].'"},';
     }
     $resp = rtrim($resp,',');
     echo <<<____HERE_DOC

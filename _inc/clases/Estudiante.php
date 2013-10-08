@@ -70,27 +70,18 @@ class Estudiante extends Objectbase {
    */
   function save($table = false , $father_id_value = false , $base = 'compania') 
   {
-    $grabar_proyecto_inicial = false;
-    if (!$this->id)
-      $grabar_proyecto_inicial = true;
     parent::save($table, $father_id_value, $base);
-      
-    /**
-     * creamos el nuevo proyecto
-     */
-    if ($grabar_proyecto_inicial)
-      $this->crearProyectoInicial();
   }
 
   /**
    * Creamos un proyecto inicial de tal manera que los estudiantes nunca estnen sin proyectos
+   * @param INT(11) $dicta_id
    */
-  function crearProyectoInicial() 
+  function crearProyectoInicial($dicta_id) 
   {
     leerClase('Proyecto');
     $proyecto_inicial = new Proyecto();
-    $proyecto_inicial->crearProyectoInicial($this->id);
-
+    $proyecto_inicial->crearProyectoInicial($this->id,$dicta_id);
   }
 
   /**
@@ -345,6 +336,17 @@ class Estudiante extends Objectbase {
     $avance->estado_avance = Avance::E1_CREADO;
     $avance->save();
     return $avance;
+  }
+  
+  /**
+   * Inscribimos a un estudiante a una materia a travez de dicta! y el semestre
+   * @param INT(11) $semestre_id
+   * @param INT(11) $dicta_id
+   */
+  function inscribirEstudianteDicta($semestre_id,$dicta_id) {
+      leerClase('Inscrito');
+      $inscrito = new Inscrito();
+      $inscrito->inscribirEstudiante($this->id,$semestre_id,$dicta_id);    
   }
   
   function grabarRespuestaRevision($revision_id) 

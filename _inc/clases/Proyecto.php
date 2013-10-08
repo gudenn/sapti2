@@ -254,13 +254,15 @@ class Proyecto extends Objectbase {
   /**
    * Creamos un proyecto inicial de tal manera que los estudiantes nunca estnen sin proyectos
    */
-  function crearProyectoInicial($estudiante_id, $grabar = true) {
+  function crearProyectoInicial($estudiante_id , $dicta_id, $grabar = true) {
     $this->estado_proyecto = Proyecto::EST1_INI;
-    $this->es_actual = 1;
-    $this->estado = Objectbase::STATUS_AC;
+    $this->es_actual       = 1;
+    $this->estado          = Objectbase::STATUS_AC;
     if ($grabar)
       $this->save();
     $this->asignarEstudiante($estudiante_id);
+    $this->asignarDicta($dicta_id);
+    
     if ($grabar)
       $this->saveAllSonObjects(TRUE);
   }
@@ -297,12 +299,27 @@ where pa.area_id=a.id  and pa.proyecto_id='$this->id' and pa.estado='AC'  and a.
     leerClase('Proyecto_estudiante');
     //$estudiante = new Estudiante($estudiante_id);
 
-    $asignado = new Proyecto_estudiante();
-    $asignado->proyecto_id = $this->id;
-    $asignado->estudiante_id = $estudiante_id;
-    $asignado->estado = Objectbase::STATUS_AC;
-    $asignado->fecha_asignacion = date('d/m/Y');
+    $asignado                         = new Proyecto_estudiante();
+    $asignado->proyecto_id            = $this->id;
+    $asignado->estudiante_id          = $estudiante_id;
+    $asignado->estado                 = Objectbase::STATUS_AC;
+    $asignado->fecha_asignacion       = date('d/m/Y');
     $this->proyecto_estudiante_objs[] = $asignado;
+  }
+
+  /**
+   * Asignamos A Dicta
+   * @param INT(11) $dicta_id codigo de grupo asignado
+   */
+  function asignarDicta($dicta_id) {
+    leerClase('Proyecto_dicta');
+    //$estudiante = new Estudiante($estudiante_id);
+
+    $asignado                         = new Proyecto_dicta();
+    $asignado->proyecto_id            = $this->id;
+    $asignado->dicta_id               = $dicta_id;
+    $asignado->estado                 = Objectbase::STATUS_AC;
+    $this->proyecto_dicta_objs[]      = $asignado;
   }
 
   /**
