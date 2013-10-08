@@ -44,8 +44,8 @@ try {
   
   $proyecto=$estudiante->getProyecto();
   $p=new Proyecto($proyecto->id);
-  $v=$p->getVigencia();
-  $a=$p->getArea();
+  $v=$pr->getVigencia();
+  $a=$pr->getArea();
   $p->nombre;
   $a->nombre;
   $vigencia= new Vigencia($proyecto->id);
