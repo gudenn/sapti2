@@ -24,7 +24,7 @@ function displayMessage(text, style) {
 
 // helper function to get path of a demo image
 function image(relativePath) {
-	return "../../images/" + relativePath;
+	return "../../images/icons/" + relativePath;
 };
 
 // this will be used to render our table headers
@@ -79,12 +79,12 @@ EditableGrid.prototype.initializeGrid = function()
                 
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
 		cell.innerHTML = "<a href='#' class='historial' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("icons/basicset/graph.png") + "\" border=\"0\" alt=\"historial\" title=\"Seguimiento\"/>Historial de Notas</a>";
+						 "<img src=\"" + image("basicset/graph.png") + "\" border=\"0\" alt=\"historial\" title=\"Seguimiento\"/>Historial de Notas</a>";
                 }}));
 		
 		// render the grid (parameters will be ignored if we have attached to an existing HTML table)
 		renderGrid("tablecontent", "testgrid", "tableid");
-                promedio2(editableGrid);
+                //promedio2(editableGrid);
 		
 		// set active (stored) filter if any
 		_$('filter').value = currentFilter ? currentFilter : '';

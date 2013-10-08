@@ -127,7 +127,7 @@ AND di.id=4
             $ir = "Location: $url";
       header($ir);
   }
-  $columnacentro = 'docente/columna.centro.evaluacion.estudiante-cvs.tpl';
+  $columnacentro = 'docente/evaluacion/columna.centro.evaluacion.estudiante-cvs.tpl';
   $smarty->assign('columnacentro',$columnacentro);
   //No hay ERROR
   $smarty->assign("ERROR",'');
@@ -141,7 +141,7 @@ $token                = sha1(URL . time());
 $_SESSION['register'] = $token;
 $smarty->assign('token',$token);
 
-$TEMPLATE_TOSHOW = 'docente/evaluacion/docente.3columnas.tpl';
+$TEMPLATE_TOSHOW = 'docente/docente.3columnas.tpl';
 $smarty->display($TEMPLATE_TOSHOW);
 
 ?>

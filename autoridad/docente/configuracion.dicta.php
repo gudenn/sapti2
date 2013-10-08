@@ -29,8 +29,12 @@ try {
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
   $smarty->assign('JS',$JS);
 
-  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Docente');
-  $menuList[]     = array('url'=>URL.Docente::URL.basename(__FILE__),'name'=>'Tiempo');
+  /**
+   * Menu superior
+   */
+  $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'docente/','name'=>' Docentes');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'docente/'.basename(__FILE__),'name'=>'Gesti&oacute;n de Materias');
   $smarty->assign("menuList", $menuList);  
   
   $semestre=new Semestre();
@@ -84,7 +88,23 @@ ORDER BY ma.nombre, di.codigo_grupo
     $smarty->assign('docentes_selected'  , '');
     $smarty->assign('materia_values'  , $materia_values);
     $smarty->assign('materia_output'  , $materia_output);
-    $smarty->assign('materia_selected'  , '');    
+    $smarty->assign('materia_selected'  , '');
+    
+  $grupo_values[] = '';
+  $grupo_output[] = '- Seleccione -';
+ 
+       $grupo_values[] = 'Grupo A';
+       $grupo_values[] = 'Grupo B';
+       $grupo_values[] = 'Grupo C';
+       $grupo_values[] = 'Grupo D';
+       $grupo_output[] = 'Grupo A';
+       $grupo_output[] = 'Grupo B';
+       $grupo_output[] = 'Grupo C';
+       $grupo_output[] = 'Grupo D';
+ 
+  $smarty->assign("grupo_values", $grupo_values);
+  $smarty->assign("grupo_output", $grupo_output);
+  $smarty->assign("grupo_selected", "");
           
   //No hay ERROR
   $smarty->assign("ERROR",'');

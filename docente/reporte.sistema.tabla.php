@@ -28,21 +28,21 @@ function wheremuestra($mat,$sem,$eva){
 }
 function consulta($mat,$sem,$eva){
     $sql="SELECT ".selectmuestra($mat,$eva)."
-FROM estudiante es, usuario us, materia ma, inscrito ins, dicta di, proyecto pro, proyecto_estudiante proes, evaluacion eva
-WHERE es.usuario_id=us.id
-AND eva.id=ins.evaluacion_id
-AND proes.estudiante_id=es.id
-AND proes.proyecto_id=pro.id
-AND ins.estudiante_id=es.id
-AND ins.dicta_id=di.id
-AND di.materia_id=ma.id
+ FROM estudiante es, usuario us, materia ma, inscrito ins, dicta di, proyecto pro, proyecto_estudiante proes, evaluacion eva
+ WHERE es.usuario_id=us.id
+ AND eva.id=ins.evaluacion_id
+ AND proes.estudiante_id=es.id
+ AND proes.proyecto_id=pro.id
+ AND ins.estudiante_id=es.id
+ AND ins.dicta_id=di.id
+ AND di.materia_id=ma.id
 ".wheremuestra($mat,$sem,$eva)."";
     return $sql;
 }
 if ($materia!=''&&$semestre!='') {
     MysqlFunciones::DesplegarTabla(consulta($materia,$semestre,$evaluacion), $var);
 }else{
-    echo 'Porfavor Seleccione una Opcion para Generar el Reporte...';
+    echo 'Por favor Seleccione una Opcion para Generar el Reporte...';
 }
 function classtabla($va){
     $clas='light';
@@ -57,7 +57,6 @@ class MysqlFunciones{
      {
         $query =  mysql_query($a);
         echo "<table class='tbl_lista'><thead><tr>";
-        var_dump($query); 
             for($i=0;$i<mysql_num_fields($query);$i++)
                 {
                     echo "<th>".mysql_field_name($query,$i)."</th>";
@@ -73,6 +72,10 @@ class MysqlFunciones{
             $b++;
         }    
         echo "</table>";
+    echo "<center> 
+    <a href='reportes.sistema.pdf.php?sql=".$a."' ><img src='../images/icons/filepd.png' border='0' alt='pdf' title='Descargar PDF'/>Descargar PDF</a>
+    <a href='reportes.sistema.excel.php?sql=".$a."' ><img src='../images/icons/excel.png' border='0' alt='exel' title='Descargar EXEL'/>Descargar EXEL</a>
+    </center>";
     }
 }
 exit;

@@ -34,7 +34,7 @@ try {
 
   $smarty->assign("ERROR", '');
 
-  $columnacentro = 'admin/columna.centro.registro-estudiante-cvs.tpl';
+  $columnacentro = 'admin/estudiante/columna.centro.registro-estudiante-cvs.tpl';
   $smarty->assign('columnacentro',$columnacentro);
 
   //CREAR UN ESTUDIANTE
@@ -85,7 +85,7 @@ $token                = sha1(URL . time());
 $_SESSION['register'] = $token;
 $smarty->assign('token',$token);
 
-$TEMPLATE_TOSHOW = 'admin/columnas.tpl';
+$TEMPLATE_TOSHOW = 'admin/2columnas.tpl';
 $smarty->display($TEMPLATE_TOSHOW);
 
 ?>

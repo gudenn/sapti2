@@ -193,11 +193,13 @@ class Usuario  extends Objectbase
         return false;
         break;
       case 3://BASTO RODRIGUEZ EDUARDO 
-        $this->apellidos = $array[0] . ' ' . $array[1];
+        $this->apellido_paterno = $array[0];
+        $this->apellido_materno = $array[1];
         $this->nombre    = $array[2];
         break;
       case 4://BASTO RODRIGUEZ PEDRO EDUARDO 
-        $this->apellidos = $array[0] . ' ' . $array[1];
+        $this->apellido_paterno = $array[0];
+        $this->apellido_materno = $array[1];
         $this->nombre    = $array[2] . ' ' . $array[3];
         break;
       default: //odos los otros casos

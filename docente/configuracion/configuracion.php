@@ -1,6 +1,6 @@
 <?php
 try {
-  require('_start.php');
+  require('../_start.php');
   if(!isDocenteSession())
     header("Location: login.php"); 
   global $PAISBOX;
@@ -131,7 +131,7 @@ where u.id=d.`usuario_id` and d.`id`=ap.`docente_id` and ap.`area_id`=a.id and u
 
   
  
-  $columnacentro = 'docente/configuracion.tpl';
+  $columnacentro = 'docente/configuracion/configuracion.tpl';
   $smarty->assign('columnacentro',$columnacentro);
 
   //No hay ERROR

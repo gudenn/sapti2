@@ -1,6 +1,6 @@
 <?php
 try {
-  require('_start.php');
+  require('../_start.php');
     if(!isDocenteSession())
     header("Location: login.php"); 
   global $PAISBOX;
@@ -121,7 +121,7 @@ catch(Exception $e)
   $smarty->assign("ERROR", handleError($e));
 }
 
-$columnacentro = 'docente/disponibilidad.tpl';
+$columnacentro = 'docente/configuracion/disponibilidad.tpl';
 $smarty->assign('columnacentro',$columnacentro);
 
 

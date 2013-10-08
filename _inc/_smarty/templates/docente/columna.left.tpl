@@ -24,8 +24,12 @@
               <li><a href="{$URL}?salirdocente=1">Salir</a></li>
             </ul>
           </div>
-        <div class="holder">
-          </div>
+        <div class="holder"></div>
+        <div class="subnav">
+          <h2>Cronograma de eventos</h2>
+
+          {include file="cronograma/cronograma.tpl"}
+        </div>
       </div>
             <script type="text/javascript">
                 $("#accordion > li").click(function(){

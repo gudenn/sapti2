@@ -1,9 +1,9 @@
       <div id="content" style="width:685px;min-height: 400px;">
         <div id="respond">
-           <h1 class="title">FORMULARIO DE INSCRIPCION DE ESTUDIANTES A {$materiagrupo[0]['materia']}</h1>
+            <h1 class="title">FORMULARIO DE INSCRIPCION DE ESTUDIANTES A <b>{$materiagrupo[0]['materia']}</b></h1>
             <p>
-               <label for="nombre de materia"><small>NOMBRE DE MATERIA:</small></label>
-               <span>{$materiagrupo[0]['materia']} Grupo: {$materiagrupo[0]['grupo']}</span><br/>
+               <label for="nombre de materia"><small>NOMBRE DE MATERIA: </small></label>
+               <span><b>{$materiagrupo[0]['materia']} </b><br />Grupo: <b>{$materiagrupo[0]['grupo']}</b></span><br/>
             </p>
           <form action="#" method="post" id="registro" name="registro" >
             <p>

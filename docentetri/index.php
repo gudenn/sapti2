@@ -31,28 +31,26 @@ try {
   leerClase('Docente');
   leerClase('Semestre');
   leerClase('Consejo');
-  
+  leerClase('Tribunal');
+  leerClase('Menu');
 
       /**
    * Menu superior
    */
-  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Docente');
+  $menuList[]     = array('url'=>URL.Tribunal::URL,'name'=>'Tribunal');
   $smarty->assign("menuList", $menuList);
 
-  
-  leerClase('Menu');
-  $menu = new Menu('Docentes');
-  $link = Docente::URL."docente_tribunal/";
-  $menu->agregarItem('Gesti&oacute;n de Docentes','Registro y modificaciones para Docentes','basicset/user4.png',$link);
-  $link = Docente::URL."docente_tribunal/";
-  $menu->agregarItem('Reportes de Docentes','Reportes correspondientes a los Docentes','basicset/graph.png',$link);
-  $menus[] = $menu;
+  $menu = new Menu('Lista de Estudiantes');
+  $link = Tribunal::URL."estudiante.lista.php";
+  $menu->agregarItem('Gesti&oacute;n de Estudiantes','Revision y Vistos Buenos a los Proyectos','basicset/user4.png',$link);
+ $menus[] = $menu;
+ $smarty->assign("menus", $menus);
   
   $docente_aux = getSessionDocente();
   $docente     = new Docente($docente_aux->docente_id);
   $usuario     = $docente->getUsuario();
   
-  $docmaterias = "SELECT di.id as iddicta, ma.id as idmat, ma.nombre as materia, di.grupo as grupo
+  $docmaterias = "SELECT di.id as iddicta, ma.id as idmat, ma.nombre as materia, di.codigo_grupo as grupo
 FROM dicta di, semestre se, materia ma
 WHERE di.materia_id=ma.id
 AND di.semestre_id=se.id
@@ -60,7 +58,8 @@ AND se.activo=1
 AND di.docente_id=".$docente_aux->docente_id."
 ORDER BY ma.id";
   $resultmate = mysql_query($docmaterias);
-  while ($row2 = mysql_fetch_array($resultmate, MYSQL_ASSOC)) {
+  while ($row2 = mysql_fetch_array($resultmate, MYSQL_ASSOC))
+ {
        $docmateriassemestre[] = $row2;
  }
 
@@ -68,11 +67,13 @@ ORDER BY ma.id";
   $smarty->assign("docente", $docente);
   $smarty->assign("usuario", $usuario);
   $smarty->assign("ERROR", $ERROR);
-  
+  /*
   $smarty->assign("columnacentro", 'docente/index.centro.tpl');
   $columnaderecha = 'docente/columna.right.calendario.eventos.tpl';
   $smarty->assign('columnaderecha',$columnaderecha);
   //No hay ERROR
+   * 
+   */
   $smarty->assign("ERROR",'');
   
 } 
@@ -81,7 +82,7 @@ catch(Exception $e)
   $smarty->assign("ERROR", handleError($e));
 }
 
-$TEMPLATE_TOSHOW = 'docente/3columnas.inicio.tpl';
+$TEMPLATE_TOSHOW = 'docente_tutor/2columnas.tpl';
 $smarty->display($TEMPLATE_TOSHOW);
 
 ?>

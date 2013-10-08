@@ -51,6 +51,8 @@ try {
   $menu = new Menu('Variables de Semestre');
   $link = Administrador::URL."configuracion/configuracion_semestral.gestion.php";
   $menu->agregarItem('Variables de Semestre','Lista de todas las variables que el sistema usa','basicset/lock.png',$link);
+  $link = Administrador::URL."configuracion/copiarsemestre1.php";
+  $menu->agregarItem('Configuracion de Semestre','Copiar Variables de Semestres pasados y Materias Dictadas','basicset/warning_48.png',$link);
   $menus[] = $menu;
   $menu = new Menu('&Aacute;rea');
   $link = Administrador::URL."configuracion/area.gestion.php";
