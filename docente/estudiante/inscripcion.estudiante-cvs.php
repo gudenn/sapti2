@@ -7,7 +7,7 @@ try {
   leerClase('Estudiante');
   leerClase('Inscrito');
   leerClase('Evaluacion');
-  leerClase('Proyecto_docente');
+  leerClase('Proyecto_dicta');
   
   /** HEADER */
   $smarty->assign('title','SAPTI - Inscripcion de Estudiantes');
@@ -32,7 +32,7 @@ try {
      $iddicta = $_GET['iddicta'];
   }
   
-    $docmaterias = "SELECT ma.nombre as materia, di.grupo as grupo
+    $docmaterias = "SELECT ma.nombre as materia, di.codigo_grupo as grupo
 FROM dicta di, materia ma
 WHERE di.materia_id=ma.id
 AND di.id='$iddicta'";
@@ -50,7 +50,7 @@ WHERE it.estudiante_id=es.id
 AND it.dicta_id='$idd'
 AND es.codigo_sis='$sis'";
     $result = mysql_query($sql);
-    if (mysql_num_rows($result)){
+    if (mysql_num_rows($result)>0){
         $cond=1;
     };
     return $cond;
@@ -106,6 +106,7 @@ AND es.codigo_sis='$sis'";
                     $proyecto_dicta->dicta_id = $iddicta;
                     $proyecto       = $estudiante->getProyecto();
                     $proyecto_dicta->proyecto_id = $proyecto->proyecto_id;
+                    $proyecto_dicta->save();
                     $inscritos[]=$estudiante_array;
                     }else{
                     $yainscritos[]=$estudiante_array;

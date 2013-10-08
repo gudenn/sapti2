@@ -5,7 +5,7 @@
               <thead>
                 <tr>
                   <th><a>CODIGO SIS             </a></th>
-                  <th><a>APELLIDOS Y NOMBRE     </a></th>
+                  <th><a>APELLIDOS Y NOMBRES     </a></th>
                   <th><a>EVALUACION 1           </a></th>
                   <th><a>EVALUACION 2           </a></th>
                   <th><a>EVALUACION 3           </a></th>
@@ -28,7 +28,7 @@
               <thead>
                 <tr>
                   <th><a>CODIGO SIS             </a></th>
-                  <th><a>APELLIDOS Y NOMBRE     </a></th>
+                  <th><a>APELLIDOS Y NOMBRES     </a></th>
                   <th><a>EVALUACION 1           </a></th>
                   <th><a>EVALUACION 2           </a></th>
                   <th><a>EVALUACION 3           </a></th>

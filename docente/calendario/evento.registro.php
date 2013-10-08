@@ -13,6 +13,8 @@ try {
   $smarty->assign('keywords','Proyecto Final');
 
   //CSS
+  $CSS[]  = URL_JS . "calendar/css/eventCalendar.css";
+  $CSS[]  = URL_JS . "calendar/css/eventCalendar_theme.css";
   $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
   $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
@@ -26,6 +28,7 @@ try {
   $JS[]  = URL_JS . "ui/i18n/jquery.ui.datepicker-es.js";
 
   //Validation
+  $JS[]  = URL_JS . "calendar/js/jquery.eventCalendar.js";
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
   $smarty->assign('JS',$JS);

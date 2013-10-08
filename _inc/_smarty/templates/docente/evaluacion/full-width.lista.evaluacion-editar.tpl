@@ -28,6 +28,10 @@
 		<div id="tablecontent"></div>
         
         	<div id="paginator"></div>
+                <center> 
+                    <a href="../reportes.sistema.pdf.php?sql={$sqlreporte}" target="_blank" >{icono('filepd.png','descargar')}Descargar PDF</a>
+                    <a href="../reportes.sistema.excel.php?sql={$sqlreporte}" target="_blank" >{icono('boton_excel.png','descargar')}Descargar EXCEL</a>
+                </center>
         </div>
         <a href="evaluacion.estudiante-cvs.php" type="button">CARGAR NOTAS POR CVS</a>
         <script type="text/javascript">

@@ -40,6 +40,8 @@ try {
   $observaciones=$_POST['observaciones'];
     if (isset($_GET['id_estudiante'])) 
   $id_estudiante=$_GET['id_estudiante'];
+    if (isset($_GET['iddicta'])) 
+  $iddicta=$_GET['iddicta'];
     
   $estudiante     = new Estudiante($id_estudiante);
   $usuario        = $estudiante->getUsuario();
@@ -76,7 +78,7 @@ try {
     $observacion->save();
     }
 
-    $ir = "Location: ../estudiante/estudiante.lista.php?";
+    $ir = "Location: ../estudiante/estudiante.lista.php?iddicta=".$iddicta."";
         header($ir);
     }
 

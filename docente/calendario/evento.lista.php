@@ -14,6 +14,8 @@ try {
   $smarty->assign('keywords','SAPTI,Estudiantes,Inscripcion');
 
   //CSS
+  $CSS[]  = URL_JS . "calendar/css/eventCalendar.css";
+  $CSS[]  = URL_JS . "calendar/css/eventCalendar_theme.css";
   $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_CSS . "academic/tables.css";
   $CSS[]  = URL_CSS . "editablegrid.css";
@@ -23,13 +25,13 @@ try {
 
    // Agregan el js
   $JS[]  = URL_JS . "jquery.min.js";
-  $JS[]  = URL_JS . "jquery-ui-1.10.3.custom.min.js";
   $JS[]  = URL_JS . "tablaeditable/editablegrid-2.0.1.js";
   $JS[]  = URL_JS . "tablaeditable/tabla.evento.lista.js";
   $JS[]  = URL_JS . "ventanasmodales/jquery.simplemodal-1.4.4.js";
   $JS[]  = URL_JS . "ventanasmodales/evento.edicion.js";
   
     //Datepicker UI
+  $JS[]  = URL_JS . "calendar/js/jquery.eventCalendar.js";
   $JS[]  = URL_JS . "ui/jquery-ui-1.10.2.custom.min.js";
   $JS[]  = URL_JS . "ui/i18n/jquery.ui.datepicker-es.js";
   $smarty->assign('JS',$JS);
