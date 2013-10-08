@@ -143,6 +143,8 @@ class Materia extends Objectbase
     $dictan = array();
     while ($row = mysql_fetch_array($result[0],MYSQL_ASSOC))
     {
+      $docente        = new Docente($row['docente_id']);
+      $row['docente'] = $docente->getNombreCompleto();
       $dictan[]  = $row;
     }
     return $dictan;    
