@@ -60,7 +60,8 @@ AND se.activo=1
 AND di.docente_id=".$docente_aux->docente_id."
 ORDER BY ma.id";
   $resultmate = mysql_query($docmaterias);
-  while ($row2 = mysql_fetch_array($resultmate, MYSQL_ASSOC)) {
+  while ($row2 = mysql_fetch_array($resultmate, MYSQL_ASSOC)) 
+  {
        $docmateriassemestre[] = $row2;
  }
   /**
@@ -87,6 +88,23 @@ ORDER BY ma.id";
   $smarty->assign("usuario", $usuario);
   $smarty->assign("ERROR", $ERROR);
   
+<<<<<<< HEAD
+=======
+  $smarty->assign("columnacentro", 'docente/index.centro.tpl');
+  $columnaderecha = 'docente/columna.right.calendario.eventos.tpl';
+  $smarty->assign('columnaderecha',$columnaderecha);
+  
+  
+  
+  
+  
+  
+
+  $smarty->assign("columnacentro", 'docente/index.centro.tpl');
+  $columnaderecha = 'docente/columna.right.calendario.eventos.tpl';
+  $smarty->assign('columnaderecha',$columnaderecha);
+
+>>>>>>> origin/master
   //No hay ERROR
   $smarty->assign("ERROR",'');
   
@@ -95,6 +113,9 @@ catch(Exception $e)
 {
   $smarty->assign("ERROR", handleError($e));
 }
+
+$TEMPLATE_TOSHOW = 'docente/3columnas.inicio.tpl';
+
 
 $TEMPLATE_TOSHOW = 'docente/2columnas.tpl';
 $smarty->display($TEMPLATE_TOSHOW);

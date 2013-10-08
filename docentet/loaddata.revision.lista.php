@@ -20,6 +20,17 @@ $grid->addColumn('id', 'ID', 'integer', NULL, false);
 $grid->addColumn('nombrep', 'Nombre Proyecto', 'string', NULL, false);
 $grid->addColumn('revtipo', 'Revisor', 'string', NULL, false);
 $grid->addColumn('fecha', 'Fecha Revision', 'string', NULL, false);
+$grid->addColumn('estado', 'Estado', 'html', NULL, false);
+$grid->addColumn('correccion', 'Fecha Correccion', 'string', NULL, false);
+$grid->addColumn('num', 'Nº Observaciones', 'integer', NULL, false);
+$grid->addColumn('action', 'Opciones', 'html', NULL, false);
+
+$grid->addColumn('id', 'ID', 'integer', NULL, false); 
+$grid->addColumn('nombrep', 'Nombre Proyecto', 'string', NULL, false);
+$grid->addColumn('revtipo', 'Revisor', 'string', NULL, false);
+$grid->addColumn('fecha', 'Fecha Revision', 'string', NULL, false);
+$grid->addColumn('estado', 'Estado', 'html', NULL, false);
+$grid->addColumn('correccion', 'Fecha Correccion', 'string', NULL, false);
 $grid->addColumn('num', 'Nº Observaciones', 'integer', NULL, false);
 $grid->addColumn('action', 'Opciones', 'html', NULL, false);
 
