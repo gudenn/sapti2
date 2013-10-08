@@ -19,6 +19,11 @@ class Nota_tribunal extends Objectbase
   * @var INT(11)
   */
   var $nota_tribunal;
+  
+  
+  
+  
+  
  
 }
 
