@@ -10,13 +10,15 @@
  * Dual licensed under the MIT or GPL Version 2 licenses.
  * http://editablegrid.net/license
  */
-      
+
+require  '_start.php';
+include '../_inc/_configurar.php';        
 require_once('config.php');         
 
 // Database connection                                   
 $mysqli = mysqli_init();
 $mysqli->options(MYSQLI_OPT_CONNECT_TIMEOUT, 5);
-$mysqli->real_connect($config['db_host'],$config['db_user'],$config['db_password'],$config['db_name']); 
+$mysqli->real_connect(DBHOST,DBUSER,BDPASS,BDNAME);
                       
 // Get all parameters provided by the javascript
 $colname = $mysqli->real_escape_string(strip_tags($_POST['colname']));

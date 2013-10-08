@@ -82,7 +82,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
      $evaluacion->rfinal=  promedio($promedio);
      $evaluacion->save();
  }
- $sqlreporte="SELECT es.codigo_sis as Codigo_SIS, CONCAT(us.apellido_paterno,' ',us.apellido_materno, us.nombre) as Estudiante, pr.nombre as Nombre_Proyecto, ev.evaluacion_1 as EVA_1, ev.evaluacion_2 as EVA_2, ev.evaluacion_3 as EVA_3, ev.promedio as Prom, ev.rfinal as Apro
+ $sqlreporte="SELECT es.codigo_sis as Codigo_SIS, CONCAT(us.apellido_paterno, us.apellido_materno, us.nombre) as Estudiante, pr.nombre as Nombre_Proyecto, ev.evaluacion_1 as EVA_1, ev.evaluacion_2 as EVA_2, ev.evaluacion_3 as EVA_3, ev.promedio as Prom, ev.rfinal as Apro
  FROM dicta di, estudiante es, usuario us, inscrito it, proyecto pr, proyecto_estudiante pe, evaluacion ev
  WHERE di.id=it.dicta_id
  AND it.estudiante_id=es.id
