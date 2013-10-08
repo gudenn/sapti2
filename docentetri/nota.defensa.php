@@ -82,6 +82,10 @@ try {
        $notatribunal->proyecto_id=$proyecto->id;
        $notatribunal->estado=  Objectbase::STATUS_AC;
        $notatribunal->save();
+       
+       
+       
+       
     
      // echo $tribunal->id;
       

@@ -31,12 +31,13 @@ try {
   leerClase('Docente');
   leerClase('Semestre');
   leerClase('Consejo');
+  leerClase('Tutor');
   
 
       /**
    * Menu superior
    */
-  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Tudor');
+  $menuList[]     = array('url'=>URL.Tutor::URL,'name'=>'Tudor');
   $smarty->assign("menuList", $menuList);
 
   leerClase('Menu');
@@ -48,28 +49,13 @@ try {
   $menu->agregarItem('Reportes de Docentes','Reportes correspondientes a los Docentes','basicset/graph.png',$link);
   $menus[] = $menu;
   
-   $menu = new Menu('Asignacion de Fecha  de Defensa');
-  $link = Consejo::URL."listadefensa.php";
-  $menu->agregarItem('Gesti&oacute;n de Asignac&oacute;n','Registro y modificacion de tribunales','basicset/user4.png',$link);
-  $link = Consejo::URL."";
-  $menu->agregarItem('Reportes de Docentes','Reportes correspondientes a los Docentes','basicset/graph.png',$link);
-  $menus[] = $menu;
-  
-  $menu = new Menu('Asignacion de Fecha  de Defensa');
-  $link = Consejo::URL."listadefensa.php";
-  $menu->agregarItem('Gesti&oacute;n de Asignac&oacute;n','Registro y modificacion de tribunales','basicset/user4.png',$link);
-  $link = Consejo::URL."";
-  $menu->agregarItem('Reportes de Docentes','Reportes correspondientes a los Docentes','basicset/graph.png',$link);
-  $menus[] = $menu;
-  
-  
  $smarty->assign("menus", $menus);
   
   $docente_aux = getSessionDocente();
   $docente     = new Docente($docente_aux->docente_id);
   $usuario     = $docente->getUsuario();
   
-  $docmaterias = "SELECT di.id as iddicta, ma.id as idmat, ma.nombre as materia, di.grupo as grupo
+  $docmaterias = "SELECT di.id as iddicta, ma.id as idmat, ma.nombre as materia, di.codigo_grupo as grupo
 FROM dicta di, semestre se, materia ma
 WHERE di.materia_id=ma.id
 AND di.semestre_id=se.id
