@@ -34,7 +34,8 @@ try {
       /**
    * Menu superior
    */
-  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Docente');
+  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
+  $menuList[]     = array('url'=>URL.Docente::URL.basename(__FILE__),'name'=>'Gestion Estudiantes');
   $smarty->assign("menuList", $menuList);
 
     if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )

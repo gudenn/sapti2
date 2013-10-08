@@ -73,7 +73,7 @@ ORDER BY ma.id";
         for($i=0; $i < count($docmateriassemestre);$i++ ) {
             if($value['idmat']==$docmateriassemestre[$i]['idmat']){
                   $link = Docente::URL."index.proyecto-final.php?iddicta=".$docmateriassemestre[$i]['iddicta']."";
-                  $menu->agregarItem('Gesti&oacute;n de Estudiantes','Registro de Estudiantes Inscritos en la Materia de Proyecto Final','docente/correccion.png',$link);
+                  $menu->agregarItem('Gesti&oacute;n de Estudiantes Codigo:'.$docmateriassemestre[$i]['grupo'].'','Gesti&oacute;n de Estudiantes Inscritos en la Materia.','docente/correccion.png',$link);
             }
          };
          $menus[] = $menu;
@@ -82,14 +82,11 @@ ORDER BY ma.id";
   //----------------------------------//
   
   $smarty->assign("menus", $menus);
-  //$smarty->assign("docmateriassemestre", $docmateriassemestre);
+  
   $smarty->assign("docente", $docente);
   $smarty->assign("usuario", $usuario);
   $smarty->assign("ERROR", $ERROR);
   
-  //$smarty->assign("columnacentro", 'docente/index.centro.tpl');
-  //$columnaderecha = 'docente/columna.right.calendario.eventos.tpl';
-  //$smarty->assign('columnaderecha',$columnaderecha);
   //No hay ERROR
   $smarty->assign("ERROR",'');
   
