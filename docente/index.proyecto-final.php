@@ -78,19 +78,17 @@ try {
   $menus[] = $menu;
   
   $menu = new Menu('Notificaciones y Mensajes');
-  $link = Docente::URL."calendario/calendario.evento.php";
+  $link = Docente::URL."notificacion/notitribunal.php";
   $menu->agregarItem('Notificaiones','Notificaciones para el Proyecto Final','docente/notificacion.png',$link);
   $link = Docente::URL."calendario/evento.registro.php?iddicta={$iddicta}";
   $menu->agregarItem('Mensajes','Mensajes para el Proyecto Final','docente/notificacion.png',$link);
   $menus[] = $menu;
   
   $menu = new Menu('Configuracion');
-  $link = Docente::URL."disponibilidad.php";
-  $menu->agregarItem('Tiempo','Agregue Disponibilidad de tiempo','docente/notificacion.png',$link);
-  $link = Docente::URL."configuracion.php";
-  $menu->agregarItem('Areas','Agregue las de interes para ser tribunal','docente/notificacion.png',$link);
-  $link = Docente::URL."configuracion.php";
-  $menu->agregarItem('Areas','Agregue las de interes para ser tribunal','docente/notificacion.png',$link);  
+  $link = Docente::URL."configuracion/disponibilidad.php";
+  $menu->agregarItem('Registro de Disponibilidad','Agregue Disponibilidad de Tiempo para Asistir a Defensas','basicset/plus_48.png',$link);
+  $link = Docente::URL."configuracion/configuracion.php";
+  $menu->agregarItem('Registro Areas','Agregue las de Areas de Interes para apoyar siendo Tribunal','basicset/plus_48.png',$link);
   $menus[] = $menu;
   //----------------------------------//
   
