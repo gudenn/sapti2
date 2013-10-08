@@ -1,12 +1,13 @@
 <?php     
 
-require_once('../../docente/config.php');      
+require  '../_start.php';
+include '../../_inc/_configurar.php';      
 require_once('../../docente/EditableGrid.php');
 
 // Database connection
 $mysqli = mysqli_init();
 $mysqli->options(MYSQLI_OPT_CONNECT_TIMEOUT, 5);
-$mysqli->real_connect($config['db_host'],$config['db_user'],$config['db_password'],$config['db_name']); 
+$mysqli->real_connect(DBHOST,DBUSER,BDPASS,BDNAME);
                     
 // create a new EditableGrid object
 $grid = new EditableGrid();

@@ -1,17 +1,27 @@
 <?php     
+
  require  '_start.php';
  require '../../_inc/_configurar.php';
  require_once('../EditableGrid.php');
+
+
+require  '../_start.php';
+include '../../_inc/_configurar.php';      
+require_once('../EditableGrid.php');
+
 
 if(isset($_GET['iddicta'])){
 $iddicta=$_GET['iddicta'];
 };
          
-// Database connection
+//Database connection
 $mysqli = mysqli_init();
 $mysqli->options(MYSQLI_OPT_CONNECT_TIMEOUT, 5);
+
 $mysqli->real_connect(DBHOST,DBUSER,BDPASS,BDNAME);                     
-// create a new EditableGrid object
+
+$mysqli->real_connect(DBHOST,DBUSER,BDPASS,BDNAME);
+
 $grid = new EditableGrid();
 
 $grid->addColumn('id', 'ID', 'integer', NULL, false); 

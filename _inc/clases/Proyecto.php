@@ -447,7 +447,11 @@ where  p.`id`=t.`proyecto_id` and p.`id`=1 and t.`docente_id`=1;
     //@TODO revisar
     //  leerClase('Proyecto_area');
     leerClase('Vigencia');
+
    $vigencias = array();
+
+     $vigencias = array();
+
     $activo = Objectbase::STATUS_AC;
     $sql = "select v.* from " . $this->getTableName('Vigencia') . " as v    where v.proyecto_id = '$this->id' and v.estado = '$activo'";
     $resultado = mysql_query($sql);
@@ -457,6 +461,23 @@ where  p.`id`=t.`proyecto_id` and p.`id`=1 and t.`docente_id`=1;
       $vigencias[] = new Vigencia($fila);
     }
     return $vigencias;
+  }
+    function getv() {
+    //@TODO revisar
+    leerClase('Vigencia');
+    $activo = Objectbase::STATUS_AC;
+    // $sql = "select p.* from ".$this->getTableName('Proyecto_estudiante')." as pe , ".$this->getTableName('Proyecto')." as p   where pe.estudiante_id = '$this->id' and pe.proyecto_id = p.id and pe.estado = '$activo' and p.estado = '$activo'  ";
+
+    $sql = "select p.* from " . $this->getTableName('vigencia') . " as pe , " . $this->getTableName('Proyecto') . " as p   where pe.estudiante_id = '$this->id' and pe.proyecto_id = p.id and  p.es_actual = '1' and pe.estado = '$activo' and p.estado = '$activo'  ";
+
+    $resultado = mysql_query($sql);
+    if (!$resultado)
+      return false;
+    if (!mysql_num_rows($resultado))
+      return new Proyecto();
+    $proyecto_array = mysql_fetch_array($resultado);
+    $proyecto       = new Proyecto($proyecto_array);
+    return $proyecto;
   }
 
   /**

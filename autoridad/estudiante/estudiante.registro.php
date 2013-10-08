@@ -50,6 +50,8 @@ try {
   //CREAR UN ESTUDIANTE
   leerClase('Usuario');
   leerClase('Estudiante');
+  leerClase('Proyecto');
+  leerClase('Proyecto_estudiante');
 
   $id     = '';
   $editar = FALSE;
@@ -139,6 +141,27 @@ try {
     $estudiante->usuario_id = $usuario->id;
     $estudiante->validar($es_nuevo);
     $estudiante->save();
+    
+    $materia=new Materia($_POST['materia_id']);
+    $tipo=$materia->tipo;
+    
+    $proyecto=new Proyecto();
+     $proyecto->nombre='';
+     $proyecto->estado=  Objectbase::STATUS_AC;
+     $proyecto->tipo_proyecto=$tipo;
+     $proyecto->estado_proyecto=Proyecto::EST1_INI;
+     $proyecto->save();
+     
+    $proyecto_e=new Proyecto_estudiante();
+     $proyecto_e->estado=  Objectbase::STATUS_AC;
+     $proyecto_e->proyecto_id=$proyecto->id;
+     $proyecto_e->estudiante_id=$estudiante->id;
+     $proyecto_e->save();
+     
+     
+    
+    
+    
     
     // grabamos si lo inscribimos a una materia
     if ( isset($_POST['dicta_id']) && isset($_POST['semestre_id']) )

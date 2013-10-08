@@ -4,6 +4,12 @@
         <h2 class="title">Formulario de Registro</h2>
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
+            <p>
+              <select name=accion>
+                    {html_options options=$accion}
+                 </select>
+              <label for="semestre_id"><small>Tipo (*)</small></label>
+            </p>
               <p>
               <input type="text" name="sigla" value="{$materia->sigla}"  data-validation-engine="validate[required]">
               <label for="codigo"><small>Materia Sigla(*)</small></label>

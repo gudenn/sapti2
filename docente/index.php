@@ -47,7 +47,7 @@ WHERE di.materia_id=ma.id
 AND di.semestre_id=se.id
 AND se.activo=1
 AND di.docente_id=".$docente_aux->docente_id."
-ORDER BY ma.id";
+ORDER BY ma.nombre";
   $mate = mysql_query($materias);
   while ($row = mysql_fetch_array($mate, MYSQL_ASSOC)) {
        $materiassemestre[] = $row;
@@ -68,17 +68,20 @@ ORDER BY ma.id";
    */
   //----------------------------------//
   leerClase('Menu');
+  $varsession=1;
   foreach ($materiassemestre as $value) {
         $menu = new Menu($value['nombre']);
         for($i=0; $i < count($docmateriassemestre);$i++ ) {
-            if($value['idmat']==$docmateriassemestre[$i]['idmat']){
+            if($value['idmat']==$docmateriassemestre[$i]['idmat']&&$docmateriassemestre[$i]['materia']=='Proyecto Final'){
                   $link = Docente::URL."index.proyecto-final.php?iddicta=".$docmateriassemestre[$i]['iddicta']."";
-                  $menu->agregarItem('Gesti&oacute;n de Estudiantes Codigo:'.$docmateriassemestre[$i]['grupo'].'','Gesti&oacute;n de Estudiantes Inscritos en la Materia.','docente/correccion.png',$link);
+                  $menu->agregarItem('Gesti&oacute;n de Estudiantes Codigo:'.$docmateriassemestre[$i]['grupo'].'','Gesti&oacute;n de Estudiantes Inscritos en la Materia Proyecto Final.','docente/correccion.png',$link);
+            }elseif ($value['idmat']==$docmateriassemestre[$i]['idmat']&&$docmateriassemestre[$i]['materia']=='Perfil') {
+                        $link = Docente::URL."index.proyecto-final.php?iddicta=".$docmateriassemestre[$i]['iddicta']."";
+                        $menu->agregarItem('Gesti&oacute;n de Estudiantes Codigo:'.$docmateriassemestre[$i]['grupo'].'','Gesti&oacute;n de Estudiantes Inscritos en la Materia de Perfil.','docente/correccion.png',$link);
             }
          };
          $menus[] = $menu;
   };
- 
   //----------------------------------//
   
   $smarty->assign("menus", $menus);

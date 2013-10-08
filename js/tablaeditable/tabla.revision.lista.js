@@ -24,7 +24,7 @@ function displayMessage(text, style) {
 
 // helper function to get path of a demo image
 function image(relativePath) {
-	return "../../images/icons/" + relativePath;
+	return "../../images/" + relativePath;
 };
 
 // this will be used to render our table headers
@@ -66,20 +66,18 @@ EditableGrid.prototype.initializeGrid = function()
 		};
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
 		cell.innerHTML = "<a href='#' class='observaciondetalle' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("detalle.png") + "\" border=\"0\" alt=\"detalle\" title=\"Detalle Revision\"/>Detalle</a>";
+						 "<img src=\"" + image("icons/detalle.png") + "\" border=\"0\" alt=\"detalle\" title=\"Detalle Revision\"/>Detalle</a>";
                 if(getValueAt(cell.rowIndex, '2')=='DO'&& getValueAt(cell.rowIndex, '4')=='CR'){                        
                 cell.innerHTML += "<br><a onclick=document.location.href='observacion.editar.php?revisiones_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("editar.png") + "\" border=\"0\" alt=\"editar\" title=\"Editar Revision\"/>Editar</a>";
+						 "<img src=\"" + image("icons/editar.png") + "\" border=\"0\" alt=\"editar\" title=\"Editar Revision\"/>Editar</a>";
                 }                        
                 }}));
             	setCellRenderer("revtipo", new CellRenderer({
                     
                     render: function(cell, value) { cell.innerHTML ="<a>"+"<img src='" + image("flags/" + value.toLowerCase() + ".png") + "' alt='" + value + "' title=\"Tipo de Revisor\"/>"+nombreRevisor(value)+"</a>";}
-			//render: function(cell, value) { cell.innerHTML = value ? "<img src='" + image("flags/" + value.toLowerCase() + ".png") + "' alt='" + value + "' title=\"Tipo de Revisor\"/>" : ""; }
 		})); 
                 setCellRenderer("estado", new CellRenderer({
 			render: function(cell, value){ cell.innerHTML ="<a>"+"<img src='" + image("flags/" + value.toLowerCase() + ".png") + "' alt='" + value + "' title=\"Estado de Revicion\"/>"+estadoRevision(value)+"</a>";} 
-                        //{ cell.innerHTML = value ? "<img src='" + image("flags/" + value.toLowerCase() + ".png") + "' alt='" + value + "' title=\"Estado de Revicion\"/>" : ""; }
 		}));
 		
 		// render the grid (parameters will be ignored if we have attached to an existing HTML table)
@@ -126,13 +124,13 @@ EditableGrid.prototype.updatePaginator = function()
 	});
 		
 	// "first" link
-	var link = $("<a>").html("<img src='" + image("gofirst.png") + "'/>&nbsp;");
+	var link = $("<a>").html("<img src='" + image("icons/gofirst.png") + "'/>&nbsp;");
 	if (!this.canGoBack()) link.css({ opacity : 0.4, filter: "alpha(opacity=40)" });
 	else link.css("cursor", "pointer").click(function(event) { editableGrid.firstPage(); });
 	paginator.append(link);
 
 	// "prev" link
-	link = $("<a>").html("<img src='" + image("prev.png") + "'/>&nbsp;");
+	link = $("<a>").html("<img src='" + image("icons/prev.png") + "'/>&nbsp;");
 	if (!this.canGoBack()) link.css({ opacity : 0.4, filter: "alpha(opacity=40)" });
 	else link.css("cursor", "pointer").click(function(event) { editableGrid.prevPage(); });
 	paginator.append(link);
@@ -141,13 +139,13 @@ EditableGrid.prototype.updatePaginator = function()
 	for (p = 0; p < pages.length; p++) paginator.append(pages[p]).append(" | ");
 	
 	// "next" link
-	link = $("<a>").html("<img src='" + image("next.png") + "'/>&nbsp;");
+	link = $("<a>").html("<img src='" + image("icons/next.png") + "'/>&nbsp;");
 	if (!this.canGoForward()) link.css({ opacity : 0.4, filter: "alpha(opacity=40)" });
 	else link.css("cursor", "pointer").click(function(event) { editableGrid.nextPage(); });
 	paginator.append(link);
 
 	// "last" link
-	link = $("<a>").html("<img src='" + image("golast.png") + "'/>&nbsp;");
+	link = $("<a>").html("<img src='" + image("icons/golast.png") + "'/>&nbsp;");
 	if (!this.canGoForward()) link.css({ opacity : 0.4, filter: "alpha(opacity=40)" });
 	else link.css("cursor", "pointer").click(function(event) { editableGrid.lastPage(); });
 	paginator.append(link);

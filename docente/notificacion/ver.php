@@ -1,6 +1,6 @@
 <?php
 try {
-  require('_start.php');
+  require('../_start.php');
   if(!isDocenteSession())
     header("Location: login.php"); 
   global $PAISBOX;
@@ -93,7 +93,7 @@ if ( isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' )
   }
   
   
-  $columnacentro = 'docente/ver.tpl';
+  $columnacentro = 'docente/notificacion/ver.tpl';
   $smarty->assign('columnacentro',$columnacentro);
 
   //No hay ERROR

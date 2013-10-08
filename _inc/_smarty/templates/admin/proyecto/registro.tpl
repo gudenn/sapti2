@@ -268,7 +268,10 @@
                     <a href="#mas"   title="Quitar este elemento" onclick="removerinstitucion();return false;" >{icono('basicset/delete_48.png','Quitar','15px')} Quitar</a> 
                   </span>
                 </td>
+            
+                
               </tr>
+              
             </table>
             
           </td>
