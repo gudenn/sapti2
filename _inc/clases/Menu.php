@@ -123,6 +123,32 @@ class Menu
     return $menus;
   }
   
+  /**
+   * Menu principal del Estudiante
+   * @param Proyecto $proyecto
+   * @return Menu
+   */
+  function getestudianteIndex($proyecto) {
+    leerClase('Grupo');
+    leerClase('Estudiante');
+    //var_dump($proyecto);
+    
+    $menus = array();
+    $thise = new Menu('Proyecto Final');
+    $link = Estudiante::URL."proyecto-final/";
+    $thise->agregarItem('Proyecto Final','Registro de avances y correcciones para el Proyecto Final','basicset/briefcase_48.png',$link);
+    $link = Estudiante::URL."proyecto-final/";
+    $thise->agregarItem('Reportes','Reportes correspondientes a mi Proyecto Final','basicset/graph.png',$link);
+    $menus[] = $thise;
+    $thise = new Menu('Notificaciones y Mensajes');
+    $link = Estudiante::URL."notificacion/";
+    $thise->agregarItem('Notificaciones','Geti&oacute;n de las Notificaciones','basicset/megaphone.png',$link,12);
+    $link = Estudiante::URL."proyecto-final/";
+    $thise->agregarItem('Mensajes','Geti&oacute;n de los mensajes Mensajes','basicset/mail.png',$link,15);
+    $menus[] = $thise;
+    return $menus;
+  }
+  
   
 }
 

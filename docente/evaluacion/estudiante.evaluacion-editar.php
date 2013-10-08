@@ -1,6 +1,7 @@
 <?php
 try {
   require('../_start.php');
+
     if(!isDocenteSession())
     header("Location: login.php"); 
     
@@ -30,8 +31,9 @@ try {
    /**
    * Menu superior
    */
-  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Docente');
-  $menuList[]     = array('url'=>URL.Docente::URL.basename(__FILE__),'name'=>'Evaluacion');
+  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>'Proyecto Final');
+  $menuList[]     = array('url'=>URL.Docente::URL.'evaluacion/'.basename(__FILE__),'name'=>'Evaluacion de Estudiantes');
   $smarty->assign("menuList", $menuList);
   
   function promedio($promedio){
@@ -52,6 +54,8 @@ try {
   if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
   {
      $iddicta = $_GET['iddicta'];
+  }else{
+      $iddicta=$_SESSION['iddictaproyectofinal'];
   }
 
   $resul = "
@@ -81,7 +85,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
      $evaluacion->rfinal=  promedio($promedio);
      $evaluacion->save();
  }
- $sqlreporte="SELECT es.codigo_sis as Codigo_SIS, CONCAT(us.apellido_paterno,' ',us.apellido_materno, us.nombre) as Estudiante, pr.nombre as Nombre_Proyecto, ev.evaluacion_1 as EVA_1, ev.evaluacion_2 as EVA_2, ev.evaluacion_3 as EVA_3, ev.promedio as Prom, ev.rfinal as Apro
+ $sqlreporte="SELECT es.codigo_sis as Codigo_SIS, CONCAT(us.apellido_paterno, us.apellido_materno, us.nombre) as Estudiante, pr.nombre as Nombre_Proyecto, ev.evaluacion_1 as EVA_1, ev.evaluacion_2 as EVA_2, ev.evaluacion_3 as EVA_3, ev.promedio as Prom, ev.rfinal as Apro
  FROM dicta di, estudiante es, usuario us, inscrito it, proyecto pr, proyecto_estudiante pe, evaluacion ev
  WHERE di.id=it.dicta_id
  AND it.estudiante_id=es.id

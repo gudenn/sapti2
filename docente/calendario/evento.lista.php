@@ -40,13 +40,16 @@ try {
   /**
    * Menu superior
    */
-  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Docente');
-  $menuList[]     = array('url'=>URL.Docente::URL.basename(__FILE__),'name'=>'Edicion de Eventos');
+  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>'Proyecto Final');
+  $menuList[]     = array('url'=>URL.Docente::URL.'calendario/'.basename(__FILE__),'name'=>'Edicion de Eventos');
   $smarty->assign("menuList", $menuList);
   
   if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
   {
      $iddicta = $_GET['iddicta'];
+  }else{
+      $iddicta=$_SESSION['iddictaproyectofinal'];
   }
   
   if (isset($_GET['eliminar']) && isset($_GET['evento_id']) && is_numeric($_GET['evento_id']) )

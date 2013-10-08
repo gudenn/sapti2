@@ -267,13 +267,15 @@ class Proyecto extends Objectbase {
   /**
    * Creamos un proyecto inicial de tal manera que los estudiantes nunca estnen sin proyectos
    */
-  function crearProyectoInicial($estudiante_id, $grabar = true) {
+  function crearProyectoInicial($estudiante_id , $dicta_id, $grabar = true) {
     $this->estado_proyecto = Proyecto::EST1_INI;
-    $this->es_actual = 1;
-    $this->estado = Objectbase::STATUS_AC;
+    $this->es_actual       = 1;
+    $this->estado          = Objectbase::STATUS_AC;
     if ($grabar)
       $this->save();
     $this->asignarEstudiante($estudiante_id);
+    $this->asignarDicta($dicta_id);
+    
     if ($grabar)
       $this->saveAllSonObjects(TRUE);
   }
@@ -284,8 +286,15 @@ class Proyecto extends Objectbase {
     leerClase('Area');
     $areas = array();
     $activo = Objectbase::STATUS_AC;
-    $sql = "select a.* from " . $this->getTableName('Proyecto_area') . " as pa , " . $this->getTableName('Area') . " as a   where pa.proyecto_id = '$this->id' and pa.area_id = a.id and pa.estado = '$activo' and a.estado = '$activo'  ";
+    $sql = "select a.* from " . $this->getTableName('Proyecto_area') . " as pa , " . $this->getTableName('Area') . " as a   where pa.proyecto_id = '$this->id' and pa.area_id = a.id and pa.estado = '$activo' and a.estado = '$activo'";
+ /**
+    $sql = "SELECT a.*
+from  proyecto_area  pa ,area a
+where pa.area_id=a.id  and pa.proyecto_id='$this->id' and pa.estado='AC'  and a.estado='AC';";
+  
+  */
     $resultado = mysql_query($sql);
+  // var_dump(mysql_fetch_array($resultado, MYSQL_ASSOC));
     if (!$resultado)
       return false;
     while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) {
@@ -303,12 +312,27 @@ class Proyecto extends Objectbase {
     leerClase('Proyecto_estudiante');
     //$estudiante = new Estudiante($estudiante_id);
 
-    $asignado = new Proyecto_estudiante();
-    $asignado->proyecto_id = $this->id;
-    $asignado->estudiante_id = $estudiante_id;
-    $asignado->estado = Objectbase::STATUS_AC;
-    $asignado->fecha_asignacion = date('d/m/Y');
+    $asignado                         = new Proyecto_estudiante();
+    $asignado->proyecto_id            = $this->id;
+    $asignado->estudiante_id          = $estudiante_id;
+    $asignado->estado                 = Objectbase::STATUS_AC;
+    $asignado->fecha_asignacion       = date('d/m/Y');
     $this->proyecto_estudiante_objs[] = $asignado;
+  }
+
+  /**
+   * Asignamos A Dicta
+   * @param INT(11) $dicta_id codigo de grupo asignado
+   */
+  function asignarDicta($dicta_id) {
+    leerClase('Proyecto_dicta');
+    //$estudiante = new Estudiante($estudiante_id);
+
+    $asignado                         = new Proyecto_dicta();
+    $asignado->proyecto_id            = $this->id;
+    $asignado->dicta_id               = $dicta_id;
+    $asignado->estado                 = Objectbase::STATUS_AC;
+    $this->proyecto_dicta_objs[]      = $asignado;
   }
 
   /**
@@ -453,7 +477,11 @@ where  p.`id`=t.`proyecto_id` and p.`id`=1 and t.`docente_id`=1;
     //@TODO revisar
     //  leerClase('Proyecto_area');
     leerClase('Vigencia');
+
+   $vigencias = array();
+
      $vigencias = array();
+
     $activo = Objectbase::STATUS_AC;
     $sql = "select v.* from " . $this->getTableName('Vigencia') . " as v    where v.proyecto_id = '$this->id' and v.estado = '$activo'";
     $resultado = mysql_query($sql);

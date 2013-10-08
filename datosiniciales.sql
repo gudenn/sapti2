@@ -130,8 +130,8 @@ INSERT INTO `titulo_honorifico` ( `nombre`, `descripcion`, `estado`) VALUES
 ( 'Dr.', 'Dr.', 'AC'),
 ( 'Ph.D.', 'Ph.D.', 'AC');
 
-INSERT INTO `sapti`.`proyecto_area` (`id`, `area_id`, `proyecto_id`, `estado`) VALUES (NULL, '2', '1', 'AC'), (NULL, '3', '3', 'AC');
-INSERT INTO `sapti`.`proyecto_area` (`id`, `area_id`, `proyecto_id`, `estado`) VALUES (NULL, '4', '4', 'AC');
+INSERT INTO `proyecto_area` (`id`, `area_id`, `proyecto_id`, `estado`) VALUES (NULL, '2', '1', 'AC'), (NULL, '3', '3', 'AC');
+INSERT INTO `proyecto_area` (`id`, `area_id`, `proyecto_id`, `estado`) VALUES (NULL, '4', '4', 'AC');
 
 INSERT INTO `evaluacion` (`id`, `evaluacion_1`, `evaluacion_2`, `evaluacion_3`, `promedio`, `rfinal`, `estado`) VALUES (NULL, '0', '0', '0', NULL, NULL, NULL), (NULL, '0', '0', '0', NULL, NULL, NULL), (NULL, '0', '0', '0', NULL, NULL, NULL);
 UPDATE `inscrito` SET `evaluacion_id` = '1' WHERE `inscrito`.`id` = 1; UPDATE `inscrito` SET `evaluacion_id` = '2' WHERE `inscrito`.`id` = 2; UPDATE `inscrito` SET `evaluacion_id` = '3' WHERE `inscrito`.`id` = 3; UPDATE `inscrito` SET `evaluacion_id` = '4' WHERE `inscrito`.`id` = 4;
@@ -152,6 +152,21 @@ INSERT INTO `vigencia` (`id`, `proyecto_id`, `fecha_inicio`, `fecha_fin`, `fecha
 --
 
 
-
 INSERT INTO `cambio` (`id`, `proyecto_id`, `tipo`, `fecha_cambio`, `estado`) VALUES
 (1, 4, 'CAMBIO TEMA', '2013-09-19', 'AC');
+
+
+INSERT INTO `consejo` (`id`, `usuario_id`, `login`, `clave`, `estado`) VALUES
+(1, 2, 'consejo', 'consejo', 'AC');
+
+INSERT INTO `lugar` (`id`, `nombre`, `estado`) VALUES
+(1, 'Laboratorio de Memi', 'AC');
+INSERT INTO `tipo_defensa` (`id`, `nombre`, `estado`) VALUES
+(1, 'Privada', 'AC'),
+(2, 'Publica', 'AC');
+
+
+INSERT INTO `turno` (`id`, `nombre`, `peso`, `descripcion`, `estado`) VALUES
+(4, 'Tarde', NULL, 'afsd', 'AC'),
+(5, 'Mañana', NULL, 'fasdf', 'AC');
+

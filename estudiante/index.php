@@ -7,21 +7,19 @@ try {
 
   
   /** HEADER */
-  $smarty->assign('title','Proyecto Final');
-  $smarty->assign('description','Proyecto Final');
-  $smarty->assign('keywords','Proyecto Final');
+  $smarty->assign('title','Sistema SAPTI - Estudiante');
+  $smarty->assign('description','Entorno de trabajo del Estudiante');
+  $smarty->assign('keywords','Estudiante,SAPTI');
 
   //CSS
+  $CSS[]  = URL_CSS . "dashboard.css";
   $CSS[]  = URL_CSS . "academic/3_column.css";
-  //Calendar
-  $CSS[]  = URL_JS . "calendar/css/eventCalendar.css";
-  $CSS[]  = URL_JS . "calendar/css/eventCalendar_theme.css";
-  $smarty->assign('CSS',$CSS);
+
 
   //JS
   $JS[]  = URL_JS ."jquery.min.js";
-  //Calendar
-  $JS[]  = URL_JS . "calendar/js/jquery.eventCalendar.js";
+
+  $smarty->assign('CSS',$CSS);
   $smarty->assign('JS',$JS);
 
   // Escritorio del estuddinate
@@ -37,10 +35,13 @@ try {
   $smarty->assign("menuList", $menuList);
 
   
+  
+  
   $estudiante_aux = getSessionEstudiante();
   $estudiante     = new Estudiante($estudiante_aux->estudiante_id);
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();
+<<<<<<< HEAD
   $proyecto= new Proyecto($proyecto->id);
   
    $vistod=$proyecto->getVD();
@@ -49,6 +50,17 @@ try {
    $vistotu=$vistot[0]->visto_bueno_tipo;
   
   
+=======
+
+  /**
+   * Menu central
+   */
+  leerClase('Menu');
+  $menu = new Menu('');
+  $menus = $menu->getestudianteIndex($proyecto);
+  $smarty->assign("menus", $menus);
+
+>>>>>>> origin/master
   $smarty->assign("estudiante", $estudiante);
   $smarty->assign("usuario", $usuario);
   
@@ -68,7 +80,8 @@ catch(Exception $e)
   $smarty->assign("ERROR", handleError($e));
 }
 
-$TEMPLATE_TOSHOW = 'estudiante/estudiante.3columnas.tpl';
+
+$TEMPLATE_TOSHOW = 'estudiante/2columnas.tpl';
 $smarty->display($TEMPLATE_TOSHOW);
 
 ?>

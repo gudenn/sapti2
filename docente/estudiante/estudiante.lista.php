@@ -29,12 +29,15 @@ try {
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
-  $menuList[]     = array('url'=>URL.Docente::URL.basename(__FILE__),'name'=>'Estudiantes Registrados');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>'Proyecto Final');
+  $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/'.basename(__FILE__),'name'=>'Estudiantes Inscritos');
   $smarty->assign("menuList", $menuList);
   
   if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
   {
      $iddicta = $_GET['iddicta'];
+  }else{
+      $iddicta=$_SESSION['iddictaproyectofinal'];
   }
 
   $smarty->assign("iddicta", $iddicta);

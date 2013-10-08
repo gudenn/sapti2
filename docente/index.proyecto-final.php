@@ -35,12 +35,14 @@ try {
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
-  $menuList[]     = array('url'=>URL.Docente::URL.basename(__FILE__),'name'=>'Gestion Estudiantes');
+  $menuList[]     = array('url'=>URL.Docente::URL.basename(__FILE__),'name'=>'Proyecto Final');
   $smarty->assign("menuList", $menuList);
 
     if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
   {
      $iddicta = $_GET['iddicta'];
+  }else{
+      $iddicta=$_SESSION['iddictaproyectofinal'];
   }
 
   $docente_aux = getSessionDocente();

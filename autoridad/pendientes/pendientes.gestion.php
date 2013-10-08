@@ -35,8 +35,9 @@ try {
    leerClase('Semestre');
   
   $semestre=new Semestre();
- echo $semestre=$semestre->getActivo();
- echo $id=$semestre->id;
+  $semestre=$semestre->getActivo();
+ $id=$semestre->id;;
+ 
   
     $sqlr="SELECT p.id,u.nombre,s.codigo,p.nombre as titulo,CONCAT(apellido_paterno,apellido_materno) as apellidos,p.estado as estadop
 FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe

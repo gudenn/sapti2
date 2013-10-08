@@ -29,8 +29,9 @@ try {
   /**
    * Menu superior
    */
-  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Docente');
-  $menuList[]     = array('url'=>URL.Docente::URL.basename(__FILE__),'name'=>'Calendario');
+  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>'Proyecto Final');
+  $menuList[]     = array('url'=>URL.Docente::URL.'calendario/'.basename(__FILE__),'name'=>'Calendario de Eventos');
   $smarty->assign("menuList", $menuList);
   
   $columnacentro = 'docente/calendario/columna.centro.calendario.eventos.tpl';

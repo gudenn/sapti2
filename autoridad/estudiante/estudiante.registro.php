@@ -51,6 +51,7 @@ try {
   leerClase('Usuario');
   leerClase('Estudiante');
   leerClase('Proyecto');
+  leerClase('Proyecto_dicta');
   leerClase('Proyecto_estudiante');
 
   $id     = '';
@@ -133,47 +134,18 @@ try {
     $usuario->objBuidFromPost();
     $estudiante->objBuidFromPost();
     $usuario->estado = Objectbase::STATUS_AC;
-    $es_nuevo = (!isset($_POST['usuario_id'])||trim($_POST['usuario_id'])=='' )?TRUE:FALSE;
+    $es_nuevo        = (!isset($_POST['usuario_id'])||trim($_POST['usuario_id'])=='' )?TRUE:FALSE;
     $usuario->validar($es_nuevo);
     $usuario->save();
 
-    $estudiante->estado = Objectbase::STATUS_AC;
+    $estudiante->estado     = Objectbase::STATUS_AC;
     $estudiante->usuario_id = $usuario->id;
     $estudiante->validar($es_nuevo);
     $estudiante->save();
     
-    $materia=new Materia($_POST['materia_id']);
-    $tipo=$materia->tipo;
-    
-    $proyecto=new Proyecto();
-     $proyecto->nombre='';
-     $proyecto->estado=  Objectbase::STATUS_AC;
-     $proyecto->tipo_proyecto=$tipo;
-     $proyecto->estado_proyecto=Proyecto::EST1_INI;
-     $proyecto->save();
-     
-    $proyecto_e=new Proyecto_estudiante();
-     $proyecto_e->estado=  Objectbase::STATUS_AC;
-     $proyecto_e->proyecto_id=$proyecto->id;
-     $proyecto_e->estudiante_id=$estudiante->id;
-     $proyecto_e->save();
-     
-     
-    
-    
-    
-    
-    // grabamos si lo inscribimos a una materia
-    if ( isset($_POST['dicta_id']) && isset($_POST['semestre_id']) )
-    {
-      leerClase('Inscrito');
-      $inscrito = new Inscrito();
-      $inscrito->semestre_id   = $_POST['semestre_id'];
-      $inscrito->dicta_id      = $_POST['dicta_id'];
-      $inscrito->estudiante_id = $estudiante->id;
-      $inscrito->estado        = Objectbase::STATUS_AC;
-      $inscrito->save();
-      
+    if ( isset($_POST['dicta_id']) && isset($_POST['semestre_id']) && is_numeric($_POST['dicta_id']) && is_numeric($_POST['semestre_id']) ) {
+      $estudiante->crearProyectoInicial($_POST['dicta_id']);
+      $estudiante->inscribirEstudianteDicta($_POST['semestre_id'], $_POST['dicta_id']);
     }
     
     $EXITO = true;
