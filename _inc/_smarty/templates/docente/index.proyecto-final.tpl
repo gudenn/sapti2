@@ -51,7 +51,7 @@
         </div>
         
           <div class="dashboard">
-          <h2>Configuracion y Vistos Buienos</h2>
+          <h2>Configuracion</h2>
           <a href="{$URL}docente/disponibilidad.php">
             <img src="{$URL_IMG}icons/docente/notificacion.png"   width="64px" height="64" alt="Correciones">
             <h3>Tiempo</h3>

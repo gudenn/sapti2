@@ -13,6 +13,8 @@ try {
   $smarty->assign('keywords','SAPTI,Observaciones,Registro');
 
   //CSS
+  $CSS[]  = URL_JS . "calendar/css/eventCalendar.css";
+  $CSS[]  = URL_JS . "calendar/css/eventCalendar_theme.css";
   $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_CSS . "editablegrid.css";
   $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
@@ -23,6 +25,7 @@ try {
   $JS[]  = URL_JS . "tablaeditable/editablegrid-2.0.1.js";
   $JS[]  = URL_JS . "tablaeditable/tabla.observacion-editar.js";
     //Validation
+  $JS[]  = URL_JS . "calendar/js/jquery.eventCalendar.js";
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
   
