@@ -78,7 +78,6 @@ ORDER BY ma.id";
          };
          $menus[] = $menu;
   };
- 
   //----------------------------------//
   
   $smarty->assign("menus", $menus);
