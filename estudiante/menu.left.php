@@ -4,6 +4,6 @@
    */
   leerClase('Menu');
   $menuizquierda = new Menu('');
-  $smarty->assign("menuizquierda", $menuizquierda->getAdminIndex());
+  $smarty->assign("menuizquierda", $menuizquierda->getestudianteIndex());
 
 ?>

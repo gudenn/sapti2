@@ -30,6 +30,26 @@ class Inscrito extends Objectbase
   */
   var $semestre_id;
   
+  /**
+   * Inscribimos a un estudiante a una materia
+   * @param INT(11) $estudiante_id
+   * @param INT(11) $semestre_id
+   * @param INT(11) $dicta_id
+   */
+  function inscribirEstudiante($estudiante_id,$semestre_id,$dicta_id) {
+    //Creamos la evaluacion
+    leerClase('Evaluacion');
+    $evaluacion         = new Evaluacion();
+    $evaluacion->estado = Objectbase::STATUS_AC;
+    $evaluacion->save();
+    
+    $this->semestre_id   = $semestre_id;
+    $this->dicta_id      = $dicta_id;
+    $this->estudiante_id = $estudiante_id;
+    $this->evaluacion_id = $evaluacion->id;
+    $this->estado        = Objectbase::STATUS_AC;
+    $this->save();
+  }
   
 }
 ?>
