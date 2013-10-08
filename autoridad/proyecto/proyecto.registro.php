@@ -297,6 +297,8 @@ try {
     mysql_query("COMMIT");
   }// FIN GRABAR PROYECTO
   
+
+  
   
   $smarty->assign("semestre",$semestre);
 

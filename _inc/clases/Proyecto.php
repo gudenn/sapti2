@@ -440,7 +440,7 @@ where  p.`id`=t.`proyecto_id` and p.`id`=1 and t.`docente_id`=1;
     //@TODO revisar
     //  leerClase('Proyecto_area');
     leerClase('Vigencia');
-    $areas = array();
+     $vigencias = array();
     $activo = Objectbase::STATUS_AC;
     $sql = "select v.* from " . $this->getTableName('Vigencia') . " as v    where v.proyecto_id = '$this->id' and v.estado = '$activo'";
     $resultado = mysql_query($sql);

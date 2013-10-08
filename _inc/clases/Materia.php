@@ -3,13 +3,23 @@
 class Materia extends Objectbase 
 {
   
-  
+ 
+    /**
+   * Materia tipo
+   */
+  const  MATERIA_PE  = "PE";
+  /**
+   * 
+   */
+  const  MATERIA_PR  = "PR";
+ 
  /**
   * Id de la materia
   * @var INT(11)
   */
      var $sigla;
-  var $nombre;
+     var $nombre;
+     var $tipo;
   
   /**
    * Obtiene todos los docentes que dictan una materia por semestre

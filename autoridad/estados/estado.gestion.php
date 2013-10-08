@@ -41,19 +41,23 @@ try {
 
   $id_es=$_GET['id_post'];
   $estudiante=new Estudiante($id_es);
-  // echo $estudiante->codigo_sis;
-  $proyecto=$estudiante->getProyecto();
-  $v=$proyecto->id;
- $vigencia= new Vigencia($proyecto->id);
   
+  $proyecto=$estudiante->getProyecto();
+  $p=new Proyecto($proyecto->id);
+  $v=$pr->getVigencia();
+  $a=$pr->getArea();
+  $p->nombre;
+  $a->nombre;
+  $vigencia= new Vigencia($proyecto->id);
+
  
   
 
  
   
  
-  $smarty->assign('proyecto'     ,$proyecto);
-   $smarty->assign('vigencia'     ,$vigencia);
+ $smarty->assign('proyecto'     ,$proyecto);
+ $smarty->assign('vigencia'     ,$vigencia);
  $smarty->assign('estudiante'     ,$estudiante);
 
   
