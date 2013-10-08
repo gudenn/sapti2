@@ -20,6 +20,7 @@ class Materia extends Objectbase
      var $sigla;
      var $nombre;
      var $tipo;
+    
   
   /**
    * Obtiene todos los docentes que dictan una materia por semestre
