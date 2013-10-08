@@ -43,11 +43,11 @@ try {
   $estudiante=new Estudiante($id_es);
   
   $proyecto=$estudiante->getProyecto();
-  $p=new Proyecto($proyecto->id);
+  $pr=new Proyecto($proyecto->id);
   $v=$pr->getVigencia();
   $a=$pr->getArea();
-  $p->nombre;
-  $a->nombre;
+ echo  $v->estado_vigencia;
+echo   $a->nombre;
   $vigencia= new Vigencia($proyecto->id);
 
  
