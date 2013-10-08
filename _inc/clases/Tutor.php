@@ -2,6 +2,8 @@
 
 class Tutor extends Objectbase
 {
+  
+  const URL                  = "docentet/";
   /** Numero maximo de tutores activos asignados a un estudiante */
   const MAXIMO   = "2";
 
