@@ -29,8 +29,12 @@ try {
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
   $smarty->assign('JS',$JS);
 
-  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Docente');
-  $menuList[]     = array('url'=>URL.Docente::URL.basename(__FILE__),'name'=>'Tiempo');
+  /**
+   * Menu superior
+   */
+  $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'docente/','name'=>' Docentes');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'docente/'.basename(__FILE__),'name'=>'Gesti&oacute;n de Materias');
   $smarty->assign("menuList", $menuList);  
   
   $semestre=new Semestre();
