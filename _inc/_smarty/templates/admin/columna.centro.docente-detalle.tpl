@@ -1,5 +1,5 @@
       <div id="content">
-        <h1 class="title">Detalle Docente "<i>{$usuario->nombre} {$usuario->apellidos}</i>"</h1>
+        <h1 class="title">Detalle "<i>{$usuario->nombre} {$usuario->apellidos}</i>"</h1>
         <div id="respond">
   
           <p>
