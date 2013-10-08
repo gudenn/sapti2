@@ -81,13 +81,15 @@ try {
     {
     
     $tutores= $proyecto->getTutores();
+    
     $arraytutores= array();
     foreach ($tutores as $valor)
     {
        $arraytutores[]=  new Usuario($valor->usuario_id);
     }
     
-    
+ $array =$proyecto ->getVigencia();
+
     
    $proyeareas=$proyecto->getArea();
    $usuariobuscado= new Usuario($estudiante->usuario_id);
@@ -100,11 +102,10 @@ try {
    
     $array=  $proyecto->getArea();
     $idareaproyecto=$array[0]->id;
- //   echo $idareaproyecto;
+    echo $idareaproyecto;
   
-    
- 
-  
+if(sizeof($array)>0)
+{
   //lista de los docentes q apoyan en el area del proyecto
   $arraylistadoc= array();
   
@@ -116,7 +117,7 @@ try {
   
 $sqldoc="select  DISTINCT d.id AS iddoc, a.area_id as idarea
 from docente  d, apoyo a
-WHERE  d.id=a.docente_id  and a.area_id=".$idareaproyecto.";";
+WHERE  d.id=a.docente_id  and a.area_id=1";
  $resultadodoc = mysql_query($sqldoc);
 while ($filadoc = mysql_fetch_array($resultadodoc, MYSQL_ASSOC))
  {
@@ -251,6 +252,15 @@ delete from `automatico`  where  docente_id=$vars;";
 }
 
 }  
+}else
+{
+     echo "<script>alert('El proyecto no tiene Area');</script>";
+}
+
+/**********************************************/
+
+
+
     }else
     {
       
