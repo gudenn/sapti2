@@ -14,11 +14,21 @@ class Materia extends Objectbase
   const  MATERIA_PR  = "PR";
  
  /**
-  * Id de la materia
+  * sigla de la materia
   * @var INT(11)
   */
      var $sigla;
+     
+ /**
+  * nombre de la materia
+  * @var INT(11)
+  */    
      var $nombre;
+     
+ /**
+  * tipo de la materia puede ser PR o PE
+  * @var INT(11)
+  */
      var $tipo;
     
   
