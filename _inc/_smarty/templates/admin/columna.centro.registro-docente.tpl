@@ -10,36 +10,36 @@
               <select name="titulo_honorifico" id="titulo_honorifico" >
               {html_options values=$titulo_h_values selected=$usuario->titulo_honorifico output=$titulo_h_output}
               </select>
-              <label for="semestre_id"><small>T&iacute;tulo (*)</small></label>
+              <label for="semestre_id"><small>T&iacute;tulo (*){getHelpTip('materia_id')}</small></label>
             </p>
          
             <p>
               <input type="text" name="codigo_sis" id="codigo_sis" value="{$docente->codigo_sis}" size="100"  data-validation-engine="validate[required]">
-              <label for="codigo_sis"><small>C&oacute;digo SIS (*)</small></label>
+              <label for="codigo_sis"><small>C&oacute;digo SIS (*){getHelpTip('materia_id')}</small></label>
             </p>
             <p>
               <input type="text" name="ci" id="ci" value="{$usuario->ci}" size="100"  data-validation-engine="validate[required]" >
-              <label for="ci"><small>CI (*)</small></label>
+              <label for="ci"><small>CI (*){getHelpTip('materia_id')}</small></label>
             </p>
             <p>
               <input type="text" name="nombre" id="nombre" value="{$usuario->nombre}" size="100"  data-validation-engine="validate[required]" >
-              <label for="nombre"><small>Nombres (*)</small></label>
+              <label for="nombre"><small>Nombres (*){getHelpTip('materia_id')}</small></label>
             </p>
             <p>
               <input type="text" name="apellido_paterno" id="apellido_paterno" value="{$usuario->apellido_paterno}" size="200">
-              <label for="apellido_paterno"><small>Apellidos Paterno</small></label>
+              <label for="apellido_paterno"><small>Apellidos Paterno(*){getHelpTip('materia_id')}</small></label>
             </p>
               <p>
               <input type="text" name="apellido_materno" id="apellido_materno" value="{$usuario->apellido_materno}" size="200">
-              <label for="apellido_materno"><small>Apellidos Materno</small></label>
+              <label for="apellido_materno"><small>Apellidos Materno(*){getHelpTip('materno')}</small></label>
             </p>
             <p>
               <input type="text" name="fecha_nacimiento" id="fecha_nacimiento" value="{$usuario->fecha_nacimiento}" size="22">
-              <label for="fecha_nacimiento"><small>Fecha de Nacimiento</small></label>
+              <label for="fecha_nacimiento"><small>Fecha de Nacimiento(*){getHelpTip('fecha de nacimiento')}</small></label>
             </p>
             <p>
               <input type="text" name="email" id="email" value="{$usuario->email}" size="22" data-validation-engine="validate[],custom[email]"  >
-              <label for="email"><small>E-Mail</small></label>
+              <label for="email"><small>E-Mail(*){getHelpTip('correo electronico')}</small></label>
             </p>
              <p>
               {html_radios name="sexo" options=$sexo selected=$sexo_selected separator="<br>"}
@@ -47,15 +47,15 @@
             {if !($usuario->login)}
             <p>
                 <input type="text" name="login" id="login" value="{$usuario->login}"  data-validation-engine="validate[required]"  size="22">
-              <label for="login"><small>Nombre de usuario (*)</small></label>
+              <label for="login"><small>Nombre de usuario (*){getHelpTip('Nombre del Usuario')}</small></label>
             </p>
             <p>
               <input type="password" name="clave" id="clave" value="" data-validation-engine="validate[required]"  size="22">
-              <label for="password"><small>Clave de Ingreso (*)</small></label>
+              <label for="password"><small>Clave de Ingreso (*){getHelpTip('ingrse la clave de ingreso al sistema')}</small></label>
             </p>
             <p>
               <input type="password" name="clave2" id="clave2" value="" data-validation-engine="validate[equals[clave]]"   size="22">
-              <label for="password"><small>Verifique Clave (*)</small></label>
+              <label for="password"><small>Verifique Clave (*){getHelpTip('ingrese nuevamente la clave de ingreso')}</small></label>
             </p>
             {/if}
             <h2 class="title">Grabar Docente</h2>
