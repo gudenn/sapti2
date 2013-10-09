@@ -2,8 +2,8 @@
 try {
   define ("MODULO", "ADMIN-PROYECTO-REGISTRO");
   require('../_start.php');
-  if(!isAdminSession())
-    header("Location: ../login.php");  
+ // if(!isAdminSession())
+   // header("Location: ../login.php");  
 
   if (!defined('TIPO'))
     define ('TIPO', 'PR');
@@ -16,7 +16,7 @@ try {
   /**
    * Menu superior
    */
-  $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
+  $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Estudiante');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'proyecto/','name'=>'Proyecto');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'proyecto/'.basename(__FILE__),'name'=>'Registro de Proyecto');
   $smarty->assign("menuList", $menuList);
@@ -275,6 +275,7 @@ try {
     }
     $proyecto->validar();
     $proyecto->tipo_proyecto = TIPO;
+    $proyecto->estado_proyecto= Proyecto::EST5_P;
     $proyecto->save();
     $proyecto->saveAllSonObjects(TRUE);
     $estudiante->marcarComoProyectoActual($proyecto->id);

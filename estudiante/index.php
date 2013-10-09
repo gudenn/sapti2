@@ -26,6 +26,7 @@ try {
   leerClase('Usuario');
   leerClase('Proyecto');
   leerClase('Estudiante');
+  leerClase('Visto_bueno');
   
   /**
    * Menu superior
@@ -44,6 +45,13 @@ try {
     $estudiante = $usuario->estudiante_objs[0];
   $proyecto       = $estudiante->getProyecto();
 
+  $proyecto= new Proyecto($proyecto->id);
+  
+   $vistod=$proyecto->getVD();
+   $vistodoc=$vistod[0]->visto_bueno_tipo;
+  $vistot=$proyecto->getVT();
+   $vistotu=$vistot[0]->visto_bueno_tipo;
+  
   /**
    * Menu central
    */
@@ -52,9 +60,14 @@ try {
   $menus = $menu->getestudianteIndex($proyecto);
   $smarty->assign("menus", $menus);
 
+
   $smarty->assign("estudiante", $estudiante);
   $smarty->assign("usuario", $usuario);
+  
   $smarty->assign("proyecto", $proyecto);
+  
+  $smarty->assign("vistodoc", $vistodoc);
+  $smarty->assign("vistotu", $vistotu);
   $smarty->assign("ERROR", $ERROR);
   
 

@@ -57,8 +57,7 @@ try {
   {
   if(($proyec->getTribunales())==($proyec->getTotalVB()))
   {
-    echo 'hola eli';
-    
+      
    $estudiantes= $proyec->getEstudiante();
    $usuarios= new Usuario($estudiantes->usuario_id);
 

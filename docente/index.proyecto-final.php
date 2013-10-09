@@ -30,17 +30,20 @@ try {
   leerClase('Usuario');
   leerClase('Docente');
   leerClase('Semestre');
+   leerClase('Notificacion');
 
       /**
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
-  $menuList[]     = array('url'=>URL.Docente::URL.basename(__FILE__),'name'=>'Gestion Estudiantes');
+  $menuList[]     = array('url'=>URL.Docente::URL.basename(__FILE__),'name'=>'Proyecto Final');
   $smarty->assign("menuList", $menuList);
 
     if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
   {
      $iddicta = $_GET['iddicta'];
+  }else{
+      $iddicta=$_SESSION['iddictaproyectofinal'];
   }
 
   $docente_aux = getSessionDocente();
@@ -76,10 +79,19 @@ try {
   $link = Docente::URL."calendario/evento.lista.php?iddicta={$iddicta}";
   $menu->agregarItem('Edici&oacute;n de Eventos','Edici&oacute;n de Eventos de la Materia de Proyecto Final','docente/edicion.png',$link);
   $menus[] = $menu;
+  /**
+        $thise = new Menu('Helpdesk SAPTI');
+        $link = Administrador::URL."helpdesk/";
+        $thise->agregarItem('Configurar Helpdesk','Gesti&oacute;n de Helpdesk para el sistema SAPTI.','basicset/helpdesk_48.png',$link,0,4);
+        $menus[] = $thise;
+  */
+  
+  
+$notificacion= new Notificacion();
   
   $menu = new Menu('Notificaciones y Mensajes');
   $link = Docente::URL."notificacion/notitribunal.php";
-  $menu->agregarItem('Notificaiones','Notificaciones para el Proyecto Final','docente/notificacion.png',$link);
+  $menu->agregarItem('Notificaiones','Notificaciones para el Proyecto Final','docente/notificacion.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
   $link = Docente::URL."calendario/evento.registro.php?iddicta={$iddicta}";
   $menu->agregarItem('Mensajes','Mensajes para el Proyecto Final','docente/notificacion.png',$link);
   $menus[] = $menu;

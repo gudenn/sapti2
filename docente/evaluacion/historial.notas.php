@@ -13,7 +13,7 @@ AND dc.usuario_id=us.id
 AND di.materia_id=ma.id
 AND it.estudiante_id=(SELECT it.estudiante_id
 FROM evaluacion ev, inscrito it
-WHERE it.evaluacion_id=ev.id
+WHERE ev.id=it.evaluacion_id
 AND ev.id='".$ideve1."' 
           )";
    $sql = mysql_query($resul);

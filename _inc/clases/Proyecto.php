@@ -38,6 +38,8 @@ class Proyecto extends Objectbase {
    * Visto Bueno de Docente, Tutores y Revisores (VB)
    */
   const EST2_BUE = "VB";
+  
+   
 
   /**
    * Estado Proyecto 
@@ -50,6 +52,17 @@ class Proyecto extends Objectbase {
    * con defensa (LD)
    */
   const EST4_DEF = "LD";
+  /**
+   * Estado Proyecto 
+   * Frormulario Perfil Pendiente
+   */
+  const EST5_P = "PD";
+  
+   /**
+   * Estado Proyecto 
+   * Frormulario Perfil Confirmaddo
+   */
+  const EST6_C = "CO";
 
   /**
    * Codigo iden de la modalidad
@@ -274,8 +287,15 @@ class Proyecto extends Objectbase {
     leerClase('Area');
     $areas = array();
     $activo = Objectbase::STATUS_AC;
-    $sql = "select a.* from " . $this->getTableName('Proyecto_area') . " as pa , " . $this->getTableName('Area') . " as a   where pa.proyecto_id = '$this->id' and pa.area_id = a.id and pa.estado = '$activo' and a.estado = '$activo'  ";
+    $sql = "select a.* from " . $this->getTableName('Proyecto_area') . " as pa , " . $this->getTableName('Area') . " as a   where pa.proyecto_id = '$this->id' and pa.area_id = a.id and pa.estado = '$activo' and a.estado = '$activo'";
+ /**
+    $sql = "SELECT a.*
+from  proyecto_area  pa ,area a
+where pa.area_id=a.id  and pa.proyecto_id='$this->id' and pa.estado='AC'  and a.estado='AC';";
+  
+  */
     $resultado = mysql_query($sql);
+  // var_dump(mysql_fetch_array($resultado, MYSQL_ASSOC));
     if (!$resultado)
       return false;
     while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) {
@@ -458,7 +478,11 @@ where  p.`id`=t.`proyecto_id` and p.`id`=1 and t.`docente_id`=1;
     //@TODO revisar
     //  leerClase('Proyecto_area');
     leerClase('Vigencia');
+
+   $vigencias = array();
+
      $vigencias = array();
+
     $activo = Objectbase::STATUS_AC;
     $sql = "select v.* from " . $this->getTableName('Vigencia') . " as v    where v.proyecto_id = '$this->id' and v.estado = '$activo'";
     $resultado = mysql_query($sql);
@@ -469,28 +493,56 @@ where  p.`id`=t.`proyecto_id` and p.`id`=1 and t.`docente_id`=1;
     }
     return $vigencias;
   }
-    function getv() {
+  
+  function getVD() {
     //@TODO revisar
-    leerClase('Vigencia');
+    //  leerClase('Proyecto_area');
+    leerClase('Visto_bueno');
+     $vistos= array();
+     $d=  Visto_bueno::E1_DOCENTE;
+    
     $activo = Objectbase::STATUS_AC;
-    // $sql = "select p.* from ".$this->getTableName('Proyecto_estudiante')." as pe , ".$this->getTableName('Proyecto')." as p   where pe.estudiante_id = '$this->id' and pe.proyecto_id = p.id and pe.estado = '$activo' and p.estado = '$activo'  ";
-
-    $sql = "select p.* from " . $this->getTableName('vigencia') . " as pe , " . $this->getTableName('Proyecto') . " as p   where pe.estudiante_id = '$this->id' and pe.proyecto_id = p.id and  p.es_actual = '1' and pe.estado = '$activo' and p.estado = '$activo'  ";
-
+    $sql = "select v.* from " . $this->getTableName('Visto_bueno') . " as v    where v.proyecto_id = '$this->id' and v.visto_bueno_tipo='$d' and v.estado = '$activo'";
     $resultado = mysql_query($sql);
     if (!$resultado)
       return false;
-    if (!mysql_num_rows($resultado))
-      return new Proyecto();
-    $proyecto_array = mysql_fetch_array($resultado);
-    $proyecto       = new Proyecto($proyecto_array);
-    return $proyecto;
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) {
+      $vistos[] = new Visto_bueno($fila);
+    }
+    return $vistos;
   }
+  
+  
+  /**
+   * 
+   * @return
+   * retorna la visto bueno  del proyecto
+   */
+ function getVT() {
+    //@TODO revisar
+    //  leerClase('Proyecto_area');
+    leerClase('Visto_bueno');
+     $vistos= array();
+     $d= Visto_bueno::E2_TUTOR;
+    
+    $activo = Objectbase::STATUS_AC;
+    $sql = "select v.* from " . $this->getTableName('Visto_bueno') . " as v    where v.proyecto_id = '$this->id' and v.visto_bueno_tipo='$d' and v.estado = '$activo'";
+    $resultado = mysql_query($sql);
+    if (!$resultado)
+      return false;
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) {
+      $vistos[] = new Visto_bueno($fila);
+    }
+    return $vistos;
+  }
+  
+
+   
 
   /**
    * 
    * @return boolean|\Area
-   * retorna los tutores del proyecto
+   * retorna los vistos buenos del proyecto
    */
   
   function getTutoress()

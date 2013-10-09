@@ -77,7 +77,7 @@
             </p>
             
             <p>
-<select name="hora_ini">
+<select  id="hora_ini" name="hora_ini">
 <option value="00">00</option>
 <option value="01">01</option>
 <option value="02">02</option>
@@ -169,7 +169,7 @@
             </p>
             
             <p>
-<select name="hora_fin">
+<select id="hora_fin" name="hora_fin">
 <option value="00">00</option>
 <option value="01">01</option>
 <option value="02">02</option>
@@ -278,8 +278,8 @@
               
  </div>
          <script>
-jQuery('#dia_id').change(function () {
-var numero =document.getElementById("dia_id").value;
+jQuery('#hora_ini').change(function () {
+var numero =document.getElementById("hora_ini").value;
 // valor de la id de Provincias
 var to=document.getElementById("Buscando");
 to.innerHTML="buscando....";
@@ -287,9 +287,9 @@ to.innerHTML="buscando....";
 jQuery.ajax({
 type: "POST", 
 url: "buscador.php",
-data: 'iddia='+numero,// enviamos la id de la Porvincia + la id de la población
+data: 'horaini='+numero,// enviamos la id de la Porvincia + la id de la población
 success: function(a) {
-jQuery('#turno_id').html(a);// el resultado de la busqueda la mostramos en  #poblacionList
+jQuery('#hora_fin').html(a);// el resultado de la busqueda la mostramos en  #poblacionList
 var to=document.getElementById("Buscando");
 to.innerHTML="";
 }

@@ -44,11 +44,13 @@ try {
   
   $proyecto=$estudiante->getProyecto();
   $pr=new Proyecto($proyecto->id);
-  $v=$pr->getVigencia();
-  $a=$pr->getArea();
- echo  $v->estado_vigencia;
-echo   $a->nombre;
-  $vigencia= new Vigencia($proyecto->id);
+  
+  $v=$proyecto->getVigencia();
+ 
+  
+
+  $vigencia= new Vigencia($v[0]->id);
+
 
  
   
