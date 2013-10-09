@@ -44,9 +44,12 @@ class Menu
 
   function getAdminIndex() {
     leerClase('Grupo');
+    leerClase('Usuario');
     leerClase('Administrador');
     $menus   = array();
     $usuario = getSessionUser();
+    if (isset($usuario->id) || (!$usuario->id))
+      return;
     // Menu del SUPER ADMINISTRADOR
     if ($usuario->perteneceGrupo(Grupo::GR_AD))
     {
