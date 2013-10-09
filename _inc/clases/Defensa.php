@@ -33,6 +33,8 @@ class Defensa extends Objectbase
   var $tipo_defensa_id;
   var $lugar_id;
   var $proyecto_id;
+  
+  
 }
 
 ?>
