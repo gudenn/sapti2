@@ -8,6 +8,9 @@ try {
    header("Location: login.php");  
 
 
+  
+  
+  
  $smarty->assign('title','Proyecto Final');
   $smarty->assign('description','Proyecto Final');
   $smarty->assign('keywords','Proyecto Final');
