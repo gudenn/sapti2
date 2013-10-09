@@ -353,6 +353,7 @@ class Estudiante extends Objectbase {
   function inscribirEstudianteDicta($semestre_id,$dicta_id) {
       leerClase('Inscrito');
       $inscrito = new Inscrito();
+      $inscrito->estado_inscrito = Inscrito::E_ACTUAL;
       $inscrito->inscribirEstudiante($this->id,$semestre_id,$dicta_id);    
   }
   
