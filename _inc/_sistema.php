@@ -81,6 +81,12 @@ function verpermisos() {
       $_SESSION['PERMISOS'][$_SESSION["MODULO"]] = $usario->getPermiso($_SESSION["MODULO"]);
     if (!$_SESSION['PERMISOS'][$_SESSION["MODULO"]]['ver'])
     {
+      leerClase('Grupo');
+      leerClase('Usuario');
+      leerClase('Administrador');
+      $usuario = getSessionUser();
+      if ($usuario->perteneceGrupo(Grupo::GR_AD))
+        return;
       //@TODO eliminar la siguiente linea
       exit("NO TIENE PERMISO!!!");
       closeSession();

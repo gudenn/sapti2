@@ -1,5 +1,17 @@
 INSERT INTO `usuario` (`id`, `nombre`, `apellido_paterno`, `apellido_materno`, `email`, `fecha_nacimiento`, `login`, `clave`, `ci`, `sexo`, `estado`) VALUES
 (1, 'Super Administrador', 'Super',' ', 'guyencu@gmail.com', '1989-01-17', 'admin', '123123', '123123', 'M', 'AC');
+
+INSERT INTO `grupo` (`id`, `codigo`, `descripcion`, `estado`) VALUES
+(1, 'SUPER-ADMIN' , 'grupo para el super administrador del sistema', 'AC'),
+(NULL, 'ESTUDIANTES' , 'estudiantes', 'AC'),
+(NULL, 'DOCENTES'    , 'docentes', 'AC'),
+(NULL, 'TUTORES'     , 'tutores', 'AC'),
+(NULL, 'TRIBUNALES'  , 'tribunales', 'AC'),
+(NULL, 'CONSEJOS'    , 'consejos', 'AC');
+
+INSERT INTO `pertenece` (`id`, `usuario_id`, `grupo_id`, `estado`) VALUES
+(NULL, '1'  , '1', 'AC');
+
 INSERT INTO `administrador` (`id`, `usuario_id`, `estado`) VALUES (NULL, '1', 'AC');
 -- -----------------------------Docente--------------------------------
 INSERT INTO `usuario` ( `nombre`, `apellido_paterno`, `apellido_materno`, `email`, `fecha_nacimiento`, `login`, `clave`, `ci`, `sexo`, `estado`) VALUES
@@ -99,12 +111,6 @@ INSERT INTO `proyecto_dicta` (`id`, `proyecto_id`, `dicta_id`, `estado`) VALUES 
 INSERT INTO `proyecto_tutor` (`id`, `proyecto_id`, `tutor_id`, `estado`) VALUES (NULL, '1', '1', 'AC');
 
 
-INSERT INTO `grupo` (`id`, `codigo`, `descripcion`, `estado`) VALUES
-(NULL, 'SUPER-ADMIN' , 'grupo para el super administrador del sistema', 'AC'),
-(NULL, 'ESTUDIANTES' , 'estudiantes', 'AC'),
-(NULL, 'DOCENTES'    , 'docentes', 'AC'),
-(NULL, 'TUTORES'     , 'tutores', 'AC'),
-(NULL, 'TRIBUNALES'  , 'tribunales', 'AC');
 
 
 INSERT INTO `area` (`id`, `nombre`, `descripcion`, `estado`) VALUES (NULL, 'Ingeniería de Software', NULL, 'AC');
@@ -161,6 +167,7 @@ INSERT INTO `tipo_defensa` (`id`, `nombre`, `estado`) VALUES
 (2, 'Publica', 'AC');
 
 
+<<<<<<< HEAD
 
 
 
@@ -169,3 +176,5 @@ INSERT INTO `turno` (`id`, `nombre`, `peso`, `descripcion`, `estado`) VALUES
 (4, 'Tarde', NULL, 'afsd', 'AC'),
 (5, 'Mañana', NULL, 'fasdf', 'AC');
 
+=======
+>>>>>>> 3db5c27ac173a2df6d7352dfdeabc830b51ddcd7
