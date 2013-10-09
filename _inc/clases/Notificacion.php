@@ -456,6 +456,8 @@ from  `notificacion` n, `notificacion_tribunal`  nt, `tribunal`t , `docente` d
    */
   
   
+  
+  
   function getNotificacionDicta($idusuario)
   {
      leerClase('Usuario');
