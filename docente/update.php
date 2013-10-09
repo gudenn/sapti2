@@ -10,7 +10,7 @@
  * Dual licensed under the MIT or GPL Version 2 licenses.
  * http://editablegrid.net/license
  */
-
+  define ("MODULO", "DOCENTE");
 require  '_start.php';
 include '../_inc/_configurar.php';        
 require_once('config.php');         

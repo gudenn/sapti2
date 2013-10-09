@@ -1,4 +1,5 @@
 <?php
+define ("MODULO", "DOCENTE");
   require('../_start.php');
 $to ='ola' ;  
 $ideve1=$_GET['idev'];
