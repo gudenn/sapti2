@@ -41,7 +41,7 @@ try {
   $estudiante     = new Estudiante($estudiante_aux->estudiante_id);
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();
-<<<<<<< HEAD
+
   $proyecto= new Proyecto($proyecto->id);
   
    $vistod=$proyecto->getVD();
@@ -49,9 +49,6 @@ try {
   $vistot=$proyecto->getVT();
    $vistotu=$vistot[0]->visto_bueno_tipo;
   
-  
-=======
-
   /**
    * Menu central
    */
@@ -60,7 +57,7 @@ try {
   $menus = $menu->getestudianteIndex($proyecto);
   $smarty->assign("menus", $menus);
 
->>>>>>> origin/master
+
   $smarty->assign("estudiante", $estudiante);
   $smarty->assign("usuario", $usuario);
   

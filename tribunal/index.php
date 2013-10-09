@@ -68,7 +68,6 @@ try {
   $menu->agregarItem('Reportes de Docentes','Reportes correspondientes a los Docentes','basicset/graph.png',$link);
   $menus[] = $menu;
   
-  
  $smarty->assign("menus", $menus);
 
   $smarty->assign('JS',$JS);

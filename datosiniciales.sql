@@ -170,3 +170,9 @@ INSERT INTO `turno` (`id`, `nombre`, `peso`, `descripcion`, `estado`) VALUES
 (4, 'Tarde', NULL, 'afsd', 'AC'),
 (5, 'Mañana', NULL, 'fasdf', 'AC');
 
+
+INSERT INTO `lugar` (`id`, `nombre`, `estado`) VALUES
+(1, 'Laboratorio de Memi', 'AC')
+INSERT INTO `tipo_defensa` (`id`, `nombre`, `estado`) VALUES
+(1, 'Privada', 'AC'),
+(2, 'Publica', 'AC');

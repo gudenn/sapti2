@@ -37,7 +37,7 @@
           <li><a href="#">Free Website Software</a></li>
           <li><a href="#">Free Webdesign Templates</a>
             <ul>
-<<<<<<< HEAD
+
               <li><a href="{$URL}estudiante/">Inicio</a></li>
               {if ($proyecto)}
               <li><a href="{$URL}estudiante/">Proyecto Final</a>
@@ -54,10 +54,9 @@
               <li><a href="editar.cuenta.php">Modificar Cuenta</a></li>
               <li><a href="editar.cuenta.php">Preferencias</a></li>
               <li><a href="{$URL}?salirestudiante=1">Salir</a></li>
-=======
+
               <li><a href="#">Free FireWorks Templates</a></li>
               <li><a href="#">Free PNG Templates</a></li>
->>>>>>> origin/master
             </ul>
           </li>
         </ul>
