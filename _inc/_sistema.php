@@ -79,6 +79,11 @@ function verpermisos() {
       $_SESSION['PERMISOS'] = array();
     if (TRUE || !isset($_SESSION['PERMISOS'][$_SESSION["MODULO"]]))
       $_SESSION['PERMISOS'][$_SESSION["MODULO"]] = $usario->getPermiso($_SESSION["MODULO"]);
+    if ($_SESSION["MODULO"] == 'VISITA')
+    {
+      return;
+      //echo ('ES VISITA');
+    }
     if (!$_SESSION['PERMISOS'][$_SESSION["MODULO"]]['ver'])
     {
       leerClase('Grupo');
@@ -92,8 +97,6 @@ function verpermisos() {
       closeSession();
       header("Location: ".URL."?notienepermiso");
     }
-    //if ($_SESSION["MODULO"] == 'VISITA')
-      //echo ('ES VISITA');
     
   }
 }
