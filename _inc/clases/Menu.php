@@ -44,9 +44,12 @@ class Menu
 
   function getAdminIndex() {
     leerClase('Grupo');
+    leerClase('Usuario');
     leerClase('Administrador');
     $menus   = array();
     $usuario = getSessionUser();
+    if (!isset($usuario->id) || (!$usuario->id))
+      return;
     // Menu del SUPER ADMINISTRADOR
     if ($usuario->perteneceGrupo(Grupo::GR_AD))
     {
@@ -112,7 +115,8 @@ class Menu
       $link = Administrador::URL."notificacion/";
       $thise->agregarItem('Gesti&oacute;n de Notificaciones','Gestionar Mis notificaciones','basicset/megaphone.png',$link,0,12);
       $link = Administrador::URL."mensajes/";
-      $thise->agregarItem('Gesti&oacute;n de Mesajes','Mi correo de Mensajes','basicset/mail.png',$link,14);        break;
+      $thise->agregarItem('Gesti&oacute;n de Mesajes','Mi correo de Mensajes','basicset/mail.png',$link,14);
+      
      
     }
     // Menu de AUTORIDADES
@@ -134,7 +138,8 @@ class Menu
       $link = Administrador::URL."notificacion/";
       $thise->agregarItem('Gesti&oacute;n de Notificaciones','Gestionar Mis notificaciones','basicset/megaphone.png',$link,0,12);
       $link = Administrador::URL."mensajes/";
-      $thise->agregarItem('Gesti&oacute;n de Mesajes','Mi correo de Mensajes','basicset/mail.png',$link,14);        break;
+      $thise->agregarItem('Gesti&oacute;n de Mesajes','Mi correo de Mensajes','basicset/mail.png',$link,14);
+      $menus[] = $thise;
       
     }
     // Menu de CONSEJO
@@ -144,7 +149,8 @@ class Menu
       $link = Administrador::URL."notificacion/";
       $thise->agregarItem('Gesti&oacute;n de Notificaciones','Gestionar Mis notificaciones','basicset/megaphone.png',$link,0,12);
       $link = Administrador::URL."mensajes/";
-      $thise->agregarItem('Gesti&oacute;n de Mesajes','Mi correo de Mensajes','basicset/mail.png',$link,14);        break;
+      $thise->agregarItem('Gesti&oacute;n de Mesajes','Mi correo de Mensajes','basicset/mail.png',$link,14);
+      $menus[] = $thise;
       
     } 
     return $menus;
