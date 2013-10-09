@@ -23,13 +23,44 @@ try {
   * Clases
   */
   leerClase('Administrador');
+  leerClase('Semestre');
+  leerClase('Proyecto');
+  $semestre=new Semestre();
+
+  $activo=  $semestre->getActivo();
+  echo $activo->s;
 
   /**
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Administrador::URL,'name'=>'Administraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'estudiante/','name'=>' Estudiantes');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'pendientes/','name'=>'Formularios Pendientes');
+  
+  
   $smarty->assign("menuList", $menuList);
+  
+  
+   $estado=  Proyecto::EST5_P;
+ 
+   $sqlr="SELECT count(*)as c
+FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe
+WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id and p.estado_proyecto='".$estado."' and p.estado='AC'";
+ $resultado = mysql_query($sqlr);
+ $arraytribunal= array();
+  
+ while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+ {
+ 
+   $arraytribunal[]=$fila;
+ }
+ 
+ 
+ //$cantp=  sizeof($arraytribunal);
+  $cantp=$arraytribunal[0]['c'];
+ 
+ 
+ 
+
 
 
   /**
@@ -37,26 +68,15 @@ try {
    */
   //----------------------------------//
   leerClase('Menu');
-  $menu = new Menu('Estudiantes');
-  $link = Administrador::URL."estudiante/estudiante.gestion.php";
-  $menu->agregarItem('Gesti&oacute;n de Estudiantes','Registro y modificaciones para Estudiantes','basicset/people.png',$link);
+ 
+  $menu = new Menu('Pendientes');
+  $link = Administrador::URL."pendientes/pendientes.gestion.php";
+
+  $menu->agregarItem('Gesti&oacute;n de Formularios Pendientes','Confirmar Formularios Pendientes','basicset/people.png',$link,$cantp);
   $link = Administrador::URL."estudiante/estudiante.registro.php";
-  $menu->agregarItem('Registro de Estudiante','Registro de un nuevo Estudiante','basicset/user5.png',$link);
-  $link = Administrador::URL."estudiante/estudiante.asignartutor.php";
-  $menu->agregarItem('Asignar Tutor a un Estudiante','Registro de un nuevo Tutor o seleccionar uno de la lista de tutores disponibles para un estudiante.','basicset/user1.png',$link);
+   
   $menus[] = $menu;
-  $menu = new Menu('Proyecto y Perfil');
-  $link = Administrador::URL."estudiante/";/*@TODO*/
-  $menu->agregarItem('Registro de Perfil','Grabar Los datos de un Perfil para un Estudiante.','basicset/survey.png',$link);
-  $link = Administrador::URL."estudiante/estudiante.asignarproyecto.php";
-  $menu->agregarItem('Registro de Proyecto Final','Grabar Los datos de un Proyecto Final para un Estudiante.','basicset/briefcase_48.png',$link);
-  $link = Administrador::URL."estudiante/estudiante.cambiotema.php";
-  $menu->agregarItem('Cambios de Tema','Registro de Cambios de Tema; Cambios Leves y Cambios Totales.','basicset/reload.png',$link);
-  $menus[] = $menu;
-  $menu = new Menu('Reportes');
-  $link = Administrador::URL."estudiante/";
-  $menu->agregarItem('Reportes de Estudiantes','Reportes correspondientes a los Estudiantes','basicset/graph.png',$link);
-  $menus[] = $menu;
+  
   //----------------------------------//
   
   

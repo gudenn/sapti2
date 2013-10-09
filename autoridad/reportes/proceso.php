@@ -22,6 +22,7 @@ try {
 
   //JS
   leerClase('Semestre');
+  leerClase('Proyecto');
   
    $JS[]  = "js/ajaxbuscarperfil.js";
    $smarty->assign('JS','');
@@ -47,10 +48,11 @@ $sql2 = "SELECT *
    $p=$_POST['semestre_selec'];
   $semestre=new Semestre($p);
   $smarty->assign("semestre", $semestre);
+  $confirmado=  Proyecto::EST6_C;
   
     $sqlr="SELECT p.id,u.nombre,s.codigo,p.nombre as titulo,CONCAT(apellido_paterno,apellido_materno) as apellidos,p.estado as estadop
 FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe
-WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado='AC' and s.id='".$p."'";
+WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado='AC' and p.estado_proyecto='".$confirmado."' and s.id='".$p."'";
  $resultado = mysql_query($sqlr);
  $arraytribunal= array();
   

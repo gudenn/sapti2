@@ -37,7 +37,6 @@
           <li><a href="#">Free Website Software</a></li>
           <li><a href="#">Free Webdesign Templates</a>
             <ul>
-<<<<<<< HEAD
               <li><a href="{$URL}estudiante/">Inicio</a></li>
               {if ($proyecto)}
               <li><a href="{$URL}estudiante/">Proyecto Final</a>
@@ -48,16 +47,14 @@
                 </ul>
               </li>
               {/if}
-              {if ($vistodoc&$vistotu)}
-              <li><a href="{$URL}autoridad/proyecto/proyecto.registro.php">Registro Perfil</a></li>
+              {if ($proyecto->estado_proyecto==Proyecto::EST2_BUE)}
+              <li><a href="{$URL}estudiante/proyecto/proyecto.registro.php">Registro Formulario</a></li>
               {/if}
               <li><a href="editar.cuenta.php">Modificar Cuenta</a></li>
               <li><a href="editar.cuenta.php">Preferencias</a></li>
               <li><a href="{$URL}?salirestudiante=1">Salir</a></li>
-=======
               <li><a href="#">Free FireWorks Templates</a></li>
               <li><a href="#">Free PNG Templates</a></li>
->>>>>>> origin/master
             </ul>
           </li>
         </ul>

@@ -89,7 +89,7 @@ class Menu
         $thise->agregarItem('Gesti&oacute;n de Reprogramaciones','Postergar y dar Prorroga a Proyectos','basicset/calendar.png',$link);
         $menus[] = $thise;
         $thise = new Menu('Perfil');
-        $link = Administrador::URL."proyeco/";
+        $link = Administrador::URL."pendientes/";
         $thise->agregarItem('Gesti&oacute;n de Perfiles','Gestionar los perfiles de tesis para los estudiantes','basicset/licence.png',$link);
         $link = Administrador::URL."reportes/";
         $thise->agregarItem('Reportes de Perfiles','Reportes correspondientes a los Perfiles','basicset/graph.png',$link);
@@ -132,7 +132,11 @@ class Menu
     leerClase('Grupo');
     leerClase('Estudiante');
     //var_dump($proyecto);
-    
+     $vistod=$proyecto->getVD();
+   $vistodoc=$vistod[0]->visto_bueno_tipo;
+   $vistot=$proyecto->getVT();
+   $vistotu=$vistot[0]->visto_bueno_tipo;
+   
     $menus = array();
     $thise = new Menu('Proyecto Final');
     $link = Estudiante::URL."proyecto-final/";
@@ -145,6 +149,13 @@ class Menu
     $thise->agregarItem('Notificaciones','Geti&oacute;n de las Notificaciones','basicset/megaphone.png',$link,12);
     $link = Estudiante::URL."proyecto-final/";
     $thise->agregarItem('Mensajes','Geti&oacute;n de los mensajes Mensajes','basicset/mail.png',$link,15);
+    if($proyecto->estado_proyecto==Proyecto::EST2_BUE){
+    $menus[] = $thise;
+    $thise = new Menu('Registro de Formulario');
+    $link = Estudiante::URL."proyecto/proyecto.registro.php";
+    $thise->agregarItem('Registro de Formulario','Geti&oacute;n de las Notificaciones','basicset/survey.png',$link,1);
+   
+    }
     $menus[] = $thise;
     return $menus;
   }
