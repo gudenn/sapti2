@@ -1,6 +1,6 @@
 <?php
 try {
-  define ("MODULO", "ESTUDIANTE-PROYECTO-INDEX");
+  define ("MODULO", "ESTUDIANTE");
   require('../_start.php');
   if(!isEstudianteSession())
     header("Location: ../login.php");  
