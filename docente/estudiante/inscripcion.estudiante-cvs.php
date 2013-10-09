@@ -8,6 +8,7 @@ try {
   leerClase('Inscrito');
   leerClase('Evaluacion');
   leerClase('Proyecto_dicta');
+  leerClase('Docente');
   
   /** HEADER */
   $smarty->assign('title','SAPTI - Inscripcion de Estudiantes');
@@ -27,9 +28,19 @@ try {
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
   $smarty->assign('JS',$JS);
   
-      if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
+  /**
+   * Menu superior
+   */
+  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>'Proyecto Final');
+  $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/'.basename(__FILE__),'name'=>'Inscripcion Estudiantes');
+  $smarty->assign("menuList", $menuList);
+  
+  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
   {
      $iddicta = $_GET['iddicta'];
+  }else{
+      $iddicta=$_SESSION['iddictaproyectofinal'];
   }
   
     $docmaterias = "SELECT ma.nombre as materia, di.codigo_grupo as grupo
