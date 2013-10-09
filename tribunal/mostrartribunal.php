@@ -38,7 +38,7 @@ try {
   leerClase("Filtro");
   leerClase("Proyecto_tribunal");
   leerClase("Proyecto_estudiante");
-    leerClase("Modalidad");
+  leerClase("Modalidad");
   
   /**
  $filtro     = new Filtro('g_docente',__FILE__);

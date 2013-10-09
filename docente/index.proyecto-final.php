@@ -79,13 +79,7 @@ try {
   $link = Docente::URL."calendario/evento.lista.php?iddicta={$iddicta}";
   $menu->agregarItem('Edici&oacute;n de Eventos','Edici&oacute;n de Eventos de la Materia de Proyecto Final','docente/edicion.png',$link);
   $menus[] = $menu;
-  /**
-        $thise = new Menu('Helpdesk SAPTI');
-        $link = Administrador::URL."helpdesk/";
-        $thise->agregarItem('Configurar Helpdesk','Gesti&oacute;n de Helpdesk para el sistema SAPTI.','basicset/helpdesk_48.png',$link,0,4);
-        $menus[] = $thise;
-  */
-  
+ 
   
 $notificacion= new Notificacion();
   

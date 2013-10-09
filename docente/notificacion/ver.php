@@ -34,6 +34,8 @@ try {
     leerClase("Usuario");
     leerClase("Docente");
     leerClase("Tribunal");
+    leerClase("Notificacion");
+    leerClase("Consejo");
 
 
 
@@ -74,15 +76,57 @@ $smarty->assign('idtribunal',$_GET['tribunal_id']);
   
 if ( isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' )
   {
-  
-  
-     if(isset($_POST['ids']))
+    if(isset($_POST['ids']))
      {
-        echo "Hola eli";
+         
+      //accion
+    if(  $_POST['accion']==Tribunal::ACCION_AC)
+    {
        $tribunal = new Tribunal($_POST['ids']);
        $tribunal->visto="V";
        $tribunal->accion=$_POST['accion'];
        $tribunal->detalle=$_POST['descripcion'];
+       $notificacion= new Notificacion();
+       
+    $notificacions= new Notificacion();
+    $notificacions->objBuidFromPost();
+    $notificacions->proyecto_id=$_POST['proyecto_id']; 
+    $notificacions->tipo="Solicitud";
+    $notificacions->fecha_envio= date("j/n/Y");
+    $notificacions->asunto="Asignacion de Tribunales";
+    $notificacions->detalle="fasdf";
+    $notificacions->prioridad=5;
+    $notificacions->estado = Objectbase::STATUS_AC;
+
+    $noticaciones= array('consejos'=>array( 1));
+    $notificacions->enviarNotificaion( $noticaciones);
+         
+       
+       
+       
+       
+    }else
+    {
+      
+       $tribunal = new Tribunal($_POST['ids']);
+       $tribunal->visto=  Tribunal::VISTO;
+       $tribunal->accion=$_POST['accion'];
+       $tribunal->detalle=$_POST['descripcion'];
+       
+        $notificacions= new Notificacion();
+    $notificacions->objBuidFromPost();
+    $notificacions->proyecto_id=$_POST['proyecto_id']; 
+    $notificacions->tipo="Solicitud";
+    $notificacions->fecha_envio= date("j/n/Y");
+    $notificacions->asunto="Asignacion de Tribunales";
+    $notificacions->detalle="fasdf";
+    $notificacions->prioridad=5;
+    $notificacions->estado = Objectbase::STATUS_AC;
+
+    $noticaciones= array('consejos'=>array( 1));
+    $notificacions->enviarNotificaion($noticaciones);
+       
+    }
        $tribunal->save();
        
        

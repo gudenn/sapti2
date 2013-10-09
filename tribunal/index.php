@@ -34,6 +34,8 @@ try {
   leerClase('Menu');
   leerClase('Tribunal');
   leerClase('Administrador');
+  leerClase('Estudiante');
+    leerClase('Notificacion');
 
   
     /**
@@ -54,7 +56,7 @@ try {
   $menu->agregarItem('Reportes de Docentes','Reportes correspondientes a los Docentes','basicset/graph.png',$link);
   $menus[] = $menu;
   
-   $menu = new Menu('Asignacion de Fecha  de Defensa');
+  $menu = new Menu('Asignacion de Fecha  de Defensa');
   $link = Consejo::URL."listadefensa.php";
   $menu->agregarItem('Gesti&oacute;n de Asignac&oacute;n','Registro y modificacion de tribunales','basicset/user4.png',$link);
   $link = Consejo::URL."";
@@ -67,6 +69,15 @@ try {
   $link = Consejo::URL."";
   $menu->agregarItem('Reportes de Docentes','Reportes correspondientes a los Docentes','basicset/graph.png',$link);
   $menus[] = $menu;
+  
+   $notificacion= new Notificacion();
+    echo sizeof($notificacion->getNotificacionConsejo(2));
+    
+    $menu = new Menu('Notificaciones y Mensajes');
+    $link = Estudiante::URL."notificacion/";
+    $menu->agregarItem('Notificaciones','Geti&oacute;n de las Notificaciones','basicset/megaphone.png',$link,  sizeof($notificacion->getNotificacionTribunal(3)));
+    $menus[] = $menu;
+  
   
  $smarty->assign("menus", $menus);
 
