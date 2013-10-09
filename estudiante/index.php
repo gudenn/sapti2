@@ -50,7 +50,7 @@ try {
    $vistodoc=$vistod[0]->visto_bueno_tipo;
    $vistot=$proyecto->getVbTutor();
    $vistotu=$vistot[0]->visto_bueno_tipo;
-
+$vb=  Proyecto::EST2_BUE;
 
   /**
    * Menu central
@@ -68,7 +68,7 @@ try {
   
   $smarty->assign("proyecto", $proyecto);
   
-  $smarty->assign("vistodoc", $vistodoc);
+  $smarty->assign("vb", $vb);
   $smarty->assign("vistotu", $vistotu);
   $smarty->assign("ERROR", $ERROR);
   

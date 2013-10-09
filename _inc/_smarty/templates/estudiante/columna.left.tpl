@@ -48,7 +48,7 @@
                 </ul>
               </li>
               {/if}
-              {if ($proyecto->estado_proyecto==Proyecto::EST2_BUE)}
+              {if ($proyecto->estado_proyecto==$vb)}
               <li><a href="{$URL}estudiante/proyecto/proyecto.registro.php">Registro Formulario</a></li>
               {/if}
               <li><a href="editar.cuenta.php">Modificar Cuenta</a></li>
