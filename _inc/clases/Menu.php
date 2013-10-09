@@ -139,6 +139,7 @@ class Menu
       $thise->agregarItem('Gesti&oacute;n de Notificaciones','Gestionar Mis notificaciones','basicset/megaphone.png',$link,0,12);
       $link = Administrador::URL."mensajes/";
       $thise->agregarItem('Gesti&oacute;n de Mesajes','Mi correo de Mensajes','basicset/mail.png',$link,14);
+      $menus[] = $thise;
       
     }
     // Menu de CONSEJO
@@ -149,6 +150,7 @@ class Menu
       $thise->agregarItem('Gesti&oacute;n de Notificaciones','Gestionar Mis notificaciones','basicset/megaphone.png',$link,0,12);
       $link = Administrador::URL."mensajes/";
       $thise->agregarItem('Gesti&oacute;n de Mesajes','Mi correo de Mensajes','basicset/mail.png',$link,14);
+      $menus[] = $thise;
       
     } 
     return $menus;
