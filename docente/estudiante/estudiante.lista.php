@@ -4,8 +4,6 @@ try {
   if(!isDocenteSession())
     header("Location: login.php"); 
 
-  leerClase("Evento");
-  leerClase("Pagination");
   leerClase('Docente');
   $ERROR = '';
 

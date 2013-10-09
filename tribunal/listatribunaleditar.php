@@ -46,34 +46,16 @@ try {
   $menuList[]     = array('url'=>URL.Consejo::URL,'name'=>'Consejo');
   $menuList[]     = array('url'=>URL . Consejo::URL ,'name'=>'Etitar Tribunales');
   $smarty->assign("menuList", $menuList);
-/**
-  $filtro     =  new Filtro('g_docente',__FILE__);
-  $docente    =  new Docente();
-  $docente    -> iniciarFiltro($filtro);
-  $filtro_sql =  $docente->filtrar($filtro);
 
-  $docente->usuario_id ='%';
-  
-  $o_string   = $docente->getOrderString($filtro);
-  $obj_mysql  = $docente->getAll('',$o_string,$filtro_sql,TRUE,TRUE);
-  $objs_pg    = new Pagination($obj_mysql, 'g_docente','',false,10);
-
-  $smarty->assign("filtros"  ,$filtro);
-  $smarty->assign("objs"     ,$objs_pg->objs);
-  $smarty->assign("pages"    ,$objs_pg->p_pages);
-*/
- 
-  
    $proyectostribunales= array();
-    $proyec= new Proyecto();
-    //var_dump( $proyec->getProyectoAsignados());
-   
+   $proyec= new Proyecto();
+      
    $usuario = new Usuario();
-//$smarty->assign('rows', $rows);
 
+   
  $usuario_id     = array();
  $usuario_nombre = array();
-$sql="SELECT DISTINCT (p.id) , u.nombre ,CONCAT(u.apellido_paterno,u.apellido_materno) as apellidos, es.codigo_sis , p.nombre as nombreproyecto
+ $sql="SELECT DISTINCT (p.id) , u.nombre ,CONCAT(u.apellido_paterno,u.apellido_materno) as apellidos, es.codigo_sis , p.nombre as nombreproyecto
 FROM proyecto p , usuario u, estudiante es , proyecto_estudiante pe, tribunal t
 WHERE  u.id=es.usuario_id and  es.id=pe.estudiante_id and  pe.proyecto_id=p.id and p.id=t.proyecto_id;";
  $resultado= mysql_query($sql);

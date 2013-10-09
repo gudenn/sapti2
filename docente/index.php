@@ -1,5 +1,6 @@
 <?php
 try {
+  define ("MODULO", "DOCENTE");
   require('_start.php');
   if(!isDocenteSession())
     header("Location: login.php");  
@@ -37,8 +38,9 @@ try {
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
   $smarty->assign("menuList", $menuList);
 
-  $docente_aux = getSessionDocente();
-  $docente     = new Docente($docente_aux->docente_id);
+  $docente = getSessionDocente();
+  //var_dump($docente);
+  //$docente     = new Docente($docente_aux->docente_id); //esto ya no es necesario
   $usuario     = $docente->getUsuario();
   
     $materias = "SELECT DISTINCT ma.id as idmat, ma.nombre as nombre
@@ -46,10 +48,10 @@ FROM dicta di, semestre se, materia ma
 WHERE di.materia_id=ma.id
 AND di.semestre_id=se.id
 AND se.activo=1
-AND di.docente_id=".$docente_aux->docente_id."
+AND di.docente_id=".$docente->id."
 ORDER BY ma.nombre";
   $mate = mysql_query($materias);
-  while ($row = mysql_fetch_array($mate, MYSQL_ASSOC)) {
+        while ($row = mysql_fetch_array($mate, MYSQL_ASSOC)) {
        $materiassemestre[] = $row;
  }
   $docmaterias = "SELECT di.id as iddicta, ma.id as idmat, ma.nombre as materia, di.codigo_grupo as grupo
@@ -57,16 +59,19 @@ FROM dicta di, semestre se, materia ma
 WHERE di.materia_id=ma.id
 AND di.semestre_id=se.id
 AND se.activo=1
-AND di.docente_id=".$docente_aux->docente_id."
+AND di.docente_id=".$docente->id."
 ORDER BY ma.id";
   $resultmate = mysql_query($docmaterias);
+
   while ($row2 = mysql_fetch_array($resultmate, MYSQL_ASSOC)) {
        $docmateriassemestre[] = $row2;
  }
+
   /**
    * Menu central
    */
   //----------------------------------//
+    if(mysql_num_rows($resultmate)>0){
   leerClase('Menu');
   $varsession=1;
   foreach ($materiassemestre as $value) {
@@ -83,6 +88,10 @@ ORDER BY ma.id";
          };
          $menus[] = $menu;
   };
+    }  else {
+  $columnacentro = 'docente/mensajedisculpa.tpl';
+  $smarty->assign('columnacentro',$columnacentro);
+  }
   //----------------------------------//
   
   $smarty->assign("menus", $menus);

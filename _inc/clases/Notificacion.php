@@ -396,26 +396,34 @@ from  `notificacion` n, `notificacion_tribunal`  nt, `tribunal`t , `docente` d
   function   getNotificacionConsejo($idusuario)
   {
     
-        leerClase('Notificacion');
+     leerClase('Notificacion');
     $notificacion= array();
     $activo = Objectbase::STATUS_AC;
-                                                            /**
-                                                                                                                                                                                          * select  n.*
-                                                                                                                                                                                                                  from  `notificacion`  n , `notificacion_consejo`  nc, `consejo`  c
-                                                                                                                                                                                                                  where   n.`id`= nc.`notificacion_id`  and nc.`consejo_id`= c.`id`  and nc.`estado_notificacion`='SV'  and c.`usuario_id`=3
-                                                                                                                                                                                         * /                                                                                             */
-    $vars=0;
-    $sql = "select n.* from " . $this->getTableName('Notificacion') . " as n , " . $this->getTableName('Notificacion_consejo') . " as nc , " . $this->getTableName('Consejo') . " as e where  n.id= nc.notificacion_id  and nc.consejo_id= c.id and  nc.estado_notificacion='SV' and  c.usuario_id='$idusuario' and n.estado = '$activo' and  nc.estado = '$activo'  and c.estado = '$activo'";
-    $resultado = mysql_query($sql);
-    if ($resultado)
+               $vars=0;                                           /**
+                                                           * select  n.*
+                                                                                                                                                                                                                    from  `notificacion`  n , `notificacion_consejo`  nc, `consejo`  c
+                                                                                                                                                                                                                      where   n.`id`= nc.`notificacion_id`  and nc.`consejo_id`= c.`id`  and nc.`estado_notificacion`='SV' and nc.`estado`='AC' and  c.`estado`='AC' and n.`estado`='AC' and c.`usuario_id`=2
+                                                                                                                                                                                                                                                                               * 
+                                                           */
+   $sql = "select n.* from " . $this->getTableName('Notificacion') . " as n , " . $this->getTableName('Notificacion_consejo') . " as nc , " . $this->getTableName('Consejo') . " as e where  n.id= nc.notificacion_id  and nc.consejo_id= c.id and  nc.estado_notificacion='SV' and  c.usuario_id='$idusuario'and n.estado = '$activo' and  nc.estado = '$activo'  and c.estado = '$activo'";
+   /** 
+    $sql="select  n.*
+from  notificacion  n , notificacion_consejo  nc, consejo  c
+where   n.id= nc.notificacion_id  and nc.consejo_id= c.id  and nc.estado_notificacion='SV' and nc.estado='AC' and  c.estado='AC' and n.estado='AC' and c.usuario_id=2;";
+   */
+   $resultado = mysql_query($sql);
+     if ($resultado)
+    
+    {
     while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
       { 
       
       $vars=$vars+1;
-        $notificacion[] =new Notificacion($fila);
+    $notificacion[] =new Notificacion($fila);
       }
-     
-       return  $notificacion;
+    }
+    echo sizeof( $notificacion);
+       return $vars;
     
     
   }
@@ -454,6 +462,8 @@ from  `notificacion` n, `notificacion_tribunal`  nt, `tribunal`t , `docente` d
    * @param type $idusuario
    * 
    */
+  
+  
   
   
   function getNotificacionDicta($idusuario)

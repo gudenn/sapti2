@@ -1,5 +1,6 @@
 <?php
 try {
+  define ("MODULO", "ESTUDIANTE");
   require('_start.php');
   if(!isEstudianteSession())
     header("Location: login.php");  
@@ -43,7 +44,7 @@ try {
   if (isEstudianteSession())
   {
     $estudiante_session = getSessionEstudiante();
-    $id         = $estudiante_session->estudiante_id;
+    $id         = $estudiante_session->id;
   }
   $estudiante = new Estudiante($id);
   

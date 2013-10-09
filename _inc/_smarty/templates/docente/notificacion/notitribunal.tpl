@@ -18,6 +18,7 @@
      <td>{$notitribunal_id[ic]['id']} </td>
       <td>{$notitribunal_id[ic]['nombreusuario']}</td>
        <td>{$notitribunal_id[ic]['nombre']} </td>
+       
       <td> <a href="ver.php?tribunal_id={$notitribunal_id[ic]['idtribunal']}" target="_blank" >{icono('detalle.png','PDF')}</a>
     
         </td>

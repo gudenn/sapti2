@@ -16,7 +16,7 @@ try {
   $smarty->assign('CSS',$CSS);
 
   //JS
-  $JS[]  = URL_JS . "jquery.1.9.1.js";
+  $JS[]  = URL_JS . "jquery.min.js";
 
   //Datepicker UI
   $JS[]  = URL_JS . "ui/jquery-ui-1.10.2.custom.min.js";
@@ -25,7 +25,8 @@ try {
   //Validation
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
-
+ 
+  
   $smarty->assign('JS',$JS);
   //CREAR UN TIPO   DE DEF
   leerClase('Tribunal');

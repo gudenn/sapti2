@@ -67,7 +67,6 @@ $idocente=0;
   }
 
   
-
   
 /////////////cargando los dias de la semana///////////
   $sqldia="SELECT DISTINCT(dia.id), dia.nombre

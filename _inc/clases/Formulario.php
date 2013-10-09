@@ -105,11 +105,11 @@ class Formulario {
   public function validarCambioPassword($id,$actual,$old,$new = false, $new2 = false ,$vallarge = false,$tipo = 'texto',$nombre = 'La Clave de acceso',$vacio = FALSE ,$mensaje = 'contiene caracteres no permitidos.',$mensaje_vacio ='no puede quedar vac&iacute;a.', $mensaje_noaceptado = 'Por favor no use los siguientes caracteres:')
   {
     if ($actual != $old)
-      throw new Exception("?".$id."1&m=La Clave no corresponde a un usuario");
+      throw new Exception("?".$id."&m=La Clave no corresponde a un usuario");
     //que no este vacio
-    Formulario::validar($id."1",$old,$tipo,$nombre,$vacio,$mensaje,$mensaje_vacio, $mensaje_noaceptado);
+    Formulario::validar($id,$old,$tipo,$nombre,$vacio,$mensaje,$mensaje_vacio, $mensaje_noaceptado);
     if ($new)
-      Formulario::validarPassword($id."2",$new,$new2,$vallarge,$tipo,'La Nueva Clave de acceso',FALSE ,'contiene caracteres no permitidos.','no puede quedar vac&iacute;a.','Por favor no use los siguientes caracteres:');
+      Formulario::validarPassword($id,$new,$new2,$vallarge,$tipo,'La Nueva Clave de acceso',FALSE ,'contiene caracteres no permitidos.','no puede quedar vac&iacute;a.','Por favor no use los siguientes caracteres:');
   }
   
   /**

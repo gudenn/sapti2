@@ -267,9 +267,10 @@ class Proyecto extends Objectbase {
   /**
    * Creamos un proyecto inicial de tal manera que los estudiantes nunca estnen sin proyectos
    */
-  function crearProyectoInicial($estudiante_id , $dicta_id, $grabar = true) {
+  function crearProyectoInicial($estudiante_id , $dicta_id,$tipo, $grabar = true) {
     $this->estado_proyecto = Proyecto::EST1_INI;
     $this->es_actual       = 1;
+    $this->tipo_proyecto   = $tipo;
     $this->estado          = Objectbase::STATUS_AC;
     if ($grabar)
       $this->save();

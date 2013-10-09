@@ -21,6 +21,17 @@ class Tutor extends Objectbase
   */
   var $proyecto_tutor_objs;
   
+ /**
+  * Get usuario de un docente
+  * @return boolean|\Usuario
+  * retorna los datos de un usuario asociado a un docente
+  */
+  function getUsuario() {
+    if (!isset($this->usuario_id) || !$this->usuario_id)
+      return false;
+    $usuario = new Usuario($this->usuario_id);
+    return $usuario;
+  }
 
   /**
    * Retorna el nombre completo del usuario

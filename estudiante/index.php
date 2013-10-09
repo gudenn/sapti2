@@ -1,6 +1,6 @@
 <?php
 try {
-  define ("MODULO", "ESTUDIANTE-INDEX");
+  define ("MODULO", "ESTUDIANTE");
   require('_start.php');
   if(!isEstudianteSession())
     header("Location: login.php");  
@@ -37,9 +37,12 @@ try {
   
   
   
-  $estudiante_aux = getSessionEstudiante();
-  $estudiante     = new Estudiante($estudiante_aux->estudiante_id);
-  $usuario        = $estudiante->getUsuario();
+  $usuario_aux    = getSessionUser();
+  $usuario        = new Usuario($usuario_aux->id);
+  $usuario->getAllObjects();
+  $estudiante     = new Estudiante();
+  if (isset($usuario->estudiante_objs[0]))
+    $estudiante = $usuario->estudiante_objs[0];
   $proyecto       = $estudiante->getProyecto();
   $proyecto= new Proyecto($proyecto->id);
   
@@ -47,8 +50,7 @@ try {
    $vistodoc=$vistod[0]->visto_bueno_tipo;
    $vistot=$proyecto->getVbTutor();
    $vistotu=$vistot[0]->visto_bueno_tipo;
-   
-   
+
 
   /**
    * Menu central
@@ -60,7 +62,7 @@ try {
 
   $menus = $menu->getestudianteIndex($proyecto);
   $smarty->assign("menus", $menus);
-  
+
   $smarty->assign("estudiante", $estudiante);
   $smarty->assign("usuario", $usuario);
   

@@ -74,10 +74,10 @@ EditableGrid.prototype.initializeGrid = function()
                 }}));
             	setCellRenderer("revtipo", new CellRenderer({
                     
-                    render: function(cell, value) { cell.innerHTML ="<a>"+"<img src='" + image("flags/" + value.toLowerCase() + ".png") + "' alt='" + value + "' title=\"Tipo de Revisor\"/>"+nombreRevisor(value)+"</a>";}
+                    render: function(cell, value) { cell.innerHTML ="<a>"+"<img src='" + image("icons/flags/" + value.toLowerCase() + ".png") + "' alt='" + value + "' title=\"Tipo de Revisor\" width='30px' height='30px'/>"+nombreRevisor(value)+"</a>";}
 		})); 
                 setCellRenderer("estado", new CellRenderer({
-			render: function(cell, value){ cell.innerHTML ="<a>"+"<img src='" + image("flags/" + value.toLowerCase() + ".png") + "' alt='" + value + "' title=\"Estado de Revicion\"/>"+estadoRevision(value)+"</a>";} 
+			render: function(cell, value){ cell.innerHTML ="<a>"+"<img src='" + image("icons/flags/" + value.toLowerCase() + ".png") + "' alt='" + value + "' title=\"Estado de Revicion\" width='30px' height='30px'/>"+estadoRevision(value)+"</a>";} 
 		}));
 		
 		// render the grid (parameters will be ignored if we have attached to an existing HTML table)

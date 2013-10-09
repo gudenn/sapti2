@@ -3,6 +3,7 @@ try {
   require('_start.php');
 
 
+  leerClase('Grupo');
   leerClase("Estudiante");
   leerClase("Formulario");
 
@@ -38,7 +39,7 @@ try {
     $formulario->validar('login'   ,$_POST["login"]   ,'texto','El nombre de usuario ');
     $formulario->validarPassword('clave',$_POST["clave"], false,TRUE);
 
-    if (!initEstudianteSession($_POST["login"] ,($_POST["clave"])))
+    if (!initSession($_POST["login"] ,($_POST["clave"])))
       throw new Exception("?login&m=El usuario y el password no corresponden a un estudiante registrado.");
     $ir = "Location: index.php";
     header($ir);

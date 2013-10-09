@@ -1,6 +1,6 @@
 <?php
 try {
-  define ("MODULO", "ESTUDIANTE-PROYECTO-INDEX");
+  define ("MODULO", "ESTUDIANTE");
   require('../_start.php');
   if(!isEstudianteSession())
     header("Location: ../login.php");  
@@ -23,8 +23,7 @@ try {
   leerClase('Usuario');
   leerClase('Estudiante');
   
-  $estudiante_aux = getSessionEstudiante();
-  $estudiante     = new Estudiante($estudiante_aux->estudiante_id);
+  $estudiante     = getSessionEstudiante();
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();
   

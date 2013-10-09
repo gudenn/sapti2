@@ -48,9 +48,11 @@ try {
 
 
   //CREAR UN ESTUDIANTE
+  leerClase('Grupo');
   leerClase('Usuario');
   leerClase('Estudiante');
   leerClase('Proyecto');
+  leerClase('Materia');
   leerClase('Proyecto_dicta');
   leerClase('Proyecto_estudiante');
 
@@ -137,6 +139,10 @@ try {
     $es_nuevo        = (!isset($_POST['usuario_id'])||trim($_POST['usuario_id'])=='' )?TRUE:FALSE;
     $usuario->validar($es_nuevo);
     $usuario->save();
+    
+    //usuario pertenece a un grupo
+    $usuario->asignarGrupo(Grupo::GR_ES);
+    
 
     $estudiante->estado     = Objectbase::STATUS_AC;
     $estudiante->usuario_id = $usuario->id;
@@ -144,7 +150,8 @@ try {
     $estudiante->save();
     
     if ( isset($_POST['dicta_id']) && isset($_POST['semestre_id']) && is_numeric($_POST['dicta_id']) && is_numeric($_POST['semestre_id']) ) {
-      $estudiante->crearProyectoInicial($_POST['dicta_id']);
+      $materia = new Materia($_POST['materia_id']);
+      $estudiante->crearProyectoInicial($_POST['dicta_id'], $materia->tipo);
       $estudiante->inscribirEstudianteDicta($_POST['semestre_id'], $_POST['dicta_id']);
     }
     

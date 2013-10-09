@@ -22,7 +22,12 @@ class Semestre extends Objectbase
   * @var INT(11)
   */
   var $activo;
-  
+
+ /**
+  * Si la posicion del semestre
+  * @var INT(11)
+  */
+  var $valor;  
   
  /**
   * (Arreglo de objetos) Todas las variables para el semestre
