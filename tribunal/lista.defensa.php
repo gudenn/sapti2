@@ -109,8 +109,7 @@ $smarty->assign('proyecto_nombre',$proyecto_nombre);
 
   if(isset($_POST['buscar']))
   {
-   echo   $_POST['codigosis'];
-    $estudiante = new Estudiante(false,$_POST['codigosis']);
+      $estudiante = new Estudiante(false,$_POST['codigosis']);
     $proyecto   = new Proyecto();
     $proyecto_aux = $estudiante->getProyecto();
     if ($proyecto_aux)

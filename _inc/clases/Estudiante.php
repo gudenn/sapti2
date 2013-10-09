@@ -30,6 +30,12 @@ class Estudiante extends Objectbase {
   */
   var $inscrito_objs;
   
+   /**
+  * (Objeto simple) Todas las notificaciones que tiene este estudiante
+  * @var object|null 
+  */
+  var $notificacion_estudiante_objs;
+  
   /**
    * Constructor del estudiante
    * @param type $id id de la tabla
@@ -77,11 +83,13 @@ class Estudiante extends Objectbase {
    * Creamos un proyecto inicial de tal manera que los estudiantes nunca estnen sin proyectos
    * @param INT(11) $dicta_id
    */
-  function crearProyectoInicial($dicta_id) 
+  function crearProyectoInicial($dicta_id,$tipo) 
   {
     leerClase('Proyecto');
+    if ($tipo == '')
+      $tipo = Proyecto::TIPO_PROYECTO;
     $proyecto_inicial = new Proyecto();
-    $proyecto_inicial->crearProyectoInicial($this->id,$dicta_id);
+    $proyecto_inicial->crearProyectoInicial($this->id,$dicta_id,$tipo);
   }
 
   /**
@@ -189,7 +197,6 @@ class Estudiante extends Objectbase {
 
   /**
    * Get usuario de un estudiante
-   * @TODO hay que arreglar esta funcion
    * @return boolean|\Usuario
    * retorna los datos de un usuario asociado a un estudiante
    */

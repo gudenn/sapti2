@@ -14,10 +14,62 @@
     <tr>
       <td>{$objs[ic]['modulo_codigo']}</td>
       <td>{$objs[ic]['modulo_descripcion']}</td>
-      <td><input type="checkbox" name="id{$objs[ic]['id']}_ver"          value="1" {if ($objs[ic]['ver'])}       checked="checked" {/if} ></td>
-      <td><input type="checkbox" name="id{$objs[ic]['crear']}_crear"     value="1" {if ($objs[ic]['crear'])}     checked="checked" {/if} ></td>
-      <td><input type="checkbox" name="id{$objs[ic]['editar']}_editar"   value="1" {if ($objs[ic]['editar'])}    checked="checked" {/if} ></td>
-      <td><input type="checkbox" name="id{$objs[ic]['eliminar']}_editar" value="1" {if ($objs[ic]['eliminar'])}  checked="checked" {/if} ></td>
+      <td>
+        <div id="loading_{$objs[ic]['id']}_ver" style="display: none" >{icono('basicset/loadingcircle.gif','Guardando...')}</div>
+        <div id="hidme_{$objs[ic]['id']}_ver" >
+        {if ($objs[ic]['ver'])}
+          <a href="?ver=0&permiso_id={$objs[ic]['id']}&pg={$objs_pg->ses_pg}" class="tajax" onclick="$('#hidme_{$objs[ic]['id']}_ver').hide();$('#loading_{$objs[ic]['id']}_ver').show();" >
+          {icono('basicset/tick_48.png','Denegar acceso')}
+          </a>
+        {else}
+          <a href="?ver=1&permiso_id={$objs[ic]['id']}&pg={$objs_pg->ses_pg}" class="tajax" onclick="$('#hidme_{$objs[ic]['id']}_ver').hide();$('#loading_{$objs[ic]['id']}_ver').show();" >
+          {icono('basicset/DeleteRed.png','Denegar acceso')}
+          </a>
+        {/if}
+        </div>
+      </td>
+      <td>
+        <div id="loading_{$objs[ic]['id']}_crear" style="display: none" >{icono('basicset/loadingcircle.gif','Guardando...')}</div>
+        <div id="hidme_{$objs[ic]['id']}_crear" >
+        {if ($objs[ic]['crear'])}
+          <a href="?crear=0&permiso_id={$objs[ic]['id']}&pg={$objs_pg->ses_pg}" class="tajax" onclick="$('#hidme_{$objs[ic]['id']}_crear').hide();$('#loading_{$objs[ic]['id']}_crear').show();" >
+          {icono('basicset/tick_48.png','Denegar acceso')}
+          </a>
+        {else}
+          <a href="?crear=1&permiso_id={$objs[ic]['id']}&pg={$objs_pg->ses_pg}" class="tajax" onclick="$('#hidme_{$objs[ic]['id']}_crear').hide();$('#loading_{$objs[ic]['id']}_crear').show();" >
+          {icono('basicset/DeleteRed.png','Denegar acceso')}
+          </a>
+        {/if}
+        </div>
+      </td>
+      <td>
+        <div id="loading_{$objs[ic]['id']}_editar" style="display: none" >{icono('basicset/loadingcircle.gif','Guardando...')}</div>
+        <div id="hidme_{$objs[ic]['id']}_editar" >
+        {if ($objs[ic]['editar'])}
+          <a href="?editar=0&permiso_id={$objs[ic]['id']}&pg={$objs_pg->ses_pg}" class="tajax" onclick="$('#hidme_{$objs[ic]['id']}_editar').hide();$('#loading_{$objs[ic]['id']}_editar').show();" >
+          {icono('basicset/tick_48.png','Denegar acceso')}
+          </a>
+        {else}
+          <a href="?editar=1&permiso_id={$objs[ic]['id']}&pg={$objs_pg->ses_pg}" class="tajax" onclick="$('#hidme_{$objs[ic]['id']}_editar').hide();$('#loading_{$objs[ic]['id']}_editar').show();" >
+          {icono('basicset/DeleteRed.png','Denegar acceso')}
+          </a>
+        {/if}
+        </div>
+      </td>
+      <td>
+        <div id="loading_{$objs[ic]['id']}_eliminar" style="display: none" >{icono('basicset/loadingcircle.gif','Guardando...')}</div>
+        <div id="hidme_{$objs[ic]['id']}_eliminar" >
+        {if ($objs[ic]['eliminar'])}
+          <a href="?eliminar=0&permiso_id={$objs[ic]['id']}&pg={$objs_pg->ses_pg}" class="tajax" onclick="$('#hidme_{$objs[ic]['id']}_eliminar').hide();$('#loading_{$objs[ic]['id']}_eliminar').show();" >
+          {icono('basicset/tick_48.png','Denegar acceso')}
+          </a>
+        {else}
+          <a href="?eliminar=1&permiso_id={$objs[ic]['id']}&pg={$objs_pg->ses_pg}" class="tajax" onclick="$('#hidme_{$objs[ic]['id']}_eliminar').hide();$('#loading_{$objs[ic]['id']}_eliminar').show();" >
+          {icono('basicset/DeleteRed.png','Denegar acceso')}
+          </a>
+        {/if}
+        </div>
+      </td>
     </tr>
   {/section}
   </tbody>

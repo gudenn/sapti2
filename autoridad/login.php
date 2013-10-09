@@ -37,7 +37,7 @@ try {
     $formulario->validar('login'   ,$_POST["login"]   ,'texto','Login ');
     $formulario->validarPassword('clave',$_POST["clave"], false,TRUE);
 
-    if (!initAdminSession($_POST["login"] ,($_POST["clave"])))
+    if (!initSession($_POST["login"] ,($_POST["clave"])))
       throw new Exception("?login&m=El usuario y el password no corresponden a administrador registrado.");
     $ir = "Location: index.php";
     header($ir);

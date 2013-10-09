@@ -31,11 +31,7 @@ try {
   $smarty->assign('tutor',$tutor);
 
   //LOGIN FORM
-  $usuario1=$_POST["login"]  ;
-  $login1=$_POST["clave"];
-    
-    echo $usuario1;
-    echo $login1;
+  
   if (isset($_POST["login"]) && $_POST["login"] != "" && isset($_POST["clave"]) && $_POST["clave"] != "" && isset($_POST['tarea']) && $_SESSION['logintutor'] == $_POST['token'] )
   {
     $tutor = new Tutor();
@@ -43,7 +39,7 @@ try {
     $formulario->validar('login'   ,$_POST["login"]   ,'texto','Login ');
     $formulario->validarPassword('clave',$_POST["clave"], false,TRUE);
    
-    if (!initTutorSession($_POST["login"] ,($_POST["clave"])))
+    if (!initSession($_POST["login"] ,($_POST["clave"])))
       throw new Exception("?login&m=El usuario y el password no corresponden a un tutor registrado.");
     $ir = "Location: index.php";
     header($ir);

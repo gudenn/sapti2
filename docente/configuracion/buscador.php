@@ -1,6 +1,6 @@
 <?php
 try {
-  require('_start.php');
+  require('../_start.php');
   if(!isDocenteSession())
   header("Location: login.php"); 
   global $PAISBOX;
@@ -41,14 +41,8 @@ AND turno.nombre=tu.nombre
  
  while ($filaturno = mysql_fetch_array($resultadoturno)) 
                 {
-  //  $turnoid[]=$filaturno['id'];
-  //  $turnonombre[]=$filaturno['nombre'];
-    echo "<option value='".$filaturno['id']."' $TRUE>".htmlentities($filaturno['nombre'])."</option>";
+      echo "<option value='".$filaturno['id']."' $TRUE>".htmlentities($filaturno['nombre'])."</option>";
  }
-//$smarty->assign('turnoid'  , $turnoid);
-//$smarty->assign('turnonombre'  , $turnonombre);
-   
-    
   };
 }
 catch(Exception $e) 

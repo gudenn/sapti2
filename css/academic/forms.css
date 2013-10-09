@@ -85,6 +85,8 @@ input, textarea, select{
 #container #respond p{
 	margin:5px 0;
 	}
+#container #respond .camcl{display: none}
+
 
 #container #respond #submit, #container #respond #reset{
 	margin:0;

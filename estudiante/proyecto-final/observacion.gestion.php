@@ -1,6 +1,6 @@
 <?php
 try {
-  define ("MODULO", "ESTUDIANTE-PROYECTO-OBSERVACION-GESTION");
+  define ("MODULO", "ESTUDIANTE");
   require('../_start.php');
   if(!isEstudianteSession())
     header("Location: ../login.php");  
@@ -49,8 +49,7 @@ try {
   $smarty->assign("menuList", $menuList);
 
   
-  $estudiante_aux = getSessionEstudiante();
-  $estudiante     = new Estudiante($estudiante_aux->estudiante_id);
+  $estudiante     = getSessionEstudiante();
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();
   

@@ -46,6 +46,21 @@ try {
   $smarty->assign("menuList", $menuList);
 
 
+  //grabamos los permisos
+  if ( isset($_GET['permiso_id']) && is_numeric($_GET['permiso_id']) )
+  {
+    $permiso = new Permiso($_GET['permiso_id']);
+    $permiso->ver      = isset($_GET['ver'])?$_GET['ver']:$permiso->ver;
+    $permiso->crear    = isset($_GET['crear'])?$_GET['crear']:$permiso->crear;
+    $permiso->editar   = isset($_GET['editar'])?$_GET['editar']:$permiso->editar;
+    $permiso->eliminar = isset($_GET['eliminar'])?$_GET['eliminar']:$permiso->eliminar;
+    $permiso->save();
+    unset($_GET['ver']);
+    unset($_GET['crear']);
+    unset($_GET['editar']);
+    unset($_GET['eliminar']);
+  }
+  
   $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
   $smarty->assign('lista'       ,'admin/seguridad/grupo.permiso.tpl');
 
@@ -73,6 +88,7 @@ try {
 
   
   $smarty->assign("filtros"  ,$filtro);
+  $smarty->assign("objs_pg"  ,$objs_pg);
   $smarty->assign("objs"     ,$objs_pg->objs);
   $smarty->assign("pages"    ,$objs_pg->p_pages);
 

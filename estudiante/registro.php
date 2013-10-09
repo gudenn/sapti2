@@ -99,7 +99,7 @@ $token                = sha1(URL . time());
 $_SESSION['register'] = $token;
 $smarty->assign('token',$token);
 
-$TEMPLATE_TOSHOW = 'estudiante/3columnas.tpl';
+$TEMPLATE_TOSHOW = 'estudiante/2columnas.tpl';
 $smarty->display($TEMPLATE_TOSHOW);
 
 ?>

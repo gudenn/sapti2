@@ -103,5 +103,11 @@ class Consejo extends Objectbase
       $filtro_sql .= " AND {$this->getTableName()}.descripcion like '%{$filtro->filtro('descripcion')}%' ";
     return $filtro_sql;
   }
+  
+  
+  
 }
 ?>
+
+
+
