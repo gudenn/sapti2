@@ -48,8 +48,8 @@
                 </ul>
               </li>
               {/if}
-              {if ($vistodoc&$vistotu)}
-              <li><a href="{$URL}autoridad/proyecto/proyecto.registro.php">Registro Perfil</a></li>
+              {if ($proyecto->estado_proyecto==Proyecto::EST2_BUE)}
+              <li><a href="{$URL}estudiante/proyecto/proyecto.registro.php">Registro Formulario</a></li>
               {/if}
               <li><a href="editar.cuenta.php">Modificar Cuenta</a></li>
               <li><a href="editar.cuenta.php">Preferencias</a></li>

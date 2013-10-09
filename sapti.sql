@@ -360,6 +360,7 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`inscrito` (
   `dicta_id` INT NULL ,
   `estudiante_id` INT NULL ,
   `semestre_id` INT NULL ,
+  `estado_inscrito` VARCHAR(2) NULL COMMENT 'cerrado si paso(CR), activo si es que es la activa (AC)' ,
   `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
