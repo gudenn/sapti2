@@ -4,8 +4,8 @@ try {
   
   
   require('_start.php');
-  if(!isConsejoSession())
-   header("Location: login.php");  ;
+ // if(!isConsejoSession())
+ //  header("Location: login.php");  ;
 
 
   
