@@ -39,6 +39,9 @@ class Dicta extends Objectbase
   var $notificacion_dicta_objs;  
   
   
+  
+  
+  
   /**
    * Obtiene el nombre completo del docente que dicta la materia
    * @return string el nombre completo del docente que dicta la materia
