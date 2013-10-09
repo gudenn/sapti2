@@ -115,7 +115,8 @@ class Menu
       $link = Administrador::URL."notificacion/";
       $thise->agregarItem('Gesti&oacute;n de Notificaciones','Gestionar Mis notificaciones','basicset/megaphone.png',$link,0,12);
       $link = Administrador::URL."mensajes/";
-      $thise->agregarItem('Gesti&oacute;n de Mesajes','Mi correo de Mensajes','basicset/mail.png',$link,14);        break;
+      $thise->agregarItem('Gesti&oacute;n de Mesajes','Mi correo de Mensajes','basicset/mail.png',$link,14);
+      
      
     }
     // Menu de AUTORIDADES
@@ -137,7 +138,7 @@ class Menu
       $link = Administrador::URL."notificacion/";
       $thise->agregarItem('Gesti&oacute;n de Notificaciones','Gestionar Mis notificaciones','basicset/megaphone.png',$link,0,12);
       $link = Administrador::URL."mensajes/";
-      $thise->agregarItem('Gesti&oacute;n de Mesajes','Mi correo de Mensajes','basicset/mail.png',$link,14);        break;
+      $thise->agregarItem('Gesti&oacute;n de Mesajes','Mi correo de Mensajes','basicset/mail.png',$link,14);
       
     }
     // Menu de CONSEJO
@@ -147,7 +148,7 @@ class Menu
       $link = Administrador::URL."notificacion/";
       $thise->agregarItem('Gesti&oacute;n de Notificaciones','Gestionar Mis notificaciones','basicset/megaphone.png',$link,0,12);
       $link = Administrador::URL."mensajes/";
-      $thise->agregarItem('Gesti&oacute;n de Mesajes','Mi correo de Mensajes','basicset/mail.png',$link,14);        break;
+      $thise->agregarItem('Gesti&oacute;n de Mesajes','Mi correo de Mensajes','basicset/mail.png',$link,14);
       
     } 
     return $menus;
