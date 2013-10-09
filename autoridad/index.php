@@ -2,7 +2,7 @@
 try {
   define ("MODULO", "ADMIN-INDEX");
   require('_start.php');
-  if(!isAdminSession())
+  if(!isUserSession())
     header("Location: login.php");  
 
   /** HEADER */
@@ -16,10 +16,14 @@ try {
 
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
+ 
+  //BOX
+  $CSS[] = URL_JS . "box/box.css";
+  $JS[]  = URL_JS . "box/jquery.box.js";
 
+  
   $smarty->assign('CSS',$CSS);
   $smarty->assign('JS',$JS);
-
  /**
   * Clases
   */
@@ -39,14 +43,18 @@ try {
   $menus = $menu->getAdminIndex();
   $smarty->assign("menus", $menus);
   
-  
-  //CREAR UN ESTUDIANTE
-  
-  $smarty->assign("ERROR", $ERROR);
+  $ERROR = '';
+  leerClase('Html');
+  $html  = new Html();
+  if (isset($_GET['notienepermiso']))
+  {
+    $html = new Html();
+    $mensaje = array('mensaje'=>'No tiene permiso de acceder a este M&oacute;dulo','titulo'=>'No Tiene Permiso' ,'icono'=> 'warning_48.png');
+    $ERROR = $html->getMessageBox ($mensaje);
+  }
+  $smarty->assign("ERROR",$ERROR);
   
 
-  //No hay ERROR
-  $smarty->assign("ERROR",'');
   
 } 
 catch(Exception $e) 

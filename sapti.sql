@@ -2,8 +2,6 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
--- CREATE SCHEMA IF NOT EXISTS `sapti` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
--- USE `sapti` ;
 
 -- -----------------------------------------------------
 -- Table `usuario`
@@ -236,6 +234,7 @@ CREATE  TABLE IF NOT EXISTS `materia` (
   `nombre` VARCHAR(200) NULL ,
   `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
   `sigla` VARCHAR(20) NULL ,
+  `tipo` VARCHAR(4) NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 

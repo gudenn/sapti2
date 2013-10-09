@@ -1,5 +1,6 @@
 <?php
 try {
+  define ("MODULO", "TUTOR");
   require('_start.php');
   if(!isTutorSession())
   header("Location: login.php");  
@@ -24,10 +25,9 @@ try {
   leerClase('Tutor');
   leerClase('Usuario');
   
-  $tutor_aux = getSessionTutor();
-  $tutor    = new Tutor($tutor_aux->tutor_id);
+  $tutor          = getSessionTutor();
   $usuario        = $tutor->getUsuario();
-  $proyecto        = $tutor->getProyectos();
+  //$proyecto       = $tutor->getProyectos();
   $smarty->assign("tutor", $tutor);
   $smarty->assign("usuario", $usuario);
   $smarty->assign("proyecto", $proyecto);

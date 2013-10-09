@@ -103,7 +103,7 @@ class Usuario  extends Objectbase
   var $docente_objs;
   
  /**
-  * (Arreglo de objetos) El Tribunale que esta asignado a este usuario
+  * (Arreglo de objetos) El Tribunal  que esta asignado a este usuario
   * @var object|null 
   */
   var $tribunal_objs;
@@ -113,6 +113,18 @@ class Usuario  extends Objectbase
   * @var object|null 
   */
   var $estudiante_objs;
+  
+ /**
+  * (Arreglo de objetos) El administrador que esta asignado a este usuario
+  * @var object|null 
+  */
+  var $administrador_objs;
+  
+ /**
+  * (Arreglo de objetos) El consejo que esta asignado a este usuario
+  * @var object|null 
+  */
+  var $consejo_objs;
 
   function getNombreCompleto($echo = false) 
   {
@@ -125,7 +137,38 @@ class Usuario  extends Objectbase
     return $nombreCompleto;
   }
 
+  /**
+   * get user if exist else return 0
+   * @param type $login
+   * @param type $clave
+   * @return object 
+   */
+  public function issetUser($login, $clave) {
+    if ($login == "" || $clave == "")
+      return false;
+    $activo = Objectbase::STATUS_AC;
+    $sql = "select * , u.id as usuario_id  from " . $this->getTableName('usuario') . " as u   where u.login = '$login' and u.clave = '$clave'  and u.estado = '$activo'  ";
+    //echo $sql; 
+    $resultado = mysql_query($sql);
+    if (!$resultado)
+      return false;
+    $user = mysql_fetch_object($resultado);
+    return $user;
+  }
 
+  
+  /**
+   * Obtiene el permiso de dicho modulo para el administrador
+   * @return Permiso
+   */
+  function getPermiso($codigo_modulo) {
+    $grupos = $this->getMisGrupos();
+    if (!sizeof($grupos))
+      return false;
+    $grupo = $grupos[0];
+    return $grupo->getPermisoModulo($codigo_modulo);
+  }
+  
   /**
    * Obtenemos todos los grupos de un usuario
    * @param Grupo $tutor_id
@@ -215,12 +258,41 @@ class Usuario  extends Objectbase
    * @param INT(11) $usuario_id Codigo identificador del usuario
    * @return \Pertenece
    */
-  function perteneceGrupo($grupo_id,$usuario_id ='') {
-    leerClase('Pertenece');
+  function perteneceGrupo($codigo_grupo,$usuario_id ='') {
     if (!$usuario_id)
       $usuario_id = $this->id;
-    $pertenece = new Pertenece('',$grupo_id,$usuario_id);
-    return $pertenece;
+
+    $activo = Objectbase::STATUS_AC;
+    $sql    = " SELECT * FROM {$this->getTableName ('Grupo')} as gp , {$this->getTableName ('Pertenece')} as pe WHERE pe.grupo_id = gp.id AND gp.codigo = '{$codigo_grupo}' AND pe.usuario_id = '{$usuario_id}' AND gp.estado = '$activo' AND pe.estado = '$activo'  ";
+    //echo $sql;
+    $result = mysql_query($sql);
+    if (mysql_num_rows($result))
+      return true;
+    return false;
+  }
+
+  /**
+   * Asignamos a un usario a un grupo dado
+   * @param INT(11) $grupo_id   Codigo identificador del grupo
+   * @param INT(11) $usuario_id Codigo identificador del usuario o el actual
+   * @return boolean
+   */
+  function asignarGrupo($codigo_grupo,$usuario_id ='') {
+    if (!$usuario_id)
+      $usuario_id = $this->id;
+
+    if (!$this->perteneceGrupo($codigo_grupo,$usuario_id))
+    {
+      leerClase('grupo');
+      leerClase('Pertenece');
+      $grupo     = new Grupo('', $codigo_grupo);
+      $pertenece = new Pertenece();
+      $pertenece->grupo_id   = $grupo->id;
+      $pertenece->usuario_id = $usuario_id;
+      $pertenece->estado     = Objectbase::STATUS_AC;
+      $pertenece->save();
+    }
+    return true;
   }
   
   

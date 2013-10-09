@@ -96,10 +96,13 @@ try {
     $usuario->estado = Objectbase::STATUS_AC;
     $usuario->save();
     
+    //usuario pertenece a un grupo
+    $usuario->asignarGrupo(Grupo::GR_TU);
     
     $tutor= new Tutor();
     $tutor->objBuidFromPost();
     $tutor->usuario_id = $usuario->id;
+    $tutor->estado     = Objectbase::STATUS_AC;
     $tutor->save();
     
     if (isset($_POST['estudiante_id']) && is_numeric($_POST['estudiante_id']) )

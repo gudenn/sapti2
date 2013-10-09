@@ -143,7 +143,6 @@ class Docente extends Objectbase{
 
     /**
    * Get usuario de un docente
-   * @TODO hay que arreglar esta funcion
    * @return boolean|\Usuario
    * retorna los datos de un usuario asociado a un docente
    */
