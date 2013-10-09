@@ -34,11 +34,19 @@ try {
     leerClase("Apoyo");
     leerClase("Usuario");
     leerClase("Docente");
+     leerClase("Notificacion");
+  $var= new Notificacion();
+  
+ 
 
-
-
-  $docente     =  getSessionDocente();
+    $docente     =  getSessionDocente();
     $docente_ids =  $docente->docente_id;
+    
+     $var->getNotificacionTribunal($docente->id);
+    
+    echo sizeof($var->getNotificacionTribunal($docente->id));
+    
+ 
     //echo $docente_ids;
     $sql="select  p.id, t.id as idtribunal, d.id as iddocente, u.nombre as nombreusuario, CONCAT (u.apellido_paterno, u.apellido_paterno) as apellidos ,p.nombre as nombreproyecto
         from proyecto p,  `tribunal` t, `docente` d , usuario u
