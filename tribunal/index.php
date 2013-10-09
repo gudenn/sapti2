@@ -4,9 +4,9 @@ try {
   
   
   require('_start.php');
- // if(!isConsejoSession())
-  // header("Location: login.php");  
-  /** HEADER */
+  if(!isConsejoSession())
+   header("Location: login.php");  
+
 
  $smarty->assign('title','Proyecto Final');
   $smarty->assign('description','Proyecto Final');
