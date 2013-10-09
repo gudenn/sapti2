@@ -7,18 +7,12 @@ class Consejo extends Objectbase
   * @var INT
   */
   var $usuario_id;
-
-  
-  /**
-  * var char 100
-  */
-  var $login;
   
  /**
-  * Descripcion del Area
+  * Descripcion del Activo
   * @var var char 100
   */
-  var $clave;
+  var $activo;
   /**
   * 
   * fecha inicio date
@@ -108,6 +102,3 @@ class Consejo extends Objectbase
   
 }
 ?>
-
-
-
