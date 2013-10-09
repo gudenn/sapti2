@@ -1,6 +1,6 @@
 <?php
 try {
-  define ("MODULO", "TRIBUNAL");
+  define ("MODULO", "TRIBUNAL-INDEX");
   require('_start.php');
   if(!isConsejoSession())
    header("Location: login.php");  

@@ -167,14 +167,8 @@ INSERT INTO `tipo_defensa` (`id`, `nombre`, `estado`) VALUES
 (2, 'Publica', 'AC');
 
 
-<<<<<<< HEAD
-
-
 
 
 INSERT INTO `turno` (`id`, `nombre`, `peso`, `descripcion`, `estado`) VALUES
 (4, 'Tarde', NULL, 'afsd', 'AC'),
 (5, 'Mañana', NULL, 'fasdf', 'AC');
-
-=======
->>>>>>> 3db5c27ac173a2df6d7352dfdeabc830b51ddcd7
