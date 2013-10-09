@@ -60,8 +60,7 @@ try {
   }
   $smarty->assign("editores", $editores);
   
-  $estudiante_aux = getSessionEstudiante();
-  $estudiante     = new Estudiante($estudiante_aux->estudiante_id);
+  $estudiante     = getSessionEstudiante();
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();
   $id             = (isset($_GET['avance_id']) && is_numeric($_GET['avance_id']))?$_GET['avance_id']:'';

@@ -112,7 +112,21 @@ class Grupo extends Objectbase
     leerClase('Permiso');
     $modulo  = new Modulo('',$codigo_modulo);
     $permiso = new Permiso('',$modulo->id,$this->id);
-    return $permiso;    
+    if ($permiso->id)
+    {
+      $resp['ver']      = $permiso->ver;
+      $resp['crear']    = $permiso->crear;
+      $resp['editar']   = $permiso->editar;
+      $resp['eliminar'] = $permiso->eliminar;
+    }
+    else // no hay permisos
+    {
+      $resp['ver']      = 0;
+      $resp['crear']    = 0;
+      $resp['editar']   = 0;
+      $resp['eliminar'] = 0;
+    }
+    return $resp;    
   }
   
   /**

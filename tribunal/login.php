@@ -40,7 +40,7 @@ try {
    // $formulario->validarPassword('clave',$_POST["clave"], false,TRUE);
     
 
-    if (!initConsejoSession($_POST["login"] ,($_POST["clave"])))
+    if (!initSession($_POST["login"] ,($_POST["clave"])))
       throw new Exception("?login&m=El usuario y el password no corresponden a un Consejero registrado.");
     $ir = "Location: index.php";
     header($ir);

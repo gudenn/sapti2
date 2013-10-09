@@ -31,6 +31,14 @@ class Dicta extends Objectbase
   */
   var $codigo_grupo;
 
+
+ /**
+  * (Objeto simple) Todas las notificaciones que tiene este grupo
+  * @var object|null 
+  */
+  var $notificacion_dicta_objs;  
+  
+  
   /**
    * Obtiene el nombre completo del docente que dicta la materia
    * @return string el nombre completo del docente que dicta la materia

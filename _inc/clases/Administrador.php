@@ -15,31 +15,6 @@ class Administrador extends Objectbase
   */
   var $usuario_id;
 
-  /**
-   * Obtiene el permiso de dicho modulo para el administrador
-   * @return Permiso
-   */
-  public function getPermiso($codigo_modulo) 
-  {
-    $grupo = $this->getGrupo();
-    return $grupo->getPermisoModulo($codigo_modulo);
-    return $grupo;
-  }
-
-  /**
-   * Obtiene el grupo del administrador
-   * @return Grupo
-   */
-  public function getGrupo() 
-  {
-    leerClase('Grupo');
-    $usuario = $this->getUsuario();
-    //@TODO Error por estos lados $usuario->grupo_id
-    //$grupo = new Grupo($usuario->grupo_id);
-    $grupo = new Grupo(1);
-    return $grupo;    
-  }
-
   
   /**
    * Obtiene el usuario del administrador

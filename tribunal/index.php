@@ -1,9 +1,9 @@
 <?php
 try {
+  define ("MODULO", "TRIBUNAL");
   require('_start.php');
-  global $PAISBOX;
- if(!isConsejoSession())
-  header("Location: login.php");  
+  if(!isConsejoSession())
+   header("Location: login.php");  
   /** HEADER */
 
  $smarty->assign('title','Proyecto Final');
