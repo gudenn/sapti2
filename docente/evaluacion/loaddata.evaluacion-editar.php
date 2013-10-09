@@ -1,10 +1,5 @@
 <?php     
 
- require  '_start.php';
- require '../../_inc/_configurar.php';
- require_once('../EditableGrid.php');
-
-
 require  '../_start.php';
 include '../../_inc/_configurar.php';      
 require_once('../EditableGrid.php');
