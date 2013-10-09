@@ -101,7 +101,7 @@ class Tooltip extends Objectbase
     $oncli = " onclick=\"$( \"#ayuda_{$this->id}\" ).dialog(); return false;\" " ;
     $icono = icono('basicset/help.png', $this->codigo, '15px');
     $link = <<<____TEST
-      <a href="#" tooltip="ayuda_{$this->id}" class="ayudatip"> {$icono} </a> 
+      <a href="#" tooltip="ayuda_{$this->id}"  tabindex="-1" class="ayudatip"> {$icono} </a> 
       <div id="ayuda_{$this->id}" title="{$this->titulo}" style="display:none;">
       <span class="ui-icon ui-icon-circle-check" style="float: left; margin: 0 7px 50px 0;"></span>
         <p>{$this->descripcion}.</p>

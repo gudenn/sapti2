@@ -128,7 +128,7 @@ class Usuario  extends Objectbase
 
   function getNombreCompleto($echo = false) 
   {
-    $nombreCompleto = trim(strtoupper("{$this->nombre} {$this->apellido_paterno} {$this->apellido_materno}"));
+    $nombreCompleto = trim(strtoupper("{$this->titulo_honorifico} {$this->nombre} {$this->apellido_paterno} {$this->apellido_materno}"));
     if ($echo)
     {
       echo $nombreCompleto;
@@ -313,13 +313,10 @@ class Usuario  extends Objectbase
       $this->getByLogin($this->login,true);
       Formulario::validarPassword('clave',$this->clave, isset($_POST['clave2'])?$_POST['clave2']:false ,TRUE);
     }
-    else
+    elseif ( isset($_POST['clave1']) && isset($_POST['clave2']) && isset($_POST['clave3']) && trim($_POST['clave1'])!='' && trim($_POST['clave2'])!='' && trim($_POST['clave3'])!='' )
     {
-      $pas1 = isset($_POST['password1'])?$_POST['password1']:false;
-      $pas2 = isset($_POST['password2'])?$_POST['password2']:false;
-      $pas3 = isset($_POST['password3'])?$_POST['password3']:false;
-      Formulario::validarCambioPassword('password',$this->clave,$pas1,$pas2,$pas3,true,'texto','La Clave de acceso',FALSE);
-      $this->password = $pas2;
+      Formulario::validarCambioPassword('cambiar',$this->clave,$_POST['clave1'],$_POST['clave2'],$_POST['clave3'],true,'texto','La Clave de acceso',FALSE);
+      $this->clave = $_POST['clave2'];
     }
     Formulario::validar_fecha('fecha_nacimiento',$this->fecha_nacimiento,TRUE);
   }
