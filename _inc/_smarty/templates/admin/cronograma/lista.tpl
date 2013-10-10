@@ -16,7 +16,7 @@
       <td>{$objs[ic]['detalle_evento']}</td>
        <td>{$objs[ic]['fecha_evento']}</td>
       <td>
-        <a href="cronograma.crear.php?cronograma_id={$objs[ic]['id']}" >{icono('basicset/pencil_48.png','Editar')} Editar</a>
+        <a href="cronograma.crear.deleted.php?cronograma_id={$objs[ic]['id']}" >{icono('basicset/pencil_48.png','Editar')} Editar</a>
          <a href="cronograma.gestion.php?eliminar=1&cronograma_id={$objs[ic]['id']}" onclick="return confirm('Eliminar este Evento?');"  >{icono('borrar.png','Eliminar')}</a>
       </td>
     </tr>

@@ -14,7 +14,7 @@
             </p>
           
             <p>
-              <textarea name="detalle_evento" id="detalle_evento" value="{$cronograma->detalle_evento}" size="22" style="width: 650px;height: 100px;" data-validation-engine="validate[required]"></textarea>
+              <textarea name="detalle_evento" id="detalle_evento" value="" size="22" style="width: 650px;height: 100px;" data-validation-engine="validate[required]">{$cronograma->detalle_evento}</textarea>
               <label for="codigo"><small>Detalle del Evento (*)</small></label>
             </p>
              <p> 

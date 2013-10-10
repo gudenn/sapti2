@@ -98,8 +98,8 @@ ________SALIDAS;
   // Si es docente para todas las materias que dicta
   if(isDocenteSession())
   {
-    $docente_aux    = getSessionDocente();
-    $docente        = new Docente($docente_aux->docente_id);
+    $docente    = getSessionDocente();
+    $docente->docente_id;
     $docente->getAllObjects();
 
     $evento = new Evento();

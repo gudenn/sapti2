@@ -65,7 +65,7 @@ try {
     $EXITO = false;
     mysql_query("BEGIN");
     $semestre_id=$_POST['semestre_id'];
-    if(count($seleccion)>0){
+    if(count($seleccion)>0 && $semestre_id >0){
         if($seleccion[0]=='mate'|| $seleccion[1]=='mate'){
             $resul0 = "SELECT di.id
             FROM dicta di, semestre se
@@ -139,15 +139,16 @@ try {
                     $conf->save();
                     }                
             }
-                            $resulcerrar = "SELECT it.id as insid, ev.id as evaid
+        }
+            $resulcerrar = "SELECT it.id as insid, ev.id as evaid
                         FROM inscrito it, evaluacion ev
                         WHERE it.evaluacion_id=ev.id
                         AND it.semestre_id='".$semestre->id."'";
             $sqlcerrar = mysql_query($resulcerrar);
             while ($filacerrar = mysql_fetch_array($sqlcerrar, MYSQL_ASSOC)) {
                     $inscritos[]=$filacerrar;
-            }echo "<script type='text/javascript'>alert('Username nada ');</script>";
-                        if(count($inscritos)>0){ echo "entra ay ins";
+            }
+                        if(count($inscritos)>0){
                 foreach ($inscritos as $arraycerrar){
                     $inscrito=new Inscrito($arraycerrar['insid']);
                     $evaluacion=new Evaluacion($arraycerrar['evaid']);
@@ -159,12 +160,7 @@ try {
                     $evaluacion->save();
                     }                
             }
-   
-        }
-        
-        $semestrecerr = new Semestre($semestre_id);
-        $semestrecerr->activar();
-        $semestrecerr->save();
+
            $EXITO = TRUE;
            mysql_query("COMMIT");     
     }
@@ -181,7 +177,7 @@ try {
     if ($EXITO)
       $mensaje = array('mensaje'=>'Se grabo correctamente la Configuracion','titulo'=>'Registro de Configuracion' ,'icono'=> 'tick_48.png');
     else
-      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente la Configuracion','titulo'=>'Registro de Configuracion' ,'icono'=> 'warning_48.png');
+      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente la Configuracion Seleccione los Campos Obligatorios.','titulo'=>'Registro de Configuracion' ,'icono'=> 'warning_48.png');
    $ERROR = $html->getMessageBox ($mensaje);
   }
   $smarty->assign("ERROR",$ERROR);

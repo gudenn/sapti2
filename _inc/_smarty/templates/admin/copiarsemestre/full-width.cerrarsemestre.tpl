@@ -9,7 +9,7 @@
                <th>
              <p>
               <input type="text" name="nombre" value="{$semestre->codigo}"  readonly>
-              <label for="codigo"><small>Codigo Semestre Actual (*)</small></label>
+              <label for="codigo"><small>Codigo Semestre Actual</small></label>
             </p>
                </th>
                <th>
@@ -25,6 +25,7 @@
             <p>
               <label><input type="checkbox" name=seleccion[] value="mate" class="checkbox" >Copiar Materias</label>
               <label><input type="checkbox" name=seleccion[] value="conf" class="checkbox" >Copiar Configuracion</label>
+              <br><br><label for=""><small>Seleccione Minimamente Una Opcion(*)</small></label>
             </p>
             </th>
             <th>
@@ -34,6 +35,7 @@
             </th>
            </tr>
             </table>
+            <p>Todos los campos con (*) son obligatorios.</p>
             <h2 class="title">Cerrar Semestre y Grabar Configuracion</h2>
             <p>
               <input type="hidden" name="tarea" value="registrar">
