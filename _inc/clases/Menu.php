@@ -164,11 +164,6 @@ class Menu
   function getestudianteIndex($proyecto) {
     leerClase('Grupo');
     leerClase('Estudiante');
-    //var_dump($proyecto);
-     $vistod=$proyecto->getVD();
-   $vistodoc=$vistod[0]->visto_bueno_tipo;
-   $vistot=$proyecto->getVT();
-   $vistotu=$vistot[0]->visto_bueno_tipo;
    
     $menus = array();
     $thise = new Menu('Proyecto Final');

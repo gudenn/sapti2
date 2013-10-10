@@ -8,6 +8,8 @@ try {
   leerClase('Semestre');
   leerClase('Dicta');
   leerClase('Configuracion_semestral');
+  leerClase('Inscrito');
+  leerClase('Evaluacion');
   /** HEADER */
   $smarty->assign('title','Lista de Estudiantes');
   $smarty->assign('description','Pagina de Lista de Incritos');
@@ -137,8 +139,29 @@ try {
                     $conf->save();
                     }                
             }
+                            $resulcerrar = "SELECT it.id as insid, ev.id as evaid
+                        FROM inscrito it, evaluacion ev
+                        WHERE it.evaluacion_id=ev.id
+                        AND it.semestre_id='".$semestre->id."'";
+            $sqlcerrar = mysql_query($resulcerrar);
+            while ($filacerrar = mysql_fetch_array($sqlcerrar, MYSQL_ASSOC)) {
+                    $inscritos[]=$filacerrar;
+            }
+                        if(count($inscritos)>0){
+                foreach ($inscritos as $arraycerrar){
+                    $inscrito=new Inscrito($arraycerrar['insid']);
+                    $evaluacion=new Evaluacion($arraycerrar['evaid']);
+                    $inscrito->objBuidFromPost();
+                    $inscrito->estado_inscrito=  Inscrito::E_CERRADO;
+                    $inscrito->save();
+                    $evaluacion->objBuidFromPost();
+                    $evaluacion->estado=  Inscrito::E_CERRADO;
+                    $evaluacion->save();
+                    }                
+            }
    
         }
+        
         $semestrecerr = new Semestre($semestre_id);
         $semestrecerr->activar();
         $semestrecerr->save();
