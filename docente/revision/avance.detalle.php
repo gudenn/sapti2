@@ -54,16 +54,7 @@ try {
   $avance         = new Avance(1);
   $avance->asignarDirectorio();
 
-  if ( isset($_POST['tarea']) && $_POST['tarea'] == 'registrar_avance' && isset($_SESSION['registrar_avance']) && isset($_POST['token']) && $_SESSION['registrar_avance'] == $_POST['token']  )
-  {
-    $EXITO = false;
-    if ($proyecto->id)
-      $avance = $estudiante->grabarAvance();
-    $EXITO = true;
-  }
-
-  
-  //$smarty->assign("estudiante", $estudiante);
+ //$smarty->assign("estudiante", $estudiante);
   //$smarty->assign("usuario", $usuario);
   //$smarty->assign("proyecto", $proyecto);
   $smarty->assign("avance", $avance);
