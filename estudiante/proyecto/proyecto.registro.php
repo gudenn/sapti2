@@ -245,7 +245,7 @@ try {
       $especifico->validar();
       $proyecto->objetivo_especifico_objs[] = $especifico;
     }
-    $proyecto->asignarEstudiante($estudiante->id);
+   // $proyecto->asignarEstudiante($estudiante->id);
     
     //areas y subareas
     $contador = 0;
