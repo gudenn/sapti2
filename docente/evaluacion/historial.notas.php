@@ -12,7 +12,7 @@ AND it.dicta_id=di.id
 AND di.docente_id=dc.id
 AND dc.usuario_id=us.id
 AND di.materia_id=ma.id
-AND it.estudiante_id=(SELECT it.estudiante_id
+AND it.estudiante_id IN (SELECT it.estudiante_id
 FROM evaluacion ev, inscrito it
 WHERE ev.id=it.evaluacion_id
 AND ev.id='".$ideve1."' 

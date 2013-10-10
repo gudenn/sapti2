@@ -4,7 +4,7 @@ define ("MODULO", "DOCENTE");
 $to ='ola' ;  
 $ideve1=$_GET['idev'];
   $resul = "
-      SELECT ob.observacion as obser, pr.nombre as nomp, us.nombre as nom,CONCAT(us.apellido_paterno,us.apellido_materno) as ap, re.fecha_revision as fere, ob.estado_observacion as estado
+      SELECT ob.observacion as observacion, ob.respuesta as respuesta, pr.nombre as nomp, us.nombre as nom,CONCAT(us.apellido_paterno,us.apellido_materno) as ap, re.fecha_revision as fere, ob.estado_observacion as estado
 FROM observacion ob, revision re, proyecto pr, docente doc, proyecto_estudiante proe, usuario us
 WHERE ob.revision_id=re.id
 AND re.proyecto_id=pr.id
@@ -46,6 +46,7 @@ if (empty($action)) {
             <thead>
               <tr>
                 <th><a>Observaciones Realizadas:</a></th>
+                <th><a>Correcciones Realizadas:</a></th>
                 <th><a>Estado Observaciones:</a></th>
               </tr>
             </thead>
@@ -54,7 +55,8 @@ if (empty($action)) {
             {
             $output .="
                       <tr class=".classtabla($g).">
-                      <td>{$arrayobser[$g]['obser']}</td>
+                      <td>{$arrayobser[$g]['observacion']}</td>
+                      <td>".getRespuesta($arrayobser[$g]['respuesta'])."</td>
                       <td>
                           <a>".estado($arrayobser[$g]['estado'])."</a>
                       </td>
@@ -92,20 +94,26 @@ function estado($va){
     $clas='';
     if($va == 'CR'){
     $clas='CREADO';
-    $res=$clas." <img src=../../images/icons/flags/CR.png title=\"Estado Observacion\"/>";
+    $res=$clas." <img src=../../images/icons/flags/CR.png title=\"Estado Observacion\" width='25px' height='25px' />";
     }else{
         if($va == 'CO'){
             $clas='CORREGIDO';
-            $res="<img src=../../images/icons/flags/RE.png title=\"Estado Observacion\"/>".$clas;
+            $res="<img src=../../images/icons/flags/RE.png title=\"Estado Observacion\" width='25px' height='25px' />".$clas;
         }else{
             if($va == 'AP'){
                 $clas='APROBADO';
-                $res="<img src=../../images/icons/flags/RE.png title=\"Estado Observacion\"/>".$clas;
+                $res="<img src=../../images/icons/flags/RE.png title=\"Estado Observacion\" width='25px' height='25px' />".$clas;
             }
         }
     }
     return $res;
 };
+  function getRespuesta($descripcion)
+  {
+    $resumen = $descripcion;
+    $resumen   = htmlspecialchars_decode( $resumen );
+    return $resumen;
+  }
 
 exit;
 

@@ -142,15 +142,5 @@ class Avance extends Objectbase
     $filtro_sql = '';
     return $filtro_sql;
   }
-    function getArchivos($dir)
-  {
-    $directorio = opendir("$dir");
-    $listaarchivos = array();
-    while($archivo= readdir($directorio)) {
-    $listaarchivos[]=$archivo;
-    }
-    closedir($directorio);
-    return $listaarchivos;
-  }
 }
 ?>

@@ -3,15 +3,14 @@
   <div class="rnd">
     <div id="container">
         <h1 class="title">Detalle de Avance</h1>
-        
-{literal}
 
 <!-- The file upload form used as target for the file upload widget -->
-<form id="fileupload" action="../../estudiante/proyecto-final/archivo/" method="POST" enctype="multipart/form-data">
+<form id="fileupload" action="../../estudiante/archivo/?estudiante_id={$estudiante->id}" method="POST" enctype="multipart/form-data">
     <!-- The table listing the files available for upload/download -->
     <h3><b>Archivos</b></h3>
     <table role="presentation"><tbody class="files"></tbody></table>
 </form>
+{literal}
 <!-- The template to display files available for upload -->
 <script id="template-upload" type="text/x-tmpl">
 {% for (var i=0, file; file=o.files[i]; i++) { %}
@@ -120,7 +119,9 @@ $('#theme-switcher').change(function () {
         <p>
           {$avance->getDescripcion()}
         </p>
-        
+        <p>
+          <a href="observacion.registro.php?docente_id={$objs[ic]['id']}" target="_blank" >{icono('basicset/pencil_48.png','Revision')}Realizar Revisiones</a>
+        </p>
         <hr>
     {$ERROR}
     </div>
