@@ -11,7 +11,7 @@
 {literal}
 
 <!-- The file upload form used as target for the file upload widget -->
-<form id="fileupload" action="archivo/" method="POST" enctype="multipart/form-data">
+<form id="fileupload" action="../archivo/" method="POST" enctype="multipart/form-data">
     <!-- Redirect browsers with JavaScript disabled to the origin page -->
 {/literal}
     <noscript><input type="hidden" name="redirect" value="{$URL}"></noscript>
