@@ -23,7 +23,7 @@
       <th><a  >ID          </a></th>
       <th><a  >NOMBRE  </a></th>
       <th><a  >APELLIDOS    </a></th>
-      <th><a  >CARTA </a></th>
+      <th><a  >ESTADO</a></th>
        </tr>
   </thead>
   

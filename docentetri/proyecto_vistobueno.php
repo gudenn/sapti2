@@ -1,5 +1,6 @@
 <?php
 try {
+   define ("MODULO", "DOCENTE-TRIBUNAL");
   require('_start.php');
   if(!isDocenteSession())
   header("Location: login.php");
@@ -42,11 +43,7 @@ try {
   $estudiante     = new Estudiante($id_estudiante);
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();
-  //echo  $proyecto->nombre;
-  //echo  "Hola elis";
-    //////creando la clase de visto bueno para realizar el visto bueno del proyecto de un estudiante
- 
-  
+   
   $smarty->assign("usuario", $usuario);
   $smarty->assign("proyecto", $proyecto);
     
@@ -64,7 +61,7 @@ try {
     $vistobueno->proyecto_id       =        $_POST['proyecto_id'];
     $vistobueno->visto_bueno_tipo  =        Visto_bueno::E3_TRIBUNAL;
     $vistobueno->fecha_visto_bueno =        date("d/m/Y");
-    $vistobueno->visto_bueno_id    =        $docente->docente_id;;
+    $vistobueno->visto_bueno_id    =        $docente->id;;
     $vistobueno->estado            =        Objectbase::STATUS_AC;
    
     $vistobueno->save();

@@ -4,8 +4,8 @@ try {
   
   
   require('_start.php');
- // if(!isConsejoSession())
- //  header("Location: login.php");  ;
+  if(!isConsejoSession())
+   header("Location: login.php");  ;
 
 
   
@@ -74,13 +74,17 @@ try {
   $link = Consejo::URL."";
   $menu->agregarItem('Reportes de Docentes','Reportes correspondientes a los Docentes','basicset/graph.png',$link);
   $menus[] = $menu;
+  $menu = new Menu('Tribunales no Aceptados');
+  $link = Consejo::URL."lista.tribunales.rechazados.php";
+  $menu->agregarItem('Gesti&oacute;n de Asignac&oacute;n','Registro y modificacion de tribunales','basicset/user4.png',$link);
+   $menus[] = $menu;
   
    $notificacion= new Notificacion();
     echo sizeof($notificacion->getNotificacionConsejo(2));
     
     $menu = new Menu('Notificaciones y Mensajes');
     $link = Estudiante::URL."notificacion/";
-    $menu->agregarItem('Notificaciones','Geti&oacute;n de las Notificaciones','basicset/megaphone.png',$link,  sizeof($notificacion->getNotificacionTribunal(3)));
+    $menu->agregarItem('Notificaciones','Geti&oacute;n de las Notificaciones','basicset/megaphone.png',$link,  sizeof($notificacion->getNotificacionConsejo(2)));
     $menus[] = $menu;
   
   

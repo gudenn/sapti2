@@ -11,7 +11,7 @@ try {
 
    echo $_POST['horaini'];
    
- //  $horafin =  new  time();
+  $horafin =  new  time();
     
 
       echo "<option value='".$horafin."' $TRUE>".htmlentities($horafin)."</option>";

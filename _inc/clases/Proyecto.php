@@ -410,14 +410,7 @@ where pa.area_id=a.id  and pa.proyecto_id='$this->id' and pa.estado='AC'  and a.
    */
    function getTribunal($docente,$idproyecto) 
   {
-    //@TODO revisar
-    //leerClase('Estudiante');
-    //
-     /**
-      * select  t.`id`
-  from  `proyecto` p, `tribunal` t
-where  p.`id`=t.`proyecto_id` and p.`id`=1 and t.`docente_id`=1;
-      */
+    
     leerClase('Tribunal');
     $activo = Objectbase::STATUS_AC;
     $sql = "select t.* from " . $this->getTableName('Tribunal') . " as t  where t.proyecto_id = '$this->id' and t.docente_id='$docente' and t.estado = '$activo' and  '$idproyecto'='$this->id'  and '$this->estado' = '$activo' ";
@@ -538,7 +531,48 @@ where  p.`id`=t.`proyecto_id` and p.`id`=1 and t.`docente_id`=1;
   
 
    
-
+  /**
+   * @return int 
+   *  retorna el total  de tribunales   asignados que aceptaron
+   */
+  
+  function getTribunalesAceptados()
+  {
+    $contador= 0;
+    $activo = Objectbase::STATUS_AC;
+     $sql = "select t.* from " . $this->getTableName('Tribunal') . " as t   where t.proyecto_id ='$this->id' and t.accion='AC' and  t.estado = '$activo'";
+   $resultado = mysql_query($sql);
+     if ($resultado)
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+      { 
+        $contador=$contador+1;
+      }
+       return   $contador;
+   
+  }
+  
+    /**
+   * 
+   * @return boolean|\Area
+   * retorna  retorna un array de los id de los tribunales activos
+   */
+  
+  function getIdTribunles()
+  {
+        $idtribunales= array();
+  
+    $activo = Objectbase::STATUS_AC;
+     $sql = "select t.* from " . $this->getTableName('Tribunal') . " as t   where t.proyecto_id ='$this->id' and t.estado = '$activo'  ";
+   $resultado = mysql_query($sql);
+    if (!$resultado)
+      return false;
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+      { 
+         $idtribunales[] =$fila['docente_id'];
+      }
+       return  $idtribunales;
+  }
+  
   /**
    * 
    * @return boolean|\Area
@@ -547,18 +581,15 @@ where  p.`id`=t.`proyecto_id` and p.`id`=1 and t.`docente_id`=1;
   
   function getTutoress()
   {
-    //@TODO revisar
-    //  leerClase('Proyecto_area');
-    leerClase('Tutor');
-    $tutores= array();
+        $tutores= array();
     $activo = Objectbase::STATUS_AC;
-    $sql = "select t.* from " . $this->getTableName('Tutor') . " as t , " . $this->getTableName('Usuario') . " as u , " . $this->getTableName('Proyecto_tutor') . " as pt  where u.id =t.usuario_id  and t.id=pt.tutor_id and pt.proyecto_id ='$this->id' and u.estado = '$activo' and t.estado = '$activo'  ";
-    $resultado = mysql_query($sql);
+     $sql = "select t.* from " . $this->getTableName('Tribunal') . " as t   where t.proyecto_id ='$this->id' and t.estado = '$activo'  ";
+   $resultado = mysql_query($sql);
     if (!$resultado)
       return false;
     while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
       { 
-        $tutores[] =new Tutor($fila);
+        $tutores[] =$fila['id'];
       }
        return $tutores;
   }
@@ -568,8 +599,12 @@ where  p.`id`=t.`proyecto_id` and p.`id`=1 and t.`docente_id`=1;
    * retorna la cantidad de tribunales
    */
   
+  
+  
+  
+  
     function getTribunales()
-  {
+   {
     
     $total= 0;
     $activo = Objectbase::STATUS_AC;
@@ -582,7 +617,7 @@ where  p.`id`=t.`proyecto_id` and p.`id`=1 and t.`docente_id`=1;
         $total=$total+1;
       }
        return $total;
-  }
+    }
   /**
    * 
    * @return boolean

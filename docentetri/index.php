@@ -1,9 +1,9 @@
 <?php
 try {
-  define ("MODULO", "DOCENTE-TRIBUNAL");
+ define ("MODULO", "DOCENTE-TRIBUNAL");
   require('_start.php');
- // if(!isDocenteSession())
-  //  header("Location: login.php");  
+if(!isDocenteSession())
+    header("Location: login.php");  
 
   /** HEADER */
   $smarty->assign('title','Proyecto Final');
