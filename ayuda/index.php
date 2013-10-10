@@ -17,19 +17,20 @@ try {
   $helpdesk = new Helpdesk(1);
   if ( isset($_GET['codigo']) )
     $helpdesk->getByCodigo ($_GET['codigo']);
+  
           
   //obtenemos el grupo del usuario actual
   //TODO permisos
-  if(isAdminSession())
+  if(isUserSession())
   {
     leerClase('Usuario');
-    $admin_aux = getSessionAdmin();
-    $usuario   = new Usuario($admin_aux->usuario_id);
-    $grupos    = $usuario->getMisGrupos();
+    $usuario = getSessionUser();
+    $grupos  = $usuario->getMisGrupos();
     $tieneAccesoHelpdesk = false;
     foreach ($grupos as $grupo) 
     {
       $permiso = $grupo->tieneAccesoHelpdesk($helpdesk->id);
+      
       if ($permiso->ver)
       {
         $tieneAccesoHelpdesk = true;

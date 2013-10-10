@@ -53,7 +53,7 @@ class Helpdesk extends Objectbase
       $script       = $_SERVER['SCRIPT_NAME'];
       $this->codigo = sha1($script);
       if (defined('MODULO'))
-        $this->codigo = sha1(MODULO);
+        $this->codigo = sha1(MODULO.basename($script));
       $this->getByCodigo($this->codigo);
       if (!$this->id)
       {
