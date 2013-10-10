@@ -44,29 +44,31 @@ try {
   if (isset($usuario->estudiante_objs[0]))
     $estudiante = $usuario->estudiante_objs[0];
   $proyecto       = $estudiante->getProyecto();
-
   $proyecto= new Proyecto($proyecto->id);
   
-   $vistod=$proyecto->getVD();
+   $vistod=$proyecto->getVbDocente();
    $vistodoc=$vistod[0]->visto_bueno_tipo;
-  $vistot=$proyecto->getVT();
+   $vistot=$proyecto->getVbTutor();
    $vistotu=$vistot[0]->visto_bueno_tipo;
-  
+$vb=  Proyecto::EST2_BUE;
+
   /**
    * Menu central
    */
+   
   leerClase('Menu');
   $menu = new Menu('');
+ 
+
   $menus = $menu->getestudianteIndex($proyecto);
   $smarty->assign("menus", $menus);
-
 
   $smarty->assign("estudiante", $estudiante);
   $smarty->assign("usuario", $usuario);
   
   $smarty->assign("proyecto", $proyecto);
   
-  $smarty->assign("vistodoc", $vistodoc);
+  $smarty->assign("vb", $vb);
   $smarty->assign("vistotu", $vistotu);
   $smarty->assign("ERROR", $ERROR);
   

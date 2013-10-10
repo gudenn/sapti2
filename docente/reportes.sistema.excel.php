@@ -1,4 +1,5 @@
 <?php
+  define ("MODULO", "DOCENTE");
 require('_start.php');
 
 //Exportar datos de php a Excel

@@ -1,11 +1,14 @@
 <?php
 try {
-  define ("MODULO", "DOCENTE");
+    define ("MODULO", "DOCENTE");
   require('../_start.php');
   if(!isDocenteSession())
     header("Location: login.php"); 
 
+  leerClase("Estudiante");
   leerClase('Docente');
+  leerClase('Usuario');
+  leerClase('Avance');
   $ERROR = '';
 
   /** HEADER */
@@ -38,7 +41,40 @@ try {
   }else{
       $iddicta=$_SESSION['iddictaproyectofinal'];
   }
-
+  if (isset($_GET['id_estudiante'])) 
+  $id_estudiante=$_GET['id_estudiante'];
+  
+  $estudiante     = new Estudiante($id_estudiante);
+  $usuario        = $estudiante->getUsuario();
+  $proyecto       = $estudiante->getProyecto();
+  function getArchivos($dir)
+  {
+    $directorio = opendir("$dir");
+    $listaarchivos = array();
+    while($archivo= readdir($directorio)) {
+    $listaarchivos[]=$archivo;
+    }
+    closedir($directorio);
+    return $listaarchivos;
+  }
+  $resul = "
+      SELECT av.id as id, pr.nombre as nombrep, av.descripcion as descripcion, av.fecha_avance as fecha, av.revision_id as correcionrevision, av.directorio as archivos
+FROM proyecto pr, avance av
+WHERE av.proyecto_id=pr.id
+AND av.proyecto_id='".$proyecto->id."'
+AND av.estado_avance='CR'
+ORDER BY av.fecha_avance
+          ";
+   $sql = mysql_query($resul);
+while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
+   $avances[]=$fila1;
+   $dir="../";
+ }
+  $avance   = new Avance();
+  $smarty->assign("avance", $avance);
+  $smarty->assign("avances", $avances);
+  $smarty->assign("usuario", $usuario);
+  $smarty->assign("proyecto", $proyecto);
   $smarty->assign("iddicta", $iddicta);
 
   //No hay ERROR
@@ -48,5 +84,5 @@ catch(Exception $e)
 {
   $smarty->assign("ERROR", handleError($e));
 }
-  $smarty->display('docente/estudiante/full-width.estudiante.lista.tpl');
+  $smarty->display('docente/revision/full-width.revision.corregido.lista.tpl');
 ?>

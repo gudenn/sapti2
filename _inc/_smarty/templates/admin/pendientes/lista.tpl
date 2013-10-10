@@ -15,7 +15,7 @@
     <th><a href='?order=proveedor'         class="tajax"   title='Ordenar por Proveedor'        >APELLIDOS     </a></th>
     <th><a href='?order=especialidad'         class="tajax"   title='Ordenar por Especialidad'        >TITULO</a></th>
     <th><a href='?order=id'                class="tajax"   title='Ordenar por Id'               >GESTION</a></th>
-    <th>ESTADO</th>    
+    <th>CONFIRMAR</th> 
   </tr>
   </thead>
   <tbody>
@@ -28,6 +28,7 @@
         <td>{$listadocentes[ic]['apellidos']}</td>
         <td>{$listadocentes[ic]['titulo']}</td>
         <td>{$listadocentes[ic]['codigo']}</td>
+       
          <td><a href="pendientes.gestion.php?proyecto_id={$listadocentes[ic]['id']}" >{icono('basicset/tick_48.png','Confirmar')} Confirmar</a></td>
       
      

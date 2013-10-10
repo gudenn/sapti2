@@ -8,6 +8,12 @@ class Consejo extends Objectbase
   */
   var $usuario_id;
 
+ /**
+  * Descripcion del Activo
+  * @var var char 100
+  */
+  var $activo;
+
   /**
   * 
   * fecha inicio date

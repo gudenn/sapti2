@@ -44,7 +44,7 @@ ul{
 	height:20px;
 	padding:3px;
 }
-.ui-state-highlight{ background:#FFF0A5; border:1px solid #FED22F; height:22px;}
+.ui-state-highlight{ background:#FFF0A5; border:1px solid #FED22F; height:25px;}
 .msg{
 	color:#0C0;
 	font:normal 11px Tahoma

@@ -14,6 +14,7 @@ try {
   leerClase("Formulario");
   leerClase("Pagination");
   leerClase("Filtro");
+  leerClase('Administrador');
 
 
   $ERROR = '';
@@ -73,20 +74,37 @@ try {
   
   leerClase('Proyecto');
   
-  $proyecto=new Proyecto();
-  
-  $cont=$proyecto->contar();
+ 
   
   
   $p=$_POST['semestre_selec'];;
-  
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
   if($_POST['semestre_selec']){
   
+  
+ $sqlr="SELECT count(*) as c
+FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
+WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
+=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado='AC' AND p.id=v.proyecto_id and s.id='".$p."'";
+ $resultado = mysql_query($sqlr);
+ $areglo= array();
+  
+ while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+ {
+  // $arraytribunal=$fila;
+   
+   //array('name' => $fila["id"], 'home' => $fila["nombre"],'cell' => $fila["apellidos"], 'email' => 'john@myexample.com');
+   
+   $areglo[]=$fila;
+ }
+ 
+ echo $cont = $areglo[0]['c'];
 
-
+ if ($cont!==0) {
+    
+ 
   $sqlr="SELECT count(*) as p
 FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
 WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
@@ -105,7 +123,7 @@ WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
  
  $post = $arraytribunal[0]['p'];
  
- echo $pos=((double)$post/(float)$cont)*100;
+ $pos=((double)$post/(float)$cont)*100;
  // $objs_pg    = new Pagination($obj_mysql, 'g_cambios','',false,10);
  $smarty->assign('pos'  , $pos);
 
@@ -154,8 +172,7 @@ WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
  $smarty->assign('cam'  , $cam); 
 
 //vencidos
- 
-echo  $fechahoy=  date('Y-m-d');
+  $fechahoy=  date('Y-m-d');
   $sqlr="SELECT count(*) as vencido
 FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
 WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
@@ -180,11 +197,13 @@ WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
  
  
  $smarty->assign('v'  , $v);
+ }
 }
 
   //No hay ERROR
   $smarty->assign("ERROR",'');
-  $smarty->assign("URL",URL);  
+  $smarty->assign("URL",URL); 
+ 
 
 }
 catch(Exception $e) 

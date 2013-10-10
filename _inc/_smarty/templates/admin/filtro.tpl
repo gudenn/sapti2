@@ -1,8 +1,10 @@
 <form action="{$filtros->clearaction}" method="get" name="filtro" id="filtro" >
+  <h2>Opciones de B&uacute;squeda R&aacute;pida: <b>{$description}</b></h2>
+    
   <table  style="width: 75%;float: left;" class="tbl_filtro">
     <tr>
       {section name=ic loop=$filtros->nombres}
-        <th><label for="{$filtros->valores[ic][1]}">{$filtros->nombres[ic]}</label></th>
+        <th><label for="{$filtros->valores[ic][1]}">{$filtros->nombres[ic]}{getHelpTip($filtros->valores[ic][1])}</label></th>
       {/section}
       <th>&nbsp;</th>
     </tr>

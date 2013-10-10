@@ -67,8 +67,8 @@ EditableGrid.prototype.initializeGrid = function(iddicta)
                 
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
 		cell.innerHTML = "<a onclick=document.location.href='../revision/revision.lista.php?id_estudiante="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("seguimiento.png") + "\" border=\"0\" alt=\"seguimiento\" title=\"Seguimiento\"/>Seguimiento</a>";
-                cell.innerHTML += "<br><a onclick=document.location.href='../revision/observacion.registro.php?id_estudiante="+getRowId(cell.rowIndex)+"&iddicta="+iddicta+"' style=\"cursor:pointer\">" +
+						 "<img src=\"" + image("seguimiento.png") + "\" border=\"0\" alt=\"seguimiento\" title=\"Seguimiento\" width='30px' height='30px' />Seguimiento</a>";
+                cell.innerHTML += "<br><a onclick=document.location.href='../revision/revision.corregido.lista.php?id_estudiante="+getRowId(cell.rowIndex)+"&iddicta="+iddicta+"' style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("editar.png") + "\" border=\"0\" alt=\"revisar\" title=\"Registrar Observacion\"/>Revisar</a>";
                 cell.innerHTML += "<br><a onclick=document.location.href='../evaluacion/proyecto.evaluacion.php?id_estudiante="+getRowId(cell.rowIndex)+"&iddicta="+iddicta+"' style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("evaluar.png") + "\" border=\"0\" alt=\"evaluar\" title=\"Evaluar Proyecto\"/>Evaluar</a>";

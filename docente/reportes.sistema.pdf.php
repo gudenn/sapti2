@@ -1,4 +1,5 @@
 <?php
+  define ("MODULO", "DOCENTE");
 require_once('../_inc/clases/class.ezpdf.php');
  require('_start.php');
 

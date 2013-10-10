@@ -1,7 +1,7 @@
 <?php
 try {
+
   require('_start.php');
-  global $PAISBOX;
 
   leerClase("Docente");
   leerClase("Formulario");

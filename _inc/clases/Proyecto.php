@@ -487,7 +487,13 @@ where pa.area_id=a.id  and pa.proyecto_id='$this->id' and pa.estado='AC'  and a.
     return $vigencias;
   }
   
-  function getVD() {
+  /**
+   * 
+   * @return
+   * retorna los Vistos buenos Docentes
+   */
+  
+  function getVbDocente() {
     //@TODO revisar
     //  leerClase('Proyecto_area');
     leerClase('Visto_bueno');
@@ -509,9 +515,9 @@ where pa.area_id=a.id  and pa.proyecto_id='$this->id' and pa.estado='AC'  and a.
   /**
    * 
    * @return
-   * retorna la visto bueno  del proyecto
+   * Retorna la Visto Bueno  del Tutor
    */
- function getVT() {
+ function getVbTutor() {
     //@TODO revisar
     //  leerClase('Proyecto_area');
     leerClase('Visto_bueno');
@@ -529,6 +535,29 @@ where pa.area_id=a.id  and pa.proyecto_id='$this->id' and pa.estado='AC'  and a.
     return $vistos;
   }
   
+  
+  /**
+   * 
+   * @return
+   * Retorna la Visto Bueno  del Tutor
+   */
+ function getVbTribunal() {
+    //@TODO revisar
+    //  leerClase('Proyecto_area');
+    leerClase('Visto_bueno');
+     $vistos= array();
+     $d= Visto_bueno::E3_TRIBUNAL;
+    
+    $activo = Objectbase::STATUS_AC;
+    $sql = "select v.* from " . $this->getTableName('Visto_bueno') . " as v    where v.proyecto_id = '$this->id' and v.visto_bueno_tipo='$d' and v.estado = '$activo'";
+    $resultado = mysql_query($sql);
+    if (!$resultado)
+      return false;
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) {
+      $vistos[] = new Visto_bueno($fila);
+    }
+    return $vistos;
+  }
 
    
   /**

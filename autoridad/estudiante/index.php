@@ -57,6 +57,7 @@ try {
   $link = Administrador::URL."estudiante/";
   $menu->agregarItem('Reportes de Estudiantes','Reportes correspondientes a los Estudiantes','basicset/graph.png',$link);
   $menus[] = $menu;
+  
   //----------------------------------//
   
   
