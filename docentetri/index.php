@@ -1,7 +1,8 @@
 <?php
 try {
+ define ("MODULO", "DOCENTE-TRIBUNAL");
   require('_start.php');
-  if(!isDocenteSession())
+if(!isDocenteSession())
     header("Location: login.php");  
 
   /** HEADER */

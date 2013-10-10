@@ -1,5 +1,6 @@
 <?php
 try {
+   define ("MODULO", "DOCENTE-TUTOR");
   require('_start.php');
   if(!isDocenteSession())
     header("Location: login.php");

@@ -1,5 +1,6 @@
 <?php
 try {
+    define ("MODULO", "DOCENTE");
   require('../_start.php');
   if(!isDocenteSession())
     header("Location: login.php"); 
@@ -36,27 +37,32 @@ try {
     leerClase("Tribunal");
     leerClase("Notificacion");
     leerClase("Consejo");
+    leerClase("Proyecto");
 
 
 
     $docente      =  getSessionDocente();
     $docente_ids  =  $docente->id;
+ 
     //echo $docente_ids;
 if ( isset($_GET['tribunal_id']))
 {
-     $tribunal = new Tribunal($_GET['tribunal_id']);
-     $tribunal->visto="V";
-     $tribunal->save();
-      
-  
-     $smarty->assign('accion', array(
+      $smarty->assign('accion', array(
      Tribunal::ACCION_AC =>  Tribunal::ACCION_AC,
      Tribunal::ACCION_RE =>  Tribunal::ACCION_RE
-                                     ));
+          
+              ));
+      $idtribuanl=$_GET['tribunal_id'];
+        
+   $query = "UPDATE notificacion_tribunal nt SET nt.estado_notificacion='V'  WHERE nt.tribunal_id=$idtribuanl";
+  mysql_query($query);
+      
+      
+      
      
 $sql="select n.`detalle`
 from `notificacion` n, `notificacion_tribunal` nt, `tribunal` t
-where n.`id`=nt.`notificacion_id` and nt.`tribunal_id`=t.`id` and n.`estado`='AC' and nt.`estado`='AC' and t.`estado`='AC' and t.`id`=".$_GET['tribunal_id'].";";
+where n.`id`=nt.`notificacion_id` and nt.`tribunal_id`=t.`id` and n.`estado`='AC' and nt.`estado`='AC' and t.`estado`='AC' and t.id=".$_GET['tribunal_id'].";";
     $resultado   =  mysql_query($sql);
     $detalle= "";
  
@@ -68,8 +74,7 @@ where n.`id`=nt.`notificacion_id` and nt.`tribunal_id`=t.`id` and n.`estado`='AC
  //var_dump($notitribunal_id);
 $smarty->assign('detalle',$detalle);
 $smarty->assign('docente',$docente);
-$smarty->assign('idtribunal',$_GET['tribunal_id']);
-  
+$smarty->assign('idtribunal',$_GET['tribunal_id']);  
  }
  
   
@@ -77,18 +82,26 @@ $smarty->assign('idtribunal',$_GET['tribunal_id']);
 if ( isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' )
   {
     if(isset($_POST['ids']))
-     {
-         
-      //accion
-    if(  $_POST['accion']==Tribunal::ACCION_AC)
     {
+    if( $_POST['accion']==Tribunal::ACCION_AC)
+    {
+      
+      
+      
+       echo  $_POST['ids'];
        $tribunal = new Tribunal($_POST['ids']);
        $tribunal->visto="V";
        $tribunal->accion=$_POST['accion'];
        $tribunal->detalle=$_POST['descripcion'];
-       $notificacion= new Notificacion();
+    
        
-    $notificacions= new Notificacion();
+       
+       
+       
+       
+       
+       
+     $notificacions= new Notificacion();
     $notificacions->objBuidFromPost();
     $notificacions->proyecto_id=$_POST['proyecto_id']; 
     $notificacions->tipo="Solicitud";
@@ -100,18 +113,23 @@ if ( isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' )
 
     $noticaciones= array('consejos'=>array( 1));
     $notificacions->enviarNotificaion( $noticaciones);
-         
-       
-       
-       
-       
-    }else
+    
+    $tribunal->save();
+  //  $proyecto= new Proyecto($_POST['proyecto_id']);
+    
+    
+ //   echo   $proyecto->getTribunalesAceptados();
+    
+    
+    
+     }else
     {
       
        $tribunal = new Tribunal($_POST['ids']);
        $tribunal->visto=  Tribunal::VISTO;
        $tribunal->accion=$_POST['accion'];
        $tribunal->detalle=$_POST['descripcion'];
+      // $tribunal->estado= Objectbase::STATUS_DE;
        
         $notificacions= new Notificacion();
     $notificacions->objBuidFromPost();
@@ -125,9 +143,10 @@ if ( isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' )
 
     $noticaciones= array('consejos'=>array( 1));
     $notificacions->enviarNotificaion($noticaciones);
-       
-    }
        $tribunal->save();
+    }
+    
+       
        
        
       

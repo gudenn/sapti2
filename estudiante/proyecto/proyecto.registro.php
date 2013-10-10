@@ -1,25 +1,23 @@
 <?php
 try {
-  define ("MODULO", "ESTUDIANTE-INDEX");
-  require('../_start.php');
+ define ("MODULO", "ESTUDIANTE");
+   require('../_start.php');
   if(!isEstudianteSession())
-    header("Location: login.php"); 
-   
-
-  if (!defined('TIPO'))
-    define ('TIPO', 'PR');
+    header("Location: ../login.php"); 
+ 
   /** HEADER */
   $smarty->assign('title','SAPTI - Registro de Proyecto');
   $smarty->assign('description','Formulario de registro de Proyecto');
   $smarty->assign('keywords','SAPTI,Proyecto,Registro');
 
-  leerClase('Administrador');
+ 
+  
   leerClase('Estudiante');
   /**
    * Menu superior
    */
   $menuList[]     = array('url'=>URL . Estudiante::URL , 'name'=>'Estudiante');
- 
+ $menuList[]     = array('url'=>URL . Estudiante::URL . 'proyecto/','name'=>'Proyecto');
   $menuList[]     = array('url'=>URL . Estudiante::URL . 'proyecto/'.basename(__FILE__),'name'=>'Registro de Proyecto');
   $smarty->assign("menuList", $menuList);
 
@@ -61,26 +59,24 @@ try {
   leerClase('Semestre');
   leerClase('Sub_area');
   leerClase('Modalidad');
-  
+  leerClase('Estudiante');
   leerClase('Institucion');
 
   leerClase('Objetivo_especifico');
-  
-  
-   $estudiante_aux = getSessionEstudiante();
-  $estudiante     = new Estudiante($estudiante_aux->estudiante_id);
-  $usuario        = $estudiante->getUsuario();
-  
-  
-  
- 
-  
 
   
   $semestre   = new Semestre(false,true);
   //si o si trabajamos aca con un estudiante asi que lo guardaremos en session
-
- 
+  $estudiante_id = false;
+  if (isset($_SESSION['estudiante_id']) && is_numeric($_SESSION['estudiante_id']))
+    $estudiante_id = $_SESSION['estudiante_id'];
+  if (isset($_GET['estudiante_id']) && is_numeric($_GET['estudiante_id']))
+  {
+    $_SESSION['estudiante_id'] = $_GET['estudiante_id'];
+    $estudiante_id             = $_GET['estudiante_id'];
+  }
+   
+  $estudiante= getSessionEstudiante();
   $estudiante->getAllObjects();
   $usuario    = $estudiante->getUsuario();
   $proyecto   = $estudiante->getProyecto();
@@ -224,6 +220,7 @@ try {
     //$proyecto = new Proyecto();
     $proyecto->objBuidFromPost('proyecto_');
     $proyecto->estado         = Objectbase::STATUS_AC;
+  
     $proyecto->fecha_registro = date('d/m/Y');
     $smarty->assign('proyecto'  , $proyecto);
 
@@ -279,7 +276,7 @@ try {
       $smarty->assign('tipo_moda',($modalidad->datos_adicionales)?'':'tipo_moda');
     }
     $proyecto->validar();
-    $proyecto->tipo_proyecto = TIPO;
+    $proyecto->tipo_proyecto =  Proyecto::TIPO_PERFIL;
     $proyecto->estado_proyecto= Proyecto::EST5_P;
     $proyecto->save();
     $proyecto->saveAllSonObjects(TRUE);

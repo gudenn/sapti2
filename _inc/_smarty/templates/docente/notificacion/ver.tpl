@@ -2,7 +2,7 @@
  <div class="clear"></div>
  <form action="" method="post" >
   <p>SEÑOR</p>
-   <p>{$docente->nombre}</p>
+   <p>{$docente->getNombreCompleto()}</p>
    <p>{$detalle}</p>
    <input type="hidden"  name="ids" value="{$idtribunal}" /><br />
 

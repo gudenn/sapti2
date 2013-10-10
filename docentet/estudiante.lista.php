@@ -1,5 +1,6 @@
 <?php
 try {
+   define ("MODULO", "DOCENTE-TUTOR");
   require('_start.php');
   if(!isDocenteSession())
     header("Location: login.php"); 
@@ -33,7 +34,7 @@ try {
  
 
   $docente=  getSessionDocente();
-  $docenteid=$docente->docente_id;
+  $docenteid=$docente->id;
   
   $smarty->assign("docente_ids", $docenteid);
 

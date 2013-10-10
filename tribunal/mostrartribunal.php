@@ -1,5 +1,7 @@
 <?php
 try {
+    define ("MODULO", "TRIBUNAL");
+  
   require('_start.php');
   global $PAISBOX;
 
@@ -36,7 +38,6 @@ try {
   leerClase("Formulario");
   leerClase("Pagination");
   leerClase("Filtro");
-  leerClase("Proyecto_tribunal");
   leerClase("Proyecto_estudiante");
   leerClase("Modalidad");
   

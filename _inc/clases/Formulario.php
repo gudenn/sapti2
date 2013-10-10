@@ -5,7 +5,7 @@ class Formulario {
     * Nombres de usuario no validos
     */
   const listaDeNombresNoValidos = "admin,administrator,cargoyellowpages,cargo,yellowpages,yellow";
-  const VALIDTEXT = "a-zA-Z0-9'\-''\_''\(''\)''#''@''.'','';'':'' ''\s''\t''\n''&''<''>'áéíóúäëïöüñÑÁÉÍÓÚÄËÏÖÜ";
+  const VALIDTEXT = "a-zA-Z0-9'\-''\_''\(''\)''#''@''.'','';'':'' ''\s''\t''\n''&''<''>'áéíóúäëïöüñÑÁÉÍÓÚÄËÏÖÜ\/";
 
   
   public function __construct($code) {

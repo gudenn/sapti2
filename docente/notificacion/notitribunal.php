@@ -1,5 +1,6 @@
 <?php
 try {
+    define ("MODULO", "DOCENTE");
   require('../_start.php');
   if(!isDocenteSession())
     header("Location: login.php"); 
@@ -40,17 +41,18 @@ try {
  
 
     $docente     =  getSessionDocente();
-    $docente_ids =  $docente->docente_id;
+    $docente_ids =  $docente->id;
     
      $var->getNotificacionTribunal($docente->id);
     
     echo sizeof($var->getNotificacionTribunal($docente->id));
     
- 
+ ////////consulta para sacar todos los notificaciones de asignacion de tribunales  del docente que esa en sesion
     //echo $docente_ids;
-    $sql="select  p.id, t.id as idtribunal, d.id as iddocente, u.nombre as nombreusuario, CONCAT (u.apellido_paterno, u.apellido_paterno) as apellidos ,p.nombre as nombreproyecto
-        from proyecto p,  `tribunal` t, `docente` d , usuario u
-where   p.id=t.proyecto_id and t.docente_id=d.id and d.usuario_id= u.id  and p.estado='AC' and t.estado='AC' and d.estado='AC' and u.estado= 'AC'  and d.id= $docente_ids;";
+    $sql="select  DISTINCT(p.id), t.id as idtribunal, u.nombre as nombre, CONCAT (u.apellido_paterno, u.apellido_paterno) as apellidos ,p.nombre as nombreproyecto
+from  usuario u, estudiante es, proyecto_estudiante pe, proyecto p,  tribunal t , notificacion_tribunal  nt
+where    u.id= es.usuario_id  and es.id=  pe.estudiante_id  and  pe.proyecto_id=p.id  and  p.id =t.proyecto_id
+and t.id=nt.tribunal_id  and t.docente_id= $docente_ids;";
     $resultado   =  mysql_query($sql);
     $notitribunal_id= array();
  

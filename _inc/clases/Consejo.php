@@ -7,12 +7,13 @@ class Consejo extends Objectbase
   * @var INT
   */
   var $usuario_id;
-  
+
  /**
   * Descripcion del Activo
   * @var var char 100
   */
   var $activo;
+
   /**
   * 
   * fecha inicio date
@@ -22,7 +23,7 @@ class Consejo extends Objectbase
   * 
   *  Fecha final date
   */
-  var $fecha_fin;
+  var $activo;
 
   /**
    * Validamos que todos los datos enviados sean correctos
@@ -86,7 +87,8 @@ class Consejo extends Objectbase
    * @param Filtro $filtro el objeto filtro
    * @return boolean
    */
-  public function filtrar(&$filtro) {
+  public function filtrar(&$filtro)
+  {
     parent::filtrar($filtro);
     $filtro_sql = '';
     if ($filtro->filtro('id'))
@@ -97,8 +99,5 @@ class Consejo extends Objectbase
       $filtro_sql .= " AND {$this->getTableName()}.descripcion like '%{$filtro->filtro('descripcion')}%' ";
     return $filtro_sql;
   }
-  
-  
-  
 }
 ?>

@@ -167,9 +167,6 @@ INSERT INTO `tipo_defensa` (`id`, `nombre`, `estado`) VALUES
 (2, 'Publica', 'AC');
 
 
-
 INSERT INTO `turno` (`id`, `nombre`, `peso`, `descripcion`, `estado`) VALUES
 (4, 'Tarde', NULL, 'afsd', 'AC'),
 (5, 'Mañana', NULL, 'fasdf', 'AC');
-
-

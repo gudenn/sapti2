@@ -16,8 +16,8 @@
   {section name=ic loop=$notitribunal_id}
     <tr  class="selectable">
      <td>{$notitribunal_id[ic]['id']} </td>
-      <td>{$notitribunal_id[ic]['nombreusuario']}</td>
-       <td>{$notitribunal_id[ic]['nombre']} </td>
+      <td>{$notitribunal_id[ic]['nombre']}{$notitribunal_id[ic]['apellidos']}</td>
+       <td>{$notitribunal_id[ic]['nombreproyecto']} </td>
        
       <td> <a href="ver.php?tribunal_id={$notitribunal_id[ic]['idtribunal']}" target="_blank" >{icono('detalle.png','PDF')}</a>
     

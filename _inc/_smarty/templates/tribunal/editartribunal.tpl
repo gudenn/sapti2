@@ -21,7 +21,7 @@
 <div >
   
   
-   <div style="width: 45%;float: left;" class="tbl_filtro">
+   <div >
      <Hi> LISTA DE LOS DOCENTES</Hi>
     <table class="tbl_lista" id="docentes"  mane="docentes">
   <thead>
@@ -78,18 +78,13 @@
     </tbody> 
 </table>
    </div>          
-    <div style="width: 45%;float: left; padding-left:27px" >
+    
       
        <form action="" method="post" id="pedido_form" >
- 
+ <div  >
    <Hi> LISTA DE LOS DOCENTES ASIGNADOS</Hi>
      
-        <tr>
-     
-          <td>
-             
-         
-             
+      
        <table  multiple id="asignados" >
         <thead>
           <tr>
@@ -147,7 +142,7 @@
       </table>
         
      
-      <input type="hidden" id="proyecto_id" name="proyecto_id" value="{$proyectobuscado->id}" /><br />
+      <input type="hidden" id="proyecto_id" name="proyecto_id" value="{$proyecto->id}" /><br />
        <input type="hidden" id="proyecto_id" name="estudiante_id" value="{$estudiantebuscado->codigo_sis}" /><br />
       
         </div>

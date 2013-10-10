@@ -1,7 +1,7 @@
 <?php
 try {
+  
   require('_start.php');
-  global $PAISBOX;
 
   leerClase("Consejo");
   leerClase("Formulario");
@@ -35,15 +35,15 @@ try {
   {
   
     $consejo = new Consejo();
-    $formulario = new Formulario('');
-   // $formulario->validar('login'   ,$_POST["login"]   ,'texto','Login ');
-   // $formulario->validarPassword('clave',$_POST["clave"], false,TRUE);
-    
+     $formulario = new Formulario('');
+     $formulario->validar('login'   ,$_POST["login"]   ,'texto','Login ');
+     $formulario->validarPassword('clave',$_POST["clave"], false,TRUE);
 
     if (!initSession($_POST["login"] ,($_POST["clave"])))
-      throw new Exception("?login&m=El usuario y el password no corresponden a un Consejero registrado.");
+      throw new Exception("?login&m=El usuario y el password no corresponden a un docente registrado.");
     $ir = "Location: index.php";
     header($ir);
+   
   }
   $_SESSION['consejo_id']=$consejo->id;
   //No hay ERROR

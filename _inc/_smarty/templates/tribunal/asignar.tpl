@@ -277,7 +277,7 @@
  </form>
               
  </div>
-         <script>
+          <script  type="text/javascript">
 jQuery('#hora_ini').change(function () {
 var numero =document.getElementById("hora_ini").value;
 // valor de la id de Provincias
@@ -287,9 +287,9 @@ to.innerHTML="buscando....";
 jQuery.ajax({
 type: "POST", 
 url: "buscador.php",
-data: 'horaini='+numero,// enviamos la id de la Porvincia + la id de la población
+data: 'iddia='+numero,// enviamos la id de la Porvincia + la id de la población
 success: function(a) {
-jQuery('#hora_fin').html(a);// el resultado de la busqueda la mostramos en  #poblacionList
+jQuery('#turno_id').html(a);// el resultado de la busqueda la mostramos en  #poblacionList
 var to=document.getElementById("Buscando");
 to.innerHTML="";
 }
@@ -297,7 +297,6 @@ to.innerHTML="";
 })
 .change();
 </script> 
-
               
                <script type="text/javascript">
         {literal} 
