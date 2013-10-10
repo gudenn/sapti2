@@ -5,8 +5,8 @@
           <form action="#" method="post" id="registro" name="buscar" >
             
             <p>
-              <input type="text" name="codigosis" id="nombre" value="" size="100"  data-validation-engine="validate[required]" >
-              <label for="nombre"><small>Ingrese Codigo Sis del Docente (*)</small></label>
+              <input type="text" name="codigosis" id="codigosis" value="" size="100"  data-validation-engine="validate[required]" >
+              <label for="codigosis"><small>Ingrese Codigo Sis del Docente (*){getHelpTip('codigosis')}</small></label>
             </p>
 
             <h2 class="title">Registrar Consejo</h2>

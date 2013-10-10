@@ -6,11 +6,11 @@
           <form action="#" method="post" id="registro" name="registro" >
             <p>
               <input type="text" name="codigo"  id="codigo" value="{$grupo->codigo}"  data-validation-engine="validate[required]">
-              <label for="codigo"><small>Nombre del Grupo(*)</small></label>
+              <label for="codigo"><small>Nombre del Grupo(*) {getHelpTip('codigo')}</small></label>
             </p>
             <p>
               <input type="text" name="descripcion" id="descripcion" value="{$grupo->descripcion}"  data-validation-engine="validate[required]">
-              <label for="descripcion"><small>Descripcion del Grupo (*)</small></label>
+              <label for="descripcion"><small>Descripci&oacute;n del Grupo (*) {getHelpTip('descripcion')}</small></label>
             </p>
             <h2 class="title">Grabar Grupo</h2>
             <p>

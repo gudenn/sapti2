@@ -139,7 +139,7 @@
           </p>-->
           <p>
             <textarea name="descripcion" id="descripcion" style="width: 308px;height: 30px;" data-validation-engine="validate[required]">{$helpdesk->descripcion}</textarea>
-            <label for="descripcion"><small>descripci&oacute;n (*)</small></label>
+            <label for="descripcion"><small>descripci&oacute;n (*) {getHelpTip('descripcion')}</small></label>
           </p>
           <h2 class="title">Contenido del tema de ayuda (*)</h2>
           <p>
@@ -150,7 +150,7 @@
           </script>          <h2 class="title">Grabar Helpdesk</h2>
           <p>
             <input type="text" name="keywords" id="keywords" value="{$helpdesk->keywords}"  data-validation-engine="validate[required]">
-            <label for="codigo"><small>Palabras Clave para Busquedas(*)</small></label>
+            <label for="keywords"><small>Palabras Clave para Busquedas(*) {getHelpTip('keywords')}</small></label>
           </p>
           <p>
             <input type="hidden" name="id"    value="{$helpdesk->id}">

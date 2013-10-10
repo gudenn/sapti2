@@ -5,18 +5,18 @@
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
             <p>
-              <select name=accion>
+              <select name="accion" id="accion" >
                     {html_options options=$accion}
                  </select>
-              <label for="semestre_id"><small>Tipo (*)</small></label>
+              <label for="accion"><small>Tipo (*) {getHelpTip('accion')}</small></label>
             </p>
               <p>
-              <input type="text" name="sigla" value="{$materia->sigla}"  data-validation-engine="validate[required]">
-              <label for="codigo"><small>Materia Sigla(*)</small></label>
+              <input type="text" name="sigla" id="sigla" value="{$materia->sigla}"  data-validation-engine="validate[required]">
+              <label for="sigla"><small>Materia Sigla(*) {getHelpTip('sigla')}</small></label>
             </p>
             <p>
-              <input type="text" name="nombre" value="{$materia->nombre}"  data-validation-engine="validate[required]">
-              <label for="codigo"><small>Nombre del Materia (*)</small></label>
+              <input type="text" name="nombre" id="nombre" value="{$materia->nombre}"  data-validation-engine="validate[required]">
+              <label for="nombre"><small>Nombre del Materia (*) {getHelpTip('nombre')}</small></label>
             </p>
             <h2 class="title">Grabar Materia</h2>
             <p>

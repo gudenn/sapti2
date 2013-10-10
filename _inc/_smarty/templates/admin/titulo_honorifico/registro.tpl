@@ -5,12 +5,12 @@
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
             <p>
-              <input type="text" name="nombre" value="{$titulo->nombre}"  data-validation-engine="validate[required]">
-              <label for="codigo"><small>Nombre del T&iacute;tulo honor&iacute;fico (*){getHelpTip('nombre')}</small></label>
+              <input type="text" name="nombre" id="nombre" value="{$titulo->nombre}"  data-validation-engine="validate[required]">
+              <label for="nombre"><small>Nombre del T&iacute;tulo honor&iacute;fico (*){getHelpTip('nombre')}</small></label>
             </p>
             <p>
-              <input type="text" name="descripcion" value="{$titulo->descripcion}"  data-validation-engine="validate[required]">
-              <label for="codigo"><small>Descripcion del T&iacute;tulo honor&iacute;fico (*){getHelpTip('descripcion')}</small></label>
+              <input type="text" name="descripcion" id="descripcion" value="{$titulo->descripcion}"  data-validation-engine="validate[required]">
+              <label for="codigo"><small>Descripci&oacute;n del T&iacute;tulo honor&iacute;fico (*){getHelpTip('descripcion')}</small></label>
             </p>
             <h2 class="title">Grabar T&iacute;tulo honor&iacute;fico</h2>
             <p>

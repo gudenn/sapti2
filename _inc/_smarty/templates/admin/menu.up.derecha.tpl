@@ -2,7 +2,7 @@
       <ul>
         <li><a href="{$URL}admin">Modificar Cuenta</a></li>
         <li><a href="{$URL}admin">Preferencias</a></li>
-        <li><a href="{$URL}">Cerrar Sesion</a></li>
+        <li><a href="{$URL}?salir=1">Cerrar Sesion</a></li>
         {include file="helpdesk/help.tpl"}
       </ul>
     </div>

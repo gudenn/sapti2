@@ -5,7 +5,7 @@
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
             <p>
-              <input type="text" name="titulo"  id="titulo" value="{$tooltip->titulo}"  data-validation-engine="validate[required]">
+              <input type="text" name="titulo" id="titulo"  id="titulo" value="{$tooltip->titulo}"  data-validation-engine="validate[required]">
               <label for="titulo"><small>T&iacute;tulo de Tooltip (*){getHelpTip('titulo')}</small></label>
             </p>
             <p>
