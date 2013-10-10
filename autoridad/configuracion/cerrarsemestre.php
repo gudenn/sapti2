@@ -146,8 +146,8 @@ try {
             $sqlcerrar = mysql_query($resulcerrar);
             while ($filacerrar = mysql_fetch_array($sqlcerrar, MYSQL_ASSOC)) {
                     $inscritos[]=$filacerrar;
-            }
-                        if(count($inscritos)>0){
+            }echo "<script type='text/javascript'>alert('Username nada ');</script>";
+                        if(count($inscritos)>0){ echo "entra ay ins";
                 foreach ($inscritos as $arraycerrar){
                     $inscrito=new Inscrito($arraycerrar['insid']);
                     $evaluacion=new Evaluacion($arraycerrar['evaid']);
