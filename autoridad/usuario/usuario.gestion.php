@@ -72,6 +72,14 @@ try {
     $usuario_aux->save();
   }
   
+   //Habilitamos para proffecionales y para no profecionales
+  if ( isset($_GET['id_usuario']) && is_numeric($_GET['id_usuario']) )
+  {
+    $usuario_aux = new Usuario($_GET['id_usuario']);
+    $usuario_aux->estado=  Objectbase::STATUS_IN;
+    $usuario_aux->save();
+  }
+  
   
   $o_string   = $usuario->getOrderString($filtro);
   $obj_mysql  = $usuario->getAll('',$o_string,$filtro_sql,TRUE,TRUE);

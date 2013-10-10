@@ -100,7 +100,7 @@ WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
    $areglo[]=$fila;
  }
  
- echo $cont = $areglo[0]['c'];
+  $cont = $areglo[0]['c'];
 
  if ($cont!==0) {
     

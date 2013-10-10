@@ -1,24 +1,24 @@
 <?php
 try {
- define ("MODULO", "ESTUDIANTE");
-   require('../_start.php');
-  if(!isEstudianteSession())
-    header("Location: ../login.php"); 
- 
+  define ("MODULO", "ADMIN-PROYECTO-REGISTRO");
+  require('../_start.php');
+ // if(!isAdminSession())
+   // header("Location: ../login.php");  
+
+  if (!defined('TIPO'))
+    define ('TIPO', 'PR');
   /** HEADER */
   $smarty->assign('title','SAPTI - Registro de Proyecto');
   $smarty->assign('description','Formulario de registro de Proyecto');
   $smarty->assign('keywords','SAPTI,Proyecto,Registro');
 
- 
-  
-  leerClase('Estudiante');
+  leerClase('Administrador');
   /**
    * Menu superior
    */
-  $menuList[]     = array('url'=>URL . Estudiante::URL , 'name'=>'Estudiante');
-
-  $menuList[]     = array('url'=>URL . Estudiante::URL . 'proyecto/'.basename(__FILE__),'name'=>'Registro de Proyecto');
+  $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'detalle');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'detalle/','name'=>'Proyecto');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'detalle/'.basename(__FILE__),'name'=>'Detalle de Proyecto');
   $smarty->assign("menuList", $menuList);
 
 
@@ -63,7 +63,8 @@ try {
   leerClase('Institucion');
 
   leerClase('Objetivo_especifico');
-
+  
+ 
   
   $semestre   = new Semestre(false,true);
   //si o si trabajamos aca con un estudiante asi que lo guardaremos en session
@@ -75,8 +76,7 @@ try {
     $_SESSION['estudiante_id'] = $_GET['estudiante_id'];
     $estudiante_id             = $_GET['estudiante_id'];
   }
-   
-  $estudiante= getSessionEstudiante();
+  $estudiante = new Estudiante($estudiante_id);
   $estudiante->getAllObjects();
   $usuario    = $estudiante->getUsuario();
   $proyecto   = $estudiante->getProyecto();
@@ -90,7 +90,62 @@ try {
   $smarty->assign('proyecto'  , $proyecto);
   $smarty->assign('semestre'  , $semestre);
   $smarty->assign('tipo_moda' , 'tipo_moda');
+  
+  //carrera
+   
+  $sqlr="select c.nombre as ca,p.nombre  from carrera c,proyecto p  where p.carrera_id=c.id AND p.carrera_id='".$proyecto->carrera_id."' and c.estado ='AC'";
+ $resultado = mysql_query($sqlr);
+ $areglo= array();
+  
+ while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+ {
+   $areglo[]=$fila;
+ }
+ 
+$carr = $areglo[0]['ca'];
+$smarty->assign('carr'      , $carr);
 
+ //Areas
+   
+  $sqlr="select a.nombre from proyecto_area pa,proyecto p ,area a where p.id=pa.proyecto_id and a.id=pa.id and p.id='".$proyecto->id."' and p.estado='AC'";
+ $resultado = mysql_query($sqlr);
+ $areglo= array();
+  
+ while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+ {
+   $areglo[]=$fila;
+ }
+ 
+$areasp = $areglo;
+$smarty->assign('areasp'      , $areasp);
+
+ //Modalidad
+   
+  $sqlr="select m.nombre as m,p.nombre  from modalidad m,proyecto p  where p.modalidad_id=m.id AND p.modalidad_id='".$proyecto->modalidad_id."' and m.estado ='AC'";
+ $resultado = mysql_query($sqlr);
+ $areglo= array();
+  
+ while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+ {
+   $areglo[]=$fila;
+ }
+ 
+$m = $areglo[0]['m'];
+$smarty->assign('m'      , $m);
+
+//Obj Especificos
+   
+  $sqlr="select o.descripcion from proyecto p ,objetivo_especifico o where p.id=o.proyecto_id and p.id='".$proyecto->id."' and p.estado='AC'";
+ $resultado = mysql_query($sqlr);
+ $areglo= array();
+  
+ while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+ {
+   $areglo[]=$fila;
+ }
+ 
+$obp = $areglo;
+$smarty->assign('obp'      , $obp);
   //Objetivos especicicos
   $smarty->assign('base'      , '2'); // cuantos se muestran mas 1
   $smarty->assign('TOTAL'     , '20');// cuantos se van a guardas
@@ -220,7 +275,6 @@ try {
     //$proyecto = new Proyecto();
     $proyecto->objBuidFromPost('proyecto_');
     $proyecto->estado         = Objectbase::STATUS_AC;
-  
     $proyecto->fecha_registro = date('d/m/Y');
     $smarty->assign('proyecto'  , $proyecto);
 
@@ -276,7 +330,7 @@ try {
       $smarty->assign('tipo_moda',($modalidad->datos_adicionales)?'':'tipo_moda');
     }
     $proyecto->validar();
-    $proyecto->tipo_proyecto =  Proyecto::TIPO_PERFIL;
+    $proyecto->tipo_proyecto = TIPO;
     $proyecto->estado_proyecto= Proyecto::EST5_P;
     $proyecto->save();
     $proyecto->saveAllSonObjects(TRUE);
@@ -331,7 +385,7 @@ $token                = sha1(URL . time());
 $_SESSION['register'] = $token;
 $smarty->assign('token',$token);
 
-$TEMPLATE_TOSHOW = 'estudiante/proyecto/registro.tpl';
+$TEMPLATE_TOSHOW = 'admin/detalleproyecto/detalleproyecto.tpl';
 $smarty->display($TEMPLATE_TOSHOW);
 
 ?>
