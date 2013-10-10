@@ -14,11 +14,16 @@
   if(!isUserSession())
     header("Location: ../../login.php");  
 
-  $estudiante = new Estudiante();
-  if (isEstudianteSession())
+  leerClase('Usuario');
+  leerClase('Estudiante');
+
+  $id = '';
+  if (isset($_GET['estudiante_id']) && is_numeric($_GET['estudiante_id']) )
+    $id = $_GET['estudiante_id'];
+    
+  $estudiante = new Estudiante($id);
+  if (!$id && isEstudianteSession())
   {
-    leerClase('Usuario');
-    leerClase('Estudiante');
     $estudiante = getSessionEstudiante();
   }
   $proyecto = $estudiante->getProyecto(); 

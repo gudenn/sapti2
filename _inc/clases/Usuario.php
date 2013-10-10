@@ -263,11 +263,16 @@ class Usuario  extends Objectbase
       $usuario_id = $this->id;
 
     $activo = Objectbase::STATUS_AC;
-    $sql    = " SELECT * FROM {$this->getTableName ('Grupo')} as gp , {$this->getTableName ('Pertenece')} as pe WHERE pe.grupo_id = gp.id AND gp.codigo = '{$codigo_grupo}' AND pe.usuario_id = '{$usuario_id}' AND gp.estado = '$activo' AND pe.estado = '$activo'  ";
+    $sql    = " SELECT pe.* FROM {$this->getTableName ('Grupo')} as gp , {$this->getTableName ('Pertenece')} as pe WHERE pe.grupo_id = gp.id AND gp.codigo = '{$codigo_grupo}' AND pe.usuario_id = '{$usuario_id}' AND gp.estado = '$activo' AND pe.estado = '$activo'  ";
     //echo $sql;
     $result = mysql_query($sql);
     if (mysql_num_rows($result))
-      return true;
+    {
+      leerClase('Pertenece');
+      $pertenece_aux = mysql_fetch_array($result,MYSQLI_ASSOC);
+      $pertenece = new Pertenece($pertenece_aux);
+      return $pertenece;
+    }
     return false;
   }
 
