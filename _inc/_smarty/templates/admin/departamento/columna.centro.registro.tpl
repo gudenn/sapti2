@@ -8,15 +8,15 @@
               <select name="institucion_id" id="subarea_id" >
               {html_options values= $institucion_values selected=$institucion_selected output=$institucion_output}
               </select>
-              <label for="institucion_id"><small>Institucion (*)</small></label>
+              <label for="institucion_id"><small>Institucion (*) {getHelpTip('institucion')}</small></label>
             </p>
              <p>
               <input type="text" name="nombre" value="{$dep->nombre}"  data-validation-engine="validate[required]">
-              <label for="codigo"><small>Nombre del Departamento (*)</small></label>
+              <label for="nombre"><small>Nombre del Departamento (*) {getHelpTip('nombre')}</small></label>
             </p>
             <p>
               <input type="text" name="descripcion" value="{$dep->descripcion}"  data-validation-engine="validate[required]">
-              <label for="codigo"><small>Descripcion del Departamento (*)</small></label>
+              <label for="descripcion"><small>Descripcion del Departamento (*) </small></label>
             </p>
             
             <h2 class="title">Grabar Departamento</h2>

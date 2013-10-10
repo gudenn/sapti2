@@ -47,16 +47,7 @@ try {
   $estudiante     = new Estudiante($id_estudiante);
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();
-  function getArchivos($dir)
-  {
-    $directorio = opendir("$dir");
-    $listaarchivos = array();
-    while($archivo= readdir($directorio)) {
-    $listaarchivos[]=$archivo;
-    }
-    closedir($directorio);
-    return $listaarchivos;
-  }
+
   $resul = "
       SELECT av.id as id, pr.nombre as nombrep, av.descripcion as descripcion, av.fecha_avance as fecha, av.revision_id as correcionrevision, av.directorio as archivos
 FROM proyecto pr, avance av
@@ -68,9 +59,9 @@ ORDER BY av.fecha_avance
    $sql = mysql_query($resul);
 while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
    $avances[]=$fila1;
-   $dir="../";
  }
   $avance   = new Avance();
+
   $smarty->assign("avance", $avance);
   $smarty->assign("avances", $avances);
   $smarty->assign("usuario", $usuario);

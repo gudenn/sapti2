@@ -1,5 +1,7 @@
 <?php
 try {
+    define ("MODULO", "TRIBUNAL");
+  
   require('_start.php');
   global $PAISBOX;
 
@@ -10,28 +12,25 @@ try {
 
   //CSS
  //CSS
-  $CSS[]  = URL_JS . "jQfu/css/jquery.fileupload-ui.css";
+   $CSS[]  = URL_JS . "jQfu/css/jquery.fileupload-ui.css";
   $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_CSS . "spams.css";
   $CSS[]  = URL_JS  . "validate/validationEngine.jquery.css";
   $CSS[]  = URL_CSS . "box/box.css";
+ 
   $smarty->assign('CSS',$CSS);
-
   //JS
-  $JS[]  = URL_JS . "jquery.1.9.1.js";
-
-  //Datepicker UI
-  $JS[]  = URL_JS . "ui/jquery-ui-1.10.2.custom.min.js";
-  $JS[]  = URL_JS . "ui/i18n/jquery.ui.datepicker-es.js";
-
+  $JS[]  = URL_JS . "jquery.min.js";
   //Validation
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
 
+  //CK Editor
+  $JS[]  = URL_JS . "ckeditor/ckeditor.js";
+  //BOX
+  $JS[]  = URL_JS ."box/jquery.box.js";
+  
   $smarty->assign('JS',$JS);
-  //JS
-  $JS[]  = "js/jquery.js";
-  $smarty->assign('JS','');
 
   //CREAR UN TIPO   DE DEF
   leerClase('Tribunal');
@@ -43,11 +42,10 @@ try {
   leerClase("Pagination");
   leerClase("Filtro");
   leerClase("Modalidad");
-  leerClase("Proyecto_tribunal");
   leerClase("Proyecto_estudiante");
 
  
- $rows = array();
+$rows = array();
 $usuario = new Usuario();
 //$smarty->assign('rows', $rows);
  $usuario_mysql  = $usuario->getAll();
@@ -75,50 +73,59 @@ $proyecto_nombre=array();
 while ($proyecto_sql && $rows = mysql_fetch_array($proyecto_sql[0]))
  {
    $proyecto_id[]     = $rows['id'];
-   $proyecto_nombre[] = $rows['nombre_proyecto'];
+   $proyecto_nombre[] = $rows['nombre'];
  }
 
 
 $smarty->assign('proyecto_id',$proyecto_id);
 $smarty->assign('proyecto_nombre',$proyecto_nombre);
   
-
-
-  $proyecto_tribunal= new Proyecto_tribunal();
    
   if ( isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' )
   {
-  
-       echo $_POST['proyecto_tribunal_id'];
-     
+      
+    $listatribunales= array();
+    $proyecto= new Proyecto($_POST['proyecto_id']);
     
-       
-       $sqlls="SELECT t.id as llaveid FROM tribunal t WHERE  t.proyecto_tribunal_id=".$_POST['proyecto_tribunal_id'].";";
-      $resultadoff = mysql_query($sqlls);
-
- $contador=0;
- 
-    foreach ($_POST['ids'] as $id)
+  //  echo $proyecto->nombre;
+    $listatribunales=$proyecto->getIdTribunles();
+    
+         if(isset($_POST['ids']))
+     { 
+     foreach ($_POST['ids'] as $id)
      {
-      echo $id;
-              
+                 echo $id;
+               
+                 if( $id )
+                $tribunal= new Tribunal();
+                $tribunal->objBuidFromPost();  
+                $tribunal->docente_id =$id;
+                $tribunal->proyecto_id=$proyectos->id;
+                $tribunal->detalle="";
+                $tribunal->accion="";
+                $tribunal->visto=  Tribunal::VISTO_NV;
+                $tribunal->fecha_asignacion= date("j/n/Y");
+                $tribunal->estado = Objectbase::STATUS_AC;
+                $tribunal->save();
+                
+                
+    $notificacions= new Notificacion();
+    $notificacions->objBuidFromPost();
+    $notificacions->proyecto_id=$_POST['proyecto_id']; 
+    $notificacions->tipo="Solicitud";
+    $notificacions->fecha_envio= date("j/n/Y");
+    $notificacions->asunto="Asignacion de Tribunales";
+    $notificacions->detalle="fasdf";
+    $notificacions->prioridad=5;
+    $notificacions->estado = Objectbase::STATUS_AC;
+
+    $noticaciones= array('tribunales'=>array( $tribunal->id));
+    $notificacions->enviarNotificaion( $noticaciones);
+                
+               
      }
- 
- while ($filas = mysql_fetch_array($resultadoff, MYSQL_ASSOC))
-    { 
-   if (isset($_POST['ids']))
-   {
-     echo $filas['llaveid'];
-  $tribunalesw= new Tribunal((int)$filas['llaveid']);
-  $tribunalesw->proyecto_tribunal_id=$_POST['proyecto_tribunal_id'];
-  $tribunalesw->docente_id =$_POST['ids'][$contador];
-  $tribunalesw->archivo="";
-  $tribunalesw->accion="";
-  $tribunalesw->estado = Objectbase::STATUS_AC;
-  $tribunalesw->save();
-   }
-$contador++;
-   }      
+     }
+    
     
    }
 
@@ -177,7 +184,7 @@ where  d.`id`=ap.`docente_id` and a.`id`=ap.`area_id` and d.`estado`='AC' and ap
   $arraytribunal[]= $lista_areas;
  }
  $smarty->assign('listadocentes'  , $arraytribunal);
-  
+ //Tribunal::
      
      //////////////////////////seleccionados////////////////////
    $sqlselec="SELECT  d.id, u.nombre, CONCAT (u.apellido_paterno, u.apellido_materno) as apellidos
@@ -185,7 +192,7 @@ FROM  usuario u ,docente d
 WHERE  u.id=d.usuario_id and u.estado='AC' and   d.id  in(
 select dd.id
 from  proyecto p, tribunal t ,docente dd
-where   p.id=t.proyecto_id  and t.docente_id= dd.id and  p.estado='AC' and t.estado='AC' and dd.estado='AC'  and p.id=".$_GET['proyecto_id'].");";
+where   p.id=t.proyecto_id and t.accion!='RE' and t.docente_id= dd.id and  p.estado='AC' and t.estado='AC' and dd.estado='AC'  and p.id=".$_GET['proyecto_id'].");";
  $resultadoselect = mysql_query($sqlselec);
  $arraytribunalselec= array();
  

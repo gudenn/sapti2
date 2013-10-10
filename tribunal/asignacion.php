@@ -1,8 +1,9 @@
 <?php
 try {
+    define ("MODULO", "TRIBUNAL");
+  
   require('_start.php');
-  global $PAISBOX;
-
+  
   /** HEADER */
   $smarty->assign('title','Proyecto Final');
   $smarty->assign('description','Proyecto Final');
@@ -10,7 +11,6 @@ try {
 
   $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
-  $CSS[]  = URL_CSS . "spams.css";
   $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
   
   $smarty->assign('CSS',$CSS);
@@ -37,7 +37,6 @@ try {
   leerClase("Formulario");
   leerClase("Pagination");
   leerClase("Filtro");
-  leerClase("Proyecto_tribunal");
   leerClase("Proyecto_estudiante");
   leerClase("Lugar");
   leerClase("Tipo_defensa");

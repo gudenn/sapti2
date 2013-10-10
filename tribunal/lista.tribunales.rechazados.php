@@ -56,9 +56,10 @@ $menuList[]     = array('url'=>URL.Consejo::URL,'name'=>'Consejo');
 
  $usuario_id     = array();
  $usuario_nombre = array();
-$sql="SELECT DISTINCT (p.id) , u.nombre ,CONCAT(u.apellido_paterno,u.apellido_materno) as apellidos, es.codigo_sis , p.nombre as nombreproyecto
-FROM proyecto p , usuario u, estudiante es , proyecto_estudiante pe, defensa d
-WHERE  u.id=es.usuario_id and  es.id=pe.estudiante_id and  pe.proyecto_id=p.id and p.id=d.proyecto_id;";
+$sql="select   DISTINCT(p.id) ,u.nombre , CONCAT(u.apellido_paterno , u.apellido_materno) apellidos, p.nombre as nombreproyecto
+from  usuario  u,  estudiante e  , proyecto_estudiante  pe , proyecto  p , tribunal t
+where    u.id= e.usuario_id  and e.id= pe.estudiante_id  and pe.proyecto_id= p.id and p.id= t.proyecto_id
+and t.accion='RE';";
  $resultado= mysql_query($sql);
  $arraytribunal= array();
  
@@ -111,7 +112,8 @@ $smarty->assign('proyecto_nombre',$proyecto_nombre);
 
   if(isset($_POST['buscar']))
   {
-      $estudiante = new Estudiante(false,$_POST['codigosis']);
+   echo   $_POST['codigosis'];
+    $estudiante = new Estudiante(false,$_POST['codigosis']);
     $proyecto   = new Proyecto();
     $proyecto_aux = $estudiante->getProyecto();
     if ($proyecto_aux)
@@ -177,7 +179,7 @@ catch(Exception $e)
   $smarty->assign("ERROR", handleError($e));
 }
 
-$contenido = 'tribunal/lista.defensa.tpl';
+$contenido = 'tribunal/lista.rechazados.tpl';
 $smarty->assign('contenido',$contenido);
 
 

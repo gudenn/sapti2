@@ -41,7 +41,7 @@ try {
    */
   $menuList[]     = array('url'=>URL.Administrador::URL,'name'=>'Administraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'seguridad/','name'=>'Control de Permisos');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'seguridad/grupo.gestion.php','name'=>'Gesti&oacute;n de Permisos');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'seguridad/grupo.asignarpermiso.php','name'=>'Gesti&oacute;n de Permisos');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'seguridad/'.basename(__FILE__),'name'=>'Asignaci&oacute;n de Permisos');
   $smarty->assign("menuList", $menuList);
 

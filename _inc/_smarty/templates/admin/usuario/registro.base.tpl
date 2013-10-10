@@ -29,12 +29,19 @@
             </p>
             <p>
               <input type="text" name="email" id="email" value="{$usuario->email}" size="22" data-validation-engine="validate[],custom[email]"  >
-              <label for="email"><small> E-Mail {getHelpTip('E-Mail')} </small></label>
+              <label for="email"><small> E-Mail {getHelpTip('email')} </small></label>
             </p>
+            {if (!$usuario->id)}
             <p>
               <input type="text" name="login" id="login" value="{$usuario->login}"  data-validation-engine="validate[required]"  size="22">
               <label for="login"><small>Nombre de usuario (*){getHelpTip('login')}</small></label>
             </p>
+            {else}
+            <p>
+              <input type="text" name="ingreso" id="ingreso" value="{$usuario->login}" disabled="disabled"  size="22">
+              <label for="login"><small>Nombre de usuario (*){getHelpTip('login')}</small></label>
+            </p>
+            {/if}
             <p>
               <input type="password" name="clave" id="clave" value="" data-validation-engine="validate[required]"  size="22">
               <label for="clave"><small>Clave de Ingreso (*){getHelpTip('clave')}</small></label>

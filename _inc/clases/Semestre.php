@@ -121,6 +121,21 @@ class Semestre extends Objectbase
       parent::__construct($array);
   }
 
+  
+/**
+ * Saca el numero de orden siguiente
+ * @return int 
+ * @throws Exception 
+ */
+  public function getOrderValor($where = " estado = 'AC' ")
+  {
+    $sql = "select MAX(valor) from ".$this->getTableName()." where $where ";
+    //echo $sql;
+    $resultado = mysql_query($sql);
+    $total     = mysql_fetch_array($resultado);
+
+    return ($total[0]*1) + 1; 
+  }
 
   /**
    Activamos este semestre como el semestre actual

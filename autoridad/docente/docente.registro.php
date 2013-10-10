@@ -17,34 +17,31 @@ try {
   $menuList[] = array('url' => URL . Administrador::URL . 'docente/' . basename(__FILE__), 'name' => 'Registro de Docente');
   $smarty->assign("menuList", $menuList);
 
-//CSS
-  $CSS[] = URL_CSS . "academic/3_column.css";
-  $CSS[] = URL_JS . "validate/validationEngine.jquery.css";
-  //BOX
-  $CSS[] = URL_JS . "box/box.css";
-  $CSS[] = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
-  $smarty->assign('CSS', $CSS);
+  //CSS
+  $CSS[]  = URL_CSS . "academic/3_column.css";
+  /////css del calendario
+  
 
   //JS
+  $JS[]  = URL_JS . "jquery.min.js";
 
-  $JS[] = URL_JS . "jquery.min.js";
-//Datepicker UI
-  $JS[] = URL_JS . "jquery-ui-1.10.2.custom.min.js";
-  $JS[] = URL_JS . "ui/i18n/jquery.ui.datepicker-es.js";
-
-  //Validation
-  $JS[] = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
-  $JS[] = URL_JS . "validate/jquery.validationEngine.js";
-
-  $smarty->assign('JS', $JS);
+  //Datepicker & Tooltips $ Dialogs UI
+  $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
+  $JS[]   = URL_JS . "jquery-ui-1.10.3.custom.min.js";
+  $JS[]   = URL_JS . "ui/i18n/jquery.ui.datepicker-es.js";
 
   //Validation
-  $JS[] = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
-  $JS[] = URL_JS . "validate/jquery.validationEngine.js";
+  $CSS[] = URL_JS . "/validate/validationEngine.jquery.css";
+  $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
+  $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
 
   //BOX
-  $JS[] = URL_JS . "box/jquery.box.js";
-  $smarty->assign('JS', $JS);
+  $CSS[] = URL_JS . "box/box.css";
+  $JS[]  = URL_JS . "box/jquery.box.js";
+
+  
+  $smarty->assign('CSS',$CSS);
+  $smarty->assign('JS',$JS);
 
 
   $smarty->assign("ERROR", '');
@@ -97,8 +94,9 @@ try {
     $EXITO = false;
     mysql_query("BEGIN");
     $usuario->objBuidFromPost();
-    $usuario->estado = Objectbase::STATUS_AC;
-    $es_nuevo        = (!isset($_POST['usuario_id']) || trim($_POST['usuario_id']) == '' ) ? TRUE : FALSE;
+    $usuario->estado           = Objectbase::STATUS_AC;
+    $usuario->puede_ser_tutor  = 1;
+    $es_nuevo                  = (!isset($_POST['usuario_id']) || trim($_POST['usuario_id']) == '' ) ? TRUE : FALSE;
     $usuario->validar($es_nuevo);
     $usuario->save();
 
@@ -110,6 +108,17 @@ try {
     $docente->usuario_id = $usuario->id;
     $docente->save();
 
+    //tambien creamos su usuario tutor
+    $usuario->getAllObjects();
+    if ( !isset($usuario->tutor_objs) || !isset($usuario->tutor_objs[0]) )
+    {
+      leerClase('Tutor');
+      $tutor = new Tutor();
+      $tutor->estado     = Objectbase::STATUS_AC;
+      $tutor->usuario_id = $usuario->id;
+      $tutor->save();
+    }
+            
     $EXITO = TRUE;
     mysql_query("COMMIT");
   }

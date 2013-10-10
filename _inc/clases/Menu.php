@@ -164,8 +164,6 @@ class Menu
   function getestudianteIndex($proyecto) {
     leerClase('Grupo');
     leerClase('Estudiante');
-    //var_dump($proyecto);
-    
    
     $menus = array();
     $thise = new Menu('Proyecto Final');

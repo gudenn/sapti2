@@ -6,11 +6,11 @@
           <form action="#" method="post" id="registro" name="registro" >
             <p>
               <input type="text" name="nombre" value="{$area->nombre}"  data-validation-engine="validate[required]">
-              <label for="codigo"><small>Nombre del Area (*){getHelpTip('nombre')}</small></label>
+              <label for="nombre"><small>Nombre del Area (*){getHelpTip('nombre{getHelpTip('nombre')}')}</small></label>
             </p>
             <p>
               <input type="text" name="descripcion" value="{$area->descripcion}"  data-validation-engine="validate[required]">
-              <label for="codigo"><small>Descripcion del Area (*){getHelpTip('descripcion')}</small></label>
+              <label for="descripcion"><small>Descripcion del Area (*){getHelpTip('descripcion')}</small></label>
             </p>
             <h2 class="title">Grabar Area</h2>
             <p>

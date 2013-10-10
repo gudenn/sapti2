@@ -35,7 +35,7 @@ try {
   $JS[]  = URL_JS . "jquery.addfield.js";
   $smarty->assign('JS',$JS);
   
-  $docente_aux = getSessionDocente();
+  $docente = getSessionDocente();
 
   if (isset($_POST['observaciones'])) 
   $observaciones=$_POST['observaciones'];
@@ -65,7 +65,7 @@ try {
     {
     $revision->objBuidFromPost();
     $revision->estado = Objectbase::STATUS_AC;
-    $revision->revisor=$docente_aux->docente_id;
+    $revision->revisor=$docente->id;
     $revision->revisor_tipo='DO';
     $revision->estado_revision=Revision::E1_CREADO;
     $revision->proyecto_id=$proyecto->id;

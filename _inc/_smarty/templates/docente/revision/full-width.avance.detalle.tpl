@@ -2,47 +2,15 @@
 <div class="wrapper row3">
   <div class="rnd">
     <div id="container">
-      {if (isset($revision))}
-        <h1 class="title">Registro de Correciones</h1>
-      {else}
-        <h1 class="title">Registro de Avance</h1>
-      {/if}
-        
+        <h1 class="title">Detalle de Avance</h1>
 
-  <h3>Subir Archivos Relacionados al Avance {getHelpTip('archivos')}</h3>
-{literal}
 <!-- The file upload form used as target for the file upload widget -->
-<form id="fileupload" action="../archivo/" method="POST" enctype="multipart/form-data">
-    <!-- Redirect browsers with JavaScript disabled to the origin page -->
-{/literal}
-    <noscript><input type="hidden" name="redirect" value="{$URL}"></noscript>
-{literal}
-    <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-    <div class="fileupload-buttonbar">
-        <div class="fileupload-buttons">
-            <!-- The fileinput-button span is used to style the file input field as button -->
-            <span class="fileinput-button">
-                <span>Add files...</span>
-                <input type="file" name="files[]" multiple>
-            </span>
-            <button type="submit" class="start">Subir Archivos</button>
-            <button type="reset" class="cancel">Cancelar</button>
-            <button type="button" class="delete">Borrar</button>
-            <input type="checkbox" class="toggle">
-            <!-- The loading indicator is shown during file processing -->
-            <span class="fileupload-loading"></span>
-        </div>
-        <!-- The global progress information -->
-        <div class="fileupload-progress fade" style="display:none">
-            <!-- The global progress bar -->
-            <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-            <!-- The extended global progress information -->
-            <div class="progress-extended">&nbsp;</div>
-        </div>
-    </div>
+<form id="fileupload" action="../../estudiante/archivo/?estudiante_id={$estudiante->id}" method="POST" enctype="multipart/form-data">
     <!-- The table listing the files available for upload/download -->
+    <h3><b>Archivos</b></h3>
     <table role="presentation"><tbody class="files"></tbody></table>
 </form>
+{literal}
 <!-- The template to display files available for upload -->
 <script id="template-upload" type="text/x-tmpl">
 {% for (var i=0, file; file=o.files[i]; i++) { %}
@@ -84,7 +52,7 @@
                 {% } %}
             </span>
         </td>
-        <td>
+        <td>ola mundo
             <p class="name">
                 <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
             </p>
@@ -94,10 +62,6 @@
         </td>
         <td>
             <span class="size">{%=o.formatFileSize(file.size)%}</span>
-        </td>
-        <td>
-            <button class="delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>Borrar</button>
-            <input type="checkbox" name="delete" value="1" class="toggle">
         </td>
     </tr>
 {% } %}
@@ -132,47 +96,32 @@
 <!-- The main application script -->
 <script src="{$URL_JS}jQfu/js/main.js"></script>
 {literal}
-
+<script>
+// Initialize the jQuery UI theme switcher:
+$('#theme-switcher').change(function () {
+    var theme = $('#theme');
+    theme.prop(
+        'href',
+        theme.prop('href').replace(
+            /[\w\-]+\/jquery-ui.css/,
+            $(this).val() + '/jquery-ui.css'
+        )
+    );
+});
+</script>
 <!-- The XDomainRequest Transport is included for cross-domain file deletion for IE 8 and IE 9 -->
 <!--[if (gte IE 8)&(lt IE 10)]>
 <script src="js/cors/jquery.xdr-transport.js"></script>
 <![endif]-->
 {/literal}
         
-        
-        <form action="" method="post" id="registro" name="registro" >
-          {if (isset($revision))}
-          <h3><b>Correciones</b></h3>
-          {assign var="objs" value=$revision->observacion_objs}
-          {section name=ic loop=$objs}
-            <p><b>Observasion:</b> {$objs[ic]->observacion}</p>
-            <p>
-              <textarea name="observacion_id_{$objs[ic]->id}" id="observacion_id_{$objs[ic]->id}" rows="4" cols="60" style="width: 431px;height: 305px;" data-validation-engine="validate[required]">{$objs[ic]->respuesta}</textarea>
-            </p>
-            <script>
-              CKEDITOR.replace('observacion_id_{$objs[ic]->id}'{$editores});
-            </script>
-          {/section}
-          {/if}
-          
-          <hr>
-          <h3><b>Descripci&oacute;n del Avance {getHelpTip('Descripcion')}</b></h3>
-          <p>
-            <textarea name="descripcion" id="descripcion" rows="4" cols="60" style="width: 431px;height: 305px;" data-validation-engine="validate[required]">{$avance->descripcion}</textarea>
-          </p>
-          <script>
-            CKEDITOR.replace('descripcion'{$editores});
-          </script>
-          <input type="hidden" name="id"            value="{$avance->id}">
-          <input type="hidden" name="directorio"    value="{$avance->directorio}">
-          {if (isset($revision))}
-          <input type="hidden" name="revision_id"   value="{$revision->id}">
-          {/if}
-          <input type="hidden" name="tarea" value="registrar_avance">
-          <input type="hidden" name="token" value="{$token}">
-          <button type="submit" class="delete ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button" aria-disabled="false"><span class="ui-button-icon-primary ui-icon ui-icon-disk"></span><span class="ui-button-text">Grabar</span></button>
-          
-        </form>
+        <h3><b>Descripcion</b></h3>
+        <p>
+          {$avance->getDescripcion()}
+        </p>
+        <p>
+          <a href="observacion.registro.php?docente_id={$objs[ic]['id']}" target="_blank" >{icono('basicset/pencil_48.png','Revision')}Realizar Revisiones</a>
+        </p>
         <hr>
     {$ERROR}
     </div>

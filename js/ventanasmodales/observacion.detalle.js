@@ -35,14 +35,14 @@ jQuery(function ($) {
 			var h = 410;
                         var title = $('#contact-container .contact-title').html();
                         $('#contact-container .contact-title').html('Cargando Detalles...');
-			dialog.overlay.fadeIn(200, function () {
-				dialog.container.fadeIn(200, function () {
-					dialog.data.fadeIn(200, function () {
+			dialog.overlay.fadeIn(50, function () {
+				dialog.container.fadeIn(50, function () {
+					dialog.data.fadeIn(50, function () {
 						$('#contact-container .contact-content').animate({
 							height: h
 						}, function () {
                                                          $('#contact-container .contact-title').html(title);
-							$('#contact-container form').fadeIn(200, function () {
+							$('#contact-container form').fadeIn(50, function () {
 								$('#contact-container #contact-title').focus();
 							});
 						});
@@ -53,13 +53,13 @@ jQuery(function ($) {
 		close: function (dialog) {
 			$('#contact-container .contact-message').fadeOut();
 			$('#contact-container .contact-title').html('Gracias...');
-			$('#contact-container form').fadeOut(200);
+			$('#contact-container form').fadeOut(50);
 			$('#contact-container .contact-content').animate({
 				height: 40
 			}, function () {
-				dialog.data.fadeOut(200, function () {
-					dialog.container.fadeOut(200, function () {
-						dialog.overlay.fadeOut(200, function () {
+				dialog.data.fadeOut(50, function () {
+					dialog.container.fadeOut(50, function () {
+						dialog.overlay.fadeOut(50, function () {
 							$.modal.close();
 						});
 					});
@@ -76,7 +76,7 @@ jQuery(function ($) {
 		showError: function () {
 			$('#contact-container .contact-message')
 				.html($('<div class="contact-error"></div>').append(contact.message))
-				.fadeIn(200);
+				.fadeIn(50);
 		}
 	};
 

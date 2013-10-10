@@ -9,7 +9,11 @@ try {
   leerClase('Inscrito');
   leerClase('Evaluacion');
   leerClase('Proyecto_dicta');
+  leerClase('Proyecto');
   leerClase('Docente');
+  leerClase('Dicta');
+  leerClase('Materia');
+  leerClase('Semestre');
   
   /** HEADER */
   $smarty->assign('title','SAPTI - Inscripcion de Estudiantes');
@@ -43,6 +47,9 @@ try {
   }else{
       $iddicta=$_SESSION['iddictaproyectofinal'];
   }
+  $dicta = new Dicta($iddicta);
+  $semestre=new Semestre();
+  $semestre->getActivo();
   
     $docmaterias = "SELECT ma.nombre as materia, di.codigo_grupo as grupo
 FROM dicta di, materia ma
@@ -98,32 +105,40 @@ AND es.codigo_sis='$sis'";
         {
 
                   $estudiante = new Estudiante();
-                  $inscrito   = new Inscrito();
-                  $evaluacion = new Evaluacion();
+                  $usuario = new Estudiante();
                   $proyecto_dicta = new Proyecto_dicta();
           $estudiante->getByCodigoSis($estudiante_array[1]);
             if ($estudiante->id){
                 if(estainscrito($estudiante_array[1], $iddicta)=='0'){
-                    $evaluacion->estado= Objectbase::STATUS_AC;
-                    $evaluacion->evaluacion_1=0;
-                    $evaluacion->evaluacion_2=0;
-                    $evaluacion->evaluacion_3=0;
-                    $evaluacion->save();
-                    $inscrito->evaluacion_id = $evaluacion->id;
-                    $inscrito->estado        = Objectbase::STATUS_AC;
-                    $inscrito->dicta_id      = $iddicta;
-                    $inscrito->estudiante_id = $estudiante->id;
-                    $inscrito->save();
+
+                    $estudiante->inscribirEstudianteDicta($semestre->id, $iddicta);
+
                     $proyecto_dicta->estado= Objectbase::STATUS_AC;
                     $proyecto_dicta->dicta_id = $iddicta;
-                    $proyecto       = $estudiante->getProyecto();
-                    $proyecto_dicta->proyecto_id = $proyecto->proyecto_id;
-                    $proyecto_dicta->save();
+                    $proyid=$estudiante->getProyecto();
+                    $proyecto       = new Proyecto($proyid->proyecto_id);
+                    $proyecto->asignarDicta($iddicta);
+                    $proyecto->save();
                     $inscritos[]=$estudiante_array;
                     }else{
                     $yainscritos[]=$estudiante_array;
                     }
             }else{
+                        $usuario->objBuidFromPost();
+                        $estudiante->objBuidFromPost();
+                        $usuario->estado = Objectbase::STATUS_AC;
+                        $usuario->save();
+
+                        //usuario pertenece a un grupo
+                        $usuario->asignarGrupo(Grupo::GR_ES);
+
+                        $estudiante->estado     = Objectbase::STATUS_AC;
+                        $estudiante->usuario_id = $usuario->id;
+                        $estudiante->save();
+
+                          $materia = new Materia($dicta->materia_id);
+                          $estudiante->crearProyectoInicial($iddicta, $materia->tipo);
+                          $estudiante->inscribirEstudianteDicta($semestre->id, $iddicta);
                $noestudiante[]=$estudiante_array;
                  }
         }

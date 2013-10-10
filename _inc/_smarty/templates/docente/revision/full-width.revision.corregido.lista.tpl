@@ -21,9 +21,7 @@
       <th><a>Descripcion        </a></th>
       <th><a>Fecha de Avance    </a></th>
       <th><a>Tipo Avance        </a></th>
-      <th><a>Archivos           </a></th>
-      <th>Opciones </th>
-     
+      <th><a>Detalle          </a></th>    
     </tr>
   </thead>
   {section name=ic loop=$avances}
@@ -40,17 +38,9 @@
           {icono('basicset/document.png','Avance de Proyecto')}
           Avance
           {/if}</td>
-      <td>{if count($avance->getArchivos($avances[ic]['archivos'])) > 0}
-          {icono('basicset/document_pencil.png','Correccion de Revision')}
-          Correccion
-          {else}
-          {icono('basicset/document.png','Avance de Proyecto')}
-          Avance
-          {/if}</td>{$avances[ic]['archivos']}     
       <td>
-        <a href="solicitud.tutor.php?docente_id={$objs[ic]['id']}" target="_blank" >{icono('detalle.png','Enviar')}</a>
-        
-      </td>
+          <a href="avance.detalle.php?docente_id={$objs[ic]['id']}" target="_blank" >{icono('basicset/cabinet.png','Detalle')}Detalle de Correccion</a>
+      </td>    
     </tr>
   </tbody>
   {/section}
