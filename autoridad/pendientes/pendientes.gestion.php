@@ -34,15 +34,54 @@ try {
    
    leerClase('Semestre');
    leerClase('Proyecto');
+  
    $estado=  Proyecto::EST5_P;
  
  if (isset($_GET['proyecto_id']) )
   {
       
      $proyecto=new Proyecto($_GET['proyecto_id']);
+    $proyecto_aux=$proyecto;
+    $estudiante=$proyecto->getEstudiante();
+   $estudiante_id= $estudiante->id;
+    $area=$proyecto->getArea();
      $proyecto->estado_proyecto=  Proyecto::EST6_C;
+     $proyecto->tipo_proyecto=  Proyecto::TIPO_PERFIL;
      $proyecto->save();
+     
+     $actualproyecto=new Proyecto();
+     $actualproyecto->carrera_id=$proyecto_aux->carrera_id;
+     $actualproyecto->estado=  Objectbase::STATUS_AC;
+     $actualproyecto->es_actual=1;
+     $actualproyecto->fecha_registro=$proyecto_aux->fecha_registro;
+     $actualproyecto->modalidad_id=$proyecto_aux->modalidad_id;
+     $actualproyecto->institucion_id=$proyecto_aux->institucion_id;
+     $actualproyecto->nombre=$proyecto_aux->nombre;
+     $actualproyecto->numero_asignado=$proyecto_aux->numero_asignado;
+     $actualproyecto->tipo_proyecto=  Proyecto::TIPO_PROYECTO;
+     $actualproyecto->save();
+    //copiar Proyecto estudiante
+    leerClase('Proyecto_estudiante');
+    //$estudiante = new Estudiante($estudiante_id);
+
+    $asignado                         = new Proyecto_estudiante();
+    $asignado->proyecto_id            = $actualproyecto->id;
+    $asignado->estudiante_id          = $estudiante_id;
+    $asignado->estado                 = Objectbase::STATUS_AC;
+    $asignado->fecha_asignacion       = date('d/m/Y');
+    $asignado->save();
+     
+ //copiar area
+    
+    leerClase('Area');
+    leerClase('Proyecto_area');
  
+    $parea=new Proyecto_area();
+    $parea->area_id=$area->id;
+    $parea->proyecto_id=$actualproyecto->id;
+    $parea->estado=  Objectbase::STATUS_AC;
+    $parea->save();
+    
  
     
   }

@@ -313,7 +313,7 @@ where pa.area_id=a.id  and pa.proyecto_id='$this->id' and pa.estado='AC'  and a.
     leerClase('Proyecto_estudiante');
     //$estudiante = new Estudiante($estudiante_id);
 
-    $asignado                         = new Proyecto_estudiante($estudiante_id);
+    $asignado                         = new Proyecto_estudiante();
     $asignado->proyecto_id            = $this->id;
     $asignado->estudiante_id          = $estudiante_id;
     $asignado->estado                 = Objectbase::STATUS_AC;
