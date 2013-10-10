@@ -90,7 +90,7 @@ try {
       $smarty->assign("crear_nuevo"  ,"tutor.asignar.php?estudiante_id={$estudiante->id}");
     $smarty->assign('cabecera_file'  ,'admin/tutor/estudiante.cabecera.tpl');
     
-    $smarty->assign('maximo_tutores' ,$maximo_tutores);
+    $smarty->assign('maximo_tutores'  ,$maximo_tutores);
     $smarty->assign('total_asignados' ,$total_asignados);
     
   }
@@ -112,6 +112,7 @@ try {
 
   if ($proyecto->id)
     $filtro_sql =  $filtro_mis_tutores . $filtro_sql;
+  
   
   $o_string   = $tutor->getOrderString($filtro);
   $obj_mysql  = $tutor->getAll('',$o_string,$filtro_sql,TRUE,TRUE);

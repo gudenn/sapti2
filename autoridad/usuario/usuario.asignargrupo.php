@@ -65,6 +65,10 @@ try {
     }
     else
       $pertenece->delete();
+    //crear objeto si no existe por ejemplo tutor
+    
+    
+    
   }
   
   

@@ -7,7 +7,7 @@
 {literal}
 
 <!-- The file upload form used as target for the file upload widget -->
-<form id="fileupload" action="../archivo" method="POST" enctype="multipart/form-data">
+<form id="fileupload" action="../archivo/" method="POST" enctype="multipart/form-data">
     <!-- The table listing the files available for upload/download -->
     <h3><b>Archivos</b></h3>
     <table role="presentation"><tbody class="files"></tbody></table>
