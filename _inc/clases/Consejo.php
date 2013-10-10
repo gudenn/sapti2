@@ -23,7 +23,7 @@ class Consejo extends Objectbase
   * 
   *  Fecha final date
   */
-  var $activo;
+  var $fecha_fin;
 
   /**
    * Validamos que todos los datos enviados sean correctos
