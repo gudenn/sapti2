@@ -7,10 +7,11 @@ $pdf->ezSetCmMargins(1,1,1.5,1.5);
 //$conexion = mysql_connect("localhost", "root","");
 //mysql_select_db("sapti", $conexion);
  $p=$_GET['id_p'];
+ 
 $queEmp = "SELECT p.id, u.nombre,s.codigo as gestion,CONCAT(apellido_paterno,apellido_materno) as apellidos, COUNT( * ) AS cantidadcambios, c.tipo,p.nombre as titulo,p.estado as estadop
 FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe, cambio c
 WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
-=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado='AC'AND c.proyecto_id=p.id and s.id='".$p."'
+=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado='AC'and p.tipo_proyecto='PE'AND c.proyecto_id=p.id and s.id='".$p."'
 GROUP BY p.id, c.tipo";
 $resEmp = mysql_query($queEmp) or die(mysql_error());
 $totEmp = mysql_num_rows($resEmp);

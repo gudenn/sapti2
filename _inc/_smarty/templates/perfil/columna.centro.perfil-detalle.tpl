@@ -70,9 +70,6 @@
     <tr  class="selectable">
     <tr  class="{cycle values="light,dark"}">
         <td>{$listadocentes[ic]['descripcion']}</td>
-       
-      
-     
     
      </tr>
     

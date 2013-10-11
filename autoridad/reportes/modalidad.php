@@ -70,7 +70,7 @@ $sql2 = "SELECT *
   
     $sqlr="SELECT p.id,u.nombre,s.codigo,p.nombre as titulo,CONCAT(apellido_paterno,apellido_materno) as apellidos,p.estado as estadop,m.nombre as modalidad
 FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,modalidad m
-WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.modalidad_id=m.id and m.id='".$m."' and s.id='".$p."'";
+WHERE u.id=e.usuario_id AND e.id=i.estudiante_id and p.tipo_proyecto='PE' AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.modalidad_id=m.id and m.id='".$m."' and s.id='".$p."'";
  $resultado = mysql_query($sqlr);
  $arraytribunal= array();
   

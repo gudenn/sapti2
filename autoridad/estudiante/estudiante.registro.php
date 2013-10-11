@@ -130,8 +130,10 @@ try {
     
     if ( isset($_POST['dicta_id']) && isset($_POST['semestre_id']) && is_numeric($_POST['dicta_id']) && is_numeric($_POST['semestre_id']) ) {
       $materia = new Materia($_POST['materia_id']);
+      echo $materia->tipo;
       $estudiante->crearProyectoInicial($_POST['dicta_id'], $materia->tipo);
       $estudiante->inscribirEstudianteDicta($_POST['semestre_id'], $_POST['dicta_id']);
+      
     }
     
     $EXITO = true;

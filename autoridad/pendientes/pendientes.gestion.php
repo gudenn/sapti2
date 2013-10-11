@@ -57,8 +57,16 @@ try {
      $actualproyecto->modalidad_id=$proyecto_aux->modalidad_id;
      $actualproyecto->institucion_id=$proyecto_aux->institucion_id;
      $actualproyecto->nombre=$proyecto_aux->nombre;
+     $actualproyecto->registrado_por=$proyecto_aux->registrado_por;
+     $actualproyecto->descripcion=$proyecto_aux->descripcion;
+     $actualproyecto->director_carrera=$proyecto_aux->director_carrera;
+     $actualproyecto->docente_materia=$proyecto_aux->docente_materia;
      $actualproyecto->numero_asignado=$proyecto_aux->numero_asignado;
+     $actualproyecto->objetivo_general=$proyecto_aux->objetivo_general;
+    $actualproyecto->trabajo_conjunto=$proyecto_aux->trabajo_conjunto;
+    $actualproyecto->responsable=$proyecto_aux->responsable;
      $actualproyecto->tipo_proyecto=  Proyecto::TIPO_PROYECTO;
+     $actualproyecto->estado_proyecto=  Proyecto::EST6_C;
      $actualproyecto->save();
     //copiar Proyecto estudiante
     leerClase('Proyecto_estudiante');
