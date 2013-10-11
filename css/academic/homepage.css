@@ -25,6 +25,17 @@ Licence: <a href="http://www.os-templates.com/template-terms">Website Template L
 	margin-bottom:20px;
 	}
 
+/* ----------------------------------------------Sin permisos-------------------------------------*/
+#homepage #sinpermisos{
+display: block;
+float: left;
+width: 420px;
+margin: 20px 0 20px 20px;
+border: 1px solid #F82121;
+padding: 20px;
+border-radius: 10px;
+background-color: rgba(248, 16, 16, 0.09);
+	}
 /* ----------------------------------------------Latest News-------------------------------------*/
 
 #homepage #latestnews{
