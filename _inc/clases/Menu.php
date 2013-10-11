@@ -177,6 +177,7 @@ class Menu
     $thise->agregarItem('Notificaciones','Geti&oacute;n de las Notificaciones','basicset/megaphone.png',$link,12);
     $link = Estudiante::URL."proyecto-final/";
     $thise->agregarItem('Mensajes','Geti&oacute;n de los mensajes Mensajes','basicset/mail.png',$link,15);
+   
     if($proyecto->estado_proyecto==Proyecto::EST2_BUE){
     $menus[] = $thise;
     $thise = new Menu('Registro de Formulario');
