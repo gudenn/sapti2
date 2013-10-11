@@ -1,4 +1,8 @@
-{include file="admin/header-sjq.tpl"}
+{if (isset($header_ui))}
+  {include file="admin/header-ui.tpl"}
+{else}
+  {include file="admin/header-sjq.tpl"}
+{/if}
 <div class="wrapper row3">
   <div class="rnd">
     <div id="container" >

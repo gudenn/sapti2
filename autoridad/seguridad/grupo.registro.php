@@ -18,25 +18,9 @@ try {
   $menuList[]     = array('url'=>URL . Administrador::URL . 'seguridad/'.basename(__FILE__),'name'=>'Registro de Grupo');
   $smarty->assign("menuList", $menuList);
  
-  //CSS
-  $CSS[]  = URL_CSS . "academic/3_column.css";
-  $CSS[]  = URL_JS  . "validate/validationEngine.jquery.css";
-  //BOX
-  $CSS[]  = URL_JS . "box/box.css";
-  
-  $smarty->assign('CSS',$CSS);
-
-  //JS
-  $JS[]  = URL_JS . "jquery.min.js";
-
-
-  //Validation
-  $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
-  $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
-
-  //BOX
-  $JS[]  = URL_JS ."box/jquery.box.js";
-  $smarty->assign('JS',$JS);
+  $smarty->assign('header_ui','1');
+  $smarty->assign('CSS','');
+  $smarty->assign('JS','');
 
 
   $smarty->assign("ERROR", '');

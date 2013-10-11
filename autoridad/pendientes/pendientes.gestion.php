@@ -16,15 +16,12 @@ try {
   $menuList[]     = array('url'=>URL . Administrador::URL . 'pendientes/','name'=>'Pendientes');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'pendientes/'.basename(__FILE__),'name'=>'Proyectos pendientes');
   $smarty->assign("menuList", $menuList);
-  //CSS
-  $CSS[]  = "css/style.css";
-  $smarty->assign('CSS','');
-
-  //JS
 
   
-   $JS[]  = "js/ajaxbuscarperfil.js";
-   $smarty->assign('JS','');
+  
+  $smarty->assign('header_ui','1');
+  $smarty->assign('CSS','');
+  $smarty->assign('JS','');
    
    $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
   $smarty->assign('lista'       ,'admin/pendientes/lista.tpl');
