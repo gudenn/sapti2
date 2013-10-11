@@ -5,21 +5,21 @@
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
              <p>
-              <input type="text" name="nombre" value="{$semestrecod}"  data-validation-engine="validate[required]">
-              <label for="codigo"><small>Cod Semestre Actual (*)</small></label>
+               <input type="text" name="nombre" id="nombre" value="{$semestrecod}" disabled="disabled">
+              <label for="nombre"><small>Cod Semestre Actual {getHelpTip('nombre')}</small></label>
             </p>
               <p>
-              <input type="text" name="nombre_evento" value="{$cronograma->nombre_evento}"  data-validation-engine="validate[required]">
-              <label for="codigo"><small>Nombre del Evento (*)</small></label>
+              <input type="text" name="nombre_evento" id="nombre_evento" value="{$cronograma->nombre_evento}"  data-validation-engine="validate[required]">
+              <label for="nombre_evento"><small>Nombre del Evento (*) {getHelpTip('nombre_evento')}</small></label>
             </p>
           
             <p>
-              <textarea name="detalle_evento" id="detalle_evento" value="{$cronograma->detalle_evento}" size="22" style="width: 650px;height: 100px;" data-validation-engine="validate[required]"></textarea>
-              <label for="codigo"><small>Detalle del Evento (*)</small></label>
+              <textarea name="detalle_evento" id="detalle_evento" value="" size="22" style="width: 650px;height: 100px;" data-validation-engine="validate[required]">{$cronograma->detalle_evento}</textarea>
+              <label for="detalle_evento"><small>Detalle del Evento (*) {getHelpTip('detalle_evento')}</small></label>
             </p>
              <p> 
-            <input type="text" name="fecha_evento" id="fecha_evento" value="{$cronograma->fecha_evento}" size="22">
-             <label for="fecha_evento"><small>Fecha de Evento</small></label>
+            <input type="text" name="fecha_evento" id="fecha_evento" value="{$cronograma->fecha_evento}" size="22"  data-validation-engine="validate[required]">
+             <label for="fecha_evento"><small>Fecha de Evento {getHelpTip('fecha_evento')}</small></label>
              </p>
             <h2 class="title">Grabar Evento</h2>
             <p>

@@ -5,12 +5,12 @@
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
             <p>
-              <input type="text" name="nombre" value="{$configuracion_semestral->nombre}"  data-validation-engine="validate[required]">
-              <label for="codigo"><small>Nombre del Campo (*)</small></label>
+              <input type="text" name="nombre"  id="nombre" value="{$configuracion_semestral->nombre}"  data-validation-engine="validate[required]">
+              <label for="nombre"><small>Nombre del Campo (*){getHelpTip('nombre')}</small></label>
             </p>
             <p>
-              <input type="text" name="valor" value="{$configuracion_semestral->valor}"  data-validation-engine="validate[required]">
-              <label for="codigo"><small>Valor del Campo (*)</small></label>
+              <input type="text" name="valor" id="valor" value="{$configuracion_semestral->valor}"  data-validation-engine="validate[required]">
+              <label for="valor"><small>Valor del Campo (*){getHelpTip('valor')}</small></label>
             </p>
             <h2 class="title">Grabar Valor de configuraci&oacute;n</h2>
             <p>

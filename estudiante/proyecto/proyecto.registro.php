@@ -17,7 +17,7 @@ try {
    * Menu superior
    */
   $menuList[]     = array('url'=>URL . Estudiante::URL , 'name'=>'Estudiante');
- $menuList[]     = array('url'=>URL . Estudiante::URL . 'proyecto/','name'=>'Proyecto');
+
   $menuList[]     = array('url'=>URL . Estudiante::URL . 'proyecto/'.basename(__FILE__),'name'=>'Registro de Proyecto');
   $smarty->assign("menuList", $menuList);
 
@@ -245,7 +245,7 @@ try {
       $especifico->validar();
       $proyecto->objetivo_especifico_objs[] = $especifico;
     }
-    $proyecto->asignarEstudiante($estudiante->id);
+   // $proyecto->asignarEstudiante($estudiante->id);
     
     //areas y subareas
     $contador = 0;

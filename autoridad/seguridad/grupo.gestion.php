@@ -22,14 +22,9 @@ try {
   $smarty->assign('keywords','Gesti&oacute;n ,Grupos');
 //  $smarty->assign('menudirslast','Gestion Grupos');
 
-  //CSS
-  $CSS[]  = URL_CSS . "academic/tables.css";
-  //$CSS[]  = URL_CSS . "pg.css";
-  $smarty->assign('CSS',$CSS);
-
-  //JS
-  $JS[]  = URL_JS . "jquery.js";
-  $smarty->assign('JS',$JS);
+  $smarty->assign('header_ui','1');
+  $smarty->assign('CSS','');
+  $smarty->assign('JS','');
 
   
   //////////////////////////////////////////////////////////////////

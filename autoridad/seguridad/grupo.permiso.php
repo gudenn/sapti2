@@ -23,14 +23,9 @@ try {
   $smarty->assign('keywords','Gestion,Permisos');
   $smarty->assign('menudirslast','Gestion Permisos');
 
-  //CSS
-  $CSS[]  = URL_CSS . "academic/tables.css";
-  //$CSS[]  = URL_CSS . "pg.css";
-  $smarty->assign('CSS',$CSS);
-
-  //JS
-  $JS[]  = URL_JS . "jquery.js";
-  $smarty->assign('JS',$JS);
+  $smarty->assign('header_ui','1');
+  $smarty->assign('CSS','');
+  $smarty->assign('JS','');
 
   
   //////////////////////////////////////////////////////////////////
@@ -41,7 +36,7 @@ try {
    */
   $menuList[]     = array('url'=>URL.Administrador::URL,'name'=>'Administraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'seguridad/','name'=>'Control de Permisos');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'seguridad/grupo.gestion.php','name'=>'Gesti&oacute;n de Permisos');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'seguridad/grupo.asignarpermiso.php','name'=>'Gesti&oacute;n de Permisos');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'seguridad/'.basename(__FILE__),'name'=>'Asignaci&oacute;n de Permisos');
   $smarty->assign("menuList", $menuList);
 

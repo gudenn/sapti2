@@ -142,6 +142,18 @@ class Avance extends Objectbase
     $filtro_sql = '';
     return $filtro_sql;
   }
+  
+  function getDirectorioAvance($codigo_sis,$formatourl = true) 
+  {
+    leerClase('Estudiante');
+    leerClase('Proyecto');
+    $proyecto = new Proyecto($this->proyecto_id);
+    if ($formatourl)
+      $archivo  = URL.Estudiante::ARCHIVO_PATH.Proyecto::ARCHIVO_PATH.'/'.$codigo_sis.'/'.$proyecto->getFolder().'/'.$this->directorio.'/';
+    else
+      $archivo  = PATH.Estudiante::ARCHIVO_PATH.Proyecto::ARCHIVO_PATH.'/'.$codigo_sis.'/'.$proyecto->getFolder().'/'.$this->directorio.'/';
+    return $archivo;
+  }
     function getArchivos($dir)
   {
     $directorio = opendir("$dir");

@@ -7,7 +7,6 @@ class Consejo extends Objectbase
   * @var INT
   */
   var $usuario_id;
-  
    /**
   * 
   * fecha inicio date

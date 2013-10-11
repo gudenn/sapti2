@@ -8,15 +8,15 @@
            <tr class="dark">
                <th>
              <p>
-              <input type="text" name="nombre" value="{$semestre->codigo}"  readonly>
-              <label for="codigo"><small>Codigo Semestre Actual (*)</small></label>
+              <input type="text" name="nombre" id="nombre" value="{$semestre->codigo}"  readonly>
+              <label for="nombre"><small>Codigo Semestre Actual {getHelpTip('semestre')}</small></label>
             </p>
                </th>
                <th>
               <select name="semestre_id" id="semestre_id" >
               {html_options values=$semestre_values selected=$semestre_selected output=$semestre_output}
               </select>
-              <label for="semestre_id"><small>Seleccione Proximo Semestre(*)</small></label>
+              <label for="semestre_id"><small>Seleccione Proximo Semestre (*){getHelpTip('semestre')}</small></label>
               </th>
               
            </tr>
@@ -25,6 +25,7 @@
             <p>
               <label><input type="checkbox" name=seleccion[] value="mate" class="checkbox" >Copiar Materias</label>
               <label><input type="checkbox" name=seleccion[] value="conf" class="checkbox" >Copiar Configuracion</label>
+              <br><br><label for=""><small>Seleccione Minimamente Una Opcion(*)</small></label>
             </p>
             </th>
             <th>
@@ -34,6 +35,7 @@
             </th>
            </tr>
             </table>
+            <p>Todos los campos con (*) son obligatorios.</p>
             <h2 class="title">Cerrar Semestre y Grabar Configuracion</h2>
             <p>
               <input type="hidden" name="tarea" value="registrar">

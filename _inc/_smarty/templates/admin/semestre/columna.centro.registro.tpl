@@ -5,9 +5,10 @@
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
             <p>
-              <input type="text" name="codigo" value="{$semestre->codigo}"  data-validation-engine="validate[required]">
-              <label for="codigo"><small>Codigo de Semestre (*)</small></label>
+              <input type="text" name="codigo" id="codigo" value="{$semestre->codigo}"  data-validation-engine="validate[required]">
+              <label for="codigo"><small>C&oacute;digo de Semestre (*) {getHelpTip('codigo')}</small></label>
             </p>
+            <!--
             <p>
               <select name="activo" id="activo"  data-validation-engine="validate[required]" >
                 <option value="">-- Seleccione --</option>
@@ -16,6 +17,8 @@
               </select>
               <label for="activo"><small>Es el semestre actual (*)</small></label>
             </p>
+            -->
+            <br>
             <h2 class="title">Grabar Semestre</h2>
             <p>
               <input type="hidden" name="id"    value="{$semestre->id}">

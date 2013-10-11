@@ -32,14 +32,11 @@ try {
   $menuList[]     = array('url'=>URL . Administrador::URL . 'tutor/'.basename(__FILE__),'name'=>'Gesti&oacute;n de Tutores');
   $smarty->assign("menuList", $menuList);
 
-  //CSS
-  $CSS[]  = URL_CSS . "academic/tables.css";
-  //$CSS[]  = URL_CSS . "pg.css";
-  $smarty->assign('CSS',$CSS);
-
-  //JS
-  $JS[]  = URL_JS . "jquery.js";
-  $smarty->assign('JS',$JS);
+  $smarty->assign('header_ui','1');
+  $smarty->assign('CSS','');
+  $smarty->assign('JS','');
+  
+  
   $semestre = new Semestre();
 
   if (isset($_GET['todos']) && $_GET['todos'])
@@ -90,7 +87,7 @@ try {
       $smarty->assign("crear_nuevo"  ,"tutor.asignar.php?estudiante_id={$estudiante->id}");
     $smarty->assign('cabecera_file'  ,'admin/tutor/estudiante.cabecera.tpl');
     
-    $smarty->assign('maximo_tutores' ,$maximo_tutores);
+    $smarty->assign('maximo_tutores'  ,$maximo_tutores);
     $smarty->assign('total_asignados' ,$total_asignados);
     
   }
@@ -112,6 +109,7 @@ try {
 
   if ($proyecto->id)
     $filtro_sql =  $filtro_mis_tutores . $filtro_sql;
+  
   
   $o_string   = $tutor->getOrderString($filtro);
   $obj_mysql  = $tutor->getAll('',$o_string,$filtro_sql,TRUE,TRUE);

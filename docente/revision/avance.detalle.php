@@ -47,25 +47,16 @@ try {
   $smarty->assign("menuList", $menuList);
 
   
-  //$estudiante     = getSessionEstudiante();
-  //$usuario        = $estudiante->getUsuario();
-  //$proyecto       = $estudiante->getProyecto();
+  $estudiante     = new Estudiante(1);
+  $usuario        = $estudiante->getUsuario();
+  $proyecto       = $estudiante->getProyecto();
   $id             = (isset($_GET['avance_id']) && is_numeric($_GET['avance_id']))?$_GET['avance_id']:'';
-  $avance         = new Avance(1);
+  $avance         = new Avance(2);
   $avance->asignarDirectorio();
 
-  if ( isset($_POST['tarea']) && $_POST['tarea'] == 'registrar_avance' && isset($_SESSION['registrar_avance']) && isset($_POST['token']) && $_SESSION['registrar_avance'] == $_POST['token']  )
-  {
-    $EXITO = false;
-    if ($proyecto->id)
-      $avance = $estudiante->grabarAvance();
-    $EXITO = true;
-  }
-
-  
-  //$smarty->assign("estudiante", $estudiante);
-  //$smarty->assign("usuario", $usuario);
-  //$smarty->assign("proyecto", $proyecto);
+  $smarty->assign("estudiante", $estudiante);
+  $smarty->assign("usuario", $usuario);
+  $smarty->assign("proyecto", $proyecto);
   $smarty->assign("avance", $avance);
   $smarty->assign("ERROR", $ERROR);
   
@@ -73,17 +64,6 @@ try {
 
   //No hay ERROR
   $ERROR = ''; 
-  leerClase('Html');
-  $html  = new Html();
-  if (isset($EXITO))
-  {
-    $html = new Html();
-    if ($EXITO)
-    {
-      $mensaje = array('mensaje'=>'Se grabo correctamente el Avance','titulo'=>'Registro de Avance' ,'icono'=> 'tick_48.png');
-      $ERROR = $html->getMessageBox ($mensaje);
-    }
-  }
   $smarty->assign("ERROR",$ERROR);
   
 } 
@@ -91,10 +71,6 @@ catch(Exception $e)
 {
   $smarty->assign("ERROR", handleError($e));
 }
-
-$token                = sha1(URL . time());
-$_SESSION['registrar_avance'] = $token;
-$smarty->assign('token',$token);
 
 $TEMPLATE_TOSHOW = 'docente/revision/full-width.avance.detalle.tpl';
 $smarty->display($TEMPLATE_TOSHOW);

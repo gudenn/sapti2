@@ -59,6 +59,7 @@ try {
     $EXITO = false;
     mysql_query("BEGIN");
     $semestre->objBuidFromPost();
+    $semestre->valor  =  $semestre->getOrderValor();
     $semestre->estado = Objectbase::STATUS_AC;
     $semestre->validar();
     $semestre->save(TRUE/*copiarlaconfiguraciondelalctivo*/);

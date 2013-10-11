@@ -1,16 +1,16 @@
       <div id="content">
-        <h1 class="title">Registro de Sub-Area para la Area <b>{$area->nombre}</b></h1>
+        <h1 class="title">Registro de Sub-Area para la &Aacute;rea <b>{$area->nombre}</b></h1>
         <p>Formulario de registro de Sub-Area</p>
         <h2 class="title">Formulario de Sub-Area</h2>
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
             <p>
-              <input type="text" name="nombre" value="{$subarea->nombre}"  data-validation-engine="validate[required]">
-              <label for="codigo"><small>Nombre del Sub-Area (*)</small></label>
+              <input type="text" name="nombre" id="nombre" value="{$subarea->nombre}"  data-validation-engine="validate[required]">
+              <label for="nombre"><small>Nombre del Sub-Area (*) {getHelpTip('nombre')}</small></label>
             </p>
             <p>
-              <input type="text" name="descripcion" value="{$subarea->descripcion}"  data-validation-engine="validate[required]">
-              <label for="codigo"><small>Descripcion del Sub-Area (*)</small></label>
+              <input type="text" name="descripcion" id="descripcion" value="{$subarea->descripcion}"  data-validation-engine="validate[required]">
+              <label for="descripcion"><small>Descripci&oacute;n del Sub-Area (*) {getHelpTip('descripcion')}</small></label>
             </p>
             <h2 class="title">Grabar Sub-Area</h2>
             <p>

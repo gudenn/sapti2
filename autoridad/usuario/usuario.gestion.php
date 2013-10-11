@@ -19,14 +19,10 @@ try {
   $smarty->assign('description','P&aacute;gina de gesti&oacute;n de Usuarios');
   $smarty->assign('keywords','Gestion,Usuarios');
 
-  //CSS
-  $CSS[]  = URL_CSS . "academic/tables.css";
-  //$CSS[]  = URL_CSS . "pg.css";
-  $smarty->assign('CSS',$CSS);
-
-  //JS
-  $JS[]  = URL_JS . "jquery.js";
-  $smarty->assign('JS',$JS);
+  
+  $smarty->assign('header_ui','1');
+  $smarty->assign('CSS','');
+  $smarty->assign('JS','');
 
   
   /**
@@ -69,6 +65,14 @@ try {
   {
     $usuario_aux = new Usuario($_GET['noes_profecional']);
     $usuario_aux->puede_ser_tutor = Usuario::NOPROFECIONAL;
+    $usuario_aux->save();
+  }
+  
+   //Habilitamos para proffecionales y para no profecionales
+  if ( isset($_GET['id_usuario']) && is_numeric($_GET['id_usuario']) )
+  {
+    $usuario_aux = new Usuario($_GET['id_usuario']);
+    $usuario_aux->estado=  Objectbase::STATUS_IN;
     $usuario_aux->save();
   }
   

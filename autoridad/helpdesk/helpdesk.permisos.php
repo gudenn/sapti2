@@ -28,14 +28,10 @@ try {
   $menuList[]     = array('url'=>URL . Administrador::URL . 'helpdesk/'.basename(__FILE__),'name'=>'Gesti&oacute;n de Permisos Para Temas de Ayuda');
   $smarty->assign("menuList", $menuList);
 
-  //CSS
-  $CSS[]  = URL_CSS . "academic/tables.css";
-  //$CSS[]  = URL_CSS . "pg.css";
-  $smarty->assign('CSS',$CSS);
 
-  //JS
-  $JS[]  = URL_JS . "jquery.min.js";
-  $smarty->assign('JS',$JS);
+  $smarty->assign('header_ui','1');
+  $smarty->assign('CSS','');
+  $smarty->assign('JS','');
 
   if (isset($_GET['permiso_id']) && is_numeric($_GET['permiso_id']) && isset($_GET['dar_acceso']) )
   {

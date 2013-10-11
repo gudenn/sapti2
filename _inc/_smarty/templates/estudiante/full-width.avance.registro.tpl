@@ -8,10 +8,11 @@
         <h1 class="title">Registro de Avance</h1>
       {/if}
         
-{literal}
 
+  <h3>Subir Archivos Relacionados al Avance {getHelpTip('archivos')}</h3>
+{literal}
 <!-- The file upload form used as target for the file upload widget -->
-<form id="fileupload" action="archivo/" method="POST" enctype="multipart/form-data">
+<form id="fileupload" action="../archivo/" method="POST" enctype="multipart/form-data">
     <!-- Redirect browsers with JavaScript disabled to the origin page -->
 {/literal}
     <noscript><input type="hidden" name="redirect" value="{$URL}"></noscript>
@@ -155,7 +156,7 @@
           {/if}
           
           <hr>
-          <h3><b>Descripcion del Avance</b></h3>
+          <h3><b>Descripci&oacute;n del Avance {getHelpTip('Descripcion')}</b></h3>
           <p>
             <textarea name="descripcion" id="descripcion" rows="4" cols="60" style="width: 431px;height: 305px;" data-validation-engine="validate[required]">{$avance->descripcion}</textarea>
           </p>

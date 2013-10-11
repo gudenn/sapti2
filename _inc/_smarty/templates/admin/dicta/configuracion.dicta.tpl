@@ -1,10 +1,10 @@
 {include file="docente/header-sjq.tpl"}
 <div class="wrapper row3">
-  <div class="rnd"> 
+  <div class="rnd">
         <div id="container">
         <h1 class="title">Materias Dictadas en el Semestre</h1>
         <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">       	
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         </head>
         <div id="wrap">
         <div id="message"></div>
@@ -24,9 +24,9 @@
                 </div>
         	<label for="filter">Busqueda Rapida :</label>
 		<input type="text" id="filter"/>
-        
+
 		<div id="tablecontent"></div>
-        
+
         	<div id="paginator"></div>
         <form name="nueva_grupo" id="nueva_grupo" action="" onsubmit="enviarDatosGrupo(); return false">
 		<h1>Registrar Materias</h1>
@@ -49,7 +49,7 @@
               <select name="docente_id" id="docente_id" >
               {html_options values=$docentes_values selected=$docentes_selected output=$docentes_output}
               </select>
-              <label for="docente_id"><small>Seleccione Docente(*)</small></label>     
+              <label for="docente_id"><small>Seleccione Docente(*) {getHelpTip('docente')}</small></label>
                     </td>
                     <td></td>
                 </tr>
@@ -58,13 +58,13 @@
               <select name="materia_id" id="materia_id" >
               {html_options values=$materia_values selected=$materia_selected output=$materia_output}
               </select>
-              <label for="materia_id"><small>Seleccione Materia(*)</small></label>                   
+              <label for="materia_id"><small>Seleccione Materia(*) {getHelpTip('materia')}</small></label>
                 </td>
                 <td>
               <select name="grupo" id="grupo" >
               {html_options values=$grupo_values selected=$grupo_selected output=$grupo_output}
-              </select>                    
-              <label for="grupo"><small>Codigo de Grupo(*)</small></label>
+              </select>
+              <label for="grupo"><small>Codigo de Grupo(*) {getHelpTip('grupo')}</small></label>
                 </td>
                 <td>
               <input name="submit" type="submit" value="Grabar">
@@ -79,7 +79,7 @@
         <script type="text/javascript">
                 editableGrid.onloadXML("configuracion.dicta2.php");
         </script>
-    </div> 
+    </div>
                {$ERROR}
     </div>
 </div>

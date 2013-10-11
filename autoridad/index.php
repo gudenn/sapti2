@@ -10,20 +10,10 @@ try {
   $smarty->assign('description','Panel de Administraci&oacute;n del Sistema SAPTI');
   $smarty->assign('keywords','Proyecto Final');
 
-  //CSS
-  $CSS[]  = URL_CSS . "dashboard.css";
-  $CSS[]  = URL_CSS . "academic/3_column.css";
-
-  //JS
-  $JS[]  = URL_JS . "jquery.min.js";
- 
-  //BOX
-  $CSS[] = URL_JS . "box/box.css";
-  $JS[]  = URL_JS . "box/jquery.box.js";
-
+  $smarty->assign('header_ui','1');
+  $smarty->assign('CSS','');
+  $smarty->assign('JS','');
   
-  $smarty->assign('CSS',$CSS);
-  $smarty->assign('JS',$JS);
  /**
   * Clases
   */

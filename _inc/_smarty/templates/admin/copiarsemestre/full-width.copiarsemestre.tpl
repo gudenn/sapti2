@@ -9,14 +9,14 @@
                <th>
              <p>
               <input type="text" name="nombre" value="{$semestre->codigo}"  readonly>
-              <label for="codigo"><small>Cod Semestre Actual (*)</small></label>
+              <label for="nombre"><small>Cod Semestre Actual (*) {getHelpTip('semestre')}</small></label>
             </p>
                </th>
                <th>
               <select name="semestre_id" id="semestre_id" >
               {html_options values=$semestre_values selected=$semestre_selected output=$semestre_output}
               </select>
-              <label for="semestre_id"><small>Seleccione Semestre(*)</small></label>
+              <label for="semestre_id"><small>Seleccione Semestre (*) {getHelpTip('semestre')}</small></label>
               </th>
               
            </tr>

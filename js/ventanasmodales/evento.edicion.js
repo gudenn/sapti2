@@ -36,14 +36,14 @@ jQuery(function ($) {
 			var h = 280;
 			var title = $('#contact-container .contact-title').html();
 			$('#contact-container .contact-title').html('Cargando Eventos...');
-			dialog.overlay.fadeIn(200, function () {
-				dialog.container.fadeIn(200, function () {
-					dialog.data.fadeIn(200, function () {
+			dialog.overlay.fadeIn(100, function () {
+				dialog.container.fadeIn(100, function () {
+					dialog.data.fadeIn(100, function () {
 						$('#contact-container .contact-content').animate({
 							height: h
 						}, function () {
 							$('#contact-container .contact-title').html(title);
-							$('#contact-container form').fadeIn(200, function () {
+							$('#contact-container form').fadeIn(100, function () {
 								$('#contact-container #contact-title').focus();
 							});
 						});
@@ -61,11 +61,11 @@ jQuery(function ($) {
 						msg.removeClass('contact-error').empty();
 					});
 					$('#contact-container .contact-title').html('Grabando...');
-					$('#contact-container form').fadeOut(200);
+					$('#contact-container form').fadeOut(100);
 					$('#contact-container .contact-content').animate({
 						height: '80px'
 					}, function () {
-						$('#contact-container .contact-loading').fadeIn(200, function () {
+						$('#contact-container .contact-loading').fadeIn(100, function () {
 							$.ajax({
 								url: 'evento.edicion.php',
 								data: $('#contact-container form').serialize() + '&action=send',
@@ -73,9 +73,9 @@ jQuery(function ($) {
 								cache: false,
 								dataType: 'html',
 								success: function (data) {
-									$('#contact-container .contact-loading').fadeOut(200, function () {
+									$('#contact-container .contact-loading').fadeOut(100, function () {
 										$('#contact-container .contact-titulo').html('Disculpas');
-										msg.html(data).fadeIn(200);
+										msg.html(data).fadeIn(100);
 									});
 								},
 								error: contact.error
@@ -86,10 +86,10 @@ jQuery(function ($) {
 				else {
 					if ($('#contact-container .contact-message:visible').length > 0) {
 						var msg = $('#contact-container .contact-message div');
-						msg.fadeOut(200, function () {
+						msg.fadeOut(100, function () {
 							msg.empty();
 							contact.showError();
-							msg.fadeIn(200);
+							msg.fadeIn(100);
 						});
 					}
 					else {
@@ -104,13 +104,13 @@ jQuery(function ($) {
 		close: function (dialog) {
 			$('#contact-container .contact-message').fadeOut();
 			$('#contact-container .contact-title').html('Gracias...');
-			$('#contact-container form').fadeOut(200);
+			$('#contact-container form').fadeOut(100);
 			$('#contact-container .contact-content').animate({
 				height: 40
 			}, function () {
-				dialog.data.fadeOut(200, function () {
-					dialog.container.fadeOut(200, function () {
-						dialog.overlay.fadeOut(200, function () {
+				dialog.data.fadeOut(100, function () {
+					dialog.container.fadeOut(100, function () {
+						dialog.overlay.fadeOut(100, function () {
 							$.modal.close(window.location.reload());
 						});
 					});
@@ -127,7 +127,7 @@ jQuery(function ($) {
 		showError: function () {
 			$('#contact-container .contact-message')
 				.html($('<div class="contact-error"></div>').append(contact.message))
-				.fadeIn(200);
+				.fadeIn(100);
 		}
 	};
 

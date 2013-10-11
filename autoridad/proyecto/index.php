@@ -10,14 +10,9 @@ try {
   $smarty->assign('description','Gesti&oacute;n de Proyectos Finales');
   $smarty->assign('keywords','Gesti&oacute;n de Proyectos Finales');
 
-  //CSS
-  $CSS[]  = URL_CSS . "dashboard.css";
-  $CSS[]  = URL_CSS . "academic/3_column.css";
-
-  //JS
-  $JS[]  = "js/jquery.min.js";
+  $smarty->assign('header_ui','1');
+  $smarty->assign('CSS','');
   $smarty->assign('JS','');
-  $smarty->assign('CSS',$CSS);
 
  /**
   * Clases

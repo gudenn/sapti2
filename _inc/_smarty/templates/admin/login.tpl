@@ -1,4 +1,8 @@
-{include file="header-sjq.tpl"}
+{if (isset($header_ui))}
+  {include file="admin/header-ui.tpl"}
+{else}
+  {include file="admin/header-sjq.tpl"}
+{/if}
 <div class="wrapper row3">
   <div class="rnd">
     <div id="container" class="clear">
@@ -9,11 +13,11 @@
           <form action="#" method="post" id="registro" name="registro" >
             <p>
               <input type="text" name="login" id="login" value="" size="100"  data-validation-engine="validate[required]">
-              <label for="login"><small>Login (*)</small></label>
+              <label for="login"><small>Login (*) {getHelpTip('login')}</small></label>
             </p>
             <p>
               <input type="password" name="clave" id="clave" value="" data-validation-engine="validate[required]"  size="22">
-              <label for="password"><small>Clave de Ingreso (*)</small></label>
+              <label for="clave"><small>Clave de Ingreso (*){getHelpTip('clave')}</small></label>
             </p>
             <h2 class="title">Datos de ingreso</h2>
             <p>

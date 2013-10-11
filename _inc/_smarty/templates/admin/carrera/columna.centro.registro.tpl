@@ -6,7 +6,7 @@
           <form action="" method="post" id="registro" name="registro" >
             <p>
               <input type="text" name="nombre"  id="nombre" value="{$carrera->nombre}"  data-validation-engine="validate[required]">
-              <label for="codigo"><small>Nombre de Carrera (*)</small></label>
+              <label for="nombre"><small>Nombre de Carrera (*){getHelpTip('nombre')}</small></label>
             </p>
             <h2 class="title">Grabar Carrera</h2>
             <p>
