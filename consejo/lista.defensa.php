@@ -183,8 +183,6 @@ $smarty->assign('contenido',$contenido);
 
 $TEMPLATE_TOSHOW = 'tribunal/tribunal.3columnas.tpl';
 
-
-//$TEMPLATE_TOSHOW = 'tribunal/listatribunaleditar.tpl';
 $smarty->display($TEMPLATE_TOSHOW);
 
 ?>

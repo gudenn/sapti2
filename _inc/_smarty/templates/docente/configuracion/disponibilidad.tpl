@@ -51,7 +51,7 @@
  <script>
 jQuery('#dia_id').change(function () {
 var numero =document.getElementById("dia_id").value;
-// valor de la id de Provincias
+
 var to=document.getElementById("Buscando");
 to.innerHTML="buscando....";
 

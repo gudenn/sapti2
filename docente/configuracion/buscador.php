@@ -1,17 +1,18 @@
 <?php
 try {
+   define ("MODULO", "DOCENTE");
   require('../_start.php');
   if(!isDocenteSession())
   header("Location: login.php"); 
   global $PAISBOX;
  if(isset($_POST['iddia']))
 { 
-   $docente     =  getSessionDocente();
-  $docente_ids =  $docente->id;
+   $usuario     = getSessionUser();
+ $usersession =   $usuario->id;
 
  $sqldocente="select  d.id
 from usuario u , docente d
-where u.id= d.usuario_id and u.estado='AC' and d.estado='AC' and u.id=$docente_ids;";
+where u.id= d.usuario_id and u.estado='AC' and d.estado='AC' and u.id=$usersession;";
  $resultadodocente= mysql_query($sqldocente);
 $idocente=0;
  while ($filadocente = mysql_fetch_array($resultadodocente)) 

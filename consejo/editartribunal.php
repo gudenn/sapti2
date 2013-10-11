@@ -42,65 +42,41 @@ try {
   leerClase("Pagination");
   leerClase("Filtro");
   leerClase("Modalidad");
+   leerClase("Notificacion");
   leerClase("Proyecto_estudiante");
-
- 
-$rows = array();
-$usuario = new Usuario();
-//$smarty->assign('rows', $rows);
- $usuario_mysql  = $usuario->getAll();
- $usuario_id     = array();
- $usuario_nombre = array();
- while ($usuario_mysql && $row = mysql_fetch_array($usuario_mysql[0]))
- {
-   $usuario_id[]     = $row['id'];
-   $usuario_nombre[] = $row['nombre'];
-   $rows=$row;
- }
-// $smarty->assign('filas'  , $rows);
-$smarty->assign('usuario_id'  , $usuario_id);
-$smarty->assign('usuario_nombre', $usuario_nombre);
-
 
 
 //contruyendo el usuario
-  
-
-$proyecto= new Proyecto();
-$proyecto_sql= $proyecto->getAll();
-$proyecto_id= array();
-$proyecto_nombre=array();
-while ($proyecto_sql && $rows = mysql_fetch_array($proyecto_sql[0]))
- {
-   $proyecto_id[]     = $rows['id'];
-   $proyecto_nombre[] = $rows['nombre'];
- }
-
-
-$smarty->assign('proyecto_id',$proyecto_id);
-$smarty->assign('proyecto_nombre',$proyecto_nombre);
-  
-   
+ 
   if ( isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' )
   {
+    echo $_POST['proyecto_id'];
       
     $listatribunales= array();
     $proyecto= new Proyecto($_POST['proyecto_id']);
     
   //  echo $proyecto->nombre;
     $listatribunales=$proyecto->getIdTribunles();
+    $tribunalesactuales= array();
+    $tribunalesactuales=$_POST['ids'];
     
          if(isset($_POST['ids']))
      { 
+     
+     
      foreach ($_POST['ids'] as $id)
-     {
-                 echo $id;
+            {
+            //     echo $id;
+       
+       
                
-                 if( $id )
+            if(!in_array($id, $listatribunales))
+             {
+               // echo $id;
                 $tribunal= new Tribunal();
                 $tribunal->objBuidFromPost();  
                 $tribunal->docente_id =$id;
-                $tribunal->proyecto_id=$proyectos->id;
+                $tribunal->proyecto_id=$proyecto->id;
                 $tribunal->detalle="";
                 $tribunal->accion="";
                 $tribunal->visto=  Tribunal::VISTO_NV;
@@ -109,20 +85,34 @@ $smarty->assign('proyecto_nombre',$proyecto_nombre);
                 $tribunal->save();
                 
                 
-    $notificacions= new Notificacion();
-    $notificacions->objBuidFromPost();
-    $notificacions->proyecto_id=$_POST['proyecto_id']; 
-    $notificacions->tipo="Solicitud";
-    $notificacions->fecha_envio= date("j/n/Y");
-    $notificacions->asunto="Asignacion de Tribunales";
-    $notificacions->detalle="fasdf";
-    $notificacions->prioridad=5;
-    $notificacions->estado = Objectbase::STATUS_AC;
+                $notificacions= new Notificacion();
+                $notificacions->objBuidFromPost();
+                $notificacions->proyecto_id=$_POST['proyecto_id']; 
+                $notificacions->tipo="Solicitud";
+                $notificacions->fecha_envio= date("j/n/Y");
+                $notificacions->asunto="Asignacion de Tribunales";
+                $notificacions->detalle="fasdf";
+                $notificacions->prioridad=5;
+                $notificacions->estado = Objectbase::STATUS_AC;
 
-    $noticaciones= array('tribunales'=>array( $tribunal->id));
-    $notificacions->enviarNotificaion( $noticaciones);
-                
-               
+                $noticaciones= array('tribunales'=>array( $tribunal->id));
+                $notificacions->enviarNotificaion( $noticaciones);
+                 }
+                 foreach ( $listatribunales  as $valores )
+                 {
+                   if(!in_array($valores,  $tribunalesactuales))
+                   {
+                      $query = "UPDATE tribunal t SET t.estado='DE'  WHERE t.docente_id=$valores  and t.proyecto_id=$proyecto->id";
+                       mysql_query($query);
+                     
+                   }
+                   
+                 }                 
+                 
+                 
+                 
+                 
+                 
      }
      }
     
@@ -221,9 +211,7 @@ where  d.`id`=ap.`docente_id` and a.`id`=ap.`area_id` and d.`estado`='AC' and ap
   $arraytribunalselec[]= $lista_areas;
  }
  $smarty->assign('listadocenteselec'  , $arraytribunalselec);
- $smarty->assign('idproyecto'  , $_GET['proyecto_id']);
-     
-         
+          
       
   }
   
@@ -242,7 +230,7 @@ catch(Exception $e)
 {
   $smarty->assign("ERROR", handleError($e));
 }
-$contenido = 'tribunal/editartribunal.tpl';
+$contenido = 'consejo/editartribunal.tpl';
   $smarty->assign('contenido',$contenido);
 
 

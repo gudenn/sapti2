@@ -277,16 +277,16 @@
  </form>
               
  </div>
-          <script  type="text/javascript">
+<script  type="text/javascript">
 jQuery('#hora_ini').change(function () {
 var numero =document.getElementById("hora_ini").value;
 // valor de la id de Provincias
 var to=document.getElementById("Buscando");
 to.innerHTML="buscando....";
-
+alert("Hola mundo");
 jQuery.ajax({
 type: "POST", 
-url: "buscador.php",
+url: "buscadorhora.php",
 data: 'iddia='+numero,// enviamos la id de la Porvincia + la id de la población
 success: function(a) {
 jQuery('#turno_id').html(a);// el resultado de la busqueda la mostramos en  #poblacionList

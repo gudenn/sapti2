@@ -155,7 +155,7 @@ if ( isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' )
   }
   
   
-  $columnacentro = 'docente/notificacion/ver.tpl';
+  $columnacentro = 'docente/tribunal/notificacion/ver.tpl';
   $smarty->assign('columnacentro',$columnacentro);
 
   //No hay ERROR

@@ -19,7 +19,7 @@
       <td>{$notitribunal_id[ic]['nombre']}{$notitribunal_id[ic]['apellidos']}</td>
        <td>{$notitribunal_id[ic]['nombreproyecto']} </td>
        
-      <td> <a href="ver.php?tribunal_id={$notitribunal_id[ic]['idtribunal']}" target="_blank" >{icono('detalle.png','PDF')}</a>
+      <td> <a href="ver.php?tribunal_id={$notitribunal_id[ic]['idtribunal']}" target="_self" >{icono('detalle.png','PDF')}</a>
     
         </td>
       

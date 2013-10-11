@@ -19,7 +19,7 @@
       <td>{$tutorlista[ic]['nombre']}{$tutorlista[ic]['apellidos']}</td>
        <td>{$tutorlista[ic]['nombreproyecto']} </td>
        
-      <td> <a href="ver.php?proyectotutor_id={$tutorlista[ic]['idproyectotutor']}" target="_blank" >{icono('detalle.png','PDF')}</a>
+      <td> <a href="ver.php?proyectotutor_id={$tutorlista[ic]['idproyectotutor']}" target="_self" >{icono('detalle.png','PDF')}</a>
     
         </td>
       

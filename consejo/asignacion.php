@@ -150,7 +150,7 @@ $smarty->assign('tipo_nombre',$tipo_nombre);
 
  $sqlr="SELECT  DISTINCT(d.id), u.nombre, CONCAT (u.apellido_paterno,u.apellido_materno) as apellidos
 FROM  usuario u ,docente d ,  tribunal  t
-WHERE  u.`id`= d.`usuario_id` and   d.`id`= t.`docente_id` and  u.`estado`='AC'  and d.`estado`='AC' and t.`proyecto_id`=1;";
+WHERE  u.`id`= d.`usuario_id` and   d.`id`= t.`docente_id` and   t.estado='AC' and u.`estado`='AC'  and d.`estado`='AC' and t.`proyecto_id`=1;";
  $resultado = mysql_query($sqlr);
  $arraytribunal= array();
 
