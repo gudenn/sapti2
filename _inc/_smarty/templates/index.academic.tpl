@@ -14,6 +14,18 @@
           <h2>Alumni</h2>
         </div>
         <!-- ###### -->
+        {if isset($sinpermiso)}
+        <div id="sinpermisos">
+          <h1>No Tiene los permisos suficientes</h1>
+          {icono('basicset/warning_48.png','Sin Permisos')}
+          No tiene permiso de acceder a ese M&oacute;dulo
+        </div>
+        <script>
+          $( document ).ready(function() {
+            $( "#sinpermisos" ).delay( 4000 ).fadeOut( 1000 );
+          });
+        </script>
+        {/if}
         <div id="latestnews">
           <h2>ANUCIOS</h2>
           <table class="tbl_lista">
@@ -48,7 +60,7 @@
             </tbody> 
           </table> 
         </div>
-        {$ERROR}
+
         <!-- ###### -->
 
 

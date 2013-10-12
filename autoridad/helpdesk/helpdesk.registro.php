@@ -22,21 +22,7 @@ try {
   $smarty->assign("menuList", $menuList);
 
 
-  //CSS
-  $CSS[]  = URL_CSS . "academic/3_column.css";
-  
-  //JS
-  $JS[]  = URL_JS . "jquery.min.js";
-
-
-  //Validation
-  $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
-  $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
-  $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
-
-  //BOX
-  $JS[]  = URL_JS ."box/jquery.box.js";
-  $smarty->assign('JS',$JS);
+  $smarty->assign('header_ui','1');
 
   
   //FileUpload
@@ -46,9 +32,7 @@ try {
 
   //CK Editor
   $JS[]  = URL_JS . "ckeditor/ckeditor.js";
-  //BOX
-  $CSS[]  = URL_JS . "box/box.css";
-  $JS[]   = URL_JS ."box/jquery.box.js";
+  
 
   $smarty->assign('JS',$JS);
   $smarty->assign('CSS',$CSS);

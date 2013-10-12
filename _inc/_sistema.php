@@ -92,9 +92,7 @@ function verpermisos() {
       $usuario = getSessionUser();
       if ($usuario->perteneceGrupo(Grupo::GR_AD))
         return;
-      //@TODO eliminar la siguiente linea
-      exit("NO TIENE PERMISO!!!");
-      closeSession();
+      //closeSession();
       header("Location: ".URL."?notienepermiso");
     }
     

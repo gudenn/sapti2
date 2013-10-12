@@ -39,6 +39,12 @@ class Proyecto extends Objectbase {
    */
   const EST2_BUE = "VB";
   
+  /**
+   * Estado Proyecto 
+   * Estado de proyecto con tribunal (TA)
+   */
+  const EST2_TA = "TA";
+  
    
 
   /**
@@ -513,7 +519,8 @@ where pa.area_id=a.id  and pa.proyecto_id='$this->id' and pa.estado='AC'  and a.
    * retorna los Vistos buenos Docentes
    */
   
-  function getVbDocente() {
+  function getVbDocente()
+  {
     //@TODO revisar
     //  leerClase('Proyecto_area');
     leerClase('Visto_bueno');
@@ -530,8 +537,7 @@ where pa.area_id=a.id  and pa.proyecto_id='$this->id' and pa.estado='AC'  and a.
     }
     return $vistos;
   }
-  
-  
+
   /**
    * 
    * @return
@@ -542,8 +548,7 @@ where pa.area_id=a.id  and pa.proyecto_id='$this->id' and pa.estado='AC'  and a.
     //  leerClase('Proyecto_area');
     leerClase('Visto_bueno');
      $vistos= array();
-     $d= Visto_bueno::E2_TUTOR;
-    
+     $d= Visto_bueno::E2_TUTOR; 
     $activo = Objectbase::STATUS_AC;
     $sql = "select v.* from " . $this->getTableName('Visto_bueno') . " as v    where v.proyecto_id = '$this->id' and v.visto_bueno_tipo='$d' and v.estado = '$activo'";
     $resultado = mysql_query($sql);
@@ -589,15 +594,16 @@ where pa.area_id=a.id  and pa.proyecto_id='$this->id' and pa.estado='AC'  and a.
   {
     $contador= 0;
     $activo = Objectbase::STATUS_AC;
-     $sql = "select t.* from " . $this->getTableName('Tribunal') . " as t   where t.proyecto_id ='$this->id' and t.accion='AC' and  t.estado = '$activo'";
-   $resultado = mysql_query($sql);
+    $sql = "select t.* from " . $this->getTableName('Tribunal') . " as t   where t.proyecto_id ='$this->id' and t.accion='AC' and  t.estado = '$activo'";
+    $resultado = mysql_query($sql);
+  //var_dump($resultado);
      if ($resultado)
     while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
       { 
         $contador=$contador+1;
       }
-       return   $contador;
-   
+         
+       return   $contador; 
   }
   
     /**
@@ -621,7 +627,17 @@ where pa.area_id=a.id  and pa.proyecto_id='$this->id' and pa.estado='AC'  and a.
       }
        return  $idtribunales;
   }
+  /**
+   * 
+   */
   
+  function  getPerfilTutorVB()
+  {
+    
+    
+  }
+
+
   /**
    * 
    * @return boolean|\Area
