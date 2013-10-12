@@ -38,11 +38,12 @@ try {
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
   $smarty->assign("menuList", $menuList);
 
+  $docente=  getSessionUser();
   $docente = getSessionDocente();
   //var_dump($docente);
   //$docente     = new Docente($docente_aux->docente_id); //esto ya no es necesario
-  $usuario     = $docente->getUsuario();
-  
+ // $usuario     = $docente->getUsuario();
+    $usuario=        getSessionUser();
     $materias = "SELECT DISTINCT ma.id as idmat, ma.nombre as nombre
 FROM dicta di, semestre se, materia ma
 WHERE di.materia_id=ma.id
