@@ -81,7 +81,7 @@ try {
  //copiar area
     
     leerClase('Area');
-    leerClase('Proyecto_area');
+    leerClase('Proyecto_area');;
  
     $parea=new Proyecto_area();
     $parea->area_id=$area->id;
