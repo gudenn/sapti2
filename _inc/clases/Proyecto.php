@@ -595,20 +595,15 @@ where pa.area_id=a.id  and pa.proyecto_id='$this->id' and pa.estado='AC'  and a.
     $contador= 0;
     $activo = Objectbase::STATUS_AC;
     $sql = "select t.* from " . $this->getTableName('Tribunal') . " as t   where t.proyecto_id ='$this->id' and t.accion='AC' and  t.estado = '$activo'";
- 
-   
-   $resultado = mysql_query($sql);
+    $resultado = mysql_query($sql);
   //var_dump($resultado);
      if ($resultado)
     while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
       { 
         $contador=$contador+1;
       }
-      
-      
-      
-       return   $contador;
-   
+         
+       return   $contador; 
   }
   
     /**
@@ -632,7 +627,17 @@ where pa.area_id=a.id  and pa.proyecto_id='$this->id' and pa.estado='AC'  and a.
       }
        return  $idtribunales;
   }
+  /**
+   * 
+   */
   
+  function  getPerfilTutorVB()
+  {
+    
+    
+  }
+
+
   /**
    * 
    * @return boolean|\Area

@@ -16,7 +16,7 @@ try {
   $smarty->assign('CSS',$CSS);
 
   //JS
-  $JS[]  = URL_JS . "jquery.min.js";
+$JS[]  = URL_JS . "jquery.min.js";
 
   //Datepicker UI
   $JS[]  = URL_JS . "ui/jquery-ui-1.10.2.custom.min.js";
@@ -162,20 +162,12 @@ WHERE  u.`id`= d.`usuario_id` and   d.`id`= t.`docente_id` and   t.estado='AC' a
         $lista_areas[] =  $fila["nombre"];
         $lista_areas[] =  $fila["apellidos"];
  
- 
+       $listatiempo=array();
 
- //}else
-//{
- //  $listaareas[]="NO HAY DATOS";
- //}
-  
-  $listatiempo=array();
-  
-  
-$sqltiempo="select  d.`id` , d.`nombre` , t.`nombre` as nombreturno
-from `dia` d, `horario_doc` hd , `turno` t
-where  d.`id`=hd.`dia_id` and hd.`turno_id`=t.`id` and  d.`estado`='AC' and hd.`estado`='AC'and t.`estado`='AC' and hd.`docente_id`=".$fila["id"].";";
- $resultadotiempo= mysql_query($sqltiempo);
+        $sqltiempo="select  d.`id` , d.`nombre` , t.`nombre` as nombreturno
+        from `dia` d, `horario_doc` hd , `turno` t
+        where  d.`id`=hd.`dia_id` and hd.`turno_id`=t.`id` and  d.`estado`='AC' and hd.`estado`='AC'and t.`estado`='AC' and hd.`docente_id`=".$fila["id"].";";
+        $resultadotiempo= mysql_query($sqltiempo);
  
   while ($filatiempo = mysql_fetch_array($resultadotiempo, MYSQL_ASSOC)) 
   {

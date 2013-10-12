@@ -1,15 +1,14 @@
 <?php
 try {
     define ("MODULO", "TRIBUNAL");
-  
   require('_start.php');
   if(!isDocenteSession())
   header("Location: login.php"); 
   global $PAISBOX;
- if(isset($_POST['horaini']))
+ if(isset($_POST['idnumero']))
 { 
 
-   echo $_POST['horaini'];
+   echo $_POST['idnumero'];
    
   $horafin =  new  time();
     

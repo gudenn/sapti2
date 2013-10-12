@@ -3,7 +3,7 @@ try {
     define ("MODULO", "DOCENTE");
   require('../_start.php');
   if(!isDocenteSession())
-    header("Location: login.php"); 
+    header("Location:../../ login.php"); 
   global $PAISBOX;
     /** HEADER */
   $smarty->assign('title','Modificacion de Observaciones');
@@ -52,7 +52,7 @@ try {
     $sql="select  DISTINCT(p.id), t.id as idtribunal, u.nombre as nombre, CONCAT (u.apellido_paterno, u.apellido_paterno) as apellidos ,p.nombre as nombreproyecto
 from  usuario u, estudiante es, proyecto_estudiante pe, proyecto p,  tribunal t , notificacion_tribunal  nt
 where    u.id= es.usuario_id  and es.id=  pe.estudiante_id  and  pe.proyecto_id=p.id  and  p.id =t.proyecto_id
-and t.id=nt.tribunal_id  and t.docente_id=$docente_ids";
+and t.visto='NV' and t.id=nt.tribunal_id  and t.docente_id=$docente_ids";
     $resultado   =  mysql_query($sql);
     $notitribunal_id= array();
  
@@ -64,14 +64,7 @@ and t.id=nt.tribunal_id  and t.docente_id=$docente_ids";
  //var_dump($notitribunal_id);
   $smarty->assign('notitribunal_id'     ,$notitribunal_id);
   
-  
-  
-   if ( isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' )
-  {  
-     echo "Hola elki";
-  }
-  
-  
+    
   $columnacentro = 'docente/tribunal/notificacion/notitribunal.tpl';
   $smarty->assign('columnacentro',$columnacentro);
 

@@ -3,11 +3,11 @@ try {
  define ("MODULO", "DOCENTE-TRIBUNAL");
   require('_start.php');
 if(!isDocenteSession())
-    header("Location: login.php");  
+    header("Location: ../login.php");  
 
   /** HEADER */
-  $smarty->assign('title','Proyecto Final');
-  $smarty->assign('description','Proyecto Final');
+  $smarty->assign('title','Proyecto');
+  $smarty->assign('description','');
   $smarty->assign('keywords','Proyecto Final');
 
   //CSS
@@ -34,19 +34,53 @@ if(!isDocenteSession())
   leerClase('Consejo');
   leerClase('Tribunal');
   leerClase('Menu');
-
+  leerClase("Notificacion");
       /**
    * Menu superior
    */
+  
+  
+  $notificacion = new Notificacion();
   $menuList[]     = array('url'=>URL.Tribunal::URL,'name'=>'Tribunal');
   $smarty->assign("menuList", $menuList);
 
   $menu = new Menu('Lista de Estudiantes');
   $link = Tribunal::URL."estudiante.lista.php";
   $menu->agregarItem('Gesti&oacute;n de Estudiantes','Revision y Vistos Buenos a los Proyectos','basicset/user4.png',$link);
- $menus[] = $menu;
- $smarty->assign("menus", $menus);
+  $link = Tribunal::URL."estudiante.lista.php";
+  $menu->agregarItem('Dar Visto Buenos','Habilitar los Proyectos Para la Asignacion de Defensa','basicset/user4.png',$link);
+
+  $menus[] = $menu;
+ 
+ 
   
+  $menu = new Menu('Defensas');
+  $link = Tribunal::URL."estudiante.lista.php";
+  $menu->agregarItem('Lista de Defensa  Privada','Revision y modificacion de Proyectos','basicset/user4.png',$link);
+  $link = Tribunal::URL."estudiante.lista.php";
+  $menu->agregarItem('Lista de Defensa Publica ','Evaluaci&oacute;n de Proyecto','basicset/graph.png',$link);
+
+  
+  $menus[] = $menu;
+  
+  $notificaciontotal= $notificacion->getNotificacionTribunal(getSessionUser()->id);
+    $menu = new Menu('Notificaciones');
+    $link = Tribunal::URL."notificacion/notitribunal.php";
+    $menu->agregarItem('Notificaciones','Geti&oacute;n de las Notificaciones','basicset/megaphone.png',$link,  sizeof($notificaciontotal));
+    $menus[] = $menu;
+  
+  
+  
+  
+  
+ $smarty->assign("menus", $menus);
+ 
+ 
+ 
+ 
+ 
+ 
+ 
   $docente_aux = getSessionDocente();
    $smarty->assign("docente", $docente);
   $smarty->assign("usuario", $usuario);

@@ -3,8 +3,7 @@ try {
     define ("MODULO", "TRIBUNAL");
   
   require('_start.php');
-  global $PAISBOX;
-
+ 
   /** HEADER */
   $smarty->assign('title','Proyecto Final');
   $smarty->assign('description','Proyecto Final');
@@ -18,7 +17,7 @@ try {
   $smarty->assign('CSS',$CSS);
 
   //JS
-  $JS[]  = URL_JS . "jquery.1.9.1.js";
+ $JS[]  = URL_JS . "jquery.min.js";
 
   //Datepicker UI
   $JS[]  = URL_JS . "ui/jquery-ui-1.10.2.custom.min.js";

@@ -3,9 +3,7 @@ try {
     define ("MODULO", "TRIBUNAL");
   
   require('_start.php');
-  global $PAISBOX;
-
-  /** HEADER */
+   /** HEADER */
   $smarty->assign('title','Proyecto Final');
   $smarty->assign('description','Proyecto Final');
   $smarty->assign('keywords','Proyecto Final');
@@ -230,7 +228,7 @@ catch(Exception $e)
 {
   $smarty->assign("ERROR", handleError($e));
 }
-$contenido = 'consejo/editartribunal.tpl';
+$contenido = 'tribunal/editartribunal.tpl';
   $smarty->assign('contenido',$contenido);
 
 

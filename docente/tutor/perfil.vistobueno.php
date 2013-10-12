@@ -3,7 +3,7 @@ try {
    define ("MODULO", "DOCENTE-TUTOR");
   require('_start.php');
   if(!isDocenteSession())
-  header("Location: login.php");
+  header("Location: ../login.php");
   leerClase('Visto_bueno');
   leerClase('Docente');
  
@@ -68,7 +68,7 @@ try {
     $vistobueno->objBuidFromPost();
    // $vistobueno->proyecto_id       =       $_POST['pro'];
     $vistobueno->visto_bueno_tipo  =        Visto_bueno::E2_TUTOR;
-    $vistobueno->visto_bueno_id    =        4;
+    $vistobueno->visto_bueno_id    =        $docente->id;     
     $vistobueno->estado            =        Objectbase::STATUS_AC;
    
     $vistobueno->save();
@@ -81,17 +81,17 @@ try {
     $totalVistosbuenos=0;
     ////////////////////////////////////////////////// probar con mas de tutores        //////////
     
-    $total= 1+ sizeof($proyecto->getTutores());
+   // $total= 1+ sizeof($proyecto->getTutores());
     
-    $totalVistosbuenos=sizeof($proyecto->getVbDocente())+($proyecto->getVbTutor());
+  //  $totalVistosbuenos=sizeof($proyecto->getVbDocente())+($proyecto->getVbTutor());
     
   //  echo $proyecto->get
     
     
     if( $total==$totalVistosbuenos)
     {
-      $proyecto->estado_proyecto= Proyecto::EST2_BUE;
-      $proyecto->save();
+     // $proyecto->estado_proyecto= Proyecto::EST2_BUE;
+    //  $proyecto->save();
     }
     
     

@@ -3,8 +3,7 @@ try {
     define ("MODULO", "TRIBUNAL");
   
   require('_start.php');
-  global $PAISBOX;
-
+ 
   /** HEADER */
   $smarty->assign('title','Proyecto Final');
   $smarty->assign('description','Proyecto Final');

@@ -277,19 +277,18 @@
  </form>
               
  </div>
-<script  type="text/javascript">
+<script>
 jQuery('#hora_ini').change(function () {
-var numero =document.getElementById("hora_ini").value;
-// valor de la id de Provincias
+var numero =document.getElementById("hora_ini").value; // valor de la id de Provincias
+var poblacio = jQuery(this).attr("hora_ini"); // este es el atributo que nos ayuda a encontrar la población cuando modificamos  el contenido
 var to=document.getElementById("Buscando");
 to.innerHTML="buscando....";
-alert("Hola mundo");
 jQuery.ajax({
 type: "POST", 
-url: "buscadorhora.php",
-data: 'iddia='+numero,// enviamos la id de la Porvincia + la id de la población
+url: "buscarhora.php",
+data: 'idnumero='+numero, // enviamos la id de la Porvincia + la id de la población
 success: function(a) {
-jQuery('#turno_id').html(a);// el resultado de la busqueda la mostramos en  #poblacionList
+jQuery('#hora_fin').html(a);// el resultado de la busqueda la mostramos en  #poblacionList
 var to=document.getElementById("Buscando");
 to.innerHTML="";
 }
@@ -318,19 +317,6 @@ to.innerHTML="";
             jQuery('select').attr('data-prompt-position',wo);
             jQuery('select').data('promptPosition',wo);
           });
-          jQuery(function(){
-            jQuery("select#materia_id").change(function(){
-              if (jQuery('#semestre_id').val() == '')
-                return jQuery('#semestre_id').validationEngine('showPrompt', 'Seleccione un semestre', 'error', true);;
-                
-              jQuery.getJSON("ajax.estudiante.registro.php",{'materia': jQuery(this).val(),'semestre': jQuery('#semestre_id').val(),  ajax: 'true'}, function(j){
-                var options = '';
-                for (var i = 0; i < j.length; i++) {
-                  options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
-                }
-                jQuery("select#dicta_id").html(options);
-              })
-            })
-          });
+     
         {/literal} 
         </script>

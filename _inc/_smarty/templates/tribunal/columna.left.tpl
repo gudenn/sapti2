@@ -2,7 +2,7 @@
           <div class="subnav">
             <h2>MENU CONSEJO</h2>
             <ul>
-              <li><a href="{$URL}tribunal/">Inicio</a></li>
+              <li><a href="{$URL}consejo/">Inicio</a></li>
                 <li><a href="registro.php">Asignaci&oacute;n de Tribunales</a></li>
               <ul>
                   <li><a href="{$URL}consejo/listatribunaleditar.php">Editar</a></li>

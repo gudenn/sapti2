@@ -1,7 +1,7 @@
 <?php
 class Consejo extends Objectbase
 {
-    const URL                  = "tribunal/";
+    const URL                  = "consejo/";
  /**
   * Codigo del usuario
   * @var INT

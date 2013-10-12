@@ -3,7 +3,7 @@ try {
  define ("MODULO", "DOCENTE-TUTOR");
   require('_start.php');
  if(!isDocenteSession())
-  header("Location: login.php");  
+  header("Location: ../login.php");  
 
   /** HEADER */
   $smarty->assign('title','Proyecto Final');
@@ -46,7 +46,7 @@ $notificaciones= new Notificacion();
   leerClase('Tutor');
   $menu = new Menu('Lista de Estudiantes  de Perfil');
   
-  $link = Tutor::URL."estudiante.lista.php";
+  $link = Tutor::URL."perfil.estudiante.lista.php";
   $menu->agregarItem('Seguimiento','Seguimiento a los Estudiantes ','basicset/user4.png',$link);
    $link = Tutor::URL."perfil.estudiante.lista.php";
   $menu->agregarItem('Dar Visto Bueno Perfil ','Reportes correspondientes a los Docentes','basicset/graph.png',$link);
@@ -62,10 +62,10 @@ $notificaciones= new Notificacion();
   
   $menus[] = $menu;
   
-   $notificaciones->getNotificacionTutor(getSessionUser()->id);
+  $notificacion= $notificaciones->getNotificacionTutor(getSessionUser()->id);
     $menu = new Menu('Notificaciones');
     $link = Tutor::URL."notificacion/notitutor.php";
-    $menu->agregarItem('Notificaciones','Geti&oacute;n de las Notificaciones','basicset/megaphone.png',$link,  sizeof($notificaciones));
+    $menu->agregarItem('Notificaciones','Geti&oacute;n de las Notificaciones','basicset/megaphone.png',$link,  sizeof($notificacion));
     $menus[] = $menu;
   
   

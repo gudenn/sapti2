@@ -3,7 +3,7 @@ try {
    define ("MODULO", "DOCENTE-TUTOR");
   require('_start.php');
   if(!isDocenteSession())
-  header("Location: login.php");
+  header("Location: ../login.php");
   leerClase('Visto_bueno');
   leerClase('Docente');
  
@@ -93,6 +93,6 @@ catch(Exception $e)
   $_SESSION['register'] = $token;
   $smarty->assign('token',$token);
   
-$TEMPLATE_TOSHOW = 'docente_tutor/full-width.visto.registro.tpl';
+$TEMPLATE_TOSHOW = 'docente/tutor/full-width.visto.registro.tpl';
 $smarty->display($TEMPLATE_TOSHOW);
 ?>

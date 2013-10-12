@@ -3,7 +3,7 @@ try {
     define ("MODULO", "DOCENTE");
   require('../_start.php');
   if(!isDocenteSession())
-    header("Location: login.php"); 
+    header("Location:../../ login.php"); 
   global $PAISBOX;
     /** HEADER */
   $smarty->assign('title','Modificacion de Observaciones');
@@ -54,8 +54,8 @@ if ( isset($_GET['tribunal_id']))
               ));
       $idtribuanl=$_GET['tribunal_id'];
         
-   $query = "UPDATE notificacion_tribunal nt SET nt.estado_notificacion='V'  WHERE nt.tribunal_id=$idtribuanl";
-  mysql_query($query);
+  // $query = "UPDATE notificacion_tribunal nt SET nt.estado_notificacion='V'  WHERE nt.tribunal_id=$idtribuanl";
+  //mysql_query($query);
       
       
       
@@ -150,7 +150,8 @@ if ( isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' )
        
       
      }
-    
+     $ir = "Location: notitribunal.php";
+    header($ir);
   
   }
   
