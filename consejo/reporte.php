@@ -1,5 +1,6 @@
 <?php
 try {
+  define ("MODULO", "CONSEJO");
   require('_start.php');
    
   //MODULO -> REGISTRO DE MERCADERIA

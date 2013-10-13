@@ -1,6 +1,6 @@
 <?php
 try {
-    define ("MODULO", "TRIBUNAL");
+  define ("MODULO", "CONSEJO");
     require('_start.php');
    /** HEADER */
   $smarty->assign('title','Proyecto Final');
