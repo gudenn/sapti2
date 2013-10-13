@@ -61,6 +61,7 @@ try {
   leerClase('Modalidad');
   leerClase('Estudiante');
   leerClase('Institucion');
+  leerClase('Vigencia');
 
   leerClase('Objetivo_especifico');
 
@@ -275,12 +276,22 @@ try {
       $modalidad    = new Modalidad($proyecto->modalidad_id);
       $smarty->assign('tipo_moda',($modalidad->datos_adicionales)?'':'tipo_moda');
     }
+    
     $proyecto->validar();
     $proyecto->tipo_proyecto =  Proyecto::TIPO_PERFIL;
     $proyecto->estado_proyecto= Proyecto::EST5_P;
     $proyecto->save();
     $proyecto->saveAllSonObjects(TRUE);
     $estudiante->marcarComoProyectoActual($proyecto->id);
+    
+    //grabamos la vigencia del proyecto
+    $vigencia=new Vigencia();
+    $vigencia->estado=  Objectbase::STATUS_AC;
+    $vigencia->estado_vigencia=  Vigencia::ESTADO_NORMAL;
+    $vigencia->fecha_inicio=date('d/m/Y');
+    $vigencia->fecha_fin= date("d/m/Y",strtotime("$fechafin +2 year") );
+    $vigencia->proyecto_id=$proyecto->id;
+    $vigencia->save();
     //guardamos datos extra
     if ( isset($_POST['telefono']) )
     {

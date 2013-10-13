@@ -10,7 +10,25 @@ try {
   $smarty->assign('keywords','Reportes');
 /**
    * Menu superior
+ * 
+ * 
    */
+   //Datepicker & Tooltips $ Dialogs UI
+  $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
+  $JS[]   = URL_JS . "jquery-ui-1.10.3.custom.min.js";
+  $JS[]   = URL_JS . "ui/i18n/jquery.ui.datepicker-es.js";
+  
+    //BOX
+  $CSS[] = URL_JS . "box/box.css";
+  $JS[]  = URL_JS . "box/jquery.box.js";
+  
+  
+  $smarty->assign('CSS',$CSS);
+  $smarty->assign('JS',$JS);
+
+
+  $smarty->assign("ERROR", '');
+
   
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'pendientes/','name'=>'Pendientes');
@@ -36,7 +54,8 @@ try {
  
  if (isset($_GET['proyecto_id']) )
   {
-      
+       $EXITO = false;
+        mysql_query("BEGIN");
    $proyecto=new Proyecto($_GET['proyecto_id']);
    
    $proyecto_aux=$proyecto;
@@ -44,10 +63,10 @@ try {
     $estudiante=$proyecto->getEstudiante();
    $estudiante_id= $estudiante->id;
    $tutores=$proyecto->getTutores();
-   echo $tutores->usuario_id;
+    $tutores->usuario_id;
     $area=$proyecto->getArea();
      if($proyecto_aux->estado_proyecto!='CO'){
-       echo $proyecto_aux->nombre;
+    
      $actualproyecto=new Proyecto();
      $actualproyecto->carrera_id=$proyecto_aux->carrera_id;
      $actualproyecto->estado=  Objectbase::STATUS_AC;
@@ -89,16 +108,18 @@ try {
     $parea->estado=  Objectbase::STATUS_AC;
     $parea->save();
    
-      
+              
+    $EXITO = TRUE;
+    mysql_query("COMMIT");
       
   }
      $proyecto->estado_proyecto=  Proyecto::EST6_C;
+     $proyecto->es_actual=0;
      $proyecto->tipo_proyecto=  Proyecto::TIPO_PERFIL;
      $proyecto->save();
     
-      $proyecto_id=0;
+     
  
-    $smarty->assign('proyecto_id'  , $proyecto_id);
   }
   //echo //$proyecto_aux->estado_proyecto;
   /*if($proyecto_aux->estado_proyecto!='CO'){
@@ -166,6 +187,19 @@ WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id
  $obj_mysql  = $arraytribunal;
  // $objs_pg    = new Pagination($obj_mysql, 'g_cambios','',false,10);
  $smarty->assign('listadocentes'  , $arraytribunal);
+ 
+ //No hay ERROR
+  $ERROR = '';
+  leerClase('Html');
+  $html = new Html();
+  if (isset($EXITO)) {
+    $html = new Html();
+    if ($EXITO)
+      $mensaje = array('mensaje' => 'Se grabo correctamente el Docente', 'titulo' => 'Registro de Docente', 'icono' => 'tick_48.png');
+    else
+      $mensaje = array('mensaje' => 'Hubo un problema, No se grabo correctamente el docente', 'titulo' => 'Registro de Docente', 'icono' => 'warning_48.png');
+    $ERROR = $html->getMessageBox($mensaje);
+  }
  
  
 }
