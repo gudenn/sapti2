@@ -68,11 +68,18 @@ try {
     $usuario_aux->save();
   }
   
-   //Habilitamos para proffecionales y para no profecionales
+   //Deshabilitamos a Usuario
   if ( isset($_GET['id_usuario']) && is_numeric($_GET['id_usuario']) )
   {
     $usuario_aux = new Usuario($_GET['id_usuario']);
     $usuario_aux->estado=  Objectbase::STATUS_IN;
+    $usuario_aux->save();
+  }
+   //Habilitamos a un Usuario
+  if ( isset($_GET['id_activar']) && is_numeric($_GET['id_activar']) )
+  {
+    $usuario_aux = new Usuario($_GET['id_activar']);
+    $usuario_aux->estado=  Objectbase::STATUS_AC;
     $usuario_aux->save();
   }
   
