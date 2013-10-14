@@ -15,18 +15,19 @@ try {
   $smarty->assign('keywords','Proyecto Final');
 
   $CSS[]  = URL_CSS . "academic/3_column.css";
-  $CSS[]  = URL_CSS . "editablegrid.css";
   $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
+    //BOX
+  $CSS[]  = URL_JS . "box/box.css";
   $smarty->assign('CSS',$CSS);
 
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
-  $JS[]  = URL_JS . "tablaeditable/editablegrid-2.0.1.js";
-  $JS[]  = URL_JS . "tablaeditable/tabla.configuracion.dicta.js";
 
   //Validation
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
+    //BOX
+  $JS[]  = URL_JS ."box/jquery.box.js";
   $smarty->assign('JS',$JS);
 
   /**
@@ -41,9 +42,16 @@ try {
   $semestre->getActivo();
 
   ////////////CARGANDO COMBOBOX///////////
-  $sqlmateria="SELECT *
-    FROM materia
-    WHERE materia.estado='AC'
+  $sqlmateria="SELECT DISTINCT(materia.id), materia.nombre
+FROM materia, codigo_grupo
+WHERE NOT EXISTS (
+SELECT *
+FROM dicta di, materia ma, codigo_grupo cg
+WHERE di.materia_id=ma.id
+AND di.codigo_grupo_id=cg.id
+AND materia.id=ma.id
+AND codigo_grupo.id=cg.id
+)
     ";
  $resultadomateria = mysql_query($sqlmateria);
     $materia_values[] = '';
@@ -67,22 +75,7 @@ AND dc.estado='AC'
     $docentes_output[] = $filadoc['nombre'];
  }
  
-   $sqltabla="SELECT di.id as id, se.codigo as semestre, CONCAT(us.apellido_paterno, us.apellido_materno, us.nombre) as nombre, ma.nombre as materia, di.codigo_grupo as grupo
-FROM dicta di, docente dc, usuario us, materia ma, semestre se
-WHERE di.docente_id=dc.id
-AND dc.usuario_id=us.id
-AND di.materia_id=ma.id
-AND di.semestre_id=se.id
-AND se.activo=1
-ORDER BY ma.nombre, di.codigo_grupo
-    ";
- $resultadotabla = mysql_query($sqltabla);
- while ($filatabla = mysql_fetch_array($resultadotabla, MYSQL_ASSOC)){
-    $tabladicta[]= $filatabla;
- }
- 
     $smarty->assign('semestre'  , $semestre);
-    $smarty->assign('tabladicta'  , $tabladicta);
     $smarty->assign('docentes_values'  , $docentes_values);
     $smarty->assign('docentes_output'  , $docentes_output);
     $smarty->assign('docentes_selected'  , '');
@@ -90,28 +83,64 @@ ORDER BY ma.nombre, di.codigo_grupo
     $smarty->assign('materia_output'  , $materia_output);
     $smarty->assign('materia_selected'  , '');
     
-  $grupo_values[] = '';
-  $grupo_output[] = '- Seleccione -';
+    if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
+  {
+    $EXITO = false;
+    mysql_query("BEGIN");
+     $dicta=new Dicta();
+     $dicta->objBuidFromPost();
+     $dicta->estado = Objectbase::STATUS_AC;
+      $dicta->docente_id       = $_POST['docente_id'];
+      $dicta->materia_id       = $_POST['materia_id'];
+      $dicta->semestre_id      = $semestre->id;
+      $dicta->codigo_grupo_id  = $_POST['grupo_id'];
+     $dicta->save();
+    $EXITO = TRUE;
+    mysql_query("COMMIT");
+  }
+    //No hay ERROR
+  $ERROR = ''; 
+  leerClase('Html');
+  $html  = new Html();
+  if (isset($EXITO))
+  {
+    $html = new Html();
+    if ($EXITO)
+      $mensaje = array('mensaje'=>'Se grabo correctamente el Grupo','titulo'=>'Grupo' ,'icono'=> 'tick_48.png');
+    else
+      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Grupo','titulo'=>'Registro de Grupo' ,'icono'=> 'warning_48.png');
+   $ERROR = $html->getMessageBox ($mensaje);
+  }
+if (isset($_GET['eliminar']) && isset($_GET['dicta_id']) && is_numeric($_GET['dicta_id']) )
+  {
+    $dictaborrar = new Dicta($_GET['dicta_id']);
+    $dictaborrar->delete();
+  }
+  
+ $sql="SELECT di.id as id, se.codigo as semestre, CONCAT(us.apellido_paterno, us.apellido_materno, us.nombre) as nombre, ma.nombre as materia, cg.nombre as grupo
+FROM dicta di, docente dc, usuario us, materia ma, semestre se, codigo_grupo cg
+WHERE di.docente_id=dc.id
+AND dc.usuario_id=us.id
+AND di.materia_id=ma.id
+AND di.semestre_id=se.id
+AND di.codigo_grupo_id=cg.id
+AND se.activo=1
+ORDER BY ma.nombre, cg.nombre";
+ $resultado = mysql_query($sql);
+  while ($fila = mysql_fetch_array($resultado)) 
+                {
+    $tabla[]=$fila;
+ }
+
+  $smarty->assign("tabla", $tabla);
  
-       $grupo_values[] = 'Grupo A';
-       $grupo_values[] = 'Grupo B';
-       $grupo_values[] = 'Grupo C';
-       $grupo_values[] = 'Grupo D';
-       $grupo_output[] = 'Grupo A';
-       $grupo_output[] = 'Grupo B';
-       $grupo_output[] = 'Grupo C';
-       $grupo_output[] = 'Grupo D';
- 
-  $smarty->assign("grupo_values", $grupo_values);
-  $smarty->assign("grupo_output", $grupo_output);
-  $smarty->assign("grupo_selected", "");
-          
   //No hay ERROR
-  $smarty->assign("ERROR",'');
+  $smarty->assign("ERROR",$ERROR);
   
 } 
 catch(Exception $e) 
 {
+  mysql_query("ROLLBACK");
   $smarty->assign("ERROR", handleError($e));
 }
 

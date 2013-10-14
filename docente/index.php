@@ -56,10 +56,11 @@ ORDER BY ma.nombre";
         while ($row = mysql_fetch_array($mate, MYSQL_ASSOC)) {
        $materiassemestre[] = $row;
  }
-  $docmaterias = "SELECT di.id as iddicta, ma.id as idmat, ma.nombre as materia, di.codigo_grupo as grupo
-FROM dicta di, semestre se, materia ma
+  $docmaterias = "SELECT di.id as iddicta, ma.id as idmat, ma.nombre as materia, cg.nombre as grupo
+FROM dicta di, semestre se, materia ma, codigo_grupo cg
 WHERE di.materia_id=ma.id
 AND di.semestre_id=se.id
+AND di.codigo_grupo_id=cg.id
 AND se.activo=1
 AND di.docente_id=".$docente->id."
 ORDER BY ma.id";
@@ -76,7 +77,6 @@ ORDER BY ma.id";
     if(mysql_num_rows($resultmate)>0)
       {
   leerClase('Menu');
-  $varsession=1;
   foreach ($materiassemestre as $value) 
    {
         $menu = new Menu($value['nombre']);
@@ -93,11 +93,7 @@ ORDER BY ma.id";
          };
          $menus[] = $menu;
   };
-  
-  
-    
-  
-    }  else {
+      }  else {
   $columnacentro = 'docente/mensajedisculpa.tpl';
   $smarty->assign('columnacentro',$columnacentro);
   }

@@ -55,7 +55,9 @@
               dateFormat:'dd/mm/yy',
               changeMonth: true,
               changeYear: true,
-              yearRange: "1920:2013"
+        {/literal} 
+              yearRange: "2010:{date('Y')+3}"
+        {literal}
             });
           });
           jQuery(document).ready(function(){

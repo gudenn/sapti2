@@ -9,9 +9,9 @@
                <span>{$usuario->nombre} {$usuario->apellido_paterno} {$usuario->apellido_materno}</span>
             </p>
             <br/>
-            <object data="/sapti/ARCHIVO/proyecto.pdf" type="application/pdf" width="900" height="300">
+            <object data="/sapti2/ARCHIVO/file.pdf" type="application/pdf" width="900" height="300">
             <p> Al parecer usted no tiene un plugin PDF para este navegador.
-            No hay problema ... puedes <a href="/sapti/ARCHIVO/proyecto.pdf"> clic aquí para descargar el archivo PDF. </ a> </ p>
+            No hay problema ... puedes <a href="/sapti2/ARCHIVO/file.pdf"> clic aquí para descargar el archivo PDF. </ a> </ p>
             </object>
             <div id="div_1">
             <label  accesskey="">OBSERVACION(ES):

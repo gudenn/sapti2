@@ -7,29 +7,35 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         </head>
         <div id="wrap">
-        <div id="message"></div>
-        	<div id="pagecontrol">
-		<label for="pagecontrol">Filas por Pagina: </label>
-		<select id="pagesize" name="pagesize">
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="15">15</option>
-                    <option value="20">20</option>
-                    <option value="25">25</option>
-                    <option value="30">30</option>
-                    <option value="40">40</option>
-                    <option value="50">50</option>
-                </select>
-
-                </div>
-        	<label for="filter">Busqueda Rapida :</label>
-		<input type="text" id="filter"/>
-
-		<div id="tablecontent"></div>
-
-        	<div id="paginator"></div>
-        <form name="nueva_grupo" id="nueva_grupo" action="" onsubmit="enviarDatosGrupo(); return false">
-		<h1>Registrar Materias</h1>
+  <div style="height: 250px; width: 920px; font-size: 12px; overflow: auto;">
+  <table class="tbl_lista">
+  <thead>
+    <tr>
+      <th>Id      </th>
+      <th>Semestre  </th>
+      <th>Docente </th>
+      <th>Materia </th>
+      <th>Grupo </th>
+      <th>Opciones </th>
+       </tr>
+  </thead>
+  <tbody>
+  {section name=ic loop=$tabla}
+     <tr  class="selectable">
+     <td>{$tabla[ic]['id']} </td>
+     <td>{$tabla[ic]['semestre']}</td>
+     <td>{$tabla[ic]['nombre']}</td>
+     <td>{$tabla[ic]['materia']}</td>
+     <td>{$tabla[ic]['grupo']}</td>
+     <td>  <a href="configuracion.dicta.php?eliminar=1&dicta_id={$tabla[ic]['id']}" onclick="return confirm('Eliminar este Grupo?');"  >{icono('borrar.png','ELIMINAR')}</a>
+     </td>
+    </tr>
+  {/section}
+    </tbody> 
+</table>
+  </div>
+        <form action="#" method="post" id="registro" name="registro" >
+                <h1>Registrar Materias</h1>
             <table>
                 <tr>
                     <td colspan="2">
@@ -42,7 +48,7 @@
                 </tr>
                 <tr>
                     <td>
-              <input type="text" name="nombre" value="{$semestre->codigo}"  readonly>
+              <input type="text" name="codigo" value="{$semestre->codigo}"  readonly>
               <label for="codigo"><small>Codigo Semestre Actual (*)</small></label>
                     </td>
                     <td>
@@ -57,30 +63,52 @@
                 <td>
               <select name="materia_id" id="materia_id" >
               {html_options values=$materia_values selected=$materia_selected output=$materia_output}
-              </select>
-              <label for="materia_id"><small>Seleccione Materia(*) {getHelpTip('materia')}</small></label>
+              </select>&nbsp;<span id='Buscando'></span>
+              <label for="materia_id"><small>Seleccione Materia(*)</small></label>                   
                 </td>
                 <td>
-              <select name="grupo" id="grupo" >
-              {html_options values=$grupo_values selected=$grupo_selected output=$grupo_output}
-              </select>
-              <label for="grupo"><small>Codigo de Grupo(*) {getHelpTip('grupo')}</small></label>
+              <select name="grupo_id" id="grupo_id" >
+              {html_options values=$grupoid selected=$grupoid output=$gruponombre}
+              </select>                    
+              <label for="grupo_id"><small>Codigo de Grupo(*)</small></label>
                 </td>
                 <td>
+
+              <input type="hidden" name="dicta_id" value="{$dicta->id}">
+              <input type="hidden" name="tarea" value="registrar">
+              <input type="hidden" name="token" value="{$token}">
+              
               <input name="submit" type="submit" value="Grabar">
               &nbsp;
-              <input name="reset" type="reset" tabindex="3" value="Resetear">
+              <input name="reset" type="reset" tabindex="5" value="Resetear">
                 </td>
                 </tr>
             </table>
-              <span id=”comprobarusuario”></span><br/>
         </form>
-        </div>
-        <script type="text/javascript">
-                editableGrid.onloadXML("configuracion.dicta2.php");
-        </script>
-    </div>
-               {$ERROR}
+{literal}
+<script type="text/javascript">
+jQuery('#materia_id').change(function () {
+var numero =document.getElementById("materia_id").value;
+var to=document.getElementById("Buscando");
+to.innerHTML="buscando....";
+
+jQuery.ajax({
+type: "POST", 
+url: "configuracion.dicta3.php",
+data: 'idmateria='+numero,
+success: function(a) {
+jQuery('#grupo_id').html(a);
+var to=document.getElementById("Buscando");
+to.innerHTML="";
+}
+});
+})
+.change();
+</script>
+{/literal} 
+        </div>                  
+    </div> 
+{$ERROR}
     </div>
 </div>
 {include file="footer.tpl"}

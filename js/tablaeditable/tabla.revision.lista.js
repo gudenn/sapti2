@@ -163,8 +163,12 @@ function nombreRevisor(tipo){
             }else{
                 if(tipo=='TU'){
                     nombre='TUTOR';                    
+                }else{
+                if(tipo=='0'){
+                    nombre='AVANCE';                    
                 }
 
+            }
             }
         }
     }

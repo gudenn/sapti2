@@ -30,7 +30,10 @@ class Vigencia extends Objectbase
   * @var Char
   */
     var $estado_vigencia;
-    
+    /**ESTADOS DE LOS PROYECTOS  */
+  const ESTADO_NORMAL  = "NO";
+  const ESTADO_PROROGA = "PR";
+  const ESTADO_POSTERGADO = "PO";
     
     function iniciarFiltro(&$filtro) 
   {

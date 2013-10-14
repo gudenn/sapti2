@@ -29,7 +29,7 @@ class Dicta extends Objectbase
   * Codigo identificador del Grupo de la Matera
   * @var INT(11)
   */
-  var $codigo_grupo;
+  var $codigo_grupo_id;
 
 
  /**
