@@ -29,7 +29,7 @@
             </p>
             <p>
               <input type="text" name="email" id="email" value="{$usuario->email}" size="22" data-validation-engine="validate[],custom[email]"  >
-              <label for="email"><small> E-Mail {getHelpTip('E-Mail')} </small></label>
+              <label for="email"><small> E-Mail {getHelpTip('email')} </small></label>
             </p>
             {if (!$usuario->id)}
             <p>

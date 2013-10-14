@@ -30,18 +30,9 @@ try {
   $smarty->assign("menuList", $menuList);
 
   
-  //CSS
-  $CSS[]  = URL_CSS . "academic/tables.css";
-  //$CSS[]  = URL_CSS . "pg.css";
-
-  //JS
-  $JS[]  = URL_JS . "jquery.min.js";
-  //BOX
-  $JS[]  = URL_JS ."box/jquery.box.js";
-  $CSS[]  = URL_JS . "box/box.css";
-
-  $smarty->assign('JS',$JS);
-  $smarty->assign('CSS',$CSS);
+  $smarty->assign('header_ui','1');
+  $smarty->assign('CSS','');
+  $smarty->assign('JS','');
 
   $smarty->assign('cabecera_file' ,'admin/tutor/cabecera.listaasignacion.tpl');
   $smarty->assign('mascara'       ,'admin/listas.mascara.tpl');

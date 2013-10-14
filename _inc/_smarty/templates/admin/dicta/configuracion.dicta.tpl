@@ -1,10 +1,10 @@
 {include file="docente/header-sjq.tpl"}
 <div class="wrapper row3">
-  <div class="rnd"> 
+  <div class="rnd">
         <div id="container">
         <h1 class="title">Materias Dictadas en el Semestre</h1>
         <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">       	
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         </head>
         <div id="wrap">
   <div style="height: 250px; width: 920px; font-size: 12px; overflow: auto;">
@@ -33,7 +33,6 @@
   {/section}
     </tbody> 
 </table>
-
   </div>
         <form action="#" method="post" id="registro" name="registro" >
                 <h1>Registrar Materias</h1>
@@ -56,7 +55,7 @@
               <select name="docente_id" id="docente_id" >
               {html_options values=$docentes_values selected=$docentes_selected output=$docentes_output}
               </select>
-              <label for="docente_id"><small>Seleccione Docente(*)</small></label>     
+              <label for="docente_id"><small>Seleccione Docente(*) {getHelpTip('docente')}</small></label>
                     </td>
                     <td></td>
                 </tr>
@@ -106,12 +105,10 @@ to.innerHTML="";
 })
 .change();
 </script>
-{/literal}
- 
-        </div>
-                   
+{/literal} 
+        </div>                  
     </div> 
-               {$ERROR}
+{$ERROR}
     </div>
 </div>
 {include file="footer.tpl"}

@@ -3,7 +3,7 @@
 class Tribunal extends Objectbase 
 {
   
-   const URL                  = "docentetri/";
+   const URL                  = "docente/tribunal/";
   /**
    *  ACCION DE LOS TRIBUNALES   ACEPTAR
    */

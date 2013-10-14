@@ -39,6 +39,12 @@ class Proyecto extends Objectbase {
    */
   const EST2_BUE = "VB";
   
+  /**
+   * Estado Proyecto 
+   * Estado de proyecto con tribunal (TA)
+   */
+  const EST2_TA = "TA";
+  
    
 
   /**
@@ -268,6 +274,8 @@ class Proyecto extends Objectbase {
    * Creamos un proyecto inicial de tal manera que los estudiantes nunca estnen sin proyectos
    */
   function crearProyectoInicial($estudiante_id , $dicta_id,$tipo, $grabar = true) {
+      
+       if($tipo!=Proyecto::TIPO_PROYECTO){
     $this->estado_proyecto = Proyecto::EST1_INI;
     $this->es_actual       = 1;
     $this->tipo_proyecto   = $tipo;
@@ -279,6 +287,24 @@ class Proyecto extends Objectbase {
     
     if ($grabar)
       $this->saveAllSonObjects(TRUE);
+    
+    
+   }else {
+        
+        $this->estado_proyecto = Proyecto::EST1_INI;
+    $this->es_actual       = 1;
+    $this->tipo_proyecto   = $tipo;
+    $this->estado          = Objectbase::STATUS_AC;
+    $this->estado_proyecto=  Proyecto::EST2_BUE;
+    if ($grabar)
+      $this->save();
+    $this->asignarEstudiante($estudiante_id);
+    $this->asignarDicta($dicta_id);
+    
+    if ($grabar)
+      $this->saveAllSonObjects(TRUE);
+            
+        }
   }
 
   function getArea() {
@@ -493,7 +519,8 @@ where pa.area_id=a.id  and pa.proyecto_id='$this->id' and pa.estado='AC'  and a.
    * retorna los Vistos buenos Docentes
    */
   
-  function getVbDocente() {
+  function getVbDocente()
+  {
     //@TODO revisar
     //  leerClase('Proyecto_area');
     leerClase('Visto_bueno');
@@ -510,8 +537,7 @@ where pa.area_id=a.id  and pa.proyecto_id='$this->id' and pa.estado='AC'  and a.
     }
     return $vistos;
   }
-  
-  
+
   /**
    * 
    * @return
@@ -522,8 +548,7 @@ where pa.area_id=a.id  and pa.proyecto_id='$this->id' and pa.estado='AC'  and a.
     //  leerClase('Proyecto_area');
     leerClase('Visto_bueno');
      $vistos= array();
-     $d= Visto_bueno::E2_TUTOR;
-    
+     $d= Visto_bueno::E2_TUTOR; 
     $activo = Objectbase::STATUS_AC;
     $sql = "select v.* from " . $this->getTableName('Visto_bueno') . " as v    where v.proyecto_id = '$this->id' and v.visto_bueno_tipo='$d' and v.estado = '$activo'";
     $resultado = mysql_query($sql);
@@ -569,15 +594,16 @@ where pa.area_id=a.id  and pa.proyecto_id='$this->id' and pa.estado='AC'  and a.
   {
     $contador= 0;
     $activo = Objectbase::STATUS_AC;
-     $sql = "select t.* from " . $this->getTableName('Tribunal') . " as t   where t.proyecto_id ='$this->id' and t.accion='AC' and  t.estado = '$activo'";
-   $resultado = mysql_query($sql);
+    $sql = "select t.* from " . $this->getTableName('Tribunal') . " as t   where t.proyecto_id ='$this->id' and t.accion='AC' and  t.estado = '$activo'";
+    $resultado = mysql_query($sql);
+  //var_dump($resultado);
      if ($resultado)
     while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
       { 
         $contador=$contador+1;
       }
-       return   $contador;
-   
+         
+       return   $contador; 
   }
   
     /**
@@ -601,7 +627,17 @@ where pa.area_id=a.id  and pa.proyecto_id='$this->id' and pa.estado='AC'  and a.
       }
        return  $idtribunales;
   }
+  /**
+   * 
+   */
   
+  function  getPerfilTutorVB()
+  {
+    
+    
+  }
+
+
   /**
    * 
    * @return boolean|\Area
@@ -666,6 +702,43 @@ where pa.area_id=a.id  and pa.proyecto_id='$this->id' and pa.estado='AC'  and a.
          $totalvb= $totalvb+1;
       }
        return  $totalvb;
+  }
+  
+   /**
+   * 
+   * @return boolean|\Carrera
+   * la carrera
+   */
+  function getCarrera1() {
+
+    //@TODO revisar
+    leerClase('Carrera');
+
+    $activo = Objectbase::STATUS_AC;
+    $sql = "select c.* from " . $this->getTableName('Carrera') . " as c ,where c.id= '$this->carrera_id' and c.estado = '$activo' ";
+    $resultados = mysql_query($sql);
+    if (!$resultados)
+      return false;
+    $carreras = mysql_fetch_array($resultados);
+   $carrera = new Carrera($carreras);
+    return $carrera;
+  }
+  function getCarrera() {
+    //@TODO revisar
+    //  leerClase('Proyecto_area');
+    leerClase('Carrera');
+     $carreras= array();
+    
+    
+    $activo = Objectbase::STATUS_AC;
+   $sql = "select c.* from " . $this->getTableName('Carrera') . " as c ,where c.id= '$this->carrera_id' and c.estado = '$activo' ";
+    $resultado = mysql_query($sql);
+    if (!$resultado)
+      return false;
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) {
+      $carreras[] = new Carrera($fila);
+    }
+    return $carreras;
   }
 }
 

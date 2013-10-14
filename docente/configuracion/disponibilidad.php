@@ -1,10 +1,9 @@
 <?php
 try {
+   define ("MODULO", "DOCENTE");
   require('../_start.php');
     if(!isDocenteSession())
     header("Location: login.php"); 
-  global $PAISBOX;
-
   /** HEADER */
   $smarty->assign('title','Proyecto Final');
   $smarty->assign('description','Proyecto Final');
@@ -28,26 +27,14 @@ try {
   leerClase("Docente");
   
   $docente     =  getSessionDocente();
-  $docente_ids =  $docente->id;
+ $idocente=  $docente->id;
 
-  echo $docente_ids;
-  
-  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Docente');
+ echo $idocente;
+   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Docente');
   $menuList[]     = array('url'=>URL.Docente::URL.basename(__FILE__),'name'=>'Tiempo');
   $smarty->assign("menuList", $menuList);  
   
 $horario_doc= new Horario_doc();
- $sqldocente="select  d.id
-from usuario u , docente d
-where u.id= d.usuario_id and u.estado='AC' and d.estado='AC' and u.id=$docente_ids;";
- $resultadodocente= mysql_query($sqldocente);
-$idocente=0;
- while ($filadocente = mysql_fetch_array($resultadodocente)) 
- {
-   $idocente=$filadocente['id'];
-    
- }
-  
 
  if ( isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' )
   {     
@@ -74,7 +61,7 @@ FROM dia, turno
 WHERE NOT EXISTS (
 SELECT *
 FROM turno tu, horario_doc hd, dia d
-WHERE hd.docente_id=$idocente
+WHERE hd.docente_id=4
 AND tu.id=hd.turno_id
 AND d.id=hd.dia_id
 AND dia.nombre=d.nombre

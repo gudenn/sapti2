@@ -38,11 +38,12 @@ try {
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
   $smarty->assign("menuList", $menuList);
 
+  $docente=  getSessionUser();
   $docente = getSessionDocente();
   //var_dump($docente);
   //$docente     = new Docente($docente_aux->docente_id); //esto ya no es necesario
-  $usuario     = $docente->getUsuario();
-  
+ // $usuario     = $docente->getUsuario();
+    $usuario=        getSessionUser();
     $materias = "SELECT DISTINCT ma.id as idmat, ma.nombre as nombre
 FROM dicta di, semestre se, materia ma
 WHERE di.materia_id=ma.id
@@ -74,9 +75,11 @@ ORDER BY ma.id";
   //----------------------------------//
     if(mysql_num_rows($resultmate)>0){
   leerClase('Menu');
-  foreach ($materiassemestre as $value) {
+  foreach ($materiassemestre as $value) 
+   {
         $menu = new Menu($value['nombre']);
-        for($i=0; $i < count($docmateriassemestre);$i++ ) {
+        for($i=0; $i < count($docmateriassemestre);$i++ )
+        {
             if($value['idmat']==$docmateriassemestre[$i]['idmat']&&$docmateriassemestre[$i]['materia']=='Proyecto Final'){
                   $link = Docente::URL."index.proyecto-final.php?iddicta=".$docmateriassemestre[$i]['iddicta']."";
                   $menu->agregarItem('Gesti&oacute;n de Estudiantes Codigo:'.$docmateriassemestre[$i]['grupo'].'','Gesti&oacute;n de Estudiantes Inscritos en la Materia Proyecto Final.','docente/correccion.png',$link);
@@ -88,7 +91,7 @@ ORDER BY ma.id";
          };
          $menus[] = $menu;
   };
-    }  else {
+      }  else {
   $columnacentro = 'docente/mensajedisculpa.tpl';
   $smarty->assign('columnacentro',$columnacentro);
   }

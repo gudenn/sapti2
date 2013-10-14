@@ -5,12 +5,12 @@
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
             <p>
-              <input type="text" name="nombre" value="{$institucion->nombre}"  data-validation-engine="validate[required]">
-              <label for="codigo"><small>Nombre de la Institucion (*)</small></label>
+              <input type="text" name="nombre" id="nombre" value="{$institucion->nombre}"  data-validation-engine="validate[required]">
+              <label for="nombre"><small>Nombre de la Institucion (*) {getHelpTip('nombre')}</small></label>
             </p>
             <p>
-              <input type="text" name="descripcion" value="{$institucion->descripcion}"  data-validation-engine="validate[required]">
-              <label for="codigo"><small>Descripcion Institucion (*)</small></label>
+              <input type="text" name="descripcion" id="descripcion" value="{$institucion->descripcion}"  data-validation-engine="validate[required]">
+              <label for="descripcion"><small>Descripci&oacute;n Institucion (*) {getHelpTip('descripcion')}</small></label>
             </p>
             <h2 class="title">Grabar Institucion</h2>
             <p>

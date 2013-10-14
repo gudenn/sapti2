@@ -1,23 +1,28 @@
 <?php
 class Consejo extends Objectbase
 {
-    const URL                  = "tribunal/";
+    const URL                  = "consejo/";
  /**
   * Codigo del usuario
   * @var INT
   */
   var $usuario_id;
+   /**
+  * 
+  * fecha inicio date
+  */
+  var $fecha_inicio;
 
   /**
   * 
   * fecha inicio date
   */
-  var $fecha_inicio;
+  var $fecha_fin;
   /**
   * 
   *  Fecha final date
   */
-  var $fecha_fin;
+  var $activo;
 
   /**
    * Validamos que todos los datos enviados sean correctos

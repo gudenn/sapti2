@@ -5,6 +5,8 @@
     <th><a href='?order=apellido_paterno'    class="tajax"  title='Ordenar por Apellido Paterno' >Apellido Paterno {$filtros->iconOrder('apellido_paterno')}</a></th>
     <th><a href='?order=apellido_materno'    class="tajax"  title='Ordenar por Apellido Materno' >Apellido Materno {$filtros->iconOrder('apellido_materno')}</a></th>
     <th>Profecional</th>
+     <th>Activo AC, Inactivo IN</th>
+      <th>Desactivar Cuenta</th>
       <th>Opciones</th>
     </tr>
   </thead>
@@ -29,6 +31,8 @@
           {/if}
         {/if}
       </td>
+       <td>{$objs[ic]['estado']}</td>
+     <td><a href="usuario.gestion.php?id_usuario={$objs[ic]['id']}">Desactivar Cuenta</a></td>
       <td>
         {if (!$objs[ic]['puede_ser_tutor'])}
           <a href="usuario.gestion.php?es_profecional={$objs[ic]['id']}">Cambiar a profecional</a>

@@ -5,8 +5,8 @@
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
             <p>
-              <input type="text" name="codigo" value="{$semestre->codigo}"  data-validation-engine="validate[required]">
-              <label for="codigo"><small>Codigo de Semestre (*)</small></label>
+              <input type="text" name="codigo" id="codigo" value="{$semestre->codigo}"  data-validation-engine="validate[required]">
+              <label for="codigo"><small>C&oacute;digo de Semestre (*) {getHelpTip('codigo')}</small></label>
             </p>
             <!--
             <p>

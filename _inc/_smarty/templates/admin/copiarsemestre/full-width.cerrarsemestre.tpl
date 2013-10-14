@@ -8,15 +8,15 @@
            <tr class="dark">
                <th>
              <p>
-              <input type="text" name="nombre" value="{$semestre->codigo}"  readonly>
-              <label for="codigo"><small>Codigo Semestre Actual</small></label>
+              <input type="text" name="nombre" id="nombre" value="{$semestre->codigo}"  readonly>
+              <label for="nombre"><small>Codigo Semestre Actual {getHelpTip('semestre')}</small></label>
             </p>
                </th>
                <th>
               <select name="semestre_id" id="semestre_id" >
               {html_options values=$semestre_values selected=$semestre_selected output=$semestre_output}
               </select>
-              <label for="semestre_id"><small>Seleccione Proximo Semestre(*)</small></label>
+              <label for="semestre_id"><small>Seleccione Proximo Semestre (*){getHelpTip('semestre')}</small></label>
               </th>
               
            </tr>

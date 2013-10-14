@@ -10,22 +10,10 @@ try {
   $smarty->assign('description','Formulario de registro de estudiantes');
   $smarty->assign('keywords','SAPTI,Estudiantes,Registro');
 
-  //CSS
-  $CSS[]  = URL_CSS . "academic/3_column.css";
-  $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
-  
-  $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
- 
-  $smarty->assign('CSS',$CSS);
 
-  //JS
-  $JS[]  = URL_JS . "jquery.1.9.1.js";
-
-  //Datepicker UI
-  $JS[]  = URL_JS . "ui/jquery-ui-1.10.2.custom.min.js";
-  $JS[]  = URL_JS . "ui/i18n/jquery.ui.datepicker-es.js";
-
-  $smarty->assign('JS',$JS);
+  $smarty->assign('header_ui','1');
+  $smarty->assign('CSS','');
+  $smarty->assign('JS','');
 
 
   $smarty->assign("ERROR", '');

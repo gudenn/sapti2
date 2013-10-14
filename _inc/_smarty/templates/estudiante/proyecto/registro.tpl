@@ -80,9 +80,7 @@
                 </td>
               </tr>
               <tr>
-                <td>
-                  <a href="../tutor/tutor.gestion.php?estudiante_id={$estudiante->id}" target="_blank">Asignar o Modificar</a><!-- | <a href="">Actualizar</a>-->
-                </td>
+                
               </tr>
               <!--
               <tr>
@@ -417,7 +415,7 @@
                   Registrado por:{getHelpTip('registrado_por')}
                 </td>
                 <td>
-                  <input type="text" name="proyecto_registrado_por" value="{$registrado_por}"  data-validation-engine="validate[required]">
+                  <input type="text" name="proyecto_registrado_por" value="{$estudiante->getNombreCompleto()}"  data-validation-engine="validate[required]">
                 </td>
                 <td>
                   Fecha:{getHelpTip('fecha_registro')}

@@ -17,7 +17,7 @@ try {
    * Menu superior
    */
   $menuList[]     = array('url'=>URL . Estudiante::URL , 'name'=>'Estudiante');
- $menuList[]     = array('url'=>URL . Estudiante::URL . 'proyecto/','name'=>'Proyecto');
+
   $menuList[]     = array('url'=>URL . Estudiante::URL . 'proyecto/'.basename(__FILE__),'name'=>'Registro de Proyecto');
   $smarty->assign("menuList", $menuList);
 
@@ -61,6 +61,7 @@ try {
   leerClase('Modalidad');
   leerClase('Estudiante');
   leerClase('Institucion');
+  leerClase('Vigencia');
 
   leerClase('Objetivo_especifico');
 
@@ -245,7 +246,7 @@ try {
       $especifico->validar();
       $proyecto->objetivo_especifico_objs[] = $especifico;
     }
-    $proyecto->asignarEstudiante($estudiante->id);
+   // $proyecto->asignarEstudiante($estudiante->id);
     
     //areas y subareas
     $contador = 0;
@@ -275,12 +276,22 @@ try {
       $modalidad    = new Modalidad($proyecto->modalidad_id);
       $smarty->assign('tipo_moda',($modalidad->datos_adicionales)?'':'tipo_moda');
     }
+    
     $proyecto->validar();
     $proyecto->tipo_proyecto =  Proyecto::TIPO_PERFIL;
     $proyecto->estado_proyecto= Proyecto::EST5_P;
     $proyecto->save();
     $proyecto->saveAllSonObjects(TRUE);
     $estudiante->marcarComoProyectoActual($proyecto->id);
+    
+    //grabamos la vigencia del proyecto
+    $vigencia=new Vigencia();
+    $vigencia->estado=  Objectbase::STATUS_AC;
+    $vigencia->estado_vigencia=  Vigencia::ESTADO_NORMAL;
+    $vigencia->fecha_inicio=date('d/m/Y');
+    $vigencia->fecha_fin= date("d/m/Y",strtotime("$fechafin +2 year") );
+    $vigencia->proyecto_id=$proyecto->id;
+    $vigencia->save();
     //guardamos datos extra
     if ( isset($_POST['telefono']) )
     {

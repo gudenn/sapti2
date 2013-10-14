@@ -5,13 +5,13 @@
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
               <p>
-              <input type="text" name="nombre" value="{$turno->nombre}"  data-validation-engine="validate[required]">
-              <label for="codigo"><small>Nombre de Turno(*)</small></label>
+              <input type="text" name="nombre" id="nombre" value="{$turno->nombre}"  data-validation-engine="validate[required]">
+              <label for="nombre"><small>Nombre de Turno(*) {getHelpTip('nombre')}</small></label>
             </p>
            
              <p>
               <textarea name="descripcion" id="descripcion"  size="22" style="width: 650px;height: 100px;" data-validation-engine="validate[required]">{$turno->descripcion}</textarea>
-              <label for="codigo"><small>Detalle del Evento (*)</small></label>
+              <label for="descripcion"><small>Detalle del Evento (*) {getHelpTip('descripcion')}</small></label>
             </p>
             
             <h2 class="title">Grabar Turno</h2>
