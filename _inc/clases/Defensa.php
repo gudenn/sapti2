@@ -2,6 +2,12 @@
 
 class Defensa extends Objectbase 
 {
+  
+  /** Constante para el  tipos de defensa */
+  /** DEFENSA PRIVADA(DP) */
+  const DEFENSA_PRIVADA = "DPRI";
+  /** DEFENSA PUBLICA (PR) */
+  const DEFENSA_PUBLICA = "DPU";
  /**
   * Nombre del Proyecto
   * @var VARCHAR(100)
@@ -30,7 +36,7 @@ class Defensa extends Objectbase
   /**
    *Hora defensa
    */
-  var $tipo_defensa_id;
+  var $tipo_defensa;
   var $lugar_id;
   var $proyecto_id;
   

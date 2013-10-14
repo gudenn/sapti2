@@ -70,7 +70,12 @@ try {
   $menu->agregarItem('Estudiantes Registrados','Estudiantes Registrados en la Materia de Proyecto Final','docente/inscritos.png',$link);
   $link = Docente::URL."evaluacion/estudiante.evaluacion-editar.php?iddicta={$iddicta}";
   $menu->agregarItem('Evaluacion de Estudiantes','Evaluacion de Estudiantes Registrados en la Materia de Proyecto Final','docente/evaluacion.png',$link);  
+  
+  $link = Docente::URL."perfil/estudiante.lista.php?iddicta={$iddicta}";
+  $menu->agregarItem('Evaluacion de Estudiantes','Evaluacion de Estudiantes Registrados en la Materia de Proyecto Final','docente/evaluacion.png',$link);  
+
   $menus[] = $menu;
+  
   
   $menu = new Menu('Calendario');
   $link = Docente::URL."calendario/calendario.evento.php";
@@ -82,7 +87,7 @@ try {
   $menus[] = $menu;
  
   
-$notificacion= new Notificacion();
+    $notificacion= new Notificacion();
   
   $menu = new Menu('Notificaciones y Mensajes');
   $link = Docente::URL."notificacion/notitribunal.php";
@@ -90,6 +95,8 @@ $notificacion= new Notificacion();
   $link = Docente::URL."calendario/evento.registro.php?iddicta={$iddicta}";
   $menu->agregarItem('Mensajes','Mensajes para el Proyecto Final','docente/notificacion.png',$link);
   $menus[] = $menu;
+  
+
   
   $menu = new Menu('Configuracion');
   $link = Docente::URL."configuracion/disponibilidad.php";

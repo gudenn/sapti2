@@ -12,7 +12,7 @@ try {
   $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
   $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
-  
+  $CSS[]  = URL_CSS . "spams.css";
   $smarty->assign('CSS',$CSS);
 
   //JS
@@ -44,23 +44,7 @@ $JS[]  = URL_JS . "jquery.min.js";
     
   
   
- $filtro     = new Filtro('g_docente',__FILE__);
-  $docente = new Docente();
-  $docente->iniciarFiltro($filtro);
-  $filtro_sql = $docente->filtrar($filtro);
-
-  $docente->usuario_id ='%';
-  
-  $o_string   = $docente->getOrderString($filtro);
-  $obj_mysql  = $docente->getAll('',$o_string,$filtro_sql,TRUE,TRUE);
-  $objs_pg    = new Pagination($obj_mysql, 'g_docente','',false,10);
-
-  $smarty->assign("filtros"  ,$filtro);
-  $smarty->assign("objs"     ,$objs_pg->objs);
-  $smarty->assign("pages"    ,$objs_pg->p_pages);
-
-  
- $rows = array();
+$rows = array();
 $usuario = new Usuario();
 //$smarty->assign('rows', $rows);
  $usuario_mysql  = $usuario->getAll();
@@ -109,18 +93,10 @@ $smarty->assign('lugar_nombre',$lugar_nombre);
 $tipo= new Tipo_defensa();
 $tipo_sql= $tipo->getAll();
 
-$tipo_id= array();
-$tipo_nombre=array();
-while ($tipo_sql && $r = mysql_fetch_array($tipo_sql[0]))
- {
-   $tipo_id[]     = $r['id'];
-   $tipo_nombre[] = $r['nombre'];
- }
-
-$smarty->assign('tipo_id',$tipo_id);
-$smarty->assign('tipo_nombre',$tipo_nombre);
-
-
+$smarty->assign('accion', array(
+    Defensa::DEFENSA_PUBLICA =>  "PUBLICA",
+      Defensa::DEFENSA_PRIVADA =>  "PRIVADA"
+                           ));
 
   if(isset($_GET['estudiante_id']))
   {

@@ -31,6 +31,7 @@ try {
   leerClase('Usuario');
   leerClase('Docente');
   leerClase('Semestre');
+   leerClase('Notificacion');
 
       /**
    * Menu superior
@@ -72,7 +73,8 @@ ORDER BY ma.id";
    * Menu central
    */
   //----------------------------------//
-    if(mysql_num_rows($resultmate)>0){
+    if(mysql_num_rows($resultmate)>0)
+      {
   leerClase('Menu');
   $varsession=1;
   foreach ($materiassemestre as $value) 
@@ -99,6 +101,20 @@ ORDER BY ma.id";
   $columnacentro = 'docente/mensajedisculpa.tpl';
   $smarty->assign('columnacentro',$columnacentro);
   }
+  
+  $notificacion = new Notificacion();
+  $menu = new Menu('Tutor');
+  $link = Docente::URL."tutor/index.php";
+  $menu->agregarItem('Notificaiones','Notificaciones para el Proyecto Final','docente/notificacion.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+   $menus[] = $menu;
+  
+   $menu = new Menu('Tribunal');
+  $link = Docente::URL."tribunal/index.php";
+  $menu->agregarItem('Notificaiones','Notificaciones para el Proyecto Final','docente/notificacion.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+   $menus[] = $menu;
+  
+  
+  
   //----------------------------------//
   
   $smarty->assign("menus", $menus);

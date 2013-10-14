@@ -3,14 +3,7 @@ try {
   define ("MODULO", "CONSEJO");
   require('_start.php');
    
-  //MODULO -> REGISTRO DE MERCADERIA
-  //ACCION -> GESTION
-  
-
-  
-  
-  
-  
+    
   leerClase("Usuario");
   leerClase("Formulario");
   leerClase("Pagination");

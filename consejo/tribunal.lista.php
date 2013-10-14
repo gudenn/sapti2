@@ -3,10 +3,9 @@ try {
    define ("MODULO", "CONSEJO");
   
   require('_start.php');
-  if(!isDocenteSession())
+   if(!isDocenteSession())
     header("Location: login.php"); 
-  global $PAISBOX;
-
+ 
 //  if(!isAdminSession())
 //    header("Location: login.php");
 

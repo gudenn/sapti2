@@ -203,11 +203,7 @@
           CKEDITOR.replace('detalle'{$editores})
         </script>
       </div>
-      <div>
-        Observaci&oacute;n<br/>
-        <textarea name="comentario" rows="4" style="width: 90%"></textarea>
-      </div>
-      
+     
       
       <div style="text-align: center">
         <input type="hidden" name="id" value="" />

@@ -45,6 +45,14 @@ try {
 
 
 //contruyendo el usuario
+  
+  
+ $editores = ",
+                {toolbar: [ 
+                  [ 'Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
+                  [ 'FontSize', 'TextColor', 'BGColor' ]]}";
+  
+  $smarty->assign("editores", $editores);
  
   if ( isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' )
   {

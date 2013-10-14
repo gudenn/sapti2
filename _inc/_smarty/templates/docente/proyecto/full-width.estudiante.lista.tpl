@@ -1,4 +1,4 @@
-{include file="tribunal/header-sjq.tpl"}
+{include file="docente/header-sjq.tpl"}
 <div class="wrapper row3">
   <div class="rnd">
     <div id="container">
@@ -19,7 +19,7 @@
                     <option value="30">30</option>
                     <option value="40">40</option>
                     <option value="50">50</option>
-       </select>
+                </select>
 
                 </div>
         	<label for="filter">Busqueda Rapida :</label>
@@ -29,8 +29,9 @@
         
         	<div id="paginator"></div>
         </div>
-          <script type="text/javascript">
-                editableGrid.onloadXML("defensa.loaddata.estudiante.lista.php");
+            <a href="../revision/observacion.estudiante-cvs.php" type="button">CARGAR OBSERVACION(ES) POR CVS</a>
+        <script type="text/javascript">
+                editableGrid.onloadXML("loaddata.estudiante.lista.php?iddicta={$iddicta}", {$iddicta});
         </script>
     </div>
     {$ERROR}
