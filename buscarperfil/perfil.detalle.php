@@ -43,17 +43,18 @@ try {
   
   $columnacentro = 'perfil/columna.centro.perfil-detalle.tpl';
   $smarty->assign('columnacentro',$columnacentro);
-   $perfil_id=$_GET['id_perfil'];
+  $perfil_id=$_GET['id_perfil'];
  
    $proyecto=new Proyecto($perfil_id);
    
    $area=$proyecto->getArea();
-   $nombre_a=$area->nombre;
+   $nombre_a=$area[0]->nombre;
    $modalidad=new Modalidad($proyecto->modalidad_id);
    $pe=new Proyecto_estudiante($proyecto->id);
    $estudiante=new Estudiante($pe->estudiante_id);
+   
    $usuario=new Usuario($estudiante->usuario_id);
-
+   $usuario->nombre;
    
    
    $smarty->assign('usuario'  ,$usuario);

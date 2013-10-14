@@ -30,7 +30,7 @@
     <table class="tbl_lista" id="docentes"  mane="docentes">
   <thead>
   <tr>
-    <th><a href='?order=id'                class="tajax"   title='Ordenar por Id'               >NUMERO           </a></th>
+    <th><a href='?order=id'                class="tajax"   title='Ordenar por Id'               >ID           </a></th>
     <th><a href='?order=codigo_box'        class="tajax"   title='Ordenar por Codigo'           >NOMBRE       </a></th>
     <th><a href='?order=proveedor'         class="tajax"   title='Ordenar por Proveedor'        >APELLIDOS     </a></th>
     <th><a href='?order=especialidad'         class="tajax"   title='Ordenar por Especialidad'        >TITULO</a></th>
@@ -43,7 +43,8 @@
    
     <tr  class="selectable">
     <tr  class="{cycle values="light,dark"}">
-        <td>{str_replace($q,"<span style='background-color: #88AAEE'>$q</span>",$listadocentes[ic]['numero'])}</td>
+        <td>{str_replace($q,"<span style='background-color: #88AAEE'>$q</span>",$listadocentes[ic]['id'])}</td>
+
         <td>{str_replace($q,"<span style='background-color: #88AAEE'>$q</span>",$listadocentes[ic]['nombre'])}</td>
         <td>{str_replace($q,"<span style='background-color: #88AAEE'>$q</span>",$listadocentes[ic]['apellidos'])}</td>
         <td>{str_replace($q,"<span style='background-color: #88AAEE'>$q</span>",$listadocentes[ic]['titulo'])}</td>
