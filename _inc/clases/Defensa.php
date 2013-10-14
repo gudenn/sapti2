@@ -40,6 +40,8 @@ class Defensa extends Objectbase
   var $lugar_id;
   var $proyecto_id;
   
+  var  $semestre;
+  
   
 }
 

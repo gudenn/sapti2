@@ -30,12 +30,12 @@ try {
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
   
-  leerClase('Consejo');
-  leerClase('Menu');
-  leerClase('Tribunal');
-  leerClase('Administrador');
-  leerClase('Estudiante');
-    leerClase('Notificacion');
+              leerClase('Consejo');
+              leerClase('Menu');
+              leerClase('Tribunal');
+              leerClase('Administrador');
+              leerClase('Estudiante');
+              leerClase('Notificacion');
 
   
     /**
@@ -56,10 +56,8 @@ try {
   
   $menu = new Menu('Asignaci&oacute;n De Fechas  De Defensa');
   $link = Consejo::URL."listadefensa.php";
-  $menu->agregarItem('Gesti&oacute;n de Asignac&oacute;n','Registro de Fechas de Defensa','basicset/user4.png',$link);
-  $link = Consejo::URL."";
-  $menu->agregarItem('Gesti&oacute;n de Asignac&oacute;n','Gesti&oacute;n De Asignaci&oacute;n Editar Eliminar Las Fechas de Defensa','basicset/graph.png',$link);
-  $menus[] = $menu;
+  $menu->agregarItem('Gesti&oacute;n de Asignac&oacute;n de Fechas de Defensa','Registro de Fechas de Defensa','basicset/user4.png',$link);
+   $menus[] = $menu;
  
   $menu = new Menu('Tribunales no Aceptados');
   $link = Consejo::URL."lista.tribunales.rechazados.php";
@@ -73,6 +71,12 @@ try {
     $link = Estudiante::URL."notificacion/";
     $menu->agregarItem('Notificaciones','Geti&oacute;n de las Notificaciones','basicset/megaphone.png',$link,  sizeof($notificacion->getNotificacionConsejo(2)));
     $menus[] = $menu;
+    
+     $menu = new Menu('Reportes');
+   $link = Consejo::URL."reporte.php";
+  $menu->agregarItem('Reportes','','basicset/graph.png',$link);
+  $menus[] = $menu;
+  
   
   
  $smarty->assign("menus", $menus);

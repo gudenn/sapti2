@@ -38,6 +38,8 @@ class Tribunal extends Objectbase
      var $fecha_asignacion;
      var $fecha_aceptacion;
      
+     var $semestre;
+     
 
   /**
    * Retorna el nombre completo del usuario

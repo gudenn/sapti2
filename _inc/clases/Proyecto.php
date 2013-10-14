@@ -704,7 +704,18 @@ where pa.area_id=a.id  and pa.proyecto_id='$this->id' and pa.estado='AC'  and a.
        return  $totalvb;
   }
   
-   /**
+  
+  /**
+   * 
+   * retorna el total de proyectos con defensa privada
+   */
+  
+  
+  function  getNumeroProyectosDefensaPrivada()
+  {
+    
+  }
+  /**
    * 
    * @return boolean|\Carrera
    * la carrera

@@ -65,15 +65,15 @@ try {
     $docente                       =       getSessionDocente();
     $vistobueno->objBuidFromPost();
    // $vistobueno->proyecto_id       =       $_POST['pro'];
-    $vistobueno->visto_bueno_tipo  =        Visto_bueno::E2_TUTOR;
-    $vistobueno->visto_bueno_id    =        4;
+    $vistobueno->visto_bueno_tipo  =        Visto_bueno::E1_DOCENTE;
+    $vistobueno->visto_bueno_id    =        $docente->id;
     $vistobueno->estado            =        Objectbase::STATUS_AC;
    
     $vistobueno->save();
     
-    $proyecto = new Proyecto($vistobueno->proyecto_id);
-    $proyecto->estado_proyecto="VB";
-    $proyecto->save();
+   // $proyecto = new Proyecto($vistobueno->proyecto_id);
+   // $proyecto->estado_proyecto="VB";
+  //  $proyecto->save();
 
     $ir = "Location: estudiante.lista.php";
     header($ir);

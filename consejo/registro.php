@@ -42,8 +42,9 @@ try {
   leerClase("Proyecto_estudiante");
   leerClase("Notificacion");
   leerClase("Notificacion_tribunal");
-   leerClase("Automatico");
-   leerClase("Consejo");
+  leerClase("Automatico");
+  leerClase("Consejo");
+  leerClase("Semestre");
    
   $menuList[]     = array('url'=>URL.Consejo::URL,'name'=>'Consejo');
   $menuList[]     = array('url'=>URL . Consejo::URL ,'name'=>'Asignaci&oacute;n');
@@ -560,15 +561,12 @@ if (isset($_POST['proyecto_id']))
  $idproyecto=$_POST['proyecto_id'];
    
    
-   $query = "UPDATE proyecto p SET p.estado_proyecto='TA'  WHERE p.id=$idproyecto";
-  mysql_query($query);
-   //UPDATE items,month SET items.price=month.price
-//WHERE items.id=month.id;
-   $proyectos   = new Proyecto($idproyecto);
-  // $proyectos->objBuidFromPost();
-  // $proyectos->estado_proyecto='TA';
-   //$proyectos->save() ;
-  
+  // $query = "UPDATE proyecto p SET p.estado_proyecto='TA'  WHERE p.id=$idproyecto";
+//  mysql_query($query);
+      $proyectos   = new Proyecto($idproyecto);
+    
+      
+      
    //$estudiante  = array();
    $estudiante   = new Estudiante(false,$_POST['estudiante_id']);
    $notificacion= new Notificacion();

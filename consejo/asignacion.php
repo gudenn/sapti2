@@ -41,6 +41,7 @@ $JS[]  = URL_JS . "jquery.min.js";
   leerClase("Lugar");
   leerClase("Tipo_defensa");
   leerClase("Defensa");
+  leerClase("Semestre");
     
   
   
@@ -164,7 +165,8 @@ WHERE  u.`id`= d.`usuario_id` and   d.`id`= t.`docente_id` and   t.estado='AC' a
         
          if( isset($_POST['tarea']) && $_POST['tarea'] =='Guardar')
             {
-          
+          $semestre= new Semestre();
+       $semestreactual=   $semestre->getActivo();
             // echo "Hola eli";
              /*
              echo  $_POST['estudiante_id'];
@@ -190,6 +192,8 @@ WHERE  u.`id`= d.`usuario_id` and   d.`id`= t.`docente_id` and   t.estado='AC' a
               //$defensa->tipo_defensa_id=tipo_defensa_id;
               //$defensa->lugar_id=1;
            //   $defensa->proyecto_id;
+              
+              $defensa->semestre= $semestreactual->codigo;
               $defensa->estado = Objectbase::STATUS_AC;
               $defensa->save();
              
