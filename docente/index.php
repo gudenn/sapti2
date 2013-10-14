@@ -69,14 +69,14 @@ ORDER BY ma.id";
   while ($row2 = mysql_fetch_array($resultmate, MYSQL_ASSOC)) {
        $docmateriassemestre[] = $row2;
  }
-
+leerClase('Menu');
   /**
    * Menu central
    */
   //----------------------------------//
     if(mysql_num_rows($resultmate)>0)
       {
-  leerClase('Menu');
+  
   foreach ($materiassemestre as $value) 
    {
         $menu = new Menu($value['nombre']);
