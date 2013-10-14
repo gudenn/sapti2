@@ -39,27 +39,44 @@ try {
   $JS[]  = URL_JS . "jquery.min.js";
   $smarty->assign('JS',$JS);
 
-  $id_es=$_GET['id_post'];
+   $id_es=$_GET['id_post'];
   $estudiante=new Estudiante($id_es);
   
   $proyecto=$estudiante->getProyecto();
-  $pr=new Proyecto($proyecto->id);
+  
+
+ $sqlr="SELECT p.nombre as nombre, p.id as id
+FROM  usuario u,estudiante e,proyecto p,proyecto_estudiante pe
+WHERE u.id=e.usuario_id and e.id=pe.estudiante_id and pe.proyecto_id=p.id  and p.tipo_proyecto='PE' and e.id='".$id_es."'";
+ $resultado = mysql_query($sqlr);
+ $areglo= array();
+  
+ while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+ {
+   $areglo[]=$fila;
+ }
+ 
+  $nombre = $areglo[0]['nombre'];
+  $id = $areglo[0]['id'];
+$smarty->assign('nombre'      , $nombre);
+ 
+ $smarty->assign('id'  , $id);
+ 
+ 
+ 
+  $proyecto=new Proyecto($id);
   
   $v=$proyecto->getVigencia();
  
-  
+  echo $v[0]->fecha_fin;
 
   $vigencia= new Vigencia($v[0]->id);
 
-
- 
-  
-
- 
+ echo $vigencia->estado_vigencia;
   
  
- $smarty->assign('proyecto'     ,$proyecto);
  $smarty->assign('vigencia'     ,$vigencia);
+
  $smarty->assign('estudiante'     ,$estudiante);
 
   
@@ -74,25 +91,28 @@ try {
  
  
 
-  if (isset($_GET['postergar']) )
+  if (isset($_GET['postergar'])&$vigencia->estado_vigencia!='PO' )
   {
       
  
  
-    $fechafin=$vigencia->fecha_fin;
-
-    echo date("Y-m-d",strtotime("$fechafin +6 month") );;;
- $vigencia->fecha_fin=  date("d/m/Y",strtotime("$fechafin +12 month") );;
-     
+       $fechafin=$v[0]->fecha_fin;
+ 
+  
+  
+    
+    
+     $actual=date("d/m/Y", strtotime("$fechafin +1 year"));
+     $vigencia->fecha_fin=$actual;
      $vigencia->estado_vigencia='PO';
      $vigencia->save();
   }
   
 
-       if (isset($_GET['prorroga']) )
+       if (isset($_GET['prorroga'])&$vigencia->estado_vigencia!='PR' )
   {
-       
-     $fechafin=$vigencia->fecha_fin;
+      
+     $fechafin=$v[0]->fecha_fin;
      $vigencia->fecha_fin=  date("d/m/Y",strtotime("$fechafin +6 month") );
      $vigencia->estado_vigencia='PR';
      $vigencia->save();

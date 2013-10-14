@@ -86,8 +86,7 @@ try {
   
  $sqlr="SELECT count(*) as c
 FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
-WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
-=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado='AC' AND p.id=v.proyecto_id and s.id='".$p."'";
+WHERE u.id=e.usuario_id and e.id=i.estudiante_id and i.semestre_id=s.id and e.id=pe.estudiante_id and pe.proyecto_id=p.id and p.es_actual=1 and s.id='".$p."'";
  $resultado = mysql_query($sqlr);
  $areglo= array();
   
@@ -100,7 +99,7 @@ WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
    $areglo[]=$fila;
  }
  
-  $cont = $areglo[0]['c'];
+ $cont = $areglo[0]['c'];
 
  if ($cont!==0) {
     
@@ -108,7 +107,7 @@ WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
   $sqlr="SELECT count(*) as p
 FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
 WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
-=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado='AC' AND p.id=v.proyecto_id AND v.estado_vigencia='PO' and s.id='".$p."'";
+=s.id AND e.id=pe.estudiante_id and p.tipo_proyecto='PE' AND pe.proyecto_id=p.id AND p.estado='AC' AND p.id=v.proyecto_id AND v.estado_vigencia='PO' and s.id='".$p."'";
  $resultado = mysql_query($sqlr);
  $arraytribunal= array();
   
@@ -131,7 +130,7 @@ WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
  $sqlr="SELECT count(*)as pr
 FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
 WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
-=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado='AC' AND p.id=v.proyecto_id AND v.estado_vigencia='PR' and s.id='".$p."'";
+=s.id AND e.id=pe.estudiante_id and p.tipo_proyecto='PE' AND pe.proyecto_id=p.id AND p.estado='AC' AND p.id=v.proyecto_id AND v.estado_vigencia='PR' and s.id='".$p."'";
  $resultado = mysql_query($sqlr);
  $arraytribunal= array();
   
@@ -152,7 +151,7 @@ WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
   $sqlr="SELECT  COUNT( * ) AS cam
 FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe, cambio c
 WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
-=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado='AC'AND c.proyecto_id=p.id and s.id='".$p."'
+=s.id AND e.id=pe.estudiante_id and p.tipo_proyecto='PE' AND pe.proyecto_id=p.id AND p.estado='AC'AND c.proyecto_id=p.id and s.id='".$p."'
 ";
  $resultado = mysql_query($sqlr);
  $arraytribunal= array();
@@ -176,7 +175,7 @@ WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
   $sqlr="SELECT count(*) as vencido
 FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
 WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
-=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado='AC' AND p.id=v.proyecto_id AND ('".$fechahoy."'>=v.fecha_fin)and s.id='".$p."'";
+=s.id AND e.id=pe.estudiante_id and p.tipo_proyecto='PE' AND pe.proyecto_id=p.id AND p.estado='AC' AND p.id=v.proyecto_id AND ('".$fechahoy."'>=v.fecha_fin)and s.id='".$p."'";
  $resultado = mysql_query($sqlr);
  $arraytribunal= array();
   
