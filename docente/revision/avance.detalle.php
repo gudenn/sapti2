@@ -16,9 +16,12 @@ try {
   //$CSS[]  = URL_JS . "jQfu/css/demo.css";
   $CSS[]  = URL_JS . "jQfu/css/jquery.fileupload-ui.css";
   $CSS[]  = URL_CSS . "academic/3_column.css";
+  $CSS[]  = URL_CSS . "academic/tables.css";
+  $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
+  $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
   //BOX
   $CSS[]  = URL_JS . "box/box.css";
-  
+  $CSS[]  = URL_JS . "ventanasmodales/simplemodaldetalle.css";
   $smarty->assign('CSS',$CSS);
 
   
@@ -30,6 +33,14 @@ try {
   $JS[]  = URL_JS . "ckeditor/ckeditor.js";
   //BOX
   $JS[]  = URL_JS ."box/jquery.box.js";
+    //Datepicker UI
+  $JS[]  = URL_JS . "ui/jquery-ui-1.10.2.custom.min.js";
+  $JS[]  = URL_JS . "ui/i18n/jquery.ui.datepicker-es.js";
+    //Validation
+  $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
+  $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
+  $JS[]  = URL_JS . "jquery.addfield.js";
+  $JS[]  = URL_JS . "ventanasmodales/jquery.simplemodal-1.4.4.js";
   $smarty->assign('JS',$JS);
 
   // Escritorio del estuddinate
@@ -37,6 +48,9 @@ try {
   leerClase('Proyecto');
   leerClase('Estudiante');
   leerClase('Avance');
+  leerClase('Revision');
+  leerClase('Observacion');
+  leerClase('Docente');
 
   /**
    * Menu superior
@@ -46,33 +60,83 @@ try {
   $menuList[]     = array('url'=>URL.Estudiante::URL.Proyecto::URL.basename(__FILE__),'name'=>'Detalle de Avance');
   $smarty->assign("menuList", $menuList);
 
-  
-  $estudiante     = new Estudiante(1);
+  if(isset($_GET['estudiante_id']) && is_numeric($_GET['estudiante_id']))
+      $estuid=$_GET['estudiante_id'];
+  $estudiante     = new Estudiante($estuid);
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();
   $id             = (isset($_GET['avance_id']) && is_numeric($_GET['avance_id']))?$_GET['avance_id']:'';
-  $avance         = new Avance(2);
+  $avance         = new Avance($id);
   $avance->asignarDirectorio();
+  $avance->estado_avance=Avance::E2_VISTO;
+  $avance->save();
+  $resul = "
+       SELECT *
+FROM observacion ov
+WHERE ov.revision_id='".$avance->revision_id."'
+";
+   $sql = mysql_query($resul);
+while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
+   $obser[]=$fila1;
+ }
+    $obsertabla='no';
+  if(mysql_num_rows($sql)>0){
+      $obsertabla='si';
+      $revision1=new Revision($avance->revision_id);
+      $revision1->estado_revision=  Revision::E2_VISTO;
+      $revision1->save();
+  }
+    $observacion1=new Observacion();
+  
+    $docente = getSessionDocente();
+    if (isset($_POST['observaciones'])) 
+    $observaciones=$_POST['observaciones'];
+    $revision->fecha_revision=date("d/m/Y");
 
+    if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
+    {
+    $observacion = new Observacion();
+    $revision = new Revision();
+    $revision->objBuidFromPost();
+    $revision->estado = Objectbase::STATUS_AC;
+    $revision->revisor=$docente->id;
+    $revision->revisor_tipo='DO';
+    $revision->estado_revision=Revision::E1_CREADO;
+    $revision->proyecto_id=$proyecto->id;
+    $revision->save();
+    foreach ($observaciones as $obser_array){
+    $observacion->objBuidFromPost();
+    $observacion->estado = Objectbase::STATUS_AC;
+    $observacion->estado_observacion=Observacion::E1_CREADO;
+    $observacion->observacion=$obser_array;
+    $observacion->revision_id = $revision->id;
+    $observacion->save();
+    }
+
+    $ir = "Location: ../revision/revision.corregido.lista.php?id_estudiante=".$estudiante->id."";
+        header($ir);
+    }
+//observacion.registro.php?id_estudiante=;
+  $smarty->assign("revision", $revision);
+  $smarty->assign("obsertabla", $obsertabla);
+  $smarty->assign("observacion1", $observacion1);
+  //$smarty->assign("obser", $obser);
   $smarty->assign("estudiante", $estudiante);
   $smarty->assign("usuario", $usuario);
   $smarty->assign("proyecto", $proyecto);
   $smarty->assign("avance", $avance);
   $smarty->assign("ERROR", $ERROR);
   
-
-
-  //No hay ERROR
-  $ERROR = ''; 
-  $smarty->assign("ERROR",$ERROR);
-  
 } 
 catch(Exception $e) 
 {
   $smarty->assign("ERROR", handleError($e));
 }
-
-$TEMPLATE_TOSHOW = 'docente/revision/full-width.avance.detalle.tpl';
+  $token = sha1(URL . time());
+  $_SESSION['register'] = $token;
+  $smarty->assign('token',$token);
+  
+$TEMPLATE_TOSHOW = 'docente/revision/avance.detalle.tpl';
 $smarty->display($TEMPLATE_TOSHOW);
 
 ?>

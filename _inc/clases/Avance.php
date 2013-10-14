@@ -154,15 +154,5 @@ class Avance extends Objectbase
       $archivo  = PATH.Estudiante::ARCHIVO_PATH.Proyecto::ARCHIVO_PATH.'/'.$codigo_sis.'/'.$proyecto->getFolder().'/'.$this->directorio.'/';
     return $archivo;
   }
-    function getArchivos($dir)
-  {
-    $directorio = opendir("$dir");
-    $listaarchivos = array();
-    while($archivo= readdir($directorio)) {
-    $listaarchivos[]=$archivo;
-    }
-    closedir($directorio);
-    return $listaarchivos;
-  }
 }
 ?>

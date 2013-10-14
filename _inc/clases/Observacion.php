@@ -89,5 +89,14 @@ class Observacion extends Objectbase
     $filtro_sql = '';
     return $filtro_sql;
   }
+
+    function getRespuesta($descripcion = '')
+  {
+    $resumen   = $this->respuesta;
+    if ( trim($descripcion) != '' )
+      $resumen = $descripcion;
+    $resumen   = htmlspecialchars_decode( $resumen );
+    return $resumen;
+  }
 }
 ?>

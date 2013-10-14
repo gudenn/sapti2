@@ -1,7 +1,6 @@
-{include file="estudiante/header-sjq.tpl"}
-<div class="wrapper row3">
-  <div class="rnd">
-    <div id="container">
+        <div style="display:none">
+	<div class="contact-top"></div>
+	<div class="contact-content">
         <h1 class="title">Detalle de Avance</h1>
 
 <!-- The file upload form used as target for the file upload widget -->
@@ -119,112 +118,9 @@ $('#theme-switcher').change(function () {
         <p>
           {$avance->getDescripcion()}
         </p>
-        {if $obsertabla=='si'}
-        <h3><b>Observaciones Corregidas</b></h3>
-        <form action="#">
- <table class="tbl_lista">
-  <thead>
-    <tr>
-      <th>Observacion    </th>
-      <th>Respuesta      </th>
-      <th>Estado         </th>
-      <th>Opciones       </th>
-    </tr>
-  </thead>
-  {section name=ic loop=$obser}
-  <tbody>
-    <tr  class="{cycle values="light,dark"}">
-      <td>{$obser[ic]['observacion']}</td>
-      <td>{$observacion1->getRespuesta($obser[ic]['respuesta'])}</td>
-      <td>{$observacion1->getEstadoObservacion($obser[ic]['estado_observacion'])}</td>
-      <td>Aprobar: <input type="checkbox" name=seleccion[] value={$obser[ic]['id']} class="checkbox" ></td> 
-    </tr>
-  {/section}
-    <tr class="{cycle values="light,dark"}">
-      <td></td>
-      <td></td>
-      <td></td>
-      <td>Marcar/Desmarcar Todo<input type="checkbox" id="marcar" value="" onclick="marcar_desmarcar();" /></td> 
-    </tr>
-  </tbody>
-</table>
-</form>
-      {else}
-      <h3><b>Revisar Avance</b></h3>
-        <div id="respond">
-          <form action="#" method="post" id="registro" name="registro" >
-            <div id="div_1">
-            <label  accesskey="">OBSERVACION(ES):
-            </label>
-            </p>
-            <input  type="text"  name="observaciones[]" id="observaciones[]" style="width:500px;" data-validation-engine="validate[required]"/> 
-            <input class="bt_plus" id="1" type="button" value="Añadir Observacion" />
-            <div class="error_form"></div>
-            </div>
 
-            <p>
-              <input type="text" name="fecha_revision" id="fecha_revision" value="{$revision->fecha_revision}" size="22"/>
-              <label for="fecha_revision"><small>FECHA DE REVISION</small></label>
-            </p>
-
-            <h2 class="title">Grabar Revision</h2>
-            <p>
-              <input type="hidden" name="id" value="{$revision->id}">
-              <input type="hidden" name="id" value="{$observacion->id}">
-              <input type="hidden" name="tarea" value="registrar">
-              <input type="hidden" name="token" value="{$token}">
-
-              <input name="submit" type="submit" id="submit" value="Grabar">
-              &nbsp;
-              <input name="reset" type="reset" id="reset" tabindex="5" value="Resetear">
-            </p>
-          </form>
-        </div>
-        <p>{$ERROR}</p>
-        <p>Todos los campos con (*) son obligatorios.</p>
-        <script type="text/javascript">
-        {literal} 
-          $(function(){
-            $('#fecha_revision').datepicker({
-              dateFormat:'dd/mm/yy',
-              changeMonth: true,
-              changeYear: true,
-              yearRange: "2000:2050"
-            });
-          });
-          jQuery(document).ready(function(){
-            jQuery("#registro").validationEngine();
-            var wo = 'bottomRight';
-            jQuery('input').attr('data-prompt-position',wo);
-            jQuery('input').data('promptPosition',wo);
-            jQuery('textarea').attr('data-prompt-position',wo);
-            jQuery('textarea').data('promptPosition',wo);
-            jQuery('select').attr('data-prompt-position',wo);
-            jQuery('select').data('promptPosition',wo);
-          });
-        {/literal} 
-        </script>
       </div>
-      {/if}
         <hr>
     {$ERROR}
-    </div>
-  </div>
+	<div class='contact-bottom'></div>
 </div>
-{include file="footer.tpl"}
-<script type="text/javascript">
-
-function marcar_desmarcar(){
-var marca = document.getElementById('marcar');
-var cb = document.getElementsByName('seleccion[]');
- 
-for (i=0; i<cb.length; i++){
-if(marca.checked == true){
-cb[i].checked = true
-}else{
-cb[i].checked = false;
-}
-}
-}
-
-</script>

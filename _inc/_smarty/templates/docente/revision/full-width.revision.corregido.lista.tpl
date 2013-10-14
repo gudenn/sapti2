@@ -16,12 +16,13 @@
 <table class="tbl_lista">
   <thead>
     <tr>
-      <th><a>Id                 </a></th>
-      <th><a>Nombre Proyecto    </a></th>
-      <th><a>Descripcion        </a></th>
-      <th><a>Fecha de Avance    </a></th>
-      <th><a>Tipo Avance        </a></th>
-      <th><a>Detalle          </a></th>    
+      <th>Id                 </th>
+      <th>Nombre Proyecto    </th>
+      <th>Descripcion        </th>
+      <th>Fecha de Avance    </th>
+      <th>Tipo Avance        </th>
+      <th>Estado Avance      </th>
+      <th>Detalle            </th>    
     </tr>
   </thead>
   {section name=ic loop=$avances}
@@ -38,8 +39,12 @@
           {icono('basicset/document.png','Avance de Proyecto')}
           Avance
           {/if}</td>
-      <td>
-          <a href="avance.detalle.php?docente_id={$objs[ic]['id']}" target="_blank" >{icono('basicset/cabinet.png','Detalle')}Detalle de Correccion</a>
+      <td>{$revision->getEstadoRevision($avances[ic]['estoavance'])}</td>
+      <td>{if $avances[ic]['correcionrevision'] > 0}
+            <a href="avance.detalle.php?estudiante_id={$estudiante->id}&avance_id={$avances[ic]['id']}" target="_blank" >{icono('basicset/cabinet.png','Detalle')}Detalle de Correccion</a>
+          {else}
+            <a href="avance.detalle.php?estudiante_id={$estudiante->id}&avance_id={$avances[ic]['id']}" target="_blank" >{icono('basicset/cabinet.png','Detalle')}Detalle de Avance</a>
+          {/if}
       </td>    
     </tr>
   </tbody>

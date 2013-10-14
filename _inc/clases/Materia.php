@@ -133,6 +133,7 @@ class Materia extends Objectbase
   {
     leerClase('Dicta');
     leerClase('Docente');
+    leerClase('Codigo_grupo');
     $gruposQueDictan = new Dicta();
     $gruposQueDictan->materia_id  = $this->id;
     $gruposQueDictan->semestre_id = $semestre_id;
@@ -144,6 +145,8 @@ class Materia extends Objectbase
     while ($row = mysql_fetch_array($result[0],MYSQL_ASSOC))
     {
       $docente        = new Docente($row['docente_id']);
+      $grupo        = new Codigo_grupo($row['codigo_grupo_id']);
+      $row['codigo_grupo'] = $grupo->nombre;
       $row['docente'] = $docente->getNombreCompleto();
       $dictan[]  = $row;
     }

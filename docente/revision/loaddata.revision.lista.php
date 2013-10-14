@@ -26,12 +26,17 @@ $grid->addColumn('num', 'Nº Observaciones', 'integer', NULL, false);
 $grid->addColumn('action', 'Opciones', 'html', NULL, false);
 
 $result = $mysqli->query('
-    SELECT re.id as id, pr.nombre as nombrep, re.revisor_tipo as revtipo, re.fecha_revision as fecha, COUNT(ob.revision_id) as num, re.estado_revision as estado, re.fecha_correccion as correccion
+SELECT re.id as id, pr.nombre as nombrep, re.revisor_tipo as revtipo, re.fecha_revision as fecha, COUNT(ob.revision_id) as num, re.estado_revision as estado, re.fecha_correccion as correccion
 FROM proyecto pr, revision re, observacion ob
 WHERE pr.id="'.$proyecto.'"
 AND re.proyecto_id=pr.id
 AND re.id=ob.revision_id
 GROUP BY ob.revision_id
+UNION
+SELECT av.id as id, pr.nombre as nombrep, av.revision_id as revtipo, av.fecha_avance as fecha, av.descripcion as num, av.estado_avance as estado, av.detalle as correccion
+FROM proyecto pr, avance av
+WHERE pr.id="'.$proyecto.'"
+AND av.proyecto_id=pr.id
 ');
 $mysqli->close();
 

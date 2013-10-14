@@ -9,6 +9,7 @@ try {
   leerClase('Docente');
   leerClase('Usuario');
   leerClase('Avance');
+  leerClase('Revision');
   $ERROR = '';
 
   /** HEADER */
@@ -32,7 +33,7 @@ try {
    */
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
   $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>'Proyecto Final');
-  $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/'.basename(__FILE__),'name'=>'Estudiantes Inscritos');
+  $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/'.basename(__FILE__),'name'=>'Lista de Correcciones');
   $smarty->assign("menuList", $menuList);
   
   if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
@@ -49,11 +50,11 @@ try {
   $proyecto       = $estudiante->getProyecto();
 
   $resul = "
-      SELECT av.id as id, pr.nombre as nombrep, av.descripcion as descripcion, av.fecha_avance as fecha, av.revision_id as correcionrevision, av.directorio as archivos
+SELECT av.id as id, pr.nombre as nombrep, av.descripcion as descripcion, av.fecha_avance as fecha, av.revision_id as correcionrevision, av.estado_avance as estoavance
 FROM proyecto pr, avance av
 WHERE av.proyecto_id=pr.id
 AND av.proyecto_id='".$proyecto->id."'
-AND av.estado_avance='CR'
+AND av.estado_avance='CR' LIKE 'VI'
 ORDER BY av.fecha_avance
           ";
    $sql = mysql_query($resul);
@@ -61,9 +62,12 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
    $avances[]=$fila1;
  }
   $avance   = new Avance();
+  $revision   = new Revision();
 
   $smarty->assign("avance", $avance);
+  $smarty->assign("revision", $revision);
   $smarty->assign("avances", $avances);
+  $smarty->assign("estudiante", $estudiante);
   $smarty->assign("usuario", $usuario);
   $smarty->assign("proyecto", $proyecto);
   $smarty->assign("iddicta", $iddicta);
