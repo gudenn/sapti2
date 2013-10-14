@@ -289,7 +289,7 @@ try {
     $vigencia->estado=  Objectbase::STATUS_AC;
     $vigencia->estado_vigencia=  Vigencia::ESTADO_NORMAL;
     $vigencia->fecha_inicio=date('d/m/Y');
-    $vigencia->fecha_fin= date("d/m/Y",strtotime("$fechafin +2 year") );
+    $vigencia->fecha_fin= date("d/m/Y",strtotime(" +2 year") );
     $vigencia->proyecto_id=$proyecto->id;
     $vigencia->save();
     //guardamos datos extra
