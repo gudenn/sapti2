@@ -51,13 +51,12 @@
                         type: 'pie',
                         name: 'Browser share',
                         data: [
-                            ['Postergado', {$pos}],
-                            ['Prorroga',    {$pr}],
+                            ['Tribunles', {$tri}],
+                            ['Defensa',    {$def}],
+                            ['Defensa Privada', {$dp}],
+                            ['Defensa Publica',    {$pu}],
                             
-                            ['Cambios',   {$cam} ],
-                            
-                            ['Vencidos',  {$v}],
-                            
+                           
                         ]
                     }]
                 });
