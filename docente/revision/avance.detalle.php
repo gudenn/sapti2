@@ -112,20 +112,29 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
            if (isset($_POST['seleccion'])) 
            $seleccion=$_POST['seleccion'];
            if(count($seleccion)>0){
+               $idrev=0;
            foreach ($seleccion as $obs){
            $obsapro = new Observacion($obs);
            $obsapro->cambiarEstadoAprobado();
+           $idrev=$obsapro->revision_id;
             }
-           }
-
-        $revisionnuevo = new Revision();
-        $revisionnuevo->crearRevisionDocente($docente->id, $proyecto->id);
+           $revision1->fechaAprobacion();
+           $revisionnuevo = new Revision();
+           $revisionnuevo->crearRevisionDocente($docente->id, $proyecto->id);
            $obsermo = new Observacion();
            $obsermo->cambiarRevisor($revisionnuevo->id, $revision1->id);
-           $avance->cambiarEstadoCorregido();
-            
+           $avance->cambiarEstadoCorregido();   
            $ir = "Location: ../revision/observacion.editar.revision.php?revisiones_id=".$revisionnuevo->id."";
-        header($ir);
+           header($ir);
+           }  else {
+               
+           $revision1->estado_revision=  Revision::E1_CREADO;
+           $revision1->save();
+                $ir = "Location: ../revision/observacion.editar.revision.php?revisiones_id=".$revision1->id."";
+                header($ir);
+           }
+
+
      }
 
   $smarty->assign("revision", $revision);
