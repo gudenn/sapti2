@@ -14,6 +14,14 @@ class Revision extends Objectbase
   const E3_RESPONDIDO = "RE";
   const E4_APROBADO   = "AP";
   
+  /** constantes para los valores del revisor tipo
+   * revisor 1 docente proyectofinal (DO), revisor 2 docente perfil (DP), revisor 3 tutor  (TU), revisor 4 tribunal (TR)
+   */
+  const T1_DOCENTE        = "DO";
+  const T2_DOCENTEPERFIL  = "DP";
+  const T3_TUTOR          = "TU";
+  const T4_TRIBUNAL       = "TR";
+  
  /**
   * Codigo identificador del Objeto Proyecto
   * @var INT(11)
@@ -158,5 +166,15 @@ class Revision extends Objectbase
     $filtro_sql = '';
     return $filtro_sql;
   }
+      function crearRevisionDocente($doc_id, $pro_id) 
+  {
+    $this->estado = Objectbase::STATUS_AC;
+    $this->revisor=$doc_id;
+    $this->revisor_tipo= self::T1_DOCENTE;
+    $this->estado_revision=  self::E1_CREADO;
+    $this->proyecto_id=$pro_id;
+    $this->fecha_revision=date("d/m/Y");
+    $this->save();
+      }
 }
 ?>

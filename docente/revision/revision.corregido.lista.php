@@ -54,7 +54,7 @@ SELECT av.id as id, pr.nombre as nombrep, av.descripcion as descripcion, av.fech
 FROM proyecto pr, avance av
 WHERE av.proyecto_id=pr.id
 AND av.proyecto_id='".$proyecto->id."'
-AND av.estado_avance='CR' LIKE 'VI'
+AND not av.estado_avance='CO'
 ORDER BY av.fecha_avance
           ";
    $sql = mysql_query($resul);
