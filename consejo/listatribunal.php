@@ -9,20 +9,15 @@ try {
   $smarty->assign('description','Proyecto Final');
   $smarty->assign('keywords','Proyecto Final');
 
-  //
-    $CSS[]  = URL_CSS . "academic/tables.css";
+   //CSS
+  $CSS[]  = URL_CSS . "academic/tables.css";
   $CSS[]  = URL_CSS . "editablegrid.css";
   $smarty->assign('CSS',$CSS);
 
- 
-  //
-  
   //JS
- $JS[]  = URL_JS . "jquery.min.js";
- // script para mostrar la tabla 
+  $JS[]  = URL_JS . "jquery.min.js";
   $JS[]  = URL_JS . "tablaeditable/editablegrid-2.0.1.js";
   $JS[]  = URL_JS . "consejo/tabla.estudiante.lista.js";
- 
   $smarty->assign('JS',$JS);
 
   //CREAR UN TIPO   DE DEF
