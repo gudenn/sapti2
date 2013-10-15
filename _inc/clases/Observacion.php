@@ -98,5 +98,35 @@ class Observacion extends Objectbase
     $resumen   = htmlspecialchars_decode( $resumen );
     return $resumen;
   }
+   /**
+   Crear Observacion
+   */
+    function crearObservacion($obser, $rev_id){
+    $this->estado = Objectbase::STATUS_AC;
+    $this->estado_observacion=  self::E1_CREADO;
+    $this->observacion=$obser;
+    $this->revision_id = $rev_id;
+    $this->save();
+      }
+   /**
+   Cambiar estado de observaciones a aprobadas
+   */
+  function cambiarEstadoAprobado() {
+    $aprobado = self::E3_APROBADO;
+    $sql = " UPDATE  `{$this->getTableName()}` SET `estado_observacion` = '$aprobado' WHERE id='$this->id'";
+    $result = mysql_query($sql);
+    if (!$result)
+      return false;
+  }
+     /**
+   Cambiar estado de observaciones a aprobadas
+   */
+  function cambiarRevisor($rev_id, $rev_id1) {
+    $aprobado = self::E3_APROBADO;
+    $sql = " UPDATE  `{$this->getTableName()}` SET `revision_id` = '$rev_id' WHERE `revision_id` = '$rev_id1' AND not `estado_observacion` = '$aprobado' ";
+    $result = mysql_query($sql);
+    if (!$result)
+      return false;
+  }
 }
 ?>

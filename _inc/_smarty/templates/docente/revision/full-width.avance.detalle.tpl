@@ -121,7 +121,7 @@ $('#theme-switcher').change(function () {
         </p>
         {if $obsertabla=='si'}
         <h3><b>Observaciones Corregidas</b></h3>
-        <form action="#">
+        <form action="#" method="post" id="aprobado" name="aprobado" >
  <table class="tbl_lista">
   <thead>
     <tr>
@@ -148,7 +148,16 @@ $('#theme-switcher').change(function () {
     </tr>
   </tbody>
 </table>
+            <p>
+              <input type="hidden" name="tarea" value="aprobar">
+              <input type="hidden" name="token" value="{$token}">
+
+              <input name="submit" type="submit" id="submit" value="aprobar y Revisar">
+              &nbsp;
+              <input name="reset" type="reset" id="reset" tabindex="5" value="Resetear">
+            </p>
 </form>
+      
       {else}
       <h3><b>Revisar Avance</b></h3>
         <div id="respond">
@@ -189,7 +198,9 @@ $('#theme-switcher').change(function () {
               dateFormat:'dd/mm/yy',
               changeMonth: true,
               changeYear: true,
-              yearRange: "2000:2050"
+        {/literal} 
+              yearRange: "2010:{date('Y')+3}"
+        {literal}
             });
           });
           jQuery(document).ready(function(){

@@ -47,34 +47,15 @@ AND re.revisor=doc.id
 AND doc.usuario_id=us.id
 AND ob.revision_id='".$revid."' 
           ";
-   $sqlj = mysql_query($resul);
-while ($fila1 = mysql_fetch_array($sqlj, MYSQL_ASSOC)) {
+   $sql = mysql_query($resul);
+while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
    $arrayobser[]=$fila1;
  }
     
   $smarty->assign("arrayobser", $arrayobser);
   $smarty->assign("revisionesid", $revid);
-  
-  $idestu=$arrayobser[0]['idestu'];
-    if(isset($_POST['borrar'])){
-      
-    $revision    = new Revision($revid);
-    $resul = "select id from observacion where revision_id =".$revid." ";
-    $sql=mysql_query($resul);
-  while($res=mysql_fetch_array($sql, MYSQL_ASSOC)) {
-      $sql1[]=$res;
-    }
-    foreach ($sql1 as $array2){
-    $observacion = new Observacion($array2);
-    $observacion->delete();
-    }
-    $revision->delete();
-    
-      $url="revision.lista.php?id_estudiante=$idestu";
-      $ir = "Location: $url";
-      header($ir);
-  };
-  $columnacentro = 'docente/revision/columna.centro.observacion-editar.tpl';
+
+  $columnacentro = 'docente/revision/columna.centro.observacion.editar.revision.tpl';
   $smarty->assign('columnacentro',$columnacentro);
 
   //No hay ERROR
