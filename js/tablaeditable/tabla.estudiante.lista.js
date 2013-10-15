@@ -72,7 +72,11 @@ EditableGrid.prototype.initializeGrid = function(iddicta)
 						 "<img src=\"" + image("editar.png") + "\" border=\"0\" alt=\"revisar\" title=\"Registrar Observacion\"/>Revisar</a>";
                 cell.innerHTML += "<br><a onclick=document.location.href='../evaluacion/proyecto.evaluacion.php?id_estudiante="+getRowId(cell.rowIndex)+"&iddicta="+iddicta+"' style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("evaluar.png") + "\" border=\"0\" alt=\"evaluar\" title=\"Evaluar Proyecto\"/>Evaluar</a>";
-		}}));
+		
+                     cell.innerHTML += "<br><a onclick=document.location.href='../vistobueno/vistobueno.php?id_estudiante="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
+						 "<img src=\"" + image("/basicset/tick_48.png") + "\" border=\"0\" alt=\"evaluar\" title=\"Evaluar Proyecto\"/>Dar visto Bueno</a>";
+
+                  }}));
 		
 		// render the grid (parameters will be ignored if we have attached to an existing HTML table)
 		renderGrid("tablecontent", "testgrid", "tableid");

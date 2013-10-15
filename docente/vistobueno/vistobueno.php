@@ -36,31 +36,38 @@ try {
   $smarty->assign('JS',$JS);
   
  
-  if (isset($_POST['observaciones'])) 
-  $observaciones=$_POST['observaciones'];
-    if (isset($_GET['id_estudiante'])) 
+ 
+    if (isset($_GET['id_estudiante']))
+    {
   $id_estudiante=$_GET['id_estudiante'];
     
   $estudiante     = new Estudiante($id_estudiante);
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();
-  echo  $usuario->tutor_id;
-    //////creando la clase de visto bueno para realizar el visto bueno del proyecto de un estudiante
- 
-  
+  echo  $usuario->tutor_id;  
   $smarty->assign("usuario", $usuario);
   $smarty->assign("proyecto", $proyecto);
-    
-    $urlpdf=".../ARCHIVO/proyecto.pdf";
-    $smarty->assign("urlpdf", $urlpdf);
+    }
       $vistobueno= new Visto_bueno();
     date_default_timezone_set('UTC');
     $vistobueno->fecha_visto_buena=date("d/m/Y");
-
+    
     if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
     {
       
+    $proyecto =    new Proyecto($_POST['proyecto_id']);
+    $listavistobueno= $proyecto->getVbTutor();
+    $listatutores=$proyecto->getTutores();
+    
+    if(sizeof($listavistobueno)>1)
+    {
+      echo "Hola elis";
+   // echo sizeof($listavistobueno);
+    if(sizeof($listavistobueno)==sizeof($listatutores))
+    {
+   // echo sizeof($listatutores);
       
+    
     $vistobueno                    =       new Visto_bueno();
     $docente                       =       getSessionDocente();
     $vistobueno->objBuidFromPost();
@@ -70,15 +77,18 @@ try {
     $vistobueno->estado            =        Objectbase::STATUS_AC;
    
     $vistobueno->save();
-    
-   // $proyecto = new Proyecto($vistobueno->proyecto_id);
-   // $proyecto->estado_proyecto="VB";
-  //  $proyecto->save();
+   
+    $proyecto = new Proyecto($vistobueno->proyecto_id);
+    $proyecto->estado_proyecto="VB";
+    $proyecto->save();
 
-    $ir = "Location: estudiante.lista.php";
-    header($ir);
-        
-        
+ //   $ir = "Location: estudiante/estudiante.lista.php?iddicta=";
+  //  header($ir);
+    }else
+    {
+      
+    }
+         }
         
     }
 
@@ -93,6 +103,6 @@ catch(Exception $e)
   $_SESSION['register'] = $token;
   $smarty->assign('token',$token);
   
-$TEMPLATE_TOSHOW = 'docente/tutor/full-width.visto.registro.tpl';
+$TEMPLATE_TOSHOW = 'docente/vistobueno/full-width.visto.registro.tpl';
 $smarty->display($TEMPLATE_TOSHOW);
 ?>

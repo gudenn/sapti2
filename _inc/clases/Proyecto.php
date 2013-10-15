@@ -606,6 +606,8 @@ where pa.area_id=a.id  and pa.proyecto_id='$this->id' and pa.estado='AC'  and a.
        return   $contador; 
   }
   
+
+  
     /**
    * 
    * @return boolean|\Area

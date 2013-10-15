@@ -1,6 +1,7 @@
 <?php
 try {
    define ("MODULO", "CONSEJO");
+  
   require('_start.php');
    if(!isDocenteSession())
     header("Location: login.php"); 
@@ -10,7 +11,9 @@ try {
 
   leerClase("Evento");
   leerClase("Pagination");
+
   $ERROR = '';
+
   /** HEADER */
   $smarty->assign('title','Lista de Estudiantes');
   $smarty->assign('description','Pagina de Lista de Incritos');

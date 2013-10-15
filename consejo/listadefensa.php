@@ -1,60 +1,44 @@
 <?php
 try {
-    define ("MODULO", "CONSEJO");
-  
+  define ("MODULO", "CONSEJO");
   require('_start.php');
-    /** HEADER */
-  /** HEADER */
-  $smarty->assign('title','Proyecto Final');
-  $smarty->assign('description','Proyecto Final');
-  $smarty->assign('keywords','Proyecto Final');
+  if(!isDocenteSession())
+    header("Location: login.php"); 
 
-  //
-    $CSS[]  = URL_CSS . "academic/tables.css";
+  leerClase('Docente');
+  $ERROR = '';
+
+  /** HEADER */
+  $smarty->assign('title','Lista de Estudiantes');
+  $smarty->assign('description','Pagina de Lista de Incritos');
+  $smarty->assign('keywords','Gestion,Estudiantes');
+
+  //CSS
+  $CSS[]  = URL_CSS . "academic/tables.css";
   $CSS[]  = URL_CSS . "editablegrid.css";
   $smarty->assign('CSS',$CSS);
 
- 
-  //
-  
   //JS
- $JS[]  = URL_JS . "jquery.min.js";
- // script para mostrar la tabla 
+  $JS[]  = URL_JS . "jquery.min.js";
   $JS[]  = URL_JS . "tablaeditable/editablegrid-2.0.1.js";
   $JS[]  = URL_JS . "consejo/defensa.tabla.estudiante.lista.js";
- 
   $smarty->assign('JS',$JS);
-
-  //CREAR UN TIPO   DE DEF
-  leerClase('Tribunal');
-  leerClase("Proyecto");
-  leerClase("Usuario");
-  leerClase("Docente");
-  leerClase("Estudiante");
-  leerClase("Formulario");
-  leerClase("Pagination");
-  leerClase("Filtro");
-  leerClase("Consejo");
-  leerClase("Proyecto_estudiante");
-$menuList[]     = array('url'=>URL.Consejo::URL,'name'=>'Consejo');
-  $menuList[]     = array('url'=>URL . Consejo::URL ,'name'=>'Proyectos Asignados');
- $smarty->assign("menuList", $menuList);
-
-  $smarty->assign("ERROR", $ERROR);
-  //No hay ERROR
-  $smarty->assign("ERROR",'');
   
-} 
+   /**
+   * Menu superior
+   */
+  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>'Proyecto Final');
+  $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/'.basename(__FILE__),'name'=>'Estudiantes Inscritos');
+  $smarty->assign("menuList", $menuList);
+ 
+
+  //No hay ERROR
+  $smarty->assign("ERROR",$ERROR);
+}
 catch(Exception $e) 
 {
   $smarty->assign("ERROR", handleError($e));
 }
-
-//$contenido = 'tribunal/listas.listas.tpl';
-//$smarty->assign('contenido',$contenido);
-
-
-$TEMPLATE_TOSHOW = 'tribunal/listadefensa.tpl';
-$smarty->display($TEMPLATE_TOSHOW);
-
+  $smarty->display('tribunal/listadefensa.tpl');
 ?>
