@@ -147,15 +147,14 @@
       
         </div>
        <div style ="clear:both;"></div>
+     
       <div>
         Mensaje<br/>
         <textarea name="detalle" rows="5" style="width: 90%"></textarea>
-      </div>
-      <div>
-        Observaci&oacute;n<br/>
-        <textarea name="comentario" rows="4" style="width: 90%"></textarea>
-      </div>
-      
+        <script>
+          CKEDITOR.replace('detalle'{$editores})
+        </script>
+      </div>     
       
       <div style="text-align: center">
         <input type="hidden" name="id" value="" />

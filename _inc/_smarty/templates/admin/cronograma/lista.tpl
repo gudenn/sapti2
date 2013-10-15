@@ -3,8 +3,8 @@
     <tr>
       <th><a href='?order=id'                  class="tajax"  title='Ordenar por Id'                 >Id                 {$filtros->iconOrder('id')}</a></th>
       <th><a href='?order=nombre'              class="tajax"  title='Ordenar por Nombre'             >Nombre  Evento           {$filtros->iconOrder('nombre_evento')}</a></th>
-      <th><a href='?order=descripcion'         class="tajax"  title='Ordenar por Descripci&oacute;n' >Detalle {$filtros->iconOrder('detalle_evento')}</a></th>
-       <th><a href='?order=descripcion'         class="tajax"  title='Ordenar por Descripci&oacute;n' >Fecha {$filtros->iconOrder('fecha_evento')}</a></th>
+      <th><a href='?order=detalle_evento'         class="tajax"  title='Ordenar por Detalle' >Detalle {$filtros->iconOrder('detalle_evento')}</a></th>
+       <th><a href='?order=fecha_evento'         class="tajax"  title='Ordenar por Fecha' >Fecha {$filtros->iconOrder('fecha_evento')}</a></th>
       <th>Opciones</th>
     </tr>
   </thead>

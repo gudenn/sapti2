@@ -8,17 +8,18 @@ if(isset($_POST['iddia']))
 { $iddocente=0;
   
     $docente     =  getSessionDocente();
- $iddocente=(int)$docente->id;
  
-  $diaids       =   $_POST['iddia'];
+    $iddocente=4;
  
-    
+  $diaids       =   $_POST["iddia"];
+ 
+  //  "SELECT * FROM poblaciones where idprovincia='".$_POST["idnumero"]."' order by poblacio asc"
  $sqlturno="SELECT DISTINCT(turno.id), turno.nombre
 FROM dia, turno
 WHERE NOT EXISTS (
 SELECT *
 FROM turno tu, horario_doc hd, dia d
-WHERE hd.docente_id=4
+WHERE hd.docente_id=$iddocente
 AND tu.id=hd.turno_id
 AND d.id=hd.dia_id
 AND d.id=$diaids

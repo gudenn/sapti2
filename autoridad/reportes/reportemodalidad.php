@@ -85,8 +85,7 @@ try {
       
  $sqlr="SELECT count(*) as c
 FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
-WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
-=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado='AC' AND p.id=v.proyecto_id and s.id='".$p."'";
+WHERE u.id=e.usuario_id and e.id=i.estudiante_id and i.semestre_id=s.id and e.id=pe.estudiante_id and pe.proyecto_id=p.id and p.es_actual=1 and s.id='".$p."'";
  $resultado = mysql_query($sqlr);
  $areglo= array();
   
@@ -106,7 +105,7 @@ WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
   $p=$_POST['semestre_selec'];
   $sqlr="SELECT Count(*)as d
 FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,modalidad m
-WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id and p.modalidad_id=m.id and m.nombre='Adcripcion'  AND p.estado='AC' and s.id='".$p."'";
+WHERE u.id=e.usuario_id and p.tipo_proyecto='PE' AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id and p.modalidad_id=m.id and m.nombre='Adcripcion'  AND p.estado='AC' and s.id='".$p."'";
  $resultado = mysql_query($sqlr);
  $arraylista= array();
   
@@ -126,7 +125,7 @@ WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id
 
  $sqlr="SELECT Count(*)as c
 FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,modalidad m
-WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id and p.modalidad_id=m.id and m.nombre='Trabajo Dirijido'  AND p.estado='AC'  and s.id='".$p."'";
+WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id and p.tipo_proyecto='PE' AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id and p.modalidad_id=m.id and m.nombre='Trabajo Dirijido'  AND p.estado='AC'  and s.id='".$p."'";
  $resultado = mysql_query($sqlr);
  $arraytribunal= array();
   
@@ -146,7 +145,7 @@ WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id
   
   $sqlr="SELECT Count(*)as d
 FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,modalidad m
-WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id and p.modalidad_id=m.id and m.nombre='Proyecto de Grado'  AND p.estado='AC'  and s.id='".$p."'";
+WHERE u.id=e.usuario_id and p.tipo_proyecto='PE' AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id and p.modalidad_id=m.id and m.nombre='Proyecto de Grado'  AND p.estado='AC'  and s.id='".$p."'";
  $resultado = mysql_query($sqlr);
  $arraytribunal= array();
   

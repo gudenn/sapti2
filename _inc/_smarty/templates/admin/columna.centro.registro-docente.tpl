@@ -49,6 +49,7 @@
                 <input type="text" name="login" id="login" value="{$usuario->login}"  data-validation-engine="validate[required]"  size="22">
               <label for="login"><small>Nombre de usuario (*){getHelpTip('Nombre del Usuario')}</small></label>
             </p>
+            {/if}
             <p>
               <input type="password" name="clave" id="clave" value="" data-validation-engine="validate[required]"  size="22">
               <label for="password"><small>Clave de Ingreso (*){getHelpTip('ingrse la clave de ingreso al sistema')}</small></label>
@@ -57,7 +58,7 @@
               <input type="password" name="clave2" id="clave2" value="" data-validation-engine="validate[equals[clave]]"   size="22">
               <label for="password"><small>Verifique Clave (*){getHelpTip('ingrese nuevamente la clave de ingreso')}</small></label>
             </p>
-            {/if}
+            
             <h2 class="title">Grabar Docente</h2>
             <p>
               <input type="hidden" name="usuario_id"    value="{$usuario->id}">

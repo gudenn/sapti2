@@ -64,9 +64,10 @@
          </p>
          
            <p>
-         <select name=tipo_defensa_id>
-         {html_options values=$tipo_id output=$tipo_nombre}
-         </select>
+       <select name=accion>
+   {html_options options=$accion}
+  </select>
+  
          <label for="lugar"><small>Tipo Defensa</small></label>
          </p>
        

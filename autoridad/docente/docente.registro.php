@@ -80,8 +80,14 @@ try {
   $smarty->assign("titulo_h_values", $titulo_h_values);
   $smarty->assign("titulo_h_output", $titulo_h_output);
 
-  if (isset($_GET['docente_id']) && is_numeric($_GET['docente_id']))
+  $editar = FALSE;
+  
+  if (isset($_GET['docente_id']) && is_numeric($_GET['docente_id'])){
+       $editar = TRUE;
     $id = $_GET['docente_id'];
+    
+    
+  }
   $docente = new Docente($id);
   $docente->usuario_id;
   $usuario = new Usuario($docente->usuario_id);
@@ -124,10 +130,11 @@ try {
   }
 
 
-
-  $columnacentro = 'admin/columna.centro.registro-docente.tpl';
-  $smarty->assign('columnacentro', $columnacentro);
-
+ if (!$editar)
+    $columnacentro = 'admin/columna.centro.registro-docente.tpl';
+  else
+    $columnacentro = 'admin/columna.centro.docente-registro-editar.tpl';
+  $smarty->assign('columnacentro',$columnacentro);
 
   $smarty->assign("docente", $docente);
 

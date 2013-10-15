@@ -32,7 +32,12 @@
         {/if}
       </td>
        <td>{$objs[ic]['estado']}</td>
-     <td><a href="usuario.gestion.php?id_usuario={$objs[ic]['id']}">Desactivar Cuenta</a></td>
+     <td>{if ($objs[ic]['estado']=='AC')}
+         <a href="usuario.gestion.php?id_usuario={$objs[ic]['id']}">Desactivar Cuenta</a></td>
+      {/if}
+     {if ($objs[ic]['estado']=='IN')}
+         <a href="usuario.gestion.php?id_activar={$objs[ic]['id']}">Activar Cuenta</a></td>
+       {/if}
       <td>
         {if (!$objs[ic]['puede_ser_tutor'])}
           <a href="usuario.gestion.php?es_profecional={$objs[ic]['id']}">Cambiar a profecional</a>

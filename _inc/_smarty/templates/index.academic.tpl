@@ -8,7 +8,8 @@
       <div id="homepage" class="clear">
         <!-- ###### -->
         <div id="left_column">
-          <h2>Prospective Students</h2>
+          <h2>Prospective Students</h2>  
+         <h2><a href="{$URL}buscarperfil/buscajax.php">{icono('Search.png','Buscador')} Buscar Proyectos</a></h2>   
           <h2>Current Students</h2>
           <h2>International Students</h2>
           <h2>Alumni</h2>
@@ -60,6 +61,8 @@
             </tbody> 
           </table> 
         </div>
+              
+              
 
         <!-- ###### -->
 
@@ -69,4 +72,5 @@
     </div>
   </div>
 </div>
+              
 {include file="footer.tpl"}

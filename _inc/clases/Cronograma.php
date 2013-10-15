@@ -45,10 +45,9 @@ class Cronograma extends Objectbase
       $filtro->order($_GET['order']);
     $filtro->nombres[] = 'Nombre';
     $filtro->valores[] = array('input', 'nombre_evento', $filtro->filtro('nombre_evento'));
-    $filtro->nombres[] = 'Descripci&oacute;n';
-    $filtro->valores[] = array('input', 'detalle_evento', $filtro->filtro('detalle_evento'));
     $filtro->nombres[] = 'Detalle';
-    $filtro->valores[] = array('input', 'fecha_evento', $filtro->filtro('fecha_evento'));
+    $filtro->valores[] = array('input', 'detalle_evento', $filtro->filtro('detalle_evento'));
+   
   }
 
   /**

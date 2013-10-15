@@ -1,37 +1,39 @@
+{include file="tribunal/header-sjq.tpl"}
+<div class="wrapper row3">
+  <div class="rnd">
+    <div id="container">
+        <h1 class="title">Lista de Estudiantes Inscritos</h1>
+        <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">       	
+        </head>
+        <div id="wrap">
+        <div id="message"></div>
+        	<div id="pagecontrol">
+		<label for="pagecontrol">Filas por Pagina: </label>
+		<select id="pagesize" name="pagesize">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                    <option value="30">30</option>
+                    <option value="40">40</option>
+                    <option value="50">50</option>
+       </select>
 
-<div id="content">
-
-    <h1 style="text-align: center;margin: 5px 0;">
-    Lista de Proyectos Asignados
-    
-    </h1>
-  
-        <form action="" method="get" >
-     <table class="tbl_lista">
-  <thead>
-   <tr>
-      <th><a href='?order=id'                    accesskey="" class="tajax"  title='Ordenar por Id'           >ID      </a></th>
-      <th><a href='?order=proyecto_id'                        class="tajax"  title='Ordenar por Proyecto'     >ESTUDIANTE    </a></th>
-      <th><a href='?order=fecha_observacion'                  class="tajax"  title='Ordenar por Fecha'        >PROYECTO   </a></th>
-      <th><a href='?order=revisor'                            class="tajax"  title='Ordenar por Revisor'      >VER TRIBUNALES  </a></th>
-    
-  </tr>
-  </thead>
-  
-  
-  <tbody>
-  {section name=ic loop=$arraytribunal}
-    <tr  class="selectable">
-      <td>{$arraytribunal[ic]['id']}</td>
-      <td>{$arraytribunal[ic]['nombre']} {$arraytribunal[ic]['apellidos']}</td>
-      <td>{$arraytribunal[ic]['nombreproyecto']}</td>
-      <td> <a href="mostrartribunal.php?proyecto_id={$arraytribunal[ic]['id']}" target="_blank" >{icono('detalle.png','Ver Tribunales')}</a>
-      </td>
-     
+                </div>
+        	<label for="filter">Busqueda Rapida :</label>
+		<input type="text" id="filter"/>
         
-    </tr>
-  {/section}
-    </tbody> 
-</table> 
-      </form>
+		<div id="tablecontent"></div>
+        
+        	<div id="paginator"></div>
+        </div>
+          <script type="text/javascript">
+                editableGrid.onloadXML("loaddata.estudiante.lista.php");
+        </script>
+    </div>
+    {$ERROR}
+  </div>
 </div>
+{include file="footer.tpl"}
