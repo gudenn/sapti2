@@ -12,9 +12,9 @@
 
 <center> 
 
-<h1><b>BUSQUEDA RAPIDA</b></h1>
+<h1><b>BUSQUEDA DE PROYECTOS</b></h1>
 
-BUSCAR <input type="text" id="bus" name="bus" onkeyup="loadXMLDoc()" required />
+<input type="text" id="bus" style="width : 400px; length:150px" placeholder="Intordusca el Titulo ,Nombre del Estudiante, la Gestion"  autofocus="autofocus" name="bus" onkeyup="loadXMLDoc()" required /><b>BUSCAR {icono('Search.png','Buscador')}</b>
 
 <div id="myDiv"></div>
 

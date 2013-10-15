@@ -12,7 +12,7 @@ try {
   $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
   $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
-  
+  $CSS[]  = URL_CSS . "spams.css";
   $smarty->assign('CSS',$CSS);
 
   //JS
@@ -41,26 +41,11 @@ $JS[]  = URL_JS . "jquery.min.js";
   leerClase("Lugar");
   leerClase("Tipo_defensa");
   leerClase("Defensa");
+  leerClase("Semestre");
     
   
   
- $filtro     = new Filtro('g_docente',__FILE__);
-  $docente = new Docente();
-  $docente->iniciarFiltro($filtro);
-  $filtro_sql = $docente->filtrar($filtro);
-
-  $docente->usuario_id ='%';
-  
-  $o_string   = $docente->getOrderString($filtro);
-  $obj_mysql  = $docente->getAll('',$o_string,$filtro_sql,TRUE,TRUE);
-  $objs_pg    = new Pagination($obj_mysql, 'g_docente','',false,10);
-
-  $smarty->assign("filtros"  ,$filtro);
-  $smarty->assign("objs"     ,$objs_pg->objs);
-  $smarty->assign("pages"    ,$objs_pg->p_pages);
-
-  
- $rows = array();
+$rows = array();
 $usuario = new Usuario();
 //$smarty->assign('rows', $rows);
  $usuario_mysql  = $usuario->getAll();
@@ -109,18 +94,10 @@ $smarty->assign('lugar_nombre',$lugar_nombre);
 $tipo= new Tipo_defensa();
 $tipo_sql= $tipo->getAll();
 
-$tipo_id= array();
-$tipo_nombre=array();
-while ($tipo_sql && $r = mysql_fetch_array($tipo_sql[0]))
- {
-   $tipo_id[]     = $r['id'];
-   $tipo_nombre[] = $r['nombre'];
- }
-
-$smarty->assign('tipo_id',$tipo_id);
-$smarty->assign('tipo_nombre',$tipo_nombre);
-
-
+$smarty->assign('accion', array(
+    Defensa::DEFENSA_PUBLICA =>  "PUBLICA",
+      Defensa::DEFENSA_PRIVADA =>  "PRIVADA"
+                           ));
 
   if(isset($_GET['estudiante_id']))
   {
@@ -188,7 +165,8 @@ WHERE  u.`id`= d.`usuario_id` and   d.`id`= t.`docente_id` and   t.estado='AC' a
         
          if( isset($_POST['tarea']) && $_POST['tarea'] =='Guardar')
             {
-          
+          $semestre= new Semestre();
+       $semestreactual=   $semestre->getActivo();
             // echo "Hola eli";
              /*
              echo  $_POST['estudiante_id'];
@@ -214,6 +192,8 @@ WHERE  u.`id`= d.`usuario_id` and   d.`id`= t.`docente_id` and   t.estado='AC' a
               //$defensa->tipo_defensa_id=tipo_defensa_id;
               //$defensa->lugar_id=1;
            //   $defensa->proyecto_id;
+              
+              $defensa->semestre= $semestreactual->codigo;
               $defensa->estado = Objectbase::STATUS_AC;
               $defensa->save();
              

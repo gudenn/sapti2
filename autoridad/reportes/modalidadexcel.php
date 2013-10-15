@@ -16,7 +16,7 @@ $p=$_GET['id_p'];
 $m=$_GET['id_m'];
 $sql = "SELECT p.id,u.nombre,s.codigo as gestion,p.nombre as titulo,CONCAT(apellido_paterno,apellido_materno) as apellidos,p.estado as estadop,m.nombre as modalidad
 FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,modalidad m
-WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id and p.tipo_proyecto='PE' AND pe.proyecto_id=p.id AND p.modalidad_id=m.id and m.id='".$m."' and s.id='".$p."'";
+WHERE u.id=e.usuario_id AND e.id=i.estudiante_id and p.tipo_proyecto='PE' AND i.semestre_id=s.id AND e.id=pe.estudiante_id and p.tipo_proyecto='PE' AND pe.proyecto_id=p.id AND p.modalidad_id=m.id and m.id='".$m."' and s.id='".$p."'";
 $result=mysql_query($sql);
  
 ?>

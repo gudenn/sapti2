@@ -1,34 +1,39 @@
+{include file="tribunal/header-sjq.tpl"}
+<div class="wrapper row3">
+  <div class="rnd">
+    <div id="container">
+        <h1 class="title">Lista de Estudiantes Inscritos</h1>
+        <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">       	
+        </head>
+        <div id="wrap">
+        <div id="message"></div>
+        	<div id="pagecontrol">
+		<label for="pagecontrol">Filas por Pagina: </label>
+		<select id="pagesize" name="pagesize">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                    <option value="30">30</option>
+                    <option value="40">40</option>
+                    <option value="50">50</option>
+       </select>
 
-    <div id="content">
-   <center> <td bgcolor="#F7F7F7" style="text-align:center"><strong>Asignar Fechas de defensa</strong></td></center>
-      <form action="" method="post">
+                </div>
+        	<label for="filter">Busqueda Rapida :</label>
+		<input type="text" id="filter"/>
         
-        <table class="tbl_lista">
-  <thead>
-    <tr>
-      <th><a href='?order=id'                    accesskey="" class="tajax"  title='Ordenar por Id'           >ID      </a></th>
-      <th><a href='?order=proyecto_id'                        class="tajax"  title='Ordenar por Proyecto'     >ETUDIANTE   </a></th>
-      <th><a href='?order=fecha_observacion'                  class="tajax"  title='Ordenar por Fecha'        >PROYECTO </a></th>
-      <th><a href='?order=fecha_observacion'                  class="tajax"  title='Ordenar por Fecha'        >ASIGNAR</a></th>
-     </tr>
-  </thead>
-  
-  
-  <tbody>
-   {section name=ic loop=$listasignacion}
-    <tr  class="selectable">
-     <td>{$listasignacion[ic]['id']}</td>
-      <td>{$listasignacion[ic]['nombre']} {$listasignacion[ic]['apellidos']}</td>
-       <td>{$listasignacion[ic]['nombreproyecto']} </td>
-      <td> <a href="asignacion.php?estudiante_id={$listasignacion[ic]['id']}" target="_self" >{icono('detalle.png','PDF')}</a>
-    
-        </td>
-      
+		<div id="tablecontent"></div>
         
-    </tr>
-  {/section}
-    </tbody> 
-</table> 
-      </form>
+        	<div id="paginator"></div>
+        </div>
+          <script type="text/javascript">
+                editableGrid.onloadXML("defensa.loaddata.estudiante.lista.php");
+        </script>
     </div>
-  
+    {$ERROR}
+  </div>
+</div>
+{include file="footer.tpl"}

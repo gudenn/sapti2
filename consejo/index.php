@@ -4,23 +4,18 @@ try {
   
   
   require('_start.php');
-  if(!isConsejoSession())
+  if(!isDocenteSession())
    header("Location: login.php");  ;
-
-
-  
-  
-  
- $smarty->assign('title','Proyecto Final');
-  $smarty->assign('description','Proyecto Final');
-  $smarty->assign('keywords','Proyecto Final');
+   $smarty->assign('title','Proyecto Final');
+   $smarty->assign('description','Proyecto Final');
+   $smarty->assign('keywords','Proyecto Final');
 
   //CSS
-    $CSS[]  = URL_CSS . "dashboard.css";
+     $CSS[]  = URL_CSS . "dashboard.css";
      $CSS[]  = URL_CSS . "academic/3_column.css";
-  $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
+     $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
   
-  $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
+     $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
   
   $smarty->assign('CSS',$CSS);
 
@@ -35,12 +30,12 @@ try {
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
   
-  leerClase('Consejo');
-  leerClase('Menu');
-  leerClase('Tribunal');
-  leerClase('Administrador');
-  leerClase('Estudiante');
-    leerClase('Notificacion');
+              leerClase('Consejo');
+              leerClase('Menu');
+              leerClase('Tribunal');
+              leerClase('Administrador');
+              leerClase('Estudiante');
+              leerClase('Notificacion');
 
   
     /**
@@ -54,29 +49,19 @@ try {
    */
   //----------------------------------//
 
-  $menu = new Menu('Asignacion de tribunales');
+  $menu = new Menu('Asignaci&oacute;n de Tribunales');
   $link = Consejo::URL."registro.php";
-  $menu->agregarItem('Gesti&oacute;n de Asignac&oacute;n','Registro y modificacion de tribunales','basicset/user4.png',$link);
-  $link = Consejo::URL."";
-  $menu->agregarItem('Reportes de Docentes','Reportes correspondientes a los Docentes','basicset/graph.png',$link);
+  $menu->agregarItem('Asignac&oacute;n  De Tribunales','Se Asigna  Tribunales a Un Estudiante','basicset/user4.png',$link);
   $menus[] = $menu;
   
-  $menu = new Menu('Asignacion de Fecha  de Defensa');
+  $menu = new Menu('Asignaci&oacute;n De Fechas  De Defensa');
   $link = Consejo::URL."listadefensa.php";
-  $menu->agregarItem('Gesti&oacute;n de Asignac&oacute;n','Registro y modificacion de tribunales','basicset/user4.png',$link);
-  $link = Consejo::URL."";
-  $menu->agregarItem('Reportes de Docentes','Reportes correspondientes a los Docentes','basicset/graph.png',$link);
-  $menus[] = $menu;
-  
-  $menu = new Menu('Asignacion de Fecha  de Defensa');
-  $link = Consejo::URL."listadefensa.php";
-  $menu->agregarItem('Gesti&oacute;n de Asignac&oacute;n','Registro y modificacion de tribunales','basicset/user4.png',$link);
-  $link = Consejo::URL."";
-  $menu->agregarItem('Reportes de Docentes','Reportes correspondientes a los Docentes','basicset/graph.png',$link);
-  $menus[] = $menu;
+  $menu->agregarItem('Gesti&oacute;n de Asignac&oacute;n de Fechas de Defensa','Registro de Fechas de Defensa','basicset/user4.png',$link);
+   $menus[] = $menu;
+ 
   $menu = new Menu('Tribunales no Aceptados');
   $link = Consejo::URL."lista.tribunales.rechazados.php";
-  $menu->agregarItem('Gesti&oacute;n de Asignac&oacute;n','Registro y modificacion de tribunales','basicset/user4.png',$link);
+  $menu->agregarItem('Gesti&oacute;n de Asignac&oacute;n','Registro y modificaci&oacute;n de Tribunales','basicset/user4.png',$link);
    $menus[] = $menu;
   
    $notificacion= new Notificacion();
@@ -86,6 +71,12 @@ try {
     $link = Estudiante::URL."notificacion/";
     $menu->agregarItem('Notificaciones','Geti&oacute;n de las Notificaciones','basicset/megaphone.png',$link,  sizeof($notificacion->getNotificacionConsejo(2)));
     $menus[] = $menu;
+    
+     $menu = new Menu('Reportes');
+   $link = Consejo::URL."reporte.php";
+  $menu->agregarItem('Reportes','','basicset/graph.png',$link);
+  $menus[] = $menu;
+  
   
   
  $smarty->assign("menus", $menus);
