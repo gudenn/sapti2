@@ -68,8 +68,7 @@ try {
   $id             = (isset($_GET['avance_id']) && is_numeric($_GET['avance_id']))?$_GET['avance_id']:'';
   $avance         = new Avance($id);
   $avance->asignarDirectorio();
-  $avance->estado_avance=Avance::E2_VISTO;
-  $avance->save();
+  $avance->cambiarEstadoVisto();
   $resul = "
        SELECT *
 FROM observacion ov
@@ -83,8 +82,6 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
   if(mysql_num_rows($sql)>0){
       $obsertabla='si';
       $revision1=new Revision($avance->revision_id);
-      $revision1->estado_revision=  Revision::E2_VISTO;
-      $revision1->save();
   }
     $observacion1=new Observacion();
   
@@ -97,30 +94,44 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
     {
     $observacion = new Observacion();
     $revision = new Revision();
+    $revision->crearRevisionDocente($docente->id, $proyecto->id);
     $revision->objBuidFromPost();
-    $revision->estado = Objectbase::STATUS_AC;
-    $revision->revisor=$docente->id;
-    $revision->revisor_tipo='DO';
-    $revision->estado_revision=Revision::E1_CREADO;
-    $revision->proyecto_id=$proyecto->id;
     $revision->save();
+    
     foreach ($observaciones as $obser_array){
-    $observacion->objBuidFromPost();
-    $observacion->estado = Objectbase::STATUS_AC;
-    $observacion->estado_observacion=Observacion::E1_CREADO;
-    $observacion->observacion=$obser_array;
-    $observacion->revision_id = $revision->id;
-    $observacion->save();
+    $observacion->crearObservacion($obser_array, $revision->id);
+    $avance->cambiarEstadoCorregido();
     }
 
     $ir = "Location: ../revision/revision.corregido.lista.php?id_estudiante=".$estudiante->id."";
         header($ir);
     }
-//observacion.registro.php?id_estudiante=;
+    
+        if (isset($_POST['tarea']) && $_POST['tarea'] == 'aprobar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
+    {
+           if (isset($_POST['seleccion'])) 
+           $seleccion=$_POST['seleccion'];
+           if(count($seleccion)>0){
+           foreach ($seleccion as $obs){
+           $obsapro = new Observacion($obs);
+           $obsapro->cambiarEstadoAprobado();
+            }
+           }
+
+        $revisionnuevo = new Revision();
+        $revisionnuevo->crearRevisionDocente($docente->id, $proyecto->id);
+           $obsermo = new Observacion();
+           $obsermo->cambiarRevisor($revisionnuevo->id, $revision1->id);
+           $avance->cambiarEstadoCorregido();
+            
+           $ir = "Location: ../revision/observacion.editar.revision.php?revisiones_id=".$revisionnuevo->id."";
+        header($ir);
+     }
+
   $smarty->assign("revision", $revision);
   $smarty->assign("obsertabla", $obsertabla);
   $smarty->assign("observacion1", $observacion1);
-  //$smarty->assign("obser", $obser);
+  $smarty->assign("obser", $obser);
   $smarty->assign("estudiante", $estudiante);
   $smarty->assign("usuario", $usuario);
   $smarty->assign("proyecto", $proyecto);
@@ -136,7 +147,7 @@ catch(Exception $e)
   $_SESSION['register'] = $token;
   $smarty->assign('token',$token);
   
-$TEMPLATE_TOSHOW = 'docente/revision/avance.detalle.tpl';
+$TEMPLATE_TOSHOW = 'docente/revision/full-width.avance.detalle.tpl';
 $smarty->display($TEMPLATE_TOSHOW);
 
 ?>

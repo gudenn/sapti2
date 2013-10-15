@@ -33,10 +33,11 @@ AND re.proyecto_id=pr.id
 AND re.id=ob.revision_id
 GROUP BY ob.revision_id
 UNION
-SELECT av.id as id, pr.nombre as nombrep, av.revision_id as revtipo, av.fecha_avance as fecha, av.descripcion as num, av.estado_avance as estado, av.detalle as correccion
-FROM proyecto pr, avance av
+SELECT av.id as id, pr.nombre as nombrep, re.revisor_tipo as revtipo, av.fecha_avance as fecha, av.descripcion as num, av.estado_avance as estado, av.fecha_avance as correccion
+FROM proyecto pr, avance av, revision re
 WHERE pr.id="'.$proyecto.'"
 AND av.proyecto_id=pr.id
+AND av.revision_id=re.id
 ');
 $mysqli->close();
 
