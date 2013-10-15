@@ -15,7 +15,7 @@ INSERT INTO `pertenece` (`id`, `usuario_id`, `grupo_id`, `estado`) VALUES
 INSERT INTO `administrador` (`id`, `usuario_id`, `estado`) VALUES (NULL, '1', 'AC');
 -- -----------------------------Docente--------------------------------
 INSERT INTO `usuario` ( `nombre`, `apellido_paterno`, `apellido_materno`, `email`, `fecha_nacimiento`, `login`, `clave`, `ci`, `sexo`, `estado`) VALUES
-( 'Ing. Jose Richard', ' Ayoroa', ' Cardozo', 'jose@gmail.com', '1989-01-17', 'jose', 'jose', '78875', 'M', 'AC');
+( 'Ing. Jose Richard', ' Ayoroa', ' Cardozo', 'jose@gmail.com', '1989-01-17', 'jose', 'richard', '78875', 'M', 'AC');
 
 INSERT INTO `usuario` ( `nombre`, `apellido_paterno`, `apellido_materno`, `email`, `fecha_nacimiento`, `login`, `clave`, `ci`, `sexo`, `estado`) VALUES
 ( 'Msc. Vladimir', 'Costas',' Jáuregui', 'costas@gmail.com', '1989-01-17', 'costas', 'costas', '78889', 'M', 'AC');
@@ -27,7 +27,7 @@ INSERT INTO `usuario` ( `nombre`, `apellido_paterno`, `apellido_materno`, `email
 ( 'Msc. Ing. Americo', 'Fiorilo', 'Lozada', 'americo@gmail.com', '1989-01-17', 'americo', 'americo', '788898', 'M', 'AC');
 
 INSERT INTO `usuario` ( `nombre`, `apellido_paterno`, `apellido_materno`, `email`, `fecha_nacimiento`, `login`, `clave`, `ci`, `sexo`, `estado`) VALUES
-( 'Lic.  Raul', 'Catari', 'Rios', 'raul@gmail.com', '1989-01-17', 'raul', 'raul', '877657', 'M', 'AC');
+( 'Lic.  Raul', 'Catari', 'Rios', 'raul@gmail.com', '1989-01-17', 'raul', 'catari', '877657', 'M', 'AC');
 
 -- iniciamos en 2 porque el primer usuario es el Super admin
 INSERT INTO `docente` (`usuario_id`, `estado`) VALUES (2, 'AC');
@@ -91,12 +91,6 @@ INSERT INTO `materia` (`id`, `nombre`, `estado`) VALUES (NULL, 'Proyecto Final',
 INSERT INTO `materia` (`id`, `nombre`, `estado`) VALUES (NULL, 'Perfil', 'AC');
 INSERT INTO `semestre` (`id`, `codigo`, `activo`, `estado`) VALUES (NULL, 'I-2013','0', 'AC'), (NULL, 'II-2013','1', 'AC');
 
-INSERT INTO `dicta` (`id`, `docente_id`, `materia_id`, `semestre_id`, `estado`) VALUES (NULL, '1', '1', '1', 'AC');
-INSERT INTO `dicta` (`id`, `docente_id`, `materia_id`, `semestre_id`, `estado`) VALUES (NULL, '2', '1', '1', 'AC');
-INSERT INTO `dicta` (`id`, `docente_id`, `materia_id`, `semestre_id`, `estado`) VALUES (NULL, '4', '2', '1', 'AC');
-INSERT INTO `dicta` (`id`, `docente_id`, `materia_id`, `semestre_id`, `estado`) VALUES (NULL, '5', '1', '1', 'AC');
-INSERT INTO `dicta` (`id`, `docente_id`, `materia_id`, `semestre_id`, `estado`) VALUES (NULL, '4', '1', '1', 'AC');
-
 INSERT INTO `dicta` (`id`, `docente_id`, `materia_id`, `semestre_id`, `codigo_grupo_id`, `estado`) VALUES (NULL, '1', '1', '1','1', 'AC');
 INSERT INTO `dicta` (`id`, `docente_id`, `materia_id`, `semestre_id`, `codigo_grupo_id`, `estado`) VALUES (NULL, '2', '1', '1','2', 'AC');
 INSERT INTO `dicta` (`id`, `docente_id`, `materia_id`, `semestre_id`, `codigo_grupo_id`, `estado`) VALUES (NULL, '4', '2', '1','3', 'AC');
@@ -110,9 +104,6 @@ INSERT INTO `inscrito` (`id`, `evaluacion_id`, `dicta_id`, `estudiante_id`, `sem
 INSERT INTO `proyecto_dicta` (`id`, `proyecto_id`, `dicta_id`, `estado`) VALUES (NULL, '1', '1', 'AC');
 INSERT INTO `proyecto_tutor` (`id`, `proyecto_id`, `tutor_id`, `estado`) VALUES (NULL, '1', '1', 'AC');
 
-
-
-
 INSERT INTO `area` (`id`, `nombre`, `descripcion`, `estado`) VALUES (NULL, 'Ingeniería de Software', NULL, 'AC');
 INSERT INTO `area` (`id`, `nombre`, `descripcion`, `estado`) VALUES (NULL, 'Sistemas Expertos', NULL, 'AC');
 
@@ -120,8 +111,6 @@ INSERT INTO `dia` (`id`, `nombre`, `descripcion`, `estado`) VALUES
 (2, 'Martes', 'el primer dia de la  semana', 'AC'),
 (4, 'Miercoles', NULL, 'AC'),
 (5, 'Jueves', NULL, 'AC');
-
-
 
 INSERT INTO `titulo_honorifico` ( `nombre`, `descripcion`, `estado`) VALUES
 ( 'Est.', 'Est.', 'AC'),
@@ -166,3 +155,5 @@ INSERT INTO `lugar` (`id`, `nombre`, `estado`) VALUES
 INSERT INTO `turno` (`id`, `nombre`, `peso`, `descripcion`, `estado`) VALUES
 (4, 'Tarde', NULL, 'afsd', 'AC'),
 (5, 'Mañana', NULL, 'fasdf', 'AC');
+
+INSERT INTO `sapti`.`codigo_grupo` (`id`, `nombre`, `estado`) VALUES ('1', 'Grupo A', 'AC'), ('2', 'Grupo B', 'AC'), ('3', 'Grupo C', 'AC'), ('4', 'Grupo D', 'AC'), ('5', 'Grupo E', 'AC');
