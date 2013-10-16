@@ -67,7 +67,7 @@ class Inscrito extends Objectbase
    * @param INT(11) $semestre_id
    * @param INT(11) $dicta_id
    */
-  function borrarEstudiante() {
+  function borrarInscripcion() {
     //Creamos la evaluacion
     leerClase('Evaluacion');
     $evaluacion         = new Evaluacion($this->evaluacion_id);

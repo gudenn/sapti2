@@ -24,6 +24,10 @@ try {
   //CSS
   $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
+     // Agregan el css
+  $CSS[]  = URL_JS . "calendar/css/eventCalendar.css";
+  $CSS[]  = URL_JS . "calendar/css/eventCalendar_theme.css";
+  $CSS[]  = URL_CSS . "dashboard.css";
   $smarty->assign('CSS',$CSS);
 
   //JS
@@ -32,6 +36,7 @@ try {
   //Validation
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
+  $JS[]  = URL_JS . "calendar/js/jquery.eventCalendar.js";
   $smarty->assign('JS',$JS);
   
   /**
@@ -100,6 +105,7 @@ AND es.codigo_sis='$sis'";
     mysql_query("BEGIN");
     $aux      = str_replace(array("\r\n", "\r", "\n"), '#CODIGOX#', trim($_POST['cvs'])); 
     $estudiantes = explode('#CODIGOX#', $aux);
+    $estudiantesaux=$estudiantes;
     if (count($estudiantes)>=1)
       foreach ($estudiantes as $estudiante_array) {
         $estudiante_array = explode(';', $estudiante_array);
@@ -143,6 +149,30 @@ AND es.codigo_sis='$sis'";
                $noestudiante[]=$estudiante_array;
                  }
         }
+      }
+      if (isset($_POST['listaoficial'])) 
+        $listaoficial=$_POST['listaoficial'];
+        $smarty->assign("listaoficial", $listaoficial);
+      if($listaoficial[0]=="borrar"){
+              $listainscritos = "SELECT it.id as id, es.codigo_sis as sis
+                    FROM inscrito it, estudiante es
+                    WHERE it.estudiante_id=es.id
+                    AND it.dicta_id='$iddicta'
+                    AND it.semestre_id='$semestre->id'";
+                  $resultins = mysql_query($listainscritos);
+                  while ($rowins = mysql_fetch_array($resultins, MYSQL_ASSOC)) {
+                       $listainsactu[] = $rowins;
+                  }
+                 if(count($listainsactu)>0 && count($listainsactu)>count($estudiantesaux))
+                  foreach ($estudiantesaux as $estaux) {
+                      for ($i=0; $i<=count($listainsactu); $i++){
+                          if ($estaux[1]==$listainsactu[$i]['sis']){
+                              unset($listainsactu[$i]);
+                              $listainsactu=array_values($listainsactu);
+                          }  
+                      }
+                      
+                  }
       }
       $yainscritos=array_envia($yainscritos);
       $inscritos=array_envia($inscritos);

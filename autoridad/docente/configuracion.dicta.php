@@ -46,12 +46,13 @@ try {
 FROM materia, codigo_grupo
 WHERE NOT EXISTS (
 SELECT *
-FROM dicta di, materia ma, codigo_grupo cg
+FROM dicta di, materia ma, codigo_grupo cg, semestre se
 WHERE di.materia_id=ma.id
 AND di.codigo_grupo_id=cg.id
 AND materia.id=ma.id
-AND codigo_grupo.id=cg.id
-)
+AND di.semestre_id=se.id
+AND se.activo=1
+AND codigo_grupo.id=cg.id)
     ";
  $resultadomateria = mysql_query($sqlmateria);
     $materia_values[] = '';

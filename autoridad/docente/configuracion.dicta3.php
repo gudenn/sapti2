@@ -10,10 +10,12 @@ try {
 FROM materia, codigo_grupo
 WHERE NOT EXISTS (
 SELECT *
-FROM materia ma, codigo_grupo cg, dicta di
+FROM materia ma, codigo_grupo cg, dicta di, semestre se
 WHERE di.codigo_grupo_id=cg.id
 AND di.materia_id=ma.id
+AND di.semestre_id=se.id
 AND ma.id=$idmateria
+AND se.activo=1
 AND codigo_grupo.nombre=cg.nombre
 )";
  $resultadogrupo = mysql_query($sqlgrupo);
