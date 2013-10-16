@@ -3,10 +3,12 @@
 class Defensa extends Objectbase 
 {
   
-  /** Constante para el  tipos de defensa */
-  /** DEFENSA PRIVADA(DP) */
+  /** Constante para el  tipo de defensa  Privada*/
+  /** DEFENSA PRIVADA(DPRI) */
   const DEFENSA_PRIVADA = "DPRI";
-  /** DEFENSA PUBLICA (PR) */
+  /** DEFENSA PUBLICA (DPU) */
+   /** Constante para el  tipo de defensa  publica*/
+  /** DEFENSA PRIVADA(DPU) */
   const DEFENSA_PUBLICA = "DPU";
  /**
   * Nombre del Proyecto

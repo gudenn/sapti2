@@ -25,8 +25,10 @@ try {
   $JS[]  = URL_JS . "ui/jquery-ui-1.10.2.custom.min.js";
   $JS[]  = URL_JS . "ui/i18n/jquery.ui.datepicker-es.js";
   $JS[]  = URL_JS . "jquery.addfield.js";
+  leerClase('Docente');
+   $menuList[]     = array('url'=>URL.Docente::URL.'tribunal','name'=>'Tribunal');
+ $menuList[]     = array('url'=>URL.Docente::URL.'tribunal/notificacion/notitribunal.php','name'=>'Notificacion');
 
-  
   
   $smarty->assign('JS',$JS);
   $smarty->assign("ERROR", '');

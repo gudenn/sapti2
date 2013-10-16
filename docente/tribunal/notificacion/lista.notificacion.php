@@ -1,7 +1,7 @@
 <?php
 try {
    define ("MODULO", "DOCENTE-TRIBUNAL");
-  require('_start.php');
+  require('../_start.php');
   if(!isDocenteSession())
     header("Location: ../login.php"); 
 
@@ -23,7 +23,7 @@ try {
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
   $JS[]  = URL_JS . "tablaeditable/editablegrid-2.0.1.js";
-  $JS[]  = URL_JS . "tablaeditabletribunal/tabla.estudiante.lista.js";
+  $JS[]  = URL_JS . "tablaeditabletribunal/lista.notificacion.js";
   $smarty->assign('JS',$JS);
    
   
@@ -43,5 +43,5 @@ catch(Exception $e)
 {
   $smarty->assign("ERROR", handleError($e));
 }
-  $smarty->display('docente/tribunal/full-width.estudiante.lista.tpl');
+  $smarty->display('docente/tribunal/notificacion/notitribunal.tpl');
 ?>

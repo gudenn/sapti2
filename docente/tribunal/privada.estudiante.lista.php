@@ -23,13 +23,12 @@ try {
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
   $JS[]  = URL_JS . "tablaeditable/editablegrid-2.0.1.js";
-  $JS[]  = URL_JS . "tablaeditabletribunal/tabla.estudiante.lista.js";
+  $JS[]  = URL_JS . "tablaeditabletribunal/privada.tabla.estudiante.lista.js";
   $smarty->assign('JS',$JS);
-   
-  
- $menuList[]     = array('url'=>URL.Docente::URL.'tribunal','name'=>'Tribunal');
- $menuList[]     = array('url'=>URL.Docente::URL.'tribunal/estudiante.lista.php','name'=>'Lista Estudiante');
+   $menuList[]     = array('url'=>URL.Docente::URL.'tribunal','name'=>'Tribunal');
+ $menuList[]     = array('url'=>URL.Docente::URL.'tribunal/privada.estudiante.lista.php','name'=>'Lista Estudiante');
  $smarty->assign("menuList", $menuList);
+
   
   $docente=  getSessionDocente();
   $docenteid=$docente->id;
@@ -43,5 +42,5 @@ catch(Exception $e)
 {
   $smarty->assign("ERROR", handleError($e));
 }
-  $smarty->display('docente/tribunal/full-width.estudiante.lista.tpl');
+  $smarty->display('docente/tribunal/privada.estudiante.lista.tpl');
 ?>

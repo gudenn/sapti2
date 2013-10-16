@@ -2,7 +2,7 @@
 <div class="wrapper row3">
   <div class="rnd">
     <div id="container">
-        <h1 class="title">Lista de Estudiantes</h1>
+        <h1 class="title">Lista de Estudiantes Con Defensa Publica</h1>
         <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">       	
         </head>
@@ -30,7 +30,7 @@
         	<div id="paginator"></div>
         </div>
          <script type="text/javascript">
-                editableGrid.onloadXML("load.notificacion.lista.php?doc={$docente_ids}");
+                editableGrid.onloadXML("publica.loaddate.estudiante.lista.php?doc={$docente_ids}");
         </script>
     </div>
     {$ERROR}

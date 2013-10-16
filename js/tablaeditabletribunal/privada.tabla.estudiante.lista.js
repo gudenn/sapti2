@@ -71,7 +71,7 @@ EditableGrid.prototype.initializeGrid = function()
 						 "<img src=\"" + image("detalle.png") + "\" border=\"0\" alt=\"delete\" title=\"Seguimiento\"/></a>";
                 cell.innerHTML += "&nbsp;<a onclick=document.location.href='observacion.registro.php?id_estudiante="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("editar.png") + "\" border=\"0\" alt=\"delete\" title=\"Registrar Observacion\"/></a>";
-                		}}));
+           		}}));
 		
 		// render the grid (parameters will be ignored if we have attached to an existing HTML table)
 		renderGrid("tablecontent", "testgrid", "tableid");
@@ -92,7 +92,7 @@ EditableGrid.prototype.onloadXML = function(url)
 {
 	// register the function that will be called when the XML has been fully loaded
 	this.tableLoaded = function() { 
-		displayMessage("Numero de Estudiantes Inscritos " + this.getRowCount()); 
+		displayMessage("Numero de Estudiantes con Defensa Privada" + this.getRowCount()); 
 		this.initializeGrid();
 	};
 
