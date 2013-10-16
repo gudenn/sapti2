@@ -102,6 +102,12 @@ try {
   $link = Administrador::URL."configuracion/turno.registro.php";
   $menu->agregarItem('Registro de Turno','Registro de un nuevo Turno.','basicset/plus_48.png',$link);
   $menus[] = $menu;
+  $menu = new Menu('Lugares De Defensa');
+  $link = Administrador::URL."configuracion/lugar.gestion.php";
+  $menu->agregarItem('Gesti&oacute;n de Lugares de Defensa','Los Lugares de Defensa','evaluar.png',$link);
+  $link = Administrador::URL."configuracion/lugar.registro.php";
+  $menu->agregarItem('Registro de Lugares de Defensa','Registro de un Nuevo Lugar de Defensa','basicset/plus_48.png',$link);
+  $menus[] = $menu;
   //----------------------------------//
   
   

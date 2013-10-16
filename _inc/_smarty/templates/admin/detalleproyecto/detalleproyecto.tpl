@@ -268,47 +268,7 @@
         <tr>
           <td>
             <table id="firmmas">
-              <tr>
-                <td style="height: 32px;">
-                    <span>{$director_carrera}</span>
-                </td>
-                <td>
-                  <select  name="proyecto_docente_materia" id="proyecto_docente_materia" data-validation-engine="validate[required]" >
-                    {html_options values=$docentes_materia selected=$proyecto->docente_materia output=$docentes_materia}
-                  </select>
-                </td>
-                <td>
-                  <select  name="proyecto_registro_tutor" id="proyecto_registro_tutor" data-validation-engine="validate[required]" >
-                    {html_options values=$registro_tutor selected=$proyecto->registro_tutor output=$registro_tutor}
-                  </select>
-
-                </td>
-                <td class="{$tipo_moda}">
-                  <select  name="proyecto_responsable" id="proyecto_responsable" data-validation-engine="validate[required]" >
-                    {html_options values=$docresp selected=$proyecto->responsable output=$docresp}
-                  </select>
-                </td>
-                <td>
-                  {$estudiante->getNombreCompleto()}
-                </td>
-              </tr>
-              <tr>
-                <td style="height: 64px;">
-                  Director de Carrera:
-                </td>
-                <td>
-                  Docente Materia:
-                </td>
-                <td>
-                  Tutor:
-                </td>
-                <td class="{$tipo_moda}">
-                  Responsable:
-                </td>
-                <td>
-                  Estudiante:
-                </td>
-              </tr>
+            
             </table>
           </td>
         </tr>
