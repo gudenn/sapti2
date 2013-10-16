@@ -8,7 +8,8 @@ if(isset($_POST['iddia']))
 { $iddocente=0;
   
     $docente     =  getSessionDocente();
- $iddocente=4;
+ 
+    $iddocente=4;
  
   $diaids       =   $_POST["iddia"];
  
@@ -18,7 +19,7 @@ FROM dia, turno
 WHERE NOT EXISTS (
 SELECT *
 FROM turno tu, horario_doc hd, dia d
-WHERE hd.docente_id=d.id=4
+WHERE hd.docente_id=$iddocente
 AND tu.id=hd.turno_id
 AND d.id=hd.dia_id
 AND d.id=$diaids

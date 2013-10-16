@@ -160,7 +160,12 @@ function nombreRevisor(tipo){
             }else{
                 if(tipo=='TU'){
                     nombre='TUTOR';                    
+                }else{
+                if(tipo=='0'){
+                    nombre='AVANCE';                    
                 }
+
+            }
 
             }
         }
@@ -177,7 +182,15 @@ function estadoRevision(tipo){
         }else{
             if(tipo=='RE'){
                 nombre='Respondido';
+            }else{
+            if(tipo=='AP'){
+                nombre='Aprobado';
+            }else{
+            if(tipo=='CO'){
+                nombre='Revisado';
             }
+        }
+        }
         }
     }
     return nombre;

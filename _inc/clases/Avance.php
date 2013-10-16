@@ -14,6 +14,7 @@ class Avance extends Objectbase
    */
   const E1_CREADO     = "CR";
   const E2_VISTO      = "VI";
+  const E2_CORREGIDO  = "CO";
   const E3_APROBADO   = "AP";
   
   
@@ -153,6 +154,23 @@ class Avance extends Objectbase
     else
       $archivo  = PATH.Estudiante::ARCHIVO_PATH.Proyecto::ARCHIVO_PATH.'/'.$codigo_sis.'/'.$proyecto->getFolder().'/'.$this->directorio.'/';
     return $archivo;
+  }
+     /**
+   Cambiar estado de Avances a Corregidos
+   */
+  function cambiarEstadoVisto() {
+    $visto = self::E2_VISTO;
+    $sql = " UPDATE  `{$this->getTableName()}` SET `estado_avance` = '$visto' WHERE id='$this->id'";
+    $result = mysql_query($sql);
+    if (!$result)
+      return false;
+  }
+    function cambiarEstadoCorregido() {
+    $corregido = self::E2_CORREGIDO;
+    $sql = " UPDATE  `{$this->getTableName()}` SET `estado_avance` = '$corregido' WHERE id='$this->id'";
+    $result = mysql_query($sql);
+    if (!$result)
+      return false;
   }
 }
 ?>

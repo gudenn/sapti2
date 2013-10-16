@@ -6,6 +6,7 @@ try {
     header("Location: login.php");  
     
   leerClase('Estudiante');
+  leerClase('Usuario');
   leerClase('Inscrito');
   leerClase('Evaluacion');
   leerClase('Proyecto_dicta');
@@ -45,15 +46,16 @@ try {
   {
      $iddicta = $_GET['iddicta'];
   }else{
-      $iddicta=$_SESSION['iddictaproyectofinal'];
+      $iddicta=$_SESSION['iddictapro'];
   }
   $dicta = new Dicta($iddicta);
   $semestre=new Semestre();
   $semestre->getActivo();
   
-    $docmaterias = "SELECT ma.nombre as materia, di.codigo_grupo as grupo
-FROM dicta di, materia ma
+    $docmaterias = "SELECT ma.nombre as materia, cg.nombre as grupo
+FROM dicta di, materia ma, codigo_grupo as cg
 WHERE di.materia_id=ma.id
+AND di.codigo_grupo_id=cg.id
 AND di.id='$iddicta'";
   $resultmate = mysql_query($docmaterias);
   while ($row2 = mysql_fetch_array($resultmate, MYSQL_ASSOC)) {
@@ -103,18 +105,11 @@ AND es.codigo_sis='$sis'";
         $estudiante_array = explode(';', $estudiante_array);
         if (count($estudiante_array)>=1 && is_numeric($estudiante_array[1]) )
         {
-
                   $estudiante = new Estudiante();
-                  $usuario = new Estudiante();
-                  $proyecto_dicta = new Proyecto_dicta();
           $estudiante->getByCodigoSis($estudiante_array[1]);
             if ($estudiante->id){
                 if(estainscrito($estudiante_array[1], $iddicta)=='0'){
-
                     $estudiante->inscribirEstudianteDicta($semestre->id, $iddicta);
-
-                    $proyecto_dicta->estado= Objectbase::STATUS_AC;
-                    $proyecto_dicta->dicta_id = $iddicta;
                     $proyid=$estudiante->getProyecto();
                     $proyecto       = new Proyecto($proyid->proyecto_id);
                     $proyecto->asignarDicta($iddicta);
@@ -124,8 +119,13 @@ AND es.codigo_sis='$sis'";
                     $yainscritos[]=$estudiante_array;
                     }
             }else{
+                        $usuario = new Usuario();
                         $usuario->objBuidFromPost();
                         $estudiante->objBuidFromPost();
+                        $usuario->parserNombreApellidos($estudiante_array[2]); //Nombres y apellidos
+                        $usuario->estado    = Objectbase::STATUS_AC;
+                        $usuario->login     = $estudiante_array[1];            //codigo sis
+                        $usuario->clave     = $estudiante_array[1]; 
                         $usuario->estado = Objectbase::STATUS_AC;
                         $usuario->save();
 
@@ -133,6 +133,7 @@ AND es.codigo_sis='$sis'";
                         $usuario->asignarGrupo(Grupo::GR_ES);
 
                         $estudiante->estado     = Objectbase::STATUS_AC;
+                        $estudiante->codigo_sis = $estudiante_array[1];
                         $estudiante->usuario_id = $usuario->id;
                         $estudiante->save();
 

@@ -184,7 +184,15 @@ function estadoRevision(tipo){
         }else{
             if(tipo=='RE'){
                 nombre='Respondido';
+            }else{
+            if(tipo=='AP'){
+                nombre='Aprobado';
+            }else{
+            if(tipo=='CO'){
+                nombre='Revisado';
             }
+        }
+        }
         }
     }
     return nombre;
