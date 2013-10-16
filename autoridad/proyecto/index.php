@@ -33,7 +33,7 @@ try {
   //----------------------------------//
   leerClase('Menu');
   $menu = new Menu('Proyecto Final');
-  $link = Administrador::URL."proyecto/proyecto.gestion.php";
+  $link = Administrador::URL."detalle/";
   $menu->agregarItem('Gesti&oacute;n de Proyectos','Registro y modificaciones para los Proyectos','basicset/briefcase_48.png',$link);
   $link = Administrador::URL."estudiante/estudiante.asignarproyecto.php";
   $menu->agregarItem('Grabar Proyecto Final','Grabar Los datos de un Proyecto Final para un Estudiante.','basicset/user6.png',$link);
@@ -42,6 +42,7 @@ try {
   $link = Administrador::URL."proyecto/";
   $menu->agregarItem('Reportes de Proyecto Final','Reportes correspondientes a Proyecto Final','basicset/graph.png',$link);
   $menus[] = $menu;
+  
   //----------------------------------//
   
   

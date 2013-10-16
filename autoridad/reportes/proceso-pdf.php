@@ -17,7 +17,8 @@ $totEmp = mysql_num_rows($resEmp);
 $ixx = 0;
 while($datatmp = mysql_fetch_assoc($resEmp)){
 	$ixx = $ixx+1;
-	$data[] = array_merge($datatmp, array('num'=>$ixx));
+        $datatmp=  utf8_decode($datatmp);
+	$data[]= array_merge($datatmp, array('num'=>$ixx));
 }
 $titles = array(
 				'id'=>'<b>NUMERO</b>',
