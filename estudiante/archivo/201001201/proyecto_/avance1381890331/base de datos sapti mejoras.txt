@@ -1,0 +1,13 @@
+revision
+proyecto_id
+revisor
+evaluacion
+fecha_cumple
+estado
+
+
+
+observacion
+revision_id
+observacion
+estado

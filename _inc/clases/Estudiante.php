@@ -356,6 +356,16 @@ class Estudiante extends Objectbase {
       $inscrito->estado_inscrito = Inscrito::E_ACTUAL;
       $inscrito->inscribirEstudiante($this->id,$semestre_id,$dicta_id);    
   }
+    /**
+   * Borramos a un estudiante a una materia a travez de dicta! y el semestre
+   * @param INT(11) $semestre_id
+   * @param INT(11) $dicta_id
+   */
+  function borrarEstudianteDicta($id_ins) {
+      leerClase('Inscrito');
+      $inscrito = new Inscrito($id_ins);
+      $inscrito->borrarEstudiante();    
+  }
   
   function grabarRespuestaRevision($revision_id) 
   {
