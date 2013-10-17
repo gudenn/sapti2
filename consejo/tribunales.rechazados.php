@@ -1,13 +1,12 @@
 <?php
 try {
-       define ("MODULO", "DOCENTE");
+  define ("MODULO", "CONSEJO");
   require('_start.php');
   if(!isDocenteSession())
-    header("Location: ../login.php"); 
+    header("Location: login.php"); 
 
-  leerClase("Pagination");
   leerClase('Docente');
-  leerClase("Usuario");
+  leerClase('Consejo');
   $ERROR = '';
 
   /** HEADER */
@@ -22,22 +21,17 @@ try {
 
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
-  $JS[]  = URL_JS . "tablaeditabletutor/editablegrid-2.0.1.js";
- // $JS[]  = URL_JS . "tablaeditabletutor/tabla.estudiante.lista.js";
-   $JS[]  = URL_JS . "tablaeditabletutor/pefil.estudiante.lista.js";
-
+  $JS[]  = URL_JS . "tablaeditable/editablegrid-2.0.1.js";
+  $JS[]  = URL_JS . "consejo/rechasos.lista.js";
   $smarty->assign('JS',$JS);
   
    /**
    * Menu superior
    */
+    $menuList[]     = array('url'=>URL.Consejo::URL,'name'=>'Consejo');
+  $menuList[]     = array('url'=>URL . Consejo::URL.'tribunales.rechazados.php' ,'name'=>'Tribunales');
+  $smarty->assign("menuList", $menuList);
  
- 
-
-  $docente=  getSessionDocente();
-  $docenteid=$docente->id;
-  
-  $smarty->assign("docente_ids", $docenteid);
 
   //No hay ERROR
   $smarty->assign("ERROR",$ERROR);
@@ -46,5 +40,5 @@ catch(Exception $e)
 {
   $smarty->assign("ERROR", handleError($e));
 }
-  $smarty->display('docente/tutor/perfil.estudiante.lista.tpl');
+  $smarty->display('tribunal/lista.rechasos.tpl');
 ?>

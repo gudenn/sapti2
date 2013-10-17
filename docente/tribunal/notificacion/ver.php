@@ -26,7 +26,7 @@ try {
   $JS[]  = URL_JS . "ui/i18n/jquery.ui.datepicker-es.js";
   $JS[]  = URL_JS . "jquery.addfield.js";
   leerClase('Docente');
-   $menuList[]     = array('url'=>URL.Docente::URL.'tribunal','name'=>'Tribunal');
+ $menuList[]     = array('url'=>URL.Docente::URL.'tribunal','name'=>'Tribunal');
  $menuList[]     = array('url'=>URL.Docente::URL.'tribunal/notificacion/notitribunal.php','name'=>'Notificacion');
 
   

@@ -67,15 +67,9 @@ EditableGrid.prototype.initializeGrid = function(iddicta)
 		};
                 
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
-		     cell.innerHTML = "<a onclick=document.location.href='mostrartribunal.php?proyecto_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("detalle.png") + "\" border=\"0\" alt=\"Ver Tribunales\" title=\"Seguimiento\" width='30px' height='30px' />Tribunales</a>";
-                cell.innerHTML += "<br><a onclick=document.location.href='editartribunal.php?editar&proyecto_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
-						 "<img src=\"" +image("editar.png") + "\" border=\"0\" alt=\"revisar\" title=\"Registrar Observacion\"/>Editar</a>";
-               
-                   cell.innerHTML += "<br><a onclick=document.location.href='eliminartribunal.php?eliminar&tribunaleliminar_id="+getRowId(cell.rowIndex)+"'onclick=return confirm('Eliminar la Asignacion de Tribunales?');'"+"' style=\"cursor:pointer\">" +
-						     "<img src=\"" + image("editar.png") + "\" border=\"0\" alt=\"revisar\" title=\"Registrar Observacion\"/>Revisar</a>";
-          
-                  }}));
+		     cell.innerHTML = "<a onclick=document.location.href='editartribunal.php?editar&proyecto_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
+						 "<img src=\"" + image("editar.png") + "\" border=\"0\" alt=\"Ver Tribunales\" title=\"Seguimiento\" width='30px' height='30px' />Tribunales</a>";
+                        }}));
 		
 		// render the grid (parameters will be ignored if we have attached to an existing HTML table)
 		renderGrid("tablecontent", "testgrid", "tableid");
@@ -96,7 +90,7 @@ EditableGrid.prototype.onloadXML = function(url, iddicta)
 {
 	// register the function that will be called when the XML has been fully loaded
 	this.tableLoaded = function() { 
-		displayMessage("Numero de Estudiantes Inscritos " + this.getRowCount()); 
+		displayMessage("Numero de Proyetos con Tribunales no Aceptados" + this.getRowCount()); 
 		this.initializeGrid(iddicta);
 	};
 

@@ -568,7 +568,7 @@ if (isset($_POST['proyecto_id']))
       
       
    //$estudiante  = array();
-   $estudiante   = new Estudiante(false,$_POST['estudiante_id']);
+   $estudiante   = new Estudiante($proyectos->getEstudiante()->id);
    $notificacion= new Notificacion();
    $notificacion->objBuidFromPost();
   // $notificacion->enviarNotificaion($usuarios);
@@ -580,7 +580,7 @@ if (isset($_POST['proyecto_id']))
     $notificacion->prioridad=5;
     $notificacion->estado = Objectbase::STATUS_AC;
 
-    $noticaciones= array('estudiantes'=>array($estudiante->id));
+    $noticaciones= array('estudiantes'=>array($proyectos->getEstudiante()->id));
     $notificacion->enviarNotificaion( $noticaciones);
     
      
@@ -589,7 +589,7 @@ if (isset($_POST['proyecto_id']))
      { 
      foreach ($_POST['ids'] as $id)
      {
-                 echo $id;
+               //  echo $id;
                
                 $tribunal= new Tribunal();
                 $tribunal->objBuidFromPost();  

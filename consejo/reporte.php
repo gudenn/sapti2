@@ -20,11 +20,12 @@ try {
 /**
    * Menu superior
    */
-  
-  $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'reportes/','name'=>'Reportes');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'reportes/'.basename(__FILE__),'name'=>'Reportes De Estadisticos');
+    leerClase('Consejo');
+  $menuList[]     = array('url'=>URL.Consejo::URL,'name'=>'Consejo');
+  $menuList[]     = array('url'=>URL . Consejo::URL.'reporte.php' ,'name'=>'Reporte');
   $smarty->assign("menuList", $menuList);
+ 
+
 
   //CSS
   $CSS[]  = URL_CSS . "academic/tables.css";
@@ -221,9 +222,6 @@ WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
   
  while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
  {
-  // $arraytribunal=$fila;
-   
-   //array('name' => $fila["id"], 'home' => $fila["nombre"],'cell' => $fila["apellidos"], 'email' => 'john@myexample.com');
    
    $arraytribunal[]=$fila;
  }

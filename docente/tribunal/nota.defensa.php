@@ -1,6 +1,6 @@
 <?php
 try {
-   define ("MODULO", "DOCENTE-TRIBUNAL");
+   define ("MODULO", "DOCENTE");
   require('_start.php');
   if(!isDocenteSession())
   header("Location: ../login.php");

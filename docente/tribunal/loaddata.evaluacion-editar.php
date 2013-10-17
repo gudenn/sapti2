@@ -1,5 +1,5 @@
 <?php     
- define ("MODULO", "DOCENTE-TRIBUNAL");
+   define ("MODULO", "DOCENTE");
 require_once('../config.php');      
 require_once('../EditableGrid.php');
 
