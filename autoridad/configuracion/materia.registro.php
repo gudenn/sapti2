@@ -45,12 +45,9 @@ try {
   $smarty->assign("ERROR", '');
   leerClase('Materia');
 
-  $smarty->assign('accion', array(
-      Materia::MATERIA_PE =>  'CODIGO PERFIL',
-      Materia::MATERIA_PR =>  'CODIGO PROYECTO FINAL'
-                                     ));
-
-  
+  // Rehice esta opcion porque no se podia editar!!! MUY MAL
+  $smarty->assign("tipo_values", array( ''                 , Materia::MATERIA_PE, Materia::MATERIA_PR));
+  $smarty->assign("tipo_output", array( '-- Seleccione --' , 'TIPO PERFIL'      , 'TIPO PROYECTO FINAL'));
   
   $smarty->assign('columnacentro','admin/materia/columna.centro.registro.tpl');
   $id = '';
@@ -64,7 +61,6 @@ try {
     
     $materia->objBuidFromPost();
     $materia->estado = Objectbase::STATUS_AC;
-    $materia->tipo=$_POST['accion'];
     $materia->validar();
     $materia->save();
     $EXITO = TRUE;
