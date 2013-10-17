@@ -51,7 +51,6 @@ if (isset($_GET['salirconsejo']) || isset($_POST['salirconsejo'])) {
   header("Location: index.php");
   exit();
 }
-
 conectar_db();
 session_start();
 mysql_query('SET NAMES \'utf8\'');

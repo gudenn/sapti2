@@ -1,7 +1,7 @@
 <?php
 try {
- define ("MODULO", "DOCENTE-TRIBUNAL");
-  require('_start.php');
+define ("MODULO", "DOCENTE");
+  require('../_start.php');
 if(!isDocenteSession())
     header("Location: ../login.php");  
 
@@ -41,13 +41,13 @@ if(!isDocenteSession())
   
   
   $notificacion = new Notificacion();
-  $menuList[]     = array('url'=>URL.Tribunal::URL,'name'=>'Tribunal');
+  $menuList[]     = array('url'=>URL.Docente::URL.'/tribunal','name'=>'Tribunal');
   $smarty->assign("menuList", $menuList);
 
   $menu = new Menu('Lista de Estudiantes');
   $link = Tribunal::URL."estudiante.lista.php";
   $menu->agregarItem('Gesti&oacute;n de Estudiantes','Revision y Vistos Buenos a los Proyectos','basicset/user4.png',$link);
-  $link = Tribunal::URL."estudiante.lista.php";
+  $link = Tribunal::URL."visto.estudiante.lista.php";
   $menu->agregarItem('Dar Visto Buenos','Habilitar los Proyectos Para la Asignacion de Defensa','basicset/user4.png',$link);
 
   $menus[] = $menu;
@@ -55,9 +55,9 @@ if(!isDocenteSession())
  
   
   $menu = new Menu('Defensas');
-  $link = Tribunal::URL."estudiante.lista.php";
+  $link = Tribunal::URL."privada.estudiante.lista.php";
   $menu->agregarItem('Lista de Defensa  Privada','Revision y modificacion de Proyectos','basicset/user4.png',$link);
-  $link = Tribunal::URL."estudiante.lista.php";
+  $link = Tribunal::URL."publica.estudiante.lista.php";
   $menu->agregarItem('Lista de Defensa Publica ','Evaluaci&oacute;n de Proyecto','basicset/graph.png',$link);
 
   
@@ -65,7 +65,7 @@ if(!isDocenteSession())
   
   $notificaciontotal= $notificacion->getNotificacionTribunal(getSessionUser()->id);
     $menu = new Menu('Notificaciones');
-    $link = Tribunal::URL."notificacion/notitribunal.php";
+    $link = Tribunal::URL."notificacion/lista.notificacion.php";
     $menu->agregarItem('Notificaciones','Geti&oacute;n de las Notificaciones','basicset/megaphone.png',$link,  sizeof($notificaciontotal));
     $menus[] = $menu;
   

@@ -64,6 +64,12 @@ class Proyecto extends Objectbase {
    */
   const EST5_P = "PD";
   
+  /**
+   * Estado Proyecto  finalizado 
+   * 
+   */
+  const EST5_F = "PF";
+  
    /**
    * Estado Proyecto 
    * Frormulario Perfil Confirmaddo
@@ -360,6 +366,21 @@ class Proyecto extends Objectbase {
     $asignado->dicta_id               = $dicta_id;
     $asignado->estado                 = Objectbase::STATUS_AC;
     $this->proyecto_dicta_objs[]      = $asignado;
+  }
+  
+    /**
+   * Asignamos A Dicta
+   * @param INT(11) $dicta_id codigo de grupo asignado
+   */
+  function asignarDictaest($dicta_id) {
+    leerClase('Proyecto_dicta');
+
+    $asignado                         = new Proyecto_dicta();
+    $asignado->proyecto_id            = $this->id;
+    $asignado->dicta_id               = $dicta_id;
+    $asignado->estado                 = Objectbase::STATUS_AC;
+    $this->proyecto_dicta_objs[]      = $asignado;
+    $asignado->save();
   }
 
   /**
@@ -705,8 +726,28 @@ class Proyecto extends Objectbase {
       }
        return  $totalvb;
   }
+  /**
+   * cantidad de notas dde un proyecto en los tribunales
+   * select  COUNT(*)  as cantida
+      from  proyecto p  , `nota_tribunal`  nt
+       where  p.`id`  =nt.`proyecto_id`  and nt.`proyecto_id`=1
+   */
   
-  
+  function  getCantidadNotas()
+  {
+    $contidad=0;   
+   $activo = Objectbase::STATUS_AC;
+   $sql = "select nt.* from " . $this->getTableName('Nota_tribunal') . " as nt ,where nt.proyecto_id= '$this->id' and c.estado = '$activo' ";
+    $resultado = mysql_query($sql);
+    if ($resultado)
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) {
+      $contidad= $contidad+1;
+    }
+    return $contidad;
+    
+  }
+
+
   /**
    * 
    * retorna el total de proyectos con defensa privada

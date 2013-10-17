@@ -1,15 +1,7 @@
 <?php
 try {
   require('_start.php');
-   
-  //MODULO -> REGISTRO DE MERCADERIA
-  //ACCION -> GESTION
-  
 
-  
-  
-  
-  
   leerClase("Usuario");
   leerClase("Formulario");
   leerClase("Pagination");
@@ -51,21 +43,21 @@ try {
   
   
   $smarty->assign('JS',$JS);
-   $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
+  $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
    
    
   $smarty->assign('lista'       ,'admin/reportes/reportemodalidad.tpl');
   
   $sql2 = "SELECT *
                 FROM semestre";
-   $resultsem = mysql_query($sql2);
+  $resultsem = mysql_query($sql2);
    
-   $semestre_values[] = '';
-   $semestre_output[] = '- Seleccione -';
+  $semestre_values[] = '';
+  $semestre_output[] = '- Seleccione -';
   while ($row2 = mysql_fetch_array($resultsem, MYSQL_ASSOC)) {
        $semestre_values[] = $row2['id'];
        $semestre_output[] = $row2['codigo'];
- }
+  }
   $smarty->assign("semestre_values", $semestre_values);
   $smarty->assign("semestre_output", $semestre_output);
   $smarty->assign("semestre_selected", "");
@@ -84,17 +76,14 @@ try {
       
       
  $sqlr="SELECT count(*) as c
-FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
-WHERE u.id=e.usuario_id and e.id=i.estudiante_id and i.semestre_id=s.id and e.id=pe.estudiante_id and pe.proyecto_id=p.id and p.es_actual=1 and s.id='".$p."'";
+ FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
+ WHERE u.id=e.usuario_id and e.id=i.estudiante_id and i.semestre_id=s.id and e.id=pe.estudiante_id and pe.proyecto_id=p.id and p.es_actual=1 and s.id='".$p."'";
  $resultado = mysql_query($sqlr);
  $areglo= array();
   
  while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
  {
-  // $arraytribunal=$fila;
-   
-   //array('name' => $fila["id"], 'home' => $fila["nombre"],'cell' => $fila["apellidos"], 'email' => 'john@myexample.com');
-   
+ 
    $areglo[]=$fila;
  }
  
@@ -102,19 +91,16 @@ WHERE u.id=e.usuario_id and e.id=i.estudiante_id and i.semestre_id=s.id and e.id
 
  if ($num!==0) {
   
-  $p=$_POST['semestre_selec'];
-  $sqlr="SELECT Count(*)as d
-FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,modalidad m
-WHERE u.id=e.usuario_id and p.tipo_proyecto='PE' AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id and p.modalidad_id=m.id and m.nombre='Adcripcion'  AND p.estado='AC' and s.id='".$p."'";
+ $p=$_POST['semestre_selec'];
+ $sqlr="SELECT Count(*)as d
+ FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,modalidad m
+ WHERE u.id=e.usuario_id and p.tipo_proyecto='PE' AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id and p.modalidad_id=m.id and m.nombre='Adcripcion'  AND p.estado='AC' and s.id='".$p."'";
  $resultado = mysql_query($sqlr);
  $arraylista= array();
   
  while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
  {
-  // $arraytribunal=$fila;
-   
-   //array('name' => $fila["id"], 'home' => $fila["nombre"],'cell' => $fila["apellidos"], 'email' => 'john@myexample.com');
-   
+ 
    $arraylista[]=$fila;
  }
  
@@ -131,10 +117,7 @@ WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id and p.ti
   
  while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
  {
-  // $arraytribunal=$fila;
-   
-   //array('name' => $fila["id"], 'home' => $fila["nombre"],'cell' => $fila["apellidos"], 'email' => 'john@myexample.com');
-   
+  
    $arraytribunal[]=$fila;
  }
  
@@ -151,10 +134,7 @@ WHERE u.id=e.usuario_id and p.tipo_proyecto='PE' AND e.id=i.estudiante_id AND i.
   
  while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
  {
-  // $arraytribunal=$fila;
-   
-   //array('name' => $fila["id"], 'home' => $fila["nombre"],'cell' => $fila["apellidos"], 'email' => 'john@myexample.com');
-   
+  
    $arraytribunal[]=$fila;
  }
  

@@ -99,10 +99,10 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
     $revision->save();
     
     foreach ($observaciones as $obser_array){
+    $observacion->objBuidFromPost();
     $observacion->crearObservacion($obser_array, $revision->id);
-    $avance->cambiarEstadoCorregido();
     }
-
+    $avance->cambiarEstadoCorregido();
     $ir = "Location: ../revision/revision.corregido.lista.php?id_estudiante=".$estudiante->id."";
         header($ir);
     }

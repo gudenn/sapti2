@@ -21,46 +21,42 @@
 
               <input name="submit" type="submit" id="submit" value="Generar">
              </p>
-          </form>
-<div id="resultado"></div>
-<div style="width: 100%;float: left;" class="tbl_filtro">
-     <Hi> LISTA DE PERFIL </Hi>
-    <table class="tbl_lista" id="docentes"  mane="docentes">
-  <thead>
-  <tr>
-    <th><a href='?order=id'                class="tajax"   title='Ordenar por Id'               >NUMERO           </a></th>
-    <th><a href='?order=codigo_box'        class="tajax"   title='Ordenar por Codigo'           >NOMBRE       </a></th>
-    <th><a href='?order=proveedor'         class="tajax"   title='Ordenar por Proveedor'        >APELLIDOS     </a></th>
-    <th><a href='?order=especialidad'         class="tajax"   title='Ordenar por Especialidad'        >T&Iacute;TULO</a></th>
-    <th><a href='?order=id'                class="tajax"   title='Ordenar por Id'               >GESTI&Oacute;N</a></th>
+  </form>
+   <div id="resultado"></div>
+   <div style="width: 100%;float: left;" class="tbl_filtro">
+   <Hi> LISTA DE PERFIL </Hi>
+   <table class="tbl_lista" id="docentes"  mane="docentes">
+   <thead>
+      <tr>
+              <th><a href='?order=id'                class="tajax"   title='Ordenar por Id'               >NUMERO           </a></th>
+              <th><a href='?order=codigo_box'        class="tajax"   title='Ordenar por Codigo'           >NOMBRE       </a></th>
+              <th><a href='?order=proveedor'         class="tajax"   title='Ordenar por Proveedor'        >APELLIDOS     </a></th>
+              <th><a href='?order=especialidad'         class="tajax"   title='Ordenar por Especialidad'        >T&Iacute;TULO</a></th>
+              <th><a href='?order=id'                class="tajax"   title='Ordenar por Id'               >GESTI&Oacute;N</a></th>
     
-  </tr>
-  </thead>
-  <tbody>
-  {section name=ic loop=$listadocentes}
+       </tr>
+    </thead>
+    <tbody>
+       {section name=ic loop=$listavencido}
    
-    <tr  class="selectable">
-    <tr  class="{cycle values="light,dark"}">
-        <td>{$listadocentes[ic]['id']}</td>
-        <td>{$listadocentes[ic]['nombre']}</td>
-        <td>{$listadocentes[ic]['apellidos']}</td>
-        <td>{$listadocentes[ic]['titulo']}</td>
-        <td>{$listadocentes[ic]['codigo']}</td>
-        
-      
-     
+       <tr  class="selectable">
+        <tr  class="{cycle values="light,dark"}">
+              <td>{$listavencido[ic]['id']}</td>
+              <td>{$listavencido[ic]['nombre']}</td>
+              <td>{$listavencido[ic]['apellidos']}</td>
+              <td>{$listavencido[ic]['titulo']}</td>
+              <td>{$listavencido[ic]['codigo']}</td>
+        </tr>
     
-     </tr>
-    </tr>
     
-  {/section}
+       {/section}
     </tbody> 
     
-</table>
+  </table>
      <center>
-      <a href="vencido-pdf.php?id_p={$semestre->id}" target="_blank" >{icono('filepd.png','descargar')}</a>
+        <a href="vencido-pdf.php?id_p={$semestre->id}" target="_blank" >{icono('filepd.png','descargar')}</a>
         <a href="venceexcel.php?id_p={$semestre->id}" target="_blank" >{icono('boton_excel.png','descargar')}</a>  
-</center>
+     </center>
 </div> 
 </body>
    

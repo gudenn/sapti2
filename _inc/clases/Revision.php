@@ -174,7 +174,6 @@ class Revision extends Objectbase
     $this->estado_revision=  self::E1_CREADO;
     $this->proyecto_id=$pro_id;
     $this->fecha_revision=date("d/m/Y");
-    $this->save();
       }
    /**
    Actualizar fecha de aprobacion de revisiones

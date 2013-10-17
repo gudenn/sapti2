@@ -16,7 +16,7 @@ try {
   $smarty->assign('CSS',$CSS);
 
   //JS
-$JS[]  = URL_JS . "jquery.min.js";
+  $JS[]  = URL_JS . "jquery.min.js";
 
   //Datepicker UI
   $JS[]  = URL_JS . "ui/jquery-ui-1.10.2.custom.min.js";
@@ -44,37 +44,7 @@ $JS[]  = URL_JS . "jquery.min.js";
   leerClase("Semestre");
     
   
-  
-$rows = array();
-$usuario = new Usuario();
-//$smarty->assign('rows', $rows);
- $usuario_mysql  = $usuario->getAll();
- $usuario_id     = array();
- $usuario_nombre = array();
- while ($usuario_mysql && $row = mysql_fetch_array($usuario_mysql[0]))
- {
-   $usuario_id[]     = $row['id'];
-   $usuario_nombre[] = $row['nombre'];
-   $rows=$row;
- }
-// $smarty->assign('filas'  , $rows);
-$smarty->assign('usuario_id'  , $usuario_id);
-$smarty->assign('usuario_nombre', $usuario_nombre);
 
-
-$proyecto= new Proyecto();
-$proyecto_sql= $proyecto->getAll();
-$proyecto_id= array();
-$proyecto_nombre=array();
-while ($proyecto_sql && $rows = mysql_fetch_array($proyecto_sql[0]))
- {
-   $proyecto_id[]     = $rows['id'];
-   $proyecto_nombre[] = $rows['nombre_proyecto'];
- }
-
-$smarty->assign('proyecto_id',$proyecto_id);
-$smarty->assign('proyecto_nombre',$proyecto_nombre);
-  
 
 $lugar= new Lugar();
 $lugar_sql= $lugar->getAll();
@@ -163,42 +133,96 @@ WHERE  u.`id`= d.`usuario_id` and   d.`id`= t.`docente_id` and   t.estado='AC' a
   
   
         
-         if( isset($_POST['tarea']) && $_POST['tarea'] =='Guardar')
+         if( isset($_POST['proyecto_id'])  && isset($_POST['tarea']) && $_POST['tarea'] =='Guardar')
             {
           $semestre= new Semestre();
-       $semestreactual=   $semestre->getActivo();
-            // echo "Hola eli";
-             /*
-             echo  $_POST['estudiante_id'];
-     
-              */
-      $horaini=$_POST['hora_ini'];
+          $semestreactual=   $semestre->getActivo();
+          $proyecto=  new Proyecto($_POST['proyecto_id']);
+       
+       
+         $horaini=$_POST['hora_ini'];
          $minutoini=$_POST['minuto_ini'];
            
-           $var=$horaini.":".$minutoini;
-           echo $var;
-           $horafin=$_POST['hora_fin'];
+           $horaini=$horaini.":".$minutoini;
+          // echo $var;
+              $horafin=$_POST['hora_fin'];
            $minutofin=$_POST['minuto_fin'];
            $varfin=$horafin.":".$minutofin;
-            $idproyecto= $_POST['proyecto_id'];
+           $fecha=  $_POST['fecha_defensa'];
+         
+        //   echo $fecha;
+           $esiste= FALSE;
+           $listatribunales= array();
+           
+         $listatribunales=  $proyecto->getIdTribunles();
+             echo  $actual;
+          foreach ($listatribunales  as $valor)
+         {
+           
+           //echo $valor;
+                $sql="select  d.id
+               from   tribunal t, proyecto  p,   defensa  d
+                  where   t.proyecto_id=p.id  and p.id= d.proyecto_id";
+                $resultado   =  mysql_query($sql);
+          while ($filadoc = mysql_fetch_array( $resultado, MYSQL_ASSOC))
+            {   
+            
+            $defensa= new Defensa($filadoc['id']);
+            
+            if(($defensa->fecha_defensa==$fecha)  &&  ($defensa->hora_inicio==$horaini))
+            {
+              $esiste=true;
+              
+            }
+            
+             
+            
+          
+            }  
+         
+            
+         }
+      
+        // echo  
+         
+            if($esiste==false)
+             {
+              $idproyecto= $_POST['proyecto_id'];
                $defensa= new Defensa();
               $defensa->objBuidFromPost();
              
               $defensa->fecha_asignacion= date("j/n/Y");
               $defensa->hora_asignacion=date("H:i:s");
-              $defensa->fecha_defensa=$_POST['fecha_defensa'];
-              $defensa->hora_inicio=$var;
+              $defensa->fecha_defensa=$fecha;
+              $defensa->hora_inicio=$horaini;
               $defensa->hora_final= $varfin;
-              //$defensa->tipo_defensa_id=tipo_defensa_id;
-              //$defensa->lugar_id=1;
-           //   $defensa->proyecto_id;
-              
+              $defensa->tipo_defensa=$_POST['accion'];;
+           
               $defensa->semestre= $semestreactual->codigo;
               $defensa->estado = Objectbase::STATUS_AC;
               $defensa->save();
              
-   $query = "UPDATE proyecto p SET p.estado_proyecto='LD'  WHERE p.id=$idproyecto";
-  mysql_query($query);
+        $query = "UPDATE proyecto p SET p.estado_proyecto='LD'  WHERE p.id=$idproyecto";
+     mysql_query($query);
+            
+    $proyectos   = new Proyecto($idproyecto);
+    $estudiante   = new Estudiante($proyectos->getEstudiante()->id);
+    $notificacion= new Notificacion();
+    $notificacion->objBuidFromPost();
+  // $notificacion->enviarNotificaion($usuarios);
+    $notificacion->proyecto_id=$_POST['proyecto_id']; 
+    $notificacion->tipo="Notificación";
+    $notificacion->fecha_envio= date("j/n/Y");
+    $notificacion->asunto= "Asignación de Fechas de Defensa";
+    $notificacion->detalle="Asignación de Fechas de Defensa";
+    $notificacion->prioridad=5;
+    $notificacion->estado = Objectbase::STATUS_AC;
+    $noticaciones= array('estudiantes'=>array($proyectos->getEstudiante()->id));
+    $notificacion->enviarNotificaion( $noticaciones);
+  
+             }  else {
+            Echo " El docent no tiene hoara disponible";
+             }
             }
 
   

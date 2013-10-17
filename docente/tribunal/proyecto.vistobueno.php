@@ -1,7 +1,7 @@
 <?php
 try {
-   define ("MODULO", "DOCENTE-TRIBUNAL");
-  require('_start.php');
+     define ("MODULO", "DOCENTE");
+  require('../_start.php');
   if(!isDocenteSession())
   header("Location: ../login.php");
   leerClase('Visto_bueno');
@@ -35,6 +35,12 @@ try {
   $JS[]  = URL_JS . "jquery.addfield.js";
   $smarty->assign('JS',$JS);
 
+   $menuList[]     = array('url'=>URL.Docente::URL.'tribunal','name'=>'Tribunal');
+ $menuList[]     = array('url'=>URL.Docente::URL.'tribunal/visto.estudiante.lista.php','name'=>'Lista Estudiante');
+ $smarty->assign("menuList", $menuList);
+  
+  
+    
   if (isset($_POST['observaciones'])) 
   $observaciones=$_POST['observaciones'];
     if (isset($_GET['id_estudiante'])) 
@@ -55,6 +61,8 @@ try {
 
     if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
     {
+  
+      
     $vistobueno                    =       new Visto_bueno();
     $docente                       =       getSessionDocente();
     $vistobueno->objBuidFromPost();    
@@ -65,13 +73,19 @@ try {
     $vistobueno->estado            =        Objectbase::STATUS_AC;
    
     $vistobueno->save();
-    
-    $proyecto = new Proyecto($vistobueno->proyecto_id);
-    $proyecto->estado_proyecto="VB";
-    $proyecto->save();
-
+     $proyectos=     new Proyecto(  $_POST['proyecto_id']);
+     echo $proyectos->nombre;
+      if((sizeof($proyectos->getVbTribunal()))==3)
+      {
+    //$proyecto = new Proyecto($vistobueno->proyecto_id);
+     $proyecto->estado_proyecto="TV";
+     $proyecto->save();
+      }
     $ir = "Location: estudiante.lista.php";
         header($ir);
+        
+        
+        
     }
 
   //No hay ERROR

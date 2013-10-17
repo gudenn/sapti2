@@ -1,6 +1,6 @@
 <?php     
- define ("MODULO", "DOCENTE-TRIBUNAL");
-require  '_start.php';
+   define ("MODULO", "DOCENTE");
+require  '../_start.php';
 include '../_inc/_configurar.php';  
 require_once('../docente/EditableGrid.php');
 

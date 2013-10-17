@@ -70,6 +70,7 @@ and t.accion='RE';";
 
 $smarty->assign('arraytribunal'  , $arraytribunal);
 
+
  while ($usuario_mysql && $row = mysql_fetch_array($usuario_mysql[0]))
  {
    $usuario_id[]     = $row['id'];

@@ -2,8 +2,10 @@
 
 try {
 
+  define ("MODULO", "ADMIN-DOCENTE-REGISTRO");
   require('../_start.php');
-  global $PAISBOX;
+  if(!isAdminSession())
+    header("Location: ../login.php");  
 
   /** HEADER */
   $smarty->assign('title', 'Registro de Docentes');

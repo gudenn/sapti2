@@ -36,7 +36,7 @@ printf("<tr>
 <td>&nbsp;%s&nbsp;</td>
 <td>&nbsp;%s</td>
 <td>&nbsp;%s</td>
-</tr>", $row["nombre"],$row["apellidos"],$row["titulo"],$row["codigo"]);
+</tr>", $row["nombre"],$row["apellidos"],utf8_decode($row["titulo"]),$row["codigo"]);
 }
 
 ?>

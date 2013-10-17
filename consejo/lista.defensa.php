@@ -41,7 +41,7 @@ try {
   leerClase("Filtro");
   leerClase("Consejo");
   leerClase("Proyecto_estudiante");
-$menuList[]     = array('url'=>URL.Consejo::URL,'name'=>'Consejo');
+  $menuList[]     = array('url'=>URL.Consejo::URL,'name'=>'Consejo');
   $menuList[]     = array('url'=>URL . Consejo::URL ,'name'=>'Proyectos Asignados');
   $smarty->assign("menuList", $menuList);
  

@@ -24,7 +24,7 @@ function displayMessage(text, style) {
 
 // helper function to get path of a demo image
 function image(relativePath) {
-	return "../images/icons/" + relativePath;
+	return "../../images/icons/" + relativePath;
 };
 
 // this will be used to render our table headers
@@ -71,11 +71,7 @@ EditableGrid.prototype.initializeGrid = function()
 						 "<img src=\"" + image("detalle.png") + "\" border=\"0\" alt=\"delete\" title=\"Seguimiento\"/></a>";
                 cell.innerHTML += "&nbsp;<a onclick=document.location.href='observacion.registro.php?id_estudiante="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("editar.png") + "\" border=\"0\" alt=\"delete\" title=\"Registrar Observacion\"/></a>";
-                cell.innerHTML += "&nbsp;<a onclick=document.location.href='proyecto_vistobueno.php?id_estudiante="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("basicset/tick_48.png") + "\" border=\"0\" alt=\"delete\" title=\"Dar Visto Bueno\"/></a>";
-           cell.innerHTML += "&nbsp;<a onclick=document.location.href='nota.defensa.php?id_estudiante="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("basicset/tick_48.png") + "\" border=\"0\" alt=\"delete\" title=\"Dar Visto Bueno\"/></a>";
-		}}));
+                		}}));
 		
 		// render the grid (parameters will be ignored if we have attached to an existing HTML table)
 		renderGrid("tablecontent", "testgrid", "tableid");

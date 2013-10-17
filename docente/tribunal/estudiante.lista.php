@@ -1,7 +1,7 @@
 <?php
 try {
-   define ("MODULO", "DOCENTE-TRIBUNAL");
-  require('_start.php');
+     define ("MODULO", "DOCENTE");
+  require('../_start.php');
   if(!isDocenteSession())
     header("Location: ../login.php"); 
 
@@ -22,11 +22,14 @@ try {
 
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
-  $JS[]  = URL_JS . "tablaeditabletribunal/editablegrid-2.0.1.js";
+  $JS[]  = URL_JS . "tablaeditable/editablegrid-2.0.1.js";
   $JS[]  = URL_JS . "tablaeditabletribunal/tabla.estudiante.lista.js";
   $smarty->assign('JS',$JS);
+   
   
-
+ $menuList[]     = array('url'=>URL.Docente::URL.'tribunal','name'=>'Tribunal');
+ $menuList[]     = array('url'=>URL.Docente::URL.'tribunal/estudiante.lista.php','name'=>'Lista Estudiante');
+ $smarty->assign("menuList", $menuList);
   
   $docente=  getSessionDocente();
   $docenteid=$docente->id;

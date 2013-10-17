@@ -1,31 +1,39 @@
- <div id="content">
-   <h1> Lista de los Tribunales </h1>
+{include file="docente/header-sjq.tpl"}
+<div class="wrapper row3">
+  <div class="rnd">
+    <div id="container">
+        <h1 class="title">Lista de Estudiantes</h1>
+        <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">       	
+        </head>
+        <div id="wrap">
+        <div id="message"></div>
+        	<div id="pagecontrol">
+		<label for="pagecontrol">Filas por Pagina: </label>
+		<select id="pagesize" name="pagesize">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                    <option value="30">30</option>
+                    <option value="40">40</option>
+                    <option value="50">50</option>
+                </select>
 
-        <table class="tbl_lista">
-  <thead>
-    <tr>
-      <th><a href='?order=id'                    accesskey="" class="tajax"  title='Ordenar por Id'           >ID      </a></th>
-      <th><a href='?order=proyecto_id'                        class="tajax"  title='Ordenar por Proyecto'     >ETUDIANTE   </a></th>
-      <th><a href='?order=fecha_observacion'                  class="tajax"  title='Ordenar por Fecha'        >PROYECTO </a></th>
-      <th><a href='?order=fecha_observacion'                  class="tajax"  title='Ordenar por Fecha'        >VER</a></th>
-     </tr>
-  </thead>
-  
-  
-  <tbody>
-  {section name=ic loop=$notitribunal_id}
-    <tr  class="selectable">
-     <td>{$notitribunal_id[ic]['id']} </td>
-      <td>{$notitribunal_id[ic]['nombre']}{$notitribunal_id[ic]['apellidos']}</td>
-       <td>{$notitribunal_id[ic]['nombreproyecto']} </td>
-       
-      <td> <a href="ver.php?tribunal_id={$notitribunal_id[ic]['idtribunal']}" target="_self" >{icono('detalle.png','PDF')}</a>
-    
-        </td>
-      
+                </div>
+        	<label for="filter">Busqueda Rapida :</label>
+		<input type="text" id="filter"/>
         
-    </tr>
-  {/section}
-    </tbody> 
-</table>               
- </div>
+		<div id="tablecontent"></div>
+        
+        	<div id="paginator"></div>
+        </div>
+         <script type="text/javascript">
+                editableGrid.onloadXML("load.notificacion.lista.php?doc={$docente_ids}");
+        </script>
+    </div>
+    {$ERROR}
+  </div>
+</div>
+{include file="footer.tpl"}
