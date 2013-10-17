@@ -4,8 +4,7 @@ require('_start.php');
 $pdf =& new Cezpdf('LETTER');
 $pdf->selectFont('../fonts/courier.afm');
 $pdf->ezSetCmMargins(1,1,1.5,1.5);
-//$conexion = mysql_connect("localhost", "root","");
-//mysql_select_db("sapti", $conexion);
+
  $p=$_GET['id_p'];
  
 $queEmp = "SELECT p.id, u.nombre,s.codigo as gestion,CONCAT(apellido_paterno,apellido_materno) as apellidos, COUNT( * ) AS cantidadcambios, c.tipo,p.nombre as titulo,p.estado as estadop
@@ -18,15 +17,16 @@ $totEmp = mysql_num_rows($resEmp);
 
 $ixx = 0;
 while($datatmp = mysql_fetch_assoc($resEmp)){
-	$ixx = $ixx+1;
-	$data[] = array_merge($datatmp, array('num'=>$ixx));
+	$ixx=$ixx+1;
+$datatmp['titulo']=utf8_decode($datatmp['titulo']);
+$data[]=$datatmp;
 }
 $titles = array(
 				'id'=>'<b>NUMERO</b>',
 				'nombre'=>'<b>NOMBRES</b>',
 				'apellidos'=>'<b>APELLIDOS</b>',
-				'titulo'=>'<b>TITULO</b>',
-				'gestion'=>'<b>GESTION</b>',
+				'titulo'=>'<b>'.utf8_decode(TÍTULO).'</b>',
+				'gestion'=>'<b>'.utf8_decode(GETÍON).'</b>',
                                
                                 'cantidadcambios'=>'<b>CANTIDAD DE CAMBIOS</b>',
                                 'tipo'=>'<b>TIPO</b>',
@@ -37,8 +37,7 @@ $options = array(
 				'xOrientation'=>'center',
 				'width'=>500
 			);
-//$txttit = "<b>Instituto Tecnol�gico de Los Mochis</b>\n";
-//$txttit.= "Reporte general de prestamos de edificios\n";
+
 
 $pdf->ezimage("../../images/umms4.JPG",0,500,'none','left');
 $pdf->ezText($txttit, 12);
@@ -48,8 +47,7 @@ $pdf->ezText("<b>Fecha:</b> ".date("d/m/Y"), 10);
 $pdf->ezText("<b>Hora:</b> ".date("H:i:s")."\n\n", 10);
 ob_end_clean();
 $pdf->ezStream();
-//$pdf->ezText("<b>Hora:</b> ".date("H:i:s"),10);
-//$pdf->ezText('<b>Fuente:</b> <c:alink:http://blog.unijimpe.net/>blog.unijimpe.net</c:alink>');
+
 $pdf->ezStream();
 
 ?>

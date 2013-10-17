@@ -28,43 +28,41 @@ try {
    $smarty->assign('JS','');
    
    $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
-  $smarty->assign('lista'       ,'admin/reportes/lista.tpl');
+   $smarty->assign('lista'       ,'admin/reportes/lista.tpl');
    
-$sql2 = "SELECT *
+   $sql2 = "SELECT *
                 FROM semestre";
    $resultsem = mysql_query($sql2);
    
    $semestre_values[] = '';
    $semestre_output[] = '- Seleccione -';
-  while ($row2 = mysql_fetch_array($resultsem, MYSQL_ASSOC)) {
+   while ($row2 = mysql_fetch_array($resultsem, MYSQL_ASSOC)) {
        $semestre_values[] = $row2['id'];
        $semestre_output[] = $row2['codigo'];
- }
-  $smarty->assign("semestre_values", $semestre_values);
-  $smarty->assign("semestre_output", $semestre_output);
-  $smarty->assign("semestre_selected", "");
-  //CREAR UN TIPO   DE DEF
-  //echo "Hola Roxi";
+   }
+   $smarty->assign("semestre_values", $semestre_values);
+   $smarty->assign("semestre_output", $semestre_output);
+   $smarty->assign("semestre_selected", "");
+  //lista de proyectos en procesos
    $p=$_POST['semestre_selec'];
-  $semestre=new Semestre($p);
-  $smarty->assign("semestre", $semestre);
-  $confirmado=  Proyecto::EST6_C;
+   $semestre=new Semestre($p);
+   $smarty->assign("semestre", $semestre);
+   $confirmado=  Proyecto::EST6_C;
   
-    $sqlr="SELECT p.id,u.nombre,s.codigo,p.nombre as titulo,CONCAT(apellido_paterno,apellido_materno) as apellidos,p.estado as estadop
-FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe
-WHERE u.id=e.usuario_id AND e.id=i.estudiante_id and p.tipo_proyecto='PE' and p.estado_proyecto='CO' AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado='AC' and s.id='".$p."'";
- $resultado = mysql_query($sqlr);
- $arraytribunal= array();
+   $sqlr="SELECT p.id,u.nombre,s.codigo,p.nombre as titulo,CONCAT(apellido_paterno,apellido_materno) as apellidos,p.estado as estadop
+   FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe
+   WHERE u.id=e.usuario_id AND e.id=i.estudiante_id and p.tipo_proyecto='PE' and p.estado_proyecto='CO' AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado='AC' and s.id='".$p."'";
+   $resultado = mysql_query($sqlr);
+   $arraytribunal= array();
   
- while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
- {
+   while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+   {
  
-   $arraytribunal[]=$fila;
- }
+      $arraytribunal[]=$fila;
+   }
  
- $obj_mysql  = $arraytribunal;
- // $objs_pg    = new Pagination($obj_mysql, 'g_cambios','',false,10);
- $smarty->assign('listadocentes'  , $arraytribunal);
+ 
+   $smarty->assign('listadocentes'  , $arraytribunal);
  
  
 }
@@ -74,9 +72,7 @@ catch(Exception $e)
   $smarty->assign("ERROR", handleError($e));
 }
 
-//if (isset($_GET['tlista']) && $_GET['tlista']) //recargamos la tabla central
- // $smarty->display('admin/listas.lista.tpl'); 
-//else
+
   $smarty->display('admin/full-width_1.tpl');
 
 ?>

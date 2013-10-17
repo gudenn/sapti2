@@ -16,15 +16,16 @@ $totEmp = mysql_num_rows($resEmp);
 
 $ixx = 0;
 while($datatmp = mysql_fetch_assoc($resEmp)){
-	$ixx = $ixx+1;
-	$data[] = array_merge($datatmp, array('num'=>$ixx));
+	$ixx=$ixx+1;
+$datatmp['titulo']=utf8_decode($datatmp['titulo']);
+$data[]=$datatmp;
 }
 $titles = array(
 				'id'=>'<b>NUMERO</b>',
 				'nombre'=>'<b>NOMBRES</b>',
 				'apellidos'=>'<b>APELLIDOS</b>',
-				'titulo'=>'<b>TITULO</b>',
-				'gestion'=>'<b>GESTION</b>',
+				'titulo'=>'<b>'.utf8_decode(TÍTULO).'</b>',
+				'gestion'=>'<b>'.utf8_decode(GETÍON).'</b>',
                                 'estadop'=>'<b>ESTADO</b>',
 				
 			);

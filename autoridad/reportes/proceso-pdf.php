@@ -5,8 +5,7 @@ require_once('../../_inc/clases/class.ezpdf.php');
 $pdf =& new Cezpdf('LETTER');
 $pdf->selectFont('../fonts/courier.afm');
 $pdf->ezSetCmMargins(1,1,1.5,1.5);
-//$conexion = mysql_connect("localhost", "root","");
-//mysql_select_db("sapti", $conexion);
+
  $p=$_GET['id_p'];
 $queEmp = "SELECT p.id,u.nombre,s.codigo as gestion,p.nombre as titulo,CONCAT(apellido_paterno,apellido_materno) as apellidos ,p.estado as estadop
 FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe
@@ -15,17 +14,17 @@ $resEmp = mysql_query($queEmp) or die(mysql_error());
 $totEmp = mysql_num_rows($resEmp);
 
 $ixx = 0;
-while($datatmp = mysql_fetch_assoc($resEmp)){
-	$ixx = $ixx+1;
-        $datatmp=  utf8_decode($datatmp);
-	$data[]= array_merge($datatmp, array('num'=>$ixx));
+while($datatmp=mysql_fetch_assoc($resEmp)){
+$ixx=$ixx+1;
+$datatmp['titulo']=utf8_decode($datatmp['titulo']);
+$data[]=$datatmp;
 }
 $titles = array(
 				'id'=>'<b>NUMERO</b>',
 				'nombre'=>'<b>NOMBRES</b>',
 				'apellidos'=>'<b>APELLIDOS</b>',
-				'titulo'=>'<b>TITULO</b>',
-				'gestion'=>'<b>GESTION</b>',
+				'titulo'=>'<b>'.utf8_decode(TÍTULO).'</b>',
+				'gestion'=>'<b>'.utf8_decode(GETÍON).'</b>',
                                 'estadop'=>'<b>ESTADO</b>',
 				
 			);

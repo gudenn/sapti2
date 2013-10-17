@@ -1,7 +1,7 @@
 <?php
 require('_start.php');
   global $PAISBOX;
-//Exportar datos de php a Excel
+
 header("Content-Type: application/vnd.ms-excel");
 header("Expires: 0");
 header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
@@ -33,7 +33,7 @@ printf("<tr>
 <td>&nbsp;%s&nbsp;</td>
 <td>&nbsp;%s</td>
 <td>&nbsp;%s</td>
-</tr>", $row["nombre"],$row["apellidos"],$row["titulo"],$row["gestion"]);
+</tr>", $row["nombre"],$row["apellidos"],utf8_decode($row["titulo"]),$row["gestion"]);
 }
 
 ?>
