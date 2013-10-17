@@ -18,7 +18,11 @@ try {
 
   //JS
   $JS[]  = URL_JS ."jquery.min.js";
-
+  //Calendar
+  $CSS[]  = URL_JS . "calendar/css/eventCalendar.css";
+  $CSS[]  = URL_JS . "calendar/css/eventCalendar_theme.css";
+  $JS[]   = URL_JS . "calendar/js/jquery.eventCalendar.js";  
+  
   $smarty->assign('CSS',$CSS);
   $smarty->assign('JS',$JS);
 
@@ -45,12 +49,15 @@ try {
     $estudiante = $usuario->estudiante_objs[0];
   $proyecto       = $estudiante->getProyecto();
   $proyecto= new Proyecto($proyecto->id);
-  
-   $vistod=$proyecto->getVbDocente();
-   $vistodoc=$vistod[0]->visto_bueno_tipo;
-   $vistot=$proyecto->getVbTutor();
-   $vistotu=$vistot[0]->visto_bueno_tipo;
-$vb=  Proyecto::EST2_BUE;
+
+  /*
+   * no viene al caso
+   $vistod   = $proyecto->getVbDocente();
+   $vistodoc = $vistod[0]->visto_bueno_tipo;
+   $vistot   = $proyecto->getVbTutor();
+   $vistotu  = $vistot[0]->visto_bueno_tipo;
+   $vb       = Proyecto::EST2_BUE;
+   */
 
   /**
    * Menu central
@@ -68,8 +75,6 @@ $vb=  Proyecto::EST2_BUE;
   
   $smarty->assign("proyecto", $proyecto);
   
-  $smarty->assign("vb", $vb);
-  $smarty->assign("vistotu", $vistotu);
   $smarty->assign("ERROR", $ERROR);
   
 

@@ -34,7 +34,7 @@
               </tbody>
               {/section}
             </table>
-            <h3 class="title">ESTUDIANTES NO ENCONTRADOS</h3>
+            <h3 class="title">ESTUDIANTES REGISTRADOS AL SISTEMA</h3>
             <table class="tbl_lista_noestu">
               <thead>
                 <tr>

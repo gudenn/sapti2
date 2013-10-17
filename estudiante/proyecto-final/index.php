@@ -34,9 +34,18 @@ try {
   $menuList[]     = array('url'=>URL.Estudiante::URL.Proyecto::URL,'name'=>'Proyecto Final');
   $smarty->assign("menuList", $menuList);
 
+  /**
+   * Menu central
+   */
+   
+  leerClase('Menu');
+  $menu = new Menu('');
+ 
+
+  $menus = $menu->getestudianteProyectoFinalIndex($proyecto);
+  $smarty->assign("menus", $menus);
   
-  
-  $smarty->assign("columnacentro", 'estudiante/index.proyecto-final.tpl');
+  //$smarty->assign("columnacentro", 'estudiante/index.proyecto-final.tpl');
   
   $smarty->assign("estudiante", $estudiante);
   $smarty->assign("usuario", $usuario);
@@ -53,7 +62,7 @@ catch(Exception $e)
   $smarty->assign("ERROR", handleError($e));
 }
 
-$TEMPLATE_TOSHOW = 'estudiante/estudiante.3columnas.tpl';
+$TEMPLATE_TOSHOW = 'estudiante/2columnas.tpl';
 $smarty->display($TEMPLATE_TOSHOW);
 
 ?>

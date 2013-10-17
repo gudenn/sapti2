@@ -169,6 +169,11 @@ class Menu
     $thise = new Menu('Proyecto Final');
     $link = Estudiante::URL."proyecto-final/";
     $thise->agregarItem('Proyecto Final','Registro de avances y correcciones para el Proyecto Final','basicset/briefcase_48.png',$link);
+    if( $proyecto->estado_proyecto == Proyecto::EST2_BUE)
+    {
+      $link = Estudiante::URL."proyecto/proyecto.registro.php";
+      $thise->agregarItem('Registro de Formulario','Geti&oacute;n de las Notificaciones','basicset/survey.png',$link,1);
+    }
     $link = Estudiante::URL."proyecto-final/";
     $thise->agregarItem('Reportes','Reportes correspondientes a mi Proyecto Final','basicset/graph.png',$link);
     $menus[] = $thise;
@@ -178,13 +183,32 @@ class Menu
     $link = Estudiante::URL."proyecto-final/";
     $thise->agregarItem('Mensajes','Geti&oacute;n de los mensajes Mensajes','basicset/mail.png',$link,15);
    
-    if($proyecto->estado_proyecto==Proyecto::EST2_BUE){
     $menus[] = $thise;
-    $thise = new Menu('Registro de Formulario');
-    $link = Estudiante::URL."proyecto/proyecto.registro.php";
-    $thise->agregarItem('Registro de Formulario','Geti&oacute;n de las Notificaciones','basicset/survey.png',$link,1);
+    return $menus;
+  }
+  
+  /**
+   * Menu principal del Estudiante para el proyecto final
+   * @param Proyecto $proyecto
+   * @return Menu
+   */
+  function getestudianteProyectoFinalIndex($proyecto) {
+    leerClase('Grupo');
+    leerClase('Estudiante');
    
-    }
+    $menus = array();
+    $thise = new Menu('Avances');
+    $link = Estudiante::URL."proyecto-final/avance.registro.php";
+    $thise->agregarItem('Registro de Avances','Registrar Archivos y la descripci&oacute;n del avance presentado','basicset/document_pencil.png',$link);
+    $link = Estudiante::URL."proyecto-final/avance.gestion.php";
+    $thise->agregarItem('Archivo de Avances','Compendio de todos los avances presentados','basicset/cabinet.png',$link);
+    $menus[] = $thise;
+    $thise = new Menu('Correciones');
+    $link = Estudiante::URL."proyecto-final/revision.gestion.php?estado_revision=CR";
+    $thise->agregarItem('Correcciones Pendientes','Todas las correcciones pendientes presentadas por Tutor(es), Docente(s) y Tribunales','basicset/document_pencil.png',$link);
+    $link = Estudiante::URL."proyecto-final/revision.gestion.php";
+    $thise->agregarItem('Archivo de Correciones','Compendio de todas las correciones presentadas','basicset/cabinet.png',$link);
+
     $menus[] = $thise;
     return $menus;
   }

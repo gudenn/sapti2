@@ -8,9 +8,15 @@
           <form action="#" method="post" id="registro" name="registro" >
             <p>
               <textarea name="cvs" rows="4" cols="60" style="width: 650px;height: 305px;" data-validation-engine="validate[required]"></textarea>
-              <label for="cvs"><small>Ingrese Contenido CVS (*)</small></label>
+              <label for="cvs"><small>Ingrese Contenido CSV (*)</small></label>
             </p>
             <h2 class="title">Grabar Estudiantes</h2>
+            <p>
+            <label>Lista Oficial</label> 
+            <input type="checkbox" name=listaoficial[] value="borrar" class="checkbox" >
+            <label>Se eliminara a todos los estudiantes que no esten en esta lisata.</label>         
+            </p>
+
             <p>
               <input type="hidden" name="tarea" value="registrar">
               <input type="hidden" name="token" value="{$token}">

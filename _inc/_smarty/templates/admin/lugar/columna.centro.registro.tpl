@@ -1,26 +1,20 @@
       <div id="content">
-        <h1 class="title">Registro de Materia</h1>
-        <p>Formulario de registro de Materia</p>
+        <h1 class="title">Registro de Lugar de Defensa</h1>
+        <p>Formulario de registro de Lugar Defensa</p>
         <h2 class="title">Formulario de Registro</h2>
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
             <p>
-              <select name="accion" id="accion"  data-validation-engine="validate[required]" >
-               {html_options values=$tipo_values output=$tipo_output selected=$materia->tipo}
-              </select>
-              <label for="accion"><small>Tipo (*) {getHelpTip('tipo')}</small></label>
-            </p>
-              <p>
-              <input type="text" name="sigla" id="sigla" value="{$materia->sigla}"  data-validation-engine="validate[required]">
-              <label for="sigla"><small>Materia Sigla(*) {getHelpTip('sigla')}</small></label>
+              <input type="text" name="nombre" id="nombre" value="{$lugar->nombre}"  data-validation-engine="validate[required]">
+              <label for="nombre"><small>Nombre de Lugar de Defensa (*) {getHelpTip('nombre')}</small></label>
             </p>
             <p>
-              <input type="text" name="nombre" id="nombre" value="{$materia->nombre}"  data-validation-engine="validate[required]">
-              <label for="nombre"><small>Nombre del Materia (*) {getHelpTip('nombre')}</small></label>
+              <input type="text" name="descripcion" id="descripcion" value="{$lugar->descripcion}"  data-validation-engine="validate[required]">
+              <label for="descripcion"><small>Descripci&oacute;n de Lugar de Defensa (*) {getHelpTip('descripcion')}</small></label>
             </p>
-            <h2 class="title">Grabar Materia</h2>
+            <h2 class="title">Grabar Lugar Defensa</h2>
             <p>
-              <input type="hidden" name="id"    value="{$materia->id}">
+              <input type="hidden" name="id"    value="{$lugar->id}">
               <input type="hidden" name="tarea" value="registrar">
               <input type="hidden" name="token" value="{$token}">
               <input name="submit" type="submit" id="submit" value="Grabar">

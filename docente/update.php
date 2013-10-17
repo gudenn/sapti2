@@ -12,8 +12,7 @@
  */
   define ("MODULO", "DOCENTE");
 require  '_start.php';
-include '../_inc/_configurar.php';        
-require_once('config.php');         
+include '../_inc/_configurar.php';                 
 
 // Database connection                                   
 $mysqli = mysqli_init();

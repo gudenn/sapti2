@@ -1,7 +1,12 @@
 <?php
 try {
+
      define ("MODULO", "DOCENTE");
   require('_start.php');
+
+ define ("MODULO", "DOCENTE-TUTOR");
+  require('../_start.php');
+
  if(!isDocenteSession())
   header("Location: ../login.php");  
 

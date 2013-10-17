@@ -60,6 +60,20 @@ class Inscrito extends Objectbase
     $this->evaluacion_id = $evaluacion->id;
     $this->estado        = Objectbase::STATUS_AC;
     $this->save();
+  }  
+  /**
+   * Borrar a un estudiante a una materia
+   * @param INT(11) $estudiante_id
+   * @param INT(11) $semestre_id
+   * @param INT(11) $dicta_id
+   */
+  function borrarInscripcion() {
+    //Creamos la evaluacion
+    leerClase('Evaluacion');
+    $evaluacion         = new Evaluacion($this->evaluacion_id);
+    $evaluacion->delete();
+    
+    $this->delete();
   }
   
 }

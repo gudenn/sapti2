@@ -50,7 +50,7 @@ try {
   {
      $iddicta = $_GET['iddicta'];
   }else{
-      $iddicta=$_SESSION['iddictaproyectofinal'];
+      $iddicta=$_SESSION['iddictapro'];
   }
   
   if (isset($_GET['eliminar']) && isset($_GET['evento_id']) && is_numeric($_GET['evento_id']) )

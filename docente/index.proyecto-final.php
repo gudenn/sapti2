@@ -44,7 +44,7 @@ try {
   {
      $iddicta = $_GET['iddicta'];
   }else{
-      $iddicta=$_SESSION['iddictaproyectofinal'];
+      $iddicta=$_SESSION['iddictapro'];
   }
 
   $docente_aux = getSessionDocente();

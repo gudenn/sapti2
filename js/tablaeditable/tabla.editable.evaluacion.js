@@ -200,9 +200,9 @@ function updateCellValue(editableGrid, rowIndex, columnIndex, oldValue, newValue
 function promedio2(editable){
     est='ABA';
     for(cant=0; cant<editable.getRowCount(); cant++){
-        col1=editable.getValueAt(cant, '4');
-        col2=editable.getValueAt(cant, '5');
-        col3=editable.getValueAt(cant, '6');
+        col1=editable.getValueAt(cant, '5');
+        col2=editable.getValueAt(cant, '6');
+        col3=editable.getValueAt(cant, '7');
         promed=(col1+col2+col3)/3;
         promed=Math.round(promed * 1) / 1;
     if(promed >='51'){
@@ -210,22 +210,25 @@ function promedio2(editable){
     }else{
         est='REPRO';
     }
-     editable.setValueAt(cant, '7', promed);
-     editable.setValueAt(cant, '8', est);
+     editable.setValueAt(cant, '8', promed);
+     editable.setValueAt(cant, '9', est);
     }        
 }
 function prom2(editableG, cant){
-    est='ABA';
-        col1=editableG.getValueAt(cant, '4');
-        col2=editableG.getValueAt(cant, '5');
-        col3=editableG.getValueAt(cant, '6');
+    
+        col1=editableG.getValueAt(cant, '5');
+        col2=editableG.getValueAt(cant, '6');
+        col3=editableG.getValueAt(cant, '7');
         promed=(col1+col2+col3)/3;
         promed=Math.round(promed * 1) / 1;
     if(promed >='51'){
         est='APRO';
+    }else{if(promed =='0'){
+        est='ABA';
     }else{
         est='REPRO';
+    }  
     }
-     editableG.setValueAt(cant, '7', promed);
-     editableG.setValueAt(cant, '8', est);
+     editableG.setValueAt(cant, '8', promed);
+     editableG.setValueAt(cant, '9', est);
 }

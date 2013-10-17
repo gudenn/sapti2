@@ -1,26 +1,23 @@
 <?php
 try {
-  define ("MODULO", "ADMIN-CONFIGURACION-MATERIA-REGISTRO");
+  define ("MODULO", "ADMIN-CONFIGURACION-LUGAR-REGISTRO");
   require('../_start.php');
   if(!isAdminSession())
     header("Location: ../login.php");  
 
-
   /** HEADER */
-  $smarty->assign('title','SAPTI - Registro Materia');
-  $smarty->assign('description','Formulario de registro de Materia');
-  $smarty->assign('keywords','SAPTI,Materia,Registro');
-
+  $smarty->assign('title','SAPTI - Registro Institucion');
+  $smarty->assign('description','Formulario de registro de Institucion');
+  $smarty->assign('keywords','SAPTI,Institucion,Registro');
   leerClase('Administrador');
   /**
    * Menu superior
    */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/','name'=>'Configuraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Registro de Materia');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Registro de Lugar de Defensa');
   $smarty->assign("menuList", $menuList);
-
-
+ 
   //CSS
   $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_JS  . "validate/validationEngine.jquery.css";
@@ -43,30 +40,31 @@ try {
 
 
   $smarty->assign("ERROR", '');
-  leerClase('Materia');
 
-  // Rehice esta opcion porque no se podia editar!!! MUY MAL
-  $smarty->assign("tipo_values", array( ''                 , Materia::MATERIA_PE, Materia::MATERIA_PR));
-  $smarty->assign("tipo_output", array( '-- Seleccione --' , 'TIPO PERFIL'      , 'TIPO PROYECTO FINAL'));
+  //CREAR UNA DEFENSA
+  leerClase('Lugar');
   
-  $smarty->assign('columnacentro','admin/materia/columna.centro.registro.tpl');
+   $smarty->assign('columnacentro','admin/lugar/columna.centro.registro.tpl');
   $id = '';
-  if (isset($_GET['materia_id']) && is_numeric($_GET['materia_id']))
-    $id = $_GET['materia_id'];
-  $materia = new Materia($id);
+ 
+if (isset($_GET['lugar_id']) && is_numeric($_GET['lugar_id']))
+  echo  $id = $_GET['lugar_id'];
+  $lugar = new Lugar($id);
+  
   if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
   {
-    $EXITO = false;
+      
+   $EXITO = false;
     mysql_query("BEGIN");
-    
-    $materia->objBuidFromPost();
-    $materia->estado = Objectbase::STATUS_AC;
-    $materia->validar();
-    $materia->save();
+    $lugar->objBuidFromPost();
+    $lugar->estado = Objectbase::STATUS_AC;
+   // $lugar->validar();
+    $lugar->save();
     $EXITO = TRUE;
     mysql_query("COMMIT");
   }
-  $smarty->assign("materia",$materia);
+  
+  $smarty->assign("lugar",$lugar);
 
   //No hay ERROR
   $ERROR = ''; 
@@ -76,9 +74,9 @@ try {
   {
     $html = new Html();
     if ($EXITO)
-      $mensaje = array('mensaje'=>'Se grabo correctamente el Materia','titulo'=>'Registro de Materia' ,'icono'=> 'tick_48.png');
+      $mensaje = array('mensaje'=>'Se grabo correctamente el Lugar','titulo'=>'Registro el Lugar' ,'icono'=> 'tick_48.png');
     else
-      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Materia','titulo'=>'Registro de Materia' ,'icono'=> 'warning_48.png');
+      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Lugar','titulo'=>'Registro de Lugar' ,'icono'=> 'warning_48.png');
    $ERROR = $html->getMessageBox ($mensaje);
   }
   $smarty->assign("ERROR",$ERROR);

@@ -6,6 +6,7 @@ try {
     header("Location: login.php");  
     
   leerClase('Estudiante');
+  leerClase('Usuario');
   leerClase('Inscrito');
   leerClase('Evaluacion');
   leerClase('Proyecto_dicta');
@@ -23,6 +24,10 @@ try {
   //CSS
   $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
+     // Agregan el css
+  $CSS[]  = URL_JS . "calendar/css/eventCalendar.css";
+  $CSS[]  = URL_JS . "calendar/css/eventCalendar_theme.css";
+  $CSS[]  = URL_CSS . "dashboard.css";
   $smarty->assign('CSS',$CSS);
 
   //JS
@@ -31,6 +36,7 @@ try {
   //Validation
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
+  $JS[]  = URL_JS . "calendar/js/jquery.eventCalendar.js";
   $smarty->assign('JS',$JS);
   
   /**
@@ -45,15 +51,16 @@ try {
   {
      $iddicta = $_GET['iddicta'];
   }else{
-      $iddicta=$_SESSION['iddictaproyectofinal'];
+      $iddicta=$_SESSION['iddictapro'];
   }
   $dicta = new Dicta($iddicta);
   $semestre=new Semestre();
   $semestre->getActivo();
   
-    $docmaterias = "SELECT ma.nombre as materia, di.codigo_grupo as grupo
-FROM dicta di, materia ma
+    $docmaterias = "SELECT ma.nombre as materia, cg.nombre as grupo
+FROM dicta di, materia ma, codigo_grupo as cg
 WHERE di.materia_id=ma.id
+AND di.codigo_grupo_id=cg.id
 AND di.id='$iddicta'";
   $resultmate = mysql_query($docmaterias);
   while ($row2 = mysql_fetch_array($resultmate, MYSQL_ASSOC)) {
@@ -98,23 +105,17 @@ AND es.codigo_sis='$sis'";
     mysql_query("BEGIN");
     $aux      = str_replace(array("\r\n", "\r", "\n"), '#CODIGOX#', trim($_POST['cvs'])); 
     $estudiantes = explode('#CODIGOX#', $aux);
+    $estudiantesaux=$estudiantes;
     if (count($estudiantes)>=1)
       foreach ($estudiantes as $estudiante_array) {
         $estudiante_array = explode(';', $estudiante_array);
         if (count($estudiante_array)>=1 && is_numeric($estudiante_array[1]) )
         {
-
                   $estudiante = new Estudiante();
-                  $usuario = new Estudiante();
-                  $proyecto_dicta = new Proyecto_dicta();
           $estudiante->getByCodigoSis($estudiante_array[1]);
             if ($estudiante->id){
                 if(estainscrito($estudiante_array[1], $iddicta)=='0'){
-
                     $estudiante->inscribirEstudianteDicta($semestre->id, $iddicta);
-
-                    $proyecto_dicta->estado= Objectbase::STATUS_AC;
-                    $proyecto_dicta->dicta_id = $iddicta;
                     $proyid=$estudiante->getProyecto();
                     $proyecto       = new Proyecto($proyid->proyecto_id);
                     $proyecto->asignarDicta($iddicta);
@@ -124,8 +125,13 @@ AND es.codigo_sis='$sis'";
                     $yainscritos[]=$estudiante_array;
                     }
             }else{
+                        $usuario = new Usuario();
                         $usuario->objBuidFromPost();
                         $estudiante->objBuidFromPost();
+                        $usuario->parserNombreApellidos($estudiante_array[2]); //Nombres y apellidos
+                        $usuario->estado    = Objectbase::STATUS_AC;
+                        $usuario->login     = $estudiante_array[1];            //codigo sis
+                        $usuario->clave     = $estudiante_array[1]; 
                         $usuario->estado = Objectbase::STATUS_AC;
                         $usuario->save();
 
@@ -133,6 +139,7 @@ AND es.codigo_sis='$sis'";
                         $usuario->asignarGrupo(Grupo::GR_ES);
 
                         $estudiante->estado     = Objectbase::STATUS_AC;
+                        $estudiante->codigo_sis = $estudiante_array[1];
                         $estudiante->usuario_id = $usuario->id;
                         $estudiante->save();
 
@@ -142,6 +149,30 @@ AND es.codigo_sis='$sis'";
                $noestudiante[]=$estudiante_array;
                  }
         }
+      }
+      if (isset($_POST['listaoficial'])) 
+        $listaoficial=$_POST['listaoficial'];
+        $smarty->assign("listaoficial", $listaoficial);
+      if($listaoficial[0]=="borrar"){
+              $listainscritos = "SELECT it.id as id, es.codigo_sis as sis
+                    FROM inscrito it, estudiante es
+                    WHERE it.estudiante_id=es.id
+                    AND it.dicta_id='$iddicta'
+                    AND it.semestre_id='$semestre->id'";
+                  $resultins = mysql_query($listainscritos);
+                  while ($rowins = mysql_fetch_array($resultins, MYSQL_ASSOC)) {
+                       $listainsactu[] = $rowins;
+                  }
+                 if(count($listainsactu)>0 && count($listainsactu)>count($estudiantesaux))
+                  foreach ($estudiantesaux as $estaux) {
+                      for ($i=0; $i<=count($listainsactu); $i++){
+                          if ($estaux[1]==$listainsactu[$i]['sis']){
+                              unset($listainsactu[$i]);
+                              $listainsactu=array_values($listainsactu);
+                          }  
+                      }
+                      
+                  }
       }
       $yainscritos=array_envia($yainscritos);
       $inscritos=array_envia($inscritos);
