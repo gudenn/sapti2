@@ -1,6 +1,6 @@
 <?php
 try {
-  define ("MODULO", "SEMESTRE-GESTION");
+  define ("MODULO", "REPROGRAMACION-GESTION");
   require('../_start.php');
   if(!isAdminSession())
     header("Location: ../login.php");  
@@ -58,26 +58,17 @@ WHERE u.id=e.usuario_id and e.id=pe.estudiante_id and pe.proyecto_id=p.id  and p
  
   $nombre = $areglo[0]['nombre'];
   $id = $areglo[0]['id'];
-$smarty->assign('nombre'      , $nombre);
+  $smarty->assign('nombre'      , $nombre);
  
- $smarty->assign('id'  , $id);
- 
- 
- 
+  $smarty->assign('id'  , $id);
+  
   $proyecto=new Proyecto($id);
-  
   $v=$proyecto->getVigencia();
- 
-  echo $v[0]->fecha_fin;
-
   $vigencia= new Vigencia($v[0]->id);
-
- echo $vigencia->estado_vigencia;
   
  
- $smarty->assign('vigencia'     ,$vigencia);
-
- $smarty->assign('estudiante'     ,$estudiante);
+  $smarty->assign('vigencia'     ,$vigencia);
+  $smarty->assign('estudiante'     ,$estudiante);
 
   
   //////////////////////////////////////////////////////////////////
@@ -93,15 +84,7 @@ $smarty->assign('nombre'      , $nombre);
 
   if (isset($_GET['postergar'])&$vigencia->estado_vigencia!='PO' )
   {
-      
- 
- 
-       $fechafin=$v[0]->fecha_fin;
- 
-  
-  
-    
-    
+     $fechafin=$v[0]->fecha_fin;
      $actual=date("d/m/Y", strtotime("$fechafin +1 year"));
      $vigencia->fecha_fin=$actual;
      $vigencia->estado_vigencia='PO';
@@ -110,34 +93,22 @@ $smarty->assign('nombre'      , $nombre);
   
 
        if (isset($_GET['prorroga'])&$vigencia->estado_vigencia!='PR' )
-  {
-      
+  { 
      $fechafin=$v[0]->fecha_fin;
      $vigencia->fecha_fin=  date("d/m/Y",strtotime("$fechafin +6 month") );
      $vigencia->estado_vigencia='PR';
      $vigencia->save();
  }
-      
-            
-        
- 
-  
-
-  
- 
-  
- 
-
-  $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
-  $smarty->assign('lista'       ,'admin/estado/lista.tpl');
+     $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
+     $smarty->assign('lista'       ,'admin/estado/lista.tpl');
 
  
 
 
 
   //No hay ERROR
-  $smarty->assign("ERROR",'');
-  $smarty->assign("URL",URL);  
+    $smarty->assign("ERROR",'');
+    $smarty->assign("URL",URL);  
 
 }
 catch(Exception $e) 
