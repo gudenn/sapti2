@@ -24,7 +24,7 @@ class Notificacion extends Objectbase
   const TIPO_MENSAJE    = 'N01';
  /** TIPO_TIEMPO mensaje de tiempo  */
   const TIPO_TIEMPO     = 'N02';
- /** TIPO_MENSAJE mensaje normal  */
+ /** TIPO_MENSAJE mensaje asignacion  */
   const TIPO_ASIGNACION = 'N03';
 
  /**
@@ -317,180 +317,301 @@ class Notificacion extends Objectbase
     }
     
   }
+
+  /**
+   * Retorna todas las notificaciones de cualquier Usuario de cualquier tipo
+   * puede ser tutor tribunal docente o estudiante
+   * @param type $usuario_id
+   * @param string $limit the limit in the sql
+   * @param string $orderby the ORDER BY sentence, in the sql
+   * @param string $filter  some firlter to the sql, like: KEY LIKE "%"
+   * @param bool $just_mysql  if just need myql recurse
+   * @return array array(the sql result,the number of afected rows) or (null,0)
+   */
+  function getTodasNotificaciones($usuario_id,$limit = "",$orderby = "",$filter = "" ,$just_mysql = false)
+  {
+    
+    $activo = Objectbase::STATUS_AC;
+
+    //Notificaciones si es Revisor
+    $sql_revisor = " SELECT n.*  , nr.estado_notificacion "
+            . " FROM " 
+            . $this->getTableName('Notificacion') . " as n , " 
+            . $this->getTableName('Notificacion_revisor') . " as nr , " 
+            . $this->getTableName('Revisor') . " as r  "
+            . " WHERE "
+            . " n.id = nr.notificacion_id  and "
+            . " nr.revisor_id = r.id  "
+            . " and  r.usuario_id = '$usuario_id' "
+            . " and n.estado = '$activo' and  nr.estado = '$activo'  and r.estado = '$activo' ";
+
+    //Notificaiones si es Consejo
+    $sql_consejo = " SELECT n.*  , nr.estado_notificacion "
+            . " FROM " 
+            . $this->getTableName('Notificacion') . " as n , " 
+            . $this->getTableName('Notificacion_consejo') . " as nr , " 
+            . $this->getTableName('Consejo') . " as r  "
+            . " WHERE "
+            . " n.id = nr.notificacion_id  and "
+            . " nr.consejo_id = r.id  "
+            . " and  r.usuario_id = '$usuario_id' "
+            . " and n.estado = '$activo' and  nr.estado = '$activo'  and r.estado = '$activo' ";
+
+    //Notificaiones si es Tribunal
+    $sql_tribunal = " SELECT n.* , nr.estado_notificacion "
+            . " FROM " 
+            . $this->getTableName('Notificacion') . " as n , " 
+            . $this->getTableName('Notificacion_tribunal') . " as nr , " 
+            . $this->getTableName('Tribunal') . " as r , "
+            . $this->getTableName('Docente') . " as d  "
+            . " WHERE "
+            . " n.id = nr.notificacion_id  and "
+            . " nr.tribunal_id = r.id  and "
+            . " d.id = r.docente_id  and "
+            . " d.usuario_id = '$usuario_id' "
+            . " and n.estado = '$activo' and  nr.estado = '$activo'  and r.estado = '$activo' ";
+
+    //Notificaiones si es Estudiante
+    $sql_estudiante = " SELECT n.*  , nr.estado_notificacion "
+            . " FROM " 
+            . $this->getTableName('Notificacion') . " as n , " 
+            . $this->getTableName('Notificacion_estudiante') . " as nr , " 
+            . $this->getTableName('Estudiante') . " as r  "
+            . " WHERE "
+            . " n.id = nr.notificacion_id  and "
+            . " nr.estudiante_id = r.id  "
+            . " and  r.usuario_id = '$usuario_id' "
+            . " and n.estado = '$activo' and  nr.estado = '$activo'  and r.estado = '$activo' ";
+
+    //Notificaiones si es Docente
+    $sql_docente = " SELECT n.*  , nr.estado_notificacion "
+            . " FROM " 
+            . $this->getTableName('Notificacion') . " as n , " 
+            . $this->getTableName('Notificacion_dicta') . " as nr , " 
+            . $this->getTableName('Dicta') . " as r  ,"
+            . $this->getTableName('Docente') . " as d  "
+            . " WHERE "
+            . " n.id = nr.notificacion_id  and "
+            . " r.id = nr.dicta_id  and "
+            . " d.id = r.docente_id  and "
+            . " d.usuario_id = '$usuario_id' "
+            . " and n.estado = '$activo' and nr.estado = '$activo'  and r.estado = '$activo' and d.estado = '$activo' ";
+    
+    //Juntamos todas las notificaciones, las filtramos y las procesamos
+    $sql    = " select * FROM ( "
+            . " ($sql_revisor) UNION "
+            . " ($sql_consejo) UNION "
+            . " ($sql_tribunal) UNION "
+            . " ($sql_estudiante) UNION "
+            . " ($sql_docente) ) as notificacion "
+            . " WHERE 1 "
+            . " $filter $orderby $limit ";
+
+    $result = mysql_query($sql);
+    if (!$result)
+      return array(false,0,$sql);
+    if ($just_mysql)
+      return $result;
+    $num_rows = mysql_num_rows($result);
+    return array($result,$num_rows,$sql);
+  }
   
   /**
-   * 
+   * retorna todas las notificaciones  de un docente  tribunal  dado el id del usuario
    * @param type $iddocente
-   *    retorna todas las notificaciones  de un docente  tribunal  dado el id del usuario
-   * 
    */
-  function   getNotificacionTribunal( $idusuario)
-  {
+  function getNotificacionTribunal($idusuario) {
     leerClase('Notificacion');
-    $notificacion= array();
+    $notificacion = array();
     $activo = Objectbase::STATUS_AC;
     /**
      * select  n.*
-from  `notificacion` n, `notificacion_tribunal`  nt, `tribunal`t , `docente` d
-                                                                                                                                                                                                                                                                    where   n.`id`=nt.`notificacion_id`  and nt.`tribunal_id`=t.`id`  and t.`docente_id`= d.`id`  and nt.`estado_notificacion`='SV' and d.`usuario_id`=3
-                                                                                                                                                                                                                                                                     and  n.`estado`='AC'  and nt.`estado`='AC'  and  t.`estado` ='AC'  and d.`estado`='AC';                                                                                                                                                                                                                                 where   n.`id`=nt.`notificacion_id`  and nt.`tribunal_id`=t.`id`  and t.`docente_id`= d.`id`  and nt.`estado_notificacion`='SV' and d.`usuario_id`=3;
+      from  `notificacion` n, `notificacion_tribunal`  nt, `tribunal`t , `docente` d
+      where   n.`id`=nt.`notificacion_id`  and nt.`tribunal_id`=t.`id`  and t.`docente_id`= d.`id`  and nt.`estado_notificacion`='SV' and d.`usuario_id`=3
+      and  n.`estado`='AC'  and nt.`estado`='AC'  and  t.`estado` ='AC'  and d.`estado`='AC';                                                                                                                                                                                                                                 where   n.`id`=nt.`notificacion_id`  and nt.`tribunal_id`=t.`id`  and t.`docente_id`= d.`id`  and nt.`estado_notificacion`='SV' and d.`usuario_id`=3;
      */
-    
-    $vars=0;
+    $vars = 0;
     $sql = "select n.* from " . $this->getTableName('Notificacion') . " as n , " . $this->getTableName('Notificacion_tribunal') . " as nt , " . $this->getTableName('Tribunal') . " as t , " . $this->getTableName('Docente') . " as d  where n.id=nt.notificacion_id  and nt.tribunal_id=t.id and t.docente_id= d.id and nt.estado_notificacion='SV' and  d.usuario_id='$idusuario' and n.estado = '$activo' and  nt.estado = '$activo'  and d.estado = '$activo' and t.estado = '$activo'";
     $resultado = mysql_query($sql);
-    
-   // var_dump($resultado);
-    if ($resultado)
-    {
-     while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
-      { 
-      
-      $vars=$vars+1;
-        $notificacion[] =new Notificacion($fila);
+
+    // var_dump($resultado);
+    if ($resultado) {
+      while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) {
+
+        $vars = $vars + 1;
+        $notificacion[] = new Notificacion($fila);
       }
     }
-       return  $notificacion;
-    
-    
-    
-    
+    return $notificacion;
   }
+
   /**
-   * 
-   * @param type $idusuario
    * retorna todas las notificaciones no visto de un estudiante dado el id del usuario
    * del estudiante
+   * 
+   * @param type $idusuario
    */
-  
-  function  getNotificacionEstudiante($idusuario)
-  {
-       leerClase('Notificacion');
-    $notificacion= array();
+  function getNotificacionEstudiante($idusuario) {
+    leerClase('Notificacion');
+    $notificacion = array();
     $activo = Objectbase::STATUS_AC;
-                                                            /**
-                                                              * select  n.*
-                                                                                              from  `notificacion`  n, `notificacion_estudiante`  ne , `estudiante`  e
-                                                                                                                                                                                                        where  n.`id`=ne.`notificacion_id`  and ne.`estudiante_id`=e.`id` and ne.`estado_notificacion`='SV' and e.`usuario_id`=1                                                                                                           where   n.`id`=nt.`notificacion_id`  and nt.`tutor_id`= t.`id`  and nt.`estado_notificacion`='SV' and t.`usuario_id`=1
-                                                                                                                                                            */
-    $vars=0;
+    /**
+     * select  n.*
+      from  `notificacion`  n, `notificacion_estudiante`  ne , `estudiante`  e
+      where  n.`id`=ne.`notificacion_id`  and ne.`estudiante_id`=e.`id` and ne.`estado_notificacion`='SV' and e.`usuario_id`=1                                                                                                           where   n.`id`=nt.`notificacion_id`  and nt.`tutor_id`= t.`id`  and nt.`estado_notificacion`='SV' and t.`usuario_id`=1
+     */
+    $vars = 0;
     $sql = "select n.* from " . $this->getTableName('Notificacion') . " as n , " . $this->getTableName('notificacion_estudiante') . " as ne , " . $this->getTableName('estudiante') . " as e where  n.id=ne.notificacion_id  and ne.estudiante_id=e.id and  ne.estado_notificacion='SV' and  e.usuario_id='$idusuario' and n.estado = '$activo' and  ne.estado = '$activo'  and e.estado = '$activo'";
     $resultado = mysql_query($sql);
     if ($resultado)
-    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
-      { 
-      
-      $vars=$vars+1;
-        $notificacion[] =new Notificacion($fila);
+      while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) {
+
+        $vars = $vars + 1;
+        $notificacion[] = new Notificacion($fila);
       }
-     
-       return  $notificacion;
-    
+
+    return $notificacion;
   }
+
   /**
+   * Retorna todas las  notificaciones q se enviaron al consejo
    * 
    * @param type $idusuario
    * @return \Notificacion
-   * Retorna todas las  notificaciones q se enviaron al consejo
    */
-  function   getNotificacionConsejo($idusuario)
-  {
-    
-     leerClase('Notificacion');
-    $notificacion= array();
+  function getNotificacionConsejo($idusuario) {
+
+    leerClase('Notificacion');
+    $notificacion = array();
     $activo = Objectbase::STATUS_AC;
-               $vars=0;                                           /**
-                                                           * select  n.*
-                                                                                                                                                                                                                    from  `notificacion`  n , `notificacion_consejo`  nc, `consejo`  c
-                                                                                                                                                                                                                      where   n.`id`= nc.`notificacion_id`  and nc.`consejo_id`= c.`id`  and nc.`estado_notificacion`='SV' and nc.`estado`='AC' and  c.`estado`='AC' and n.`estado`='AC' and c.`usuario_id`=2
-                                                                                                                                                                                                                                                                               * 
-                                                           */
-   $sql = "select n.* from " . $this->getTableName('Notificacion') . " as n , " . $this->getTableName('Notificacion_consejo') . " as nc , " . $this->getTableName('Consejo') . " as e where  n.id= nc.notificacion_id  and nc.consejo_id= c.id and  nc.estado_notificacion='SV' and  c.usuario_id='$idusuario'and n.estado = '$activo' and  nc.estado = '$activo'  and c.estado = '$activo'";
-   /** 
-    $sql="select  n.*
-from  notificacion  n , notificacion_consejo  nc, consejo  c
-where   n.id= nc.notificacion_id  and nc.consejo_id= c.id  and nc.estado_notificacion='SV' and nc.estado='AC' and  c.estado='AC' and n.estado='AC' and c.usuario_id=2;";
-   */
-   $resultado = mysql_query($sql);
-     if ($resultado)
-    
-    {
-    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
-      { 
-      
-      $vars=$vars+1;
-    $notificacion[] =new Notificacion($fila);
+    $vars = 0;/**
+     * select  n.*
+      from  `notificacion`  n , `notificacion_consejo`  nc, `consejo`  c
+      where   n.`id`= nc.`notificacion_id`  and nc.`consejo_id`= c.`id`  and nc.`estado_notificacion`='SV' and nc.`estado`='AC' and  c.`estado`='AC' and n.`estado`='AC' and c.`usuario_id`=2
+     * 
+     */
+    $sql = "select n.* from " . $this->getTableName('Notificacion') . " as n , " . $this->getTableName('Notificacion_consejo') . " as nc , " . $this->getTableName('Consejo') . " as e where  n.id= nc.notificacion_id  and nc.consejo_id= c.id and  nc.estado_notificacion='SV' and  c.usuario_id='$idusuario'and n.estado = '$activo' and  nc.estado = '$activo'  and c.estado = '$activo'";
+    /**
+      $sql="select  n.*
+      from  notificacion  n , notificacion_consejo  nc, consejo  c
+      where   n.id= nc.notificacion_id  and nc.consejo_id= c.id  and nc.estado_notificacion='SV' and nc.estado='AC' and  c.estado='AC' and n.estado='AC' and c.usuario_id=2;";
+     */
+    $resultado = mysql_query($sql);
+    if ($resultado) {
+      while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) {
+
+        $vars = $vars + 1;
+        $notificacion[] = new Notificacion($fila);
       }
     }
-    echo sizeof( $notificacion);
-       return $vars;
-    
-    
+    echo sizeof($notificacion);
+    return $vars;
   }
+
   /**
-  * 
-  * @param type $idusuario
-  * retorna todas  las notificaciones de un tutor dado el id del usuario
-  */
-  function   getNotificacionTutor($idusuario)
-  {   
+   * retorna todas  las notificaciones de un tutor dado el id del usuario
+   * 
+   * @param type $idusuario
+   */
+  function getNotificacionTutor($idusuario) {
     leerClase('Notificacion');
-    $notificacion= array();
+    $notificacion = array();
     $activo = Objectbase::STATUS_AC;
-                                                            /**
-                                                              * select n.*
-                                                         from  `notificacion` n, `notificacion_tutor`  nt , `tutor`  t
-                                                                                                                                                                                   where   n.`id`=nt.`notificacion_id`  and nt.`tutor_id`= t.`id`  and nt.`estado_notificacion`='SV' and t.`usuario_id`=1
-                                                              */
-    $vars=0;
+    /**
+     * select n.*
+      from  `notificacion` n, `notificacion_tutor`  nt , `tutor`  t
+      where   n.`id`=nt.`notificacion_id`  and nt.`tutor_id`= t.`id`  and nt.`estado_notificacion`='SV' and t.`usuario_id`=1
+     */
+    $vars = 0;
     $sql = "select n.* from " . $this->getTableName('Notificacion') . " as n , " . $this->getTableName('Notificacion_tutor') . " as nt , " . $this->getTableName('Tutor') . " as t where n.id=nt.notificacion_id  and nt.tutor_id= t.id and  nt.estado_notificacion='SV' and  t.usuario_id='$idusuario' and n.estado = '$activo' and  nt.estado = '$activo'  and t.estado = '$activo'";
     $resultado = mysql_query($sql);
-    if ($resultado)
-    {
-   while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
-      { 
-      
-      $vars=$vars+1;
-        $notificacion[] =new Notificacion($fila);
+    if ($resultado) {
+      while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) {
+
+        $vars = $vars + 1;
+        $notificacion[] = new Notificacion($fila);
       }
     }
-       return  $notificacion;
-    
+    return $notificacion;
   }
+
   /**
    * 
    * @param type $idusuario
    * 
    */
-  
-  
-  
-  
-  function getNotificacionDicta($idusuario)
-  {
-     leerClase('Usuario');
-     $usuario= new Usuario($idusuario);
-      $notificaciondicta=array();
-    
- foreach ($usuario->docente_objs as $docen)
-  {
-    $dicta = new Dicta();
-  foreach ( $docen->dicta_objs as $dicta)
-  {
-    $dicta->getAllObjects();
-    $dicta->notificacion_dicta_objs;
-    foreach( $dicta->notificacion_dicta_objs as $notidicta)
-    {
-         if($notidicta->estado_notificacion ='SV')
-         {
-            $notificaciondicta[]=$notidicta;
-         }
-    
+  function getNotificacionDicta($idusuario) {
+    leerClase('Usuario');
+    $usuario = new Usuario($idusuario);
+    $notificaciondicta = array();
+
+    foreach ($usuario->docente_objs as $docen) {
+      $dicta = new Dicta();
+      foreach ($docen->dicta_objs as $dicta) {
+        $dicta->getAllObjects();
+        $dicta->notificacion_dicta_objs;
+        foreach ($dicta->notificacion_dicta_objs as $notidicta) {
+          if ($notidicta->estado_notificacion = 'SV') {
+            $notificaciondicta[] = $notidicta;
+          }
+        }
+      }
     }
-  }    
+    return $notificaciondicta;
   }
-  return  $notificaciondicta;
-    
+  
+  
+  /**
+   * Inicia el filtro para las notificaciones
+   * @param Filtro $filtro el fitro que se usara
+   */
+  function iniciarFiltro(&$filtro) {
+
+    if (isset($_GET['order']))
+      $filtro->order($_GET['order']);
+    $filtro->nombres[] = 'Estado';
+    $filtro->valores[] = array ('select','estado_notificacion'  ,$filtro->filtro('estado_notificacion'),
+        array(''      ,'SV'          , 'VI'        ),
+        array('Todos' ,'Sin Revisar' , 'Revisados' ));
+    $filtro->nombres[] = 'Tipo Mensaje';
+    $filtro->valores[] = array ('select','tipo'  ,$filtro->filtro('tipo'),
+        array(''      , self::TIPO_MENSAJE  , self::TIPO_TIEMPO   , self::TIPO_ASIGNACION  ),
+        array('Todos' ,'Normal'             ,'Fin de Plazo'       ,'Asignaci&oacute;n'     ));
+    $filtro->nombres[] = 'Asunto';
+    $filtro->valores[] = array('input', 'asunto', $filtro->filtro('asunto'));
+    $filtro->nombres[] = 'Mensaje';
+    $filtro->valores[] = array('input', 'descripcion', $filtro->filtro('descripcion'));
+  }
+
+  /**
+   * Devuelve el order para el SQL
+   * @param array $order_array arreglo con las claves para el order
+   * @return string
+   */
+  function getOrderString(&$filtro) {
+    $order_array = array();
+    $order_array['id']                  = " {$this->getTableName()}.id ";
+    $order_array['tipo']                = " {$this->getTableName()}.tipo ";
+    $order_array['asunto']              = " {$this->getTableName()}.asunto ";
+    $order_array['descripcion']         = " {$this->getTableName()}.descripcion ";
+    $order_array['estado']              = " {$this->getTableName()}.estado ";
+    $order_array['estado_notificacion'] = " {$this->getTableName()}.estado_notificacion "; // un poco de codigo hard aca
+    return $filtro->getOrderString($order_array);
+  }
+
+  /**
+   * Filtramos para la busqueda usando un objeto Filtro
+   * @param Filtro $filtro el objeto filtro
+   * @return boolean
+   */
+  public function filtrar(&$filtro) {
+    parent::filtrar($filtro);
+    $filtro_sql = '';
+    if ($filtro->filtro('estado_notificacion'))
+      $filtro_sql .= " AND {$this->getTableName()}.estado_notificacion like '%{$filtro->filtro('estado_notificacion')}%' ";
+    //if ($filtro->filtro('descripcion'))
+    //  $filtro_sql .= " AND {$this->getTableName()}.descripcion like '%{$filtro->filtro('descripcion')}%' ";
+    return $filtro_sql;
   }
   
   
