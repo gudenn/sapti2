@@ -240,7 +240,7 @@ class Proyecto extends Objectbase {
     $sql = "select p.* from " . $this->getTableName('Proyecto_estudiante') . " as pe , " . $this->getTableName('Proyecto') . " as p   where pe.estudiante_id = '$this->id' and pe.proyecto_id = p.id and pe.estado = '$activo' and p.estado = '$activo'  ";
 
     //$sql = "select a.* from ".$this->getTableName('Proyecto_area')." as pa , ".$this->getTableName('Area')." as a   where pa.proyecto_id = '$this->id' and pa.area_id = a.id and pa.estado = '$activo' and a.estado = '$activo'  ";
-//echo $sql;
+    //echo $sql;
     $resultado = mysql_query($sql);
     if (!$resultado)
       return false;
@@ -256,7 +256,7 @@ class Proyecto extends Objectbase {
 
     $sql = "select p.* from " . $this->getTableName('Proyecto_estudiante') . " as pe , " . $this->getTableName('Proyecto') . " as p   where pe.estudiante_id = '$this->id' and pe.proyecto_id = p.id and pe.estado = '$activo' and p.estado = '$activo'  ";
 
-//echo $sql;
+    //echo $sql;
     $resultado = mysql_query($sql);
     if (!$resultado)
       return false;
@@ -314,14 +314,14 @@ class Proyecto extends Objectbase {
     $areas = array();
     $activo = Objectbase::STATUS_AC;
     $sql = "select a.* from " . $this->getTableName('Proyecto_area') . " as pa , " . $this->getTableName('Area') . " as a   where pa.proyecto_id = '$this->id' and pa.area_id = a.id and pa.estado = '$activo' and a.estado = '$activo'";
- /**
-    $sql = "SELECT a.*
-from  proyecto_area  pa ,area a
-where pa.area_id=a.id  and pa.proyecto_id='$this->id' and pa.estado='AC'  and a.estado='AC';";
+    /**
+       $sql = "SELECT a.*
+    from  proyecto_area  pa ,area a
+    where pa.area_id=a.id  and pa.proyecto_id='$this->id' and pa.estado='AC'  and a.estado='AC';";
   
-  */
+    */
     $resultado = mysql_query($sql);
-  // var_dump(mysql_fetch_array($resultado, MYSQL_ASSOC));
+    // var_dump(mysql_fetch_array($resultado, MYSQL_ASSOC));
     if (!$resultado)
       return false;
     while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) {
@@ -409,9 +409,9 @@ where pa.area_id=a.id  and pa.proyecto_id='$this->id' and pa.estado='AC'  and a.
   }
 
   /**
+   * retorna el estudiante del proyectto
    * 
    * @return boolean|\Estudiante
-   * retorna el estudiante del proyectto
    */
   function getEstudiante() {
 

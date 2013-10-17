@@ -6,11 +6,11 @@ class Notificacion_tribunal extends Objectbase
     /*
    * estado notificacion NO VISTO
    */
-const EST_SV    = 'SV';
-/*
- * ESTADO NOTIFICACION VISTO
- */
-const EST_VI   = 'VI';
+    const EST_SV    = 'SV';
+    /*
+     * ESTADO NOTIFICACION VISTO
+     */
+    const EST_VI   = 'VI';
     /**
   
     /**
