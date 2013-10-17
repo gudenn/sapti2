@@ -3,10 +3,12 @@
   <tr>
     <th><a href='?order=codigo'              class="tajax"  title='Ordenar por Codigo'       >Codigo       {$filtros->iconOrder('codigo')}</a></th>
     <th><a href='?order=descripcion'         class="tajax"  title='Ordenar por Descipcion'   >Descripcion  {$filtros->iconOrder('descripcion')}</a></th>
-    <th><a href='?order=ver'                 class="tajax"  title='Ordenar por Ver'          >Ver          {$filtros->iconOrder('ver')}</a></th>
+    <th><a href='?order=ver'                 class="tajax"  title='Ordenar por Acceso'       >Tiene Acceso {$filtros->iconOrder('ver')}</a></th>
+{*
     <th><a href='?order=crear'               class="tajax"  title='Ordenar por Crear'        >Crear        {$filtros->iconOrder('crear')}</a></th>
     <th><a href='?order=editar'              class="tajax"  title='Ordenar por Editar'       >Editar       {$filtros->iconOrder('editar')}</a></th>
     <th><a href='?order=eliminar'            class="tajax"  title='Ordenar por Eliminar'     >Eliminar     {$filtros->iconOrder('eliminar')}</a></th>
+*}
   </tr>
   </thead>
   <tbody>
@@ -28,6 +30,7 @@
         {/if}
         </div>
       </td>
+{*
       <td>
         <div id="loading_{$objs[ic]['id']}_crear" style="display: none" >{icono('basicset/loadingcircle.gif','Guardando...')}</div>
         <div id="hidme_{$objs[ic]['id']}_crear" >
@@ -70,6 +73,7 @@
         {/if}
         </div>
       </td>
+*}
     </tr>
   {/section}
   </tbody>
