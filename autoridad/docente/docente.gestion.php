@@ -1,12 +1,9 @@
 <?php
 try {
+  define ("MODULO", "ADMIN-DOCENTE-GESTION");
   require('../_start.php');
- 
-  
-  //MODULO -> REGISTRO DE MERCADERIA
-  //ACCION -> GESTION
-  
-
+  if(!isAdminSession())
+    header("Location: ../login.php");  
   
   
   

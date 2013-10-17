@@ -367,6 +367,21 @@ where pa.area_id=a.id  and pa.proyecto_id='$this->id' and pa.estado='AC'  and a.
     $asignado->estado                 = Objectbase::STATUS_AC;
     $this->proyecto_dicta_objs[]      = $asignado;
   }
+  
+    /**
+   * Asignamos A Dicta
+   * @param INT(11) $dicta_id codigo de grupo asignado
+   */
+  function asignarDictaest($dicta_id) {
+    leerClase('Proyecto_dicta');
+
+    $asignado                         = new Proyecto_dicta();
+    $asignado->proyecto_id            = $this->id;
+    $asignado->dicta_id               = $dicta_id;
+    $asignado->estado                 = Objectbase::STATUS_AC;
+    $this->proyecto_dicta_objs[]      = $asignado;
+    $asignado->save();
+  }
 
   /**
    * Asignamos Estudiante

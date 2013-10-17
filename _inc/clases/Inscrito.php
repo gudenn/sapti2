@@ -67,12 +67,21 @@ class Inscrito extends Objectbase
    * @param INT(11) $semestre_id
    * @param INT(11) $dicta_id
    */
-  function borrarInscripcion() {
+  function borrarInscrito() {
     //Creamos la evaluacion
     leerClase('Evaluacion');
+    leerClase('Estudiante');
+    leerClase('Proyecto_dicta');
+    $estudiante         = new Estudiante($this->estudiante_id);
     $evaluacion         = new Evaluacion($this->evaluacion_id);
+    $protecto=$estudiante->getProyecto();
+    $sql = "select p.id as id from " . $this->getTableName('Proyecto_dicta') . " as p  where p.proyecto_id = '$protecto->id' and p.dicta_id = '$this->dicta_id' ";
+    $resultado = mysql_query($sql);
+
+    $proyecto_array = mysql_fetch_array($resultado);
+    $proyecto_dicta       = new Proyecto_dicta($proyecto_array);
+    $proyecto_dicta->delete();
     $evaluacion->delete();
-    
     $this->delete();
   }
   

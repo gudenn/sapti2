@@ -118,7 +118,7 @@ AND es.codigo_sis='$sis'";
                     $estudiante->inscribirEstudianteDicta($semestre->id, $iddicta);
                     $proyid=$estudiante->getProyecto();
                     $proyecto       = new Proyecto($proyid->proyecto_id);
-                    $proyecto->asignarDicta($iddicta);
+                    $proyecto->asignarDictaest($iddicta);
                     $proyecto->save();
                     $inscritos[]=$estudiante_array;
                     }else{
@@ -153,6 +153,7 @@ AND es.codigo_sis='$sis'";
       if (isset($_POST['listaoficial'])) 
         $listaoficial=$_POST['listaoficial'];
         $smarty->assign("listaoficial", $listaoficial);
+
       if($listaoficial[0]=="borrar"){
               $listainscritos = "SELECT it.id as id, es.codigo_sis as sis
                     FROM inscrito it, estudiante es
@@ -163,15 +164,20 @@ AND es.codigo_sis='$sis'";
                   while ($rowins = mysql_fetch_array($resultins, MYSQL_ASSOC)) {
                        $listainsactu[] = $rowins;
                   }
-                 if(count($listainsactu)>0 && count($listainsactu)>count($estudiantesaux))
+                 if(count($listainsactu)>0 && count($listainsactu)>count($estudiantesaux)){
                   foreach ($estudiantesaux as $estaux) {
+                     $estaux = explode(';', $estaux);
+                     $listainsactu=array_values($listainsactu);
                       for ($i=0; $i<=count($listainsactu); $i++){
                           if ($estaux[1]==$listainsactu[$i]['sis']){
                               unset($listainsactu[$i]);
-                              $listainsactu=array_values($listainsactu);
                           }  
                       }
-                      
+                  }
+                  foreach ($listainsactu as $ins){
+                      $borrarins=new Inscrito($ins['id']);
+                      $borrarins->borrarInscrito();
+                  }
                   }
       }
       $yainscritos=array_envia($yainscritos);
