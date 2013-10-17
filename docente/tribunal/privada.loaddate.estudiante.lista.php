@@ -1,6 +1,6 @@
 <?php     
      define ("MODULO", "DOCENTE");
-require  '_start.php';
+require  '../_start.php';
 require '../../_inc/_configurar.php';
 require('../EditableGrid.php');
 if(isset($_GET['doc'])){
