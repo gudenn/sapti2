@@ -5,10 +5,10 @@
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
             <p>
-              <select name="accion" id="accion" >
-                    {html_options options=$accion}
-                 </select>
-              <label for="accion"><small>Tipo (*) {getHelpTip('accion')}</small></label>
+              <select name="accion" id="accion"  data-validation-engine="validate[required]" >
+               {html_options values=$tipo_values output=$tipo_output selected=$materia->tipo}
+              </select>
+              <label for="accion"><small>Tipo (*) {getHelpTip('tipo')}</small></label>
             </p>
               <p>
               <input type="text" name="sigla" id="sigla" value="{$materia->sigla}"  data-validation-engine="validate[required]">

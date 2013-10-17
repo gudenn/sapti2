@@ -1,5 +1,5 @@
 <?php     
- define ("MODULO", "DOCENTE-TRIBUNAL");
+   define ("MODULO", "DOCENTE");
 require  './_start.php';
 require '../../_inc/_configurar.php';
 require('../EditableGrid.php');
@@ -24,9 +24,9 @@ $grid->addColumn('apellidos', 'Apellidos', 'string', NULL, false);
 $grid->addColumn('nombrep', 'Nombre Proyecto', 'string', NULL, false);
 $grid->addColumn('action', 'Opciones', 'html', NULL, false);
 
-$result = $mysqli->query('select DISTINCT (e.id), e.codigo_sis, u.nombre as nombre, CONCAT(u.apellido_paterno,u.apellido_materno) apellidos, p.`nombre` as nombrep
-            from  usuario u , estudiante e, proyecto_estudiante pe, proyecto p, tribunal  t, docente  d
-            where   u.id=e.usuario_id and e.id=pe.estudiante_id and pe.proyecto_id=p.id  and p.estado_proyecto="TA" and p.id=t.proyecto_id and t.docente_id = d.id and d.id="'.$docid.'"');
+$result = $mysqli->query('select DISTINCT (e.id), e.codigo_sis as codigosis, u.nombre as nombre, CONCAT(u.apellido_paterno,u.apellido_materno) apellidos, p.nombre as nombrep
+            from  usuario u , estudiante e, proyecto_estudiante pe, proyecto p, tribunal  t
+            where   u.id=e.usuario_id and e.id=pe.estudiante_id and pe.proyecto_id=p.id and   t.accion="AC" and p.id=t.proyecto_id and t.docente_id="'.$docid.'"');
 $mysqli->close();
 
 

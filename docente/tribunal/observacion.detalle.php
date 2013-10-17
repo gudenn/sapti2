@@ -1,6 +1,6 @@
 <?php
 try {
-   define ("MODULO", "DOCENTE-TRIBUNAL");
+   define ("MODULO", "DOCENTE");
   require('_start.php');
   if(!isDocenteSession())
       header("Location: ../login.php");
@@ -20,7 +20,13 @@ try {
   $JS[]  = URL_JS . "jquery.min.js";
   $JS[]  = URL_JS . "calendar/js/jquery.eventCalendar.js";
   $smarty->assign('JS',$JS);
+  
+        leerClase('Docente');
 
+   $menuList[]     = array('url'=>URL.Docente::URL.'tribunal','name'=>'Tribunal');
+ $menuList[]     = array('url'=>URL.Docente::URL.'tribunal/estudiante.lista.php','name'=>'Lista Estudiante');
+ $smarty->assign("menuList", $menuList);
+  
   if ( isset($_GET['revisiones_id']))
   $revid=$_GET['revisiones_id'];
 

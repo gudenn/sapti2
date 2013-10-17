@@ -1,6 +1,6 @@
 <?php
 try {
-   define ("MODULO", "DOCENTE-TRIBUNAL");
+   define ("MODULO", "DOCENTE");
   require('_start.php');
   if(!isDocenteSession())
   header("Location: ../login.php");
@@ -38,7 +38,11 @@ try {
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
   $JS[]  = URL_JS . "jquery.addfield.js";
   $smarty->assign('JS',$JS);
-
+  
+  $menuList[]     = array('url'=>URL.Docente::URL.'tribunal','name'=>'Tribunal');
+ $menuList[]     = array('url'=>URL.Docente::URL.'tribunal/publica.estudiante.lista.php','name'=>'Lista Estudiante');
+ $smarty->assign("menuList", $menuList);
+  
   if (isset($_POST['observaciones'])) 
   $observaciones=$_POST['observaciones'];
     if (isset($_GET['id_estudiante'])) 
@@ -67,10 +71,11 @@ try {
      
       
       $docente=  getSessionDocente();
-      $docenteid=$docente->docente_id;
+      $docenteid=$docente->id;
       //echo  $docenteid;
       //echo $_POST['estudiante_id'];
      // echo  $_POST['nota_tribunal'];
+      
       $estudiantes= new Estudiante($_POST['estudiante_id']);
       
       $proyecto= $estudiantes ->getProyecto();
@@ -78,13 +83,20 @@ try {
       
        $notatribunal= new Nota_tribunal();
        $notatribunal->objBuidFromPost();
-       $notatribunal->tribunal_id=$tribunal->id;
+       $notatribunal->tribunal_id=$docenteid;
       // $notatribunal->nota_tribunal=
        $notatribunal->proyecto_id=$proyecto->id;
        $notatribunal->estado=  Objectbase::STATUS_AC;
        $notatribunal->save();
        
        
+       if(($proyecto->getCantidadNotas())==3)
+       {
+         
+         $proyecto->estado_proyecto=  Proyecto::EST5_F;
+         $proyecto->save();
+         
+       }
        
        
     
@@ -104,6 +116,6 @@ catch(Exception $e)
   $_SESSION['register'] = $token;
   $smarty->assign('token',$token);
   
-$TEMPLATE_TOSHOW = 'docente_tribunal/nota.defensa.tpl';
+$TEMPLATE_TOSHOW = 'docente/tribunal/nota.defensa.tpl';
 $smarty->display($TEMPLATE_TOSHOW);
 ?>

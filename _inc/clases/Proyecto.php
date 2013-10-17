@@ -64,6 +64,12 @@ class Proyecto extends Objectbase {
    */
   const EST5_P = "PD";
   
+  /**
+   * Estado Proyecto  finalizado 
+   * 
+   */
+  const EST5_F = "PF";
+  
    /**
    * Estado Proyecto 
    * Frormulario Perfil Confirmaddo
@@ -720,8 +726,28 @@ where pa.area_id=a.id  and pa.proyecto_id='$this->id' and pa.estado='AC'  and a.
       }
        return  $totalvb;
   }
+  /**
+   * cantidad de notas dde un proyecto en los tribunales
+   * select  COUNT(*)  as cantida
+      from  proyecto p  , `nota_tribunal`  nt
+       where  p.`id`  =nt.`proyecto_id`  and nt.`proyecto_id`=1
+   */
   
-  
+  function  getCantidadNotas()
+  {
+    $contidad=0;   
+   $activo = Objectbase::STATUS_AC;
+   $sql = "select nt.* from " . $this->getTableName('Nota_tribunal') . " as nt ,where nt.proyecto_id= '$this->id' and c.estado = '$activo' ";
+    $resultado = mysql_query($sql);
+    if ($resultado)
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) {
+      $contidad= $contidad+1;
+    }
+    return $contidad;
+    
+  }
+
+
   /**
    * 
    * retorna el total de proyectos con defensa privada

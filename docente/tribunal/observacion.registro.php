@@ -1,6 +1,6 @@
 <?php
 try {
-   define ("MODULO", "DOCENTE-TRIBUNAL");
+     define ("MODULO", "DOCENTE");
   require('_start.php');
   if(!isDocenteSession())
     header("Location: ../login.php");
@@ -33,7 +33,12 @@ try {
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
   $JS[]  = URL_JS . "jquery.addfield.js";
   $smarty->assign('JS',$JS);
-
+  leerClase('Docente');
+ 
+   $menuList[]     = array('url'=>URL.Docente::URL.'tribunal','name'=>'Tribunal');
+   $menuList[]     = array('url'=>URL.Docente::URL.'tribunal/estudiante.lista.php','name'=>'Lista Estudiante');
+   $smarty->assign("menuList", $menuList);
+  
   if (isset($_POST['observaciones'])) 
   $observaciones=$_POST['observaciones'];
     if (isset($_GET['id_estudiante'])) 

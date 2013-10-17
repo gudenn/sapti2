@@ -15,12 +15,12 @@
   {section name=ic loop=$objs}
   <tbody>
     <tr  class="{cycle values="light,dark"}">
-      <td>{$objs[ic]['usuario_titulo_honorifico']}</td>
-      <td>{$objs[ic]['usuario_nombre']}</td>
-      <td>{$objs[ic]['usuario_apellido_paterno']}</td>
-      <td>{$objs[ic]['usuario_apellido_materno']}</td>
-      <td>{$objs[ic]['usuario_login']}</td>
-      <td>{$objs[ic]['usuario_email']}</td>
+      <td>{$objs[ic]['titulo_honorifico']}</td>
+      <td>{$objs[ic]['nombre']}</td>
+      <td>{$objs[ic]['apellido_paterno']}</td>
+      <td>{$objs[ic]['apellido_materno']}</td>
+      <td>{$objs[ic]['login']}</td>
+      <td>{$objs[ic]['email']}</td>
       <td>
         {if ($objs[ic]['puede_ser_tutor'])}
           {if ($objs[ic]['sexo']=='M')}

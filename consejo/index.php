@@ -60,7 +60,7 @@ try {
    $menus[] = $menu;
  
   $menu = new Menu('Tribunales no Aceptados');
-  $link = Consejo::URL."lista.tribunales.rechazados.php";
+  $link = Consejo::URL."tribunales.rechazados.php";
   $menu->agregarItem('Gesti&oacute;n de Asignac&oacute;n','Registro y modificaci&oacute;n de Tribunales','basicset/user4.png',$link);
    $menus[] = $menu;
   
