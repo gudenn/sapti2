@@ -2,11 +2,8 @@
 try {
 
      define ("MODULO", "DOCENTE");
-  require('_start.php');
-
- define ("MODULO", "DOCENTE-TUTOR");
   require('../_start.php');
-
+ 
  if(!isDocenteSession())
   header("Location: ../login.php");  
 
@@ -69,7 +66,7 @@ $notificaciones= new Notificacion();
   
   $notificacion= $notificaciones->getNotificacionTutor(getSessionUser()->id);
     $menu = new Menu('Notificaciones');
-    $link = Tutor::URL."notificacion/notitutor.php";
+    $link = Tutor::URL."notificacion/lista.notificacion.php";
     $menu->agregarItem('Notificaciones','Geti&oacute;n de las Notificaciones','basicset/megaphone.png',$link,  sizeof($notificacion));
     $menus[] = $menu;
   
@@ -80,11 +77,9 @@ $notificaciones= new Notificacion();
  $smarty->assign("menus", $menus);
   
   $docente_aux = getSessionDocente();
-  $docente     = new Docente($docente_aux->docente_id);
+  $docente     = new Docente($docente_aux->id);
   $usuario     = $docente->getUsuario();
   
-
-
   $smarty->assign("docente", $docente);
   $smarty->assign("usuario", $usuario);
   $smarty->assign("ERROR", $ERROR);
