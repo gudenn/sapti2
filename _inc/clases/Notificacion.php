@@ -495,6 +495,18 @@ class Notificacion extends Objectbase
             . " d.usuario_id = '$usuario_id' "
             . " and n.estado = '$activo' and  nr.estado = '$activo'  and r.estado = '$activo' ";
 
+    //Notificaiones si es Tutor
+    $sql_tutor = " SELECT n.*  , nr.estado_notificacion "
+            . " FROM " 
+            . $this->getTableName('Notificacion') . " as n , " 
+            . $this->getTableName('Notificacion_tutor') . " as nr , " 
+            . $this->getTableName('Tutor') . " as r  "
+            . " WHERE "
+            . " n.id = nr.notificacion_id  and "
+            . " nr.tutor_id = r.id  "
+            . " and  r.usuario_id = '$usuario_id' "
+            . " and n.estado = '$activo' and  nr.estado = '$activo'  and r.estado = '$activo' ";
+
     //Notificaiones si es Estudiante
     $sql_estudiante = " SELECT n.*  , nr.estado_notificacion "
             . " FROM " 
@@ -524,13 +536,15 @@ class Notificacion extends Objectbase
     //Juntamos todas las notificaciones, las filtramos y las procesamos
     $sql    = " select * , DATE_FORMAT(fecha_envio,'%d %b %Y') as fecha_envio_toshow " 
             . " FROM ( "
-            . " ($sql_revisor) UNION "
-            . " ($sql_consejo) UNION "
-            . " ($sql_tribunal) UNION "
-            . " ($sql_estudiante) UNION "
-            . " ($sql_docente) ) as notificacion "
-            . " WHERE 1 "
-            . " $filter $orderby $limit ";
+            . " ($sql_revisor) UNION "              // Revisor
+            . " ($sql_consejo) UNION "              // Consejo
+            . " ($sql_tutor) UNION "                // Tutor
+            . " ($sql_tribunal) UNION "             // Tribunal
+            . " ($sql_estudiante) UNION "           // Estudiante
+            . " ($sql_docente) ) as notificacion "  // Docente
+            . " WHERE 1 "                           // 
+            . " $filter $orderby $limit ";          // Limites y lineamientos!
+    
 
     $result = mysql_query($sql);
     if (!$result)

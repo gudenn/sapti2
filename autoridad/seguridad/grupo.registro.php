@@ -1,6 +1,6 @@
 <?php
 try {
-  define ("MODULO", "ADMIN-SEGURIDAD-GRUPO-REGISTRO");
+  define ("MODULO", "ADMIN-SEGURIDAD");
   require('../_start.php');
   if(!isAdminSession())
     header("Location: ../login.php");  

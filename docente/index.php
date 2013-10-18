@@ -118,7 +118,7 @@ leerClase('Menu');
    $menu = new Menu('Notificaiones y Mensajes');
    $link = Docente::URL."notificacion/";
    $menu->agregarItem('Notificaiones','Gesti&oacute;n de notificaiones','basicset/message-archived.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
-   $link = Docente::URL."notificacion/";
+   $link = Docente::URL."notificacion/notificacion.gestion.php?estado_notificacion=SV";
    $counter = $notificacion->getTodasNotificaciones($usuario->id, '', '', ' AND estado_notificacion="SV" ');
    $menu->agregarItem('Notificaciones Pendientes','Todas las notificaciones no leidas','basicset/message-not-read.png',$link,$counter[1]);
    $menus[] = $menu;
