@@ -39,32 +39,31 @@ try {
   leerClase('Tutor');
   leerClase('Usuario');
   leerClase('Estudiante');
-
+  leerClase('Notificacion');
+  leerClase('Estudiante');
+  leerClase('Proyecto');
   
+
   //Sexo del usuario
-  $smarty->assign('sexo', array(
+      $smarty->assign('sexo', array(
       Usuario::FEMENINO  => 'Femenino',
       Usuario::MASCULINO => 'Masculino'));
-  $smarty->assign('sexo_selected', ($usuario->sexo==Usuario::FEMENINO)?Usuario::FEMENINO:Usuario::MASCULINO);
+     $smarty->assign('sexo_selected', ($usuario->sexo==Usuario::FEMENINO)?Usuario::FEMENINO:Usuario::MASCULINO);
 
-  if (isset($_GET['estudiante_id']) && is_numeric($_GET['estudiante_id']))
+  if (isset($_GET['notificacion_id']) && is_numeric($_GET['notificacion_id']))
   {
-     $estudiante = new Estudiante($_GET['estudiante_id']);
-     $smarty->assign("estudiante",$estudiante);
+    
+    $notificacion  = new Notificacion($_GET['notificacion_id']);
+    $proyecto      =  new Proyecto($notificacion->proyecto_id);
+    $estudiante   =  $proyecto->getEstudiante();
+    
+     //echo $_GET['notificacion_id'];
+    
+     $smarty->assign("notificacion", $notificacion);
+     $smarty->assign("proyecto", $proyecto);
+     $smarty->assign("estudiante", $estudiante);
   }
-  //Asignar titulo al usuario
-  leerClase('Titulo_honorifico');
-  $titulo_h     = new Titulo_honorifico();
-  $titulo_hs    = $titulo_h->getAll();
-  $titulo_h_values[] = '';
-  $titulo_h_output[] = '- Seleccione -';
-  while ($row = mysql_fetch_array($titulo_hs[0])) 
-  {
-    $titulo_h_values[] = $row['nombre'];
-    $titulo_h_output[] = $row['nombre'];
-  }
-  $smarty->assign("titulo_h_values", $titulo_h_values);
-  $smarty->assign("titulo_h_output", $titulo_h_output);
+  
 
   //tutor
   $id = '';
