@@ -149,12 +149,11 @@ while ($filapeso = mysql_fetch_array($resulpeso, MYSQL_ASSOC))
 
                 $automatico=new Automatico();
                 $automatico->objBuidFromPost();
-                  $automatico->area_id=$filadoc['idarea'];
-                 $automatico->docente_id=$filadoc['iddoc'];
-                  $automatico->valor_tiempo=$pesodia;
+                $automatico->area_id=$filadoc['idarea'];
+                $automatico->docente_id=$filadoc['iddoc'];
+                $automatico->valor_tiempo=$pesodia;
                 $automatico->valor_area=100;
                 $automatico->dia=$filadia['iddia'];
-                
                 $automatico->save();
 
 }
@@ -603,20 +602,18 @@ if (isset($_POST['proyecto_id']))
                 $tribunal->save();
                 
                 
-    $notificacions= new Notificacion();
-    $notificacions->objBuidFromPost();
-    $notificacions->proyecto_id=$_POST['proyecto_id']; 
-    $notificacions->tipo="Solicitud";
-    $notificacions->fecha_envio= date("j/n/Y");
-    $notificacions->asunto="Asignacion de Tribunales";
-    $notificacions->detalle="fasdf";
-    $notificacions->prioridad=5;
-    $notificacions->estado = Objectbase::STATUS_AC;
-
-    $noticaciones= array('tribunales'=>array( $tribunal->id));
-    $notificacions->enviarNotificaion( $noticaciones);
-                
-               
+                $notificacions= new Notificacion();
+                $notificacions->objBuidFromPost();
+                $notificacions->proyecto_id=$_POST['proyecto_id']; 
+                $notificacions->tipo="Solicitud";
+                $notificacions->fecha_envio= date("j/n/Y");
+                $notificacions->asunto="Asignacion de Tribunales";
+                $notificacions->detalle="fasdf";
+                $notificacions->prioridad=5;
+                $notificacions->estado = Objectbase::STATUS_AC;
+                $noticaciones= array('tribunales'=>array( $tribunal->id));
+                $notificacions->enviarNotificaion( $noticaciones);
+        
      }
      }
     

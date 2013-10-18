@@ -86,8 +86,15 @@ if ( isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' )
   {
     if(isset($_POST['ids']))
     {
+      $idtribuanl=$_POST['ids'];
+      $query = "UPDATE notificacion_tribunal nt SET nt.estado_notificacion='V'  WHERE nt.tribunal_id=$idtribuanl";
+         mysql_query($query);
+      
     if( $_POST['accion']==Tribunal::ACCION_AC)
     {
+      
+      
+      
        $tribunal = new Tribunal($_POST['ids']);
        $tribunal->visto="V";
        $tribunal->accion=$_POST['accion'];
@@ -152,7 +159,7 @@ if ( isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' )
        
       
      }
-     $ir = "Location: notitribunal.php";
+     $ir = "Location: lista.notificacion.php";
     header($ir);
   
   }

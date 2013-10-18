@@ -76,6 +76,11 @@ $smarty->assign('proyectotutor',$_GET['proyectotutor_id']);
   
 if ( isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' )
   {
+    $idtribuanl=$_POST['ids'];
+      $query = "UPDATE notificacion_tribunal nt SET nt.estado_notificacion='V'  WHERE nt.tribunal_id=$idtribuanl";
+         mysql_query($query);
+      
+  
     if( $_POST['accion']==Proyecto_tutor::ACEPTADO)
     {
           
