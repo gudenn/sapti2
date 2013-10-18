@@ -7,6 +7,7 @@ try {
 
   leerClase('Estudiante');
   leerClase('Usuario');
+  leerClase('Docente');
   
   /** HEADER */
   $smarty->assign('title','Gestion de Observaciones');
@@ -15,6 +16,7 @@ try {
 
   $CSS[]  = URL_CSS . "academic/tables.css";
   $CSS[]  = URL_CSS . "editablegrid.css";
+  $CSS[]  = URL_JS . "ventanasmodales/simplemodaldetalle.css";
   $smarty->assign('CSS',$CSS);
 
   //JS
@@ -22,7 +24,17 @@ try {
   $JS[]  = URL_JS . "tablaeditable/editablegrid-2.0.1.js";
   $JS[]  = URL_JS . "tablaeditable/tabla.revision.lista.js";
   $JS[]  = URL_JS . "ventanasmodales/observacion.detalle.js";
+  $JS[]  = URL_JS . "ventanasmodales/jquery.simplemodal-1.4.4.js";
   $smarty->assign('JS',$JS);
+  
+     /**
+   * Menu superior
+   */
+  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>'Proyecto Final');
+  $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/'.'estudiante.lista.php','name'=>'Estudiantes Inscritos');
+  $menuList[]     = array('url'=>URL.Docente::URL.'revision/'.basename(__FILE__),'name'=>'Seguimiento');
+  $smarty->assign("menuList", $menuList);
   
   if (isset($_GET['id_estudiante'])) 
   $id_estudiante=$_GET['id_estudiante'];
