@@ -559,6 +559,9 @@ if (isset($_POST['proyecto_id']))
  {
  $idproyecto=$_POST['proyecto_id'];
    
+ 
+ 
+ 
    
   // $query = "UPDATE proyecto p SET p.estado_proyecto='TA'  WHERE p.id=$idproyecto";
 //  mysql_query($query);
