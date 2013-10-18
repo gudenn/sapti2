@@ -7,8 +7,8 @@ try {
 
   /** HEADER */
   $smarty->assign('title','Gestion de Pendientes');
-  $smarty->assign('description','Reportes');
-  $smarty->assign('keywords','Reportes');
+  $smarty->assign('description','Pendientes');
+  $smarty->assign('keywords','Pendientes');
 /**
    * Menu superior
  * 
