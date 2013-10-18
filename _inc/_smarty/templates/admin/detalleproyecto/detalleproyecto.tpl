@@ -280,12 +280,7 @@
           <td>
             <table>
               <tr>
-                <td style="height: 33px;">
-                  Registrado por:
-                </td>
-                <td>
-                    <span>{$registrado_por}</span>
-                </td>
+                
                 <td>
                   Fecha:{getHelpTip('fecha_registro')}
                 </td>

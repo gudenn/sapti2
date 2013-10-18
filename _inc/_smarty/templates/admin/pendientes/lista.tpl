@@ -10,6 +10,7 @@
     <th><a href='?order=proveedor'         class="tajax"   title='Ordenar por Proveedor'        >APELLIDOS     </a></th>
     <th><a href='?order=especialidad'         class="tajax"   title='Ordenar por Especialidad'        >TITULO</a></th>
     <th><a href='?order=id'                class="tajax"   title='Ordenar por Id'               >GESTION</a></th>
+     <th>DETALLE</th> 
     <th>CONFIRMAR</th> 
       </tr>
   </thead>
@@ -18,15 +19,14 @@
    
     <tr  class="selectable">
     <tr  class="{cycle values="light,dark"}">
-          <td>{$listadocentes[ic]['id']}</td>
+          <td>{$listadocentes[ic]['eid']}</td>
           <td>{$listadocentes[ic]['nombre']}</td>
           <td>{$listadocentes[ic]['apellidos']}</td>
           <td>{$listadocentes[ic]['titulo']}</td>
           <td>{$listadocentes[ic]['codigo']}</td>
-       
-    <td><a href="pendientes.gestion.php?proyecto_id={$listadocentes[ic]['id']}" >{icono('basicset/tick_48.png','Confirmar')} Confirmar</a></td>
-      
-     
+    <td><a href="proyecto.detalle.php?estudiante_id={$listadocentes[ic]['eid']}" >{icono('basicset/document.png','Detalle')} Ver Detalle</a></td> 
+    <td><a href="pendientes.gestion.php?proyecto_id={$listadocentes[ic]['pid']}" >{icono('basicset/tick_48.png','Confirmar')} Confirmar</a></td>
+    
     
      </tr>
    
