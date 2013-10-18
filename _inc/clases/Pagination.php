@@ -16,6 +16,7 @@ class Pagination {
   const Last     = "Ultimo&raquo;";
   const To       = "a";
   const Of       = "de";
+  const PP       = "15";
     
   var $selc_combo; // get the option of the selector 
   var $link_pages; // get the link footer pagination
@@ -25,6 +26,7 @@ class Pagination {
   var $ses_to;     // total de registros
   var $objs;       // the object content the number of rows that correspond
 
+  
   /**
   * Si es para html los links del paginado se haran de una manera y si es para php se haran de otra  manera
   * @var type string
@@ -41,7 +43,7 @@ class Pagination {
   public function  __construct($result , $clave = 'leads', $w_like = '' , $sera_html_y_no_php = true ,$pp = false)
   {
     if (!$pp)
-      $pp = 3;
+      $pp = self::PP;
 
     if ($sera_html_y_no_php)
       $this->html_php = 'HTML';

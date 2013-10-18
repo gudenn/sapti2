@@ -48,7 +48,7 @@ try {
   if (isset($usuario->estudiante_objs[0]))
     $estudiante = $usuario->estudiante_objs[0];
   $proyecto       = $estudiante->getProyecto();
-  $proyecto= new Proyecto($proyecto->id);
+  //$proyecto= new Proyecto($proyecto->id);
 
   /*
    * no viene al caso

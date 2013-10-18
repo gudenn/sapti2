@@ -108,6 +108,20 @@ leerClase('Menu');
   $link = Docente::URL."tribunal/index.php";
   $menu->agregarItem('Notificaiones','Notificaciones para el Proyecto Final','docente/notificacion.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
    $menus[] = $menu;
+   
+   // Notificaiones 
+  leerClase('Usuario');
+  leerClase('Notificacion');
+  $usuario      = getSessionUser();
+  $notificacion = new Notificacion();
+
+   $menu = new Menu('Notificaiones y Mensajes');
+   $link = Docente::URL."notificacion/";
+   $menu->agregarItem('Notificaiones','Gesti&oacute;n de notificaiones','basicset/message-archived.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+   $link = Docente::URL."notificacion/";
+   $counter = $notificacion->getTodasNotificaciones($usuario->id, '', '', ' AND estado_notificacion="SV" ');
+   $menu->agregarItem('Notificaciones Pendientes','Todas las notificaciones no leidas','basicset/message-not-read.png',$link,$counter[1]);
+   $menus[] = $menu;
   
   
   

@@ -27,6 +27,20 @@ class Notificacion extends Objectbase
  /** TIPO_MENSAJE mensaje asignacion  */
   const TIPO_ASIGNACION = 'N03';
 
+  //ESTAS VARIABLES SE GUARDAN EN notificacion_XX
+  /**
+   * estado notificacion NO VISTO
+   */
+  const EST_SV    = 'SV';
+  /**
+   * ESTADO NOTIFICACION VISTO
+   */
+  const EST_VI   = 'VI';
+  /**
+   * ESTADO NOTIFICACION ARCHIVADO
+   */
+  const EST_AR   = 'AR';
+  
  /**
   * Codigo identificador del Del proyecto
   * @var INT(11)
@@ -116,6 +130,102 @@ class Notificacion extends Objectbase
   * @var object|null 
   */
   var $notificacion_estudiante_objs;  
+  
+
+  /**
+   * Mostramos el icono por el estado del mensaje
+   * el estado debe estar el la asociacion en tre la
+   * notificacion y el usuario
+   * 
+   * @param string(2) $id
+   * @return icon
+   */
+  function getIconLeido($estado_notificacion , $width = "25px") 
+  {
+    $estado_notificacion = (trim($estado_notificacion)=='')?self::EST_SV:$estado_notificacion;
+    $icono               = '';
+    $descripcion         = '';
+    switch ($estado_notificacion) {
+      case self::EST_VI: // Mensajes ya vistos
+        $icono       = 'basicset/message-already-read.png';
+        $descripcion = 'Mensaje ya leido';
+        break;
+      case self::EST_AR: // Mensajes archivados
+        $icono       = 'basicset/message-archived.png';
+        $descripcion = 'Mensaje Archivado';
+        break;
+      case self::EST_SV: //No leido y el resto
+      default:
+        $icono = "basicset/message-not-read.png";
+        $descripcion = 'Mensaje No leido';
+        break;
+    }
+    return icono($icono, $descripcion, $width);
+  }
+
+  /**
+   * Mostramos el icono por el estado del mensaje
+   * el estado debe estar el la asociacion en tre la
+   * notificacion y el usuario
+   * 
+   * @param string(2) $id
+   * @return icon
+   */
+  function getIconPrioridad($prioridad = '' , $width = "25px") 
+  {
+    $prioridad = (trim($prioridad)=='')?$this->prioridad:$prioridad;
+    $icono               = '';
+    $descripcion         = '';
+    switch ($prioridad) {
+      case 0:
+      default:
+        $icono       = 'basicset/prioridad_0.png';
+        $descripcion = 'Prioridad muy baja';
+        break;
+      case 1:
+        $icono       = 'basicset/prioridad_1.png';
+        $descripcion = 'Prioridad muy baja';
+        break;
+      case 2:
+        $icono       = 'basicset/prioridad_2.png';
+        $descripcion = 'Prioridad muy baja';
+        break;
+      case 3:
+        $icono       = 'basicset/prioridad_3.png';
+        $descripcion = 'Prioridad baja';
+        break;
+      case 4:
+        $icono       = 'basicset/prioridad_4.png';
+        $descripcion = 'Prioridad normal';
+        break;
+      case 5:
+        $icono       = 'basicset/prioridad_5.png';
+        $descripcion = 'Prioridad normal';
+        break;
+      case 6:
+        $icono       = 'basicset/prioridad_6.png';
+        $descripcion = 'Prioridad normal';
+        break;
+      case 7:
+        $icono       = 'basicset/prioridad_7.png';
+        $descripcion = 'Prioridad alta';
+        break;
+      case 8:
+        $icono       = 'basicset/prioridad_8.png';
+        $descripcion = 'Prioridad alta';
+        break;
+      case 9:
+        $icono       = 'basicset/prioridad_9.png';
+        $descripcion = 'Prioridad muy alta';
+        break;
+      case 10:
+        $icono       = 'basicset/prioridad_10.png';
+        $descripcion = 'Prioridad muy alta';
+        break;
+    }
+    return icono($icono, $descripcion, $width);
+  }
+  
   
   /**
    * Manda una notificacion a todos los actores de un proyecto
@@ -239,7 +349,7 @@ class Notificacion extends Objectbase
   function enviarNotificaion($usuarios /*$dictas,$estudiantes,$tutores,$tribunales,$revisores,$consejos*/)
   {
 
-
+    
     $estudiantes = isset($usuarios['estudiantes'])?$usuarios['estudiantes']:array();
     $tribunales  = isset($usuarios['tribunales' ])?$usuarios['tribunales' ]:array();
     $revisores   = isset($usuarios['revisores'  ])?$usuarios['revisores'  ]:array();
@@ -249,8 +359,10 @@ class Notificacion extends Objectbase
    /// leerClase('Notificacion_dicta');
     foreach ($dictas as $dicta_id) 
     {
-      $n_obj             = new Notificacion_dicta();
-      $n_obj->docente_id = $dicta_id;
+      $n_obj                      = new Notificacion_dicta();
+      $n_obj->dicta_id            = $dicta_id;
+      $n_obj->estado_notificacion = self::EST_SV;
+      $n_obj->estado              = Objectbase::STATUS_AC;
       $this->notificacion_dicta_objs[] = $n_obj;
     }
     leerClase('Notificacion_tutor');
@@ -258,41 +370,47 @@ class Notificacion extends Objectbase
     //$tutores=$usuarios[0];
     foreach ($tutores as $tutor_id) 
     {
- 
-    
-      $n_obj           = new Notificacion_tutor();
-      $n_obj->tutor_id = $tutor_id;
+      $n_obj                      = new Notificacion_tutor();
+      $n_obj->tutor_id            = $tutor_id;
+      $n_obj->estado_notificacion = self::EST_SV;
+      $n_obj->estado              = Objectbase::STATUS_AC;
+
       $this->notificacion_tutor_objs[] = $n_obj;
     }
     leerClase('Notificacion_revisor');
     foreach ($revisores as $revisor_id) 
     {
-      $n_obj             = new Notificacion_revisor();
-      $n_obj->revisor_id = $revisor_id;
+      $n_obj                      = new Notificacion_revisor();
+      $n_obj->revisor_id          = $revisor_id;
+      $n_obj->estado_notificacion = self::EST_SV;
+      $n_obj->estado              = Objectbase::STATUS_AC;
       $this->notificacion_revisor_objs[] = $n_obj;
     }
     leerClase('Notificacion_estudiante');
     foreach ($estudiantes as $estudiante_id) 
     {
-      $n_obj                = new Notificacion_estudiante();
-      $n_obj->estudiante_id = $estudiante_id;
-      $n_obj->estado_notificacion =  Notificacion_estudiante::EST_SV;
+      $n_obj                      = new Notificacion_estudiante();
+      $n_obj->estudiante_id       = $estudiante_id;
+      $n_obj->estado_notificacion = self::EST_SV;
+      $n_obj->estado              = Objectbase::STATUS_AC;
       $this->notificacion_estudiante_objs[] = $n_obj;
     }
     leerClase('Notificacion_tribunal');
     foreach ($tribunales as $tribunal_id) 
     {
-      $n_obj               = new Notificacion_tribunal();
-      $n_obj->tribunal_id  = $tribunal_id;
-      $n_obj->estado_notificacion =  Notificacion_tribunal::EST_SV;
-      $n_obj->estado = Objectbase::STATUS_AC;
+      $n_obj                      = new Notificacion_tribunal();
+      $n_obj->tribunal_id         = $tribunal_id;
+      $n_obj->estado_notificacion = self::EST_SV;
+      $n_obj->estado              = Objectbase::STATUS_AC;
       $this->notificacion_tribunal_objs[] = $n_obj;
     }
     leerClase('Notificacion_consejo');
     foreach ($consejos as $consejo_id) 
     {
-      $n_obj               = new Notificacion_consejo();
-      $n_obj->consejo_id   = $consejo_id;
+      $n_obj                      = new Notificacion_consejo();
+      $n_obj->consejo_id          = $consejo_id;
+      $n_obj->estado_notificacion = self::EST_SV;
+      $n_obj->estado              = Objectbase::STATUS_AC;
       $this->notificacion_consejo_objs[] = $n_obj;
     }
     
@@ -332,6 +450,12 @@ class Notificacion extends Objectbase
   {
     
     $activo = Objectbase::STATUS_AC;
+    // Ordenamos por prioridad DESC fecha DESC
+    if (trim($orderby) == '')
+    {
+      $orderby = " ORDER BY notificacion.prioridad DESC, notificacion.fecha_envio DESC ";
+    }
+    
 
     //Notificaciones si es Revisor
     $sql_revisor = " SELECT n.*  , nr.estado_notificacion "
@@ -398,7 +522,8 @@ class Notificacion extends Objectbase
             . " and n.estado = '$activo' and nr.estado = '$activo'  and r.estado = '$activo' and d.estado = '$activo' ";
     
     //Juntamos todas las notificaciones, las filtramos y las procesamos
-    $sql    = " select * FROM ( "
+    $sql    = " select * , DATE_FORMAT(fecha_envio,'%d %b %Y') as fecha_envio_toshow " 
+            . " FROM ( "
             . " ($sql_revisor) UNION "
             . " ($sql_consejo) UNION "
             . " ($sql_tribunal) UNION "
@@ -571,8 +696,8 @@ class Notificacion extends Objectbase
       $filtro->order($_GET['order']);
     $filtro->nombres[] = 'Estado';
     $filtro->valores[] = array ('select','estado_notificacion'  ,$filtro->filtro('estado_notificacion'),
-        array(''      ,'SV'          , 'VI'        ),
-        array('Todos' ,'Sin Revisar' , 'Revisados' ));
+        array(''      ,'SV'          , 'VI'       , 'AR'         ),
+        array('Todos' ,'Sin Revisar' , 'Revisados', 'Archivados' ));
     $filtro->nombres[] = 'Tipo Mensaje';
     $filtro->valores[] = array ('select','tipo'  ,$filtro->filtro('tipo'),
         array(''      , self::TIPO_MENSAJE  , self::TIPO_TIEMPO   , self::TIPO_ASIGNACION  ),
@@ -580,7 +705,7 @@ class Notificacion extends Objectbase
     $filtro->nombres[] = 'Asunto';
     $filtro->valores[] = array('input', 'asunto', $filtro->filtro('asunto'));
     $filtro->nombres[] = 'Mensaje';
-    $filtro->valores[] = array('input', 'descripcion', $filtro->filtro('descripcion'));
+    $filtro->valores[] = array('input', 'detalle', $filtro->filtro('detalle'));
   }
 
   /**
@@ -593,7 +718,9 @@ class Notificacion extends Objectbase
     $order_array['id']                  = " {$this->getTableName()}.id ";
     $order_array['tipo']                = " {$this->getTableName()}.tipo ";
     $order_array['asunto']              = " {$this->getTableName()}.asunto ";
-    $order_array['descripcion']         = " {$this->getTableName()}.descripcion ";
+    $order_array['detalle']             = " {$this->getTableName()}.detalle ";
+    $order_array['fecha_envio']         = " {$this->getTableName()}.fecha_envio ";
+    $order_array['prioridad']           = " {$this->getTableName()}.prioridad ";
     $order_array['estado']              = " {$this->getTableName()}.estado ";
     $order_array['estado_notificacion'] = " {$this->getTableName()}.estado_notificacion "; // un poco de codigo hard aca
     return $filtro->getOrderString($order_array);
@@ -609,8 +736,12 @@ class Notificacion extends Objectbase
     $filtro_sql = '';
     if ($filtro->filtro('estado_notificacion'))
       $filtro_sql .= " AND {$this->getTableName()}.estado_notificacion like '%{$filtro->filtro('estado_notificacion')}%' ";
-    //if ($filtro->filtro('descripcion'))
-    //  $filtro_sql .= " AND {$this->getTableName()}.descripcion like '%{$filtro->filtro('descripcion')}%' ";
+    if ($filtro->filtro('detalle'))
+      $filtro_sql .= " AND {$this->getTableName()}.detalle like '%{$filtro->filtro('detalle')}%' ";
+    if ($filtro->filtro('asunto'))
+      $filtro_sql .= " AND {$this->getTableName()}.asunto like '%{$filtro->filtro('asunto')}%' ";
+    if ($filtro->filtro('tipo'))
+      $filtro_sql .= " AND {$this->getTableName()}.tipo like '%{$filtro->filtro('tipo')}%' ";
     return $filtro_sql;
   }
   
