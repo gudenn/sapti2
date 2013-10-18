@@ -6,7 +6,7 @@
       <th><a href='?order=fecha_envio'         class="tajax"  title='Ordenar por Fecha'              >Fecha   {$filtros->iconOrder('fecha_envio')}</a></th>
       <th><a href='?order=asunto'              class="tajax"  title='Ordenar por Asunto'             >Asunto  {$filtros->iconOrder('asunto')}</a></th>
       <th><a href='?order=detalle'             class="tajax"  title='Ordenar por Detalle'            >Detalle {$filtros->iconOrder('descripcion')}</a></th>
-      <th>Opciones</th>
+      <th></th>
     </tr>
   </thead>
   {section name=ic loop=$objs}

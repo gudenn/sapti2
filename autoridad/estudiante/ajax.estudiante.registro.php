@@ -1,5 +1,5 @@
 <?php
-define ("MODULO", "ADMIN-ESTUDIANTE-AJAX");
+define ("MODULO", "ADMIN-ESTUDIANTE");
 require_once("../../_inc/_sistema.php");
 if(!isAdminSession())
   exit('No tiene permiso');

@@ -1,5 +1,5 @@
 <?php
-  define ("MODULO", "ADMIN-PROYECTO-AJAX");
+  define ("MODULO", "ADMIN-PROYECTO");
   require('../../_inc/_sistema.php');
   if(!isAdminSession())
     header("Location: ../login.php");  

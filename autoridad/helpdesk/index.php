@@ -1,6 +1,6 @@
 <?php
 try {
-  define ("MODULO", "ADMIN-HELPDESK-INDEX");
+  define ("MODULO", "ADMIN-HELPDESK");
   require('../_start.php');
   if(!isAdminSession())
     header("Location: ../login.php");  
