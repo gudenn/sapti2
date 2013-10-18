@@ -3,7 +3,7 @@
   
   /** Smarty */
   require(DIR_LIB.'/smarty/Smarty.class.php');
-  require (DIR_LIB.'/PHPExcel/PHPExcel.php');
+   require (DIR_LIB.'/PHPExcel/PHPExcel.php');
   Smarty::muteExpectedErrors();
 
   
