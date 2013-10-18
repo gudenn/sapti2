@@ -85,7 +85,6 @@ leerClase('Menu');
             if($value['idmat']==$docmateriassemestre[$i]['idmat']&&$docmateriassemestre[$i]['materia']=='Proyecto Final'){
                   $link = Docente::URL."index.proyecto-final.php?iddicta=".$docmateriassemestre[$i]['iddicta']."";
                   $menu->agregarItem('Gesti&oacute;n de Estudiantes Codigo:'.$docmateriassemestre[$i]['grupo'].'','Gesti&oacute;n de Estudiantes Inscritos en la Materia Proyecto Final.','docente/correccion.png',$link);
-                  $_SESSION['iddictapro'] = $docmateriassemestre[$i]['iddicta'];
             }elseif ($value['idmat']==$docmateriassemestre[$i]['idmat']&&$docmateriassemestre[$i]['materia']=='Perfil') {
                         $link = Docente::URL."index.proyecto-final.php?iddicta=".$docmateriassemestre[$i]['iddicta']."";
                         $menu->agregarItem('Gesti&oacute;n de Estudiantes Codigo:'.$docmateriassemestre[$i]['grupo'].'','Gesti&oacute;n de Estudiantes Inscritos en la Materia de Perfil.','docente/correccion.png',$link);
