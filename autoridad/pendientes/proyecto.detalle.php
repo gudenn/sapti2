@@ -10,7 +10,7 @@ try {
   /** HEADER */
   $smarty->assign('title','SAPTI - Detalle de Proyecto');
   $smarty->assign('description','Detalle Proyecto');
-  $smarty->assign('keywords','SAPTI,Proyecto,Registro');
+  $smarty->assign('keywords','SAPTI,Detalle Proyecto,Detalle');
 
   leerClase('Administrador');
   /**
