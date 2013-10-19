@@ -121,7 +121,7 @@ class Observacion extends Objectbase
   }
 
    /**
-   Cambiar estado de observaciones a aprobadas
+   Cambiar estado de observaciones a rechazadas
    */
   function cambiarEstadoRechazado() {
     $rechazado = self::E4_RECHAZADO;
