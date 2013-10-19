@@ -156,7 +156,7 @@ try {
        
        
      }else{
-       
+       leerClase('Proyecto_tutor');
        
        
      $proyectotutor=  $notificacion->getProyectoTutor(getSessionUser()->id);
