@@ -28,6 +28,12 @@ class Notificacion_tutor extends Objectbase
   var $tutor_id;
 
   /**
+   * Codigo identificador de objeto Proyecto_tutor
+   * @var INT (11)
+   */
+  var $proyecto_tutor_id;
+
+  /**
    * Sin ver (SV), Visto (VI) , Archivado (AR)
    * @var STRING(2) 
    */
@@ -39,6 +45,14 @@ class Notificacion_tutor extends Objectbase
    */
   var $fecha_visto;
   
+  /**
+   * Marcamos como vista una notificacion
+   */
+  function marcarVisto() {
+    $this->fecha_visto = date('j/n/Y');
+    $this->estado_notificacion = self::EST_VI;
+    $this->save();
+  }
     
    
 }
