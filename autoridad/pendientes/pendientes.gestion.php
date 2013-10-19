@@ -55,17 +55,17 @@ try {
  
  if (isset($_GET['proyecto_id']) )
   {
-       $EXITO = false;
-        mysql_query("BEGIN");
-   $proyecto=new Proyecto($_GET['proyecto_id']);
+    $EXITO = false;
+    mysql_query("BEGIN");
+    $proyecto=new Proyecto($_GET['proyecto_id']);
    
-   $proyecto_aux=$proyecto;
+    $proyecto_aux=$proyecto;
 
-    $estudiante=$proyecto->getEstudiante();
-   $estudiante_id= $estudiante->id;
-   $tutores=$proyecto->getTutores();
-    $tutores->usuario_id;
-    $area=$proyecto->getArea();
+     $estudiante=$proyecto->getEstudiante();
+     $estudiante_id= $estudiante->id;
+     $tutores=$proyecto->getTutores();
+     $tutores->usuario_id;
+     $area=$proyecto->getArea();
      if($proyecto_aux->estado_proyecto!='CO'){
     
      $actualproyecto=new Proyecto();
@@ -88,14 +88,14 @@ try {
      $actualproyecto->estado_proyecto=  Proyecto::EST6_C;
      $actualproyecto->save();
     //copiar Proyecto estudiante
-    leerClase('Proyecto_estudiante');
+     leerClase('Proyecto_estudiante');
    
-    $asignado                         = new Proyecto_estudiante();
-    $asignado->proyecto_id            = $actualproyecto->id;
-    $asignado->estudiante_id          = $estudiante_id;
-    $asignado->estado                 = Objectbase::STATUS_AC;
-    $asignado->fecha_asignacion       = date('d/m/Y');
-    $asignado->save();
+     $asignado                         = new Proyecto_estudiante();
+     $asignado->proyecto_id            = $actualproyecto->id;
+     $asignado->estudiante_id          = $estudiante_id;
+     $asignado->estado                 = Objectbase::STATUS_AC;
+     $asignado->fecha_asignacion       = date('d/m/Y');
+     $asignado->save();
      
     //copiar area
     

@@ -1,5 +1,5 @@
       <div id="content"  style="width:685px;min-height: 450px;">
-        <h1 class="title"><b>Gesti&oacute;n de Estudiantes:</b></h1>
+        <h1 class="title"><b>Gesti&oacute;n de Reportes:</b></h1>
         <div class="dashboard">
           <h2>Reportes</h2>
           <a href="{$URL}{Administrador::URL}reportes/proceso.php">
