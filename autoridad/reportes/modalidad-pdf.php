@@ -1,37 +1,11 @@
 <?php
-//============================================================+
-// File name   : example_006.php
-// Begin       : 2008-03-04
-// Last Update : 2010-11-20
-//
-// Description : Example 006 for TCPDF class
-//               WriteHTML and RTL support
-//
-// Author: Nicola Asuni
-//
-// (c) Copyright:
-//               Nicola Asuni
-//               Tecnick.com LTD
-//               Manor Coach House, Church Hill
-//               Aldershot, Hants, GU12 4RQ
-//               UK
-//               www.tecnick.com
-//               info@tecnick.com
-//============================================================+
 
-/**
- * Creates an example PDF TEST document using TCPDF
- * @package com.tecnick.tcpdf
- * @abstract TCPDF - Example: WriteHTML and RTL support
- * @author Nicola Asuni
- * @since 2008-03-04
- */
-  //define ("MODULO", "DOCENTE");
   require('_start.php');
  
 require_once('../../../sapti.inc/libs/tcpdf/config/lang/eng.php');
 require_once('../../../sapti.inc/libs/tcpdf/tcpdf.php');
 
+ //cabecera pdf
 class MYPDF extends TCPDF {
 
     //Page header
@@ -146,6 +120,7 @@ function DesplegarTabla($a,$b)
         return $html;
         var_dump($html);
     }
+    //configurar tamanio columnas para las tablas
     function tamcolumna($nom){
         $tam='50';
         switch ($nom){
