@@ -72,6 +72,10 @@ EditableGrid.prototype.initializeGrid = function()
 						 "<img src=\"" + image("icons/editar.png") + "\" border=\"0\" alt=\"editar\" title=\"Editar Revision\"/>Editar</a>";
                 }                        
                 }}));
+            	setCellRenderer("tipo", new CellRenderer({
+                    
+                    render: function(cell, value) { cell.innerHTML ="<a>"+"<img src='" + image("icons/flags/" + value.toLowerCase() + ".png") + "' alt='" + value + "' title=\"Tipo de Evento\" width='30px' height='30px'/>"+nombreRevisor(value)+"</a>";}
+		})); 
             	setCellRenderer("revtipo", new CellRenderer({
                     
                     render: function(cell, value) { cell.innerHTML ="<a>"+"<img src='" + image("icons/flags/" + value.toLowerCase() + ".png") + "' alt='" + value + "' title=\"Tipo de Revisor\" width='30px' height='30px'/>"+nombreRevisor(value)+"</a>";}
@@ -169,6 +173,21 @@ function nombreRevisor(tipo){
                 }
 
             }
+            }
+        }
+    }
+    return nombre;
+}
+function nombreTipo(tipo){
+    nombre='';
+    if(tipo=='AC'){
+        nombre='REVISION';
+    }else{
+        if(tipo=='0'){
+            nombre='AVANCE';
+        }else{
+            if(tipo>0){
+                nombre='CORRECCION';
             }
         }
     }
