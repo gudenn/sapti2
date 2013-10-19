@@ -26,36 +26,14 @@
  * @author Nicola Asuni
  * @since 2008-03-04
  */
-  //define ("MODULO", "DOCENTE");
+  define ("MODULO", "DOCENTE");
   require('_start.php');
  
-require_once('../../../sapti.inc/libs/tcpdf/config/lang/eng.php');
-require_once('../../../sapti.inc/libs/tcpdf/tcpdf.php');
-class MYPDF extends TCPDF {
-
-    //Page header
-    public function Header() {
-        // Logo
-        $image_file = K_PATH_IMAGES.'cabesera.jpg';
-        $this->Image($image_file,20,20, 150, '20', 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
-        // Set font
-        $this->SetFont('helvetica', 'B', 20);
-       
-    }
-
-    // Page footer
-    public function Footer() {
-        // Position at 15 mm from bottom
-        $this->SetY(-15);
-        // Set font
-        $this->SetFont('helvetica', 'I', 8);
-        // Page number
-        $this->Cell(0, 10, 'Page '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
-    }
-}
+require_once('../../sapti.inc/libs/tcpdf/config/lang/eng.php');
+require_once('../../sapti.inc/libs/tcpdf/tcpdf.php');
 
 // create new PDF document
-$pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
@@ -100,29 +78,23 @@ $pdf->AddPage();
 // writeHTMLCell($w, $h, $x, $y, $html='', $border=0, $ln=0, $fill=0, $reseth=true, $align='', $autopadding=true)
 
 // create some HTML content
- //CSS
-  $CSS[]  = URL_CSS . "academic/tables.css";
-$p=$_GET['id_p'];
-$sql = "SELECT u.nombre AS NOMBRE,CONCAT(apellido_paterno,apellido_materno) as APELLIDOS ,s.codigo as SEMESTRE,p.nombre as TITULO,p.estado as ESTADO
-   FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe
-   WHERE u.id=e.usuario_id AND e.id=i.estudiante_id and p.tipo_proyecto='PE' and p.estado_proyecto='CO' AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado='AC' and s.id='".$p."'";
-//$sql = $queEmp = $_GET['sql'];
+
+$sql = "SELECT p.id,CONCAT(u.nombre,' ',apellido_paterno,' ',apellido_materno) as nombrec ,p.nombre,s.codigo
+FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe
+WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado='AC'";
+
 $b=1;
-//DesplegarTabla($sql,$b);
 
 function DesplegarTabla($a,$b)
      {
         $query =  mysql_query($a);
         $html= '<table border="0.5" cellspacing="0" cellpadding="8" ><thead><tr>';
         $html.=
-                '<th style="background-color:#006; text-align:center; color:#FFF" width="40"><strong>No</strong></th>';
+                '<th style="background-color:#006; text-align:center; color:#FFF"><strong>Numero</strong></th>';
             for($i=0;$i<mysql_num_fields($query);$i++)
                 {
-                
                     $html.=
-                
-                            '<th style="background-color:#006; text-align:center; color:#FFF" width="'.tamcolumna(mysql_field_name($query,$i)).'" ><strong>'.mysql_field_name($query,$i).'</strong></th>';
-                            $array[]= tamcolumna(mysql_field_name($query,$i));
+                            '<th style="background-color:#006; text-align:center; color:#FFF"><strong>'.mysql_field_name($query,$i).'</strong></th>';
                 }
                 $html.=
                         '</thead></tr>';
@@ -130,11 +102,11 @@ function DesplegarTabla($a,$b)
             $html.=
                     '<tr>';
             $html.=
-                    '<td width="40">'.$b.'</td>';
+                    '<td>'.$b.'</td>';
             for($i=0;$i<mysql_num_fields($query);$i++)
                 {
                     $html.=
-                            '<td width="'.$array[$i].'"  height="">'.$row[mysql_field_name($query,$i)].'</td>';
+                            '<td>'.$row[mysql_field_name($query,$i)].'</td>';
                 }
            $html.=
                    '</tr>';
@@ -145,37 +117,9 @@ function DesplegarTabla($a,$b)
         return $html;
         var_dump($html);
     }
-    function tamcolumna($nom){
-        $tam='50';
-        switch ($nom){
 
-     case "NOMBRE":
-     $tam='100';
-         break;
-
-       case "APELLIDOS":
-           
-           $tam='100';
-         break;
-     
-     case "SEMESTRE":
-           $tam='70';
-         break;
-      case "TITULO":
-           $tam='300';
-         break;
-
-break;
-
-}
-
-        return $tam;
-            
-    }
-//$pdf->Image('../../images/cabesera.jpg', '', '',150,20, '', '', 'T', false, 300, '', false, false, 1, false, false, false);
 // output the HTML content
-$pdf->SetXY(10, 50);
-$pdf->writeHTML(DesplegarTabla($sql,$b),10, true, false, true, false, 'J');
+$pdf->writeHTML(DesplegarTabla($sql,$b), true, false, true, false, '');
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

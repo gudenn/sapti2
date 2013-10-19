@@ -61,8 +61,8 @@ $sql2 = "SELECT *
   
   
   
-  echo $m=$_POST['modalidad_selec'];
-   $p=$_POST['semestre_selec'];
+  $m=$_POST['modalidad_selec'];
+  $p=$_POST['semestre_selec'];
   $semestre=new Semestre($p);
   $modalidad=new Modalidad($m);
   $smarty->assign("modalidad", $modalidad);
