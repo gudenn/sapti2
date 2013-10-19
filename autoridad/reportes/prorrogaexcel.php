@@ -4,7 +4,7 @@
         $p=$_GET['id_p'];
 	$consulta = "SELECT s.codigo as gestion,CONCAT(u.nombre,' ',apellido_paterno,apellido_materno) as nombre ,p.nombre as titulo,v.estado_vigencia as estadop,p.id
         FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
-        WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id and p.tipo_proyecto='PE' AND p.estado='AC' AND p.id=v.proyecto_id AND v.estado_vigencia='PR' and s.id='".$p."'";
+        WHERE u.id=e.usuario_id AND e.id=i.estudiante_id and p.estado_proyecto='CO' AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id and p.tipo_proyecto='PR' AND p.estado='AC' AND p.id=v.proyecto_id AND v.estado_vigencia='PR' and s.id='".$p."'";
 	$resultado =mysql_query($consulta); 
 	
 						
@@ -162,7 +162,7 @@
 
 		// Se manda el archivo al navegador web, con el nombre que se indica (Excel2007)
 		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-		header('Content-Disposition: attachment;filename="ReporteProceso.xlsx"');
+		header('Content-Disposition: attachment;filename="ReporteProrroga.xlsx"');
 		header('Cache-Control: max-age=0');
 
 		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');

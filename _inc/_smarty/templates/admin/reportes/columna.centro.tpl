@@ -22,7 +22,7 @@
             <h3>Reportes Perfiles con Cambio</h3>
             <p>Lista Perfiles con Cambio Generar Reportes en pdf y excel </p>
           </a>
-            <a href="{$URL}{Administrador::URL}reportes/vencido.php">
+            <a href="{$URL}{Administrador::URL}reportes/vencido.lista.php">
             <img src="{$URL_IMG}note.png"   width="48px" height="48px" alt="Estudiantes">
             <h3>Reportes Perfiles en Vencidos</h3>
             <p>Lista Perfiles Vencidos Generar Reportes en pdf y excel </p>

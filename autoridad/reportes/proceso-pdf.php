@@ -77,7 +77,7 @@ $pdf->AddPage();
 $p=$_GET['id_p'];
 $sql = "SELECT u.nombre AS NOMBRE,CONCAT(apellido_paterno,apellido_materno) as APELLIDOS ,s.codigo as SEMESTRE,p.nombre as TITULO,p.estado as ESTADO
    FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe
-   WHERE u.id=e.usuario_id AND e.id=i.estudiante_id and p.tipo_proyecto='PE' and p.estado_proyecto='CO' AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado='AC' and s.id='".$p."'";
+   WHERE u.id=e.usuario_id AND e.id=i.estudiante_id and p.tipo_proyecto='PR' and p.estado_proyecto='CO' and p.estado_proyecto='CO' AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado='AC' and s.id='".$p."'";
 
 $b=1;
 
@@ -153,7 +153,7 @@ $pdf->lastPage();
 // ---------------------------------------------------------
 
 //Close and output PDF document
-$pdf->Output('example_006.pdf', 'I');
+$pdf->Output('proceso.pdf', 'I');
 
 //============================================================+
 // END OF FILE                                                

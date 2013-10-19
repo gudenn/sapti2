@@ -1,12 +1,6 @@
 
 <form action="#" method="post" id="registro" name="registro" >
-     <p>
-              <select name="semestre_selec" id="semestre_selec" >
-              {html_options values=$semestre_values selected=$semestre_selected output=$semestre_output}
-              </select>
-              <label for="semestre_selec"><small>Seleccione Semestre(*)</small></label>
-            </p>
-            
+    
             
             <h2 class="title">Generar </h2>
             <p>

@@ -79,12 +79,12 @@ try {
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
-  if($_POST['semestre_selec']){
+  if(isset($_POST['tarea']) && $_POST['tarea'] == 'registrar'){
   
   
  $sqlr="SELECT count(*) as c
- FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
- WHERE u.id=e.usuario_id and e.id=i.estudiante_id and i.semestre_id=s.id and e.id=pe.estudiante_id and pe.proyecto_id=p.id and p.es_actual=1 and s.id='".$p."'";
+FROM proyecto p
+WHERE p.tipo_proyecto='PR' AND p.estado_proyecto='CO'";
  $resultado = mysql_query($sqlr);
  $areglo= array();
   
@@ -94,15 +94,15 @@ try {
    $areglo[]=$fila;
  }
  
- $cont = $areglo[0]['c'];
+ echo $cont = $areglo[0]['c'];
 
  if ($cont!==0) {
     
   
  //proyecots postergados
-  $sqlr="SELECT count(*) as p 
-  FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
-  WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id and p.tipo_proyecto='PE' AND pe.proyecto_id=p.id AND p.estado='AC' AND p.id=v.proyecto_id AND v.estado_vigencia='PO' and s.id='".$p."'";
+ $sqlr="SELECT count(*) as p
+ FROM vigencia v ,proyecto p
+ WHERE v.estado_vigencia='PO'and p.id=v.proyecto_id and p.estado_proyecto='CO'";
  $resultado = mysql_query($sqlr);
  $arraytribunal= array();
   
@@ -121,9 +121,9 @@ try {
  
   
  //proyecots con prorroga
- $sqlr="SELECT count(*)as pr
- FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
- WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id and p.tipo_proyecto='PE' AND pe.proyecto_id=p.id AND p.estado='AC' AND p.id=v.proyecto_id AND v.estado_vigencia='PR' and s.id='".$p."'";
+ $sqlr="SELECT count(*) as pr
+ FROM vigencia v ,proyecto p
+ WHERE v.estado_vigencia='PR'and p.id=v.proyecto_id and p.estado_proyecto='CO'";
  $resultado = mysql_query($sqlr);
  $arraytribunal= array();
   
@@ -141,9 +141,9 @@ try {
  
  
  //proyecots con cambio
-  $sqlr="SELECT  COUNT( * ) AS cam
- FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe, cambio c
- WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id and p.tipo_proyecto='PE' AND pe.proyecto_id=p.id AND p.estado='AC'AND c.proyecto_id=p.id and s.id='".$p."'";
+  $sqlr=" SELECT count(*) as cam
+ FROM proyecto p,cambio c
+ WHERE p.id=c.proyecto_id and p.estado_proyecto='CO'";
  $resultado = mysql_query($sqlr);
  $arraytribunal= array();
   
@@ -159,10 +159,10 @@ try {
  $smarty->assign('cam'  , $cam); 
 
 //vencidos
-  $fechahoy=  date('Y-m-d');
+ $fechahoy=  date('Y-m-d');
   $sqlr="SELECT count(*) as vencido
-   FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
-   WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id and p.tipo_proyecto='PE' AND pe.proyecto_id=p.id AND p.estado='AC' AND p.id=v.proyecto_id AND ('".$fechahoy."'>=v.fecha_fin)and s.id='".$p."'";
+ FROM vigencia v ,proyecto p
+ WHERE  p.id=v.proyecto_id and p.estado_proyecto='CO' AND ('".$fechahoy."'>=v.fecha_fin)";
  $resultado = mysql_query($sqlr);
  $arraytribunal= array();
   
