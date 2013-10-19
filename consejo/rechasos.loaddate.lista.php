@@ -1,9 +1,12 @@
 <?php     
 define ("MODULO", "CONSEJO");
+
 require  '_start.php';
 include '../_inc/_configurar.php';      
 require_once('../docente/EditableGrid.php');
          
+if(!isConsejoSession())
+  header("Location: login.php"); 
 // Database connection
 $mysqli = mysqli_init();
 $mysqli->options(MYSQLI_OPT_CONNECT_TIMEOUT, 5);

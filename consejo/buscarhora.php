@@ -4,7 +4,6 @@ try {
   require('_start.php');
   if(!isConsejoSession())
   header("Location: login.php"); 
-  global $PAISBOX;
  if(isset($_POST['idnumero']))
 { 
 

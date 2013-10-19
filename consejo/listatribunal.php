@@ -2,7 +2,7 @@
 try {
   define ("MODULO", "CONSEJO");
   require('_start.php');
-  if(!isDocenteSession())
+ if(!isConsejoSession())
     header("Location: login.php"); 
 
   leerClase('Docente');

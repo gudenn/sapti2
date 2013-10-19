@@ -1,6 +1,7 @@
 <?php
 try {
   define ("MODULO", "CONSEJO");
+ 
   require('_start.php');
 
   leerClase("Consejo");
