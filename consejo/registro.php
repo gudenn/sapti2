@@ -14,8 +14,10 @@ try {
   $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_CSS . "spams.css";
   $CSS[]  = URL_JS  . "validate/validationEngine.jquery.css";
-  $CSS[]  = URL_CSS . "box/box.css";
- 
+  //include '../js/box/jquery.box.js';
+  $CSS[]  = '../js/box/box.css';;
+  
+ // $JS[]  = '../js/box/jquery.box.js';
   $smarty->assign('CSS',$CSS);
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
@@ -23,10 +25,11 @@ try {
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
 
+  
   //CK Editor
   $JS[]  = URL_JS . "ckeditor/ckeditor.js";
   //BOX
-  $JS[]  = URL_JS ."box/jquery.box.js";
+  $JS[]  = '../js/box/jquery.box.js';
   
   $smarty->assign('JS',$JS);
 
@@ -149,12 +152,11 @@ while ($filapeso = mysql_fetch_array($resulpeso, MYSQL_ASSOC))
 
                 $automatico=new Automatico();
                 $automatico->objBuidFromPost();
-                  $automatico->area_id=$filadoc['idarea'];
-                 $automatico->docente_id=$filadoc['iddoc'];
-                  $automatico->valor_tiempo=$pesodia;
+                $automatico->area_id=$filadoc['idarea'];
+                $automatico->docente_id=$filadoc['iddoc'];
+                $automatico->valor_tiempo=$pesodia;
                 $automatico->valor_area=100;
                 $automatico->dia=$filadia['iddia'];
-                
                 $automatico->save();
 
 }
@@ -558,8 +560,14 @@ if ( isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' )
 
 if (isset($_POST['proyecto_id']))
  {
+  
+  $EXITO = false;
+    mysql_query("BEGIN");
  $idproyecto=$_POST['proyecto_id'];
    
+ 
+ 
+ 
    
   // $query = "UPDATE proyecto p SET p.estado_proyecto='TA'  WHERE p.id=$idproyecto";
 //  mysql_query($query);
@@ -568,12 +576,11 @@ if (isset($_POST['proyecto_id']))
       
       
    //$estudiante  = array();
-   $estudiante   = new Estudiante($proyectos->getEstudiante()->id);
-   $notificacion= new Notificacion();
-   $notificacion->objBuidFromPost();
-  // $notificacion->enviarNotificaion($usuarios);
-   $notificacion->proyecto_id=$_POST['proyecto_id']; 
-   $notificacion->tipo="Solicitud";
+    $estudiante   = new Estudiante($proyectos->getEstudiante()->id);
+    $notificacion = new Notificacion();
+    $notificacion->objBuidFromPost();
+    $notificacion->proyecto_id=$_POST['proyecto_id']; 
+    $notificacion->tipo="Solicitud";
     $notificacion->fecha_envio= date("j/n/Y");
     $notificacion->asunto="Asignacion de Tribunales";
     $notificacion->detalle="fasdf";
@@ -603,25 +610,24 @@ if (isset($_POST['proyecto_id']))
                 $tribunal->save();
                 
                 
-    $notificacions= new Notificacion();
-    $notificacions->objBuidFromPost();
-    $notificacions->proyecto_id=$_POST['proyecto_id']; 
-    $notificacions->tipo="Solicitud";
-    $notificacions->fecha_envio= date("j/n/Y");
-    $notificacions->asunto="Asignacion de Tribunales";
-    $notificacions->detalle="fasdf";
-    $notificacions->prioridad=5;
-    $notificacions->estado = Objectbase::STATUS_AC;
-
-    $noticaciones= array('tribunales'=>array( $tribunal->id));
-    $notificacions->enviarNotificaion( $noticaciones);
-                
-               
+                $notificacions= new Notificacion();
+                $notificacions->objBuidFromPost();
+                $notificacions->proyecto_id=$_POST['proyecto_id']; 
+                $notificacions->tipo=  Notificacion::TIPO_ASIGNACION;
+                $notificacions->fecha_envio= date("j/n/Y");
+                $notificacions->asunto="Asignacion de Tribunales";
+                $notificacions->detalle="fasdf";
+                $notificacions->prioridad=5;
+                $notificacions->estado = Objectbase::STATUS_AC;
+                $noticaciones= array('tribunales'=>array( $tribunal->id));
+                $notificacions->enviarNotificaion( $noticaciones);
+        
      }
      }
+    $EXITO = TRUE;
+    mysql_query("COMMIT");
     
-     
-     
+        
      }else
  {
    
@@ -629,6 +635,17 @@ if (isset($_POST['proyecto_id']))
  }
  
  }
+ 
+   leerClase('Html');
+  if (isset($EXITO))
+    {
+   $html = new Html();
+    if ($EXITO)
+      $mensaje = array('mensaje' => 'Se grabo correctamente la Asignacion de Tribunales', 'titulo' => 'Registro de Tribunales', 'icono' => 'tick_48.png');
+     else
+      $mensaje = array('mensaje' => 'Hubo un problema, No se grabo correctamente la Asignacion de Tribunales', 'titulo' => 'Registro de Tribunales', 'icono' => 'warning_48.png');
+    $ERROR = $html->getMessageBox($mensaje);
+     }
 
   
   

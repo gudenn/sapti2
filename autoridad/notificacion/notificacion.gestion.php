@@ -1,16 +1,25 @@
 <?php
 try {
-  define ("MODULO", "NOTIFICACIONES");
-  require_once('../_start.php');
+  if (!defined('MODULO'))
+  {
+    define ("MODULO", "NOTIFICACION");
+    require('../_start.php');
+  }
   if(!isUserSession())
     header("Location: ../login.php");  
+
   
   
   
   leerClase("Usuario");
   leerClase("Proyecto");
   leerClase("Notificacion");
+  leerClase("Notificacion_consejo");
   leerClase("Notificacion_dicta");
+  leerClase("Notificacion_estudiante");
+  leerClase("Notificacion_revisor");
+  leerClase("Notificacion_tribunal");
+  leerClase("Notificacion_tutor");
   leerClase("Formulario");
   leerClase("Pagination");
   leerClase("Filtro");
@@ -28,7 +37,8 @@ try {
   if (!isset($menuList))
   {
     $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
-    $menuList[]     = array('url'=>URL . Administrador::URL . 'notificaion/','name'=>'Notificaciones');
+    $menuList[]     = array('url'=>URL . Administrador::URL . 'notificacion/','name'=>'Notificaciones');
+    $menuList[]     = array('url'=>URL . Administrador::URL . 'notificacion/notificacion.gestion.php','name'=>'Archivo de Notificaiones');
   }
   $smarty->assign("menuList", $menuList);
 
@@ -44,7 +54,24 @@ try {
   $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
   $smarty->assign('lista'       ,'notificacion/lista.tpl');
   
+  // creo unas cuantas notificaciones de prueba
+  // para testeo habilitar estas lineas
+  /**
+  $nueva_notificacion = new Notificacion();
+  $tipo = array('N01','N02','N03');
   
+  $nueva_notificacion->asunto      = "Mensaje nuevo";
+  $nueva_notificacion->detalle     = "Mensaje nuevo ";
+  $nueva_notificacion->fecha_envio = date("d/m/Y");
+  $nueva_notificacion->estado      = 'AC';
+  $nueva_notificacion->prioridad   = rand(1, 10);
+  $nueva_notificacion->tipo        = $tipo[rand(0, 2)];  
+  $nueva_notificacion->proyecto_id = '1';
+  $nueva_notificacion->notificarTodos();
+  
+  var_dump($nueva_notificacion);
+  /**/ 
+
   //Filtro
   $filtro       = new Filtro('mis_notificaciones',__FILE__);
   $notificacion = new Notificacion();
@@ -57,29 +84,19 @@ try {
   
   $o_string   = $notificacion->getOrderString($filtro);
   $usuario    = getSessionUser();
-  $obj_mysql  = $notificacion->getTodasNotificaciones($usuario->id,'',$o_string,$filtro_sql,TRUE,TRUE);
+  $obj_mysql  = $notificacion->getTodasNotificaciones($usuario->id,'',$o_string,$filtro_sql,TRUE);
+  
  
   $objs_pg    = new Pagination($obj_mysql, 'mis_notificaciones','',false);
 
 
-  $smarty->assign("filtros"  ,$filtro);
-  $smarty->assign("objs"     ,$objs_pg->objs);
-  $smarty->assign("pages"    ,$objs_pg->p_pages);
+  $smarty->assign("filtros"       ,$filtro);
+  $smarty->assign("objs_pg"       ,$objs_pg);
+  $smarty->assign("objs"          ,$objs_pg->objs);
+  $smarty->assign("pages"         ,$objs_pg->p_pages);
+  $smarty->assign("notificacion"  ,$notificacion);
 
-  // creo unas cuantas notificaciones de prueba
-  $nueva_notificacion = new Notificacion();
-  
-  $nueva_notificacion->asunto      = "MEnsaje nuevo";
-  $nueva_notificacion->detalle     = "MEnsaje nuevo";
-  $nueva_notificacion->fecha_envio = date("d/m/Y");
-  $nueva_notificacion->estado      = 'AC';
-  $nueva_notificacion->prioridad   = '5';
-  $nueva_notificacion->proyecto_id = '1';
-  $nueva_notificacion->save();
-  $nueva_notificacion->notificarTodos();
-  
-  var_dump($nueva_notificacion);
-          
+       
 
 
   //No hay ERROR

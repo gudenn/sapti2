@@ -1,20 +1,28 @@
 <?php
 try {
-  define ("MODULO", "ADMIN-TUTOR-REGISTRO");
-  require('../_start.php');
-  if(!isAdminSession())
+  if (!defined('MODULO'))
+  {
+    define ("MODULO", "NOTIFICACION");
+    require('../_start.php');
+  }
+  if(!isUserSession())
     header("Location: ../login.php");  
   
   /** HEADER */
-  $smarty->assign('title','Proyecto Final');
-  $smarty->assign('description','Proyecto Final');
-  $smarty->assign('keywords','Proyecto Final');
+  $smarty->assign('title','Detalle de Mis Notificaciones');
+  $smarty->assign('description','Detalle de Mis Notificaciones');
+  $smarty->assign('keywords','Gesti&oacute;n,Notificaciones');
   /**
    * Menu superior
+   * hay que declarar esta variable en cada pagina para que esto funcione bien
    */
-  $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'tutor/','name'=>'Tutor');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'tutor/'.basename(__FILE__),'name'=>'Registrar Tutor');
+  if (!isset($menuList))
+  {
+    $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
+    $menuList[]     = array('url'=>URL . Administrador::URL . 'notificacion/','name'=>'Notificaciones');
+    $menuList[]     = array('url'=>URL . Administrador::URL . 'notificacion/notificacion.gestion.php','name'=>'Archivo de Notificaiones');
+    $menuList[]     = array('url'=>URL . Administrador::URL . 'notificacion/notificacion.detalle.php','name'=>'Detalle de Notificaciones');
+  }
   $smarty->assign("menuList", $menuList);
 
   $smarty->assign('header_ui','1');
@@ -25,38 +33,37 @@ try {
 
   $smarty->assign("ERROR", '');
 
-  $smarty->assign('columnacentro','admin/tutor/columna.centro.registro.tpl');
+  $smarty->assign('columnacentro','notificacion/detalle.tpl');
 
   //CREAR UN TUTOR
   leerClase('Tutor');
   leerClase('Usuario');
   leerClase('Estudiante');
-
+  leerClase('Notificacion');
+  leerClase('Estudiante');
+  leerClase('Proyecto');
   
+
   //Sexo del usuario
-  $smarty->assign('sexo', array(
+      $smarty->assign('sexo', array(
       Usuario::FEMENINO  => 'Femenino',
       Usuario::MASCULINO => 'Masculino'));
-  $smarty->assign('sexo_selected', ($usuario->sexo==Usuario::FEMENINO)?Usuario::FEMENINO:Usuario::MASCULINO);
+     $smarty->assign('sexo_selected', ($usuario->sexo==Usuario::FEMENINO)?Usuario::FEMENINO:Usuario::MASCULINO);
 
-  if (isset($_GET['estudiante_id']) && is_numeric($_GET['estudiante_id']))
+  if (isset($_GET['notificacion_id']) && is_numeric($_GET['notificacion_id']))
   {
-     $estudiante = new Estudiante($_GET['estudiante_id']);
-     $smarty->assign("estudiante",$estudiante);
+    
+    $notificacion  = new Notificacion($_GET['notificacion_id']);
+    $proyecto      =  new Proyecto($notificacion->proyecto_id);
+    $estudiante   =  $proyecto->getEstudiante();
+    
+     //echo $_GET['notificacion_id'];
+    
+     $smarty->assign("notificacion", $notificacion);
+     $smarty->assign("proyecto", $proyecto);
+     $smarty->assign("estudiante", $estudiante);
   }
-  //Asignar titulo al usuario
-  leerClase('Titulo_honorifico');
-  $titulo_h     = new Titulo_honorifico();
-  $titulo_hs    = $titulo_h->getAll();
-  $titulo_h_values[] = '';
-  $titulo_h_output[] = '- Seleccione -';
-  while ($row = mysql_fetch_array($titulo_hs[0])) 
-  {
-    $titulo_h_values[] = $row['nombre'];
-    $titulo_h_output[] = $row['nombre'];
-  }
-  $smarty->assign("titulo_h_values", $titulo_h_values);
-  $smarty->assign("titulo_h_output", $titulo_h_output);
+  
 
   //tutor
   $id = '';
@@ -71,35 +78,7 @@ try {
     $EXITO = false;
     mysql_query("BEGIN");
     
-
-    
-    $usuario = new Usuario();
-    $usuario->objBuidFromPost();
-    $usuario->puede_ser_tutor = Usuario::PROFECIONAL;
-    $usuario->estado = Objectbase::STATUS_AC;
-    $usuario->save();
-    
-    //usuario pertenece a un grupo
-    $usuario->asignarGrupo(Grupo::GR_TU);
-    
-    $tutor= new Tutor();
-    $tutor->objBuidFromPost();
-    $tutor->usuario_id = $usuario->id;
-    $tutor->estado     = Objectbase::STATUS_AC;
-    $tutor->save();
-    
-    if (isset($_POST['estudiante_id']) && is_numeric($_POST['estudiante_id']) )
-    {
-      // Primero quitamos al tutor anterior
-      if ( isset($_GET['cambiartutor_id']) && is_numeric($_GET['cambiartutor_id']) )
-      {
-        $tutoantiguo = new Tutor($_GET['cambiartutor_id']);
-        $tutoantiguo->finalizarTutoria($estudiante->id);
-      }
-      $tutor->asignarTutoria ($_POST['estudiante_id']);
-      
-    }
-    
+    // OPCIONES
 
     $EXITO = TRUE;
     mysql_query("COMMIT");

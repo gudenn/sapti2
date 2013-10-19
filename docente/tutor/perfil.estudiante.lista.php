@@ -1,7 +1,7 @@
 <?php
 try {
        define ("MODULO", "DOCENTE");
-  require('_start.php');
+  require('../_start.php');
   if(!isDocenteSession())
     header("Location: ../login.php"); 
 
@@ -31,7 +31,11 @@ try {
    /**
    * Menu superior
    */
- 
+  
+ $menuList[]     = array('url'=>URL.Docente::URL.'tutor','name'=>'Tutor');
+ $menuList[]     = array('url'=>URL.Docente::URL.'tutor/estudiante.lista.php','name'=>'Lista Estudiante');
+ $smarty->assign("menuList", $menuList);
+  
  
 
   $docente=  getSessionDocente();

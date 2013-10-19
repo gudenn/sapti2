@@ -26,8 +26,7 @@ try {
   $JS[]  = URL_JS . "ui/i18n/jquery.ui.datepicker-es.js";
   $JS[]  = URL_JS . "jquery.addfield.js";
 
-  
-  
+ 
   $smarty->assign('JS',$JS);
   $smarty->assign("ERROR", '');
  //// leer las clases 
@@ -41,7 +40,11 @@ try {
     leerClase("Consejo");
     leerClase("Proyecto");
 
-
+  
+ $menuList[]     = array('url'=>URL.Docente::URL.'tutor','name'=>'Tutor');
+ $menuList[]     = array('url'=>URL.Docente::URL.'tutor/estudiante.lista.php','name'=>'Lista Estudiante');
+ $smarty->assign("menuList", $menuList);
+  
 
     $docente      =  getSessionDocente();
     $docente_ids  =  $docente->id;
@@ -76,6 +79,11 @@ $smarty->assign('proyectotutor',$_GET['proyectotutor_id']);
   
 if ( isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' )
   {
+    $idtribuanl=$_POST['ids'];
+      $query = "UPDATE notificacion_tribunal nt SET nt.estado_notificacion='V'  WHERE nt.tribunal_id=$idtribuanl";
+         mysql_query($query);
+      
+  
     if( $_POST['accion']==Proyecto_tutor::ACEPTADO)
     {
           
@@ -99,7 +107,7 @@ if ( isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' )
     $estudiante= new Estudiante($proyecto->getEstudiante()->id);
     
     $notificacions->enviarNotificaion( $noticaciones);
-     $ir = "Location: notitutor.php";
+     $ir = "Location:lista.notificacion.php";
     header($ir);
        
      }else
@@ -126,7 +134,7 @@ if ( isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' )
     $estudiante= new Estudiante($proyecto->getEstudiante()->id);
     
     $notificacions->enviarNotificaion( $noticaciones);
-      $ir = "Location: notificacion.php";
+      $ir = "Location: lista.notificacion.php";
     header($ir);
     }
     

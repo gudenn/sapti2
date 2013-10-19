@@ -500,9 +500,9 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`notificacion_tribunal` (
   `notificacion_id` INT NOT NULL ,
   `tribunal_id` INT NOT NULL ,
   `accion` VARCHAR(45) NULL COMMENT 'Aceptar , rechazar ' ,
-  `estado_notificacion` VARCHAR(2) NULL COMMENT 'Sin ver (SV), Visto (VI) ' ,
   `fecha_visto` DATE NULL ,
-  `estado` VARCHAR(45) NULL ,
+  `estado_notificacion` VARCHAR(2) NULL COMMENT 'Sin ver (SV), Visto (VI) , archivado (AR)' ,
+  `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
@@ -516,9 +516,9 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`notificacion_estudiante` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `notificacion_id` INT NOT NULL ,
   `estudiante_id` INT NOT NULL ,
-  `estado_notificacion` VARCHAR(2) NULL COMMENT 'Sin ver (SV), Visto (VI)' ,
   `fecha_visto` DATE NULL ,
-  `estado` VARCHAR(45) NULL ,
+  `estado_notificacion` VARCHAR(2) NULL COMMENT 'Sin ver (SV), Visto (VI) , archivado (AR)' ,
+  `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
@@ -530,10 +530,11 @@ DROP TABLE IF EXISTS `sapti`.`notificacion_dicta` ;
 
 CREATE  TABLE IF NOT EXISTS `sapti`.`notificacion_dicta` (
   `id` INT NOT NULL AUTO_INCREMENT ,
-  `notificacion_id` INT NOT NULL ,
-  `estado_notificacion` VARCHAR(2) NULL COMMENT 'Sin ver (SV), Visto (VI) ' ,
-  `estado` VARCHAR(45) NULL ,
-  `dicta_id` INT NOT NULL ,
+  `notificacion_id` INT NULL ,
+  `dicta_id` INT NULL ,
+  `fecha_visto` DATE NULL ,
+  `estado_notificacion` VARCHAR(2) NULL COMMENT 'Sin ver (SV), Visto (VI) , archivado (AR)' ,
+  `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
@@ -545,11 +546,11 @@ DROP TABLE IF EXISTS `sapti`.`notificacion_tutor` ;
 
 CREATE  TABLE IF NOT EXISTS `sapti`.`notificacion_tutor` (
   `id` INT NOT NULL AUTO_INCREMENT ,
-  `notificacion_id` INT NOT NULL ,
-  `tutor_id` INT NOT NULL ,
-  `estado_notificacion` VARCHAR(45) NULL COMMENT 'Sin ver (SV), Visto (VI) ' ,
+  `notificacion_id` INT NULL ,
+  `tutor_id` INT NULL ,
   `fecha_visto` DATE NULL ,
-  `estado` VARCHAR(45) NULL ,
+  `estado_notificacion` VARCHAR(2) NULL COMMENT 'Sin ver (SV), Visto (VI) , archivado (AR)' ,
+  `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
@@ -827,9 +828,9 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`notificacion_consejo` (
   `notificacion_id` INT NOT NULL ,
   `consejo_id` INT NOT NULL ,
   `accion` VARCHAR(45) NULL COMMENT 'Aceptar , rechazar ' ,
-  `estado_notificacion` VARCHAR(2) NULL COMMENT 'Sin ver (SV), Visto (VI) ' ,
   `fecha_visto` DATE NULL ,
-  `estado` VARCHAR(45) NULL ,
+  `estado_notificacion` VARCHAR(2) NULL COMMENT 'Sin ver (SV), Visto (VI) , archivado (AR)' ,
+  `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
@@ -857,9 +858,9 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`notificacion_revisor` (
   `notificacion_id` INT NOT NULL ,
   `revisor_id` INT NOT NULL ,
   `accion` VARCHAR(45) NULL COMMENT 'Aceptar , rechazar ' ,
-  `estado_notificacion` VARCHAR(2) NULL COMMENT 'Sin ver (SV), Visto (VI) ' ,
   `fecha_visto` DATE NULL ,
-  `estado` VARCHAR(45) NULL ,
+  `estado_notificacion` VARCHAR(2) NULL COMMENT 'Sin ver (SV), Visto (VI) , archivado (AR)' ,
+  `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
