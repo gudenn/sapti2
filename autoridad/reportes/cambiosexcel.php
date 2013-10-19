@@ -25,11 +25,11 @@
 							 ->setLastModifiedBy("Codedrinks") //Ultimo usuario que lo modificó
 							 ->setTitle("Reporte Excel con PHP y MySQL")
 							 ->setSubject("Reporte Excel con PHP y MySQL")
-							 ->setDescription("Reporte de Proceso")
-							 ->setKeywords("reporte Proceso")
+							 ->setDescription("Reporte de Cambios")
+							 ->setKeywords("Reporte Cambios")
 							 ->setCategory("Reporte excel");
 
-		$tituloReporte = "Reportes de proyectos en Proceso";
+		$tituloReporte = "Reportes de Proyectos con Cambios";
 		$titulosColumnas = array('NOMBRE', 'TITULO', 'GESTION', 'ESTADO','CANTIDAD DE CAMBIOS', 'TIPO DE CAMBIO',);
 		
 		$objPHPExcel->setActiveSheetIndex(0)

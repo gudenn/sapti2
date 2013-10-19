@@ -30,7 +30,7 @@
 							 ->setKeywords("reporte Proceso")
 							 ->setCategory("Reporte excel");
 
-		$tituloReporte = "Reportes de proyectos en Proceso";
+		$tituloReporte = "Reportes de Proyectos Modalidad";
 		$titulosColumnas = array('NOMBRE', 'TITULO', 'GESTION', 'ESTADO');
 		
 		$objPHPExcel->setActiveSheetIndex(0)
