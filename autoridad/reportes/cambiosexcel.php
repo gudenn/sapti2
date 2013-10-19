@@ -1,6 +1,6 @@
 <?php
    require('../_start.php');
-	
+	//consulta
         $p=$_GET['id_p'];
 	$consulta = "SELECT p.id, u.nombre,s.codigo,CONCAT(apellido_paterno,apellido_materno) as apellidos, COUNT( * ) AS cantidadcambios, c.tipo,p.nombre as titulo,p.estado as estadop
         FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe, cambio c
