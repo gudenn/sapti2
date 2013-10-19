@@ -10,7 +10,7 @@
     </tr>
   </thead>
  
-  <tbody>68510575
+         <tbody>
        
     <tr  class="{cycle values="light,dark"}">
       <td>{$id}</td>
@@ -25,6 +25,6 @@
       </td>
     </tr>
   
-  </tbody>
+         </tbody>
  
 </table>

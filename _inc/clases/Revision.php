@@ -189,14 +189,15 @@ class Revision extends Objectbase
    Array de observaciones no Aprobadas
    */
   function listaDesaprobados() {
+      leerClase('Observacion');
     $aprobado = self::E4_APROBADO;
-    $sql = " SELECT id
-            FROM observacion ob
-            WHERE ob.revision_id='$this->id'
+    $sql = " SELECT ob.* FROM ".$this->getTableName('Observacion')." as ob WHERE ob.revision_id='$this->id'
             AND not ob.estado_observacion='$aprobado'";
-    $result = mysql_query($sql);
-    while ($fila = mysql_fetch_array($result, MYSQL_ASSOC)) {
-    $obser[]=$fila;
+    $resultados = mysql_query($sql);
+    if (!$resultados)
+      return false;
+    while ($fila = mysql_fetch_array($resultados, MYSQL_ASSOC)) {
+    $obser[]=$fila['id'];
     }
       return $obser;
     }

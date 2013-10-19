@@ -226,6 +226,27 @@ class Notificacion extends Objectbase
     return icono($icono, $descripcion, $width);
   }
   
+  function marcarVisto() {
+    $this->getAllObjects();
+    //Consejo
+    foreach ($this->notificacion_consejo_objs as $notificacion_consejo)
+      $notificacion_consejo->marcarVisto();
+    //Dicta
+    foreach ($this->notificacion_dicta_objs as $notificacion_consejo)
+      $notificacion_consejo->marcarVisto();
+    //estudiante
+    foreach ($this->notificacion_estudiante_objs as $notificacion_consejo)
+      $notificacion_consejo->marcarVisto();
+    //Revisor
+    foreach ($this->notificacion_revisor_objs as $notificacion_consejo)
+      $notificacion_consejo->marcarVisto();
+    //tribunal
+    foreach ($this->notificacion_tribunal_objs as $notificacion_consejo)
+      $notificacion_consejo->marcarVisto();
+    //Tutor
+    foreach ($this->notificacion_tutor_objs as $notificacion_consejo)
+      $notificacion_consejo->marcarVisto();
+  }
   
   /**
    * Manda una notificacion a todos los actores de un proyecto
@@ -563,27 +584,27 @@ class Notificacion extends Objectbase
   /**
    * retorna todas las notificaciones  de un docente  tribunal  dado el id del usuario
    * @param type $iddocente
+   * @return Tribunal
    */
   function getNotificacionTribunal($usuario_id) 
   {
     leerClase('Tribunal');
-     $activo = Objectbase::STATUS_AC;
+    $activo = Objectbase::STATUS_AC;
     /**
     select  t.*
                                                                                                                                                                                                     from   `docente`  d, `tribunal`  t, `notificacion_tribunal`  nt
                                                                                                                                                                                                     where d.`id`=t.`docente_id`  and t.`id`=nt.`tribunal_id` and nt.`notificacion_id`=1  and d.`usuario_id`=5     */
    
-    $sql = "select t.* from " . $this->getTableName('Tribunal') . " as t , " . $this->getTableName('Notificacion_tribunal') . " as nt , " . $this->getTableName('Docente') . " as d  where d.id=t.docente_id  and t.id=nt.tribunal_id and t.docente_id= d.id and nt.notificacion_id='$this->id' and nt.estado_notificacion='SV' and  d.usuario_id='$usuario_id' and t.estado = '$activo' and  nt.estado = '$activo'  and d.estado = '$activo'";
+    $sql = "select t.* from " . $this->getTableName('Tribunal') . " as t , " . $this->getTableName('Notificacion_tribunal') . " as nt , " . $this->getTableName('Docente') . " as d  where d.id=t.docente_id  and t.id=nt.tribunal_id and t.docente_id= d.id and nt.notificacion_id='$this->id' and  d.usuario_id='$usuario_id' and t.estado = '$activo' and  nt.estado = '$activo'  and d.estado = '$activo'";
     $resultado = mysql_query($sql);
 
     // var_dump($resultado);
     if (!$resultado) 
       return false;
-      while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
-      {
-
-       $tribunal = new Tribunal($fila);
-      }
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+    {
+      $tribunal = new Tribunal($fila);
+    }
     
     return  $tribunal;
   }
@@ -592,6 +613,7 @@ class Notificacion extends Objectbase
   /**
    * retorna todas las notificaciones  de un docente  tribunal  dado el id del usuario
    * @param type $iddocente
+   * deprecated!
    */
   function getProyectoTutor($usuario_id) 
   {
