@@ -33,7 +33,7 @@
         	<div id="paginator"></div>
         </div>
         <script type="text/javascript">
-                editableGrid.onloadXML("loaddata.revision.lista.php?doc={$proyecto->id}");
+                editableGrid.onloadXML("loaddata.revision.lista.php?doc={$proyecto->id}", {$estudiante->id});
         </script>
         <p>{$ERROR}</p>
      </div>

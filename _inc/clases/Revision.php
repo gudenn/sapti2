@@ -185,5 +185,20 @@ class Revision extends Objectbase
     if (!$result)
       return false;
   }
+       /**
+   Array de observaciones no Aprobadas
+   */
+  function listaDesaprobados() {
+    $aprobado = self::E4_APROBADO;
+    $sql = " SELECT id
+            FROM observacion ob
+            WHERE ob.revision_id='$this->id'
+            AND not ob.estado_observacion='$aprobado'";
+    $result = mysql_query($sql);
+    while ($fila = mysql_fetch_array($result, MYSQL_ASSOC)) {
+    $obser[]=$fila;
+    }
+      return $obser;
+    }
 }
 ?>

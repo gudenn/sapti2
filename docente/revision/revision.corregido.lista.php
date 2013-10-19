@@ -45,16 +45,20 @@ try {
   if (isset($_GET['id_estudiante'])) 
   $id_estudiante=$_GET['id_estudiante'];
   
+  $docente=  getSessionDocente();
   $estudiante     = new Estudiante($id_estudiante);
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();
 
   $resul = "
 SELECT av.id as id, pr.nombre as nombrep, av.descripcion as descripcion, av.fecha_avance as fecha, av.revision_id as correcionrevision, av.estado_avance as estoavance
-FROM proyecto pr, avance av
+FROM proyecto pr, avance av, revision re
 WHERE av.proyecto_id=pr.id
+AND av.revision_id=re.id
+AND re.estado_revision='RE'
 AND av.proyecto_id='".$proyecto->id."'
-AND not av.estado_avance='CO'
+AND re.revisor_tipo='DO'
+AND re.revisor='".$docente->id."'
 ORDER BY av.fecha_avance
           ";
    $sql = mysql_query($resul);

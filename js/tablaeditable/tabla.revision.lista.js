@@ -48,10 +48,10 @@ InfoHeaderRenderer.prototype.render = function(cell, value)
 };
 
 // this function will initialize our editable grid
-EditableGrid.prototype.initializeGrid = function() 
+EditableGrid.prototype.initializeGrid = function(estid) 
 {
 	with (this) {
-
+                
 		// register the function that will handle model changes
 		modelChanged = function(rowIndex, columnIndex, oldValue, newValue, row) { 
 		};
@@ -70,11 +70,15 @@ EditableGrid.prototype.initializeGrid = function()
                 if(getValueAt(cell.rowIndex, '2')=='DO'&& getValueAt(cell.rowIndex, '4')=='CR'){                        
                 cell.innerHTML += "<br><a onclick=document.location.href='observacion.editar.php?revisiones_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("icons/editar.png") + "\" border=\"0\" alt=\"editar\" title=\"Editar Revision\"/>Editar</a>";
-                }                        
+                } 
+                if(getValueAt(cell.rowIndex, '1')=='0'){                        
+                cell.innerHTML += "<br><a onclick=document.location.href='avance.detalle.php?estudiante_id="+estid+"&avance_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
+						 "<img src=\"" + image("icons/basicset/document_pencil.png") + "\" border=\"0\" alt=\"revisar\" title=\"Revisar\"/>Revisar</a>";
+                } 
                 }}));
             	setCellRenderer("tipo", new CellRenderer({
                     
-                    render: function(cell, value) { cell.innerHTML ="<a>"+"<img src='" + image("icons/flags/" + value.toLowerCase() + ".png") + "' alt='" + value + "' title=\"Tipo de Evento\" width='30px' height='30px'/>"+nombreRevisor(value)+"</a>";}
+                    render: function(cell, value) { cell.innerHTML ="<a>"+"<img src='" + image("icons/flags/" + value.toLowerCase() + ".png") + "' alt='" + value + "' title=\"Tipo de Evento\" width='30px' height='30px'/>"+nombreTipo(value)+"</a>";}
 		})); 
             	setCellRenderer("revtipo", new CellRenderer({
                     
@@ -82,6 +86,10 @@ EditableGrid.prototype.initializeGrid = function()
 		})); 
                 setCellRenderer("estado", new CellRenderer({
 			render: function(cell, value){ cell.innerHTML ="<a>"+"<img src='" + image("icons/flags/" + value.toLowerCase() + ".png") + "' alt='" + value + "' title=\"Estado de Revicion\" width='30px' height='30px'/>"+estadoRevision(value)+"</a>";} 
+		}));
+                setCellRenderer("num", new CellRenderer({
+                    
+                    render: function(cell, value) { cell.innerHTML ="<a>"+htmlspecialchars(value)+"</a>";}
 		}));
 		
 		// render the grid (parameters will be ignored if we have attached to an existing HTML table)
@@ -99,12 +107,12 @@ EditableGrid.prototype.initializeGrid = function()
 	}
 };
 
-EditableGrid.prototype.onloadXML = function(url) 
+EditableGrid.prototype.onloadXML = function(url, estid) 
 {
 	// register the function that will be called when the XML has been fully loaded
 	this.tableLoaded = function() { 
 		displayMessage("Numero de Revisiones al Proyecto " + this.getRowCount()); 
-		this.initializeGrid();
+		this.initializeGrid(estid);
 	};
 
 	// load XML URL
@@ -216,3 +224,31 @@ function estadoRevision(tipo){
     }
     return nombre;
 }
+function getDetalle(){
+    for(cant=0; cant<editableGrid.getRowCount(); cant++){
+        detalle=editableGrid.getValueAt(cant, '6');
+        alert(detalle)
+        detalle1   = htmlspecialchars(detalle);
+        editableGrid.setValueAt(cant, '6', detalle1);
+    }        
+}
+function htmlspecialchars4(str) {
+ if (typeof(str) == "string") {
+  str = str.replace(/&/g, "&amp;"); /* must do &amp; first */
+  str = str.replace(/"/g, "&quot;");
+  str = str.replace(/'/g, "&#039;");
+  str = str.replace(/</g, "&lt;");
+  str = str.replace(/>/g, "&gt;");
+  }
+ return str;
+ }
+function htmlspecialchars(str) {
+ if (typeof(str) == "string") {
+  str = str.replace(/&/g, "&amp;"); /* must do &amp; first */
+  str = str.replace(/"/g, "&quot;");
+  str = str.replace(/'/g, "&#039;");
+  str = str.replace(/</g, "&lt;");
+  str = str.replace(/>/g, "&gt;");
+  }
+ return str;
+ }
