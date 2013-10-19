@@ -11,6 +11,7 @@ class Observacion extends Objectbase
   const E1_CREADO    = "CR";
   const E2_CORREGIDO = "CO";
   const E3_APROBADO  = "AP";
+  const E4_RECHAZADO  = "NP";
 
  /**
   * Codigo identificador del Objeto Proyecto
@@ -118,12 +119,13 @@ class Observacion extends Objectbase
     if (!$result)
       return false;
   }
-     /**
+
+   /**
    Cambiar estado de observaciones a aprobadas
    */
-  function cambiarRevisor($rev_id, $rev_id1) {
-    $aprobado = self::E3_APROBADO;
-    $sql = " UPDATE  `{$this->getTableName()}` SET `revision_id` = '$rev_id' WHERE `revision_id` = '$rev_id1' AND not `estado_observacion` = '$aprobado' ";
+  function cambiarEstadoRechazado() {
+    $rechazado = self::E4_RECHAZADO;
+    $sql = " UPDATE  `{$this->getTableName()}` SET `estado_observacion` = '$rechazado' WHERE id='$this->id'";
     $result = mysql_query($sql);
     if (!$result)
       return false;

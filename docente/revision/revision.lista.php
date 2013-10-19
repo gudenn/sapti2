@@ -44,6 +44,7 @@ try {
   $proyecto       = $estudiante->getProyecto();
 
   $smarty->assign("usuario", $usuario);
+  $smarty->assign("estudiante", $estudiante);
   $smarty->assign("proyecto", $proyecto);
 
   //No hay ERROR

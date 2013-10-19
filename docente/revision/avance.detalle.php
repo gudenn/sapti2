@@ -121,8 +121,23 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
            $revision1->fechaAprobacion();
            $revisionnuevo = new Revision();
            $revisionnuevo->crearRevisionDocente($docente->id, $proyecto->id);
-           $obsermo = new Observacion();
-           $obsermo->cambiarRevisor($revisionnuevo->id, $revision1->id);
+           $revisionnuevo->save();
+           $desaprobados=$revision1->listaDesaprobados();
+           var_dump($desaprobados);
+           if(count($desaprobados)>0){
+                         foreach ($desaprobados as $des) {
+               $obsermodes=new Observacion($des);
+               $obsermodes->objBuidFromPost();
+               $obsermo = new Observacion();
+               $obsermo->objBuidFromPost();
+               $obsermo->crearObservacion($obsermodes->observacion, $revisionnuevo->id);
+               $obsermodes->cambiarEstadoRechazado();
+               $obsermodes->save();
+               $obsermo->save();
+           } 
+           }
+
+           
            $avance->cambiarEstadoCorregido();   
            $ir = "Location: ../revision/observacion.editar.revision.php?revisiones_id=".$revisionnuevo->id."";
            header($ir);
