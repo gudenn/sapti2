@@ -17,7 +17,7 @@ try {
 /**
    * Menu superior
    */
-  
+  leerClase('Administrador');
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'reportes/','name'=>'Reportes');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'reportes/'.basename(__FILE__),'name'=>'Reportes De Estadisticos');
@@ -76,8 +76,8 @@ try {
       
       
  $sqlr="SELECT count(*) as c
- FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
- WHERE u.id=e.usuario_id and e.id=i.estudiante_id and i.semestre_id=s.id and e.id=pe.estudiante_id and pe.proyecto_id=p.id and p.es_actual=1 and s.id='".$p."'";
+   FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe
+   WHERE u.id=e.usuario_id AND e.id=i.estudiante_id and p.tipo_proyecto='PE'  AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado='AC' and s.id='".$p."'";
  $resultado = mysql_query($sqlr);
  $areglo= array();
   
@@ -89,7 +89,7 @@ try {
  
  echo $num = $areglo[0]['c'];
 
- if ($num!==0) {
+ if ($num!=0) {
   
  $p=$_POST['semestre_selec'];
  $sqlr="SELECT Count(*)as d

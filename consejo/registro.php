@@ -569,8 +569,8 @@ if (isset($_POST['proyecto_id']))
  
  
    
-  // $query = "UPDATE proyecto p SET p.estado_proyecto='TA'  WHERE p.id=$idproyecto";
-//  mysql_query($query);
+   $query = "UPDATE proyecto p SET p.estado_proyecto='TA'  WHERE p.id=$idproyecto";
+     mysql_query($query);
       $proyectos   = new Proyecto($idproyecto);
     
       
@@ -580,10 +580,10 @@ if (isset($_POST['proyecto_id']))
     $notificacion = new Notificacion();
     $notificacion->objBuidFromPost();
     $notificacion->proyecto_id=$_POST['proyecto_id']; 
-    $notificacion->tipo="Solicitud";
+    $notificacion->tipo=  Notificacion::TIPO_MENSAJE;
     $notificacion->fecha_envio= date("j/n/Y");
-    $notificacion->asunto="Asignacion de Tribunales";
-    $notificacion->detalle="fasdf";
+  //  $notificacion->asunto="Asignacion de Tribunales";
+   // $notificacion->detalle="fasdf";
     $notificacion->prioridad=5;
     $notificacion->estado = Objectbase::STATUS_AC;
 
@@ -591,7 +591,7 @@ if (isset($_POST['proyecto_id']))
     $notificacion->enviarNotificaion( $noticaciones);
     
      
-   
+  // $listatribunales=
      if(isset($_POST['ids']))
      { 
      foreach ($_POST['ids'] as $id)

@@ -17,7 +17,7 @@ try {
   
      $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
   
-  $smarty->assign('CSS',$CSS);
+     $smarty->assign('CSS',$CSS);
 
   //JS
    $JS[]  = URL_JS . "jquery.min.js";

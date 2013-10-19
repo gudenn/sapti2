@@ -240,7 +240,12 @@ class Notificacion extends Objectbase
     $this->notificarTribunales($proyecto);
     $this->notificarRevisores($proyecto);
   }
+  /**
+   * Retorna la notificacion del tribunal
+   * @return boolean|\Area
+   */
   
+
   /**
    * Notificamos a todos los estudiantes del proyecto
    */
@@ -559,30 +564,63 @@ class Notificacion extends Objectbase
    * retorna todas las notificaciones  de un docente  tribunal  dado el id del usuario
    * @param type $iddocente
    */
-  function getNotificacionTribunal($idusuario) {
-    leerClase('Notificacion');
-    $notificacion = array();
-    $activo = Objectbase::STATUS_AC;
+  function getNotificacionTribunal($usuario_id) 
+  {
+    leerClase('Tribunal');
+     $activo = Objectbase::STATUS_AC;
     /**
-     * select  n.*
-      from  `notificacion` n, `notificacion_tribunal`  nt, `tribunal`t , `docente` d
-      where   n.`id`=nt.`notificacion_id`  and nt.`tribunal_id`=t.`id`  and t.`docente_id`= d.`id`  and nt.`estado_notificacion`='SV' and d.`usuario_id`=3
-      and  n.`estado`='AC'  and nt.`estado`='AC'  and  t.`estado` ='AC'  and d.`estado`='AC';                                                                                                                                                                                                                                 where   n.`id`=nt.`notificacion_id`  and nt.`tribunal_id`=t.`id`  and t.`docente_id`= d.`id`  and nt.`estado_notificacion`='SV' and d.`usuario_id`=3;
-     */
-    $vars = 0;
-    $sql = "select n.* from " . $this->getTableName('Notificacion') . " as n , " . $this->getTableName('Notificacion_tribunal') . " as nt , " . $this->getTableName('Tribunal') . " as t , " . $this->getTableName('Docente') . " as d  where n.id=nt.notificacion_id  and nt.tribunal_id=t.id and t.docente_id= d.id and nt.estado_notificacion='SV' and  d.usuario_id='$idusuario' and n.estado = '$activo' and  nt.estado = '$activo'  and d.estado = '$activo' and t.estado = '$activo'";
+    select  t.*
+                                                                                                                                                                                                    from   `docente`  d, `tribunal`  t, `notificacion_tribunal`  nt
+                                                                                                                                                                                                    where d.`id`=t.`docente_id`  and t.`id`=nt.`tribunal_id` and nt.`notificacion_id`=1  and d.`usuario_id`=5     */
+   
+    $sql = "select t.* from " . $this->getTableName('Tribunal') . " as t , " . $this->getTableName('Notificacion_tribunal') . " as nt , " . $this->getTableName('Docente') . " as d  where d.id=t.docente_id  and t.id=nt.tribunal_id and t.docente_id= d.id and nt.notificacion_id='$this->id' and nt.estado_notificacion='SV' and  d.usuario_id='$usuario_id' and t.estado = '$activo' and  nt.estado = '$activo'  and d.estado = '$activo'";
     $resultado = mysql_query($sql);
 
     // var_dump($resultado);
-    if ($resultado) {
-      while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) {
+    if (!$resultado) 
+      return false;
+      while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+      {
 
-        $vars = $vars + 1;
-        $notificacion[] = new Notificacion($fila);
+       $tribunal = new Tribunal($fila);
       }
-    }
-    return $notificacion;
+    
+    return  $tribunal;
   }
+  
+  
+  /**
+   * retorna todas las notificaciones  de un docente  tribunal  dado el id del usuario
+   * @param type $iddocente
+   */
+  function getProyectoTutor($usuario_id) 
+  {
+    leerClase('Proyecto_tutor');
+     $activo = Objectbase::STATUS_AC;
+    /**
+    select  t.*
+                                                                                                                                                                                                    from   `docente`  d, `tribunal`  t, `notificacion_tribunal`  nt
+                                                                                                                                                                                                    where d.`id`=t.`docente_id`  and t.`id`=nt.`tribunal_id` and nt.`notificacion_id`=1  and d.`usuario_id`=5     */
+   
+    $sql = "select pt.* from " . $this->getTableName('Proyecto_tutor') . " as pt , " . $this->getTableName('Notificacion_tutor') . " as nt , " . $this->getTableName('Tutor') . " as t  where   pt.proyecto_id='$this->proyecto_id'  and  nt.notificacion_id='$this->id' nt.tutor_id=t.id and t.id=pt.tutor_id  and nt.estado_notificacion='SV' and  t.usuario_id='$usuario_id' and t.estado = '$activo' and  nt.estado = '$activo'  and t.estado = '$activo'";
+    $resultado = mysql_query($sql);
+
+    // var_dump($resultado);
+    if (!$resultado) 
+      return false;
+      while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+      {
+
+       $proyectotutor= new Proyecto_tutor($fila);
+      }
+    
+    return   $proyectotutor;
+  }
+  
+  
+  
+  
+  
 
   /**
    * retorna todas las notificaciones no visto de un estudiante dado el id del usuario

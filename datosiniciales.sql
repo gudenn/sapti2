@@ -87,9 +87,9 @@ INSERT INTO `proyecto_dicta` (`id`, `proyecto_id`, `dicta_id`, `estado`) VALUES 
 INSERT INTO `proyecto_dicta` (`id`, `proyecto_id`, `dicta_id`, `estado`) VALUES (NULL, '4', '4', 'AC');
 
 
-INSERT INTO `materia` (`id`, `nombre`, `estado`) VALUES (NULL, 'Proyecto Final', 'AC');
-INSERT INTO `materia` (`id`, `nombre`, `estado`) VALUES (NULL, 'Perfil', 'AC');
-INSERT INTO `semestre` (`id`, `codigo`, `activo`, `estado`) VALUES (NULL, 'I-2013','0', 'AC'), (NULL, 'II-2013','1', 'AC');
+INSERT INTO `materia` (`id`, `nombre`, `sigla`, `estado`) VALUES (NULL, 'Proyecto Final','PR', 'AC');
+INSERT INTO `materia` (`id`, `nombre`, `estado`) VALUES (NULL, 'Perfil','PE', 'AC');
+INSERT INTO `semestre` (`id`, `codigo`, `activo`, `sigla`,`estado`) VALUES (NULL, 'I-2013','0', 'AC'), (NULL, 'II-2013','1', 'AC');
 
 INSERT INTO `dicta` (`id`, `docente_id`, `materia_id`, `semestre_id`, `codigo_grupo_id`, `estado`) VALUES (NULL, '1', '1', '1','1', 'AC');
 INSERT INTO `dicta` (`id`, `docente_id`, `materia_id`, `semestre_id`, `codigo_grupo_id`, `estado`) VALUES (NULL, '2', '1', '1','2', 'AC');

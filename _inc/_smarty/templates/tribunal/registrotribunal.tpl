@@ -190,14 +190,15 @@
         
      
       <input type="hidden" id="proyecto_id" name="proyecto_id" value="{$proyectobuscado->id}" /><br />
-      <input type="text" id="proyecto_id" name="estudiante_id" value="{$estudiantebuscado->codigo_sis}" /><br />
-      
-    
+      <input type="hidden" id="proyecto_id" name="estudiante_id" value="{$estudiantebuscado->codigo_sis}" /><br />
+        Asunto<br/>
+       <input type="text" id="asunto" name="asunto" value="Asignacion de Tribunales" /><br />
+   
        <div style ="clear"></div>
        <div>
        
       <div>
-        Mensaje<br/>
+        Detalle<br/>
         <textarea name="detalle" rows="5" style="width: 90%"></textarea>
         <script>
           CKEDITOR.replace('detalle'{$editores})

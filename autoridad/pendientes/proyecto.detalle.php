@@ -8,17 +8,17 @@ try {
   if (!defined('TIPO'))
     define ('TIPO', 'PR');
   /** HEADER */
-  $smarty->assign('title','SAPTI - Registro de Proyecto');
-  $smarty->assign('description','Formulario de registro de Proyecto');
-  $smarty->assign('keywords','SAPTI,Proyecto,Registro');
+  $smarty->assign('title','SAPTI - Detalle de Proyecto');
+  $smarty->assign('description','Detalle Proyecto');
+  $smarty->assign('keywords','SAPTI,Detalle Proyecto,Detalle');
 
   leerClase('Administrador');
   /**
    * Menu superior
    */
-  $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'detalle');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'detalle/','name'=>'Proyecto');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'detalle/'.basename(__FILE__),'name'=>'Detalle de Proyecto');
+ $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'pendientes/pendientes.gestion.php','name'=>'Pendientes');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'pendientes/'.basename(__FILE__),'name'=>'Proyectos Detalle');
   $smarty->assign("menuList", $menuList);
 
 

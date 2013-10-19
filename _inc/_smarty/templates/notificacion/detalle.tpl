@@ -3,32 +3,40 @@
 <div id="content">
  <div class="clear"></div>
  <form action="" method="post" >
-   <h1> Fecha de Envio</h1>
+  <p>Fecha</p>
     <p>{$notificacion->fecha_envio}</p>
   
-    <h1> Asunto</h1>
+  <p>Asunto</p>
    <p>{$notificacion->asunto}</p>
   
     <p>Detalle</p>
    <p>{$notificacion->detalle}</p>
   
-    <p>SEÑOR</p>
-   <p>{$notificacion->fecha_envio}</p>
- 
-    <select name=accion>
-    {html_options options=$accion}
-    </select>
-  
-       <div>
-        Observaci&oacute;n<br/>
-        <textarea name="descripcion" rows="4" style="width: 90%"></textarea>
-      </div>
    
-        <div style="text-align: center">
-        <input type="hidden" name="id" value="" />
-        <input type="hidden" name="salida_id" value="25" />
-        <input type="submit" value="grabar" name="tarea" class="sendme"  />
+     {if ($notificacion->tipo)==$tiponotificacion}
+       <select name=accion>
+    {html_options options=$accion}
+    </select><br/>
+      Asunto<br/>
+       <input type="text" id="asunto" name="asunto" value="" /><br />
+   
+       <div>
+        Detalle<br/>
+        <textarea name="detalle" rows="4" style="width: 90%"></textarea>
+      </div>
+    
+      <div style="text-align: center">
+        <input type="hidden"  id="id_notificacion" name="id_notificacion" value="{$notificacion->id}" />
+                <input type="hidden" name="tarea" value="registrar">
+              <input type="hidden" name="token" value="{$token}">
+              <input name="submit" type="submit" id="submit" value="Grabar">
         </div>
+    
+        {/if}
+   
+  
+   
+      
  </form>
   </div>    
 
