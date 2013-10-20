@@ -94,9 +94,9 @@ WHERE p.tipo_proyecto='PR' AND p.estado_proyecto='CO'";
    $areglo[]=$fila;
  }
  
- echo $cont = $areglo[0]['c'];
+ $cont = $areglo[0]['c'];
 
- if ($cont!==0) {
+ if ($cont!=0) {
     
   
  //proyecots postergados
