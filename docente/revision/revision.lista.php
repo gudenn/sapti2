@@ -37,8 +37,15 @@ try {
   $menuList[]     = array('url'=>URL.Docente::URL.'revision/'.basename(__FILE__),'name'=>'Seguimiento');
   $smarty->assign("menuList", $menuList);
   
-  if (isset($_GET['id_estudiante'])) 
-  $id_estudiante=$_GET['id_estudiante'];
+  //Guardamos el Id del eestudiante para esta parte
+  $id_estudiante = false;
+  if (isset($_SESSION['revision_estudiante_id']) && is_numeric($_SESSION['revision_estudiante_id']))
+    $id_estudiante = $_SESSION['revision_estudiante_id'];
+  if (isset($_GET['id_estudiante']) && is_numeric($_GET['id_estudiante']))
+  {
+    $_SESSION['revision_estudiante_id'] = $_GET['id_estudiante'];
+    $id_estudiante                      = $_GET['id_estudiante'];
+  }  
   
   $estudiante     = new Estudiante($id_estudiante);
   $usuario        = $estudiante->getUsuario();
