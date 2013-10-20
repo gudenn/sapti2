@@ -29,8 +29,7 @@
         
         	<div id="paginator"></div>
         </div>
-            <a href="observacion.estudiante-cvs.php" type="button">CARGAR OBSERVACION(ES) POR CVS</a>
-        <script type="text/javascript">
+            <script type="text/javascript">
                 editableGrid.onloadXML("loaddata.estudiante.lista.php?doc={$docente_ids}");
         </script>
     </div>
