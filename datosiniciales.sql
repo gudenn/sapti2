@@ -90,7 +90,7 @@ INSERT INTO `proyecto_dicta` (`id`, `proyecto_id`, `dicta_id`, `estado`) VALUES 
 INSERT INTO `materia` (`id`, `nombre`, `estado`, `sigla`, `tipo`) VALUES
 (1, 'Proyecto Final', 'AC', '', 'PR'),
 (2, 'Perfil', 'AC', '', 'PE');
-INSERT INTO `semestre` (`id`, `codigo`, `activo`, `sigla`,`estado`) VALUES (NULL, 'I-2013','0', 'AC'), (NULL, 'II-2013','1', 'AC');
+INSERT INTO `semestre` (`id`, `codigo`, `activo`,, `sigla`,`estado`) VALUES (NULL, 'I-2013','0', 'AC'), (NULL, 'II-2013','1', 'AC');
 
 INSERT INTO `dicta` (`id`, `docente_id`, `materia_id`, `semestre_id`, `codigo_grupo_id`, `estado`) VALUES (NULL, '1', '1', '1','1', 'AC');
 INSERT INTO `dicta` (`id`, `docente_id`, `materia_id`, `semestre_id`, `codigo_grupo_id`, `estado`) VALUES (NULL, '2', '1', '1','2', 'AC');
