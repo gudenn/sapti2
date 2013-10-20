@@ -1,37 +1,11 @@
 <?php
-//============================================================+
-// File name   : example_006.php
-// Begin       : 2008-03-04
-// Last Update : 2010-11-20
-//
-// Description : Example 006 for TCPDF class
-//               WriteHTML and RTL support
-//
-// Author: Nicola Asuni
-//
-// (c) Copyright:
-//               Nicola Asuni
-//               Tecnick.com LTD
-//               Manor Coach House, Church Hill
-//               Aldershot, Hants, GU12 4RQ
-//               UK
-//               www.tecnick.com
-//               info@tecnick.com
-//============================================================+
 
-/**
- * Creates an example PDF TEST document using TCPDF
- * @package com.tecnick.tcpdf
- * @abstract TCPDF - Example: WriteHTML and RTL support
- * @author Nicola Asuni
- * @since 2008-03-04
- */
-  //define ("MODULO", "DOCENTE");
-  require('_start.php');
+require('_start.php');
  
 require_once('../../../sapti.inc/libs/tcpdf/config/lang/eng.php');
 require_once('../../../sapti.inc/libs/tcpdf/tcpdf.php');
 
+ //cabecera pdf
 class MYPDF extends TCPDF {
 
     //Page header
@@ -97,19 +71,15 @@ $pdf->SetFont('dejavusans', '', 10);
 // add a page
 $pdf->AddPage();
 
-// writeHTML($html, $ln=true, $fill=false, $reseth=false, $cell=false, $align='')
-// writeHTMLCell($w, $h, $x, $y, $html='', $border=0, $ln=0, $fill=0, $reseth=true, $align='', $autopadding=true)
 
-// create some HTML content
- //CSS
   $CSS[]  = URL_CSS . "academic/tables.css";
 $p=$_GET['id_p'];
 $sql = "SELECT u.nombre AS NOMBRE,CONCAT(apellido_paterno,apellido_materno) as APELLIDOS ,p.nombre as TITULO,s.codigo as GESTION,v.estado_vigencia as ESTADO
 FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
-WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id and p.tipo_proyecto='PE' AND p.estado='AC' AND p.id=v.proyecto_id and p.tipo_proyecto='PE' AND v.estado_vigencia='PR' and s.id='".$p."'";
+WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id and p.tipo_proyecto='PR' and p.estado_proyecto='CO' AND p.estado='AC' AND p.id=v.proyecto_id and p.tipo_proyecto='PE' AND v.estado_vigencia='PR' and s.id='".$p."'";
 //$sql = $queEmp = $_GET['sql'];
 $b=1;
-//DesplegarTabla($sql,$b);
+
 
 function DesplegarTabla($a,$b)
      {
@@ -146,6 +116,8 @@ function DesplegarTabla($a,$b)
         return $html;
         var_dump($html);
     }
+    
+    //configurar tamanio columnas para las tablas
     function tamcolumna($nom){
         $tam='50';
         switch ($nom){
@@ -184,7 +156,7 @@ $pdf->lastPage();
 // ---------------------------------------------------------
 
 //Close and output PDF document
-$pdf->Output('example_006.pdf', 'I');
+$pdf->Output('prorroga.pdf', 'I');
 
 //============================================================+
 // END OF FILE                                                

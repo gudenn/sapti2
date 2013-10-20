@@ -1,39 +1,14 @@
 <?php
-//============================================================+
-// File name   : example_006.php
-// Begin       : 2008-03-04
-// Last Update : 2010-11-20
-//
-// Description : Example 006 for TCPDF class
-//               WriteHTML and RTL support
-//
-// Author: Nicola Asuni
-//
-// (c) Copyright:
-//               Nicola Asuni
-//               Tecnick.com LTD
-//               Manor Coach House, Church Hill
-//               Aldershot, Hants, GU12 4RQ
-//               UK
-//               www.tecnick.com
-//               info@tecnick.com
-//============================================================+
 
-/**
- * Creates an example PDF TEST document using TCPDF
- * @package com.tecnick.tcpdf
- * @abstract TCPDF - Example: WriteHTML and RTL support
- * @author Nicola Asuni
- * @since 2008-03-04
- */
-  //define ("MODULO", "DOCENTE");
   require('_start.php');
  
-require_once('../../../sapti.inc/libs/tcpdf/config/lang/eng.php');
-require_once('../../../sapti.inc/libs/tcpdf/tcpdf.php');
-class MYPDF extends TCPDF {
+   require_once('../../../sapti.inc/libs/tcpdf/config/lang/eng.php');
+   require_once('../../../sapti.inc/libs/tcpdf/tcpdf.php');
+   
+   //cabecera pdf
+  class MYPDF extends TCPDF {
 
-    //Page header
+   
     public function Header() {
         // Logo
         $image_file = K_PATH_IMAGES.'cabesera.jpg';
@@ -54,10 +29,10 @@ class MYPDF extends TCPDF {
     }
 }
 
-// create new PDF document
+
 $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
-// set document information
+
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Nicola Asuni');
 $pdf->SetTitle('TCPDF Example 006');
@@ -96,20 +71,17 @@ $pdf->SetFont('dejavusans', '', 10);
 // add a page
 $pdf->AddPage();
 
-// writeHTML($html, $ln=true, $fill=false, $reseth=false, $cell=false, $align='')
-// writeHTMLCell($w, $h, $x, $y, $html='', $border=0, $ln=0, $fill=0, $reseth=true, $align='', $autopadding=true)
 
-// create some HTML content
- //CSS
-  $CSS[]  = URL_CSS . "academic/tables.css";
+
+//consulta para las tablas con el id de Semestre
 $p=$_GET['id_p'];
 $sql = "SELECT u.nombre AS NOMBRE,CONCAT(apellido_paterno,apellido_materno) as APELLIDOS ,s.codigo as SEMESTRE,p.nombre as TITULO,p.estado as ESTADO
    FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe
-   WHERE u.id=e.usuario_id AND e.id=i.estudiante_id and p.tipo_proyecto='PE' and p.estado_proyecto='CO' AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado='AC' and s.id='".$p."'";
-//$sql = $queEmp = $_GET['sql'];
-$b=1;
-//DesplegarTabla($sql,$b);
+   WHERE u.id=e.usuario_id AND e.id=i.estudiante_id and p.tipo_proyecto='PR' and p.estado_proyecto='CO' and p.estado_proyecto='CO' AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado='AC' and s.id='".$p."'";
 
+$b=1;
+
+//desplega la tabla en html para el pdf
 function DesplegarTabla($a,$b)
      {
         $query =  mysql_query($a);
@@ -148,22 +120,18 @@ function DesplegarTabla($a,$b)
     function tamcolumna($nom){
         $tam='50';
         switch ($nom){
-
-     case "NOMBRE":
-     $tam='100';
-         break;
-
-       case "APELLIDOS":
-           
-           $tam='100';
-         break;
-     
-     case "SEMESTRE":
-           $tam='70';
-         break;
-      case "TITULO":
-           $tam='300';
-         break;
+        case "NOMBRE":
+        $tam='100';
+        break;
+        case "APELLIDOS":
+        $tam='100';
+        break;
+        case "SEMESTRE":
+        $tam='70';
+        break;
+        case "TITULO":
+        $tam='300';
+        break;
 
 break;
 
@@ -185,7 +153,7 @@ $pdf->lastPage();
 // ---------------------------------------------------------
 
 //Close and output PDF document
-$pdf->Output('example_006.pdf', 'I');
+$pdf->Output('proceso.pdf', 'I');
 
 //============================================================+
 // END OF FILE                                                

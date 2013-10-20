@@ -3,7 +3,8 @@ try {
    define ("MODULO", "CONSEJO");
   
   require('_start.php');
- 
+if(!isConsejoSession())
+  header("Location: login.php"); 
   /** HEADER */
   $smarty->assign('title','Proyecto Final');
   $smarty->assign('description','Proyecto Final');
@@ -174,10 +175,7 @@ from docente  d, apoyo a
 where  d.id=a.docente_id  and a.area_id=".$idareaproyecto.");";
  $resultadodocno = mysql_query($sqldocno);
 while ($filadocno = mysql_fetch_array($resultadodocno, MYSQL_ASSOC))
- {            
-  
-  
-   
+ {  
 $sqlsig="select  DISTINCT (d.`id`) as iddia, hd.`docente_id` as iddocente
 from  horario_doc hd, dia  d , turno t
 where  hd.`dia_id`=d.`id` and hd.`turno_id`=t.`id` and hd.`docente_id`=".$filadocno['iddoc'].";";

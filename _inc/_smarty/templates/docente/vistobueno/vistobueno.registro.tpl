@@ -23,8 +23,9 @@
 
             <h2 class="title">Grabar Revision</h2>
             <p>
-              <input type="hidden" name="proyecto_id" value="{$proyecto->id}">
-              <input type="hidden" name="visto_bueno_id" value="{$usuario->id}">
+              <input type="hidden" id="proyecto_id" name="proyecto_id" value="{$proyecto->id}">
+              <input type="hidden"  id="visto_bueno_id"  name="visto_bueno_id" value="{$usuario->id}">
+               <input type="hidden"  id="estudiante_id"  name="estudiante_id" value="{$estudiante->id}">
               <input type="hidden" name="tarea" value="registrar">
               <input type="hidden" name="token" value="{$token}">
 

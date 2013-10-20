@@ -1,26 +1,23 @@
  <div id="content">
-     
-    <center> <strong>FORMULARIO DE REGISTRO DE TRIBUNALES</strong></td></center>
+   <center> <strong> <h1>Formulario De Asignación De Tribunales </h1></strong></td></center>
     
     <div style="width: 50%;float: left;"  class="tbl_filtro">
     <form action="" method="post" >
-             <h1>  BUSQUEDA POR ESTUDIANTE</h1>
-          <table >
+             <h1>  Busqueda Por Estudiante</h1>
+          <table>
           <tr>
-              <th><label for="estado_lugar">CODIGO SIS</label></th>
+              <th><label for="estado_lugar">Codigo Sis</label></th>
                
           </tr>
            <tr>
-            
-                 <td>
+           <td>
                       <input type="text" name="codigosis"  id="codigosis" value="{$estudiantebuscado->codigo_sis}" />
-                  </td>
+            </td>
         <td><input type="submit" value="Buscar" name="buscar" class="sendme" /></td>
            </tr>
           
           </table>
      </form>
-
   </div>
 <div style="width: 50%;float: left;" class="tbl_filtro">
         
@@ -42,31 +39,28 @@
   <hr>
 <div >
   <h1 style="text-align: center" > Modo De Asignaci&oacute;n</h1>
+  
    <form action="" method="post">
  
-      <input type="hidden" id="proyecto_id" name="proyecto_id" value="{$proyectobuscado->id}" /><br />
-      <input type="hidden" id="proyecto_id" name="estudiante_id" value="{$estudiantebuscado->codigo_sis}" /><br />
-      
-    
-     <div style="text-align: center">
+        <input type="hidden" id="proyecto_id" name="proyecto_id" value="{$proyectobuscado->id}" />
+        <input type="hidden" id="proyecto_id" name="estudiante_id" value="{$estudiantebuscado->codigo_sis}" />
+         <div style="text-align: center">
        
-       <input type="submit" name="a" value ="A">
+        <input type="submit" name="a" value ="A">
         <input type="submit" name="ma" value ="Ma">
         <input type="hidden" name="token" value="{$token}">
        
                   &nbsp;
-     </div>
+         </div>
    </form>
  
  </div>
     <div style ="clear:both;"></div>  
   <hr>
          
-<div >
-  
-  
-   <div style='height: 200px; width: 100%; font-size: 12px; overflow: auto;'>
-     <Hi> Lista de Docentes</Hi>
+<div>
+ <div style='height: 200px; width: 100%; font-size: 12px; overflow: auto;'>
+ <Hi> Lista de Docentes</Hi>
 <table class="tbl_lista" id="docentes"  mane="docentes">
   <thead>
     <tr>

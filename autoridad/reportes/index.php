@@ -5,9 +5,9 @@ try {
     header("Location: login.php");  
 
   /** HEADER */
-  $smarty->assign('title','Gesti&oacute;n de Estudiantes');
-  $smarty->assign('description','Gesti&oacute;n de Estudiantes');
-  $smarty->assign('keywords','Gesti&oacute;n de Estudiantes');
+  $smarty->assign('title','Gesti&oacute;n de Reportes');
+  $smarty->assign('description','Gesti&oacute;n de Reportes');
+  $smarty->assign('keywords','Gesti&oacute;n de Reportes');
 
   //CSS
   $CSS[]  = URL_CSS . "dashboard.css";

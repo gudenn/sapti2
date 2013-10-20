@@ -2,7 +2,7 @@
 define ("MODULO", "DOCENTE");
 require  '../_start.php';
 include '../../_inc/_configurar.php';  
-require_once('../docente/EditableGrid.php');
+require_once('../../docente/EditableGrid.php');
 
 if(isset($_GET['doc'])){
 $proyecto=$_GET['doc'];

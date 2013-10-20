@@ -1,8 +1,8 @@
-{include file="docente/header-sjq.tpl"}
+{include file="admin/header-sjq.tpl"}
 <div class="wrapper row3">
   <div class="rnd">
     <div id="container">
-        <h1 class="title">Lista de Estudiantes Inscritos</h1>
+       
         <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">       	
         </head>
@@ -10,7 +10,7 @@
         <div id="message"></div>
         	<div id="pagecontrol">
 		<label for="pagecontrol">Filas por Pagina: </label>
-		<select id="pagesize" name="pagesize">
+      <select id="pagesize" name="pagesize">
                     <option value="5">5</option>
                     <option value="10">10</option>
                     <option value="15">15</option>
@@ -19,19 +19,21 @@
                     <option value="30">30</option>
                     <option value="40">40</option>
                     <option value="50">50</option>
-                </select>
+       </select>
 
                 </div>
-        	<label for="filter">Busqueda Rapida :</label>
-		<input type="text" id="filter"/>
+        	
         
 		<div id="tablecontent"></div>
         
         	<div id="paginator"></div>
         </div>
-            <a href="observacion.estudiante-cvs.php" type="button">CARGAR OBSERVACION(ES) POR CVS</a>
+      <center>
+        <a href="vencido-pdf.php?id_p={$semestre->id}" target="_blank" >{icono('filepd.png','descargar')}</a>
+        <a href="venceexcel.php?id_p={$semestre->id}" target="_blank" >{icono('boton_excel.png','descargar')}</a>  
+     </center>
         <script type="text/javascript">
-                editableGrid.onloadXML("perfil.loaddata.estudiante.lista.php?doc={$usuarioid_ids}");
+                editableGrid.onloadXML("loaddata.vencido.lista.php");
         </script>
     </div>
     {$ERROR}

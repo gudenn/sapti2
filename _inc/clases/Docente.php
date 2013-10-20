@@ -156,6 +156,8 @@ class Docente extends Objectbase{
     return $usuario;
   }
   
+ 
+  
    /**
    * Get usuario de un docente
    * @TODO hay que arreglar esta funcion

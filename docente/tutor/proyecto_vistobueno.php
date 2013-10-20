@@ -50,6 +50,7 @@ try {
   
   $smarty->assign("usuario", $usuario);
   $smarty->assign("proyecto", $proyecto);
+    $smarty->assign("estudiante",  $estudiante );
     
     $urlpdf=".../ARCHIVO/proyecto.pdf";
     $smarty->assign("urlpdf", $urlpdf);
@@ -60,20 +61,55 @@ try {
     if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
     {
       
+        $vistobueno                    =       new Visto_bueno();
+        $docente                       =       getSessionDocente();
+
+        
+        
+        $estudiante= new Estudiante($_POST['estudiante_id']);/// crando el estudiante
+        $proyectoestudiante= $estudiante->getProyecto();  // obtien e el proyecto del estudioante
+        $usuario= getSessionUser();
+        $usuario->getAllObjects();
+
+       $docentestudiante= $estudiante->getDocente();//  retorna el docente del estudiante
+          
+       foreach ($usuario->tutor_objs as $tutor_id)
+        {
+              $vistobueno->objBuidFromPost();
+             // $vistobueno->proyecto_id       =       $_POST['pro'];
+              $vistobueno->visto_bueno_tipo  =        Visto_bueno::E2_TUTOR;
+              $vistobueno->visto_bueno_id    =     $tutor_id->id;    
+              $vistobueno->estado            =        Objectbase::STATUS_AC;
+              $vistobueno->save();
+       }
+       
+       
+            $listatutores=$proyectoestudiante->getTutores();  ///  retorna lista de los tutores de un estudiante
+            $vistobuenotutores= $proyectoestudiante->getVbTutorProyectoIds();  //  retorna la lista de los vistos buenos de los tutores
+
       
-    $vistobueno                    =       new Visto_bueno();
-    $docente                       =       getSessionDocente();
-    $vistobueno->objBuidFromPost();
-   // $vistobueno->proyecto_id       =       $_POST['pro'];
-    $vistobueno->visto_bueno_tipo  =        Visto_bueno::E2_TUTOR;
-    $vistobueno->visto_bueno_id    =        4;
-    $vistobueno->estado            =        Objectbase::STATUS_AC;
-   
-    $vistobueno->save();
-    
-    $proyecto = new Proyecto($vistobueno->proyecto_id);
-    $proyecto->estado_proyecto="VB";
-    $proyecto->save();
+                 $totalvistobuenotutor=true;
+                foreach ($listatutores as $value) 
+                  {
+
+                  if(!in_array($value->id, $vistobuenotutores))
+                  {
+                    $totalvistobuenotutor=FALSE;
+                    break;;
+
+                  }
+                  }
+                  
+                  
+                  $vistobuenodocente=$proyectoestudiante->getVbDocenteProyecto($docentestudiante->id);
+                 
+                  if((sizeof($vistobuenodocente)!=0)  && $totalvistobuenotutor )
+                  {
+                    
+                   $proyectoestudiante->estado_proyecto="VB";
+                   $proyectoestudiante->save();
+
+                  }
 
     $ir = "Location: estudiante.lista.php";
     header($ir);

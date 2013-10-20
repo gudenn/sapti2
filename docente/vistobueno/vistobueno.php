@@ -1,6 +1,6 @@
 <?php
 try {
-   define ("MODULO", "DOCENTE");
+  define ("MODULO", "DOCENTE");
   require('../_start.php');
   if(!isDocenteSession())
   header("Location: ../login.php");
@@ -35,62 +35,75 @@ try {
   $JS[]  = URL_JS . "jquery.addfield.js";
   $smarty->assign('JS',$JS);
   
+ if (isset($_GET['id_estudiante']))
+  {
  
- 
-    if (isset($_GET['id_estudiante']))
-    {
-  $id_estudiante=$_GET['id_estudiante'];
-    
-  $estudiante     = new Estudiante($id_estudiante);
+     
+  $estudiante     = new Estudiante($_GET['id_estudiante']);
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();
-  echo  $usuario->tutor_id;  
+  
+  $smarty->assign("estudiante",  $estudiante);
   $smarty->assign("usuario", $usuario);
   $smarty->assign("proyecto", $proyecto);
-    }
-      $vistobueno= new Visto_bueno();
+  
+   }
+    $vistobueno= new Visto_bueno();
     date_default_timezone_set('UTC');
     $vistobueno->fecha_visto_buena=date("d/m/Y");
     
     if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
     {
-      
+    
+    //  $docen
     $proyecto =    new Proyecto($_POST['proyecto_id']);
     $listavistobueno= $proyecto->getVbTutor();
     $listatutores=$proyecto->getTutores();
-    
-    if(sizeof($listavistobueno)>1)
-    {
-      echo "Hola elis";
-   // echo sizeof($listavistobueno);
-    if(sizeof($listavistobueno)==sizeof($listatutores))
-    {
-   // echo sizeof($listatutores);
-      
-    
-    $vistobueno                    =       new Visto_bueno();
-    $docente                       =       getSessionDocente();
-    $vistobueno->objBuidFromPost();
-   // $vistobueno->proyecto_id       =       $_POST['pro'];
-    $vistobueno->visto_bueno_tipo  =        Visto_bueno::E1_DOCENTE;
-    $vistobueno->visto_bueno_id    =        $docente->id;
-    $vistobueno->estado            =        Objectbase::STATUS_AC;
    
-    $vistobueno->save();
+    $vistobuenotutores= $proyecto->getVbTutorPerfilIds();
+    
+     $vistobueno                    =       new Visto_bueno();
+     $docente                       =       getSessionDocente();
+     $vistobueno->objBuidFromPost();
+     $vistobueno->proyecto_id       =        $proyecto->id;
+     $vistobueno->visto_bueno_tipo  =        Visto_bueno::E1_DOCENTE;
+     $vistobueno->visto_bueno_id    =        $docente->id;
+     $vistobueno->estado            =        Objectbase::STATUS_AC;
    
-    $proyecto = new Proyecto($vistobueno->proyecto_id);
-    $proyecto->estado_proyecto="VB";
-    $proyecto->save();
-
- //   $ir = "Location: estudiante/estudiante.lista.php?iddicta=";
-  //  header($ir);
-    }else
-    {
+     $vistobueno->save();
+    
+      foreach ($vistobuenotutores as $values) 
+      {
+       echo $values;
+      }
+     
+    
+    
+    $totalvistobuenotutor=true;
+    foreach ($listatutores as $value) 
+      {
       
-    }
-         }
+      if(!in_array($value->id, $vistobuenotutores))
+      {
+        $totalvistobuenotutor=FALSE;
+        break;;
         
-    }
+      }
+     }
+     
+     
+   //  $vistobuenodocente= $proyecto->getVbDocentePerfil(getSessionDocente()->id);
+     
+     
+     if( $totalvistobuenotutor)
+       {
+       
+        $proyecto = new Proyecto($vistobueno->proyecto_id);
+        $proyecto->estado_proyecto="VB";
+        $proyecto->save();
+
+       }
+     }
 
   //No hay ERROR
   $smarty->assign("ERROR",'');

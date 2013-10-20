@@ -9,11 +9,9 @@
                <span>{$usuario->nombre} {$usuario->apellido_paterno} {$usuario->apellido_materno}</span>
             </p>
             <br/>
-            <object data="/sapti/ARCHIVO/proyecto.pdf" type="application/pdf" width="900" height="300">
-            <p> Al parecer usted no tiene un plugin PDF para este navegador.
+             <p> Al parecer usted no tiene un plugin PDF para este navegador.
             No hay problema ... puedes <a href="/sapti/ARCHIVO/proyecto.pdf"> clic aquí para descargar el archivo PDF. </ a> </ p>
-            </object>
-            
+              
         
            
             <p>
@@ -25,6 +23,7 @@
             <p>
               <input type="hidden" name="proyecto_id" value="{$proyecto->id}">
               <input type="hidden" name="visto_bueno_id" value="{$usuario->id}">
+               <input type="hidden" name="estudiante_id" value="{$estudiante->id}">
               <input type="hidden" name="tarea" value="registrar">
               <input type="hidden" name="token" value="{$token}">
 

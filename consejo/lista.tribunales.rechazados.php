@@ -1,9 +1,9 @@
 <?php
 try {
    define ("MODULO", "CONSEJO");
-  
-  require('_start.php');
-  
+   require('_start.php');
+  if(!isConsejoSession())
+  header("Location: login.php"); 
   /** HEADER */
   /** HEADER */
   $smarty->assign('title','Proyecto Final');

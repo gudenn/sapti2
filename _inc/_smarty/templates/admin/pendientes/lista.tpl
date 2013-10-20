@@ -19,7 +19,7 @@
    
     <tr  class="selectable">
     <tr  class="{cycle values="light,dark"}">
-          <td>{$listadocentes[ic]['eid']}</td>
+          <td>{$listadocentes[ic]['pid']}</td>
           <td>{$listadocentes[ic]['nombre']}</td>
           <td>{$listadocentes[ic]['apellidos']}</td>
           <td>{$listadocentes[ic]['titulo']}</td>

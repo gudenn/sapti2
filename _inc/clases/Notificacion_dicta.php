@@ -39,6 +39,15 @@ class Notificacion_dicta extends Objectbase
    */
   var $fecha_visto;
 
+  /**
+   * Marcamos como vista una notificacion
+   */
+  function marcarVisto() {
+    $this->fecha_visto = date('j/n/Y');
+    $this->estado_notificacion = self::EST_VI;
+    $this->save();
+  }
+
    
 }
 

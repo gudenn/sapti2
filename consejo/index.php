@@ -4,8 +4,8 @@ try {
   
   
   require('_start.php');
-  if(!isDocenteSession())
-   header("Location: login.php");  ;
+ if(!isConsejoSession())
+  header("Location: login.php"); 
    $smarty->assign('title','Proyecto Final');
    $smarty->assign('description','Proyecto Final');
    $smarty->assign('keywords','Proyecto Final');

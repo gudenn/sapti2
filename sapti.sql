@@ -548,6 +548,7 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`notificacion_tutor` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `notificacion_id` INT NULL ,
   `tutor_id` INT NULL ,
+  `proyecto_tutor_id` INT NULL ,
   `fecha_visto` DATE NULL ,
   `estado_notificacion` VARCHAR(2) NULL COMMENT 'Sin ver (SV), Visto (VI) , archivado (AR)' ,
   `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,

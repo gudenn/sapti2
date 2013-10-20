@@ -25,6 +25,7 @@
             <p>
               <input type="hidden" name="proyecto_id" value="{$proyecto->id}">
               <input type="hidden" name="visto_bueno_id" value="{$usuario->id}">
+                <input type="hidden" name="estudiante_id" value="{$estudiante->id}">
               <input type="hidden" name="tarea" value="registrar">
               <input type="hidden" name="token" value="{$token}">
 

@@ -1,9 +1,9 @@
 <?php
 try {
- // define ("MODULO", "CONSEJO");
+  define ("MODULO", "CONSEJO");
   require('_start.php');
-   
-    
+   if(!isConsejoSession())
+  header("Location: login.php"); 
   leerClase("Usuario");
   leerClase("Formulario");
   leerClase("Pagination");

@@ -6,7 +6,7 @@
         $m=$_GET['id_m'];
 	$consulta = "SELECT p.id,u.nombre,s.codigo,p.nombre as titulo,CONCAT(apellido_paterno,apellido_materno) as apellidos,p.estado as estadop,m.nombre as modalidad
         FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,modalidad m
-        WHERE u.id=e.usuario_id AND e.id=i.estudiante_id and p.tipo_proyecto='PE' AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.modalidad_id=m.id and m.id='".$m."' and s.id='".$p."'";
+        WHERE u.id=e.usuario_id AND e.id=i.estudiante_id and p.tipo_proyecto='PR' and p.estado_proyecto='CO' AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.modalidad_id=m.id and m.id='".$m."' and s.id='".$p."'";
 	$resultado =mysql_query($consulta); 
 	
 						
@@ -164,7 +164,7 @@
 
 		// Se manda el archivo al navegador web, con el nombre que se indica (Excel2007)
 		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-		header('Content-Disposition: attachment;filename="ReporteProceso.xlsx"');
+		header('Content-Disposition: attachment;filename="ReporteModalidad.xlsx"');
 		header('Cache-Control: max-age=0');
 
 		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');

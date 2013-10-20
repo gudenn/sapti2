@@ -1,14 +1,13 @@
 <?php
 try {
-  define ("MODULO", "ADMIN-PERFIL");
   require('../_start.php');
   if(!isAdminSession())
     header("Location: ../login.php");  
 
   /** HEADER */
-  $smarty->assign('title','Gestion de Pendientes');
-  $smarty->assign('description','Pendientes');
-  $smarty->assign('keywords','Pendientes');
+  $smarty->assign('title','Reportes');
+  $smarty->assign('description','Reportes');
+  $smarty->assign('keywords','Reportes');
 /**
    * Menu superior
  * 
@@ -50,13 +49,14 @@ try {
    
    leerClase('Semestre');
    leerClase('Proyecto');
+   leerClase('Vigencia');
   
    $estado=  Proyecto::EST5_P;
  
  if (isset($_GET['proyecto_id']) )
   {
-       $EXITO = false;
-        mysql_query("BEGIN");
+   $EXITO = false;
+   mysql_query("BEGIN");
    $proyecto=new Proyecto($_GET['proyecto_id']);
    
    $proyecto_aux=$proyecto;
@@ -107,6 +107,15 @@ try {
     $parea->proyecto_id=$actualproyecto->id;
     $parea->estado=  Objectbase::STATUS_AC;
     $parea->save();
+    
+     //grabamos la vigencia del proyecto
+    $vigencia=new Vigencia();
+    $vigencia->estado=  Objectbase::STATUS_AC;
+    $vigencia->estado_vigencia=  Vigencia::ESTADO_NORMAL;
+    $vigencia->fecha_inicio=date('d/m/Y');
+    $vigencia->fecha_fin= date("d/m/Y",strtotime(" +2 year") );
+    $vigencia->proyecto_id=$actualproyecto->id;
+    $vigencia->save();
    
               
     $EXITO = TRUE;
@@ -124,7 +133,7 @@ try {
   
   //buscamos el proyeco
   
-    $sqlr="SELECT e.id as eid,p.id as pid,u.nombre,s.codigo,p.nombre as titulo,CONCAT(apellido_paterno,apellido_materno) as apellidos,p.estado as estadop,p.estado_proyecto
+    $sqlr="SELECT p.id as pid,e.id as eid,u.nombre,s.codigo,p.nombre as titulo,CONCAT(apellido_paterno,apellido_materno) as apellidos,p.estado as estadop,p.estado_proyecto
            FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe
            WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id  and p.estado='AC' and p.estado_proyecto='".$estado."'";
            $resultado = mysql_query($sqlr);
