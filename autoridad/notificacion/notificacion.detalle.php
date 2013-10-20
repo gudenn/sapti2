@@ -54,183 +54,93 @@ try {
   if (isset($_GET['notificacion_id']) && is_numeric($_GET['notificacion_id']))
   {
     
-      $smarty->assign('accion', array(
-     Tribunal::ACCION_AC =>  Tribunal::ACCION_AC,
-     Tribunal::ACCION_RE =>  Tribunal::ACCION_RE
-          
-              ));
+     $smarty->assign('accion', array(
+        Tribunal::ACCION_AC =>  Tribunal::ACCION_AC,
+        Tribunal::ACCION_RE =>  Tribunal::ACCION_RE
+     ));
     
     $notificacion  = new Notificacion($_GET['notificacion_id']);
+    $notificacion->marcarVisto();
     $proyecto      =  new Proyecto($notificacion->proyecto_id);
-    $estudiante   =  $proyecto->getEstudiante();
+    $estudiante    =  $proyecto->getEstudiante();
     
-     //echo $_GET['notificacion_id'];
+    //echo $_GET['notificacion_id'];
     //$notificacion
-    $tipo= Notificacion::TIPO_ASIGNACION;
-   // echo $tipo;
+    $tipo = Notificacion::TIPO_ASIGNACION;
+    // echo $tipo;
+    $smarty->assign("proyecto", $proyecto);
+    $smarty->assign("estudiante", $estudiante);
+    $smarty->assign("notificacion", $notificacion);
     $smarty->assign("tiponotificacion",$tipo);
-    
-     $smarty->assign("notificacion", $notificacion);
-     $smarty->assign("proyecto", $proyecto);
-     $smarty->assign("estudiante", $estudiante);
   }
   
 
-  if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
-  {
+  if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token']){
     
     $EXITO = false;
     mysql_query("BEGIN");
-    if(isset($_POST['id_notificacion']))
-    {
+    if(isset($_POST['id_notificacion'])){
       
       $notificacion = new Notificacion($_POST['id_notificacion']);
-     $tribunal=    $notificacion->getNotificacionTribunal(getSessionUser()->id);
+      $notificacion->getAllObjects();
+      $tribunal     = $notificacion->getNotificacionTribunal(getSessionUser()->id);
+      $proyecto     = new Proyecto($notificacion->proyecto_id);
      
-     $proyecto= new Proyecto($notificacion->proyecto_id);
-     
-    echo  $tribunal->id;
-     
-     if($tribunal)
-     {
-        
-       $idtribuanl=$tribunal->id;
-      $query = "UPDATE notificacion_tribunal nt SET nt.estado_notificacion='V'  WHERE nt.tribunal_id=$idtribuanl";
-       //  mysql_query($query);
-         
-    if( $_POST['accion']==Tribunal::ACCION_AC)
-     {
-      
-      
-      
-      // $tribunal = new Tribunal($_POST['ids']);
-       $tribunal->visto=  Tribunal::VISTO;
-       $tribunal->accion=$_POST['accion'];
-       $tribunal->detalle=$_POST['detalle'];
-    
-       
-       
-     $notificacions= new Notificacion();
-     $notificacions->objBuidFromPost();
-     $notificacions->proyecto_id=$proyecto->id; 
-     $notificacions->tipo=  Notificacion::TIPO_MENSAJE;
-     $notificacions->fecha_envio= date("j/n/Y");
-     $notificacions->asunto="Asignacion de Tribunales";
-    // $notificacions->detalle=;
-     $notificacions->prioridad=5;
-     $notificacions->estado = Objectbase::STATUS_AC;
+      //Solo para tribunales
+      if($tribunal){
 
-    $noticaciones= array('estudiantes'=>array($proyecto->getEstudiante()->id));
-  $notificacions->enviarNotificaion( $noticaciones);
-    
-    $tribunal->save();
-  
-     }else
-    {
-      
-          $tribunal->visto=  Tribunal::VISTO;
-          $tribunal->accion=$_POST['accion'];
-          $tribunal->detalle=$_POST['detalle'];
-      // $tribunal->estado= Objectbase::STATUS_DE;
+        $tribunal->visto   = Tribunal::VISTO;
+        $tribunal->accion  = ( $_POST['accion']==Tribunal::ACCION_AC)?Tribunal::ACCION_AC:Tribunal::ACCION_RE;
+        $tribunal->detalle = $_POST['detalle'];
+        $tribunal->save();
+
+        //Enviar notificacion
+        $notificacions = new Notificacion();
+        $notificacions->objBuidFromPost();
+        $notificacions->proyecto_id = $proyecto->id; 
+        $notificacions->fecha_envio = date("j/n/Y");
+        $notificacions->prioridad   = 7;
+        $notificacions->asunto      = "Asignacion de Tribunales";
+        $notificacions->tipo        = Notificacion::TIPO_MENSAJE;
+        $notificacions->estado      = Objectbase::STATUS_AC;
+
+        $noticaciones= array('estudiantes'=>array($proyecto->getEstudiante()->id));
+        $notificacions->enviarNotificaion( $noticaciones);
+
        
+      }else{ // notificaiones para asignar tutor
+       
+        leerClase('Proyecto_tutor');
+        $id = '';
+        if (isset($notificacion->notificacion_tutor_objs[0]))
+          $id = $notificacion->notificacion_tutor_objs[0]->proyecto_tutor_id;
+        // Aceptamos o rechasamos la tutoria
+        $proyectotutor = new Proyecto_tutor($id);
+        $proyectotutor->estado_tutoria = ( $_POST['accion'] == Tribunal::ACCION_AC )?Proyecto_tutor::ACEPTADO:Proyecto_tutor::RECHADO;
+        $proyectotutor->fecha_acepta   = date("j/n/Y");
+        $proyectotutor->save();
+
+        
+        //Enviamos un mensaje
         $notificacions= new Notificacion();
         $notificacions->objBuidFromPost();
-        $notificacions->proyecto_id=$proyecto->id; 
-        $notificacions->tipo=  Notificacion::TIPO_MENSAJE;
-        $notificacions->fecha_envio= date("j/n/Y");
-        $notificacions->asunto="Asignacion de Tribunales";
-        $notificacions->detalle=$_POST['detalle'];
-        $notificacions->prioridad=5;
-        $notificacions->estado = Objectbase::STATUS_AC;
+        $notificacions->proyecto_id = $proyecto->id; 
+        $notificacions->tipo        =  Notificacion::TIPO_MENSAJE;
+        $notificacions->fecha_envio = date("j/n/Y");
+        $notificacions->asunto      = "Nombramiento de tutor";
+        $notificacions->prioridad   = 7;
+        $notificacions->estado      = Objectbase::STATUS_AC;
 
-       $noticaciones= array('estudiantes'=>array($proyecto->getEstudiante()->id));
-      $notificacions->enviarNotificaion( $noticaciones);
-        
-        
-       $tribunal->save();
-    }
-    
-       
-       
-       
-       
-       
-     }else{
-       leerClase('Proyecto_tutor');
-       
-       
-     $proyectotutor=  $notificacion->getProyectoTutor(getSessionUser()->id);
-       
-       
-              $idtribuanl=$tribunal->id;
-      $query = "UPDATE notificacion_tutor nt SET nt.estado_notificacion='V'  WHERE nt.notificacion_id=$notificacion->id";
-       //  mysql_query($query);
-         
-    if( $_POST['accion']==Tribunal::ACCION_AC)
-     {
-      
-      /**
-       *  const ACEPTADO   = "AC";
-        const RECHADO    = "RE";
-       */
-      
-      // $tribunal = new Tribunal($_POST['ids']);
-      $proyectotutor->estado_tutoria=  Proyecto_tutor::ACEPTADO;
-      
-       
-     $notificacions= new Notificacion();
-     $notificacions->objBuidFromPost();
-     $notificacions->proyecto_id=$proyecto->id; 
-     $notificacions->tipo=  Notificacion::TIPO_MENSAJE;
-     $notificacions->fecha_envio= date("j/n/Y");
-     $notificacions->asunto="Nombramiento de tutor";
-    // $notificacions->detalle=;
-     $notificacions->prioridad=5;
-     $notificacions->estado = Objectbase::STATUS_AC;
+        $noticaciones = array('estudiantes'=>array($proyecto->getEstudiante()->id));
+        $notificacions->enviarNotificaion( $noticaciones);
 
-    $noticaciones= array('estudiantes'=>array($proyecto->getEstudiante()->id));
-  $notificacions->enviarNotificaion( $noticaciones);
-    
-    $proyectotutor->save();
-  
-     }else
-    {
-       $proyectotutor->estado_tutoria=  Proyecto_tutor::RECHADO;
-    
-       
-        $notificacions= new Notificacion();
-        $notificacions->objBuidFromPost();
-        $notificacions->proyecto_id=$proyecto->id; 
-        $notificacions->tipo=  Notificacion::TIPO_MENSAJE;
-        $notificacions->fecha_envio= date("j/n/Y");
-        $notificacions->asunto= "Nombramiento de tutor";
-        $notificacions->detalle=$_POST['detalle'];
-        $notificacions->prioridad=5;
-        $notificacions->estado = Objectbase::STATUS_AC;
 
-       $noticaciones= array('estudiantes'=>array($proyecto->getEstudiante()->id));
-      $notificacions->enviarNotificaion( $noticaciones);
-        
-        
-       $proyectotutor->save();
+      }
     }
-       
-      
-       
-  
-     }
-      
-      
-      
-    }
-    
-   
     $EXITO = TRUE;
     mysql_query("COMMIT");
   }
-  
-  $smarty->assign('usuario',$usuario);
-  $smarty->assign('tutor',$tutor);
+
 
   
   $token = sha1(URL . time());
