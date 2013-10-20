@@ -44,7 +44,7 @@ try {
   $smarty->assign("usuario"   , $usuario);
   $smarty->assign("estudiante", $estudiante);
   
-  $columnacentro = 'admin/columna.centro.docente-detalle.tpl';
+  $columnacentro = 'admin/docente/columna.centro.docente-detalle.tpl';
   $smarty->assign('columnacentro',$columnacentro);
 
   //No hay ERROR
@@ -60,7 +60,7 @@ $token                = sha1(URL . time());
 $_SESSION['register'] = $token;
 $smarty->assign('token',$token);
 
-$TEMPLATE_TOSHOW = 'admin/3columnas.tpl';
+$TEMPLATE_TOSHOW = 'admin/2columnas.tpl';
 $smarty->display($TEMPLATE_TOSHOW);
 
 ?>

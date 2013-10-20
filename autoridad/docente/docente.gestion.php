@@ -53,7 +53,7 @@ try {
 
   $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
   
-  $smarty->assign('lista'       ,'admin/docente.lista.tpl');
+  $smarty->assign('lista'       ,'admin/docente/docente.lista.tpl');
 
   //Filtro
   $filtro     = new Filtro('g_docente',__FILE__);
