@@ -3,8 +3,8 @@
   <tr>
     <th></th>
     <th><a href='?order=nombre'              class="tajax"  title='Ordenar por Nombre'           >Nombre           {$filtros->iconOrder('nombre')}</a></th>
-    <th><a href='?order=apellido_paterno'    class="tajax"  title='Ordenar por Apellido Paterno' >Apellido Paterno {$filtros->iconOrder('apellido_paterno')}</a></th>
-    <th><a href='?order=apellido_materno'    class="tajax"  title='Ordenar por Apellido Materno' >Apellido Materno {$filtros->iconOrder('apellido_materno')}</a></th>
+    <th><a href='?order=apellido_paterno'    class="tajax"  title='Ordenar por Apellido Paterno' >Ap. Paterno {$filtros->iconOrder('apellido_paterno')}</a></th>
+    <th><a href='?order=apellido_materno'    class="tajax"  title='Ordenar por Apellido Materno' >Ap. Materno {$filtros->iconOrder('apellido_materno')}</a></th>
     {section name=ia loop=$grupos}
       {if ($grupos[ia]->codigo!= 'TRIBUNALES')}
         <th style="background: #FFF;">{$grupos[ia]->getIcon()}</th>
