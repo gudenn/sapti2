@@ -38,10 +38,10 @@ try {
   
  
 
-  $docente=  getSessionDocente();
-  $docenteid=$docente->id;
+  $usuario= getSessionUser();
+  $usuarioid= $usuario->id;
   
-  $smarty->assign("docente_ids", $docenteid);
+  $smarty->assign("usuarioid_ids", $usuarioid);
 
   //No hay ERROR
   $smarty->assign("ERROR",$ERROR);

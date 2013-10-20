@@ -31,7 +31,7 @@
         </div>
             <a href="observacion.estudiante-cvs.php" type="button">CARGAR OBSERVACION(ES) POR CVS</a>
         <script type="text/javascript">
-                editableGrid.onloadXML("perfil.loaddata.estudiante.lista.php?doc={$docente_ids}");
+                editableGrid.onloadXML("perfil.loaddata.estudiante.lista.php?doc={$usuarioid_ids}");
         </script>
     </div>
     {$ERROR}
