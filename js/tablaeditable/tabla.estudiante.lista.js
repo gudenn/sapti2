@@ -66,12 +66,12 @@ EditableGrid.prototype.initializeGrid = function(iddicta)
 		};
                 
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
-		cell.innerHTML = "<a onclick=\"session(" + getRowId(cell.rowIndex) + ");\" style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("seguimiento.png") + "\" border=\"0\" alt=\"seguimiento\" title=\"Seguimiento de Proyecto\" width='30px' height='30px' />Seguimiento</a>";
-                cell.innerHTML += "<br><a onclick=document.location.href='../revision/revision.corregido.lista.php?id_estudiante="+getRowId(cell.rowIndex)+"&iddicta="+iddicta+"' style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("editar.png") + "\" border=\"0\" alt=\"revisar\" title=\"Correcciones Pendientes\"/>Correccion</a>";
-                cell.innerHTML += "<br><a onclick=document.location.href='../evaluacion/proyecto.evaluacion.php?id_estudiante="+getRowId(cell.rowIndex)+"&iddicta="+iddicta+"' style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("evaluar.png") + "\" border=\"0\" alt=\"evaluar\" title=\"Evaluar Proyecto\"/>Evaluar</a>";
+		cell.innerHTML = "<a onclick=\"sessionSeguimiento(" + getRowId(cell.rowIndex) + ");\" style=\"cursor:pointer\">" +
+				"<img src=\"" + image("seguimiento.png") + "\" border=\"0\" alt=\"seguimiento\" title=\"Seguimiento de Proyecto\" width='30px' height='30px' />Seguimiento</a>";
+                cell.innerHTML += "<br><a onclick=\"sessionCorreccion(" + getRowId(cell.rowIndex) + ");\" style=\"cursor:pointer\">" +
+				"<img src=\"" + image("editar.png") + "\" border=\"0\" alt=\"revisar\" title=\"Correcciones Pendientes\"/>Correccion</a>";
+                cell.innerHTML += "<br><a onclick=\"sessionEvaluacion(" + getRowId(cell.rowIndex) + ");\" style=\"cursor:pointer\">" +
+				"<img src=\"" + image("evaluar.png") + "\" border=\"0\" alt=\"evaluar\" title=\"Evaluar Proyecto\"/>Evaluar</a>";
                   }}));
 		
 		// render the grid (parameters will be ignored if we have attached to an existing HTML table)
@@ -145,7 +145,7 @@ EditableGrid.prototype.updatePaginator = function()
 	paginator.append(link);
 };
 
-function session(seccion) {
+function sessionSeguimiento(seccion) {
 	$.ajax({ 
 		url: '../variable.session.php',
 		type: 'POST',
@@ -157,6 +157,46 @@ function session(seccion) {
 		{ 
                     if(response=="ok"){
                         document.location.href='../revision/revision.lista.php';
+                    }else{
+                       alert("Intente De Nuevo");
+                    }
+		},
+		error: function() { alert("Ajax failure\n"); },
+		async: true
+	});
+};
+function sessionCorreccion(seccion) {
+	$.ajax({ 
+		url: '../variable.session.php',
+		type: 'POST',
+		dataType: "html",
+		data: { 
+			estudiante_id : seccion
+		},
+		success: function (response) 
+		{ 
+                    if(response=="ok"){
+                        document.location.href='../revision/revision.corregido.lista.php';
+                    }else{
+                       alert("Intente De Nuevo");
+                    }
+		},
+		error: function() { alert("Ajax failure\n"); },
+		async: true
+	});
+};
+function sessionEvaluacion(seccion) {
+	$.ajax({ 
+		url: '../variable.session.php',
+		type: 'POST',
+		dataType: "html",
+		data: { 
+			estudiante_id : seccion
+		},
+		success: function (response) 
+		{ 
+                    if(response=="ok"){
+                        document.location.href='../evaluacion/proyecto.evaluacion.php';
                     }else{
                        alert("Intente De Nuevo");
                     }

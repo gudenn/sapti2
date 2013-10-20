@@ -97,7 +97,7 @@ try {
                     $dicta->docente_id=$dicta_aux->docente_id;
                     $dicta->estado=$dicta_aux->estado;
                     $dicta->materia_id=$dicta_aux->materia_id;
-                    $dicta->codigo_grupo=$dicta_aux->codigo_grupo;
+                    $dicta->codigo_grupo_id=$dicta_aux->codigo_grupo_id;
                     $dicta->semestre_id=$semestre_id;
                     $dicta->save();
                     }                
@@ -160,7 +160,9 @@ try {
                     $evaluacion->save();
                     }                
             }
-
+           $semestreactivar=new Semestre($semestre_id);
+           $semestreactivar->activar();
+           $semestreactivar->save();
            $EXITO = TRUE;
            mysql_query("COMMIT");     
     }
