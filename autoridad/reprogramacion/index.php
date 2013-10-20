@@ -27,7 +27,7 @@ try {
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Administrador::URL,'name'=>'Administraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'Reprogramar/','name'=>'Reprogramar');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'reprogramacion/','name'=>'Reprogramaci&oacute;n');
   $smarty->assign("menuList", $menuList);
 
 
@@ -37,8 +37,8 @@ try {
   //----------------------------------//
   leerClase('Menu');
   $menu = new Menu('Reprogramacion');
-  $link = Administrador::URL."estados/lista.estudiantes.php";
-  $menu->agregarItem('Busqeda de estudiantes para Reprogramar','Reprogramacion','basicset/people.png',$link);
+  $link = Administrador::URL."reprogramacion/lista.estudiantes.php";
+  $menu->agregarItem('Busqeda de estudiantes para Reprogramar','Reprogramaci&oacute;n','basicset/people.png',$link);
  
   $menus[] = $menu;
  
