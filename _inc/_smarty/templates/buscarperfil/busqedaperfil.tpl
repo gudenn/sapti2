@@ -14,7 +14,7 @@
 
 <h1><b>BUSQUEDA DE PROYECTOS</b></h1>
 
-<input type="text" id="bus" style="width : 400px; length:150px" placeholder="Intordusca el Titulo ,Nombre del Estudiante, la Gestion"  autofocus="autofocus" name="bus" onkeyup="loadXMLDoc()" required /><b>BUSCAR {icono('Search.png','Buscador')}</b>
+<input type="text" id="bus" style="width : 400px; length:150px" placeholder="Intordusca el T&iacute;tulo ,Nombre del Estudiante, La Gesti&oacute;n"  autofocus="autofocus" name="bus" onkeyup="loadXMLDoc()" required /><b>BUSCAR {icono('Search.png','Buscador')}</b>
 
 <div id="myDiv"></div>
 
