@@ -42,9 +42,9 @@ $sql2 = "SELECT *
   $smarty->assign("semestre_values", $semestre_values);
   $smarty->assign("semestre_output", $semestre_output);
   $smarty->assign("semestre_selected", "");
-  //CREAR UN TIPO   DE DEF
-  //echo "Hola Roxi";
-  echo $p=$_POST['semestre_selec'];
+
+  
+  $p=$_POST['semestre_selec'];
   $semestre=new Semestre($p);
   $smarty->assign("semestre", $semestre);
   
@@ -57,15 +57,11 @@ WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
   
  while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
  {
-  // $arraytribunal=$fila;
-   
-   //array('name' => $fila["id"], 'home' => $fila["nombre"],'cell' => $fila["apellidos"], 'email' => 'john@myexample.com');
-   
+  
    $arraytribunal[]=$fila;
  }
  
- $obj_mysql  = $arraytribunal;
- // $objs_pg    = new Pagination($obj_mysql, 'g_cambios','',false,10);
+
  $smarty->assign('listadocentes'  , $arraytribunal);
  
  

@@ -24,7 +24,9 @@
           <td>{$listadocentes[ic]['apellidos']}</td>
           <td>{$listadocentes[ic]['titulo']}</td>
           <td>{$listadocentes[ic]['codigo']}</td>
-    <td><a href="proyecto.detalle.php?estudiante_id={$listadocentes[ic]['eid']}" >{icono('basicset/document.png','Detalle')} Ver Detalle</a></td> 
+          
+          
+    <td><a href="../detalle/proyecto.detalle.php?estudiante_id={$listadocentes[ic]['eid']}" >{icono('basicset/document.png','Detalle')} Ver Detalle</a></td> 
     <td><a href="pendientes.gestion.php?proyecto_id={$listadocentes[ic]['pid']}" >{icono('basicset/tick_48.png','Confirmar')} Confirmar</a></td>
     
     

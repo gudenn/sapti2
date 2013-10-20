@@ -62,7 +62,7 @@
             <h2 class="title">Grabar Docente</h2>
             <p>
               <input type="hidden" name="usuario_id"    value="{$usuario->id}">
-              <input type="hidden" name="estudiante_id" value="{$estudiante->id}">
+              <input type="hidden" name="estudiante_id" value="{$docente->id}">
               <input type="hidden" name="tarea" value="registrar">
               <input type="hidden" name="token" value="{$token}">
 

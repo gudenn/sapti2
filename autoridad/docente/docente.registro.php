@@ -57,7 +57,7 @@ try {
 
 
 
-  //CREAR UN TUTOR
+  //CREAR UN DOCENTE
   leerClase('Docente');
   leerClase('Usuario');
 
@@ -114,7 +114,7 @@ try {
     $docente->usuario_id = $usuario->id;
     $docente->save();
 
-    //tambien creamos su usuario tutor
+    //tambien creamos su usuario docente
     $usuario->getAllObjects();
     if ( !isset($usuario->tutor_objs) || !isset($usuario->tutor_objs[0]) )
     {
