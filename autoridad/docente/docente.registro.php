@@ -42,6 +42,7 @@ try {
   
   $smarty->assign('CSS',$CSS);
   $smarty->assign('JS',$JS);
+  $smarty->assign('header_ui','1');
 
 
   $smarty->assign("ERROR", '');

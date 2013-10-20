@@ -31,7 +31,7 @@ try {
 
   
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'pendientes/','name'=>'Pendientes');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'pendientes/','name'=>'pendientes');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'pendientes/'.basename(__FILE__),'name'=>'Proyectos pendientes');
   $smarty->assign("menuList", $menuList);
 
