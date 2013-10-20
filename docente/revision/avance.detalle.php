@@ -94,7 +94,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
     {
     $observacion = new Observacion();
     $revision = new Revision();
-    $revision->crearRevisionDocente($docente->id, $proyecto->id);
+    $revision->crearRevisionDocente($docente->usuario_id, $proyecto->id);
     $revision->objBuidFromPost();
     $revision->save();
     
@@ -118,9 +118,9 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
             }
            $revision1->fechaAprobacion();
            $desaprobados=$revision1->listaDesaprobados();
-           if(count($desaprobados>0)){
+           if(count($desaprobados)>0){
            $revisionnuevo = new Revision();
-           $revisionnuevo->crearRevisionDocente($docente->id, $proyecto->id);
+           $revisionnuevo->crearRevisionDocente($docente->usuario_id, $proyecto->id);
            $revisionnuevo->save();
            foreach ($desaprobados as $des) {
                $obsermodes=new Observacion($des);
@@ -131,20 +131,32 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
                $obsermodes->save();
                $obsermo->save();
                $obsermodes->cambiarEstadoRechazado();
-          }  
+           }  
            }
            $avance->cambiarEstadoCorregido();   
            $ir = "Location: ../revision/observacion.editar.revision.php?revisiones_id=".$revisionnuevo->id."";
            header($ir);
            }  else {
-               
-           $revision1->estado_revision=  Revision::E1_CREADO;
-           $revision1->save();
-                $ir = "Location: ../revision/observacion.editar.revision.php?revisiones_id=".$revision1->id."";
-                header($ir);
+           $revision1->fechaAprobacion();
+           $desaprobados=$revision1->listaObservaciones();
+           if(count($desaprobados)>0){
+           $revisionnuevo = new Revision();
+           $revisionnuevo->crearRevisionDocente($docente->usuario_id, $proyecto->id);
+           $revisionnuevo->save();
+           foreach ($desaprobados as $des) {
+               $obsermodes=new Observacion($des);
+               $obsermodes->objBuidFromPost();
+               $obsermo = new Observacion();
+               $obsermo->objBuidFromPost();
+               $obsermo->crearObservacion($obsermodes->observacion, $revisionnuevo->id);
+               $obsermodes->save();
+               $obsermo->save();
+               $obsermodes->cambiarEstadoRechazado();
+           }}
+           $avance->cambiarEstadoCorregido();   
+           $ir = "Location: ../revision/observacion.editar.revision.php?revisiones_id=".$revisionnuevo->id."";
+           header($ir);
            }
-
-
      }
 
   $smarty->assign("revision", $revision);

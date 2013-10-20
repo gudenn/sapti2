@@ -24,6 +24,7 @@ try {
   $JS[]  = URL_JS . "tablaeditable/editablegrid-2.0.1.js";
   $JS[]  = URL_JS . "tablaeditable/tabla.revision.lista.js";
   $JS[]  = URL_JS . "ventanasmodales/observacion.detalle.js";
+  $JS[]  = URL_JS . "ventanasmodales/avance.detalle.modal.js";
   $JS[]  = URL_JS . "ventanasmodales/jquery.simplemodal-1.4.4.js";
   $smarty->assign('JS',$JS);
   

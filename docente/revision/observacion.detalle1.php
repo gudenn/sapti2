@@ -1,7 +1,7 @@
 <?php
 define ("MODULO", "DOCENTE");
   require('../_start.php');
-$to ='ola' ;  
+
 $ideve1=$_GET['idev'];
   $resul = "
       SELECT ob.observacion as observacion, ob.respuesta as respuesta, pr.nombre as nomp, us.nombre as nom,CONCAT(us.apellido_paterno,us.apellido_materno) as ap, re.fecha_revision as fere, ob.estado_observacion as estado
@@ -81,15 +81,7 @@ function classtabla($va){
     }
     return $clas;
 };
-function tabla(){
-              for ($g=0;$g==3;$g++)
-            {
-            $output1 +="<tr class=".classtabla($i).">
-                      <td>{$arrayobser[$g]['obser']}</td>
-                      </tr>";
-            }  
-   return $output1;
-}
+
 function estado($va){
     $clas='';
     if($va == 'CR'){
@@ -103,7 +95,12 @@ function estado($va){
             if($va == 'AP'){
                 $clas='APROBADO';
                 $res="<img src=../../images/icons/flags/RE.png title=\"Estado Observacion\" width='25px' height='25px' />".$clas;
+            }else{
+            if($va == 'NP'){
+                $clas='RECHAZADO';
+                $res="<img src=../../images/icons/flags/NP.png title=\"Estado Observacion\" width='25px' height='25px' />".$clas;
             }
+        }
         }
     }
     return $res;

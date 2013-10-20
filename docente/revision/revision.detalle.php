@@ -50,27 +50,30 @@ try {
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();
 
-  $resul = "
-SELECT av.id as id, pr.nombre as nombrep, av.descripcion as descripcion, av.fecha_avance as fecha, av.revision_id as correcionrevision, av.estado_avance as estoavance
-FROM proyecto pr, avance av, revision re
-WHERE av.proyecto_id=pr.id
-AND av.revision_id=re.id
-AND re.estado_revision='RE'
-AND av.proyecto_id='".$proyecto->id."'
-AND re.revisor_tipo='DO'
-AND re.revisor='".$docente->usuario_id."'
-ORDER BY av.fecha_avance
-          ";
-   $sql = mysql_query($resul);
-while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
-   $avances[]=$fila1;
- }
-  $avance   = new Avance();
-  $revision   = new Revision();
+    	function obtener_directorios($ruta){
+			// Abre un gestor de directorios para la ruta indicada
+			$gestor = opendir($ruta);
+			// Recorre todos los elementos del directorio
+			while ($archivo = readdir($gestor))  {
+				// Se muestran todos los archivos y carpetas excepto "." y ".."
+				if ($archivo != "." && $archivo != "..") {
+					// Si es un directorio se recorre recursivamente
+                                    $archi[]= $archivo;		
+				}
+			}
+			// Cierra el gestor de directorios
+			closedir($gestor);
+		return $archi;
+	}
 
+  $avance   = new Avance(2);
+  $revision   = new Revision();
+  $dir='../../'.$avance->getDirectorioAvancedir(201001201);
+  $archivosruta=obtener_directorios($dir);
+  $smarty->assign("archivosruta", $archivosruta);
+  $smarty->assign("dir", $dir);
   $smarty->assign("avance", $avance);
   $smarty->assign("revision", $revision);
-  $smarty->assign("avances", $avances);
   $smarty->assign("estudiante", $estudiante);
   $smarty->assign("usuario", $usuario);
   $smarty->assign("proyecto", $proyecto);
@@ -83,5 +86,5 @@ catch(Exception $e)
 {
   $smarty->assign("ERROR", handleError($e));
 }
-  $smarty->display('docente/revision/full-width.revision.corregido.lista.tpl');
+  $smarty->display('docente/revision/full-width.revision.detalle.tpl');
 ?>
