@@ -1,12 +1,12 @@
       <div id="content">
         <h1 class="title">Registro de Grupo</h1>
-        <p>Formulario de registro de Codigo de Grupo</p>
+        <p>Formulario de registro de C&oacute;digo de Grupo</p>
         <h2 class="title">Formulario de Registro</h2>
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
               <p>
-              <input type="text" name="nombre" value="{$grupo->nombre}"  data-validation-engine="validate[required]">
-              <label for="codigo"><small>Nombre de Grupo(*)</small></label>
+              <input type="text" name="nombre" id="nombre"  value="{$grupo->nombre}"  data-validation-engine="validate[required]">
+              <label for="nombre"><small>Nombre de Grupo(*) {getHelpTip('nombre')}</small></label>
             </p>
             
             <h2 class="title">Grabar Codigo de Grupo</h2>

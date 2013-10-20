@@ -31,6 +31,14 @@ try {
   $JS[]  = URL_JS . "jquery.js";
   $smarty->assign('JS',$JS);
 
+  /**
+   * Menu superior
+   */
+  $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administrador');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'reprogramacion/','name'=>'Reprogarmaci&oacute;n');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'reprogramacion/'.basename(__FILE__),'name'=>'Gestion de Estados');
+  $smarty->assign("menuList", $menuList);
+
   
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////

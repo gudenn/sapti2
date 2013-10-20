@@ -166,10 +166,10 @@ class Revision extends Objectbase
     $filtro_sql = '';
     return $filtro_sql;
   }
-      function crearRevisionDocente($doc_id, $pro_id) 
+      function crearRevisionDocente($usu_id, $pro_id) 
   {
     $this->estado = Objectbase::STATUS_AC;
-    $this->revisor=$doc_id;
+    $this->revisor=$usu_id;
     $this->revisor_tipo= self::T1_DOCENTE;
     $this->estado_revision=  self::E1_CREADO;
     $this->proyecto_id=$pro_id;
@@ -193,6 +193,20 @@ class Revision extends Objectbase
     $aprobado = self::E4_APROBADO;
     $sql = " SELECT ob.* FROM ".$this->getTableName('Observacion')." as ob WHERE ob.revision_id='$this->id'
             AND not ob.estado_observacion='$aprobado'";
+    $resultados = mysql_query($sql);
+    if (!$resultados)
+      return false;
+    while ($fila = mysql_fetch_array($resultados, MYSQL_ASSOC)) {
+    $obser[]=$fila['id'];
+    }
+      return $obser;
+    }
+  /**
+   Array de id de todas las observaciones
+   */
+  function listaObservaciones() {
+      leerClase('Observacion');
+    $sql = " SELECT ob.* FROM ".$this->getTableName('Observacion')." as ob WHERE ob.revision_id='$this->id'";
     $resultados = mysql_query($sql);
     if (!$resultados)
       return false;

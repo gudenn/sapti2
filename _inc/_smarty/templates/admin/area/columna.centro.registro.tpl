@@ -1,18 +1,18 @@
       <div id="content">
-        <h1 class="title">Registro de Area</h1>
-        <p>Formulario de registro de Area</p>
+        <h1 class="title">Registro de &Aacute;rea </h1>
+        <p>Formulario de registro de &Aacute;rea </p>
         <h2 class="title">Formulario de Registro</h2>
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
             <p>
               <input type="text" name="nombre" value="{$area->nombre}"  data-validation-engine="validate[required]">
-              <label for="nombre"><small>Nombre del Area (*){getHelpTip('nombre')}</small></label>
+              <label for="nombre"><small>Nombre del &Aacute;rea (*){getHelpTip('nombre')}</small></label>
             </p>
             <p>
               <input type="text" name="descripcion" value="{$area->descripcion}"  data-validation-engine="validate[required]">
-              <label for="descripcion"><small>Descripcion del Area (*){getHelpTip('descripcion')}</small></label>
+              <label for="descripcion"><small>Descripcion del &Aacute;rea (*){getHelpTip('descripcion')}</small></label>
             </p>
-            <h2 class="title">Grabar Area</h2>
+            <h2 class="title">Grabar &Aacute;rea</h2>
             <p>
               <input type="hidden" name="id"    value="{$area->id}">
               <input type="hidden" name="tarea" value="registrar">

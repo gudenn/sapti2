@@ -37,18 +37,19 @@ try {
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
-  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php?iddicta='.$_SESSION['iddictapro'],'name'=>'Proyecto Final');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.perfil.php?iddicta='.$_SESSION['iddictaperfil'],'name'=>'Perfil');
   $smarty->assign("menuList", $menuList);
 
     if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
   {
      $iddicta = $_GET['iddicta'];
-     $_SESSION['iddictapro']=$iddicta;
+     $_SESSION['iddictaperfil']=$iddicta;
   }else{
 
   }
 
-  $docente     = getSessionDocente();
+  $docente_aux = getSessionDocente();
+  $docente     = new Docente($docente_aux->docente_id);
   $usuario     = $docente->getUsuario();
   
   $smarty->assign("docente", $docente);

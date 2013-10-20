@@ -53,6 +53,9 @@ class Observacion extends Objectbase
       case self::E3_APROBADO:
         $estado = 'Aprobado';
         break;
+      case self::E4_RECHAZADO:
+        $estado = 'Rechazado';
+        break;
       default:
         $estado = 'Nuevo';
         break;

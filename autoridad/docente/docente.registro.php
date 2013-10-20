@@ -131,9 +131,9 @@ try {
 
 
  if (!$editar)
-    $columnacentro = 'admin/columna.centro.registro-docente.tpl';
+    $columnacentro = 'admin/docente/columna.centro.registro-docente.tpl';
   else
-    $columnacentro = 'admin/columna.centro.docente-registro-editar.tpl';
+    $columnacentro = 'admin/docente/columna.centro.docente-registro-editar.tpl';
   $smarty->assign('columnacentro',$columnacentro);
 
   $smarty->assign("docente", $docente);

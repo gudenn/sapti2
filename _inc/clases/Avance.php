@@ -155,6 +155,17 @@ class Avance extends Objectbase
       $archivo  = PATH.Estudiante::ARCHIVO_PATH.Proyecto::ARCHIVO_PATH.'/'.$codigo_sis.'/'.$proyecto->getFolder().'/'.$this->directorio.'/';
     return $archivo;
   }
+    function getDirectorioAvancedir($codigo_sis,$formatourl = true) 
+  {
+    leerClase('Estudiante');
+    leerClase('Proyecto');
+    $proyecto = new Proyecto($this->proyecto_id);
+    if ($formatourl)
+      $archivo  = Estudiante::ARCHIVO_PATH.Proyecto::ARCHIVO_PATH.'/'.$codigo_sis.'/'.$proyecto->getFolder().'/'.$this->directorio.'/';
+    else
+      $archivo  = Estudiante::ARCHIVO_PATH.Proyecto::ARCHIVO_PATH.'/'.$codigo_sis.'/'.$proyecto->getFolder().'/'.$this->directorio.'/';
+    return $archivo;
+  }
      /**
    Cambiar estado de Avances a Corregidos
    */

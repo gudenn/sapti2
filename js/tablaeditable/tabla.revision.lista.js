@@ -10,7 +10,7 @@
  */
 
 // create our editable grid
-var editableGrid = new EditableGrid("listarevision", {
+var editableGrid = new EditableGrid("listarevision123", {
 	enableSort: true, // true is the default, set it to false if you don't want sorting to be enabled
 	editmode: "absolute", // change this to "fixed" to test out editorzone, and to "static" to get the old-school mode
 	editorzoneid: "edition", // will be used only if editmode is set to "fixed"
@@ -65,20 +65,31 @@ EditableGrid.prototype.initializeGrid = function(estid)
 			else displayMessage("Fila Selecionada y Cambiada por '" + this.getRowId(oldRowIndex) + "' to '" + this.getRowId(newRowIndex) + "'");
 		};
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
-		cell.innerHTML = "<a href='#' class='observaciondetalle' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("icons/detalle.png") + "\" border=\"0\" alt=\"detalle\" title=\"Detalle Revision\"/>Detalle</a>";
                 if(getValueAt(cell.rowIndex, '2')=='DO'&& getValueAt(cell.rowIndex, '4')=='CR'){                        
                 cell.innerHTML += "<br><a onclick=document.location.href='observacion.editar.php?revisiones_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("icons/editar.png") + "\" border=\"0\" alt=\"editar\" title=\"Editar Revision\"/>Editar</a>";
                 } 
-                if(getValueAt(cell.rowIndex, '1')=='0'){                        
+                if(getValueAt(cell.rowIndex, '1')=='0'){
+                cell.innerHTML = "<a href='#' class='avancedetalle' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
+						 "<img src=\"" + image("icons/detalle.png") + "\" border=\"0\" alt=\"detalle\" title=\"Detalle Avance\" />Detalle</a>";
                 cell.innerHTML += "<br><a onclick=document.location.href='avance.detalle.php?estudiante_id="+estid+"&avance_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("icons/basicset/document_pencil.png") + "\" border=\"0\" alt=\"revisar\" title=\"Revisar\"/>Revisar</a>";
-                } 
+						 "<img src=\"" + image("icons/basicset/document_pencil.png") + "\" border=\"0\" alt=\"revisar\" title=\"Revisar\" width='25px' height='25px'/>Revisar</a>";
+                }
+                else if(getValueAt(cell.rowIndex, '4')=='CO'){
+                cell.innerHTML = "<a href='#' class='avancedetalle' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
+						 "<img src=\"" + image("icons/detalle.png") + "\" border=\"0\" alt=\"detalle\" title=\"Detalle Avance\" />Detalle</a>";
+                }else{
+                cell.innerHTML = "<a href='#' class='observaciondetalle' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
+						 "<img src=\"" + image("icons/detalle.png") + "\" border=\"0\" alt=\"detalle\" title=\"Detalle Revision\"/>Detalle</a>";
+                }
                 }}));
+                setCellRenderer("num", new CellRenderer({
+                    
+                    render: function(cell, value) { cell.innerHTML =htmlspecialchars_decode(value);}
+		}));
             	setCellRenderer("tipo", new CellRenderer({
                     
-                    render: function(cell, value) { cell.innerHTML ="<a>"+"<img src='" + image("icons/flags/" + value.toLowerCase() + ".png") + "' alt='" + value + "' title=\"Tipo de Evento\" width='30px' height='30px'/>"+nombreTipo(value)+"</a>";}
+                    render: function(cell, value) { cell.innerHTML ="<a>"+"<img src='" + image("icons/flags/" + value.toLowerCase() + "R.png") + "' alt='" + value + "' title=\"Tipo de Evento\" width='30px' height='30px'/>"+nombreTipo(value)+"</a>";}
 		})); 
             	setCellRenderer("revtipo", new CellRenderer({
                     
@@ -86,10 +97,6 @@ EditableGrid.prototype.initializeGrid = function(estid)
 		})); 
                 setCellRenderer("estado", new CellRenderer({
 			render: function(cell, value){ cell.innerHTML ="<a>"+"<img src='" + image("icons/flags/" + value.toLowerCase() + ".png") + "' alt='" + value + "' title=\"Estado de Revicion\" width='30px' height='30px'/>"+estadoRevision(value)+"</a>";} 
-		}));
-                setCellRenderer("num", new CellRenderer({
-                    
-                    render: function(cell, value) { cell.innerHTML ="<a>"+htmlspecialchars(value)+"</a>";}
 		}));
 		
 		// render the grid (parameters will be ignored if we have attached to an existing HTML table)
@@ -111,7 +118,7 @@ EditableGrid.prototype.onloadXML = function(url, estid)
 {
 	// register the function that will be called when the XML has been fully loaded
 	this.tableLoaded = function() { 
-		displayMessage("Numero de Revisiones al Proyecto " + this.getRowCount()); 
+		displayMessage("Numero de Avances, Revisiones y Correcciones al Proyecto " + this.getRowCount()); 
 		this.initializeGrid(estid);
 	};
 
@@ -164,91 +171,73 @@ EditableGrid.prototype.updatePaginator = function()
 };
 function nombreRevisor(tipo){
     nombre='';
-    if(tipo=='DO'){
-        nombre='DOCENTE';
-    }else{
-        if(tipo=='TR'){
-            nombre='TRIBUNAL';
-        }else{
-            if(tipo=='DP'){
-                nombre='DOCENTE PERFIL';
-            }else{
-                if(tipo=='TU'){
-                    nombre='TUTOR';                    
-                }else{
-                if(tipo=='0'){
-                    nombre='AVANCE';                    
-                }
-
-            }
-            }
-        }
-    }
+    switch (tipo) { 
+   	case 'DO': 
+            nombre='DOCENTE';
+      	 break
+         case 'TR': 
+             nombre='TRIBUNAL';
+      	 break
+        case 'DP': 
+             nombre='DOCENTE PERFIL';
+      	 break 
+        case 'TU': 
+             nombre='TUTOR';
+      	 break
+        case '0': 
+             nombre='AVANCE';
+      	 break
+   	default: 
+            nombre='USUARIO';
+        } 
     return nombre;
 }
 function nombreTipo(tipo){
     nombre='';
-    if(tipo=='AC'){
-        nombre='REVISION';
-    }else{
-        if(tipo=='0'){
+        switch (tipo) { 
+   	case 'AC': 
+            nombre='REVISION';
+      	 break
+   	case '0': 
             nombre='AVANCE';
-        }else{
-            if(tipo>0){
-                nombre='CORRECCION';
-            }
+      	 break
+   	case 'CO': 
+            nombre='CORRECCION';
+      	 break
+   	case 'VI': 
+            nombre='CORRECCION';
+      	 break
+        default: 
+            nombre='ARCHIVO';
         }
-    }
     return nombre;
 }
 function estadoRevision(tipo){
     nombre='';
-    if(tipo=='CR'){
-        nombre='Creado';
-    }else{
-        if(tipo=='VI'){
+            switch (tipo) { 
+   	case 'CR': 
+            nombre='Creado';
+      	 break
+   	case 'VI': 
             nombre='Visto';
-        }else{
-            if(tipo=='RE'){
-                nombre='Respondido';
-            }else{
-            if(tipo=='AP'){
-                nombre='Aprobado';
-            }else{
-            if(tipo=='CO'){
-                nombre='Revisado';
-            }
-        }
-        }
-        }
+      	 break
+   	case 'RE': 
+            nombre='Respondido';
+      	 break
+   	case 'AP': 
+            nombre='Aprobado';
+      	 break
+   	case 'CO': 
+            nombre='Revisado';
+      	 break
+        default: 
+            nombre='Visto';
+
     }
     return nombre;
 }
-function getDetalle(){
-    for(cant=0; cant<editableGrid.getRowCount(); cant++){
-        detalle=editableGrid.getValueAt(cant, '6');
-        alert(detalle)
-        detalle1   = htmlspecialchars(detalle);
-        editableGrid.setValueAt(cant, '6', detalle1);
-    }        
+function htmlspecialchars_decode(html){
+  var txt = document.createElement("textarea");
+  txt.innerHTML = html;
+  return txt.value;
 }
-function htmlspecialchars4(str) {
- if (typeof(str) == "string") {
-  str = str.replace(/&/g, "&amp;"); /* must do &amp; first */
-  str = str.replace(/"/g, "&quot;");
-  str = str.replace(/'/g, "&#039;");
-  str = str.replace(/</g, "&lt;");
-  str = str.replace(/>/g, "&gt;");
-  }
- return str;
- }
-function htmlspecialchars(str) {
- if (typeof(str) == "string") {
-  str = str.replace(/&/g, "&amp;"); /* must do &amp; first */
-  str = str.replace(/"/g, "&quot;");
-  str = str.replace(/'/g, "&#039;");
-  str = str.replace(/</g, "&lt;");
-  str = str.replace(/>/g, "&gt;");
-  }
- return str;
- }

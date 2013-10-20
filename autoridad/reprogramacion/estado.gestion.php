@@ -27,8 +27,8 @@ try {
    * Menu superior
    */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administrador');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'estados/','name'=>'Estado');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'estados/'.basename(__FILE__),'name'=>'Gestion de Estados');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'reprogramacion/','name'=>'Reprogarmaci&oacute;n');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'reprogramacion/'.basename(__FILE__),'name'=>'Gesti&oacute;n de Estados');
   $smarty->assign("menuList", $menuList);
 
   //CSS
