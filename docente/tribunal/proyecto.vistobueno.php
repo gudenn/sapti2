@@ -61,28 +61,25 @@ try {
 
     if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
     {
-  
-      
     $vistobueno                    =       new Visto_bueno();
     $docente                       =       getSessionDocente();
     $vistobueno->objBuidFromPost();    
     $vistobueno->proyecto_id       =        $_POST['proyecto_id'];
     $vistobueno->visto_bueno_tipo  =        Visto_bueno::E3_TRIBUNAL;
     $vistobueno->fecha_visto_bueno =        date("d/m/Y");
-    $vistobueno->visto_bueno_id    =        $docente->id;;
+    $vistobueno->visto_bueno_id    =        $docente->id;
     $vistobueno->estado            =        Objectbase::STATUS_AC;
    
-    $vistobueno->save();
+     $vistobueno->save();
      $proyectos=     new Proyecto(  $_POST['proyecto_id']);
      echo $proyectos->nombre;
-      if((sizeof($proyectos->getVbTribunal()))==3)
-      {
-    //$proyecto = new Proyecto($vistobueno->proyecto_id);
-     $proyecto->estado_proyecto="TV";
-     $proyecto->save();
-      }
-    $ir = "Location: estudiante.lista.php";
-        header($ir);
+          if((sizeof($proyectos->getVbTribunal()))==3)
+          {
+          $proyecto->estado_proyecto="TV";
+          $proyecto->save();
+          }
+         $ir = "Location: estudiante.lista.php";
+         header($ir);
         
         
         

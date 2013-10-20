@@ -482,13 +482,14 @@ class Proyecto extends Objectbase {
 
     $activo = Objectbase::STATUS_AC;
 
-    $sql = "select * from " . $this->getTableName('Proyecto_tutor') . " where proyecto_id = '$this->id' and estado_tutoria = '$estado_tutoria' AND estado = '$activo'";
+    $sql = "select * from " . $this->getTableName('Proyecto_tutor') . "  as pt where pt.proyecto_id = '$this->id' and pt.estado_tutoria = '$estado_tutoria' AND estado = '$activo'";
     //echo $sql;
     $resultado = mysql_query($sql);
     if (!$resultado)
       return false;
     $tutores = array();
-    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) {
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC))
+                    {
       $tutores[] = new Tutor($fila['tutor_id']);
     }
     return $tutores;
@@ -534,13 +535,13 @@ class Proyecto extends Objectbase {
     return $vigencias;
   }
   
-  /**
+    /**
    * 
    * @return
-   * retorna los Vistos buenos Docentes
+   * retorna los Vistos buenos Docentes de proyecto final
    */
   
-  function getVbDocente()
+  function getVbDocenteProyecto($iddocente)
   {
     //@TODO revisar
     //  leerClase('Proyecto_area');
@@ -549,16 +550,95 @@ class Proyecto extends Objectbase {
      $d=  Visto_bueno::E1_DOCENTE;
     
     $activo = Objectbase::STATUS_AC;
-    $sql = "select v.* from " . $this->getTableName('Visto_bueno') . " as v    where v.proyecto_id = '$this->id' and v.visto_bueno_tipo='$d' and v.estado = '$activo'";
+    $sql = "select v.* from " . $this->getTableName('Visto_bueno') . " as v    where  v.visto_bueno_id='$iddocente' and '$this->tipo_proyecto'='PR'  and  v.proyecto_id = '$this->id' and v.visto_bueno_tipo='$d' and v.estado = '$activo'";
     $resultado = mysql_query($sql);
     if (!$resultado)
       return false;
-    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) {
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+      {
       $vistos[] = new Visto_bueno($fila);
-    }
+      }
     return $vistos;
   }
 
+  
+  /**
+   * 
+   * @return
+   * retorna los Vistos buenos Docentes  del docente de perfil
+   */
+  
+  function getVbDocentePerfil($iddocente)
+  {
+    //@TODO revisar
+    //  leerClase('Proyecto_area');
+    leerClase('Visto_bueno');
+     $vistos= array();
+     $d=  Visto_bueno::E1_DOCENTE;
+    $activo = Objectbase::STATUS_AC;
+    $sql = "select v.* from " . $this->getTableName('Visto_bueno') . " as v    where  v.visto_bueno_id='$iddocente' and '$this->tipo_proyecto'='PE'  and  v.proyecto_id = '$this->id' and v.visto_bueno_tipo='$d' and v.estado = '$activo'";
+    $resultado = mysql_query($sql);
+    if (!$resultado)
+      return false;
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+      {
+      $vistos[] = new Visto_bueno($fila);
+      }
+    return $vistos;
+  }
+
+  /**
+  * 
+  * retorna  un array  de  los vistos buenos de los docente  de proyecto final
+  */
+ function getVbTutorPerfilIds() 
+ {
+        leerClase('Tutor');
+        leerClase('Proyecto_tutor');
+
+    $activo = Objectbase::STATUS_AC;
+     $vb= Visto_bueno::E2_TUTOR; 
+
+   $sql = "select v.* from " . $this->getTableName('Visto_bueno') . " as v    where v.proyecto_id = '$this->id' and v.visto_bueno_tipo='$vb' and  '$this->tipo_proyecto'='PE'  and v.estado = '$activo'";
+    //echo $sql;
+    $resultado = mysql_query($sql);
+    if (!$resultado)
+      return false;
+    $tutores = array();
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC))
+                    {
+      $tutores[] = $fila['visto_bueno_id'];
+    }
+    return $tutores;
+ }
+  
+  /**
+  * 
+  * retorna  un array  de  los vistos buenos de los docente  de proyecto final
+  */
+ function getVbTutorProyectoIds() 
+ {
+        leerClase('Tutor');
+        leerClase('Proyecto_tutor');
+
+    $activo = Objectbase::STATUS_AC;
+     $vb= Visto_bueno::E2_TUTOR; 
+
+   $sql = "select v.* from " . $this->getTableName('Visto_bueno') . " as v    where v.proyecto_id = '$this->id' and v.visto_bueno_tipo='$vb' and  '$this->tipo_proyecto'='PR'  and v.estado = '$activo'";
+    //echo $sql;
+    $resultado = mysql_query($sql);
+    if (!$resultado)
+      return false;
+    $tutores = array();
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC))
+                    {
+      $tutores[] = $fila['visto_bueno_id'];
+    }
+    return $tutores;
+ }
+  
+  
+  
   /**
    * 
    * @return
@@ -575,7 +655,8 @@ class Proyecto extends Objectbase {
     $resultado = mysql_query($sql);
     if (!$resultado)
       return false;
-    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) {
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC))
+       {
       $vistos[] = new Visto_bueno($fila);
     }
     return $vistos;
@@ -650,16 +731,7 @@ class Proyecto extends Objectbase {
       }
        return  $idtribunales;
   }
-  /**
-   * 
-   */
-  
-  function  getPerfilTutorVB()
-  {
-    
-    
-  }
-
+ 
 
   /**
    * 

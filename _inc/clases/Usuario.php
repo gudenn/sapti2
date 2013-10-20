@@ -217,6 +217,29 @@ class Usuario  extends Objectbase
     return true;
   }
 
+   /**
+   * Get tutor  returna el tutor 
+   * @return boolean|\Usuario
+   * retorna los datos de un usuario asociado a un docente
+   */
+  function getTutor() 
+  {
+    leerClase('Tutor');
+    
+    $activo = Objectbase::STATUS_AC;
+    $sql = "select t.* from " . $this->getTableName('Tutor') . " as t ,where t.usuario_id = '$this->usuario_id'  and t.estado = '$activo'  ";
+    $resultado = mysql_query($sql);
+    
+    if (!$resultado)
+      return false;
+
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+         { 
+        $tutor =new Tutor($fila);
+          }
+       return $tutor;
+  
+  }
   
   
   
