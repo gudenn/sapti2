@@ -80,7 +80,7 @@ $pdf->AddPage();
 $p=$_GET['id_p'];
 $sql = "SELECT u.nombre AS NOMBRE,CONCAT(apellido_paterno,' ',apellido_materno) as APELLIDOS,p.nombre as TITULO, COUNT( * ) AS CANTIDAD, c.tipo AS TIPO
   FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe, cambio c
-  WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado='AC'and p.tipo_proyecto='PR'AND c.proyecto_id=p.id and s.id='".$p."'
+  WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado='AC'and p.tipo_proyecto='PR' and p.estado_proyecto='CO' AND c.proyecto_id=p.id and s.id='".$p."'
   GROUP BY p.id, c.tipo";
 $b=1;
 //DesplegarTabla($sql,$b);
@@ -159,7 +159,7 @@ $pdf->lastPage();
 // ---------------------------------------------------------
 
 //Close and output PDF document
-$pdf->Output('example_006.pdf', 'I');
+$pdf->Output('cambio.pdf', 'I');
 
 //============================================================+
 // END OF FILE                                                
