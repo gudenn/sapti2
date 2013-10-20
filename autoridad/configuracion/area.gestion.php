@@ -57,6 +57,7 @@ try {
   $smarty->assign("filtros"  ,$filtro);
   $smarty->assign("objs"     ,$objs_pg->objs);
   $smarty->assign("pages"    ,$objs_pg->p_pages);
+  $smarty->assign("crear_nuevo"  ,"area.registro.php");
 
 
 

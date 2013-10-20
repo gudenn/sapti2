@@ -64,7 +64,7 @@
     </tr>
     <tr>
       <td>
-        <a href="{$crear_nuevo}" title="Crear Nuevo" class="sendme" style="line-height: 19px;">Crear</a>
+        <a href="{$crear_nuevo}" title="Crear Nuevo" class="sendme" style="line-height: 19px;" >Crear Nuevo</a>
       </td>
     </tr>
   </table>
