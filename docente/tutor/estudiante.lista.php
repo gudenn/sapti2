@@ -38,7 +38,7 @@ try {
   $docente=  getSessionDocente();
   $docenteid=$docente->id;
   
-  $smarty->assign("docente_ids", $docenteid);
+  $smarty->assign("docente_ids",$docente->usuario_id);
 
   //No hay ERROR
   $smarty->assign("ERROR",$ERROR);
