@@ -322,7 +322,76 @@ class Usuario  extends Objectbase
     }
     return true;
   }
-  
+
+  /**
+   * Esta funcion creara un objeto si se asigna un usuario a ceirto grupo 
+   * como por ejemplo si se asigna un usuario al grupo de consejo
+   * se creara un objeto consejo asociado a este usuario
+   * @param Grupo $grupo
+   */
+  function crearObjetoxParaGrupo($grupo) 
+  {
+    leerClase('Grupo');
+    $this->getAllObjects();
+    switch ($grupo->codigo) {
+      case Grupo::GR_AD: // creamos un administrador
+        leerClase('Administrador');
+        if ( !sizeof($this->administrador_objs))
+        {
+          $administrador = new Administrador();
+          $administrador->usuario_id = $this->id;
+          $administrador->estado     = Objectbase::STATUS_AC;
+          $administrador->save();
+        }
+        break;
+      case Grupo::GR_CO: // creamos un Consejo
+        leerClase('Consejo');
+        if ( !sizeof($this->consejo_objs))
+        {
+          $consejo = new Consejo();
+          $consejo->usuario_id   = $this->id;
+          $consejo->fecha_inicio = date('j/n/Y');
+          $consejo->fecha_fin    = date('j/n').'/'.(date('Y')+1);
+          $consejo->activo       = 1;
+          $consejo->estado       = Objectbase::STATUS_AC;
+          $consejo->save();
+        }
+        break;
+      case Grupo::GR_DO: // creamos un Docente
+        leerClase('Docente');
+        if ( !sizeof($this->docente_objs))
+        {
+          $docente = new Docente();
+          $docente->usuario_id   = $this->id;
+          $docente->estado       = Objectbase::STATUS_AC;
+          $docente->save();
+        }
+        break;
+      case Grupo::GR_ES: // creamos un Estudiante
+        leerClase('Estudiante');
+        if ( !sizeof($this->estudiante_objs))
+        {
+          $estudiante = new Estudiante();
+          $estudiante->usuario_id   = $this->id;
+          $estudiante->estado       = Objectbase::STATUS_AC;
+          $estudiante->save();
+        }
+        break;
+      case Grupo::GR_TU: // creamos un Tutor
+        leerClase('Tutor');
+        if ( !sizeof($this->tutor_objs))
+        {
+          $tutor = new Tutor();
+          $tutor->usuario_id   = $this->id;
+          $tutor->estado       = Objectbase::STATUS_AC;
+          $tutor->save();
+        }
+        break;
+      default:
+        break;
+    }
+  }
+
   
   /**
    * Validamos al usuario ya sea para actualizar o para crear uno nuevo
