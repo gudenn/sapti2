@@ -14,7 +14,7 @@
               <select name="modalidad_selec" id="modalidad_selec" >
               {html_options values=$modalidad_values selected=$modalidad_selected output=$modalidad_output}
               </select>
-              <label for="modalidad_selec"><small>Seleccione Semestre(*)</small></label>
+              <label for="modalidad_selec"><small>Seleccione Modalidad(*)</small></label>
             </p>
             
             

@@ -3,7 +3,7 @@
 	
         $p=$_GET['id_p'];
         $fechahoy=  date('Y-m-d');
-	$consulta = 'SELECT p.id,u.nombre,s.codigo,CONCAT(apellido_paterno,apellido_materno) as apellidos ,p.nombre as titulo
+	$consulta = 'SELECT p.id,s.codigo,CONCAT(u.nombre," ",apellido_paterno," ",apellido_materno) as nombre ,p.nombre as titulo 
         FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
         WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id and p.tipo_proyecto="PR" and p.estado_proyecto="CO" AND p.estado="AC" AND p.id=v.proyecto_id AND ("'.$fechahoy.'">=v.fecha_fin)';
 	$resultado =mysql_query($consulta); 
@@ -30,10 +30,10 @@
 							 ->setCategory("Reporte excel");
 
 		$tituloReporte = "Reportes de proyectos en Vencidos";
-		$titulosColumnas = array('NOMBRE', 'TITULO', 'GESTION', 'ESTADO');
+		$titulosColumnas = array('NOMBRE', 'TITULO', 'GESTION');
 		
 		$objPHPExcel->setActiveSheetIndex(0)
-        		    ->mergeCells('A1:D1');
+        		    ->mergeCells('A1:C1');
 						
 		// Se agregan los titulos del reporte
 		$objPHPExcel->setActiveSheetIndex(0)
@@ -41,7 +41,7 @@
         		    ->setCellValue('A3',  $titulosColumnas[0])
 		            ->setCellValue('B3',  $titulosColumnas[1])
         		    ->setCellValue('C3',  $titulosColumnas[2])
-                            ->setCellValue('D3',  $titulosColumnas[3]);
+                            ;
 		
 		//Se agregan los datos de los alumnos
 		$i = 4;
@@ -49,8 +49,7 @@
 			$objPHPExcel->setActiveSheetIndex(0)
         		    ->setCellValue('A'.$i,  $fila['nombre'])
 		            ->setCellValue('B'.$i, $fila['titulo'])
-        		    ->setCellValue('C'.$i,  $fila['gestion'])
-                            ->setCellValue('D'.$i, $fila['estadop']);
+        		    ->setCellValue('C'.$i,  $fila['codigo']);
 					$i++;
 		}
 		
@@ -143,9 +142,9 @@
            	)
         ));
 		 
-		$objPHPExcel->getActiveSheet()->getStyle('A1:D1')->applyFromArray($estiloTituloReporte);
-		$objPHPExcel->getActiveSheet()->getStyle('A3:D3')->applyFromArray($estiloTituloColumnas);		
-		$objPHPExcel->getActiveSheet()->setSharedStyle($estiloInformacion, "A4:D".($i-1));
+		$objPHPExcel->getActiveSheet()->getStyle('A1:C1')->applyFromArray($estiloTituloReporte);
+		$objPHPExcel->getActiveSheet()->getStyle('A3:C3')->applyFromArray($estiloTituloColumnas);		
+		$objPHPExcel->getActiveSheet()->setSharedStyle($estiloInformacion, "A4:C".($i-1));
 				
 		for($i = 'A'; $i <= 'D'; $i++){
 			$objPHPExcel->setActiveSheetIndex(0)			
