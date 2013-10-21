@@ -92,19 +92,58 @@ class Tooltip extends Objectbase
   }
   
   /**
+   * Actualizamos los tool tips que no esten editados y 
+   * que tengan el mismo cogido
+   */
+  function actualizarPorMismoCodigo() {
+    $re100 = Tooltip::EST01_RECIEN;
+    $re1no = Tooltip::EST01_CLONAD;
+    $sql   = " 
+      UPDATE " . $this->getTableName() . " SET 
+        titulo         = '{$this->titulo}' ,  
+        descripcion    = '{$this->descripcion}' ,
+        estado_tooltip = '$re1no' 
+      WHERE 
+        codigo = '{$this->codigo}' AND estado_tooltip = '{$re100}' ";
+      $result = mysql_query($sql);
+      if (!$result)
+        return false;
+      return true;
+  }
+  
+  /**
    * Mostramos el toltip
    */
   function mostrar($echo = true) 
   {
-    if (!$this->mostrar)
+    leerClase('Administrador');
+    leerClase('Usuario');
+    $editar  = false;
+    $usuario = getSessionUser();
+    
+    if ( isset($usuario->id) && $usuario->id)
+    {
+      $permiso = $usuario->getPermiso('ADMIN-HELPDESK');
+      if ($permiso['ver'])
+      {
+        $editar = $this->editarToolTip();
+      }
+      
+    }
+ 
+    if (!$this->mostrar && !$editar)
       return;
     $oncli = " onclick=\"$( \"#ayuda_{$this->id}\" ).dialog(); return false;\" " ;
-    $icono = icono('basicset/help.png', $this->codigo, '15px');
+    if ($this->mostrar)
+      $icono = icono('basicset/help.png', $this->codigo, '15px');
+    else
+      $icono = icono('basicset/eyeclose.png', $this->codigo . " (Oculto al p&uacute;blico) ", '15px');
     $link = <<<____TEST
       <a href="#" tooltip="ayuda_{$this->id}"  tabindex="-1" class="ayudatip"> {$icono} </a> 
       <div id="ayuda_{$this->id}" title="{$this->titulo}" style="display:none;">
-      <span class="ui-icon ui-icon-circle-check" style="float: left; margin: 0 7px 50px 0;"></span>
-        <p>{$this->descripcion}.</p>
+        <span class="ui-icon ui-icon-circle-check" style="float: left; margin: 0 7px 50px 0;"></span>
+        <p id="tooltip_p_{$this->id}">{$this->descripcion}.</p>
+        {$editar}
       </div>
 ____TEST;
     if ($echo)
@@ -113,6 +152,60 @@ ____TEST;
       return $link;
   }
   
+  /**
+   * mostramos un formulario de edicion en todo el sistema para los tooltips
+   */
+  function editarToolTip($echo = false)  {
+    leerClase('Administrador');
+    $URL    = URL . Administrador::URL . 'helpdesk/tooltip.registro.ajax.php';
+    $loadin = icono('basicset/loading.gif', 'Guardando...' , '50px' , '10px');
+    $coculto = (!$this->mostrar)?' checked="checked" ':''; 
+    $link   = <<<____TEST
+      <a href="#" onclick="$('#tooltip_id_{$this->id}').fadeIn('Slow');$('#tooltip_p_{$this->id}').hide();$(this).hide();return false;" ><span class="ui-icon ui-icon-pencil" style="float: left; margin: 0 7px 50px 0;" ></span> Editar</a>
+      <div id="tt_loading_{$this->id}" style="display:none;text-align: center;padding: 50px 0;">{$loadin}<br>Guardando...</div>
+      <div id="tooltip_id_{$this->id}" style="display:none;">
+        <fieldset>
+          <label for="tt_titulo_{$this->id}">T&iacute;tulo de Tooltip (*)</label><br>
+          <input type="text" name="tt_titulo_{$this->id}" id="tt_titulo_{$this->id}" class="text ui-widget-content ui-corner-all" value="$this->titulo" /><br><br>
+          <label for="tt_descripcion_{$this->id}">Descipci&oacute;n de Tooltip (*)</label><br>
+          <input type="text" name="tt_descripcion_{$this->id}" id="tt_descripcion_{$this->id}"  class="text ui-widget-content ui-corner-all" value="$this->descripcion" /><br><br>
+          <label for="tt_ocultar_{$this->id}" title="Ocultar este Tooltip.">Ocultar</label>
+          <input type="checkbox" name="tt_ocultar_{$this->id}" id="tt_ocultar_{$this->id}" $coculto value="ON" /><br><br>
+          <label for="tt_actualizar_{$this->id}" title="Se actualizar&aacute;n todos los tooltips con el mismo c&oacute;digo que no esten editados todav&iacute;a">Actualizar todos</label>
+          <input type="checkbox" name="tt_actualizar_{$this->id}" id="tt_actualizar_{$this->id}"  value="ON" /><br><br>
+          <button id="tt_save_{$this->id}" type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false"><span class="ui-button-text">Guardar</span></button>              
+          <button id="tt_cancel_{$this->id}" type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false"><span class="ui-button-text">Cancelar</span></button>              
+          <script type="text/javascript">
+            $(function() {
+              
+              $('#tt_cancel_{$this->id}').click(function(){
+                $('#tooltip_id_{$this->id}').fadeOut('fast');$('#tooltip_p_{$this->id}').show();return false;
+              });
+              $('#tt_save_{$this->id}').click(function(){
+                $('#tooltip_id_{$this->id}').fadeOut('fast');
+                $('#tt_loading_{$this->id}').fadeIn('slow');
+                $.post( "{$URL}", { titulo: $('#tt_titulo_{$this->id}').val(), descripcion: $('#tt_descripcion_{$this->id}').val(), actualizar : $('#tt_actualizar_{$this->id}').prop('checked'), ocultar : $('#tt_ocultar_{$this->id}').prop('checked'), tooltip_id : '{$this->id}' } ).done(function( data ) {
+                  if (data != 'TRUE')
+                  {
+                    $('#tooltip_id_{$this->id}').fadeIn('fast');
+                    alert(data);
+                  }
+                  else{
+                    $('#tt_loading_{$this->id}').html('Se grabo correctamente la Informaci&oacute;n');
+                  }
+                });
+              });
+            });
+          </script>
+        </fieldset>
+      </div>
+____TEST;
+    if ($echo)
+      echo $link;
+    else
+      return $link;
+  }
+
   /**
    * Mostramos el icono correspondiente al estado de la ayuda
    * 
