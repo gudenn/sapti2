@@ -184,7 +184,7 @@ class Menu
     $thise = new Menu('Proyecto Final');
     $link = Estudiante::URL."proyecto-final/";
     $thise->agregarItem('Proyecto Final','Registro de avances y correcciones para el Proyecto Final','basicset/briefcase_48.png',$link);
-    if( $proyecto->estado_proyecto == Proyecto::EST2_BUE)
+    if( $proyecto->estado_proyecto==Proyecto::EST2_BUE)
     {
       $link = Estudiante::URL."proyecto/proyecto.registro.php";
       $thise->agregarItem('Registro de Formulario','Geti&oacute;n de las Notificaciones','basicset/survey.png',$link,1);

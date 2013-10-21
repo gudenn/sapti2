@@ -8,7 +8,7 @@ try {
   $smarty->assign('title','Reportes');
   $smarty->assign('description','Reportes');
   $smarty->assign('keywords','Reportes');
-/**
+   /**
    * Menu superior
    */
   

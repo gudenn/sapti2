@@ -19,14 +19,10 @@
          
           <p>
               <label for="area"><small>AREA:</small></label>
-            <span>{$nombre_a}</span>
+            <span>{$area}</span>
             
           </p>
-          <p>
-              <label for="email"><small>SUB_AREA:</small></label>
-                 <span>{$sub_area}</span>
-            
-          </p>
+         
           
           <p>
               <label for="email"><small>MODALIDAD:</small></label>
@@ -39,19 +35,7 @@
             <span>{$carrera}</span>
            
           </p>
-          <p>
-              <label for="email"><small>TUTOR:</small></label>
-            <span>{$tutor}</span>
-           
-          </p>
-          <p>
-              <label for="email"><small>FORMULARIO:</small></label>
-            <span>{$formulario}</span>
-           
          
-          
-             
-          
         </div>
             <div>
                 <p>

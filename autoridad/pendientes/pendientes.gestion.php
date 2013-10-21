@@ -5,9 +5,9 @@ try {
     header("Location: ../login.php");  
 
   /** HEADER */
-  $smarty->assign('title','Reportes');
-  $smarty->assign('description','Reportes');
-  $smarty->assign('keywords','Reportes');
+  $smarty->assign('title','Pendientes');
+  $smarty->assign('description','Pendientes');
+  $smarty->assign('keywords','Pendientes');
 /**
    * Menu superior
  * 
@@ -31,7 +31,7 @@ try {
 
   
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'pendientes/','name'=>'Pendientes');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'pendientes/','name'=>'pendientes');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'pendientes/'.basename(__FILE__),'name'=>'Proyectos pendientes');
   $smarty->assign("menuList", $menuList);
 
@@ -133,7 +133,7 @@ try {
   
   //buscamos el proyeco
   
-    $sqlr="SELECT p.id as pid,e.id as eid,u.nombre,s.codigo,p.nombre as titulo,CONCAT(apellido_paterno,apellido_materno) as apellidos,p.estado as estadop,p.estado_proyecto
+    $sqlr="SELECT p.id as pid,e.id as eid,u.nombre,s.codigo,p.nombre as titulo,CONCAT(apellido_paterno,' ',apellido_materno) as apellidos,p.estado as estadop,p.estado_proyecto
            FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe
            WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id  and p.estado='AC' and p.estado_proyecto='".$estado."'";
            $resultado = mysql_query($sqlr);
