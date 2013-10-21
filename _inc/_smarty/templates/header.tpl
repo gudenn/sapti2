@@ -4,7 +4,7 @@
     <title>{$title}</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta http-equiv="imagetoolbar" content="no" />
-    <link rel="shortcut icon" alt= "Cargo Directory" href="{$URL_IMG}favicon.ico"  />
+    <link rel="shortcut icon" alt= "SAPTI UMSS" href="{$URL_IMG}favicon.ico"  />
     <meta name="description" content="{$description}" />
     <meta name="keywords" content="{$keywords}" />
 
