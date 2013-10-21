@@ -36,14 +36,12 @@ try {
   $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/'.basename(__FILE__),'name'=>'Lista de Correcciones');
   $smarty->assign("menuList", $menuList);
   
-  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
-  {
-     $iddicta = $_GET['iddicta'];
-  }else{
-      $iddicta=$_SESSION['iddictaproyectofinal'];
+  if ( isset($_SESSION['iddictapro']) && is_numeric($_SESSION['iddictapro']) ){
+      $iddicta=$_SESSION['iddictapro'];
   }
-  if (isset($_GET['id_estudiante'])) 
-  $id_estudiante=$_GET['id_estudiante'];
+  if( isset($_SESSION['estudiente_id']) && is_numeric($_SESSION['estudiente_id']) ){
+       $id_estudiante=$_SESSION['estudiente_id'];
+  }
   
   $docente=  getSessionDocente();
   $estudiante     = new Estudiante($id_estudiante);
