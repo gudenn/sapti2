@@ -48,7 +48,7 @@ InfoHeaderRenderer.prototype.render = function(cell, value)
 };
 
 // this function will initialize our editable grid
-EditableGrid.prototype.initializeGrid = function(iddicta) 
+EditableGrid.prototype.initializeGrid = function() 
 {
 	with (this) {
 
@@ -92,12 +92,12 @@ EditableGrid.prototype.initializeGrid = function(iddicta)
 	}
 };
 
-EditableGrid.prototype.onloadXML = function(url, iddicta) 
+EditableGrid.prototype.onloadXML = function(url) 
 {
 	// register the function that will be called when the XML has been fully loaded
 	this.tableLoaded = function() { 
 		displayMessage("Numero de Estudiantes Inscritos " + this.getRowCount()); 
-		this.initializeGrid(iddicta);
+		this.initializeGrid();
 	};
 
 	// load XML URL

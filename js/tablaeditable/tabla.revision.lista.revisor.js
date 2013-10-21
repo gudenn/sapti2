@@ -16,7 +16,6 @@ var editableGrid = new EditableGrid("listarevisionrevisor", {
 	editorzoneid: "edition", // will be used only if editmode is set to "fixed"
 	pageSize: 10
 });
-
 // helper function to display a message
 function displayMessage(text, style) { 
 	_$("message").innerHTML = "<p class='" + (style || "ok") + "'>" + text + "</p>"; 
@@ -48,10 +47,10 @@ InfoHeaderRenderer.prototype.render = function(cell, value)
 };
 
 // this function will initialize our editable grid
-EditableGrid.prototype.initializeGrid = function() 
+EditableGrid.prototype.initializeGrid = function(estid) 
 {
 	with (this) {
-
+                
 		// register the function that will handle model changes
 		modelChanged = function(rowIndex, columnIndex, oldValue, newValue, row) { 
 		};
@@ -61,20 +60,38 @@ EditableGrid.prototype.initializeGrid = function()
 
 
 		rowSelected = function(oldRowIndex, newRowIndex) {
-			if (oldRowIndex < 0) displayMessage("Selecionada Fila '" + this.getRowId(newRowIndex) + "'");
-			else displayMessage("Selecionada Fila y Cambiada por '" + this.getRowId(oldRowIndex) + "' to '" + this.getRowId(newRowIndex) + "'");
+			if (oldRowIndex < 0) displayMessage("Fila Selecionada '" + this.getRowId(newRowIndex) + "'");
+			else displayMessage("Fila Selecionada y Cambiada por '" + this.getRowId(oldRowIndex) + "' to '" + this.getRowId(newRowIndex) + "'");
 		};
-                
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
-		cell.innerHTML = "<a href='#' class='observaciondetalle' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
+                if(getValueAt(cell.rowIndex, '1')=='0'){
+                cell.innerHTML = "<a href='#' class='avancedetalle' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
+						 "<img src=\"" + image("icons/detalle.png") + "\" border=\"0\" alt=\"detalle\" title=\"Detalle Avance\" />Detalle</a>";
+                }
+                else if(getValueAt(cell.rowIndex, '4')=='CO'){
+                cell.innerHTML = "<a href='#' class='avancedetalle' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
+						 "<img src=\"" + image("icons/detalle.png") + "\" border=\"0\" alt=\"detalle\" title=\"Detalle Avance\" />Detalle</a>";
+                }else{
+                cell.innerHTML = "<a href='#' class='observaciondetalle' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("icons/detalle.png") + "\" border=\"0\" alt=\"detalle\" title=\"Detalle Revision\"/>Detalle</a>";
+                }
+                cell.innerHTML += "</br><a href='#' class='historial' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
+						 "<img src=\"" + image("icons/basicset/graph.png") + "\" border=\"0\" alt=\"historial\" title=\"Historial de Notas del Proyecto\" width='25px' height='25px'/>Historial de Notas</a>";
                 }}));
-                setCellRenderer("revtipo", new CellRenderer({
+                setCellRenderer("num", new CellRenderer({
                     
-                    render: function(cell, value) { cell.innerHTML ="<a>"+"<img src='" + image("icons/flags/" + value.toLowerCase() + ".png") + "' alt='" + value + "' title=\"Tipo de Revisor\" width='30px' height='30px' />"+nombreRevisor(value)+"</a>";}
+                    render: function(cell, value) { cell.innerHTML =cortarResumen(extractText(extractText(value)), length = "25", end = "...");}
+		}));
+            	setCellRenderer("tipo", new CellRenderer({
+                    
+                    render: function(cell, value) { cell.innerHTML ="<a>"+"<img src='" + image("icons/flags/" + value.toLowerCase() + "r.png") + "' alt='" + value + "' title=\"Tipo de Evento\" width='30px' height='30px'/>"+nombreTipo(value)+"</a>";}
+		})); 
+            	setCellRenderer("revtipo", new CellRenderer({
+                    
+                    render: function(cell, value) { cell.innerHTML ="<a>"+"<img src='" + image("icons/flags/" + value.toLowerCase() + ".png") + "' alt='" + value + "' title=\"Tipo de Revisor\" width='30px' height='30px'/>"+nombreRevisor(value)+"</a>";}
 		})); 
                 setCellRenderer("estado", new CellRenderer({
-			render: function(cell, value){ cell.innerHTML ="<a>"+"<img src='" + image("icons/flags/" + value.toLowerCase() + ".png") + "' alt='" + value + "' title=\"Estado de Revicion\" width='30px' height='30px' />"+estadoRevision(value)+"</a>";} 
+			render: function(cell, value){ cell.innerHTML ="<a>"+"<img src='" + image("icons/flags/" + value.toLowerCase() + ".png") + "' alt='" + value + "' title=\"Estado de Revicion\" width='30px' height='30px'/>"+estadoRevision(value)+"</a>";} 
 		}));
 		
 		// render the grid (parameters will be ignored if we have attached to an existing HTML table)
@@ -92,12 +109,12 @@ EditableGrid.prototype.initializeGrid = function()
 	}
 };
 
-EditableGrid.prototype.onloadXML = function(url) 
+EditableGrid.prototype.onloadXML = function(url, estid) 
 {
 	// register the function that will be called when the XML has been fully loaded
 	this.tableLoaded = function() { 
-		displayMessage("Numero de Revisiones al Proyecto " + this.getRowCount()); 
-		this.initializeGrid();
+		displayMessage("Numero de Avances, Revisiones y Correcciones al Proyecto " + this.getRowCount()); 
+		this.initializeGrid(estid);
 	};
 
 	// load XML URL
@@ -149,49 +166,79 @@ EditableGrid.prototype.updatePaginator = function()
 };
 function nombreRevisor(tipo){
     nombre='';
-    if(tipo=='DO'){
-        nombre='DOCENTE';
-    }else{
-        if(tipo=='TR'){
-            nombre='TRIBUNAL';
-        }else{
-            if(tipo=='DP'){
-                nombre='DOCENTE PERFIL';
-            }else{
-                if(tipo=='TU'){
-                    nombre='TUTOR';                    
-                }else{
-                if(tipo=='0'){
-                    nombre='AVANCE';                    
-                }
-
-            }
-
-            }
+    switch (tipo) { 
+   	case 'DO': 
+            nombre='DOCENTE';
+      	 break
+         case 'TR': 
+             nombre='TRIBUNAL';
+      	 break
+        case 'DP': 
+             nombre='DOCENTE PERFIL';
+      	 break 
+        case 'TU': 
+             nombre='TUTOR';
+      	 break
+        case '0': 
+             nombre='AVANCE';
+      	 break
+   	default: 
+            nombre='USUARIO';
+        } 
+    return nombre;
+}
+function nombreTipo(tipo){
+    nombre='';
+        switch (tipo) { 
+   	case 'AC': 
+            nombre='REVISION';
+      	 break
+   	case '0': 
+            nombre='AVANCE';
+      	 break
+   	case 'CO': 
+            nombre='CORRECCION';
+      	 break
+   	case 'VI': 
+            nombre='CORRECCION';
+      	 break
+        default: 
+            nombre='ARCHIVO';
         }
-    }
     return nombre;
 }
 function estadoRevision(tipo){
     nombre='';
-    if(tipo=='CR'){
-        nombre='Creado';
-    }else{
-        if(tipo=='VI'){
+            switch (tipo) { 
+   	case 'CR': 
+            nombre='Creado';
+      	 break
+   	case 'VI': 
             nombre='Visto';
-        }else{
-            if(tipo=='RE'){
-                nombre='Respondido';
-            }else{
-            if(tipo=='AP'){
-                nombre='Aprobado';
-            }else{
-            if(tipo=='CO'){
-                nombre='Revisado';
-            }
-        }
-        }
-        }
+      	 break
+   	case 'RE': 
+            nombre='Respondido';
+      	 break
+   	case 'AP': 
+            nombre='Aprobado';
+      	 break
+   	case 'CO': 
+            nombre='Revisado';
+      	 break
+        default: 
+            nombre='Visto';
+
     }
     return nombre;
+}
+function cortarResumen (texto, length, end){
+    if(!parseInt(texto))
+  return texto.substring(0, length) + end;
+  return texto;
+};
+
+function extractText(anchText){
+    var str1 = document.createElement('str1');      
+    str1.innerHTML = anchText;
+    return str1.innerText;
 }

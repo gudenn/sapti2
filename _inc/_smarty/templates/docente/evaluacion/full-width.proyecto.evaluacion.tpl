@@ -81,7 +81,7 @@
 </div>
 {include file="footer.tpl"}
         <script type="text/javascript">
-                editableGrid.onloadXML("../revision/loaddata.revision.lista.php?doc={$proyecto->id}");
+                editableGrid.onloadXML("../revision/loaddata.revision.lista.php?doc={$estudiante->id}");
         </script>
         <script type="text/javascript">
             function activar(bott){
