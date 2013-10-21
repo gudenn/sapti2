@@ -37,7 +37,7 @@ try {
   $menuList[]     = array('url'=>URL.Docente::URL.'revision/'.'revision.lista.php','name'=>'Seguimiento');
   $smarty->assign("menuList", $menuList);
   
-  if (isset($_SESSION['estudiente_id'])){
+    if( isset($_SESSION['estudiente_id']) && is_numeric($_SESSION['estudiente_id']) ){
        $id_estudiante=$_SESSION['estudiente_id'];
   }
 
