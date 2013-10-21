@@ -168,7 +168,7 @@
 </select>
              <label for="hora_final"><small>HORA FIN</small></label>
             </p>
-            <div style="text-align: center">
+        <div style="text-align: center">
         <input type="hidden" name="id" value="" />
         <input type="hidden" name="estudiante_id" value="{$estudiantebuscado->id}" />
          <input type="hidden" name="proyecto_id" value="{$proyectobuscado->id}" />

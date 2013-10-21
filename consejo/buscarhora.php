@@ -9,7 +9,7 @@ try {
  if(isset($_POST['idnumero']))
 { 
   $horafin = 1+$_POST['idnumero'];
-    
+  $minutoini= $_POST['minuto'];
 
       echo "<option value='".$horafin."' $TRUE>".htmlentities($horafin)."</option>";
  }
