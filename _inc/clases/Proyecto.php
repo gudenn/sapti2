@@ -719,19 +719,37 @@ class Proyecto extends Objectbase {
   function getIdTribunles()
   {
         $idtribunales= array();
-  
-    $activo = Objectbase::STATUS_AC;
-     $sql = "select t.* from " . $this->getTableName('Tribunal') . " as t   where t.proyecto_id ='$this->id' and t.estado = '$activo'  ";
-   $resultado = mysql_query($sql);
-    if (!$resultado)
-      return false;
-    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+        $activo = Objectbase::STATUS_AC;
+        $sql = "select t.* from " . $this->getTableName('Tribunal') . " as t   where t.proyecto_id ='$this->id' and t.estado = '$activo'  ";
+         $resultado = mysql_query($sql);
+         if (!$resultado)
+          return false;
+          while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
       { 
          $idtribunales[] =$fila['docente_id'];
       }
        return  $idtribunales;
   }
- 
+ /**
+  * 
+  */
+  
+ function getCalcularNota()
+ {
+          leerClase('Nota_tribunal');
+   
+         $notatribunal= array();
+         $activo = Objectbase::STATUS_AC;
+         $sql = "select nt.* from " . $this->getTableName('Nota_tribunal') . " as nt    where nt.proyecto_id ='$this->id' and t.estado = '$activo'  ";
+         $resultado = mysql_query($sql);
+         if (!$resultado)
+          return false;
+          while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+         { 
+        $notatribunal[] = new Nota_tribunal($fila );
+         }
+       return  $notatribunal;
+ }
 
   /**
    * 
