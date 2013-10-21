@@ -7,7 +7,7 @@ try {
   
 if(isset($_POST['estudiante_id'])){
     $varsession=$_POST['estudiante_id'];
-    $_SESSION['estudiente_id']=$varsession;
+    $_SESSION['pro_estudiente_id']=$varsession;
     echo 'ok';
   }  else {
       echo 'fall';

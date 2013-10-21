@@ -39,8 +39,8 @@ try {
   if ( isset($_SESSION['iddictapro']) && is_numeric($_SESSION['iddictapro']) ){
       $iddicta=$_SESSION['iddictapro'];
   }
-  if( isset($_SESSION['estudiente_id']) && is_numeric($_SESSION['estudiente_id']) ){
-       $id_estudiante=$_SESSION['estudiente_id'];
+  if( isset($_SESSION['pro_estudiente_id']) && is_numeric($_SESSION['pro_estudiente_id']) ){
+       $id_estudiante=$_SESSION['pro_estudiente_id'];
   }
   
   $docente=  getSessionDocente();

@@ -8,6 +8,7 @@ try {
   leerClase("Estudiante");
   leerClase("Usuario");
   leerClase("Evaluacion");
+  leerClase("Docente");
 
   /** HEADER */
   $smarty->assign('title','Gestion de Observaciones');
@@ -27,11 +28,21 @@ try {
   $JS[]  = URL_JS . "ventanasmodales/historial.notas.js";
   $JS[]  = URL_JS . "ventanasmodales/jquery.simplemodal-1.4.4.js";
   $smarty->assign('JS',$JS);
-
-    if (isset($_GET['id_estudiante'])) 
-  $id_estudiante=$_GET['id_estudiante'];
-      if (isset($_GET['iddicta'])) 
-  $iddicta=$_GET['iddicta'];
+  
+  /**
+   * Menu superior
+   */
+  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>'Proyecto Final');
+  $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/'.'estudiante.lista.php','name'=>'Estudiantes Inscritos');
+  $menuList[]     = array('url'=>URL.Docente::URL.'evaluacion/'.basename(__FILE__),'name'=>'Evaluacion al Proyecto');
+  $smarty->assign("menuList", $menuList);
+  if ( isset($_SESSION['iddictapro']) && is_numeric($_SESSION['iddictapro']) ){
+      $iddicta=$_SESSION['iddictapro'];
+  }
+  if( isset($_SESSION['pro_estudiente_id']) && is_numeric($_SESSION['pro_estudiente_id']) ){
+       $id_estudiante=$_SESSION['pro_estudiente_id'];
+  }
   $estudiante     = new Estudiante($id_estudiante);
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();

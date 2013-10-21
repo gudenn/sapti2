@@ -117,9 +117,8 @@ AND es.codigo_sis='$sis'";
                 if(estainscrito($estudiante_array[1], $iddicta)=='0'){
                     $estudiante->inscribirEstudianteDicta($semestre->id, $iddicta);
                     $proyid=$estudiante->getProyecto();
-                    $proyecto       = new Proyecto($proyid->proyecto_id);
-                    $proyecto->asignarDictaest($iddicta);
-                    $proyecto->save();
+                    $proyid->asignarDictaest($iddicta);
+                    $proyid->save();
                     $inscritos[]=$estudiante_array;
                     }else{
                     $yainscritos[]=$estudiante_array;
