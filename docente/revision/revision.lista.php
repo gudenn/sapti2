@@ -32,14 +32,15 @@ try {
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
-  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php?iddicta='.$_SESSION['iddictapro'],'name'=>'Proyecto Final');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php?','name'=>'Proyecto Final');
   $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/'.'estudiante.lista.php','name'=>'Estudiantes Inscritos');
-  $menuList[]     = array('url'=>URL.Docente::URL.'revision/'.basename(__FILE__),'name'=>'Seguimiento');
+  $menuList[]     = array('url'=>URL.Docente::URL.'revision/'.'revision.lista.php','name'=>'Seguimiento');
   $smarty->assign("menuList", $menuList);
   
-  if (isset($_GET['id_estudiante'])) 
-  $id_estudiante=$_GET['id_estudiante'];
-  
+  if (isset($_SESSION['estudiente_id'])){
+       $id_estudiante=$_SESSION['estudiente_id'];
+  }
+
   $estudiante     = new Estudiante($id_estudiante);
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();
