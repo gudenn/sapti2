@@ -10,7 +10,6 @@ try {
   leerClase('Estudiante');
   leerClase('Usuario');
   leerClase('Proyecto');
-  leerClase('Notificacion');
 
   /** HEADER */
   $smarty->assign('title','Proyecto Final');
@@ -57,10 +56,9 @@ try {
     {
     
     //  $docen
-    $estudiantes      =    new Estudiante($_POST['estudiante_id']);
-    $proyecto         =    new Proyecto($_POST['proyecto_id']);
-    $listavistobueno  =    $proyecto->getVbTutor();
-    $listatutores     =    $proyecto->getTutores();
+    $proyecto =    new Proyecto($_POST['proyecto_id']);
+    $listavistobueno= $proyecto->getVbTutor();
+    $listatutores=$proyecto->getTutores();
    
     $vistobuenotutores= $proyecto->getVbTutorPerfilIds();
     
@@ -71,20 +69,21 @@ try {
      $vistobueno->visto_bueno_tipo  =        Visto_bueno::E1_DOCENTE;
      $vistobueno->visto_bueno_id    =        $docente->id;
      $vistobueno->estado            =        Objectbase::STATUS_AC;
+   
      $vistobueno->save();
-    
      
-                    $notificacions= new Notificacion();
+                $notificacions= new Notificacion();
                     $notificacions->objBuidFromPost();
                     $notificacions->proyecto_id = $proyecto->id; 
                     $notificacions->tipo        =  Notificacion::TIPO_MENSAJE;
                     $notificacions->fecha_envio = date("j/n/Y");
-                    $notificacions->asunto      = "Visto bueno del Docente";
+                    $notificacions->asunto      =  " Visto bueno del Docente de Proyecto final";
                     $notificacions->prioridad   = 7;
                     $notificacions->estado      = Objectbase::STATUS_AC;
 
                     $noticaciones = array('estudiantes'=>array($estudiantes->id));
                     $notificacions->enviarNotificaion( $noticaciones);
+    
   
     
     $totalvistobuenotutor=true;
@@ -109,19 +108,17 @@ try {
         $proyecto->estado_proyecto="VB";
         $proyecto->save();
         
-        
-                    $notificacions= new Notificacion();
+                   $notificacions= new Notificacion();
                     $notificacions->objBuidFromPost();
                     $notificacions->proyecto_id = $proyecto->id; 
                     $notificacions->tipo        =  Notificacion::TIPO_MENSAJE;
                     $notificacions->fecha_envio = date("j/n/Y");
-                    $notificacions->asunto      = " Tu Formulario de registro  Habilitado";
+                    $notificacions->asunto      = "Estas Habilitado para Para tus Defensas";
                     $notificacions->prioridad   = 7;
                     $notificacions->estado      = Objectbase::STATUS_AC;
 
                     $noticaciones = array('estudiantes'=>array($estudiantes->id));
                     $notificacions->enviarNotificaion( $noticaciones);
-        
         
         
        }

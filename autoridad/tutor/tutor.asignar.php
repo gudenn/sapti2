@@ -111,7 +111,7 @@ try {
   }
   
   
-  $smarty->assign("estudiante"  ,$estudiante);
+  $smarty->assign("estudiante" ,$estudiante);
   if ( isset($_GET['cambiartutor_id']) && is_numeric($_GET['cambiartutor_id']) )
     $smarty->assign("crear_nuevo"  ,"tutor.registro.php?estudiante_id={$estudiante->id}&cambiartutor_id=".$_GET['cambiartutor_id']);
   else

@@ -81,6 +81,19 @@ try {
               $vistobueno->visto_bueno_id    =     $tutor_id->id;    
               $vistobueno->estado            =        Objectbase::STATUS_AC;
               $vistobueno->save();
+              
+              
+                   $notificacions= new Notificacion();
+                    $notificacions->objBuidFromPost();
+                    $notificacions->proyecto_id = $proyecto->id; 
+                    $notificacions->tipo        =  Notificacion::TIPO_MENSAJE;
+                    $notificacions->fecha_envio = date("j/n/Y");
+                    $notificacions->asunto      = "Visto bueno del Tutor";
+                    $notificacions->prioridad   = 7;
+                    $notificacions->estado      = Objectbase::STATUS_AC;
+
+                    $noticaciones = array('estudiantes'=>array($estudiante->id));
+                    $notificacions->enviarNotificaion( $noticaciones);
        }
        
        
@@ -108,6 +121,20 @@ try {
                     
                    $proyectoestudiante->estado_proyecto="VB";
                    $proyectoestudiante->save();
+                   
+                   
+                   
+                    $notificacions= new Notificacion();
+                    $notificacions->objBuidFromPost();
+                    $notificacions->proyecto_id = $proyecto->id; 
+                    $notificacions->tipo        =  Notificacion::TIPO_MENSAJE;
+                    $notificacions->fecha_envio = date("j/n/Y");
+                    $notificacions->asunto      = "Estas Habilitado Para tus Defensas";
+                    $notificacions->prioridad   = 7;
+                    $notificacions->estado      = Objectbase::STATUS_AC;
+
+                    $noticaciones = array('estudiantes'=>array($estudiante->id));
+                    $notificacions->enviarNotificaion( $noticaciones);
 
                   }
 

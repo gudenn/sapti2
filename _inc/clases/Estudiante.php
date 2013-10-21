@@ -362,6 +362,10 @@ and es.id='$this->id'";
       return false;
   }
 
+  /**
+   * Grabamos el avance que realizo el estudiante en proyecto
+   * @return boolean|\Avance
+   */
   function grabarAvance() 
   {
     $proyecto    = $this->getProyecto();
@@ -383,9 +387,29 @@ and es.id='$this->id'";
     }
     $avance->estado_avance = Avance::E1_CREADO;
     $avance->save();
+    $this->notificarAvance($proyecto);
     return $avance;
   }
-  
+
+  /**
+   * Notificamos a todos los involucrados en el proyecto acerca del avance del proyecto
+   * @param Proyecto $proyecto
+   */
+  function notificarAvance($proyecto) 
+  {
+    leerClase('Notificacion');
+    $notificacion              = new Notificacion();
+    $notificacion->proyecto_id = $proyecto->id;
+    $notificacion->tipo        = Notificacion::TIPO_MENSAJE;
+    $notificacion->fecha_envio = date('d/m/Y');
+    $notificacion->asunto      = "Avance: {$this->getNombreCompleto()}";
+    $notificacion->detalle     = "El estudiante {$this->getNombreCompleto()} realizo un avance en su proyecto {$proyecto->nombre}, en la fecha {$notificacion->fecha_envio} ";
+    $notificacion->prioridad   = 3;
+    $notificacion->estado      = Objectbase::STATUS_AC;
+    
+    $notificacion->notificarTodos();
+  }
+
   /**
    * Inscribimos a un estudiante a una materia a travez de dicta! y el semestre
    * @param INT(11) $semestre_id

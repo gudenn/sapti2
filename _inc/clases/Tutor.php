@@ -137,8 +137,8 @@ class Tutor extends Objectbase
     $notificacion->estado      = Objectbase::STATUS_AC;
     
     $tutores[]     = $this->id;
-    $estudiantes[] = $estudiante->id;
-    $usuarios      = array('tutores'=>$tutores,'estudiantes'=>$estudiantes);
+    //$estudiantes[] = $estudiante->id;
+    $usuarios      = array('tutores'=>$tutores/*,'estudiantes'=>$estudiantes*/);
     $notificacion->enviarNotificaion($usuarios,$asignado);
     
   }
