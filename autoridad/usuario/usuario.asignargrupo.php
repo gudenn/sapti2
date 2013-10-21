@@ -51,19 +51,15 @@ try {
     if (is_numeric(($_GET['pertenece_id'])))
       $id = ($_GET['pertenece_id']);
     $pertenece = new Pertenece($id);
-    if ($_GET['asignar_grupo']==1)
+    $usuario   = new Usuario($_GET['usuario_id']);
+    $grupo     = new Grupo($_GET['grupo_id']);
+    if ( $_GET['asignar_grupo'] == 1 )
     {
-      $pertenece->usuario_id = $_GET['usuario_id'];
-      $pertenece->grupo_id   = $_GET['grupo_id'];
-      $pertenece->estado     = Objectbase::STATUS_AC;
-      $pertenece->save();
+      $usuario->asignarGrupo($grupo->codigo);
+      $usuario->crearObjetoxParaGrupo($grupo);
     }
     else
       $pertenece->delete();
-    //crear objeto si no existe por ejemplo tutor
-    
-    
-    
   }
   
   

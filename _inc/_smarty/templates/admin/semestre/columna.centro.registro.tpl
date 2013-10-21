@@ -8,6 +8,7 @@
               <input type="text" name="codigo" id="codigo" value="{$semestre->codigo}"  data-validation-engine="validate[required]">
               <label for="codigo"><small>C&oacute;digo de Semestre (*) {getHelpTip('codigo')}</small></label>
             </p>
+            {* No se usa mas
             <!--
             <p>
               <select name="activo" id="activo"  data-validation-engine="validate[required]" >
@@ -18,6 +19,7 @@
               <label for="activo"><small>Es el semestre actual (*)</small></label>
             </p>
             -->
+            *}
             <br>
             <h2 class="title">Grabar Semestre</h2>
             <p>

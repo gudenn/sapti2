@@ -3,10 +3,12 @@
   <tr>
     <th></th>
     <th><a href='?order=nombre'              class="tajax"  title='Ordenar por Nombre'           >Nombre           {$filtros->iconOrder('nombre')}</a></th>
-    <th><a href='?order=apellido_paterno'    class="tajax"  title='Ordenar por Apellido Paterno' >Apellido Paterno {$filtros->iconOrder('apellido_paterno')}</a></th>
-    <th><a href='?order=apellido_materno'    class="tajax"  title='Ordenar por Apellido Materno' >Apellido Materno {$filtros->iconOrder('apellido_materno')}</a></th>
+    <th><a href='?order=apellido_paterno'    class="tajax"  title='Ordenar por Apellido Paterno' >Ap. Paterno {$filtros->iconOrder('apellido_paterno')}</a></th>
+    <th><a href='?order=apellido_materno'    class="tajax"  title='Ordenar por Apellido Materno' >Ap. Materno {$filtros->iconOrder('apellido_materno')}</a></th>
     {section name=ia loop=$grupos}
-    <th style="background: #FFF;">{$grupos[ia]->getIcon()}</th>
+      {if ($grupos[ia]->codigo!= 'TRIBUNALES')}
+        <th style="background: #FFF;">{$grupos[ia]->getIcon()}</th>
+      {/if}
      {/section}
     </tr>
   </thead>
@@ -18,6 +20,7 @@
       <td>{$objs[ic]['apellido_paterno']}</td>
       <td>{$objs[ic]['apellido_materno']}</td>
       {section name=iaz loop=$grupos}
+        {if ($grupos[iaz]->codigo!= 'TRIBUNALES')}
         {assign var="i" value=ia}
       <td>
         {assign var="pertenece" value=$usuario->perteneceGrupo($grupos[iaz]->codigo,$objs[ic]['id'])}
@@ -36,6 +39,7 @@
         {/if}
         </div>
       </td>
+        {/if}
        {/section}
     </tr>
   </tbody>

@@ -1,4 +1,5 @@
 {include file="admin/header-sjq.tpl"}
+
 <div class="wrapper row3">
   <div class="rnd">
     <div id="container" >
@@ -101,7 +102,7 @@
             <table>
               <tr class="tableholder" >
                 <td style="height: 31px;">
-                  Carrera:{getHelpTip('carrera_id')}
+                  Carrera:
                 </td>
                
                 <td>
@@ -152,15 +153,14 @@
         </tr>
         <tr class="tableholder" >
           <td style="padding-bottom: 10px;">
-                  &Aacute;rea(s):{getHelpTip('areasp')}
+                  &Aacute;rea(s):
   <table class="tbl_lista" id="areasp"  mane="areasp">
      <tbody>                  
             {section name=ic loop=$areasp}
-   
-    <tr  class="selectable">
-    <tr  class="{cycle values="light,dark"}">
-        <td>{$areasp[ic]['nombre']}</td>
-     </tr>
+            <tr  class="selectable">
+            <tr  class="{cycle values="light,dark"}">
+            <td>{$areasp[ic]['nombre']}</td>
+            </tr>
     
     
             {/section}
@@ -175,13 +175,13 @@
             <table>
               <tr>
                 <td style="height: 35px;">
-                  Modalidad:{getHelpTip('modalidad')}
+                  Modalidad:
                 </td>
                 <td>
                     <span>{$m}</span>
                 </td>
                 <td style="height: 35px;" class="{$tipo_moda}">
-                  Instituci&oacute;n:{getHelpTip('institucion')}
+                  Instituci&oacute;n:
                 </td>
                 <td class="{$tipo_moda}">
                   <span id="instituciones_lista">
@@ -210,7 +210,7 @@
              <table>
               <tr>
                 <td style="height: 61px;vertical-align: top; ">
-                  Objetivo General:{getHelpTip('objetivogeneral')}
+                  Objetivo General:
                 </td>
                 <td>
                     <span>{$proyecto->objetivo_general}</span>
@@ -282,7 +282,7 @@
               <tr>
                 
                 <td>
-                  Fecha:{getHelpTip('fecha_registro')}
+                  Fecha:
                 </td>
                 <td>
                   {$fecha}

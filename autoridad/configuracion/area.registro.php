@@ -7,8 +7,8 @@ try {
 
 
   /** HEADER */
-  $smarty->assign('title','SAPTI - Registro Area');
-  $smarty->assign('description','Formulario de registro de Area');
+  $smarty->assign('title','SAPTI - Registro &Aactue;rea');
+  $smarty->assign('description','Formulario de registro de &Aactue;rea');
   $smarty->assign('keywords','SAPTI,Area,Registro');
 
   leerClase('Administrador');
@@ -17,7 +17,7 @@ try {
    */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/','name'=>'Configuraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Registro de Area');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Registro de &Aactue;rea');
   $smarty->assign("menuList", $menuList);
 
 
