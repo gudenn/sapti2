@@ -57,6 +57,7 @@ class Avance extends Objectbase
 
   
   
+  
   function asignarDirectorio() 
   {
     if (!$this->directorio)
@@ -117,14 +118,10 @@ class Avance extends Objectbase
 
     $filtro->nombres[] = 'Estado';
     $filtro->valores[] = array ('select','estado'  ,$filtro->filtro('estado'),
-        array(''      ,'AC'         ,'NC'           ,'IN'          ,'DE'        ),
-        array('Todos' ,'Confirmados','No Confirmado','Desctivado'  ,'Eliminado' ));
-    $filtro->nombres[] = 'proyecto_id';
-    $filtro->valores[] = array ('input' ,'proyecto_id',$filtro->filtro('proyecto_id'));
-    $filtro->nombres[] = 'revisor';
-    $filtro->valores[] = array ('input' ,'revisor',$filtro->filtro('revisor'));
-    $filtro->nombres[] = 'fecha_observacion';
-    $filtro->valores[] = array ('input' ,'fecha_revision',$filtro->filtro('fecha_revision'));
+        array(''      ,'CR'    ,'VI'    ),
+        array('Todos' ,'Nuevos','Vistos'));
+    $filtro->nombres[] = 'Descripci&oacute;n';
+    $filtro->valores[] = array ('input' ,'descripcion',$filtro->filtro('descripcion'));
 
   }
 

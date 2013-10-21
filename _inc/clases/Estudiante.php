@@ -26,7 +26,7 @@ class Estudiante extends Objectbase {
 
  /**
   * (Objeto simple) Todas las materias en la que esta inscrito este estudiante
-  * @var object|null 
+  * @var Inscrito|null 
   */
   var $inscrito_objs;
   
@@ -193,6 +193,24 @@ class Estudiante extends Objectbase {
     $proyecto = new Proyecto($proyecto_id);
     $proyecto->es_actual = '1';
     $proyecto->save();
+  }
+  
+  /**
+   * Devuelve el objeto dicata en el que esta inscrito un estudiante
+   * @return Dicta
+   */
+  function getDicta()
+  {
+    leerClase('Dicta');
+    leerClase('Inscrito');
+    $this->getAllObjects();
+    // buscamos todas las materias inscritas
+    foreach ($this->inscrito_objs as $inscrito) {
+      if ($inscrito->estado_inscrito == Inscrito::E_ACTUAL )
+        return new Dicta ($inscrito->dicta_id);
+    }
+    return new Dicta ();
+    
   }
   
   /**

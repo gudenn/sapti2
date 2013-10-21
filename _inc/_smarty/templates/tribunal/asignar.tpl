@@ -166,10 +166,13 @@
 <option value="58">58</option>
 <option value="59">59</option>
 </select>
+
               &nbsp;<span id='Buscando'></span>
-               </p>
+              <label for="hora_final"><small>HORA INICIO</small></label>
             
-            <p>
+               </p>
+
+             
 <select id="hora_fin" name="hora_fin">
 <option value="00">00</option>
 <option value="01">01</option>
@@ -281,7 +284,7 @@
 <script>
 jQuery('#hora_ini').change(function () {
 var numero =document.getElementById("hora_ini").value; // valor de la id de Provincias
-var poblacio = jQuery(this).attr("hora_ini"); // este es el atributo que nos ayuda a encontrar la población cuando modificamos  el contenido
+//var poblacio = jQuery(this).attr("hora_ini"); // este es el atributo que nos ayuda a encontrar la población cuando modificamos  el contenido
 var to=document.getElementById("Buscando");
 to.innerHTML="buscando....";
 jQuery.ajax({

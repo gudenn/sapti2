@@ -4,13 +4,11 @@ define ("MODULO", "DOCENTE");
 
 $ideve1=$_GET['idev'];
   $resul = "
-      SELECT ob.observacion as observacion, ob.respuesta as respuesta, pr.nombre as nomp, us.nombre as nom,CONCAT(us.apellido_paterno,us.apellido_materno) as ap, re.fecha_revision as fere, ob.estado_observacion as estado
-FROM observacion ob, revision re, proyecto pr, docente doc, proyecto_estudiante proe, usuario us
+      SELECT ob.observacion as observacion, ob.respuesta as respuesta, pr.nombre as nomp, CONCAT(us.apellido_paterno,' ',us.apellido_materno,' ', us.nombre) as nombre, re.fecha_revision as fere, ob.estado_observacion as estado
+FROM observacion ob, revision re, proyecto pr, usuario us
 WHERE ob.revision_id=re.id
 AND re.proyecto_id=pr.id
-AND pr.id=proe.proyecto_id
-AND re.revisor=doc.id
-AND doc.usuario_id=us.id
+AND re.revisor=us.id
 AND ob.revision_id='".$ideve1."' 
           ";
    $sql = mysql_query($resul);
@@ -31,7 +29,7 @@ if (empty($action)) {
                 <form action='#' style='display:none'>
           <p>
             <label for='revisor'>Nombre del Revisor:</label>
-            <span><i>{$arrayobser[0]['nom']}</i><i>{$arrayobser[0]['ap']}</i></span>
+            <span><b>{$arrayobser[0]['nombre']}</b></span>
           </p>
           <p>
             <label for='proyecto_id'>Nombres de Proyecto: </label>

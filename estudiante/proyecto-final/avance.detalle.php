@@ -35,6 +35,8 @@ try {
   // Escritorio del estuddinate
   leerClase('Usuario');
   leerClase('Proyecto');
+  leerClase('Avance');
+  leerClase('Revision');
   leerClase('Estudiante');
   leerClase('Avance');
 
@@ -52,6 +54,13 @@ try {
   $proyecto       = $estudiante->getProyecto();
   $id             = (isset($_GET['avance_id']) && is_numeric($_GET['avance_id']))?$_GET['avance_id']:'';
   $avance         = new Avance($id);
+  // si tiene correciones 
+  $revision = false;
+  if ($avance->revision_id)
+  {
+    $revision = new Revision($avance->revision_id);
+    $revision->getAllObjects();
+  }
   $avance->asignarDirectorio();
 
   if ( isset($_POST['tarea']) && $_POST['tarea'] == 'registrar_avance' && isset($_SESSION['registrar_avance']) && isset($_POST['token']) && $_SESSION['registrar_avance'] == $_POST['token']  )
@@ -62,12 +71,16 @@ try {
     $EXITO = true;
   }
 
+
   
-  $smarty->assign("estudiante", $estudiante);
-  $smarty->assign("usuario", $usuario);
-  $smarty->assign("proyecto", $proyecto);
-  $smarty->assign("avance", $avance);
-  $smarty->assign("ERROR", $ERROR);
+  $avance->getDescripcion();
+  
+  $smarty->assign("estudiante" , $estudiante);
+  $smarty->assign("usuario"    , $usuario);
+  $smarty->assign("proyecto"   , $proyecto);
+  $smarty->assign("avance"     , $avance);
+  $smarty->assign("revision"   , $revision);
+  $smarty->assign("ERROR"      , $ERROR);
   
 
 

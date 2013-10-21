@@ -835,6 +835,7 @@ class Proyecto extends Objectbase {
    * @return boolean|\Carrera
    * la carrera
    */
+  /* ESTO ESTA DEMAS!!
   function getCarrera1() {
 
     //@TODO revisar
@@ -849,6 +850,7 @@ class Proyecto extends Objectbase {
    $carrera = new Carrera($carreras);
     return $carrera;
   }
+  */
   function getCarrera() {
     //@TODO revisar
     //  leerClase('Proyecto_area');
