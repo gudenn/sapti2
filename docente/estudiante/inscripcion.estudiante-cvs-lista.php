@@ -23,6 +23,8 @@ try {
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
   $smarty->assign('JS',$JS);
   $smarty->assign("ERROR", '');
+  leerClase('Docente');
+  
    /**
    * Menu superior
    */
