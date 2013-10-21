@@ -181,16 +181,14 @@ class Menu
     leerClase('Estudiante');
    
     $menus = array();
-    $thise = new Menu('Proyecto Final');
+    $thise = new Menu('Proyecto');
     $link = Estudiante::URL."proyecto-final/";
-    $thise->agregarItem('Proyecto Final','Registro de avances y correcciones para el Proyecto Final','basicset/briefcase_48.png',$link);
+    $thise->agregarItem('Proyecto','Registro de avances y correcciones para el Proyecto Final','basicset/briefcase_48.png',$link);
     if( $proyecto->estado_proyecto==Proyecto::EST2_BUE)
     {
       $link = Estudiante::URL."proyecto/proyecto.registro.php";
       $thise->agregarItem('Registro de Formulario','Geti&oacute;n de las Notificaciones','basicset/survey.png',$link,1);
     }
-    $link = Estudiante::URL."proyecto-final/";
-    $thise->agregarItem('Reportes','Reportes correspondientes a mi Proyecto Final','basicset/graph.png',$link);
     $menus[] = $thise;
 
     // Notificaiones 
@@ -217,20 +215,27 @@ class Menu
    */
   function getestudianteProyectoFinalIndex($proyecto) {
     leerClase('Grupo');
+    leerClase('Avance');
+    leerClase('Revision');
     leerClase('Estudiante');
    
     $menus = array();
     $thise = new Menu('Avances');
     $link = Estudiante::URL."proyecto-final/avance.registro.php";
     $thise->agregarItem('Registro de Avances','Registrar Archivos y la descripci&oacute;n del avance presentado','basicset/document_pencil.png',$link);
+    $avance = new Avance();
     $link = Estudiante::URL."proyecto-final/avance.gestion.php";
-    $thise->agregarItem('Archivo de Avances','Compendio de todos los avances presentados','basicset/cabinet.png',$link);
+    $thise->agregarItem('Archivo de Avances','Compendio de todos los avances presentados','basicset/cabinet.png',$link,'',$avance->contar( " proyecto_id = '{$proyecto->id}'  " ));
     $menus[] = $thise;
     $thise = new Menu('Correciones');
+    $revision = new Revision();
+    $pendiente = Revision::E1_CREADO;
+    $pendiente = $revision->contar( " proyecto_id = '{$proyecto->id}' AND estado_revision = '{$pendiente}'  " );
     $link = Estudiante::URL."proyecto-final/revision.gestion.php?estado_revision=CR";
-    $thise->agregarItem('Correcciones Pendientes','Todas las correcciones pendientes presentadas por Tutor(es), Docente(s) y Tribunales','basicset/document_pencil.png',$link);
-    $link = Estudiante::URL."proyecto-final/revision.gestion.php";
-    $thise->agregarItem('Archivo de Correciones','Compendio de todas las correciones presentadas','basicset/cabinet.png',$link);
+    $thise->agregarItem('Correcciones Pendientes','Todas las correcciones pendientes presentadas por Tutor(es), Docente(s) y Tribunales','basicset/document_pencil.png',$link,$pendiente);
+    $pendiente = $revision->contar( " proyecto_id = '{$proyecto->id}' " );
+    $link = Estudiante::URL."proyecto-final/revision.gestion.php?estado_revision=";
+    $thise->agregarItem('Archivo de Correciones','Compendio de todas las correciones presentadas','basicset/cabinet.png',$link,'',$pendiente);
 
     $menus[] = $thise;
     return $menus;

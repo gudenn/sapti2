@@ -48,4 +48,4 @@
     {include file="admin/menu.up.derecha.tpl"}
   </div>
 </div>
-{include file="admin/menu.topnav.tpl"}
+{include file="menu.topnav.tpl"}

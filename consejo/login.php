@@ -12,18 +12,9 @@ try {
   $smarty->assign('description','Pagina de inicio');
   $smarty->assign('keywords','Ingreso,usuario');
 
-  //CSS
-  $CSS[]  = "../js/validate/validationEngine.jquery.css";
-  $CSS[]  = "../js/ui/base/jquery.ui.all.css";
-
-  $smarty->assign('CSS',$CSS);
-
-  //JS
-  $JS[]  = "../js/jquery.js";
-  $JS[]  = "../js/validate/idiomas/jquery.validationEngine-es.js";
-  $JS[]  = "../js/validate/jquery.validationEngine.js";
-  
-  $smarty->assign('JS',$JS);
+  $smarty->assign('header_ui','1');
+  $smarty->assign('CSS','');
+  $smarty->assign('JS','');
 
   
   //////////////////////////////////////////////////////////////////

@@ -20,7 +20,7 @@ $q=$_POST[q];
   
 $sqlr="SELECT p.id,u.nombre,s.codigo,p.nombre as titulo,CONCAT(apellido_paterno,' ',apellido_materno) as apellidos,p.estado as estadop
 FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe
-WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id and p.tipo_proyecto='PR'AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id 
+WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id and p.tipo_proyecto='PR' and p.estado_proyecto='CO' AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id 
 AND (
 p.nombre LIKE  '%$q%'
 OR u.nombre LIKE  '%$q%' OR u.apellido_paterno LIKE  '%$q%' OR u.apellido_materno LIKE  '%$q%' OR p.numero_asignado LIKE  '%$q%' OR s.codigo LIKE  '%$q%'

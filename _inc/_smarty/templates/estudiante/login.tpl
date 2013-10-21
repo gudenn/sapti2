@@ -1,4 +1,4 @@
-{include file="header-sjq.tpl"}
+{include file="header-ui.tpl"}
 <div class="wrapper row3">
   <div class="rnd">
     <div id="container" class="clear">

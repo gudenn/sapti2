@@ -21,11 +21,16 @@ try {
 
   // Escritorio del estuddinate
   leerClase('Usuario');
+  leerClase('Materia');
+  leerClase('Docente');
   leerClase('Estudiante');
   
   $estudiante     = getSessionEstudiante();
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();
+  $dicta          = $estudiante->getDicta();
+  $materia        = new Materia($dicta->materia_id);
+  $docente        = new Docente($dicta->docente_id);
   
   /**
    * Menu superior
@@ -45,11 +50,13 @@ try {
   $menus = $menu->getestudianteProyectoFinalIndex($proyecto);
   $smarty->assign("menus", $menus);
   
-  //$smarty->assign("columnacentro", 'estudiante/index.proyecto-final.tpl');
   
+  $smarty->assign("columnacentrodetalle", 'estudiante/columna.detalle.tpl');
   $smarty->assign("estudiante", $estudiante);
   $smarty->assign("usuario", $usuario);
   $smarty->assign("proyecto", $proyecto);
+  $smarty->assign("docente", $docente);
+  $smarty->assign("materia", $materia);
   $smarty->assign("ERROR", $ERROR);
   
 
