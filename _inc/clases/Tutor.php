@@ -91,7 +91,7 @@ class Tutor extends Objectbase
     $asignado->estado           = Objectbase::STATUS_AC;
     $asignado->fecha_asignacion = date('d/m/Y');
     $asignado->save();
-    $this->notificarAsignacionTutor($estudiante, $proyecto);
+    $this->notificarAsignacionTutor($estudiante, $proyecto,$asignado);
     
   }
 
@@ -121,8 +121,9 @@ class Tutor extends Objectbase
    * que se ha hecho una solicitud de asignacion de tutor
    * @param Estudiante $estudiante
    * @param Proyecto $proyecto
+   * @param Proyecto_tutor $asignado
    */
-  function notificarAsignacionTutor($estudiante,$proyecto) 
+  function notificarAsignacionTutor($estudiante,$proyecto,$asignado) 
   {
     leerClase('Notificacion');
     leerClase('Notificacion_tutor');
@@ -138,7 +139,7 @@ class Tutor extends Objectbase
     $tutores[]     = $this->id;
     $estudiantes[] = $estudiante->id;
     $usuarios      = array('tutores'=>$tutores,'estudiantes'=>$estudiantes);
-    $notificacion->enviarNotificaion($usuarios);
+    $notificacion->enviarNotificaion($usuarios,$asignado);
     
   }
   

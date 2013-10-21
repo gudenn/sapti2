@@ -31,22 +31,23 @@ try {
   leerClase('Usuario');
   leerClase('Docente');
   leerClase('Semestre');
-   leerClase('Notificacion');
+  leerClase('Notificacion');
 
-      /**
+  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
+  {
+     $iddicta                = $_GET['iddicta'];
+     $_SESSION['iddictapro'] = $iddicta;
+  }
+  
+  /**
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
   $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php?iddicta='.$_SESSION['iddictapro'],'name'=>'Proyecto Final');
   $smarty->assign("menuList", $menuList);
+  
 
-    if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
-  {
-     $iddicta = $_GET['iddicta'];
-     $_SESSION['iddictapro']=$iddicta;
-  }else{
-
-  }
+  
 
   $docente     = getSessionDocente();
   $usuario     = $docente->getUsuario();

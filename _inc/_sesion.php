@@ -120,6 +120,7 @@ function closeSession() {
     setcookie("$SYSTEM_NAME-USER", "" , 1 - ($SESSION_TIME * 2), '/');
     unset($_SESSION["$SYSTEM_NAME-USER"]);
   }
+  session_destroy();
 }
 
  /**

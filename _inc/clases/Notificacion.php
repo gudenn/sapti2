@@ -370,9 +370,10 @@ class Notificacion extends Objectbase
    * dictas      = array();
    * consejos    = array();
    * tutores     = array();
+   * @param Proyecto_tutor $proyecto_tutor si es del tipo asignar tutor mandamos la signacion
    */
   
-  function enviarNotificaion($usuarios /*$dictas,$estudiantes,$tutores,$tribunales,$revisores,$consejos*/)
+  function enviarNotificaion($usuarios /*$dictas,$estudiantes,$tutores,$tribunales,$revisores,$consejos*/,$proyecto_tutor = false)
   {
 
     
@@ -398,6 +399,8 @@ class Notificacion extends Objectbase
     {
       $n_obj                      = new Notificacion_tutor();
       $n_obj->tutor_id            = $tutor_id;
+      if ($proyecto_tutor)
+        $n_obj->proyecto_tutor_id = $proyecto_tutor->id;
       $n_obj->estado_notificacion = self::EST_SV;
       $n_obj->estado              = Objectbase::STATUS_AC;
 
