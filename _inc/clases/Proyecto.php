@@ -506,12 +506,10 @@ class Proyecto extends Objectbase {
     //  leerClase('Proyecto_area');
     leerClase('Proyecto_tutor');
 
-   $vigencias = array();
-
-     $proyect = array();
-
+    $estado_tutoria = Proyecto_tutor::ACEPTADO;
+    $proyect = array();
     $activo = Objectbase::STATUS_AC;
-    $sql = "select pt.* from " . $this->getTableName('Proyecto_tutor') . " as pt    where pt.proyecto_id = '$this->id' and pt.estado = '$activo'";
+    $sql = "select pt.* from " . $this->getTableName('Proyecto_tutor') . " as pt    where pt.proyecto_id = '$this->id' and pt.estado_tutoria = '$estado_tutoria' and pt.estado = '$activo'";
     $resultado = mysql_query($sql);
     if (!$resultado)
       return false;
