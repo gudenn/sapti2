@@ -1,10 +1,12 @@
 <form action="{$filtros->clearaction}" method="get" name="filtro" id="filtro" >
-  <table  style="width: 75%;float: left;" class="tbl_filtro">
+  <h2>Opciones de B&uacute;squeda R&aacute;pida: <b>{$description}</b></h2>
+    
+  <table  style="width: {sizeof($filtros->nombres)*105}px;float: left;" class="tbl_filtro">
     <tr>
       {section name=ic loop=$filtros->nombres}
-        <th><label for="{$filtros->valores[ic][1]}">{$filtros->nombres[ic]}</label></th>
+        <th style="width: 105px;"><label for="{$filtros->valores[ic][1]}">{$filtros->nombres[ic]}{getHelpTip($filtros->valores[ic][1])}</label></th>
       {/section}
-      <th>&nbsp;</th>
+      <th style="width: 105px;">&nbsp;</th>
     </tr>
     <tr>
       {section name=ic loop=$filtros->valores}
@@ -22,26 +24,47 @@
     </tr>
   </table>
 </form>
-<table  style="width: 108px;float: left;" class="tbl_filtro">
+<table  style="width: 110px;float: left;" class="tbl_filtro">
   <tr>
     <th>&nbsp;</th>
   </tr>
   <tr>
     <td>
       <form action="{$filtros->clearaction}" method="post" id="filtro_clear">
-        <input type="submit" value="Limpiar" name="clear" class="sendme" />
+        <input type="submit" value="Limpiar" name="clear" class="sendme" onclick="clear_form('#filtro')" />
       </form>
     </td>
   </tr>
 </table>
+<script type="text/javascript">
+{literal}
+  function clear_form(ele) {
+      $(ele).find(':input').each(function() {
+          switch(this.type) {
+              case 'password':
+              case 'select-multiple':
+              case 'select-one':
+              case 'text':
+              case 'textarea':
+                  $(this).val('');
+                  break;
+              case 'checkbox':
+              case 'radio':
+                  this.checked = false;
+          }
+      });
+
+  }
+{/literal}
+</script>
 {if isset($crear_nuevo)}
-  <table  style="width: 90px;float: left;" class="tbl_filtro">
+  <table  style="width: 120px;float: left;" class="tbl_filtro">
     <tr>
       <th>&nbsp;</th>
     </tr>
     <tr>
-      <td>
-        <a href="{$crear_nuevo}" title="Crear Nuevo" class="sendme" style="line-height: 19px;">Crear</a>
+      <td style="line-height: 26px;">
+        <a href="{$crear_nuevo}" title="Crear Nuevo" class="sendme" style="line-height: 19px;" >Nuevo</a>
       </td>
     </tr>
   </table>

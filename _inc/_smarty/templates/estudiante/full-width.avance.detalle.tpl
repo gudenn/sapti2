@@ -116,7 +116,24 @@ $('#theme-switcher').change(function () {
 <![endif]-->
 {/literal}
         
-        <h3><b>Descripcion</b></h3>
+        {if ($revision)}
+        <h3><b>Correcion(es) hecha(s) por:</b> {$revision->getRevisor()}</h3>
+        <p>Fecha de Revisi&oacute;n: {$revision->fecha_revision}</p>
+        <p>Fecha de Respuesta: {$revision->fecha_correccion}</p>
+        {section name=ic loop=$revision->observacion_objs}
+          {assign var='obser' value=$revision->observacion_objs[ic]}
+          <p>
+            <b>Observaci&oacute;n:</b><br>
+            {$avance->getDescripcion($obser->observacion)}
+          </p>
+          <p>
+            <b>Respuesta:</b><br>
+            {$avance->getDescripcion($obser->respuesta)}
+          </p>
+        {/section}
+        {/if}
+
+        <h3><b>Descripci&oacute;n del Avance</b></h3>
         <p>
           {$avance->getDescripcion()}
         </p>

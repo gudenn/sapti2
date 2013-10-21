@@ -88,15 +88,15 @@ try {
   $menus[] = $menu;
  
   
+  /*
     $notificacion= new Notificacion();
-  
   $menu = new Menu('Notificaciones y Mensajes');
   $link = Docente::URL."notificacion/notitribunal.php";
   $menu->agregarItem('Notificaiones','Notificaciones para el Proyecto Final','docente/notificacion.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
   $link = Docente::URL."calendario/evento.registro.php?iddicta={$iddicta}";
   $menu->agregarItem('Mensajes','Mensajes para el Proyecto Final','docente/notificacion.png',$link);
   $menus[] = $menu;
-  
+  */
 
   
   $menu = new Menu('Configuracion');

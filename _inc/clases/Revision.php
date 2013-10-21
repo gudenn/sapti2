@@ -72,9 +72,31 @@ class Revision extends Objectbase
   */
   var $observacion_objs;
 
+  /**
+   * Obtiene el avance al que esa relacionado una 
+   * revision
+   * @param INT(11) $revision_id
+   * @return Avance
+   */
+  function getAvance($revision_id = false) {
+    leerClase('Avance');
+    if (!$revision_id)
+      $revision_id = $this->id;
+    $sql        = " SELECT * FROM ".$this->getTableName('Avance')." WHERE revision_id = '$revision_id' ";
+    $resultados = mysql_query($sql);
+    if (!$resultados)
+      return false;
+    $fila = mysql_fetch_array($resultados, MYSQL_ASSOC);
+    $avance = new Avance($fila);
+    return $avance;
+  }
  
-  function getRevisor($revisor_id,$tipo='DO',$gettipo = false) 
+  function getRevisor($revisor_id = false,$tipo=false,$gettipo = false) 
   {
+    if (!$revisor_id)
+      $revisor_id = $this->revisor;
+    if (!$tipo)
+      $tipo = $this->revisor_tipo;
     if ($tipo == '')
       return 'Desconocido';
     switch ($tipo) {

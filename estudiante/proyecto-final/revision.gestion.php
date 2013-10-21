@@ -22,14 +22,9 @@ try {
   $smarty->assign('description','Pagina de gestion de Correciones');
   $smarty->assign('keywords','Gestion,Correciones');
 
-  //CSS
-  $CSS[]  = URL_CSS . "academic/tables.css";
-  //$CSS[]  = URL_CSS . "pg.css";
-  $smarty->assign('CSS',$CSS);
-
-  //JS
-  $JS[]  = URL_JS . "jquery.js";
-  $smarty->assign('JS',$JS);
+  $smarty->assign('header_ui','1');
+  $smarty->assign('CSS','');
+  $smarty->assign('JS','');
 
   /**
    * Menu superior
@@ -51,6 +46,7 @@ try {
   $smarty->assign("estudiante", $estudiante);
   $smarty->assign("usuario", $usuario);
   $smarty->assign("proyecto", $proyecto);
+  $smarty->assign("E1_CREADO", Revision::E1_CREADO);
   $smarty->assign("ERROR", $ERROR);
   
   
@@ -68,6 +64,7 @@ try {
  
   $objs_pg    = new Pagination($obj_mysql, 'e_revision','',false,10);
 
+  $smarty->assign("revision" ,$revision);
   $smarty->assign("filtros"  ,$filtro);
   $smarty->assign("objs"     ,$objs_pg->objs);
   $smarty->assign("pages"    ,$objs_pg->p_pages);
