@@ -17,7 +17,7 @@ try {
    * Menu superior
    */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Detalle');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'Pendientes/pendientes.gestion.php','name'=>'Confirmar');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'pendientes/pendientes.gestion.php','name'=>'Confirmar');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'detalle/'.basename(__FILE__),'name'=>'Detalle de Proyecto');
   $smarty->assign("menuList", $menuList);
 

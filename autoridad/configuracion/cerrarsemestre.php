@@ -42,7 +42,7 @@ try {
    
        $sql2 = "SELECT *
                 FROM semestre se
-                WHERE se.valor >".$semestre->valor."
+                WHERE se.valor > '".$semestre->valor."'
                 ORDER BY se.valor";
    $resultsem = mysql_query($sql2);
    

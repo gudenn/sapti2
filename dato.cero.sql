@@ -25,4 +25,4 @@ INSERT INTO `titulo_honorifico` ( `nombre`, `descripcion`, `estado`) VALUES
 ( 'Dr.', 'Dr.', 'AC'),
 ( 'Ph.D.', 'Ph.D.', 'AC');
 
-INSERT INTO `semestre` (`id`, `codigo`, `activo`, `estado`) VALUES (NULL, 'II-2013','1', 'AC');
+INSERT INTO `semestre` (`id`, `codigo`, `activo`, `valor`, `estado`) VALUES (NULL, 'II-2013','1','1', 'AC');
