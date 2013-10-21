@@ -135,7 +135,26 @@ class Tooltip extends Objectbase
       return;
     $oncli = " onclick=\"$( \"#ayuda_{$this->id}\" ).dialog(); return false;\" " ;
     if ($this->mostrar)
-      $icono = icono('basicset/help.png', $this->codigo, '15px');
+      if (!$editar)
+      {
+        $icono = icono('basicset/help.png', $this->codigo, '15px');
+      }
+      else
+      {
+        switch ($this->estado_tooltip) {
+          case Tooltip::EST01_RECIEN:
+          default:
+            $icono = icono('basicset/help_pendiente.png', $this->codigo . " (Pendiente)", '15px');
+            break;
+          case Tooltip::EST01_CLONAD:
+            $icono = icono('basicset/help_clonado.png', $this->codigo . " (Clonado)", '15px');
+            break;
+          case Tooltip::EST02_APROBA:
+            $icono = icono('basicset/help_verificado.png', $this->codigo . " (Verificado)", '15px');
+            break;
+        }
+        
+      }
     else
       $icono = icono('basicset/eyeclose.png', $this->codigo . " (Oculto al p&uacute;blico) ", '15px');
     $link = <<<____TEST

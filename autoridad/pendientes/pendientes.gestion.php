@@ -41,7 +41,7 @@ try {
   $smarty->assign('CSS','');
   $smarty->assign('JS','');
    
-   $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
+  $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
   $smarty->assign('lista'       ,'admin/pendientes/lista.tpl');
   
   
@@ -57,16 +57,15 @@ try {
  
  if (isset($_GET['proyecto_id']) )
   {
-   $EXITO = false;
-   mysql_query("BEGIN");
-    $proyecto=new Proyecto($_GET['proyecto_id']);
+     $EXITO = false;
+     mysql_query("BEGIN");
    
-    $proyecto_aux=$proyecto;
-
-    $estudiante=$proyecto->getEstudiante();
-    $estudiante_id= $estudiante->id;
-    $tutores=$proyecto->getProyectoTutor();
-    $area=$proyecto->getArea();
+     $proyecto=new Proyecto($_GET['proyecto_id']);
+     $proyecto_aux=$proyecto;
+     $estudiante=$proyecto->getEstudiante();
+     $estudiante_id= $estudiante->id;
+     $tutores=$proyecto->getProyectoTutor();
+     $area=$proyecto->getArea();
      if($proyecto_aux->estado_proyecto!='CO'){
     
      $actualproyecto=new Proyecto();
@@ -113,18 +112,15 @@ try {
     $proyectotutor=new Proyecto_tutor($tutores[0]->id);
     $proyectotutor->proyecto_id=$actualproyecto->id;
     $proyectotutor->save();
-    
-    
-    
-    
+
      //grabamos la vigencia del proyecto
-    $vigencia=new Vigencia();
-    $vigencia->estado=  Objectbase::STATUS_AC;
-    $vigencia->estado_vigencia=  Vigencia::ESTADO_NORMAL;
-    $vigencia->fecha_inicio=date('d/m/Y');
-    $vigencia->fecha_fin= date("d/m/Y",strtotime(" +2 year") );
-    $vigencia->proyecto_id=$actualproyecto->id;
-    $vigencia->save();
+     $vigencia=new Vigencia();
+     $vigencia->estado=  Objectbase::STATUS_AC;
+     $vigencia->estado_vigencia=  Vigencia::ESTADO_NORMAL;
+     $vigencia->fecha_inicio=date('d/m/Y');
+     $vigencia->fecha_fin= date("d/m/Y",strtotime(" +2 year") );
+     $vigencia->proyecto_id=$actualproyecto->id;
+     $vigencia->save();
    
               
     $EXITO = TRUE;
