@@ -16,7 +16,6 @@ var editableGrid = new EditableGrid("listarevision123", {
 	editorzoneid: "edition", // will be used only if editmode is set to "fixed"
 	pageSize: 10
 });
-
 // helper function to display a message
 function displayMessage(text, style) { 
 	_$("message").innerHTML = "<p class='" + (style || "ok") + "'>" + text + "</p>"; 
@@ -85,7 +84,7 @@ EditableGrid.prototype.initializeGrid = function(estid)
                 }}));
                 setCellRenderer("num", new CellRenderer({
                     
-                    render: function(cell, value) { cell.innerHTML =htmlspecialchars_decode(value);}
+                    render: function(cell, value) { cell.innerHTML =cortarResumen(extractText(extractText(value)), length = "25", end = "...");}
 		}));
             	setCellRenderer("tipo", new CellRenderer({
                     
@@ -236,8 +235,14 @@ function estadoRevision(tipo){
     }
     return nombre;
 }
-function htmlspecialchars_decode(html){
-  var txt = document.createElement("textarea");
-  txt.innerHTML = html;
-  return txt.value;
+function cortarResumen (texto, length, end){
+    if(!parseInt(texto))
+  return texto.substring(0, length) + end;
+  return texto;
+};
+
+function extractText(anchText){
+    var str1 = document.createElement('str1');      
+    str1.innerHTML = anchText;
+    return str1.innerText;
 }

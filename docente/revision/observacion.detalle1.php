@@ -84,19 +84,19 @@ function estado($va){
     $clas='';
     if($va == 'CR'){
     $clas='CREADO';
-    $res=$clas." <img src=../../images/icons/flags/CR.png title=\"Estado Observacion\" width='25px' height='25px' />";
+    $res=$clas." <img src=../../images/icons/flags/CR.png title=\"Estado Observacion\" width='20px' height='20px' />";
     }else{
         if($va == 'CO'){
             $clas='CORREGIDO';
-            $res="<img src=../../images/icons/flags/RE.png title=\"Estado Observacion\" width='25px' height='25px' />".$clas;
+            $res="<img src=../../images/icons/flags/RE.png title=\"Estado Observacion\" width='20px' height='20px' />".$clas;
         }else{
             if($va == 'AP'){
                 $clas='APROBADO';
-                $res="<img src=../../images/icons/flags/RE.png title=\"Estado Observacion\" width='25px' height='25px' />".$clas;
+                $res="<img src=../../images/icons/flags/RE.png title=\"Estado Observacion\" width='20px' height='20px' />".$clas;
             }else{
             if($va == 'NP'){
                 $clas='RECHAZADO';
-                $res="<img src=../../images/icons/flags/NP.png title=\"Estado Observacion\" width='25px' height='25px' />".$clas;
+                $res="<img src=../../images/icons/flags/NP.png title=\"Estado Observacion\" width='20px' height='20px' />".$clas;
             }
         }
         }

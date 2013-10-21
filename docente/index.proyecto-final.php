@@ -65,14 +65,14 @@ try {
   //----------------------------------//
   leerClase('Menu');
   $menu = new Menu('Estudiantes');
-  $link = Docente::URL."estudiante/inscripcion.estudiante-cvs.php?iddicta={$iddicta}";
+  $link = Docente::URL."estudiante/inscripcion.estudiante-cvs.php";
   $menu->agregarItem('Gesti&oacute;n de Estudiantes','Registro de Estudiantes Inscritos en la Materia de Proyecto Final','docente/correccion.png',$link);
-  $link = Docente::URL."estudiante/estudiante.lista.php?iddicta={$iddicta}";
+  $link = Docente::URL."estudiante/estudiante.lista.php";
   $menu->agregarItem('Estudiantes Registrados','Estudiantes Registrados en la Materia de Proyecto Final','docente/inscritos.png',$link);
-  $link = Docente::URL."evaluacion/estudiante.evaluacion-editar.php?iddicta={$iddicta}";
+  $link = Docente::URL."evaluacion/estudiante.evaluacion-editar.php";
   $menu->agregarItem('Evaluacion de Estudiantes','Evaluacion de Estudiantes Registrados en la Materia de Proyecto Final','docente/evaluacion.png',$link);  
   
-  $link = Docente::URL."perfil/estudiante.lista.php?iddicta={$iddicta}";
+  $link = Docente::URL."perfil/estudiante.lista.php";
   $menu->agregarItem('Evaluacion de Estudiantes','Evaluacion de Estudiantes Registrados en la Materia de Proyecto Final','docente/evaluacion.png',$link);  
 
   $menus[] = $menu;
@@ -81,9 +81,9 @@ try {
   $menu = new Menu('Calendario');
   $link = Docente::URL."calendario/calendario.evento.php";
   $menu->agregarItem('Calendario de Eventos','Calendario de todos los Eventos registrados por Tutor(es), Docente(s) y Tribunales','docente/calendar.png',$link);
-  $link = Docente::URL."calendario/evento.registro.php?iddicta={$iddicta}";
+  $link = Docente::URL."calendario/evento.registro.php";
   $menu->agregarItem('Registro de Eventos','Registro de Eventos y en la Materia de Proyecto Final','docente/registroeve.png',$link);
-  $link = Docente::URL."calendario/evento.lista.php?iddicta={$iddicta}";
+  $link = Docente::URL."calendario/evento.lista.php";
   $menu->agregarItem('Edici&oacute;n de Eventos','Edici&oacute;n de Eventos de la Materia de Proyecto Final','docente/edicion.png',$link);
   $menus[] = $menu;
  

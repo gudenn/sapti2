@@ -79,7 +79,7 @@ EditableGrid.prototype.initializeGrid = function()
                 
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
 		cell.innerHTML = "<a href='#' class='historial' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("basicset/graph.png") + "\" border=\"0\" alt=\"historial\" title=\"Seguimiento\" width='40px' height='40px'/>Historial de Notas</a>";
+						 "<img src=\"" + image("basicset/graph.png") + "\" border=\"0\" alt=\"historial\" title=\"Historial de Notas del Proyecto\" width='30px' height='30px'/>Historial de Notas</a>";
                 }}));
 		
 		// render the grid (parameters will be ignored if we have attached to an existing HTML table)

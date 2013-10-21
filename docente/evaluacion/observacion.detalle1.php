@@ -1,16 +1,14 @@
 <?php
 define ("MODULO", "DOCENTE");
   require('../_start.php');
-$to ='ola' ;  
+
 $ideve1=$_GET['idev'];
   $resul = "
-      SELECT ob.observacion as obser, pr.nombre as nomp, us.nombre as nom,CONCAT(us.apellido_paterno,us.apellido_materno) as ap, re.fecha_revision as fere, ob.estado_observacion as estado
-FROM observacion ob, revision re, proyecto pr, docente doc, proyecto_estudiante proe, usuario us
+      SELECT ob.observacion as observacion, ob.respuesta as respuesta, pr.nombre as nomp, CONCAT(us.apellido_paterno,' ',us.apellido_materno,' ', us.nombre) as nombre, re.fecha_revision as fere, ob.estado_observacion as estado
+FROM observacion ob, revision re, proyecto pr, usuario us
 WHERE ob.revision_id=re.id
 AND re.proyecto_id=pr.id
-AND pr.id=proe.proyecto_id
-AND re.revisor=doc.id
-AND doc.usuario_id=us.id
+AND re.revisor=us.id
 AND ob.revision_id='".$ideve1."' 
           ";
    $sql = mysql_query($resul);
@@ -31,7 +29,7 @@ if (empty($action)) {
                 <form action='#' style='display:none'>
           <p>
             <label for='revisor'>Nombre del Revisor:</label>
-            <span><i>{$arrayobser[0]['nom']}</i><i>{$arrayobser[0]['ap']}</i></span>
+            <span><b>{$arrayobser[0]['nombre']}</b></span>
           </p>
           <p>
             <label for='proyecto_id'>Nombres de Proyecto: </label>
@@ -46,6 +44,7 @@ if (empty($action)) {
             <thead>
               <tr>
                 <th><a>Observaciones Realizadas:</a></th>
+                <th><a>Correcciones Realizadas:</a></th>
                 <th><a>Estado Observaciones:</a></th>
               </tr>
             </thead>
@@ -54,7 +53,8 @@ if (empty($action)) {
             {
             $output .="
                       <tr class=".classtabla($g).">
-                      <td>{$arrayobser[$g]['obser']}</td>
+                      <td>{$arrayobser[$g]['observacion']}</td>
+                      <td>".getRespuesta($arrayobser[$g]['respuesta'])."</td>
                       <td>
                           <a>".estado($arrayobser[$g]['estado'])."</a>
                       </td>
@@ -79,33 +79,36 @@ function classtabla($va){
     }
     return $clas;
 };
-function tabla(){
-              for ($g=0;$g==3;$g++)
-            {
-            $output1 +="<tr class=".classtabla($i).">
-                      <td>{$arrayobser[$g]['obser']}</td>
-                      </tr>";
-            }  
-   return $output1;
-}
+
 function estado($va){
     $clas='';
     if($va == 'CR'){
     $clas='CREADO';
-    $res=$clas." <img src=../../images/icons/flags/CR.png title=\"Estado Observacion\"/>";
+    $res=$clas." <img src=../../images/icons/flags/CR.png title=\"Estado Observacion\" width='20px' height='20px' />";
     }else{
         if($va == 'CO'){
             $clas='CORREGIDO';
-            $res="<img src=../../images/icons/flags/RE.png title=\"Estado Observacion\"/>".$clas;
+            $res="<img src=../../images/icons/flags/RE.png title=\"Estado Observacion\" width='20px' height='20px' />".$clas;
         }else{
             if($va == 'AP'){
                 $clas='APROBADO';
-                $res="<img src=../../images/icons/flags/RE.png title=\"Estado Observacion\"/>".$clas;
+                $res="<img src=../../images/icons/flags/RE.png title=\"Estado Observacion\" width='20px' height='20px' />".$clas;
+            }else{
+            if($va == 'NP'){
+                $clas='RECHAZADO';
+                $res="<img src=../../images/icons/flags/NP.png title=\"Estado Observacion\" width='20px' height='20px' />".$clas;
             }
+        }
         }
     }
     return $res;
 };
+  function getRespuesta($descripcion)
+  {
+    $resumen = $descripcion;
+    $resumen   = htmlspecialchars_decode( $resumen );
+    return $resumen;
+  }
 
 exit;
 
