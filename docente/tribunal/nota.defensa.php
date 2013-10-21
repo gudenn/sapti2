@@ -71,17 +71,18 @@ try {
      
       
       $docente=  getSessionDocente();
+      $docente->getAllObject();
+      
       $docenteid=$docente->id;
-      //echo  $docenteid;
+      // echo  $docenteid;
       //echo $_POST['estudiante_id'];
-     // echo  $_POST['nota_tribunal'];
+      // echo  $_POST['nota_tribunal'];
       
-      $estudiantes= new Estudiante($_POST['estudiante_id']);
+         $estudiantes   =  new Estudiante($_POST['estudiante_id']);
+         $proyecto      =  $estudiantes ->getProyecto();
+         $tribunal      =  $proyecto->getTribunal($docenteid, $proyecto->id);
       
-      $proyecto= $estudiantes ->getProyecto();
-    $tribunal=  $proyecto->getTribunal($docenteid, $proyecto->id);
-      
-       $notatribunal= new Nota_tribunal();
+       $notatribunal = new Nota_tribunal();
        $notatribunal->objBuidFromPost();
        $notatribunal->tribunal_id=$docenteid;
       // $notatribunal->nota_tribunal=
@@ -89,12 +90,42 @@ try {
        $notatribunal->estado=  Objectbase::STATUS_AC;
        $notatribunal->save();
        
+       $notatribuanl= new  Nota ();
+       $notadicta=  $proyecto-> getCalcularNota();
        
+       $contador=0;
+       foreach ($notadicta  as $valor)
+       {
+        $contador=$contador+$valor->nota_tribunal;
+         
+         
+       }
+       $promedionota= $contador/sizeof($notadicta);
+       $nota =new Nota();
+       
+    foreach ($proyecto ->$tribunal_objs  as $docen) 
+      {
+     
+        $nota->nota_proyecto = 40;
+        $nota->nota_defensa=$contador;
+        $nota->proyecto_id   = $proyecto->id;
+        $nota->tribunal_id   =$docen->id;
+        $nota->estado        ='AC';
+        $nota->seave();
+     }
+     
+       
+       
+     
+     
        if(($proyecto->getCantidadNotas())==3)
        {
          
          $proyecto->estado_proyecto=  Proyecto::EST5_F;
          $proyecto->save();
+         
+         
+        // not
          
        }
        
