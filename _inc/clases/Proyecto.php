@@ -495,6 +495,29 @@ class Proyecto extends Objectbase {
     return $tutores;
 
   }
+  
+  /**
+   * 
+   * @return
+   * retorna el proyecto tutor
+   */
+  function getProyectoTutor() {
+    //@TODO revisar
+    //  leerClase('Proyecto_area');
+    leerClase('Proyecto_tutor');
+
+    $estado_tutoria = Proyecto_tutor::ACEPTADO;
+    $proyect = array();
+    $activo = Objectbase::STATUS_AC;
+    $sql = "select pt.* from " . $this->getTableName('Proyecto_tutor') . " as pt    where pt.proyecto_id = '$this->id' and pt.estado_tutoria = '$estado_tutoria' and pt.estado = '$activo'";
+    $resultado = mysql_query($sql);
+    if (!$resultado)
+      return false;
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) {
+      $proyect[] = new Proyecto_tutor($fila);
+    }
+    return $proyect;
+  }
 
   /**
    * Consultamos el estado del tutor

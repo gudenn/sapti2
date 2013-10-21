@@ -89,6 +89,7 @@ class Helpdesk extends Objectbase
     if ( trim($ancla) != '')
       $ancla  = "#$ancla";
     $URL  = URL;
+    
     $icono = icono('basicset/helpdesk_48.png','Ayuda','24px',false,false,false,false);
     $link = <<<____TEST
       <li class="last"><a class="ayudapopup" href="{$URL}ayuda/?codigo={$this->codigo}{$ancla}" target="_blank" >Ayuda {$icono}</a></li>
@@ -147,6 +148,8 @@ ____TEST;
       $this->getAllObjects();
     }
   }
+  
+
   
   /**
    * Mostramos el icono correspondiente al estado de la ayuda
