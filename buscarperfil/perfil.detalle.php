@@ -45,7 +45,9 @@ try {
   $smarty->assign('columnacentro',$columnacentro);
   
  $perfil_id=$_GET['id_perfil'];
- $proyecto=new Proyecto($perfil_id);  
+ $proyecto=new Proyecto($perfil_id);
+  $tutores=$proyecto->getProyectoTutor();
+  echo $tutores[0]->id;
  $area=$proyecto->getArea();
  $nombre_a=$area[0]->nombre;
  $modalidad=new Modalidad($proyecto->modalidad_id);
