@@ -1,8 +1,8 @@
 <?php     
    define ("MODULO", "DOCENTE");
    require '../_start.php';
-require_once('../config.php');      
-require_once('../EditableGrid.php');
+   require_once('../config.php');      
+   require_once('../EditableGrid.php');
 
 if(isset($_GET['iddicta'])){
 $iddicta=$_GET['iddicta'];
