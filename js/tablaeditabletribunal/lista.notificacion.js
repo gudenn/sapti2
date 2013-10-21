@@ -24,7 +24,7 @@ function displayMessage(text, style) {
 
 // helper function to get path of a demo image
 function image(relativePath) {
-	return "../../images/icons/" + relativePath;
+	return "../../../images/icons/" + relativePath;
 };
 
 // this will be used to render our table headers
@@ -68,7 +68,7 @@ EditableGrid.prototype.initializeGrid = function()
                 
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
 		          cell.innerHTML += "<br><a onclick=document.location.href='ver.php?tribunal_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("editar.png") + "\" border=\"0\" alt=\"revisar\" title=\"Registrar Observacion\"/>Revisar</a>";
+						 "<img src=\"" + image("editar.png") + "\" border=\"0\" alt=\"revisar\" title=\"Solicitud\"/>Ver Solicitud</a>";
               		}}));
 		
 		// render the grid (parameters will be ignored if we have attached to an existing HTML table)

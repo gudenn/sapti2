@@ -41,10 +41,8 @@ try {
   $menu->agregarItem('Asignar Tutor a un Estudiante','Registro de un nuevo Tutor o seleccionar uno de la lista de tutores disponibles para un estudiante.','basicset/user1.png',$link);
   $menus[] = $menu;
   $menu = new Menu('Proyecto y Perfil');
-  $link = Administrador::URL."estudiante/";/*@TODO*/
-  $menu->agregarItem('Registro de Perfil','Grabar Los datos de un Perfil para un Estudiante.','basicset/survey.png',$link);
   $link = Administrador::URL."estudiante/estudiante.asignarproyecto.php";
-  $menu->agregarItem('Registro de Proyecto Final','Grabar Los datos de un Proyecto Final para un Estudiante.','basicset/briefcase_48.png',$link);
+  $menu->agregarItem('Registro de Perfil','Grabar el perfil de un Estudiante.','basicset/briefcase_48.png',$link);
   $link = Administrador::URL."estudiante/estudiante.cambiotema.php";
   $menu->agregarItem('Cambios de Tema','Registro de Cambios de Tema; Cambios Leves y Cambios Totales.','basicset/reload.png',$link);
   $menus[] = $menu;
