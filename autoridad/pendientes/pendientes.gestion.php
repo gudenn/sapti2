@@ -65,7 +65,7 @@ try {
 
     $estudiante=$proyecto->getEstudiante();
     $estudiante_id= $estudiante->id;
-    $tutores=$proyecto->getTutores();
+    $tutores=$proyecto->getProyectoTutor();
     $area=$proyecto->getArea();
      if($proyecto_aux->estado_proyecto!='CO'){
     
@@ -110,10 +110,8 @@ try {
     $parea->save();
     
      //copiar el tutor
-    $proyectotutor=new Proyecto_tutor();
-    $proyectotutor->tutor_id=$tutores[0]->id;
+    $proyectotutor=new Proyecto_tutor($tutores[0]->id);
     $proyectotutor->proyecto_id=$actualproyecto->id;
-    $proyectotutor->estado=  Objectbase::STATUS_AC;
     $proyectotutor->save();
     
     
