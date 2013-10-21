@@ -12,21 +12,11 @@ try {
   $smarty->assign('description','Pagina de inicio');
   $smarty->assign('keywords','Ingreso,usuario');
 
-  //JS
-  $JS[]  = URL_JS . "jquery.min.js";
 
-  //Datepicker & Tooltips $ Dialogs UI
-  $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
-  $JS[]   = URL_JS . "jquery-ui-1.10.3.custom.min.js";
-  $JS[]   = URL_JS . "ui/i18n/jquery.ui.datepicker-es.js";
+  $smarty->assign('header_ui','1');
+  $smarty->assign('CSS','');
+  $smarty->assign('JS','');
 
-  //Validation
-  $CSS[] = URL_JS . "/validate/validationEngine.jquery.css";
-  $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
-  $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
-
-  $smarty->assign('JS',$JS);
-  $smarty->assign('CSS',$CSS);
 
   
   //////////////////////////////////////////////////////////////////
