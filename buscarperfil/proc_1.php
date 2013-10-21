@@ -1,16 +1,16 @@
 <?php
 try {
-  require('_start.php');
-  global $PAISBOX;
+ require('_start.php');
+ global $PAISBOX;
 
   /** HEADER */
-  $smarty->assign('title','Proyecto Final');
-  $smarty->assign('description','Proyecto Final');
-  $smarty->assign('keywords','Proyecto Final');
+ $smarty->assign('title','Proyecto Final');
+ $smarty->assign('description','Proyecto Final');
+ $smarty->assign('keywords','Proyecto Final');
 
   //CSS
-  $CSS[]  = "css/style.css";
-  $smarty->assign('CSS','');
+ $CSS[]  = "css/style.css";
+ $smarty->assign('CSS','');
 
   //JS
 $JS[]  = "js/jquery.js";
