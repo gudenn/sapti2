@@ -11,7 +11,7 @@
            
              <p>
               <textarea name="descripcion" id="descripcion"  size="22" style="width: 650px;height: 100px;" data-validation-engine="validate[required]">{$turno->descripcion}</textarea>
-              <label for="descripcion"><small>Detalle del Evento (*) {getHelpTip('descripcion')}</small></label>
+              <label for="descripcion"><small>Detalle de Turno (*) {getHelpTip('descripcion')}</small></label>
             </p>
             
             <h2 class="title">Grabar Turno</h2>
