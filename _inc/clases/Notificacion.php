@@ -253,6 +253,14 @@ class Notificacion extends Objectbase
    */
   function notificarTodos() 
   {
+    leerClase('Notificacion_consejo');
+    leerClase('Notificacion_dicta');
+    leerClase('Notificacion_estudiante');
+    leerClase('Notificacion_revisor');
+    leerClase('Notificacion_tribunal');
+    leerClase('Notificacion_tutor');
+    
+            
     $proyecto = new Proyecto($this->proyecto_id);
     $proyecto->getAllObjects();
     $this->notificarEstudiantes($proyecto);
