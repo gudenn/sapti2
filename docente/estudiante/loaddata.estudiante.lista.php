@@ -31,6 +31,7 @@ AND it.estudiante_id=es.id
 AND es.usuario_id=us.id
 AND pe.estudiante_id=es.id
 AND pe.proyecto_id=pr.id
+AND pr.es_actual=1
 AND di.id="'.$iddicta.'"');
 
 $mysqli->close();

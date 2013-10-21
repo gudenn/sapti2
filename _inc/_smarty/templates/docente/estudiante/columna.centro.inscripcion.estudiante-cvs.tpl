@@ -14,7 +14,7 @@
             <p>
             <label>Lista Oficial</label> 
             <input type="checkbox" name=listaoficial[] value="borrar" class="checkbox" >
-            <label>Se eliminara a todos los estudiantes que no esten en esta lisata.</label>         
+            <label>Se eliminara a todos los estudiantes que no esten en esta lista.</label>         
             </p>
 
             <p>
