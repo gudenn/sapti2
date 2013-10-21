@@ -3,13 +3,12 @@ try {
     define ("MODULO", "CONSEJO");
   require('_start.php');
   if(!isConsejoSession())
-  header("Location: login.php"); 
+  header("Location: login.php");
+  $hora=$_POST['idnumero'];
+          
  if(isset($_POST['idnumero']))
 { 
-
-   echo $_POST['idnumero'];
-   
-  $horafin =  new  time();
+  $horafin = 1+$_POST['idnumero'];
     
 
       echo "<option value='".$horafin."' $TRUE>".htmlentities($horafin)."</option>";

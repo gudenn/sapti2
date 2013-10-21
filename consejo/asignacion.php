@@ -222,7 +222,7 @@ WHERE  u.`id`= d.`usuario_id` and   d.`id`= t.`docente_id` and   t.estado='AC' a
     $notificacion->enviarNotificaion( $noticaciones);
   
              }  else {
-            Echo " El docent no tiene hoara disponible";
+            echo " El docent no tiene hoara disponible";
              }
             }
 

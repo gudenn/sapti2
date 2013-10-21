@@ -89,7 +89,7 @@ EditableGrid.prototype.initializeGrid = function(estid)
 		}));
             	setCellRenderer("tipo", new CellRenderer({
                     
-                    render: function(cell, value) { cell.innerHTML ="<a>"+"<img src='" + image("icons/flags/" + value.toLowerCase() + "R.png") + "' alt='" + value + "' title=\"Tipo de Evento\" width='30px' height='30px'/>"+nombreTipo(value)+"</a>";}
+                    render: function(cell, value) { cell.innerHTML ="<a>"+"<img src='" + image("icons/flags/" + value.toLowerCase() + "r.png") + "' alt='" + value + "' title=\"Tipo de Evento\" width='30px' height='30px'/>"+nombreTipo(value)+"</a>";}
 		})); 
             	setCellRenderer("revtipo", new CellRenderer({
                     

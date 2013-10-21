@@ -222,5 +222,16 @@ function isTutorSession() {
       return $usuario_aux->tutor_objs[0];
     return false;
   }
+   /**
+  * Obtiene el Docente de la session
+  * @return Docente
+  */
+  function getSessionConsejo() 
+  {
+    $usuario_aux    = getSessionUser();
+    if (isset($usuario_aux->consejo_objs[0]))
+      return $usuario_aux->consejo_objs[0];
+    return false;
+  }
 
 ?>
