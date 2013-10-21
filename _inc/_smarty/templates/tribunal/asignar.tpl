@@ -166,8 +166,8 @@
 <option value="58">58</option>
 <option value="59">59</option>
 </select>
-             <label for="fecha_cumple"><small>HORA INICIO</small></label>
-            </p>
+              &nbsp;<span id='Buscando'></span>
+               </p>
             
             <p>
 <select id="hora_fin" name="hora_fin">

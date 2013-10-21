@@ -10,7 +10,7 @@
  */
 
 // create our editable grid
-var editableGrid = new EditableGrid("listaestudiantes", {
+var editableGrid = new EditableGrid("listaestudiantesdefenza", {
 	enableSort: true, // true is the default, set it to false if you don't want sorting to be enabled
 	editmode: "absolute", // change this to "fixed" to test out editorzone, and to "static" to get the old-school mode
 	editorzoneid: "edition", // will be used only if editmode is set to "fixed"
@@ -48,7 +48,7 @@ InfoHeaderRenderer.prototype.render = function(cell, value)
 };
 
 // this function will initialize our editable grid
-EditableGrid.prototype.initializeGrid = function(iddicta) 
+EditableGrid.prototype.initializeGrid = function() 
 {
 	with (this) {
 
@@ -67,9 +67,9 @@ EditableGrid.prototype.initializeGrid = function(iddicta)
                 
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
 		     cell.innerHTML = "<a onclick=document.location.href='mostrartribunal.php?proyecto_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("detalle.png") + "\" border=\"0\" alt=\"seguimiento\" title=\"Ver Tribunales\" width='30px' height='30px' />Seguimiento</a>";
+						 "<img src=\"" + image("detalle.png") + "\" border=\"0\" alt=\"seguimiento\" title=\"Ver Tribunales\" width='30px' height='30px' />Ver Tribunales</a>";
                 cell.innerHTML += "<br><a onclick=document.location.href='asignacion.php?estudiante_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
-					 	 "<img src=\"" + image("editar.png") + "\" border=\"0\" alt=\"revisar\" title=\"Asignar La Defensa\"/>Revisar</a>";
+					 	 "<img src=\"" + image("editar.png") + "\" border=\"0\" alt=\"revisar\" title=\"Asignar La Defensa\"/>Asignar Defensa</a>";
                
               
                   }}));
@@ -89,12 +89,12 @@ EditableGrid.prototype.initializeGrid = function(iddicta)
 	}
 };
 
-EditableGrid.prototype.onloadXML = function(url, iddicta) 
+EditableGrid.prototype.onloadXML = function(url) 
 {
 	// register the function that will be called when the XML has been fully loaded
 	this.tableLoaded = function() { 
 		displayMessage("Numero de Estudiantes Inscritos " + this.getRowCount()); 
-		this.initializeGrid(iddicta);
+		this.initializeGrid();
 	};
 
 	// load XML URL

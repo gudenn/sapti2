@@ -10,6 +10,7 @@ try {
   leerClase('Estudiante');
   leerClase('Usuario');
   leerClase('Proyecto');
+  leerClase('Notificacion');
 
   /** HEADER */
   $smarty->assign('title','Proyecto Final');

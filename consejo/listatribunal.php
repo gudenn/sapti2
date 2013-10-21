@@ -6,6 +6,7 @@ try {
     header("Location: login.php"); 
 
   leerClase('Docente');
+   leerClase('Consejo');
   $ERROR = '';
 
   /** HEADER */
@@ -27,10 +28,10 @@ try {
    /**
    * Menu superior
    */
-  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
-  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>'Proyecto Final');
-  $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/'.basename(__FILE__),'name'=>'Estudiantes Inscritos');
+ $menuList[]     = array('url'=>URL.Consejo::URL,'name'=>'Consejo');
+  $menuList[]     = array('url'=>URL . Consejo::URL.'listatribunal.php' ,'name'=>'Tribunal');
   $smarty->assign("menuList", $menuList);
+   $smarty->assign("menuList", $menuList);
  
 
   //No hay ERROR

@@ -24,8 +24,7 @@ function displayMessage(text, style) {
 
 // helper function to get path of a demo image
 function image(relativePath) {
-  
-	return "../images/icons/" + relativePath;
+	return "../../images/icons/" + relativePath;
 };
 
 // this will be used to render our table headers
@@ -67,11 +66,15 @@ EditableGrid.prototype.initializeGrid = function(iddicta)
 		};
                 
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
-		     cell.innerHTML = "<a onclick=document.location.href='mostrartribunal.php?proyecto_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("detalle.png") + "\" border=\"0\" alt=\"Ver Tribunales\" title=\"Seguimiento\" width='30px' height='30px' />Tribunales</a>";
-                cell.innerHTML += "<br><a onclick=document.location.href='editartribunal.php?editar&proyecto_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
-						 "<img src=\"" +image("editar.png") + "\" border=\"0\" alt=\"revisar\" title=\"Registrar Observacion\"/>Editar</a>";
-               
+		cell.innerHTML = "<a onclick=\"sessionSeguimiento(" + getRowId(cell.rowIndex) + ");\" style=\"cursor:pointer\">" +
+				"<img src=\"" + image("seguimiento.png") + "\" border=\"0\" alt=\"seguimiento\" title=\"Seguimiento de Proyecto\" width='30px' height='30px' />Seguimiento</a>";
+                cell.innerHTML += "<br><a onclick=\"sessionCorreccion(" + getRowId(cell.rowIndex) + ");\" style=\"cursor:pointer\">" +
+				"<img src=\"" + image("editar.png") + "\" border=\"0\" alt=\"revisar\" title=\"Correcciones Pendientes\"/>Correccion</a>";
+                cell.innerHTML += "<br><a onclick=\"sessionEvaluacion(" + getRowId(cell.rowIndex) + ");\" style=\"cursor:pointer\">" +
+				"<img src=\"" + image("evaluar.png") + "\" border=\"0\" alt=\"evaluar\" title=\"Evaluar Proyecto\"/>Evaluar</a>";
+                                cell.innerHTML += "<br><a onclick=document.location.href='vistobueno.php?id_estudiante="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
+						 "<img src=\"" + image("basicset/ok.png") + "\" border=\"0\" alt=\"evaluar\" title=\"Evaluar Proyecto\"/>Visto Bueno</a>";
+
                   }}));
 		
 		// render the grid (parameters will be ignored if we have attached to an existing HTML table)
@@ -143,4 +146,65 @@ EditableGrid.prototype.updatePaginator = function()
 	if (!this.canGoForward()) link.css({ opacity : 0.4, filter: "alpha(opacity=40)" });
 	else link.css("cursor", "pointer").click(function(event) { editableGrid.lastPage(); });
 	paginator.append(link);
+};
+
+function sessionSeguimiento(seccion) {
+	$.ajax({ 
+		url: '../variable.session.php',
+		type: 'POST',
+		dataType: "html",
+		data: { 
+			estudiante_id : seccion
+		},
+		success: function (response) 
+		{ 
+                    if(response=="ok"){
+                        document.location.href='../revision/revision.lista.php';
+                    }else{
+                       alert("Intente De Nuevo");
+                    }
+		},
+		error: function() { alert("Ajax failure\n"); },
+		async: true
+	});
+};
+function sessionCorreccion(seccion) {
+	$.ajax({ 
+		url: '../variable.session.php',
+		type: 'POST',
+		dataType: "html",
+		data: { 
+			estudiante_id : seccion
+		},
+		success: function (response) 
+		{ 
+                    if(response=="ok"){
+                        document.location.href='../revision/revision.corregido.lista.php';
+                    }else{
+                       alert("Intente De Nuevo");
+                    }
+		},
+		error: function() { alert("Ajax failure\n"); },
+		async: true
+	});
+};
+function sessionEvaluacion(seccion) {
+	$.ajax({ 
+		url: '../variable.session.php',
+		type: 'POST',
+		dataType: "html",
+		data: { 
+			estudiante_id : seccion
+		},
+		success: function (response) 
+		{ 
+                    if(response=="ok"){
+                        document.location.href='../evaluacion/proyecto.evaluacion.php';
+                    }else{
+                       alert("Intente De Nuevo");
+                    }
+		},
+		error: function() { alert("Ajax failure\n"); },
+		async: true
+	});
 };
