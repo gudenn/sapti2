@@ -50,6 +50,8 @@ try {
    leerClase('Semestre');
    leerClase('Proyecto');
    leerClase('Vigencia');
+   leerClase('Tutor');
+   leerClase('Proyecto_tutor');
   
    $estado=  Proyecto::EST5_P;
  
@@ -57,14 +59,13 @@ try {
   {
    $EXITO = false;
    mysql_query("BEGIN");
-   $proyecto=new Proyecto($_GET['proyecto_id']);
+    $proyecto=new Proyecto($_GET['proyecto_id']);
    
-   $proyecto_aux=$proyecto;
+    $proyecto_aux=$proyecto;
 
     $estudiante=$proyecto->getEstudiante();
-   $estudiante_id= $estudiante->id;
-   $tutores=$proyecto->getTutores();
-    $tutores->usuario_id;
+    $estudiante_id= $estudiante->id;
+    $tutores=$proyecto->getTutores();
     $area=$proyecto->getArea();
      if($proyecto_aux->estado_proyecto!='CO'){
     
@@ -107,6 +108,16 @@ try {
     $parea->proyecto_id=$actualproyecto->id;
     $parea->estado=  Objectbase::STATUS_AC;
     $parea->save();
+    
+     //copiar el tutor
+    $proyectotutor=new Proyecto_tutor();
+    $proyectotutor->tutor_id=$tutores[0]->id;
+    $proyectotutor->proyecto_id=$actualproyecto->id;
+    $proyectotutor->estado=  Objectbase::STATUS_AC;
+    $proyectotutor->save();
+    
+    
+    
     
      //grabamos la vigencia del proyecto
     $vigencia=new Vigencia();
