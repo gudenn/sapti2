@@ -18,7 +18,6 @@ try {
   $CSS[]  = URL_JS . "calendar/css/eventCalendar.css";
   $CSS[]  = URL_JS . "calendar/css/eventCalendar_theme.css";
   $CSS[]  = URL_CSS . "dashboard.css";
-  //$CSS[]  = URL_CSS . "acordion.css";
 
 // Agregan el js
   //JS
@@ -37,13 +36,15 @@ try {
   {
      $iddicta                = $_GET['iddicta'];
      $_SESSION['iddictapro'] = $iddicta;
+  }  else {
+      $iddicta=$_SESSION['iddictapro'];
   }
   
   /**
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
-  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php?iddicta='.$_SESSION['iddictapro'],'name'=>'Proyecto Final');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>'Proyecto Final');
   $smarty->assign("menuList", $menuList);
   
 

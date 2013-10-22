@@ -7,6 +7,7 @@ try {
   
   leerClase("Revision");
   leerClase("Observacion");
+  leerClase("Docente");
   
     /** HEADER */
   $smarty->assign('title','Modificacion de Observaciones');
@@ -29,13 +30,26 @@ try {
   $JS[]  = URL_JS . "calendar/js/jquery.eventCalendar.js";
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
-  
   $JS[]  = URL_JS . "jquery.addfield.js";
-
   $smarty->assign('JS',$JS);
+     /**
+   * Menu superior
+   */
+  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>'Proyecto Final');
+  $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/estudiante.lista.php','name'=>'Estudiantes Inscritos');
+  $menuList[]     = array('url'=>URL.Docente::URL.'revision/revision.lista.php','name'=>'Seguimiento');
+  $menuList[]     = array('url'=>URL.Docente::URL.'revision/'.basename(__FILE__),'name'=>'Edicion de Observaciones');
+  $smarty->assign("menuList", $menuList);
     
-  if ( isset($_GET['revisiones_id']) && is_numeric($_GET['revisiones_id']) )
+  $revid = false;
+  if ( isset($_GET['revisiones_id']) && is_numeric($_GET['revisiones_id']) ){
   $revid=$_GET['revisiones_id'];
+  $_SESSION['obs_revisiones_id']=$_GET['revisiones_id'];      
+  }
+  elseif (isset($_SESSION['obs_revisiones_id']) && is_numeric($_SESSION['obs_revisiones_id'])) {
+      $revid = $_SESSION['obs_revisiones_id'];
+    }
 
   $resul = "
       SELECT ob.observacion as obser, pr.nombre as nomp, us.nombre as nom,CONCAT(us.apellido_paterno,us.apellido_materno) as ap, re.fecha_revision as fere, proe.id as idestu

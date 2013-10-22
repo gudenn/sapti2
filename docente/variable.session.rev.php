@@ -4,13 +4,14 @@ try {
   require('_start.php');
   if(!isDocenteSession())
     header("Location: login.php"); 
- 
-if(isset($_POST['descripcion'])){
-    $descrip1=$_POST['descripcion'];
-    $descrip=cortar( trim( strip_tags( htmlspecialchars_decode( $descrip1 ) ) ) , '70');
-    echo $descrip;
-    };
-
+  
+if(isset($_POST['revicion'])){
+    $varsession=$_POST['revicion'];
+    $_SESSION['obs_revisiones_id']=$varsession;
+    echo 'ok';
+  }  else {
+      echo 'fall';
+  };
 }
 catch(Exception $e) 
 {

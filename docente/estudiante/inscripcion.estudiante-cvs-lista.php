@@ -30,7 +30,8 @@ try {
    */
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
   $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>'Proyecto Final');
-  $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/'.basename(__FILE__),'name'=>'Inscripcion Estudiantes');
+  $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/inscripcion.estudiante-cvs','name'=>'Inscripcion Estudiantes');
+  $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/'.basename(__FILE__),'name'=>'Inscripcion Estudiantes Resultado');
   $smarty->assign("menuList", $menuList);
   
     function array_recibe($url_array) { 

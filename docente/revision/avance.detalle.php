@@ -52,20 +52,26 @@ try {
   leerClase('Observacion');
   leerClase('Docente');
 
-  /**
+     /**
    * Menu superior
    */
-  $menuList[]     = array('url'=>URL.Estudiante::URL,'name'=>'Estudiante');
-  $menuList[]     = array('url'=>URL.Estudiante::URL.Proyecto::URL,'name'=>'Proyecto Final');
-  $menuList[]     = array('url'=>URL.Estudiante::URL.Proyecto::URL.basename(__FILE__),'name'=>'Detalle de Avance');
+  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>'Proyecto Final');
+  $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/estudiante.lista.php','name'=>'Estudiantes Inscritos');
+  $menuList[]     = array('url'=>URL.Docente::URL.'revision/revision.lista.php','name'=>'Seguimiento');
+  $menuList[]     = array('url'=>URL.Docente::URL.'revision/'.basename(__FILE__),'name'=>'Detalle de Avance');
   $smarty->assign("menuList", $menuList);
-
-  if(isset($_GET['estudiante_id']) && is_numeric($_GET['estudiante_id']))
-      $estuid=$_GET['estudiante_id'];
+  
+    $estuid = false;
+    $id = false;
+    if (isset($_SESSION['obs_estudiante_id']) && is_numeric($_SESSION['obs_estudiante_id']) && isset($_SESSION['obs_avance_id']) && is_numeric($_SESSION['obs_avance_id'])) {
+        $estuid  =$_SESSION['obs_estudiante_id'];
+        $id     =$_SESSION['obs_avance_id'];         
+    }
+    
   $estudiante     = new Estudiante($estuid);
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();
-  $id             = (isset($_GET['avance_id']) && is_numeric($_GET['avance_id']))?$_GET['avance_id']:'';
   $avance         = new Avance($id);
   $avance->asignarDirectorio();
   $avance->cambiarEstadoVisto();
@@ -103,7 +109,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
     $observacion->crearObservacion($obser_array, $revision->id);
     }
     $avance->cambiarEstadoCorregido();
-    $ir = "Location: ../revision/revision.corregido.lista.php?id_estudiante=".$estudiante->id."";
+    $ir = "Location: ../estudiante/estudiante.lista.php";
         header($ir);
     }
     

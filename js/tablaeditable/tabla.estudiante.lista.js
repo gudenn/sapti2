@@ -72,8 +72,8 @@ EditableGrid.prototype.initializeGrid = function()
 				"<img src=\"" + image("editar.png") + "\" border=\"0\" alt=\"revisar\" title=\"Correcciones Pendientes\"/>Correccion</a>";
                 cell.innerHTML += "<br><a onclick=\"sessionEvaluacion(" + getRowId(cell.rowIndex) + ");\" style=\"cursor:pointer\">" +
 				"<img src=\"" + image("evaluar.png") + "\" border=\"0\" alt=\"evaluar\" title=\"Evaluar Proyecto\"/>Evaluar</a>";
-                                cell.innerHTML += "<br><a onclick=document.location.href='vistobueno.php?id_estudiante="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("basicset/ok.png") + "\" border=\"0\" alt=\"evaluar\" title=\"Evaluar Proyecto\"/>Visto Bueno</a>";
+                cell.innerHTML += "<br><a onclick=document.location.href='vistobueno.php?id_estudiante="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
+						 "<img src=\"" + image("basicset/ok.png") + "\" border=\"0\" alt=\"evaluar\" title=\"Evaluar Proyecto\" width='30px' height='30px' />Visto Bueno</a>";
 
                   }}));
 		
