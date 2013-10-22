@@ -1,10 +1,10 @@
 <?php
 try {
      define ("MODULO", "DOCENTE");
-  require('../_start.php');
-  if(!isDocenteSession())
-    header("Location: ../login.php");
-  
+    require('../_start.php');
+    if(!isDocenteSession())
+      header("Location: ../login.php");
+
   leerClase('Revision');
   leerClase('Observacion');
   leerClase('Estudiante');
@@ -56,8 +56,6 @@ try {
   $smarty->assign("usuario", $usuario);
   $smarty->assign("proyecto", $proyecto);
     
-    $urlpdf=".../ARCHIVO/proyecto.pdf";
-    $smarty->assign("urlpdf", $urlpdf);
     
     date_default_timezone_set('UTC');
     $revision->fecha_revision=date("d/m/Y");

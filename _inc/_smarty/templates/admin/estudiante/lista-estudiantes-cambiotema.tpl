@@ -21,10 +21,10 @@
       <td>{$objs[ic]['usuario_email']}</td>
      
       <td>
-        <a href="../tutor/tutor.gestion.php?estudiante_id={$objs[ic]['id']}" target="_blank" >{icono('basicset/reload.png','Cambio')} Cambio Leve</a>
+        <a href="proyectocambio/proyecto.registro.php?estudiante_id={$objs[ic]['id']}&cambio_leve" target="_blank" >{icono('basicset/reload.png','Cambio')} Cambio Leve</a>
       </td>
       <td>
-        <a href="../tutor/tutor.gestion.php?estudiante_id={$objs[ic]['id']}" target="_blank" >{icono('basicset/reload.png','Cambio')} Cambio Total</a>
+        <a href="proyectocambio/proyecto.registro.php?estudiante_id={$objs[ic]['id']}&cambio_total" target="_blank" >{icono('basicset/reload.png','Cambio')} Cambio Total</a>
       </td>
     </tr>
   </tbody>

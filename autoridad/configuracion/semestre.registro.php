@@ -60,7 +60,7 @@ try {
     mysql_query("BEGIN");
     $semestre->objBuidFromPost();
     if (!$semestre->valor)
-      $semestre->valor  =  $semestre->getOrderValor();
+    $semestre->valor  =  $semestre->getOrderValor();
     $semestre->estado = Objectbase::STATUS_AC;
     $semestre->validar();
     $semestre->save(TRUE/*copiarlaconfiguraciondelalctivo*/);

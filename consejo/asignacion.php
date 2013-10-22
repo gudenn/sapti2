@@ -47,38 +47,34 @@ try {
   
 
 
-$lugar= new Lugar();
-$lugar_sql= $lugar->getAll();
+      $lugar= new Lugar();
+      $lugar_sql= $lugar->getAll();
 
-$lugar_id= array();
-$lugar_nombre=array();
-while ($lugar_sql && $ro = mysql_fetch_array($lugar_sql[0]))
- {
-   $lugar_id[]     = $ro['id'];
-   $lugar_nombre[] = $ro['nombre'];
- }
+      $lugar_id= array();
+      $lugar_nombre=array();
+      while ($lugar_sql && $ro = mysql_fetch_array($lugar_sql[0]))
+       {
+         $lugar_id[]     = $ro['id'];
+         $lugar_nombre[] = $ro['nombre'];
+       }
 
-$smarty->assign('lugar_id',$lugar_id);
-$smarty->assign('lugar_nombre',$lugar_nombre);
+      $smarty->assign('lugar_id',$lugar_id);
+      $smarty->assign('lugar_nombre',$lugar_nombre);
 
 
-$tipo= new Tipo_defensa();
-$tipo_sql= $tipo->getAll();
-
-$smarty->assign('accion', array(
-    Defensa::DEFENSA_PUBLICA =>  "PUBLICA",
-      Defensa::DEFENSA_PRIVADA =>  "PRIVADA"
-                           ));
+        $tipo= new Tipo_defensa();
+        $tipo_sql= $tipo->getAll();
+        $smarty->assign('accion', array(
+            Defensa::DEFENSA_PUBLICA =>  "PUBLICA",
+            Defensa::DEFENSA_PRIVADA =>  "PRIVADA"
+                                   ));
 
   if(isset($_GET['estudiante_id']))
   {
-    
-  //  echo $_GET['estudiante_id'];
-      $estudiante = new Estudiante($_GET['estudiante_id']);
-      
-       $proyecto     = new Proyecto();
+        $estudiante   =  new Estudiante($_GET['estudiante_id']);
+        $proyecto     =  new Proyecto();
    
-    $proyecto_aux = $estudiante->getProyecto();
+    $proyecto_aux  =  $estudiante->getProyecto();
     if ($proyecto_aux)
       $proyecto = $proyecto_aux;
     else
@@ -88,11 +84,10 @@ $smarty->assign('accion', array(
       
     }
       
-     $usuariobuscado= new Usuario($estudiante->usuario_id);
+   $usuariobuscado= new Usuario($estudiante->usuario_id);
    $smarty->assign('usuariobuscado',  $usuariobuscado);
    $smarty->assign('estudiantebuscado', $estudiante);
    $smarty->assign('proyectobuscado', $proyecto);
-   
    $smarty->assign('proyectoarea', $proyecto->getArea());
 
 

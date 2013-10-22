@@ -61,32 +61,22 @@ if(!isDocenteSession())
   $menu->agregarItem('Lista de Defensa Publica ','Evaluaci&oacute;n de Proyecto','basicset/graph.png',$link);
 
   
-  $menus[] = $menu;
-  
-  $notificaciontotal= $notificacion->getNotificacionTribunal(getSessionUser()->id);
+    $menus[] = $menu;
+
+    $notificaciontotal= $notificacion->getNotificacionTribunal(getSessionUser()->id);
     $menu = new Menu('Notificaciones');
     $link = Tribunal::URL."notificacion/lista.notificacion.php";
     $menu->agregarItem('Notificaciones','Geti&oacute;n de las Notificaciones','basicset/megaphone.png',$link,  sizeof($notificaciontotal));
     $menus[] = $menu;
+
+    $smarty->assign("menus", $menus);
+ 
   
-  
-  
-  
-  
- $smarty->assign("menus", $menus);
- 
- 
- 
- 
- 
- 
- 
-  $docente_aux = getSessionDocente();
+   $docente_aux = getSessionDocente();
    $smarty->assign("docente", $docente);
-  $smarty->assign("usuario", $usuario);
-  $smarty->assign("ERROR", $ERROR);
- 
-  $smarty->assign("ERROR",'');
+   $smarty->assign("usuario", $usuario);
+   $smarty->assign("ERROR", $ERROR);
+    $smarty->assign("ERROR",'');
   
 } 
 catch(Exception $e) 

@@ -28,9 +28,9 @@ try {
    /**
    * Menu superior
    */
- $menuList[]     = array('url'=>URL.Consejo::URL,'name'=>'Consejo');
-  $menuList[]     = array('url'=>URL . Consejo::URL.'listatribunal.php' ,'name'=>'Tribunal');
-  $smarty->assign("menuList", $menuList);
+   $menuList[]     = array('url'=>URL.Consejo::URL,'name'=>'Consejo');
+   $menuList[]     = array('url'=>URL . Consejo::URL.'listatribunal.php' ,'name'=>'Tribunal');
+   $smarty->assign("menuList", $menuList);
    $smarty->assign("menuList", $menuList);
  
 

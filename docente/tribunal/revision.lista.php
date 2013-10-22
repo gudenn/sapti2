@@ -22,7 +22,7 @@ try {
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
   $JS[]  = URL_JS . "tablaeditable/editablegrid-2.0.1.js";
-  $JS[]  = URL_JS . "tablaeditable/tabla.revision.lista.js";
+  $JS[]  = URL_JS . "tablaeditabletribunal/tabla.revision.lista.js";
   $JS[]  = URL_JS . "ventanasmodales/observacion.detalle.js";
   $JS[]  = URL_JS . "ventanasmodales/avance.detalle.modal.js";
   $JS[]  = URL_JS . "ventanasmodales/jquery.simplemodal-1.4.4.js";
@@ -58,6 +58,6 @@ catch(Exception $e)
   $smarty->assign("ERROR", handleError($e));
 }
 
-  $smarty->display('docente/revision/full-width.revision.lista.tpl');
+  $smarty->display('docente/tribunal/full-width.revision.lista.tpl');
 
 ?>

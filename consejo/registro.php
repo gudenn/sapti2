@@ -352,11 +352,11 @@ where  d.`id`=hd.`dia_id` and hd.`turno_id`=t.`id` and  d.`estado`='AC' and hd.`
    $smarty->assign('proyectoarea', $proyecto->getArea());
    
     $sqlr="SELECT  DISTINCT(d.id), u.nombre, CONCAT (u.apellido_paterno,u.apellido_materno) as apellidos
-FROM  usuario u ,docente d, automatico a
-WHERE  u.id=d.usuario_id and  a.docente_id=d.id and u.estado='AC'
-ORDER BY  a.valor_area  DESC, a.valor_tiempo DESC;";
- $resultado = mysql_query($sqlr);
- $arraytribunal= array();
+    FROM  usuario u ,docente d, automatico a
+    WHERE  u.id=d.usuario_id and  a.docente_id=d.id and u.estado='AC'
+    ORDER BY  a.valor_area  DESC, a.valor_tiempo DESC;";
+    $resultado = mysql_query($sqlr);
+    $arraytribunal= array();
 
  while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
          { 
@@ -367,10 +367,10 @@ ORDER BY  a.valor_area  DESC, a.valor_tiempo DESC;";
         $lista_areas[] =  $fila["apellidos"];
  
  
-$sqla="select  a.`nombre`
-from `docente` d , `apoyo` ap , `area` a
-where  d.`id`=ap.`docente_id` and a.`id`=ap.`area_id` and d.`estado`='AC' and ap.`estado`='AC' and a.`estado`='AC'and d.`id`=".$fila["id"];
- $resultadoa = mysql_query($sqla);
+   $sqla="select  a.`nombre`
+   from `docente` d , `apoyo` ap , `area` a
+   where  d.`id`=ap.`docente_id` and a.`id`=ap.`area_id` and d.`estado`='AC' and ap.`estado`='AC' and a.`estado`='AC'and d.`id`=".$fila["id"];
+   $resultadoa = mysql_query($sqla);
 //if(mysql_fetch_array($resultadoa, MYSQL_ASSOC)){
   while ($filas = mysql_fetch_array($resultadoa, MYSQL_ASSOC)) 
   {
@@ -446,37 +446,37 @@ $contador=0;
         $lista_areas[] =  $fila["apellidos"];
  
  
-$sqla="select  a.`nombre`
-from `docente` d , `apoyo` ap , `area` a
-where  d.`id`=ap.`docente_id` and a.`id`=ap.`area_id` and d.`estado`='AC' and ap.`estado`='AC' and a.`estado`='AC'and d.`id`=".$fila["id"];
- $resultadoa = mysql_query($sqla);
-//if(mysql_fetch_array($resultadoa, MYSQL_ASSOC)){
-  while ($filas = mysql_fetch_array($resultadoa, MYSQL_ASSOC)) 
-  {
-     $listaareas[]=$filas;
-  }
+          $sqla="select  a.`nombre`
+          from `docente` d , `apoyo` ap , `area` a
+          where  d.`id`=ap.`docente_id` and a.`id`=ap.`area_id` and d.`estado`='AC' and ap.`estado`='AC' and a.`estado`='AC'and d.`id`=".$fila["id"];
+           $resultadoa = mysql_query($sqla);
+        //if(mysql_fetch_array($resultadoa, MYSQL_ASSOC)){
+          while ($filas = mysql_fetch_array($resultadoa, MYSQL_ASSOC)) 
+          {
+             $listaareas[]=$filas;
+          }
  //}else
 //{
  //  $listaareas[]="NO HAY DATOS";
  //}
-  $lista_areas[]=$listaareas;
-  $listatiempo=array();
+     $lista_areas[]=$listaareas;
+      $listatiempo=array();
   
   
-$sqltiempo="select  d.`id` , d.`nombre` , t.`nombre` as nombreturno
-from `dia` d, `horario_doc` hd , `turno` t
-where  d.`id`=hd.`dia_id` and hd.`turno_id`=t.`id` and  d.`estado`='AC' and hd.`estado`='AC'and t.`estado`='AC' and hd.`docente_id`=".$fila["id"].";";
- $resultadotiempo= mysql_query($sqltiempo);
- 
-  while ($filatiempo = mysql_fetch_array($resultadotiempo, MYSQL_ASSOC)) 
-  {
-     $listatiempo[]=$filatiempo;
-  }
-  //$lista_tiempo[]= $listatiempo;
-  $lista_areas[]= $listatiempo;
-  $arraytribunalasignados[]= $lista_areas;
-       
-         
+        $sqltiempo="select  d.`id` , d.`nombre` , t.`nombre` as nombreturno
+        from `dia` d, `horario_doc` hd , `turno` t
+        where  d.`id`=hd.`dia_id` and hd.`turno_id`=t.`id` and  d.`estado`='AC' and hd.`estado`='AC'and t.`estado`='AC' and hd.`docente_id`=".$fila["id"].";";
+         $resultadotiempo= mysql_query($sqltiempo);
+
+          while ($filatiempo = mysql_fetch_array($resultadotiempo, MYSQL_ASSOC)) 
+          {
+             $listatiempo[]=$filatiempo;
+          }
+          //$lista_tiempo[]= $listatiempo;
+          $lista_areas[]= $listatiempo;
+          $arraytribunalasignados[]= $lista_areas;
+
+
          /////////////////
        
          }  else {

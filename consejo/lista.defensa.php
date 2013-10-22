@@ -2,8 +2,8 @@
 try {
    define ("MODULO", "CONSEJO");
    require('_start.php');
- if(!isConsejoSession())
-  header("Location: login.php"); 
+   if(!isConsejoSession())
+   header("Location: login.php"); 
   /** HEADER */
   /** HEADER */
   $smarty->assign('title','Proyecto Final');
@@ -121,45 +121,27 @@ $smarty->assign('proyecto_nombre',$proyecto_nombre);
       
     }
   
-    $usuariobuscado= new Usuario($estudiante->usuario_id);
-  //echo  $estudiante->i;
-  //  var_dump( $proyecto->getArea());
-   // echo $estudiante->codigo_sis;
-     $smarty->assign('usuariobuscado',  $usuariobuscado);
-    $smarty->assign('estudiantebuscado', $estudiante);
-     $smarty->assign('proyectobuscado', $proyecto);
+      $usuariobuscado= new Usuario($estudiante->usuario_id);
+      $smarty->assign('usuariobuscado',  $usuariobuscado);
+      $smarty->assign('estudiantebuscado', $estudiante);
+      $smarty->assign('proyectobuscado', $proyecto);
       $smarty->assign('proyectoarea', $proyecto->getArea());  
-      
-   // return $proyecto;
-    //$proyecto->getProyectoAprobados();
-    
-  //  var_dump($proyecto->getProyectoAprobados());
-   // $
-   
-    
+        
   }
   
    if ( isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' )
   {
-     
-     /**
-      $proyecto_tribunal->objBuidFromPost();
-      $proyecto_tribunal->estado = Objectbase::STATUS_AC;
-      $proyecto_tribunal->save();
-    */
+    
      if (isset($_POST['ids']))
      foreach ($_POST['ids'] as $id)
      {
-       echo $id;
-               $tribunal= new Tribunal();
-          //     $smarty->assign("tribunal",$tribunal);
-             
-               $tribunal->usuario_id =$id;
-                $tribunal->estado = Objectbase::STATUS_AC;
+                 $tribunal= new Tribunal();
+                 $tribunal->usuario_id =$id;
+                 $tribunal->estado = Objectbase::STATUS_AC;
                //$tribunal->proyecto_tribunal_id=$proyecto_tribunal->id;;
-                $tribunal->objBuidFromPost();
-               $tribunal->save();
-     }
+                 $tribunal->objBuidFromPost();
+                 $tribunal->save();
+      }
    }
 
   
