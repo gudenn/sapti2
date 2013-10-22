@@ -53,15 +53,15 @@ $menuList[]     = array('url'=>URL.Consejo::URL,'name'=>'Consejo');
    $usuario = new Usuario();
 //$smarty->assign('rows', $rows);
 
- $usuario_id     = array();
- $usuario_nombre = array();
-$sql="select   DISTINCT(p.id) ,u.nombre , CONCAT(u.apellido_paterno , u.apellido_materno) apellidos, p.nombre as nombreproyecto
-from  usuario  u,  estudiante e  , proyecto_estudiante  pe , proyecto  p , tribunal t
-where    u.id= e.usuario_id  and e.id= pe.estudiante_id  and pe.proyecto_id= p.id and p.id= t.proyecto_id
-and t.accion='RE';";
- $resultado= mysql_query($sql);
- $arraytribunal= array();
- 
+      $usuario_id     = array();
+      $usuario_nombre = array();
+      $sql="select   DISTINCT(p.id) ,u.nombre , CONCAT(u.apellido_paterno , u.apellido_materno) apellidos, p.nombre as nombreproyecto
+      from  usuario  u,  estudiante e  , proyecto_estudiante  pe , proyecto  p , tribunal t
+      where    u.id= e.usuario_id  and e.id= pe.estudiante_id  and pe.proyecto_id= p.id and p.id= t.proyecto_id
+      and t.accion='RE';";
+       $resultado= mysql_query($sql);
+        $arraytribunal= array();
+
  while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
  {
    
@@ -79,7 +79,7 @@ $smarty->assign('arraytribunal'  , $arraytribunal);
  }
  
  $rows = array();
-$usuario = new Usuario();
+ $usuario = new Usuario();
 //$smarty->assign('rows', $rows);
  $usuario_mysql  = $usuario->getAll();
  $usuario_id     = array();
@@ -90,15 +90,15 @@ $usuario = new Usuario();
    $usuario_nombre[] = $row['nombre'];
    $rows=$row;
  }
-// $smarty->assign('filas'  , $rows);
-$smarty->assign('usuario_id'  , $usuario_id);
-$smarty->assign('usuario_nombre', $usuario_nombre);
+  // $smarty->assign('filas'  , $rows);
+  $smarty->assign('usuario_id'  , $usuario_id);
+  $smarty->assign('usuario_nombre', $usuario_nombre);
 
 
-$proyecto= new Proyecto();
-$proyecto_sql= $proyecto->getAll();
-$proyecto_id= array();
-$proyecto_nombre=array();
+    $proyecto= new Proyecto();
+    $proyecto_sql= $proyecto->getAll();
+    $proyecto_id= array();
+    $proyecto_nombre=array();
 while ($proyecto_sql && $rows = mysql_fetch_array($proyecto_sql[0]))
  {
    $proyecto_id[]     = $rows['id'];
@@ -124,44 +124,24 @@ $smarty->assign('proyecto_nombre',$proyecto_nombre);
       
     }
   
-    $usuariobuscado= new Usuario($estudiante->usuario_id);
-  //echo  $estudiante->i;
-  //  var_dump( $proyecto->getArea());
-   // echo $estudiante->codigo_sis;
-     $smarty->assign('usuariobuscado',  $usuariobuscado);
-    $smarty->assign('estudiantebuscado', $estudiante);
-     $smarty->assign('proyectobuscado', $proyecto);
-      $smarty->assign('proyectoarea', $proyecto->getArea());  
+       $usuariobuscado= new Usuario($estudiante->usuario_id);
+       $smarty->assign('usuariobuscado',  $usuariobuscado);
+       $smarty->assign('estudiantebuscado', $estudiante);
+       $smarty->assign('proyectobuscado', $proyecto);
+       $smarty->assign('proyectoarea', $proyecto->getArea());  
       
-   // return $proyecto;
-    //$proyecto->getProyectoAprobados();
-    
-  //  var_dump($proyecto->getProyectoAprobados());
-   // $
-   
-    
   }
   
    if ( isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' )
   {
-     
-     /**
-      $proyecto_tribunal->objBuidFromPost();
-      $proyecto_tribunal->estado = Objectbase::STATUS_AC;
-      $proyecto_tribunal->save();
-    */
      if (isset($_POST['ids']))
      foreach ($_POST['ids'] as $id)
      {
-       echo $id;
-               $tribunal= new Tribunal();
-          //     $smarty->assign("tribunal",$tribunal);
-             
-               $tribunal->usuario_id =$id;
-                $tribunal->estado = Objectbase::STATUS_AC;
-               //$tribunal->proyecto_tribunal_id=$proyecto_tribunal->id;;
-                $tribunal->objBuidFromPost();
-               $tribunal->save();
+                 $tribunal= new Tribunal();
+                 $tribunal->usuario_id =$id;
+                 $tribunal->estado = Objectbase::STATUS_AC;
+                  $tribunal->objBuidFromPost();
+                  $tribunal->save();
      }
    }
 

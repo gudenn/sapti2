@@ -16,12 +16,8 @@ try {
   $smarty->assign('CSS','');
   $smarty->assign('JS','');
 
-  
-  //////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////
-  $consejo = new Consejo();
-  $smarty->assign('consejo',$consejo);
+    $consejo = new Consejo();
+    $smarty->assign('consejo',$consejo);
   //LOGIN FORM
   if (isset($_POST["login"]) && $_POST["login"] != "" && isset($_POST["clave"]) && $_POST["clave"] != "" && isset($_POST['tarea']) && $_SESSION['logindocente'] == $_POST['token'] )
   {

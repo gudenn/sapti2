@@ -54,13 +54,13 @@ try {
    $usuario = new Usuario();
 
    
- $usuario_id     = array();
- $usuario_nombre = array();
- $sql="SELECT DISTINCT (p.id) , u.nombre ,CONCAT(u.apellido_paterno,u.apellido_materno) as apellidos, es.codigo_sis , p.nombre as nombreproyecto
-FROM proyecto p , usuario u, estudiante es , proyecto_estudiante pe, tribunal t
-WHERE  u.id=es.usuario_id and  es.id=pe.estudiante_id and  pe.proyecto_id=p.id and p.id=t.proyecto_id;";
- $resultado= mysql_query($sql);
- $arraytribunal= array();
+    $usuario_id     = array();
+    $usuario_nombre = array();
+    $sql="SELECT DISTINCT (p.id) , u.nombre ,CONCAT(u.apellido_paterno,u.apellido_materno) as apellidos, es.codigo_sis , p.nombre as nombreproyecto
+    FROM proyecto p , usuario u, estudiante es , proyecto_estudiante pe, tribunal t
+    WHERE  u.id=es.usuario_id and  es.id=pe.estudiante_id and  pe.proyecto_id=p.id and p.id=t.proyecto_id;";
+    $resultado= mysql_query($sql);
+    $arraytribunal= array();
  
  while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
  {
@@ -94,20 +94,20 @@ $smarty->assign('usuario_id'  , $usuario_id);
 $smarty->assign('usuario_nombre', $usuario_nombre);
 
 
-$proyecto= new Proyecto();
-$proyecto_sql= $proyecto->getAll();
-$proyecto_id= array();
-$proyecto_nombre=array();
-while ($proyecto_sql && $rows = mysql_fetch_array($proyecto_sql[0]))
- {
-   $proyecto_id[]     = $rows['id'];
-   $proyecto_nombre[] = $rows['nombre_proyecto'];
- }
+    $proyecto= new Proyecto();
+    $proyecto_sql= $proyecto->getAll();
+    $proyecto_id= array();
+    $proyecto_nombre=array();
+    while ($proyecto_sql && $rows = mysql_fetch_array($proyecto_sql[0]))
+     {
+       $proyecto_id[]     = $rows['id'];
+       $proyecto_nombre[] = $rows['nombre_proyecto'];
+     }
 
 
-$smarty->assign('proyecto_id',$proyecto_id);
-$smarty->assign('proyecto_nombre',$proyecto_nombre);
-  
+      $smarty->assign('proyecto_id',$proyecto_id);
+      $smarty->assign('proyecto_nombre',$proyecto_nombre);
+
 
   if(isset($_POST['buscar']))
   {
@@ -123,22 +123,13 @@ $smarty->assign('proyecto_nombre',$proyecto_nombre);
       
     }
   
-    $usuariobuscado= new Usuario($estudiante->usuario_id);
-  //echo  $estudiante->i;
-  //  var_dump( $proyecto->getArea());
-   // echo $estudiante->codigo_sis;
-     $smarty->assign('usuariobuscado',  $usuariobuscado);
-    $smarty->assign('estudiantebuscado', $estudiante);
-     $smarty->assign('proyectobuscado', $proyecto);
-      $smarty->assign('proyectoarea', $proyecto->getArea());  
+       $usuariobuscado= new Usuario($estudiante->usuario_id);
+       $smarty->assign('usuariobuscado',  $usuariobuscado);
+       $smarty->assign('estudiantebuscado', $estudiante);
+       $smarty->assign('proyectobuscado', $proyecto);
+       $smarty->assign('proyectoarea', $proyecto->getArea());  
       
-   // return $proyecto;
-    //$proyecto->getProyectoAprobados();
-    
-  //  var_dump($proyecto->getProyectoAprobados());
-   // $
-   
-    
+  
   }
   
    if ( isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' )

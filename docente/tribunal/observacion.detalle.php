@@ -21,11 +21,11 @@ try {
   $JS[]  = URL_JS . "calendar/js/jquery.eventCalendar.js";
   $smarty->assign('JS',$JS);
   
-        leerClase('Docente');
+            leerClase('Docente');
 
-   $menuList[]     = array('url'=>URL.Docente::URL.'tribunal','name'=>'Tribunal');
- $menuList[]     = array('url'=>URL.Docente::URL.'tribunal/estudiante.lista.php','name'=>'Lista Estudiante');
- $smarty->assign("menuList", $menuList);
+            $menuList[]       = array('url'=>URL.Docente::URL.'tribunal','name'=>'Tribunal');
+             $menuList[]      = array('url'=>URL.Docente::URL.'tribunal/estudiante.lista.php','name'=>'Lista Estudiante');
+              $smarty->assign("menuList", $menuList);
   
   if ( isset($_GET['revisiones_id']))
   $revid=$_GET['revisiones_id'];
@@ -41,12 +41,12 @@ AND doc.usuario_id=us.id
 AND ob.revision_id='".$revid."' 
           ";
    $sql = mysql_query($resul);
-while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
+while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) 
+  {
    $arrayobser[]=$fila1;
  }
     
   $smarty->assign("arrayobser", $arrayobser);
-  
   $columnacentro = 'docente/tribunal/columna.centro.observacion-detalle.tpl';
   $smarty->assign('columnacentro',$columnacentro);
 

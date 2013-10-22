@@ -3,20 +3,18 @@ try {
  define ("MODULO", "CONSEJO");
   
   
-  require('_start.php');
- if(!isConsejoSession())
-  header("Location: login.php"); 
-   $smarty->assign('title','Proyecto Final');
-   $smarty->assign('description','Proyecto Final');
-   $smarty->assign('keywords','Proyecto Final');
+    require('_start.php');
+    if(!isConsejoSession())
+    header("Location: login.php"); 
+     $smarty->assign('title','Proyecto Final');
+     $smarty->assign('description','Proyecto Final');
+     $smarty->assign('keywords','Proyecto Final');
 
   //CSS
      $CSS[]  = URL_CSS . "dashboard.css";
      $CSS[]  = URL_CSS . "academic/3_column.css";
      $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
-  
      $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
-  
      $smarty->assign('CSS',$CSS);
 
   //JS
@@ -67,15 +65,11 @@ try {
    $notificacion= new Notificacion();
     echo sizeof($notificacion->getNotificacionConsejo(2));
     
-    $menu = new Menu('Notificaciones y Mensajes');
-    $link = Estudiante::URL."notificacion/";
-    $menu->agregarItem('Notificaciones','Geti&oacute;n de las Notificaciones','basicset/megaphone.png',$link,  sizeof($notificacion->getNotificacionConsejo(2)));
-    $menus[] = $menu;
-    
+     
      $menu = new Menu('Reportes');
-   $link = Consejo::URL."reporte.php";
-  $menu->agregarItem('Reportes','','basicset/graph.png',$link);
-  $menus[] = $menu;
+     $link = Consejo::URL."reporte.php";
+     $menu->agregarItem('Reportes','','basicset/graph.png',$link);
+     $menus[] = $menu;
   
   
   
