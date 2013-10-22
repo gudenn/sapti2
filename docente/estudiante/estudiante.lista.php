@@ -6,6 +6,7 @@ try {
     header("Location: login.php"); 
 
   leerClase('Docente');
+  leerClase('Dicta');
   $ERROR = '';
 
   /** HEADER */
@@ -24,6 +25,12 @@ try {
   $JS[]  = URL_JS . "tablaeditable/tabla.estudiante.lista.js";
   $smarty->assign('JS',$JS);
   
+    if ( isset($_SESSION['iddictapro']) && is_numeric($_SESSION['iddictapro']) )
+  {
+     $iddicta = $_SESSION['iddictapro'];
+  }
+  $dicta=new Dicta($iddicta);
+  //$dicta
    /**
    * Menu superior
    */
@@ -31,13 +38,6 @@ try {
   $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>'Proyecto Final');
   $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/'.basename(__FILE__),'name'=>'Estudiantes Inscritos');
   $smarty->assign("menuList", $menuList);
-  
-  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
-  {
-     $iddicta = $_GET['iddicta'];
-  }else{
-      $iddicta=$_SESSION['iddictapro'];
-  }
 
   $smarty->assign("iddicta", $iddicta);
 

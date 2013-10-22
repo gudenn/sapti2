@@ -5,7 +5,7 @@
   leerClase('Menu');
   leerClase('Docente');
   $docente   = false;
-  if (getSessionDocente())
+  if (isDocenteSession())
   {
     $docente = getSessionDocente();
   }

@@ -274,7 +274,7 @@ function sessionAvance(seccion, est) {
 		dataType: "html",
 		data: { 
 			avance : seccion,
-                        estudiante_id : seccion
+                        estudiante_id : est
 		},
 		success: function (response) 
 		{ 

@@ -250,6 +250,7 @@ class Menu
       leerClase('Docente');
       leerClase('Usuario');
       leerClase('Notificacion');
+      if (getSessionDocente()){
     $materias = "SELECT DISTINCT ma.id as idmat, ma.nombre as nombre
 FROM dicta di, semestre se, materia ma
 WHERE di.materia_id=ma.id
@@ -292,11 +293,8 @@ ORDER BY ma.id";
          };
          $menus[] = $thise;
   };
-      }  else {
-  $columnacentro = 'docente/mensajedisculpa.tpl';
-  $smarty->assign('columnacentro',$columnacentro);
-  }
-  
+      }  
+      }
   $notificacion = new Notificacion();
   $thise = new Menu('Tutor');
   $link = Docente::URL."tutor/index.php";
