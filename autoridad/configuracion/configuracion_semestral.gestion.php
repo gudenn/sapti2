@@ -16,16 +16,16 @@ try {
   $ERROR = '';
 
   /** HEADER */
-  $smarty->assign('title','Gestion de Configurai&oacute;n Semestral');
-  $smarty->assign('description','Pagina de gesti&oacute;n de Configurai&oacute;n Semestral');
-  $smarty->assign('keywords','Gesti&acoute;n,Configurai&oacute;n Semestral');
+  $smarty->assign('title','Gestion de Configuraci&oacute;n Semestral');
+  $smarty->assign('description','Pagina de gesti&oacute;n de Configuraci&oacute;n Semestral');
+  $smarty->assign('keywords','Gesti&acoute;n,Configuraci&oacute;n Semestral');
   leerClase('Administrador');
   /**
    * Menu superior
    */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/','name'=>'Configuraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Configurai&oacute;n Semestral');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Configuraci&oacute;n Semestral');
   $smarty->assign("menuList", $menuList);
 
   //CSS

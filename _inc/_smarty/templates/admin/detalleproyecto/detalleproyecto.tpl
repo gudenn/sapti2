@@ -102,7 +102,7 @@
             <table>
               <tr class="tableholder" >
                 <td style="height: 31px;">
-                  Carrera:
+                  Carrera:<span>{$carr}</span>
                 </td>
                
                 <td>
