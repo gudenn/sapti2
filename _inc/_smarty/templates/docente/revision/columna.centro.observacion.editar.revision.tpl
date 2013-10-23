@@ -39,6 +39,7 @@
                 </td>
                 </tr>
             </table>
+                <a href="revision.lista.php" type="button" class="sendme">Enviar</a>  
           </form>
         </div>
         <p>{$ERROR}</p>

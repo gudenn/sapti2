@@ -4,7 +4,7 @@ try {
   require('../_start.php');
 
     if(!isDocenteSession())
-    header("Location: login.php"); 
+    header("Location: ../login.php"); 
     
   leerClase("Docente");
   leerClase("Evaluacion");

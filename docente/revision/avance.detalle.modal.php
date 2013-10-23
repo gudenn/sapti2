@@ -4,8 +4,13 @@ define ("MODULO", "DOCENTE");
 
   leerClase("Estudiante");
   leerClase('Avance');
-  
-$ideve1=$_GET['idev'];
+    $estuid = false;
+    $id = false;
+    if (isset($_SESSION['obs_estudiante_id']) && is_numeric($_SESSION['obs_estudiante_id']) && isset($_SESSION['obs_avance_id']) && is_numeric($_SESSION['obs_avance_id'])) {
+        $estuid  =$_SESSION['obs_estudiante_id'];
+        $id     =$_SESSION['obs_avance_id'];         
+    }
+$ideve1=$id;
 $avance   = new Avance($ideve1);
 if($avance->revision_id==0){
       $resul = "
@@ -29,7 +34,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
    $arrayobser[]=$fila1;
  }
  
-  $estudiante=new Estudiante(1);
+  $estudiante=new Estudiante($estuid);
 
   $dir='../../'.$avance->getDirectorioAvancedir($estudiante->codigo_sis);
   $archivosruta=obtener_directorios($dir);
@@ -92,7 +97,6 @@ if (empty($action)&&$avance->revision_id==0) {
 	</form>
         </div>
         <button type='submit' class='contact-cancel contact-button simplemodal-close' tabindex='1006'>Cerrar</button>
-        <a href='avance.detalle.php?estudiante_id={$estudiante->id}&avance_id={$avance->id}' class='contact-cancel contact-button' tabindex='1006'>Revisar</a>
         </div>
 	<div class='contact-bottom'></div>
 </div>";
