@@ -46,8 +46,8 @@ try {
   
  $perfil_id=$_GET['id_perfil'];
  $proyecto=new Proyecto($perfil_id);
-  $tutores=$proyecto->getProyectoTutor();
-  echo $tutores[0]->id;
+  $tutores = $proyecto->getTutores();
+  
  $area=$proyecto->getArea();
  $nombre_a=$area[0]->nombre;
  $modalidad=new Modalidad($proyecto->modalidad_id);
@@ -57,7 +57,7 @@ try {
  $usuario=new Usuario($estudiante->usuario_id);
  $usuario->nombre;
    
-   
+ $smarty->assign('tutores', $tutores); 
  $smarty->assign('usuario'  ,$usuario);
  $smarty->assign('proyecto'  ,$proyecto);
  $smarty->assign('modalida'  , $modalidad);

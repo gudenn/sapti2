@@ -241,6 +241,87 @@ class Menu
     return $menus;
   }
   
+  /**
+   * Menu principal del Docente
+   * @param Docente $docente
+   * @return Menu
+   */
+  function getDocenteIndex($docente) {
+      leerClase('Docente');
+      leerClase('Usuario');
+      leerClase('Notificacion');
+      if (getSessionDocente()){
+    $materias = "SELECT DISTINCT ma.id as idmat, ma.nombre as nombre
+FROM dicta di, semestre se, materia ma
+WHERE di.materia_id=ma.id
+AND di.semestre_id=se.id
+AND se.activo=1
+AND di.docente_id=".$docente->id."
+ORDER BY ma.nombre";
+  $mate = mysql_query($materias);
+        while ($row = mysql_fetch_array($mate, MYSQL_ASSOC)) {
+       $materiassemestre[] = $row;
+ }
+  $docmaterias = "SELECT di.id as iddicta, ma.id as idmat, ma.nombre as materia, cg.nombre as grupo, ma.tipo as tipo
+FROM dicta di, semestre se, materia ma, codigo_grupo cg
+WHERE di.materia_id=ma.id
+AND di.semestre_id=se.id
+AND di.codigo_grupo_id=cg.id
+AND se.activo=1
+AND di.docente_id=".$docente->id."
+ORDER BY ma.id";
+  $resultmate = mysql_query($docmaterias);
+
+  while ($row2 = mysql_fetch_array($resultmate, MYSQL_ASSOC)) {
+       $docmateriassemestre[] = $row2;
+  }
+  if(mysql_num_rows($resultmate)>0)
+      {
+          $menus = array();
+  foreach ($materiassemestre as $value) 
+   {
+        $thise = new Menu($value['nombre']);
+        for($i=0; $i < count($docmateriassemestre);$i++ )
+        {
+            if($value['idmat']==$docmateriassemestre[$i]['idmat']&&$docmateriassemestre[$i]['tipo']=='PR'){
+                  $link = Docente::URL."index.proyecto-final.php?iddicta=".$docmateriassemestre[$i]['iddicta']."";
+                  $thise->agregarItem('Gesti&oacute;n de Estudiantes Codigo:'.$docmateriassemestre[$i]['grupo'].'','Gesti&oacute;n de Estudiantes Inscritos en la Materia Proyecto Final.','docente/correccion.png',$link);
+            }elseif ($value['idmat']==$docmateriassemestre[$i]['idmat']&&$docmateriassemestre[$i]['tipo']=='PE') {
+                        $link = Docente::URL."index.proyecto-final.php?iddicta=".$docmateriassemestre[$i]['iddicta']."";
+                        $thise->agregarItem('Gesti&oacute;n de Estudiantes Codigo:'.$docmateriassemestre[$i]['grupo'].'','Gesti&oacute;n de Estudiantes Inscritos en la Materia de Perfil.','docente/correccion.png',$link);
+            }
+         };
+         $menus[] = $thise;
+  };
+      }  
+      }
+  $notificacion = new Notificacion();
+  $thise = new Menu('Tutor');
+  $link = Docente::URL."tutor/index.php";
+  $thise->agregarItem('Notificaiones','Notificaciones para el Proyecto Final','docente/notificacion.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+   $menus[] = $thise;
+  
+   $thise = new Menu('Tribunal');
+  $link = Docente::URL."tribunal/index.php";
+  $thise->agregarItem('Notificaiones','Notificaciones para el Proyecto Final','docente/notificacion.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+   $menus[] = $thise;
+   
+   // Notificaiones 
+
+  $usuario      = getSessionUser();
+  $notificacion = new Notificacion();
+
+   $thise = new Menu('Notificaiones y Mensajes');
+   $link = Docente::URL."notificacion/";
+   $thise->agregarItem('Notificaiones','Gesti&oacute;n de notificaiones','basicset/message-archived.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+   $link = Docente::URL."notificacion/notificacion.gestion.php?estado_notificacion=SV";
+   $counter = $notificacion->getTodasNotificaciones($usuario->id, '', '', ' AND estado_notificacion="SV" ');
+   $thise->agregarItem('Notificaciones Pendientes','Todas las notificaciones no leidas','basicset/message-not-read.png',$link,$counter[1]);
+   $menus[] = $thise;
+  
+    return $menus;
+  }
+  
   
 }
 

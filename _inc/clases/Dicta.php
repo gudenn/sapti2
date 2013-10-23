@@ -53,5 +53,16 @@ class Dicta extends Objectbase
     return $docente->getNombreCompleto();
   }
   
+    /**
+   * Obtiene el nombre completo del docente que dicta la materia
+   * @return string el nombre completo del docente que dicta la materia
+   */
+  function getNombreMateria() 
+  {
+    leerClase('Materia');
+    $docente = new Docente($this->docente_id);
+    return $docente->getNombreCompleto();
+  }
+  
 }
 ?>

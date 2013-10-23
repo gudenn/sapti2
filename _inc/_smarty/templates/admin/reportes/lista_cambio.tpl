@@ -14,8 +14,7 @@
             
             <h2 class="title">Generar </h2>
             <p>
-              <input type="hidden" name="usuario_id"    value="{$usuario->id}">
-              <input type="hidden" name="estudiante_id" value="{$estudiante->id}">
+            
               <input type="hidden" name="tarea" value="registrar">
               <input type="hidden" name="token" value="{$token}">
 
@@ -34,8 +33,8 @@
     <th><a href='?order=especialidad'         class="tajax"   title='Ordenar por Especialidad'        >T&Iacute;TULO</a></th>
     <th><a href='?order=id'                class="tajax"   title='Ordenar por Id'               >GESTI&Oacute;N</a></th>
     <th>ESTADO</th> 
-     <th>CANTIDAD DE CAMBIOS</th>
-      <th>TIPO DE CAMBIO</th>
+     <th>CANBIOS LEVES</th>
+      <th>CAMBIOS TOTALES</th>
   </tr>
   </thead>
   <tbody>
@@ -49,8 +48,8 @@
         <td>{$listadocentes[ic]['titulo']}</td>
         <td>{$listadocentes[ic]['codigo']}</td>
          <td>{$listadocentes[ic]['estadop']}</td>
-         <td>{$listadocentes[ic]['cantidadcambios']}</td>
-         <td>{$listadocentes[ic]['tipo']}</td>
+         <td>{$listadocentes[ic]['cambioleve']}</td>
+         <td>{$listadocentes[ic]['cambiototal']}</td>
       
      
     

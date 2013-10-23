@@ -237,5 +237,13 @@ class Revision extends Objectbase
     }
       return $obser;
     }
+      /**
+   Guarda la Id de la Resivion en Session
+   */
+  function sessionRevision() {
+
+        $_SESSION['obs_revisiones_id']=$this->id;
+        return;
+    }
 }
 ?>

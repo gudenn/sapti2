@@ -92,7 +92,6 @@ if (empty($action)&&$avance->revision_id==0) {
 	</form>
         </div>
         <button type='submit' class='contact-cancel contact-button simplemodal-close' tabindex='1006'>Cerrar</button>
-        <a href='avance.detalle.php?estudiante_id={$estudiante->id}&avance_id={$avance->id}' class='contact-cancel contact-button' tabindex='1006'>Revisar</a>
         </div>
 	<div class='contact-bottom'></div>
 </div>";

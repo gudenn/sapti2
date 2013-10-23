@@ -21,7 +21,7 @@ $grid->addColumn('codigosis', 'Codigo Sis', 'string', NULL, false);
 $grid->addColumn('nombre', 'Nombres', 'string', NULL, false);  
 $grid->addColumn('apellidos', 'Apellidos', 'string', NULL, false);
 $grid->addColumn('nombrep', 'Nombre Proyecto', 'string', NULL, false);
-$grid->addColumn('action', 'Opciones', 'html', NULL, false);
+$grid->addColumn('action', '- Opciones -', 'html', NULL, false);
 
 $result = $mysqli->query('
     SELECT es.id as id, es.codigo_sis as codigosis, us.nombre as nombre, CONCAT(us.apellido_paterno," ",us.apellido_materno) as apellidos, pr.nombre as nombrep

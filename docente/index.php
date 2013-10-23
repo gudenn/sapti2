@@ -39,40 +39,11 @@ try {
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
   $smarty->assign("menuList", $menuList);
 
-  $docente=  getSessionUser();
   $docente = getSessionDocente();
-  //var_dump($docente);
-  //$docente     = new Docente($docente_aux->docente_id); //esto ya no es necesario
- // $usuario     = $docente->getUsuario();
-    $usuario=        getSessionUser();
-    $materias = "SELECT DISTINCT ma.id as idmat, ma.nombre as nombre
-FROM dicta di, semestre se, materia ma
-WHERE di.materia_id=ma.id
-AND di.semestre_id=se.id
-AND se.activo=1
-AND di.docente_id=".$docente->id."
-ORDER BY ma.nombre";
-  $mate = mysql_query($materias);
-        while ($row = mysql_fetch_array($mate, MYSQL_ASSOC)) {
-       $materiassemestre[] = $row;
- }
-  $docmaterias = "SELECT di.id as iddicta, ma.id as idmat, ma.nombre as materia, cg.nombre as grupo
-FROM dicta di, semestre se, materia ma, codigo_grupo cg
-WHERE di.materia_id=ma.id
-AND di.semestre_id=se.id
-AND di.codigo_grupo_id=cg.id
-AND se.activo=1
-AND di.docente_id=".$docente->id."
-ORDER BY ma.id";
-  $resultmate = mysql_query($docmaterias);
-
-  while ($row2 = mysql_fetch_array($resultmate, MYSQL_ASSOC)) {
-       $docmateriassemestre[] = $row2;
- }
-leerClase('Menu');
-  /**
+      /**
    * Menu central
    */
+
   //----------------------------------//
     if(mysql_num_rows($resultmate)>0)
       {
@@ -135,11 +106,13 @@ leerClase('Menu');
   
   
   //----------------------------------//
-  
+
+  leerClase('Menu');
+  $menu = new Menu('');
+  $menus = $menu->getDocenteIndex($docente);
   $smarty->assign("menus", $menus);
   
   $smarty->assign("docente", $docente);
-  $smarty->assign("usuario", $usuario);
   $smarty->assign("ERROR", $ERROR);
   
   //No hay ERROR

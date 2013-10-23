@@ -64,22 +64,23 @@ EditableGrid.prototype.initializeGrid = function(estid)
 			else displayMessage("Fila Selecionada y Cambiada por '" + this.getRowId(oldRowIndex) + "' to '" + this.getRowId(newRowIndex) + "'");
 		};
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
-                if(getValueAt(cell.rowIndex, '2')=='DO'&& getValueAt(cell.rowIndex, '4')=='CR'){                        
-                cell.innerHTML += "<br><a onclick=document.location.href='observacion.editar.php?revisiones_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("icons/editar.png") + "\" border=\"0\" alt=\"editar\" title=\"Editar Revision\"/>Editar</a>";
-                } 
+ 
                 if(getValueAt(cell.rowIndex, '1')=='0'){
                 cell.innerHTML = "<a href='#' class='avancedetalle' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("icons/detalle.png") + "\" border=\"0\" alt=\"detalle\" title=\"Detalle Avance\" />Detalle</a>";
-                cell.innerHTML += "<br><a onclick=document.location.href='avance.detalle.php?estudiante_id="+estid+"&avance_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
+                cell.innerHTML += "<br><a onclick=\"sessionAvance(" + getRowId(cell.rowIndex) + ", " + estid + ");\" style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("icons/basicset/document_pencil.png") + "\" border=\"0\" alt=\"revisar\" title=\"Revisar\" width='25px' height='25px'/>Revisar</a>";
                 }
-                else if(getValueAt(cell.rowIndex, '4')=='CO'){
+                else if(getValueAt(cell.rowIndex, '1')=='AC'){
+                cell.innerHTML = "<a href='#' class='observaciondetalle' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
+			 "<img src=\"" + image("icons/detalle.png") + "\" border=\"0\" alt=\"detalle\" title=\"Detalle Revision\"/>Detalle</a>";
+                }else{
                 cell.innerHTML = "<a href='#' class='avancedetalle' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("icons/detalle.png") + "\" border=\"0\" alt=\"detalle\" title=\"Detalle Avance\" />Detalle</a>";
-                }else{
-                cell.innerHTML = "<a href='#' class='observaciondetalle' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("icons/detalle.png") + "\" border=\"0\" alt=\"detalle\" title=\"Detalle Revision\"/>Detalle</a>";
+                      }
+                if(getValueAt(cell.rowIndex, '2')=='DO' && getValueAt(cell.rowIndex, '4')=='CR'){                        
+                cell.innerHTML += "<br><a onclick=\"sessionRevision(" + getRowId(cell.rowIndex) + ");\" style=\"cursor:pointer\">" +
+						 "<img src=\"" + image("icons/editar.png") + "\" border=\"0\" alt=\"editar\" title=\"Editar Revision\"/>Editar</a>";
                 }
                 }}));
                 setCellRenderer("num", new CellRenderer({
@@ -246,3 +247,44 @@ function extractText(anchText){
     str1.innerHTML = anchText;
     return str1.innerText;
 }
+function sessionRevision(seccion) {
+	$.ajax({ 
+		url: '../variable.session.rev.php',
+		type: 'POST',
+		dataType: "html",
+		data: { 
+			revicion : seccion
+		},
+		success: function (response) 
+		{ 
+                    if(response=="ok"){
+                        document.location.href='../revision/observacion.editar.revision.php';
+                    }else{
+                       alert("Intente De Nuevo");
+                    }
+		},
+		error: function() { alert("Ajax failure\n"); },
+		async: true
+	});
+};
+function sessionAvance(seccion, est) {
+	$.ajax({ 
+		url: '../variable.session.avac.php',
+		type: 'POST',
+		dataType: "html",
+		data: { 
+			avance : seccion,
+                        estudiante_id : est
+		},
+		success: function (response) 
+		{ 
+                    if(response=="ok"){
+                        document.location.href='../revision/avance.detalle.php';
+                    }else{
+                       alert("Intente De Nuevo");
+                    }
+		},
+		error: function() { alert("Ajax failure\n"); },
+		async: true
+	});
+};
