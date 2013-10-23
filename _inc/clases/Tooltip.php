@@ -124,7 +124,7 @@ class Tooltip extends Objectbase
     if ( isset($usuario->id) && $usuario->id)
     {
       $permiso = $usuario->getPermiso('ADMIN-HELPDESK');
-      if ($permiso['ver'])
+      if ($permiso['ver'] && isset($_SESSION['editor_online']) && ($_SESSION['editor_online']))
       {
         $editar = $this->editarToolTip();
       }
