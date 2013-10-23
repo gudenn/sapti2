@@ -145,10 +145,12 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
                $obsermo->save();
                $obsermodes->cambiarEstadoRechazado();
            }
+           $revision1->estadoAprobado();
            $avance->cambiarEstadoCorregido();   
            $ir = "Location: ../revision/observacion.editar.revision.php?revisiones_id=".$revisionnuevo->id."";
            header($ir);
            }else {
+                   $revision1->estadoAprobado();
                    $avance->cambiarEstadoCorregido();
                    $ir = "Location: ../estudiante/estudiante.lista.php";
                    header($ir);
@@ -170,6 +172,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
                $obsermo->save();
                $obsermodes->cambiarEstadoRechazado();
            }}
+           $revision1->estadoAprobado();
            $avance->cambiarEstadoCorregido();   
            $ir = "Location: ../revision/observacion.editar.revision.php?revisiones_id=".$revisionnuevo->id."";
            header($ir);
