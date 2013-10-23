@@ -16,12 +16,24 @@ try {
   $smarty->assign('CSS',$CSS);
 
   //JS
-  $JS[]  = URL_JS . "jquery.1.9.1.js";
-
+  $JS[]  = URL_JS . "jquery.min.js";
   //Validation
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
   $smarty->assign('JS',$JS);
+          if ( isset($_SESSION['iddictapro']) && is_numeric($_SESSION['iddictapro']) )
+  {
+      $iddicta=$_SESSION['iddictapro'];
+  }
+  $dicta = new Dicta($iddicta);
+  
+   /**
+   * Menu superior
+   */
+  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>$dicta->getNombreMateria());
+  $menuList[]     = array('url'=>URL.Docente::URL.'evaluacion/estudiante.evaluacion-editar.php','name'=>'Evaluacion de Estudiantes');
+  $smarty->assign("menuList", $menuList);
 
     function array_recibe($url_array) { 
      $tmp = stripslashes($url_array); 

@@ -8,6 +8,7 @@ try {
     
   leerClase("Docente");
   leerClase("Evaluacion");
+  leerClase("Dicta");
   $ERROR = '';
 
   /** HEADER */
@@ -28,12 +29,16 @@ try {
   $JS[]  = URL_JS . "ventanasmodales/historial.notas.js";
   $JS[]  = URL_JS . "ventanasmodales/jquery.simplemodal-1.4.4.js";
   $smarty->assign('JS',$JS);
-
+    if ( isset($_SESSION['iddictapro']) && is_numeric($_SESSION['iddictapro']) )
+  {
+      $iddicta=$_SESSION['iddictapro'];
+  }
+  $dicta = new Dicta($iddicta);
    /**
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
-  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>'Proyecto Final');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>$dicta->getNombreMateria());
   $menuList[]     = array('url'=>URL.Docente::URL.'evaluacion/'.basename(__FILE__),'name'=>'Evaluacion de Estudiantes');
   $smarty->assign("menuList", $menuList);
   
@@ -51,13 +56,6 @@ try {
     }
     return $est;
         };
-
-  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
-  {
-     $iddicta = $_GET['iddicta'];
-  }else{
-      $iddicta=$_SESSION['iddictapro'];
-  }
 
   $resul = "
       SELECT ev.id as id
@@ -86,7 +84,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
      $evaluacion->rfinal=  promedio($promedio);
      $evaluacion->save();
  }
- $sqlreporte="SELECT es.codigo_sis as Codigo_SIS, CONCAT(us.apellido_paterno, us.apellido_materno, us.nombre) as Estudiante, pr.nombre as Nombre_Proyecto, ev.evaluacion_1 as EVA_1, ev.evaluacion_2 as EVA_2, ev.evaluacion_3 as EVA_3, ev.promedio as Prom, ev.rfinal as Apro
+ $sqlreporte="SELECT es.codigo_sis as Codigo_SIS, CONCAT(us.apellido_paterno,' ', us.apellido_materno,' ', us.nombre) as Estudiante, pr.nombre as Nombre_Proyecto, ev.evaluacion_1 as E1, ev.evaluacion_2 as E2, ev.evaluacion_3 as E3, ev.promedio as Pro, ev.rfinal as Apro
  FROM dicta di, estudiante es, usuario us, inscrito it, proyecto pr, proyecto_estudiante pe, evaluacion ev
  WHERE di.id=it.dicta_id
  AND it.estudiante_id=es.id
@@ -94,6 +92,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
  AND pe.estudiante_id=es.id
  AND pe.proyecto_id=pr.id
  AND it.evaluacion_id=ev.id
+ AND pr.es_actual=1
  AND di.id='".$iddicta."'";
       $smarty->assign("iddicta", $iddicta);
       $smarty->assign("sqlreporte", $sqlreporte);

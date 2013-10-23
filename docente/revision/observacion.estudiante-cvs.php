@@ -25,9 +25,22 @@ try {
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
   $smarty->assign('JS',$JS);
-
-  $docente=  getSessionDocente();
-  $docenteid=$docente->id;
+    leerClase('Dicta');
+    if ( isset($_SESSION['iddictapro']) && is_numeric($_SESSION['iddictapro']) )
+  {
+      $iddicta=$_SESSION['iddictapro'];
+  }
+  $dicta = new Dicta($iddicta);
+     /**
+   * Menu superior
+   */
+  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>$dicta->getNombreMateria());
+  $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/estudiante.lista.php','name'=>'Estudiantes Inscritos');
+  $menuList[]     = array('url'=>URL.Docente::URL.'revision/'.basename(__FILE__),'name'=>'Revision de Estudiantes por CSV');
+  $smarty->assign("menuList", $menuList);
+  
+  $docenteid=getSessionDocente();
 
     function estainscrito($sis) {
       $cond=0;
@@ -83,8 +96,8 @@ AND di.id=it.dicta_id
 AND it.estudiante_id=es.id
 AND it.evaluacion_id=ev.id
 AND pe.estudiante_id=es.id
-AND dt.id=5
-AND di.id=4   
+AND dt.id=$docenteid->id
+AND di.id=$iddicta
         ";
          $resultado = mysql_query($sql);
  while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) {

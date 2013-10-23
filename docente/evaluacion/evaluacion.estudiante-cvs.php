@@ -7,6 +7,7 @@ try {
   
   leerClase('Evaluacion');
   leerClase('Docente');
+  leerClase("Dicta");
   
   /** HEADER */
   $smarty->assign('title','SAPTI - Inscripcion de Estudiantes');
@@ -17,23 +18,29 @@ try {
   $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
   $smarty->assign('CSS',$CSS);
-  
-   /**
-   * Menu superior
-   */
-  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Docente');
-  $menuList[]     = array('url'=>URL.Docente::URL.basename(__FILE__),'name'=>'Evaluaciones de estudiantes por cvs');
-  $smarty->assign("menuList", $menuList);
+
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
-
   //Validation
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
   $smarty->assign('JS',$JS);
+        if ( isset($_SESSION['iddictapro']) && is_numeric($_SESSION['iddictapro']) )
+  {
+      $iddicta=$_SESSION['iddictapro'];
+  }
+  $dicta = new Dicta($iddicta);
+  
+   /**
+   * Menu superior
+   */
+  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>$dicta->getNombreMateria());
+  $menuList[]     = array('url'=>URL.Docente::URL.'evaluacion/estudiante.evaluacion-editar.php','name'=>'Evaluacion de Estudiantes');
+  $menuList[]     = array('url'=>URL.Docente::URL.'evaluacion/'.basename(__FILE__),'name'=>'Evaluacion de Estudiantes por CSV');
+  $smarty->assign("menuList", $menuList);
 
-  $docente=  getSessionDocente();
-  $docenteid=$docente->id;
+  $docenteid=getSessionDocente();
 
     function estainscrito($sis) {
       $cond=0;
@@ -87,8 +94,8 @@ WHERE di.docente_id=dt.id
 AND di.id=it.dicta_id
 AND it.estudiante_id=es.id
 AND it.evaluacion_id=ev.id
-AND dt.id=5
-AND di.id=4    
+AND dt.id=$docenteid->id
+AND di.id=$iddicta    
         ";
          $resultado = mysql_query($sql);
  while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) {

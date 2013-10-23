@@ -24,14 +24,20 @@ try {
   $smarty->assign('JS',$JS);
   $smarty->assign("ERROR", '');
   leerClase('Docente');
+  leerClase('Dicta');
+  
+  if ( isset($_SESSION['iddictapro']) && is_numeric($_SESSION['iddictapro']) )
+  {
+      $iddicta=$_SESSION['iddictapro'];
+  }
+  $dicta = new Dicta($iddicta);
   
    /**
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
-  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>'Proyecto Final');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>$dicta->getNombreMateria());
   $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/inscripcion.estudiante-cvs','name'=>'Inscripcion Estudiantes');
-  $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/'.basename(__FILE__),'name'=>'Inscripcion Estudiantes Resultado');
   $smarty->assign("menuList", $menuList);
   
     function array_recibe($url_array) { 

@@ -32,7 +32,7 @@ $grid->addColumn('apro', 'Aprobacion', 'string', NULL, false);
 $grid->addColumn('action', 'Historial', 'html', NULL, false);
 
 $result = $mysqli->query('
-SELECT ev.id as id, es.codigo_sis as codigo, us.nombre as nombre, CONCAT(us.apellido_paterno,us.apellido_materno) as apellidos, pr.nombre as nombrep, pr.id as id_pr, ev.evaluacion_1, ev.evaluacion_2, ev.evaluacion_3, ev.promedio as pro, ev.rfinal as apro
+SELECT ev.id as id, es.codigo_sis as codigo, us.nombre as nombre, CONCAT(us.apellido_paterno," ",us.apellido_materno) as apellidos, pr.nombre as nombrep, pr.id as id_pr, ev.evaluacion_1, ev.evaluacion_2, ev.evaluacion_3, ev.promedio as pro, ev.rfinal as apro
 FROM dicta di, estudiante es, usuario us, inscrito it, proyecto pr, proyecto_estudiante pe, evaluacion ev
 WHERE di.id=it.dicta_id
 AND it.estudiante_id=es.id
@@ -40,6 +40,7 @@ AND es.usuario_id=us.id
 AND pe.estudiante_id=es.id
 AND pe.proyecto_id=pr.id
 AND it.evaluacion_id=ev.id
+AND pr.es_actual="1"
 AND di.id="'.$iddicta.'"
 ');
 $mysqli->close();

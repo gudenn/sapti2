@@ -60,9 +60,11 @@ class Dicta extends Objectbase
   function getNombreMateria() 
   {
     leerClase('Materia');
-    $docente = new Docente($this->docente_id);
-    return $docente->getNombreCompleto();
+    leerClase('Codigo_grupo');
+    $materia    = new Materia($this->materia_id);
+    $grupo      = new Codigo_grupo($this->codigo_grupo_id);
+    $mat_grupo= trim(strtoupper("{$materia->nombre} {$grupo->nombre}"));
+    return $mat_grupo;
   }
-  
 }
 ?>

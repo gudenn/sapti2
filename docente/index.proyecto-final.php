@@ -31,6 +31,7 @@ try {
   leerClase('Docente');
   leerClase('Semestre');
   leerClase('Notificacion');
+  leerClase('Dicta');
 
   if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
   {
@@ -39,17 +40,15 @@ try {
   }  else {
       $iddicta=$_SESSION['iddictapro'];
   }
+  $dicta=new Dicta($iddicta);
   
   /**
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
-  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>'Proyecto Final');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>$dicta->getNombreMateria());
   $smarty->assign("menuList", $menuList);
   
-
-  
-
   $docente     = getSessionDocente();
   $usuario     = $docente->getUsuario();
   
@@ -58,9 +57,7 @@ try {
   $smarty->assign("iddicta", $iddicta);
   $smarty->assign("ERROR", $ERROR);
   
-  //$smarty->assign("columnacentro", 'docente/index.proyecto-final.tpl');
-  
-    /**
+  /**
    * Menu central
    */
   //----------------------------------//
@@ -72,12 +69,7 @@ try {
   $menu->agregarItem('Estudiantes Registrados','Estudiantes Registrados en la Materia de Proyecto Final','docente/inscritos.png',$link);
   $link = Docente::URL."evaluacion/estudiante.evaluacion-editar.php";
   $menu->agregarItem('Evaluacion de Estudiantes','Evaluacion de Estudiantes Registrados en la Materia de Proyecto Final','docente/evaluacion.png',$link);  
-  
-  $link = Docente::URL."perfil/estudiante.lista.php";
-  $menu->agregarItem('Evaluacion de Estudiantes','Evaluacion de Estudiantes Registrados en la Materia de Proyecto Final','docente/evaluacion.png',$link);  
-
   $menus[] = $menu;
-  
   
   $menu = new Menu('Calendario');
   $link = Docente::URL."calendario/calendario.evento.php";
@@ -88,26 +80,13 @@ try {
   $menu->agregarItem('Edici&oacute;n de Eventos','Edici&oacute;n de Eventos de la Materia de Proyecto Final','docente/edicion.png',$link);
   $menus[] = $menu;
  
-  
-  /*
-    $notificacion= new Notificacion();
-  $menu = new Menu('Notificaciones y Mensajes');
-  $link = Docente::URL."notificacion/notitribunal.php";
-  $menu->agregarItem('Notificaiones','Notificaciones para el Proyecto Final','docente/notificacion.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
-  $link = Docente::URL."calendario/evento.registro.php?iddicta={$iddicta}";
-  $menu->agregarItem('Mensajes','Mensajes para el Proyecto Final','docente/notificacion.png',$link);
-  $menus[] = $menu;
-  */
-
-  
   $menu = new Menu('Configuracion');
   $link = Docente::URL."configuracion/disponibilidad.php";
   $menu->agregarItem('Registro de Disponibilidad','Agregue Disponibilidad de Tiempo para Asistir a Defensas','basicset/plus_48.png',$link);
   $link = Docente::URL."configuracion/configuracion.php";
   $menu->agregarItem('Registro Areas','Agregue las de Areas de Interes para apoyar siendo Tribunal','basicset/plus_48.png',$link);
   $menus[] = $menu;
-  //----------------------------------//
-  
+  //----------------------------------//  
   
   $smarty->assign("menus", $menus);
   //No hay ERROR
