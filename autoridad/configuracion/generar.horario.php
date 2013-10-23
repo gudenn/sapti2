@@ -5,8 +5,8 @@ try {
   
 
   /** HEADER */
-  $smarty->assign('title','SAPTI - Registro Materia');
-  $smarty->assign('description','Formulario de registro de Materia');
+  $smarty->assign('title','SAPTI - Registro Horarios');
+  $smarty->assign('description','Horarios dis ponibles para las defensas');
   $smarty->assign('keywords','SAPTI,Materia,Registro');
 
   leerClase('Administrador');
@@ -14,7 +14,8 @@ try {
   leerClase('Dia');
   
   $diass= new Dia();
-  $diass->llemartabla();
+  $smarty->assign("diass", $diass);
+  
   
   
   
@@ -27,113 +28,16 @@ try {
   $smarty->assign("menuList", $menuList);
 
 
-  //CSS
-  $CSS[]  = URL_CSS . "academic/3_column.css";
-  $CSS[]  = URL_JS  . "validate/validationEngine.jquery.css";
-  //BOX
-  $CSS[]  = URL_JS . "box/box.css";
-  
-  $smarty->assign('CSS',$CSS);
 
-  //JS
-  $JS[]  = URL_JS . "jquery.min.js";
-
-
-  //Validation
-  $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
-  $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
-
-  //BOX
-  $JS[]  = URL_JS ."box/jquery.box.js";
-  $smarty->assign('JS',$JS);
+  $smarty->assign('header_ui','1');
+  $smarty->assign('CSS','');
+  $smarty->assign('JS','');
 
 
   $smarty->assign("ERROR", '');
-  leerClase('Materia');
-
-  // Rehice esta opcion porque no se podia editar!!! MUY MAL
-  $smarty->assign("tipo_values", array( ''                 , Materia::MATERIA_PE, Materia::MATERIA_PR));
-  $smarty->assign("tipo_output", array( '-- Seleccione --' , 'TIPO PERFIL'      , 'TIPO PROYECTO FINAL'));
-  
-  $smarty->assign('columnacentro','admin/materia/columna.centro.registro.tpl');
-  
-  /****
-   * 
-   */
-  
-$arryDias=array();
-$arryDias[]='Lunes';
-$arryDias[]='Martes';
-$arryDias[]='Miercoles';
-$arryDias[]='Jueves';
-$arryDias[]='Viernes';
-
-$arrahorario=array();
-$arrahorario[]='08:15';
-$arrahorario[]='09:45';
-$arrahorario[]='11:15';
-$arrahorario[]='12:45';
-$arrahorario[]='14:15';
-$arrahorario[]='15:45';
-$arrahorario[]='17:15';
-$arrahorario[]='18:45';
-$arrahorario[]='20:15';
-
-foreach ($arryDias as $dias)
-{
-  foreach ( $arrahorario as $horas)
-  {
-    
-    
-    
-  }
-  
-}  
-
-
-
+  $smarty->assign('columnacentro','admin/dia/horario.tpl');
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  $id = '';
-  if (isset($_GET['materia_id']) && is_numeric($_GET['materia_id']))
-    $id = $_GET['materia_id'];
-  $materia = new Materia($id);
-  if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
-  {
-    $EXITO = false;
-    mysql_query("BEGIN");
-    
-    $materia->objBuidFromPost();
-    $materia->estado = Objectbase::STATUS_AC;
-    $materia->validar();
-    $materia->save();
-    $EXITO = TRUE;
-    mysql_query("COMMIT");
-  }
-  $smarty->assign("materia",$materia);
-
-  //No hay ERROR
-  $ERROR = ''; 
-  leerClase('Html');
-  $html  = new Html();
-  if (isset($EXITO))
-  {
-    $html = new Html();
-    if ($EXITO)
-      $mensaje = array('mensaje'=>'Se grabo correctamente el Materia','titulo'=>'Registro de Materia' ,'icono'=> 'tick_48.png');
-    else
-      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Materia','titulo'=>'Registro de Materia' ,'icono'=> 'warning_48.png');
-   $ERROR = $html->getMessageBox ($mensaje);
-  }
-  $smarty->assign("ERROR",$ERROR);
   
 } 
 catch(Exception $e) 

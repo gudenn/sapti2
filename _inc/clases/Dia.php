@@ -20,6 +20,12 @@ class Dia extends Objectbase {
   var $descripcion;
 
   /**
+   * El orden de los dias
+   * SMALLINT 
+   */
+  var $orden;
+
+  /**
    * ( simple) Todas las horas  asignadas a un dia
    * @var Hora|null 
    */
@@ -29,7 +35,6 @@ class Dia extends Objectbase {
    * funcion para iniciar horario
    */
   function iniciarHorario() {
-
     $arryDias = array();
     $arryDias[] = 'Lunes';
     $arryDias[] = 'Martes';
@@ -48,55 +53,67 @@ class Dia extends Objectbase {
     $arrahorario[] = '18:45';
     $arrahorario[] = '20:15';
 
+    $contador = 1;
     foreach ($arryDias as $dias) {
-      $dia= new Dia();
-        $dia->nombre=$dias;
-        $dia->estado=  Objectbase::STATUS_AC;
-        
-        for ($valor=0; $valor< (sizeof($arrahorario)-1) ; $valor ++)
-        {
-           $hora = new Hora();
-           $hora->hora_inicio = $arrahorario[$valor];
-           $hora->hora_fin= $arrahorario[$valor+1];
-           $hora->estado = Objectbase::STATUS_AC;
-           $dia->hora_objs[]=$hora;
-          
-          
-        }
-     
-        $dia->save();
-        $dia->saveAllSonObjects(1);
+      $dia = new Dia();
+      $dia->nombre = $dias;
+      $dia->orden  = $contador;
+      $dia->estado = Objectbase::STATUS_AC;
+      $contador ++;
+
+      for ($valor = 0; $valor < (sizeof($arrahorario) - 1); $valor++) {
+        $hora = new Hora();
+        $hora->hora_inicio = $arrahorario[$valor];
+        $hora->hora_fin = $arrahorario[$valor + 1];
+        $hora->estado = Objectbase::STATUS_AC;
+        $dia->hora_objs[] = $hora;
+      }
+
+      $dia->save();
+      $dia->saveAllSonObjects(1);
     }
   }
-  
-  
-  function   llemartabla()
-  {
-  leerClase('Dia');
-  leerClase('Hora');
-     $dia= new Dia();
-     $dias= $dia->getAll();
-     var_dump($dias);
-     exit();
-     foreach ($dia->getAll() as $dias)
-       {
-      $dia= new Dia();
-           
-        for ($valor=0; $valor< (sizeof($arrahorario)-1) ; $valor ++)
-        {
-           $hora = new Hora();
-           $hora->hora_inicio = $arrahorario[$valor];
-           $hora->hora_fin= $arrahorario[$valor+1];
-           $hora->estado = Objectbase::STATUS_AC;
-           $dia->hora_objs[]=$hora;
-          
-          
-        }
+
+  function llemartabla() {
+    leerClase('Dia');
+    leerClase('Hora');
+    leerClase('Semestre');
+    $semestre = new Semestre('',1);
     
-       }
+    $valor = $semestre->getValor('Iniciar Horarios',1);
+    if ($valor)
+    {
+      $this->iniciarHorario();
+      $semestre->setValor('Iniciar Horarios',0);
+    }
+    
+    $dia = new Dia();
+    $dias = $dia->getAll('',' ORDER BY orden ASC ');
+    while ($row = mysql_fetch_array($dias[0])) {
+      
+      $dia  = new Dia($row);
+      $hora = new Hora();
+      if ($dia->nombre == 'Lunes')
+        $tdiaextra =  "<div class='horariodia'> Horas";
+      $tdia .=  "<div class='horariodia'> {$dia->nombre}";
+      $horas = $hora->getAll('',' ORDER BY id ASC '," WHERE dia_id = '{$dia->id}' ");
+      while ($rowd = mysql_fetch_array($horas[0])) {
+        $hora = new Hora($rowd); 
+        $tdia .=  "<div class='horariohora'>
+                {$hora->id}
+                <input type=\"checkbox\" name=\"hora_id[]\" value=\"{$hora->id}\" />
+                </div>";
+        if ($dia->nombre == 'Lunes')
+          $tdiaextra .= "<div class='horariohora'> {$hora->hora_inicio}</div>";
+      }
+      $tdia .= "</div>";
+      if ($dia->nombre == 'Lunes')
+        $tdiaextra .=  "</div>";
+    }
+    echo $tdiaextra.$tdia;
   }
-  
-            function validar() {
+
+  function validar() {
     leerClase('Formulario');
     Formulario::validar('nombre', $this->nombre, 'texto', 'El Nombre');
     Formulario::validar('descripcion', $this->descripcion, 'texto', 'El Descrpcion');
