@@ -153,17 +153,17 @@ class Menu
       $thises[] = $thise;
       
     } 
-    // Notificaiones para todos
+    // Notificaciones para todos
 
-    // Notificaiones 
+    // Notificaciones 
     leerClase('Usuario');
     leerClase('Notificacion');
     $usuario      = getSessionUser();
     $notificacion = new Notificacion();
 
-    $thise = new Menu('Notificaiones y Mensajes');
+    $thise = new Menu('Notificaciones y Mensajes');
     $link = Administrador::URL."notificacion/";
-    $thise->agregarItem('Notificaiones','Gesti&oacute;n de notificaiones','basicset/message-archived.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+    $thise->agregarItem('Notificaciones','Gesti&oacute;n de Notificaciones','basicset/message-archived.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
     $link = Administrador::URL."notificacion/notificacion.gestion.php?estado_notificacion=SV";
     $counter = $notificacion->getTodasNotificaciones($usuario->id, '', '', ' AND estado_notificacion="SV" ');
     $thise->agregarItem('Notificaciones Pendientes','Todas las notificaciones no leidas','basicset/message-not-read.png',$link,$counter[1]);
@@ -191,15 +191,15 @@ class Menu
     }
     $thises[] = $thise;
 
-    // Notificaiones 
+    // Notificaciones 
    leerClase('Usuario');
    leerClase('Notificacion');
    $usuario      = getSessionUser();
    $notificacion = new Notificacion();
 
-    $thise = new Menu('Notificaiones y Mensajes');
+    $thise = new Menu('Notificaciones y Mensajes');
     $link = Estudiante::URL."notificacion/";
-    $thise->agregarItem('Notificaiones','Gesti&oacute;n de notificaiones','basicset/message-archived.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+    $thise->agregarItem('Notificaciones','Gesti&oacute;n de Notificaciones','basicset/message-archived.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
     $link = Estudiante::URL."notificacion/notificacion.gestion.php?estado_notificacion=SV";
     $counter = $notificacion->getTodasNotificaciones($usuario->id, '', '', ' AND estado_notificacion="SV" ');
     $thise->agregarItem('Notificaciones Pendientes','Todas las notificaciones no leidas','basicset/message-not-read.png',$link,$counter[1]);
@@ -298,12 +298,12 @@ ORDER BY ma.id";
   $notificacion = new Notificacion();
   $thise = new Menu('Tutor');
   $link = Docente::URL."tutor/index.php";
-  $thise->agregarItem('Notificaiones','Notificaciones para el Proyecto Final','docente/notificacion.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+  $thise->agregarItem('Notificaciones','Notificaciones para el Proyecto Final','docente/notificacion.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
   $thises[] = $thise;
   
   $thise = new Menu('Tribunal');
   $link = Docente::URL."tribunal/index.php";
-  $thise->agregarItem('Notificaiones','Notificaciones para el Proyecto Final','docente/notificacion.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+  $thise->agregarItem('Notificaciones','Notificaciones para el Proyecto Final','docente/notificacion.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
   $thises[] = $thise;
   
   $thise = new Menu('Tiempo');
@@ -316,13 +316,13 @@ ORDER BY ma.id";
   $thise->agregarItem('Configuracion','Agregar Areas De Disponibilidad','docente/notificacion.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
   $thises[] = $thise;
    
-   // Notificaiones 
+   // Notificaciones 
   $usuario      = getSessionUser();
   $notificacion = new Notificacion();
 
-   $thise = new Menu('Notificaiones y Mensajes');
+   $thise = new Menu('Notificaciones y Mensajes');
    $link = Docente::URL."notificacion/";
-   $thise->agregarItem('Notificaiones','Gesti&oacute;n de notificaiones','basicset/message-archived.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+   $thise->agregarItem('Notificaciones','Gesti&oacute;n de Notificaciones','basicset/message-archived.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
    $link = Docente::URL."notificacion/notificacion.gestion.php?estado_notificacion=SV";
    $counter = $notificacion->getTodasNotificaciones($usuario->id, '', '', ' AND estado_notificacion="SV" ');
    $thise->agregarItem('Notificaciones Pendientes','Todas las notificaciones no leidas','basicset/message-not-read.png',$link,$counter[1]);
