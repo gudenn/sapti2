@@ -70,11 +70,11 @@ class Docente extends Objectbase{
   }
   
   /**
-   * 
+   * funcion para Iniciar los Horarios de  un docente
    */
   function iniciarHorario() {
     $sql = "DELETE FROM {$this->getTableName('Horario_docente')} WHERE docente_id = '{$this->id}' ";
-    
+    mysql_query($sql);
   }
     /**
    * get user if exist else return 0

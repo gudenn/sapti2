@@ -2,20 +2,20 @@
 /**
  * Esta clase es para guardar los tribunales de cada proyecto
  */
-class Horario_doc extends Objectbase 
+class Horario_docente extends Objectbase 
 { 
  /**
-  * Id del tribunal
+  * Id del Docente
   * @var INT(11)
   */
   var $docente_id;
   
  /**
-  * Id del docente
+  * Id del Hora
   * @var INT(11)
   */
-  var $dia_id;
-   var $turno_id;     
+  var $hora_id;
+    
 }
 
 ?>

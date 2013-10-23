@@ -74,7 +74,11 @@ class Dia extends Objectbase {
     }
   }
 
-  function llemartabla() {
+  /**
+   *   Recuperar la tabla de horarios
+   * @param type $iddocente
+   */
+  function llemartabla($iddocente=false) {
     leerClase('Dia');
     leerClase('Hora');
     leerClase('Semestre');
@@ -87,7 +91,8 @@ class Dia extends Objectbase {
       $semestre->setValor('Iniciar Horarios',0);
     }
     
-    $dia = new Dia();
+    $hora = new Hora();
+    $dia  = new Dia();
     $dias = $dia->getAll('',' ORDER BY orden ASC ');
     while ($row = mysql_fetch_array($dias[0])) {
       
@@ -98,10 +103,11 @@ class Dia extends Objectbase {
       $tdia .=  "<div class='horariodia'> {$dia->nombre}";
       $horas = $hora->getAll('',' ORDER BY id ASC '," WHERE dia_id = '{$dia->id}' ");
       while ($rowd = mysql_fetch_array($horas[0])) {
-        $hora = new Hora($rowd); 
+        $hora  = new Hora($rowd); 
+        $check = $hora->getAsignada($iddocente, $hora->id)?'checked="checked"':'';
         $tdia .=  "<div class='horariohora'>
                 {$hora->id}
-                <input type=\"checkbox\" name=\"hora_id[]\" value=\"{$hora->id}\" />
+                <input type=\"checkbox\" name=\"hora_id[]\" value=\"{$hora->id}\" $check />
                 </div>";
         if ($dia->nombre == 'Lunes')
           $tdiaextra .= "<div class='horariohora'> {$hora->hora_inicio}</div>";

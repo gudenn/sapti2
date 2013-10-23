@@ -4,7 +4,7 @@ try {
   require('../_start.php');
   if(!isDocenteSession())
     header("Location: login.php"); 
-  global $PAISBOX;
+
     /** HEADER */
   $smarty->assign('title','Modificacion de Observaciones');
   $smarty->assign('description','Formulario de Modificacion de Observaciones');
@@ -48,7 +48,7 @@ try {
      
    if ( isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' )
   {
-    $docentes     =  getSessionDocente();
+    $docentes     = getSessionUser();
     $docente_idss =  $docentes->id;
  
     $sqla="select a.id, ap.`id` as idapoyo
@@ -79,11 +79,11 @@ where u.id=d.`usuario_id` and d.`id`=ap.`docente_id` and ap.`area_id`=a.id and u
      foreach ($_POST['myselect'] as $id)
      {
    // echo $id;
-      $apoyo = new Apoyo();
+          $apoyo = new Apoyo();
                 $apoyo->objBuidFromPost();
                 $apoyo->estado = Objectbase::STATUS_AC;
                 $apoyo->area_id=$id;
-                $apoyo->docente_id =$iddocente;
+                $apoyo->docente_id = getSessionDocente()->id;
                 $apoyo->save();
           
      }
