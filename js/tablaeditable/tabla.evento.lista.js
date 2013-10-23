@@ -10,7 +10,8 @@
  */
 
 // create our editable grid
-var editableGrid = new EditableGrid("listaevento", {
+var time=Math.random();
+var editableGrid = new EditableGrid("listaevento"+time, {
 	pageSize: 10
 });
 
