@@ -3,7 +3,7 @@ try {
   define ("MODULO", "DOCENTE");
   require('../_start.php');
   if(!isDocenteSession())
-    header("Location: login.php"); 
+    header("Location: ../login.php"); 
 
   leerClase('Docente');
   leerClase('Dicta');
@@ -25,12 +25,11 @@ try {
   $JS[]  = URL_JS . "tablaeditable/tabla.estudiante.lista.js";
   $smarty->assign('JS',$JS);
   
-    if ( isset($_SESSION['iddictapro']) && is_numeric($_SESSION['iddictapro']) )
+  if ( isset($_SESSION['iddictapro']) && is_numeric($_SESSION['iddictapro']) )
   {
      $iddicta = $_SESSION['iddictapro'];
   }
   $dicta=new Dicta($iddicta);
-  //$dicta
    /**
    * Menu superior
    */

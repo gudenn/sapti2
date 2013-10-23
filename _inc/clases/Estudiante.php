@@ -204,6 +204,65 @@ class Estudiante extends Objectbase {
     $proyecto->es_actual = '1';
     $proyecto->save();
   }
+  
+  /**
+   * Devuelve el objeto dicata en el que esta inscrito un estudiante
+   * @return Dicta
+   */
+  function getDicta()
+  {
+    leerClase('Dicta');
+    leerClase('Inscrito');
+    $this->getAllObjects();
+    // buscamos todas las materias inscritas
+    foreach ($this->inscrito_objs as $inscrito) {
+      if ($inscrito->estado_inscrito == Inscrito::E_ACTUAL )
+        return new Dicta ($inscrito->dicta_id);
+    }
+    return new Dicta ();
+    
+  }
+  
+  /**
+   * devuelve el docente de unestudiante
+   * 
+   */
+  
+  function  getDocente()
+  {
+    /**
+     * SELECT d.*
+FROM   docente d, dicta di, estudiante es, inscrito it
+WHERE di.id=it.dicta_id
+AND it.estudiante_id=es.id
+AND d.id=di.docente_id
+and es.id=9
+     */
+      leerClase('Docente');
+    $activo = Objectbase::STATUS_AC;
+    // $sql = "select p.* from ".$this->getTableName('Proyecto_estudiante')." as pe , ".$this->getTableName('Proyecto')." as p   where pe.estudiante_id = '$this->id' and pe.proyecto_id = p.id and pe.estado = '$activo' and p.estado = '$activo'  ";
+
+    $sql = "SELECT d.*
+FROM   docente d, dicta di, estudiante es, inscrito it
+WHERE di.id=it.dicta_id
+AND it.estudiante_id=es.id
+AND d.id=di.docente_id
+and es.id='$this->id'";
+
+    $resultado = mysql_query($sql);
+    if (!$resultado)
+      return false;
+    if (!mysql_num_rows($resultado))
+      return new Docente();
+    $docente_array = mysql_fetch_array($resultado);
+    $docente      = new Docente( $docente_array);
+    return $docente;
+    
+    
+    
+    
+
+  }
 
   /**
    * Get usuario de un estudiante

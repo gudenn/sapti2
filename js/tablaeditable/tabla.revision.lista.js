@@ -66,7 +66,7 @@ EditableGrid.prototype.initializeGrid = function(estid)
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
  
                 if(getValueAt(cell.rowIndex, '1')=='0'){
-                cell.innerHTML = "<a href='#' class='avancedetalle' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
+                cell.innerHTML = "<a onclick=\"sessionAvanceDe(" + getRowId(cell.rowIndex) + ", " + estid + ");\" class='avancedetalle' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("icons/detalle.png") + "\" border=\"0\" alt=\"detalle\" title=\"Detalle Avance\" />Detalle</a>";
                 cell.innerHTML += "<br><a onclick=\"sessionAvance(" + getRowId(cell.rowIndex) + ", " + estid + ");\" style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("icons/basicset/document_pencil.png") + "\" border=\"0\" alt=\"revisar\" title=\"Revisar\" width='25px' height='25px'/>Revisar</a>";
@@ -75,7 +75,7 @@ EditableGrid.prototype.initializeGrid = function(estid)
                 cell.innerHTML = "<a href='#' class='observaciondetalle' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
 			 "<img src=\"" + image("icons/detalle.png") + "\" border=\"0\" alt=\"detalle\" title=\"Detalle Revision\"/>Detalle</a>";
                 }else{
-                cell.innerHTML = "<a href='#' class='avancedetalle' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
+                cell.innerHTML = "<a onclick=\"sessionAvanceDe(" + getRowId(cell.rowIndex) + ", " + estid + ");\" class='avancedetalle' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("icons/detalle.png") + "\" border=\"0\" alt=\"detalle\" title=\"Detalle Avance\" />Detalle</a>";
                       }
                 if(getValueAt(cell.rowIndex, '2')=='DO' && getValueAt(cell.rowIndex, '4')=='CR'){                        
@@ -280,6 +280,26 @@ function sessionAvance(seccion, est) {
 		{ 
                     if(response=="ok"){
                         document.location.href='../revision/avance.detalle.php';
+                    }else{
+                       alert("Intente De Nuevo");
+                    }
+		},
+		error: function() { alert("Ajax failure\n"); },
+		async: true
+	});
+};
+function sessionAvanceDe(seccion, est) {
+	$.ajax({ 
+		url: '../variable.session.avac.php',
+		type: 'POST',
+		dataType: "html",
+		data: { 
+			avance : seccion,
+                        estudiante_id : est
+		},
+		success: function (response) 
+		{ 
+                    if(response=="ok"){
                     }else{
                        alert("Intente De Nuevo");
                     }

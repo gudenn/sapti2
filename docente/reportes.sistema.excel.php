@@ -3,8 +3,7 @@
    leerClase('Usuario');
    leerClase('Dicta');
 	
-        //$consulta = $_GET['sql'];
-        $consulta="SELECT * FROM usuario";
+        $consulta = $_GET['sql'];
 	$resultado =mysql_query($consulta); 
 	
 		date_default_timezone_set('America/Mexico_City');
@@ -62,7 +61,7 @@
                                 'bold'      => true,
                                 'italic'    => false,
                                 'strike'    => false,
-                                'size'      => 12,
+                                'size'      => 9,
                                 'color'     => array(
                                                     'rgb' => '000000'
                                                 )
