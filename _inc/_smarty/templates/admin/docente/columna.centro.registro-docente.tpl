@@ -12,6 +12,24 @@
             <!-- ############ -->
             {include file="admin/usuario/registro.base.tpl"}
             <!-- ############ -->
+            
+              <p>
+          <select name="numero_horas" id="numero_horas">
+          <option>-Seleccione-</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+          <option>9</option>
+          <option>10</option>
+          <option>11</option>
+          <option>12</option>
+          </select>
+          <label for="numero_horas"><small>Numero de Horas Asignadas (*){getHelpTip('Numero de Horas disponibles')}</small></label>
+          
+           </p>
             <h2 class="title">Grabar Docente</h2>
             <p>
               <input type="hidden" name="usuario_id"    value="{$usuario->id}">

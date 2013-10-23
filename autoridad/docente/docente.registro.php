@@ -80,6 +80,8 @@ try {
   }
   $smarty->assign("titulo_h_values", $titulo_h_values);
   $smarty->assign("titulo_h_output", $titulo_h_output);
+ 
+ 
 
   $editar = FALSE;
   
@@ -113,6 +115,8 @@ try {
     $docente->objBuidFromPost();
     $docente->estado     = Objectbase::STATUS_AC;
     $docente->usuario_id = $usuario->id;
+    $docente->configuracion_area=0;
+    $docente->configuracion_horario=0;
     $docente->save();
 
     //tambien creamos su usuario docente
