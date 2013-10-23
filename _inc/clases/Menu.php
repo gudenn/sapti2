@@ -88,7 +88,7 @@ class Menu
       $thise->agregarItem('Reportes de Usuarios','Reportes correspondientes a los Todos los Usuarios','basicset/graph.png',$link);
       $menus[] = $thise;  
       $thise = new Menu('Reprogramaciones');
-      $link = Administrador::URL."estados/";
+      $link = Administrador::URL."reprogramacion/";
       $thise->agregarItem('Gesti&oacute;n de Reprogramaciones','Postergar y dar Prorroga a Proyectos','basicset/calendar.png',$link);
       $menus[] = $thise;
       $thise = new Menu('Perfil');

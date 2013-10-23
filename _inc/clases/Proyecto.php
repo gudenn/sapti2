@@ -335,6 +335,28 @@ class Proyecto extends Objectbase {
     }
     return $areas;
   }
+  
+   /**
+   * Creamos un proyecto inicial de tal manera que los estudiantes nunca estnen sin proyectos
+   */
+  function getObjetivo() {
+    //@TODO revisar
+    //  leerClase('Proyecto_area');
+    leerClase('Objetivo_especifico');
+
+    $objetivos= array();
+    $activo = Objectbase::STATUS_AC;
+    $sql = "select v.* from " . $this->getTableName('Objetivo_especifico') . " as v    where v.proyecto_id = '$this->id' and v.estado = '$activo'";
+    $resultado = mysql_query($sql);
+    if (!$resultado)
+      return false;
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) {
+      $objetivos[] = new Objetivo_especifico($fila);
+    }
+    return $objetivos;
+  }
+ 
+  
 
   /**
    * Asignamos Estudiante

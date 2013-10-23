@@ -1,7 +1,7 @@
 <?php
 try {
   define ("MODULO", "ADMIN-DOCENTE");
-  require('../_start.php');
+  require('../../_start.php');
   if(!isAdminSession())
     header("Location: login.php");  
 
@@ -31,6 +31,7 @@ try {
   $menuList[]     = array('url'=>URL . Administrador::URL . 'docente/','name'=>'Docente');
   $smarty->assign("menuList", $menuList);
 
+  
 
   /**
    * Menu central
@@ -46,15 +47,8 @@ try {
   $menu->agregarItem('Asignacion de Materias','Asignacion de Materias a los Docentes','basicset/survey.png',$link);  
   $menus[] = $menu;
   
-  $menu = new Menu('Configurar');
-  $link = Administrador::URL."docente/";
-  $menu->agregarItem('Configurar horarios','Configurar horas al docente','basicset/survey.png',$link);  
-  $link = Administrador::URL."docente/";
-  $menu->agregarItem('Configurar Areas','Configurar Areas','basicset/survey.png',$link);  
-  $menus[] = $menu;
-  
   $menu = new Menu('Reportes');
-  $link = Administrador::URL."docente/";
+  $link = Administrador::URL."docente/reporte";
   $menu->agregarItem('Reportes de Docente','Reportes correspondientes a los Docentes','basicset/graph.png',$link);
   $menus[] = $menu;
   //----------------------------------//
