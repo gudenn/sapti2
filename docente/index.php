@@ -101,12 +101,22 @@ leerClase('Menu');
   $menu = new Menu('Tutor');
   $link = Docente::URL."tutor/index.php";
   $menu->agregarItem('Notificaiones','Notificaciones para el Proyecto Final','docente/notificacion.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
-   $menus[] = $menu;
+  $menus[] = $menu;
   
-   $menu = new Menu('Tribunal');
+  $menu = new Menu('Tribunal');
   $link = Docente::URL."tribunal/index.php";
   $menu->agregarItem('Notificaiones','Notificaciones para el Proyecto Final','docente/notificacion.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
-   $menus[] = $menu;
+  $menus[] = $menu;
+  
+  $menu = new Menu('Tiempo');
+  $link = Docente::URL."configuracion/disponibilidad.php";
+  $menu->agregarItem('Disponibilidad','Disponibilidad De Tiempo','docente/notificacion.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+  $menus[] = $menu;
+  
+  $menu = new Menu('Agregar Areas');
+  $link = Docente::URL."configuracion/configuracion.php";
+  $menu->agregarItem('Configuracion','Agregar Areas De Disponibilidad','docente/notificacion.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+  $menus[] = $menu;
    
    // Notificaiones 
   leerClase('Usuario');

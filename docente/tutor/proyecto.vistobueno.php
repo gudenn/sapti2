@@ -10,7 +10,7 @@ try {
   leerClase('Estudiante');
   leerClase('Usuario');
   leerClase('Proyecto');
-
+  leerClase('Notificacion');
   /** HEADER */
   $smarty->assign('title','Proyecto Final');
   $smarty->assign('description','Proyecto Final');
@@ -65,8 +65,7 @@ try {
         $docente                       =       getSessionDocente();
 
         
-        
-        $estudiante= new Estudiante($_POST['estudiante_id']);/// crando el estudiante
+         $estudiante= new Estudiante($_SESSION['pro_estudiente_id']);/// crando el estudiante
         $proyectoestudiante= $estudiante->getProyecto();  // obtien e el proyecto del estudioante
         $usuario= getSessionUser();
         $usuario->getAllObjects();
@@ -76,9 +75,9 @@ try {
        foreach ($usuario->tutor_objs as $tutor_id)
         {
               $vistobueno->objBuidFromPost();
-             // $vistobueno->proyecto_id       =       $_POST['pro'];
+              $vistobueno->proyecto_id       =       $proyectoestudiante->id;
               $vistobueno->visto_bueno_tipo  =        Visto_bueno::E2_TUTOR;
-              $vistobueno->visto_bueno_id    =     $tutor_id->id;    
+              $vistobueno->visto_bueno_id    =        $tutor_id->id;    
               $vistobueno->estado            =        Objectbase::STATUS_AC;
               $vistobueno->save();
               
@@ -87,10 +86,10 @@ try {
                     $notificacions->objBuidFromPost();
                     $notificacions->proyecto_id = $proyecto->id; 
                     $notificacions->tipo        =  Notificacion::TIPO_MENSAJE;
-                    $notificacions->fecha_envio = date("j/n/Y");
-                    $notificacions->asunto      = "Visto bueno del Tutor";
-                    $notificacions->prioridad   = 7;
-                    $notificacions->estado      = Objectbase::STATUS_AC;
+                    $notificacions->fecha_envio =  date("j/n/Y");
+                    $notificacions->asunto      =  "Visto bueno del Tutor";
+                    $notificacions->prioridad   =  7;
+                    $notificacions->estado      =   Objectbase::STATUS_AC;
 
                     $noticaciones = array('estudiantes'=>array($estudiante->id));
                     $notificacions->enviarNotificaion( $noticaciones);

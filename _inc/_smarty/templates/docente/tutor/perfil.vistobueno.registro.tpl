@@ -1,25 +1,20 @@
       <div id="content">
-        <h1 class="title">REGISTRO DE OBSERVACIONES</h1>
+        <h1 class="title">Registro de Visto Bueno</h1>
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
             <p>
-               <label for="nombre de proyecto"><small>NOMBRE DE PROYECTO:</small></label>
+               <label for="nombre de proyecto"><small>Nombre De Proyecto:</small></label>
                <span>{$proyecto->nombre}</span><br/>
-               <label for="nombre de estudiante"><small>NOMBRE DE ESTUDIANTE:</small></label>
+               <label for="nombre de estudiante"><small>Nombre De Estudiante:</small></label>
                <span>{$usuario->nombre} {$usuario->apellido_paterno} {$usuario->apellido_materno}</span>
             </p>
             <br/>
-             <p> Al parecer usted no tiene un plugin PDF para este navegador.
-            No hay problema ... puedes <a href="/sapti/ARCHIVO/proyecto.pdf"> clic aquí para descargar el archivo PDF. </ a> </ p>
-              
-        
-           
-            <p>
+             
               <input type="text" name="fecha_revision" id="fecha_revision" value="{$revision->fecha_revision}" size="22"/>
-              <label for="fecha_revision"><small>FECHA DE REVISION</small></label>
+              <label for="fecha_revision"><small>FECHA</small></label>
             </p>
 
-            <h2 class="title">Grabar Revision</h2>
+            <h2 class="title">Grabar </h2>
             <p>
               <input type="hidden" name="proyecto_id" value="{$proyecto->id}">
               <input type="hidden" name="visto_bueno_id" value="{$usuario->id}">
