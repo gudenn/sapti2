@@ -66,12 +66,12 @@ try {
   leerClase('Objetivo_especifico');
   
   //cambio de tema
-  $cambio='NO';
+  $cambio_tema='NO';
   if(isset($_GET['cambio_leve']))
-  $cambio='SI';
+  $cambio_tema='SI';
   if(isset($_GET['cambio_total']))
-  $cambio='SI';
-  $smarty->assign('cambio', $cambio);
+  $cambio_tema='SI';
+  $smarty->assign('cambio_tema', $cambio_tema);
   
   $semestre   = new Semestre(false,true);
   //si o si trabajamos aca con un estudiante asi que lo guardaremos en session
@@ -83,6 +83,7 @@ try {
     $_SESSION['estudiante_id'] = $_GET['estudiante_id'];
     $estudiante_id             = $_GET['estudiante_id'];
   }
+  
   $estudiante = new Estudiante($estudiante_id);
   $estudiante->getAllObjects();
   $usuario    = $estudiante->getUsuario();
@@ -91,9 +92,9 @@ try {
   //si cambio leve mandamos el mismo proyecto si cambio total creamos un nuevo proyecto
   if(isset($_GET['cambio_leve']))
   $proyecto = $estudiante->getProyecto();
-  if(isset($_GET['cambio_total']))
+  if(isset($_GET['cambio_total'])){
   $proyecto=new Proyecto();
-  
+  }
   $proyecto->getAllObjects();
   
 
@@ -256,7 +257,10 @@ try {
       $especifico->validar();
       $proyecto->objetivo_especifico_objs[] = $especifico;
     }
-   $proyecto->asignarEstudiante($estudiante->id);
+     if(isset($_GET['cambio_total'])){
+  $proyecto->asignarEstudiante($estudiante->id);
+  }
+   
     
     //areas y subareas
     $contador = 0;
@@ -308,36 +312,42 @@ try {
     
      //cambio_leve
     $cantidad=$estudiante->numero_cambio_leve;
-    if ( isset($_GET['cambio_leve'])&$cantidad<=Cambio::CANTCAMBIO)
+    if ( isset($_GET['cambio_leve']))
     {  
-       $cambio=new Cambio();
-       $cambio->estado=Objectbase::STATUS_AC;
-       $cambio->fecha_cambio= date('d/m/Y');
-       $cambio->proyecto_id=$proyectoest->id;
-       $cambio->tipo= Cambio::CAMBIOLEVE;
+       leerClase('Semestre');
+       $semestre             = new Semestre('',1);
+       $maximo_cambios_leves = $semestre->getValor('maximo cambios leves', 3);
+       $cambio               = new Cambio();
+       $cambio->estado       = Objectbase::STATUS_AC;
+       $cambio->fecha_cambio = date('d/m/Y');
+       $cambio->proyecto_id  = $proyecto->id;
+       $cambio->tipo         = Cambio::CAMBIOLEVE;
        $cambio->save();
-       $estudiante->numero_cambio_leve=1;
+      
+      if ( $maximo_cambios_leves <= $estudiante->numero_cambio_leve )
+      
+         echo "<script>alert('El estudiante {$estudiante->getNombreCompleto()} ha alcanzado el maximo de cambios totales');</script>";
+         throw new Exception("?nombre&m='El estudiante {$estudiante->getNombreCompleto()} ha alcanzado el maximo de cambios totales'");
+       $estudiante->numero_cambio_leve = $estudiante->numero_cambio_leve + 1;
        $estudiante->save();
-       //grabamos el proyecto tutor
-       $ptutor=$proyectoest->getProyectoTutor();
-       $proyectotutor=new Proyecto_tutor($ptutor[0]->id);
-       $proyectotutor->proyecto_id=$proyecto->id;
-       $proyectotutor->save();
-       //desactivaamos el proyecto anterior
-       
-   }
-     //cambio_total
-    if ( isset($_GET['cambio_total'])&$cantidad<=Cambio::CANTCAMBIO)
+    }
+    //cambio_total
+    if ( isset($_GET['cambio_total']))
     {
-       $cambio=new Cambio();
-       $cambio->estado=Objectbase::STATUS_AC;
-       $cambio->fecha_cambio= date('d/m/Y');
-       $cambio->proyecto_id=$proyectoest->id;
-       $cambio->tipo= Cambio::CAMBIOTOTAL;
+       leerClase('Semestre');
+       $semestre             = new Semestre(' ',1);
+       $maximo_cambios_total = $semestre->getValor('maximo cambios totales', 2);
+       $cambio               = new Cambio();
+       $cambio->estado       = Objectbase::STATUS_AC;
+       $cambio->fecha_cambio = date('d/m/Y');
+       $cambio->proyecto_id  = $proyecto->id;
+       $cambio->tipo         = Cambio::CAMBIOTOTAL;
        $cambio->save();
-       $estudiante->numero_cambio_total=1;
+       if ( $maximo_cambios_total <= $estudiante->numero_cambio_total )
+         echo "<script>alert('El estudiante {$estudiante->getNombreCompleto()} ha alcanzado el maximo de cambios totales');</script>";
+         throw new Exception("?nombre&m='El estudiante {$estudiante->getNombreCompleto()} ha alcanzado el maximo de cambios totales'");
+       $estudiante->numero_cambio_total = $estudiante->numero_cambio_total + 1;
        $estudiante->save();
-     
        //desactivamos el proyecto anterior
        $proyectoest->es_actual=0;
        $proyectoest->save();

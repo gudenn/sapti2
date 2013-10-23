@@ -26,7 +26,21 @@ class Docente extends Objectbase{
   * @var object|null 
   */
   var $dicta_objs;
-
+   /**
+  * Numero de Horas asignadas
+  * @var INT(11)
+  */
+  var $numero_horas;
+   /**
+  * Configuracion area docente
+  * @var BOOLEAN
+  */
+  var $configuracion_area;
+   /**
+  * configuracion horario docente
+  * @var BOOLEAN
+  */
+  var $configuracion_horario;
     /**
    * Constructor del Docente
    * @param type $id id de la tabla
@@ -67,6 +81,14 @@ class Docente extends Objectbase{
       return false;
     $usuario = new Usuario($this->usuario_id);
     return $usuario->getNombreCompleto($echo);
+  }
+  
+  /**
+   * 
+   */
+  function iniciarHorario() {
+    $sql = "DELETE FROM {$this->getTableName('Horario_docente')} WHERE docente_id = '{$this->id}' ";
+    
   }
     /**
    * get user if exist else return 0

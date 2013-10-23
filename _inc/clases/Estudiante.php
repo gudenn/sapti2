@@ -26,7 +26,7 @@ class Estudiante extends Objectbase {
 
  /**
   * (Objeto simple) Todas las materias en la que esta inscrito este estudiante
-  * @var Inscrito|null 
+  * @var object|null 
   */
   var $inscrito_objs;
   
@@ -35,7 +35,17 @@ class Estudiante extends Objectbase {
   * @var object|null 
   */
   var $notificacion_estudiante_objs;
+     /**
+  * Cantidad de cambios_leves que tiene este estudiante
+  * @var INT(11)
+  */
+  var $numero_cambio_leve;
   
+    /**
+  * Cantidad de cambios_total que tiene este estudiante
+  * @var INT(11)
+  */
+  var $numero_cambio_total;
   /**
    * Constructor del estudiante
    * @param type $id id de la tabla
@@ -194,65 +204,6 @@ class Estudiante extends Objectbase {
     $proyecto->es_actual = '1';
     $proyecto->save();
   }
-  
-  /**
-   * Devuelve el objeto dicata en el que esta inscrito un estudiante
-   * @return Dicta
-   */
-  function getDicta()
-  {
-    leerClase('Dicta');
-    leerClase('Inscrito');
-    $this->getAllObjects();
-    // buscamos todas las materias inscritas
-    foreach ($this->inscrito_objs as $inscrito) {
-      if ($inscrito->estado_inscrito == Inscrito::E_ACTUAL )
-        return new Dicta ($inscrito->dicta_id);
-    }
-    return new Dicta ();
-    
-  }
-  
-  /**
-   * devuelve el docente de unestudiante
-   * 
-   */
-  
-  function  getDocente()
-  {
-    /**
-     * SELECT d.*
-FROM   docente d, dicta di, estudiante es, inscrito it
-WHERE di.id=it.dicta_id
-AND it.estudiante_id=es.id
-AND d.id=di.docente_id
-and es.id=9
-     */
-      leerClase('Docente');
-    $activo = Objectbase::STATUS_AC;
-    // $sql = "select p.* from ".$this->getTableName('Proyecto_estudiante')." as pe , ".$this->getTableName('Proyecto')." as p   where pe.estudiante_id = '$this->id' and pe.proyecto_id = p.id and pe.estado = '$activo' and p.estado = '$activo'  ";
-
-    $sql = "SELECT d.*
-FROM   docente d, dicta di, estudiante es, inscrito it
-WHERE di.id=it.dicta_id
-AND it.estudiante_id=es.id
-AND d.id=di.docente_id
-and es.id='$this->id'";
-
-    $resultado = mysql_query($sql);
-    if (!$resultado)
-      return false;
-    if (!mysql_num_rows($resultado))
-      return new Docente();
-    $docente_array = mysql_fetch_array($resultado);
-    $docente      = new Docente( $docente_array);
-    return $docente;
-    
-    
-    
-    
-
-  }
 
   /**
    * Get usuario de un estudiante
@@ -380,10 +331,6 @@ and es.id='$this->id'";
       return false;
   }
 
-  /**
-   * Grabamos el avance que realizo el estudiante en proyecto
-   * @return boolean|\Avance
-   */
   function grabarAvance() 
   {
     $proyecto    = $this->getProyecto();
@@ -405,29 +352,9 @@ and es.id='$this->id'";
     }
     $avance->estado_avance = Avance::E1_CREADO;
     $avance->save();
-    $this->notificarAvance($proyecto);
     return $avance;
   }
-
-  /**
-   * Notificamos a todos los involucrados en el proyecto acerca del avance del proyecto
-   * @param Proyecto $proyecto
-   */
-  function notificarAvance($proyecto) 
-  {
-    leerClase('Notificacion');
-    $notificacion              = new Notificacion();
-    $notificacion->proyecto_id = $proyecto->id;
-    $notificacion->tipo        = Notificacion::TIPO_MENSAJE;
-    $notificacion->fecha_envio = date('d/m/Y');
-    $notificacion->asunto      = "Avance: {$this->getNombreCompleto()}";
-    $notificacion->detalle     = "El estudiante {$this->getNombreCompleto()} realizo un avance en su proyecto {$proyecto->nombre}, en la fecha {$notificacion->fecha_envio} ";
-    $notificacion->prioridad   = 3;
-    $notificacion->estado      = Objectbase::STATUS_AC;
-    
-    $notificacion->notificarTodos();
-  }
-
+  
   /**
    * Inscribimos a un estudiante a una materia a travez de dicta! y el semestre
    * @param INT(11) $semestre_id
@@ -438,6 +365,16 @@ and es.id='$this->id'";
       $inscrito = new Inscrito();
       $inscrito->estado_inscrito = Inscrito::E_ACTUAL;
       $inscrito->inscribirEstudiante($this->id,$semestre_id,$dicta_id);    
+  }
+    /**
+   * Borramos a un estudiante a una materia a travez de dicta! y el semestre
+   * @param INT(11) $semestre_id
+   * @param INT(11) $dicta_id
+   */
+  function borrarEstudianteDicta($id_ins) {
+      leerClase('Inscrito');
+      $inscrito = new Inscrito($id_ins);
+      $inscrito->borrarEstudiante();    
   }
   
   function grabarRespuestaRevision($revision_id) 

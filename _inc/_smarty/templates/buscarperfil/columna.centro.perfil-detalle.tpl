@@ -16,6 +16,17 @@
             <span>{$usuario->apellido_materno}</span>
             
           </p>
+          <p>
+             <label for="nombre"><small>TUTOR:</small></label>
+              <table class="tbl_lista" id="docentes"  mane="docentes">
+           <td id="lista_tutores" style="height: 29px;padding-left: 40px">
+                {section name=tutor start=0 loop=$tutores}
+                   {$tutores[tutor]->getNombreCompleto()}<br>
+                {/section}
+              
+          </td>
+          </table>
+          </p>
          
           <p>
               <label for="area"><small>AREA:</small></label>

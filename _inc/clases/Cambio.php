@@ -4,7 +4,12 @@
  */
 class Cambio extends Objectbase 
 {
-  
+ /** constant to add in the begin of the key to find the date values   */
+  const CAMBIOLEVE                  = "LE";
+  /** constant to add in the begin of the key to find the date values   */
+  const CAMBIOTOTAL                  = "TO";
+   /** constant to add in the begin of the key to find the date values   */
+  const CANTCAMBIO                  =1;
  /**
   * El id del Proyecto
   * @var INT(11)
