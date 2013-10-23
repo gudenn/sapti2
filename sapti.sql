@@ -687,8 +687,8 @@ DROP TABLE IF EXISTS `sapti`.`apoyo` ;
 
 CREATE  TABLE IF NOT EXISTS `sapti`.`apoyo` (
   `id` INT NOT NULL AUTO_INCREMENT ,
-  `area_id` INT NOT NULL ,
-  `docente_id` INT NOT NULL ,
+  `area_id` INT NULL ,
+  `docente_id` INT NULL ,
   `estado` VARCHAR(2) NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
@@ -916,11 +916,9 @@ DROP TABLE IF EXISTS `sapti`.`automatico` ;
 
 CREATE  TABLE IF NOT EXISTS `sapti`.`automatico` (
   `id` INT NOT NULL AUTO_INCREMENT ,
-  `area_id` INT NOT NULL ,
-  `docente_id` INT NOT NULL ,
-  `valor_tiempo` INT NULL ,
-  `dia` INT NULL ,
-  `valor_area` INT NULL ,
+  `docente_id` INT NULL ,
+  `area_id` INT NULL ,
+  `valor` INT NULL ,
   `numero_aceptados` INT NULL ,
   `estado` VARCHAR(2) NULL ,
   PRIMARY KEY (`id`) )

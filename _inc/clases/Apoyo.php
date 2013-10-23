@@ -16,6 +16,14 @@ class Apoyo extends Objectbase
   */
   var $docente_id;
 
+  /**
+   * Borramos todos los apoyos de un docente
+   * @param type $docente_id
+   */
+  function borrarMisApoyos($docente_id) {
+    $sqldelite = "DELETE FROM apoyo WHERE docente_id = '$docente_id' ";
+    mysql_query($sqldelite);
+  }
 }
 
 ?>
