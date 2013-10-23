@@ -327,6 +327,11 @@ ORDER BY ma.id";
    $counter = $notificacion->getTodasNotificaciones($usuario->id, '', '', ' AND estado_notificacion="SV" ');
    $thise->agregarItem('Notificaciones Pendientes','Todas las notificaciones no leidas','basicset/message-not-read.png',$link,$counter[1]);
    $thises[] = $thise;
+   
+   $thise = new Menu('Reportes del Sistema');
+   $link = Docente::URL."reportes.sistema.php";
+   $thise->agregarItem('Reportes de Usuario','Gesti&oacute;n de reportes del sistema.','basicset/diagram_48.png',$link);
+   $thises[] = $thise;
   
     return $thises;
   }

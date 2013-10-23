@@ -25,19 +25,22 @@ try {
    /**
    * Menu superior
    */
-  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Docente');
+  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materas');
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Reportes de Sistema');
   $smarty->assign("menuList", $menuList);
 
-  $docente=  getSessionDocente();
-  $docenteid=$docente->docente_id;
+  $docenteid=getSessionDocente();
   
-     $sql1 = "SELECT di.id as dic, CONCAT(ma.nombre, ' ',di.codigo_grupo) as mat
-FROM dicta di, docente dt, materia ma
+     $sql1 = "SELECT di.id as dic, CONCAT(ma.nombre, ' ',cg.nombre) as mat
+FROM dicta di, docente dt, materia ma, codigo_grupo cg, semestre se
 WHERE di.docente_id=dt.id
 AND di.materia_id=ma.id
-AND dt.id='".$docenteid."'
-ORDER BY ma.nombre, di.codigo_grupo";
+AND di.codigo_grupo_id=cg.id
+AND di.semestre_id=se.id
+AND se.activo=1
+AND dt.id='".$docenteid->id."'
+ORDER BY ma.nombre, cg.nombre
+";
    $resultmate = mysql_query($sql1);
    
    $materia_values[] = '';
