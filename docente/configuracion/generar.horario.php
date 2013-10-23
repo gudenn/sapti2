@@ -30,12 +30,9 @@ if(!isDocenteSession())
   /**
    * Menu superior
    */
-  $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/','name'=>'Configuraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Registro de Materia');
+  $menuList[] = array('url' => URL . Docente::URL, 'name' => 'Docente');
+  $menuList[] = array('url' => URL . Docente::URL.'configuracion/' . basename(__FILE__), 'name' => 'Tiempo');
   $smarty->assign("menuList", $menuList);
-
-
 
   $smarty->assign('header_ui','1');
   $smarty->assign('CSS','');
