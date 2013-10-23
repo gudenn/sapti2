@@ -54,24 +54,7 @@ try {
   $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
   $smarty->assign('lista'       ,'notificacion/lista.tpl');
   
-  // creo unas cuantas notificaciones de prueba
-  // para testeo habilitar estas lineas
-  /**
-  $nueva_notificacion = new Notificacion();
-  $tipo = array('N01','N02','N03');
   
-  $nueva_notificacion->asunto      = "Mensaje nuevo";
-  $nueva_notificacion->detalle     = "Mensaje nuevo ";
-  $nueva_notificacion->fecha_envio = date("d/m/Y");
-  $nueva_notificacion->estado      = 'AC';
-  $nueva_notificacion->prioridad   = rand(1, 10);
-  $nueva_notificacion->tipo        = $tipo[rand(0, 2)];  
-  $nueva_notificacion->proyecto_id = '1';
-  $nueva_notificacion->notificarTodos();
-  
-  var_dump($nueva_notificacion);
-  /**/ 
-
   //Filtro
   $filtro       = new Filtro('mis_notificaciones',__FILE__);
   $notificacion = new Notificacion();
@@ -86,7 +69,7 @@ try {
   $usuario    = getSessionUser();
   $obj_mysql  = $notificacion->getTodasNotificaciones($usuario->id,'',$o_string,$filtro_sql,TRUE);
   
- 
+ // var_dump($obj_mysql);
   $objs_pg    = new Pagination($obj_mysql, 'mis_notificaciones','',false);
 
 

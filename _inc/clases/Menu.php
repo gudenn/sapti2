@@ -307,7 +307,7 @@ ORDER BY ma.id";
   $thises[] = $thise;
   
   $thise = new Menu('Tiempo');
-  $link = Docente::URL."configuracion/disponibilidad.php";
+  $link = Docente::URL."configuracion/generar.horario.php";
   $thise->agregarItem('Disponibilidad','Disponibilidad De Tiempo','docente/notificacion.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
   $thises[] = $thise;
   

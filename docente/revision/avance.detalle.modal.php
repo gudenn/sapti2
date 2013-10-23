@@ -55,7 +55,7 @@ if (empty($action)&&$avance->revision_id==0) {
           </p>
           <p>
             <label for='fecha_observacion'>Fecha de Avance: </label>
-            <span><b>{$arrayobser[0]['fecha']}</b></span>            
+            <span><b>{$arrayobser[0]['fecha']}.</b></span>            
           </p>
           <div style='height: 200px; width: 650px; font-size: 12px; overflow: auto;'>
             <table class='tbl_lista'>
@@ -112,13 +112,13 @@ if (empty($action)&&$avance->revision_id==0) {
                 <form action='#' style='display:none'>
           
             <label for='revisor'>Nombre del Revisor:</label>
-            <span><i>{$arrayobser[0]['nombreRevisor']}</i></span>
+            <span><i>{$arrayobser[0]['nombreRevisor']}.</i></span>
           <p>
             <label for='proyecto_id'>Nombres de Proyecto: </label>
-            <span>{$arrayobser[0]['nombrep']}</span>
+            <span>{$arrayobser[0]['nombrep']}.</span>
           </p>
             <label for='fecha_observacion'>Fecha de Avance: </label>
-            <span>{$arrayobser[0]['fecha']}</span>            
+            <span>{$arrayobser[0]['fecha']}.</span>            
           
           <div style='height: 200px; width: 650px; font-size: 12px; overflow: auto;'>
             <table class='tbl_lista'>
