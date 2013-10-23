@@ -64,7 +64,7 @@ try {
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
   $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>$dicta->getNombreMateria());
   $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/estudiante.lista.php','name'=>'Estudiantes Inscritos');
-  $menuList[]     = array('url'=>URL.Docente::URL.'revision/revision.lista.php','name'=>'Seguimiento');
+  $menuList[]     = array('url'=>URL.Docente::URL.'revision/revision.corregido.lista.php','name'=>'Lista de Correcciones');
   $menuList[]     = array('url'=>URL.Docente::URL.'revision/'.basename(__FILE__),'name'=>'Detalle de Avance');
   $smarty->assign("menuList", $menuList);
   
@@ -144,11 +144,15 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
                $obsermodes->save();
                $obsermo->save();
                $obsermodes->cambiarEstadoRechazado();
-           }  
            }
            $avance->cambiarEstadoCorregido();   
            $ir = "Location: ../revision/observacion.editar.revision.php?revisiones_id=".$revisionnuevo->id."";
            header($ir);
+           }else {
+                   $avance->cambiarEstadoCorregido();
+                   $ir = "Location: ../estudiante/estudiante.lista.php";
+                   header($ir);
+                }
            }  else {
            $revision1->fechaAprobacion();
            $desaprobados=$revision1->listaObservaciones();
