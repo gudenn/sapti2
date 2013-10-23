@@ -3,17 +3,15 @@
 try {
   define("MODULO", "DOCENTE");
   require('../_start.php');
-
-  if(!isDocenteSession())
-    header("Location: login.php"); 
+if (!isDocenteSession())
+    header("Location: ../login.php");
 
     /** HEADER */
   $smarty->assign('title','Modificacion de Observaciones');
   $smarty->assign('description','Formulario de Modificacion de Observaciones');
   $smarty->assign('keywords','SAPTI,Observaciones,Registro');
 
-  if (!isDocenteSession())
-    header("Location: login.php");
+  
   
   /** HEADER */
   $smarty->assign('title', 'Modificacion de Observaciones');
@@ -52,7 +50,7 @@ try {
   leerClase("Docente");
 
   $menuList[] = array('url' => URL . Docente::URL, 'name' => 'Docente');
-  $menuList[] = array('url' => URL . Docente::URL . basename(__FILE__), 'name' => 'Areas');
+  $menuList[] = array('url' => URL . Docente::URL.'configuracion/' . basename(__FILE__), 'name' => 'Tiempo');
   $smarty->assign("menuList", $menuList);
 
     
