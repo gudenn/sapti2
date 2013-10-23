@@ -1,20 +1,17 @@
       <div id="content">
-        <h1 class="title">REGISTRO DE OBSERVACIONES</h1>
+        <h1 class="title">Registro De Observaciones</h1>
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
             <p>
-               <label for="nombre de proyecto"><small>NOMBRE DE PROYECTO:</small></label>
+               <label for="nombre de proyecto"><small>Nombre  De Proyecto:</small></label>
                <span>{$proyecto->nombre}</span><br/>
-               <label for="nombre de estudiante"><small>NOMBRE DE ESTUDIANTE:</small></label>
+               <label for="nombre de estudiante"><small>Nombre De Estudiante:</small></label>
                <span>{$usuario->nombre} {$usuario->apellido_paterno} {$usuario->apellido_materno}</span>
             </p>
             <br/>
-            <object data="/sapti/ARCHIVO/proyecto.pdf" type="application/pdf" width="900" height="300">
-            <p> Al parecer usted no tiene un plugin PDF para este navegador.
-            No hay problema ... puedes <a href="/sapti/ARCHIVO/proyecto.pdf"> clic aquí para descargar el archivo PDF. </ a> </ p>
-            </object>
+           
             <div id="div_1">
-            <label  accesskey="">OBSERVACION(ES):
+            <label  accesskey="">Observación:
             </label>
             </p>
             <input  type="text"  name="observaciones[]" id="observaciones[]" style="width:500px;" data-validation-engine="validate[required]"/> 
@@ -24,10 +21,10 @@
 
             <p>
               <input type="text" name="fecha_revision" id="fecha_revision" value="{$revision->fecha_revision}" size="22"/>
-              <label for="fecha_revision"><small>FECHA DE REVISION</small></label>
+              <label for="fecha_revision"><small>Fecha De Revisión</small></label>
             </p>
 
-            <h2 class="title">Grabar Revision</h2>
+            <h2 class="title">Grabar Revisión</h2>
             <p>
               <input type="hidden" name="id" value="{$revision->id}">
               <input type="hidden" name="id" value="{$observacion->id}">

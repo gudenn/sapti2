@@ -82,6 +82,14 @@ class Docente extends Objectbase{
     $usuario = new Usuario($this->usuario_id);
     return $usuario->getNombreCompleto($echo);
   }
+  
+  /**
+   * 
+   */
+  function iniciarHorario() {
+    $sql = "DELETE FROM {$this->getTableName('Horario_docente')} WHERE docente_id = '{$this->id}' ";
+    
+  }
     /**
    * get user if exist else return 0
    * @param type $login

@@ -222,9 +222,9 @@ DROP TABLE IF EXISTS `sapti`.`materia` ;
 CREATE  TABLE IF NOT EXISTS `sapti`.`materia` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `nombre` VARCHAR(200) NULL ,
+  `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
   `sigla` VARCHAR(20) NULL ,
   `tipo` VARCHAR(4) NULL ,
-  `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
@@ -547,11 +547,10 @@ DROP TABLE IF EXISTS `sapti`.`notificacion_tutor` ;
 CREATE  TABLE IF NOT EXISTS `sapti`.`notificacion_tutor` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `notificacion_id` INT NULL ,
-  `tutor_id` INT NULL ,
-  `proyecto_tutor_id` INT NULL ,
   `fecha_visto` DATE NULL ,
   `estado_notificacion` VARCHAR(2) NULL COMMENT 'Sin ver (SV), Visto (VI) , archivado (AR)' ,
   `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
+  `proyecto_tutor_id` INT NOT NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
@@ -646,37 +645,37 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`dia` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `nombre` VARCHAR(45) NULL ,
   `descripcion` VARCHAR(45) NULL ,
+  `orden` SMALLINT NULL COMMENT 'el orden de los dias' ,
   `estado` VARCHAR(2) NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `sapti`.`turno`
+-- Table `sapti`.`hora`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `sapti`.`turno` ;
+DROP TABLE IF EXISTS `sapti`.`hora` ;
 
-CREATE  TABLE IF NOT EXISTS `sapti`.`turno` (
+CREATE  TABLE IF NOT EXISTS `sapti`.`hora` (
   `id` INT NOT NULL AUTO_INCREMENT ,
-  `nombre` VARCHAR(45) NULL ,
-  `peso` INT NULL ,
-  `descripcion` VARCHAR(45) NULL ,
+  `dia_id` INT NULL ,
+  `hora_inicio` VARCHAR(45) NULL ,
+  `hora_fin` VARCHAR(45) NULL ,
   `estado` VARCHAR(2) NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `sapti`.`horario_doc`
+-- Table `sapti`.`horario_docente`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `sapti`.`horario_doc` ;
+DROP TABLE IF EXISTS `sapti`.`horario_docente` ;
 
-CREATE  TABLE IF NOT EXISTS `sapti`.`horario_doc` (
+CREATE  TABLE IF NOT EXISTS `sapti`.`horario_docente` (
   `id` INT NOT NULL AUTO_INCREMENT ,
-  `docente_id` INT NOT NULL ,
-  `dia_id` INT NOT NULL ,
+  `docente_id` INT NULL ,
+  `hora_id` INT NULL ,
   `estado` VARCHAR(2) NULL ,
-  `turno_id` INT NOT NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
@@ -953,11 +952,11 @@ DROP TABLE IF EXISTS `sapti`.`nota` ;
 
 CREATE  TABLE IF NOT EXISTS `sapti`.`nota` (
   `id` INT NOT NULL AUTO_INCREMENT ,
+  `proyecto_id` INT NOT NULL ,
   `nota_proyecto` INT NULL COMMENT 'nota del proyecto final' ,
   `nota_defensa` VARCHAR(45) NULL COMMENT 'nota del defensa del proyecto' ,
   `nota_final` TINYINT(1) NULL COMMENT 'nota final del proyecto' ,
   `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
-  `proyecto_id` INT NOT NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 

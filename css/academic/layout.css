@@ -365,3 +365,6 @@ div.wrapper h1, div.wrapper h2, div.wrapper h3, div.wrapper h4, div.wrapper h5, 
 	/*background-color:#06213F;*/
 	}
   
+/** para manejo de horarios docente */
+.horariodia{width: 110px;float: left;}
+.horariohora{width: 100%;}
