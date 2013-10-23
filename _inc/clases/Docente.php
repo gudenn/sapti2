@@ -26,6 +26,12 @@ class Docente extends Objectbase{
   * @var object|null 
   */
   var $dicta_objs;
+
+ /**
+  * (Objeto simple) Todas las areas en que apoya este docente
+  * @var Apoyo|null 
+  */
+  var $apoyo_objs;
    /**
   * Numero de Horas asignadas
   * @var INT(11)
