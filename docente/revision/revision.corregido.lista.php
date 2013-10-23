@@ -3,13 +3,14 @@ try {
     define ("MODULO", "DOCENTE");
   require('../_start.php');
   if(!isDocenteSession())
-    header("Location: login.php"); 
+    header("Location: ../login.php"); 
 
   leerClase("Estudiante");
   leerClase('Docente');
   leerClase('Usuario');
   leerClase('Avance');
   leerClase('Revision');
+  leerClase('Dicta');
   $ERROR = '';
 
   /** HEADER */
@@ -27,19 +28,21 @@ try {
   $JS[]  = URL_JS . "tablaeditable/editablegrid-2.0.1.js";
   $JS[]  = URL_JS . "tablaeditable/tabla.estudiante.lista.js";
   $smarty->assign('JS',$JS);
+      if ( isset($_SESSION['iddictapro']) && is_numeric($_SESSION['iddictapro']) )
+  {
+      $iddicta=$_SESSION['iddictapro'];
+  }
+  $dicta = new Dicta($iddicta);
   
    /**
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
-  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>'Proyecto Final');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>$dicta->getNombreMateria());
   $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/'.'estudiante.lista.php','name'=>'Estudiantes Inscritos');
   $menuList[]     = array('url'=>URL.Docente::URL.'revision/'.basename(__FILE__),'name'=>'Lista de Correcciones');
   $smarty->assign("menuList", $menuList);
-  
-  if ( isset($_SESSION['iddictapro']) && is_numeric($_SESSION['iddictapro']) ){
-      $iddicta=$_SESSION['iddictapro'];
-  }
+
   if( isset($_SESSION['pro_estudiente_id']) && is_numeric($_SESSION['pro_estudiente_id']) ){
        $id_estudiante=$_SESSION['pro_estudiente_id'];
   }

@@ -41,9 +41,9 @@
           {/if}</td>
       <td>{$revision->getEstadoRevision($avances[ic]['estoavance'])}</td>
       <td>{if $avances[ic]['correcionrevision'] > 0}
-            <a href="avance.detalle.php?estudiante_id={$estudiante->id}&avance_id={$avances[ic]['id']}" target="_blank" >{icono('basicset/cabinet.png','Detalle')}Detalle de Correccion</a>
+            <a onclick="sessionAvance({$avances[ic]['id']}, {$estudiante->id});" style="cursor:pointer">{icono('basicset/cabinet.png','Detalle')}Detalle de Correccion</a>
           {else}
-            <a href="avance.detalle.php?estudiante_id={$estudiante->id}&avance_id={$avances[ic]['id']}" target="_blank" >{icono('basicset/cabinet.png','Detalle')}Detalle de Avance</a>
+            <a onclick="sessionAvance({$avances[ic]['id']}, {$estudiante->id});" style="cursor:pointer">{icono('basicset/cabinet.png','Detalle')}Detalle de Avance</a>
           {/if}
       </td>    
     </tr>
@@ -51,6 +51,31 @@
   {/section}
 </table>
         </div>
+{literal}
+<script type="text/javascript">
+function sessionAvance(seccion, est) {
+	$.ajax({ 
+		url: '../variable.session.avac.php',
+		type: 'POST',
+		dataType: "html",
+		data: { 
+			avance : seccion,
+                        estudiante_id : est
+		},
+		success: function (response) 
+		{ 
+                    if(response=="ok"){
+                        document.location.href='avance.detalle.php';
+                    }else{
+                       alert("Intente De Nuevo");
+                    }
+		},
+		error: function() { alert("Ajax failure\n"); },
+		async: true
+	});
+}
+</script>
+{/literal}
     </div>
     {$ERROR}
   </div>

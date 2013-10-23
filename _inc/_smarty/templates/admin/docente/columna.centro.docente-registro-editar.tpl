@@ -32,6 +32,23 @@
               {html_radios name="sexo" options=$sexo selected=$sexo_selected separator="<br>"}
             </p>
             <p>
+          <select name="numero_horas" id="numero_horas">
+          <option>-Seleccione-</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+          <option>9</option>
+          <option>10</option>
+          <option>11</option>
+          <option>12</option>
+          </select>
+          <label for="numero_horas"><small>Numero de Horas Asignadas (*){getHelpTip('Numero de Horas disponibles')}</small></label>
+          
+           </p>
+            <p>
               <input type="text" name="email" id="email" value="{$usuario->email}" size="22" data-validation-engine="validate[],custom[email]"  >
               <label for="email"><small>E-Mail{getHelpTip('email')}</small></label>
             </p>

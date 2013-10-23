@@ -33,7 +33,7 @@
                     <a href="../reportes.sistema.excel.php?sql={$sqlreporte}" target="_blank" >{icono('boton_excel.png','descargar')}Descargar EXCEL</a>
                 </center>
         </div>
-        <a href="evaluacion.estudiante-cvs.php" type="button">CARGAR NOTAS POR CVS</a>
+        <a href="evaluacion.estudiante-cvs.php" class="sendme">CARGAR NOTAS POR CVS</a>
         <script type="text/javascript">
                 editableGrid.onloadXML("loaddata.evaluacion-editar.php?iddicta={$iddicta}");
         </script>

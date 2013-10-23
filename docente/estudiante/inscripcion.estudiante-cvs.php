@@ -3,7 +3,7 @@ try {
     define ("MODULO", "DOCENTE");
   require('../_start.php');
   if(!isDocenteSession())
-    header("Location: login.php");  
+    header("Location: ../login.php");  
     
   leerClase('Estudiante');
   leerClase('Usuario');
@@ -39,21 +39,20 @@ try {
   $JS[]  = URL_JS . "calendar/js/jquery.eventCalendar.js";
   $smarty->assign('JS',$JS);
   
+    if ( isset($_SESSION['iddictapro']) && is_numeric($_SESSION['iddictapro']) )
+  {
+      $iddicta=$_SESSION['iddictapro'];
+  }
+  $dicta = new Dicta($iddicta);
+  
   /**
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
-  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>'Proyecto Final');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>$dicta->getNombreMateria());
   $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/'.basename(__FILE__),'name'=>'Inscripcion Estudiantes');
   $smarty->assign("menuList", $menuList);
   
-  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
-  {
-     $iddicta = $_GET['iddicta'];
-  }else{
-      $iddicta=$_SESSION['iddictapro'];
-  }
-  $dicta = new Dicta($iddicta);
   $semestre=new Semestre();
   $semestre->getActivo();
   

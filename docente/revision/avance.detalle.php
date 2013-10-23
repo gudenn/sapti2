@@ -3,7 +3,7 @@ try {
     define ("MODULO", "DOCENTE");
   require('../_start.php');
   if(!isDocenteSession())
-    header("Location: login.php");
+    header("Location: ../login.php");
 
 
   /** HEADER */
@@ -51,14 +51,20 @@ try {
   leerClase('Revision');
   leerClase('Observacion');
   leerClase('Docente');
+  leerClase('Dicta');
+    if ( isset($_SESSION['iddictapro']) && is_numeric($_SESSION['iddictapro']) )
+  {
+      $iddicta=$_SESSION['iddictapro'];
+  }
+  $dicta = new Dicta($iddicta);
 
      /**
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
-  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>'Proyecto Final');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>$dicta->getNombreMateria());
   $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/estudiante.lista.php','name'=>'Estudiantes Inscritos');
-  $menuList[]     = array('url'=>URL.Docente::URL.'revision/revision.lista.php','name'=>'Seguimiento');
+  $menuList[]     = array('url'=>URL.Docente::URL.'revision/revision.corregido.lista.php','name'=>'Lista de Correcciones');
   $menuList[]     = array('url'=>URL.Docente::URL.'revision/'.basename(__FILE__),'name'=>'Detalle de Avance');
   $smarty->assign("menuList", $menuList);
   
@@ -95,6 +101,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
     if (isset($_POST['observaciones'])) 
     $observaciones=$_POST['observaciones'];
     $revision->fecha_revision=date("d/m/Y");
+    $avance->cambiarEstadoVisto();
 
     if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
     {
@@ -137,11 +144,17 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
                $obsermodes->save();
                $obsermo->save();
                $obsermodes->cambiarEstadoRechazado();
-           }  
            }
+           $revision1->estadoAprobado();
            $avance->cambiarEstadoCorregido();   
            $ir = "Location: ../revision/observacion.editar.revision.php?revisiones_id=".$revisionnuevo->id."";
            header($ir);
+           }else {
+                   $revision1->estadoAprobado();
+                   $avance->cambiarEstadoCorregido();
+                   $ir = "Location: ../estudiante/estudiante.lista.php";
+                   header($ir);
+                }
            }  else {
            $revision1->fechaAprobacion();
            $desaprobados=$revision1->listaObservaciones();
@@ -159,6 +172,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
                $obsermo->save();
                $obsermodes->cambiarEstadoRechazado();
            }}
+           $revision1->estadoAprobado();
            $avance->cambiarEstadoCorregido();   
            $ir = "Location: ../revision/observacion.editar.revision.php?revisiones_id=".$revisionnuevo->id."";
            header($ir);

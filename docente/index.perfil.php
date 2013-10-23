@@ -32,21 +32,23 @@ try {
   leerClase('Docente');
   leerClase('Semestre');
    leerClase('Notificacion');
-
-      /**
-   * Menu superior
-   */
-  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
-  $menuList[]     = array('url'=>URL.Docente::URL.'index.perfil.php?iddicta='.$_SESSION['iddictaperfil'],'name'=>'Perfil');
-  $smarty->assign("menuList", $menuList);
-
-    if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
+  leerClase('Dicta');
+  
+  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
   {
      $iddicta = $_GET['iddicta'];
      $_SESSION['iddictaperfil']=$iddicta;
   }else{
       $iddicta= $_SESSION['iddictaperfil'];
   }
+  $dicta=new Dicta($iddicta);
+  
+      /**
+   * Menu superior
+   */
+  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.perfil.php?iddicta='.$_SESSION['iddictaperfil'],'name'=>$dicta->getNombreMateria());
+  $smarty->assign("menuList", $menuList);
 
   $docente_aux = getSessionDocente();
   $docente     = new Docente($docente_aux->docente_id);
