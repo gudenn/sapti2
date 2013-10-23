@@ -65,7 +65,9 @@ try {
      $estudiante=$proyecto->getEstudiante();
      $estudiante_id= $estudiante->id;
      $tutores=$proyecto->getProyectoTutor();
-     $area=$proyecto->getArea();
+     $areas=$proyecto->getArea();
+     $objetivos=$proyecto->getObjetivo();
+ 
      if($proyecto_aux->estado_proyecto!='CO'){
     
      $actualproyecto=new Proyecto();
@@ -100,19 +102,35 @@ try {
     //copiar area
     
     leerClase('Area');
-    leerClase('Proyecto_area');;
- 
+    leerClase('Proyecto_area');
+    
+    foreach ($areas as $nueva)
+    { 
     $parea=new Proyecto_area();
-    $parea->area_id=$area->id;
+    $parea->area_id =$nueva->id;
     $parea->proyecto_id=$actualproyecto->id;
     $parea->estado=  Objectbase::STATUS_AC;
     $parea->save();
+    }
+    //copiar Objetivos
+    leerClase('Objetivo_especifico');
+    foreach ($objetivos as $especifico)
+    { 
+    $objetivos=new Objetivo_especifico();
+    $objetivos->descripcion=$especifico->descripcion;
+    $objetivos->proyecto_id=$actualproyecto->id;
+    $objetivos->estado=  Objectbase::STATUS_AC;
+    $objetivos->save();
+    }
+   
     
      //copiar el tutor
-    $proyectotutor=new Proyecto_tutor($tutores[0]->id);
+     foreach ($tutores as $protut)
+    { 
+    $proyectotutor=new Proyecto_tutor($protut->id);
     $proyectotutor->proyecto_id=$actualproyecto->id;
     $proyectotutor->save();
-
+    }
      //grabamos la vigencia del proyecto
      $vigencia=new Vigencia();
      $vigencia->estado=  Objectbase::STATUS_AC;

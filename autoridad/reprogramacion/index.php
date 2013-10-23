@@ -38,7 +38,7 @@ try {
   leerClase('Menu');
   $menu = new Menu('Reprogramacion');
   $link = Administrador::URL."reprogramacion/lista.estudiantes.php";
-  $menu->agregarItem('Busqeda de estudiantes para Reprogramar','Reprogramaci&oacute;n','basicset/people.png',$link);
+  $menu->agregarItem('Busqueda de estudiantes para Reprogramar','Reprogramaci&oacute;n','basicset/people.png',$link);
  
   $menus[] = $menu;
  

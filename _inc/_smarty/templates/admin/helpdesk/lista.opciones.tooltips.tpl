@@ -12,8 +12,8 @@
   <tbody>
     <tr  class="{cycle values="light,dark"}">
       <td>{$helpdesk->getIconEstadoHD($objs[ic]['estado_helpdesk'])}</td>
-      <td>{$objs[ic]['descripcion']}</td>
-      <td>{$objs[ic]['keywords']}</td>
+      <td>{str_replace('/',' /',$objs[ic]['descripcion'])}</td>
+      <td>{str_replace(',',', ',$objs[ic]['keywords'])}</td>
       <td>
         {$helpdesk->getContadorTooltipsLita($objs[ic]['id'],'RC')}
         {$helpdesk->getContadorTooltipsLita($objs[ic]['id'],'CL')}
