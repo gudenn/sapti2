@@ -4,7 +4,7 @@ define ("MODULO", "DOCENTE");
  
 $ideve1=$_GET['idev'];
   $resul = "
-      SELECT se.codigo as semestre, CONCAT(us.apellido_paterno,us.apellido_materno,us.nombre) as docente, ma.nombre as materia, ev.promedio as promedio
+      SELECT se.codigo as semestre, CONCAT(us.apellido_paterno,' ',us.apellido_materno,' ',us.nombre) as docente, ma.nombre as materia, ev.promedio as promedio
 FROM inscrito it, evaluacion ev, semestre se, materia ma, docente dc, usuario us, dicta di
 WHERE it.evaluacion_id=ev.id
 AND it.semestre_id=se.id

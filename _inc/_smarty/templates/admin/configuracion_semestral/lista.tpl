@@ -11,9 +11,9 @@
     <td>{$semestre->codigo}</td>
     <td>
       {if ($semestre->activo)}
-        {icono('basicset/tick_48.png','Editar')} Si
+        {icono('basicset/tick_48.png','Es el semestre activo')} Si
       {else}
-        {icono('basicset/delete_48.png','Editar')} No
+        {icono('basicset/delete_48.png','No es el semestre activo')} No
       {/if}
     </td>
     <td>

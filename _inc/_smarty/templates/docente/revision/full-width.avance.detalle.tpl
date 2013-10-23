@@ -152,7 +152,7 @@ $('#theme-switcher').change(function () {
               <input type="hidden" name="tarea" value="aprobar">
               <input type="hidden" name="token" value="{$token}">
 
-              <input name="submit" type="submit" id="submit" value="aprobar y Revisar">
+              <input name="submit" type="submit" id="submit" value="Aprobar y Revisar">
               &nbsp;
               <input name="reset" type="reset" id="reset" tabindex="5" value="Resetear">
             </p>

@@ -10,7 +10,8 @@
  */
 
 // create our editable grid
-var editableGrid = new EditableGrid("listarevisionrevisor", {
+var time=Math.random();
+var editableGrid = new EditableGrid("listarevisionrevisor"+time, {
 	enableSort: true, // true is the default, set it to false if you don't want sorting to be enabled
 	editmode: "absolute", // change this to "fixed" to test out editorzone, and to "static" to get the old-school mode
 	editorzoneid: "edition", // will be used only if editmode is set to "fixed"
@@ -75,8 +76,6 @@ EditableGrid.prototype.initializeGrid = function(estid)
                 cell.innerHTML = "<a href='#' class='avancedetalle' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("icons/detalle.png") + "\" border=\"0\" alt=\"detalle\" title=\"Detalle Avance\" />Detalle</a>";
                       }
-                cell.innerHTML += "</br><a href='#' class='historial' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("icons/basicset/graph.png") + "\" border=\"0\" alt=\"historial\" title=\"Historial de Notas del Proyecto\" width='25px' height='25px'/>Historial de Notas</a>";
                 }}));
                 setCellRenderer("num", new CellRenderer({
                     

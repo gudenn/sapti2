@@ -63,12 +63,12 @@ try {
   //----------------------------------//
   leerClase('Menu');
   $menu = new Menu('Estudiantes');
-  $link = Docente::URL."estudiante/inscripcion.estudiante-cvs.php";
-  $menu->agregarItem('Gesti&oacute;n de Estudiantes','Registro de Estudiantes Inscritos en la Materia de Proyecto Final','docente/correccion.png',$link);
   $link = Docente::URL."estudiante/estudiante.lista.php";
   $menu->agregarItem('Estudiantes Registrados','Estudiantes Registrados en la Materia de Proyecto Final','docente/inscritos.png',$link);
   $link = Docente::URL."evaluacion/estudiante.evaluacion-editar.php";
   $menu->agregarItem('Evaluacion de Estudiantes','Evaluacion de Estudiantes Registrados en la Materia de Proyecto Final','docente/evaluacion.png',$link);  
+  $link = Docente::URL."estudiante/inscripcion.estudiante-cvs.php";
+  $menu->agregarItem('Gesti&oacute;n de Estudiantes','Registro de Estudiantes Inscritos en la Materia de Proyecto Final','docente/correccion.png',$link);
   $menus[] = $menu;
   
   $menu = new Menu('Calendario');
@@ -79,13 +79,7 @@ try {
   $link = Docente::URL."calendario/evento.lista.php";
   $menu->agregarItem('Edici&oacute;n de Eventos','Edici&oacute;n de Eventos de la Materia de Proyecto Final','docente/edicion.png',$link);
   $menus[] = $menu;
- 
-  $menu = new Menu('Configuracion');
-  $link = Docente::URL."configuracion/disponibilidad.php";
-  $menu->agregarItem('Registro de Disponibilidad','Agregue Disponibilidad de Tiempo para Asistir a Defensas','basicset/plus_48.png',$link);
-  $link = Docente::URL."configuracion/configuracion.php";
-  $menu->agregarItem('Registro Areas','Agregue las de Areas de Interes para apoyar siendo Tribunal','basicset/plus_48.png',$link);
-  $menus[] = $menu;
+
   //----------------------------------//  
   
   $smarty->assign("menus", $menus);

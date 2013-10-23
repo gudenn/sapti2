@@ -26,6 +26,12 @@ class Docente extends Objectbase{
   * @var object|null 
   */
   var $dicta_objs;
+
+ /**
+  * (Objeto simple) Todas las areas en que apoya este docente
+  * @var Apoyo|null 
+  */
+  var $apoyo_objs;
    /**
   * Numero de Horas asignadas
   * @var INT(11)
@@ -84,11 +90,11 @@ class Docente extends Objectbase{
   }
   
   /**
-   * 
+   * funcion para Iniciar los Horarios de  un docente
    */
   function iniciarHorario() {
     $sql = "DELETE FROM {$this->getTableName('Horario_docente')} WHERE docente_id = '{$this->id}' ";
-    
+    mysql_query($sql);
   }
     /**
    * get user if exist else return 0

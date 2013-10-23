@@ -3,9 +3,10 @@ try {
   define ("MODULO", "DOCENTE");
   require('../_start.php');
   if(!isDocenteSession())
-    header("Location: login.php");
+    header("Location: ../login.php");
   
   leerClase('Docente');
+  leerClase('Dicta');
   $ERROR = '';
   
   /** HEADER */
@@ -26,12 +27,19 @@ try {
   $smarty->assign('JS',$JS);
   $smarty->assign('CSS',$CSS);
   $smarty->assign("ERROR", $ERROR);
-  
+    if ( isset($_SESSION['iddictapro']) && is_numeric($_SESSION['iddictapro']) )
+  {
+     $iddicta = $_SESSION['iddictapro'];
+  }  else {
+        $ir = URL.Docente::URL;
+        header($ir);
+  }
+  $dicta=new Dicta($iddicta);
   /**
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
-  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>'Proyecto Final');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>$dicta->getNombreMateria());
   $menuList[]     = array('url'=>URL.Docente::URL.'calendario/'.basename(__FILE__),'name'=>'Calendario de Eventos');
   $smarty->assign("menuList", $menuList);
   

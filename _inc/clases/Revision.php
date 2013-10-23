@@ -237,13 +237,16 @@ class Revision extends Objectbase
     }
       return $obser;
     }
-      /**
-   Guarda la Id de la Resivion en Session
+     /**
+   Actualizar estado aprobacion de revisiones
    */
-  function sessionRevision() {
+  function estadoAprobado() {
+    $aprobado = self::E4_APROBADO;
+    $sql = " UPDATE  `{$this->getTableName()}` SET `estado_revision` = '$aprobado' WHERE id='$this->id'";
+    $result = mysql_query($sql);
+    if (!$result)
+      return false;
+  }
 
-        $_SESSION['obs_revisiones_id']=$this->id;
-        return;
-    }
 }
 ?>
