@@ -19,7 +19,7 @@ class Menu
   * Todos los items del menu
   * @var object|null 
   */
-  var $menu_items;
+  var $thise_items;
 
   public function __construct($nombre_menu) {
     $this->nombre_menu = $nombre_menu;
@@ -46,7 +46,7 @@ class Menu
     leerClase('Grupo');
     leerClase('Usuario');
     leerClase('Administrador');
-    $menus   = array();
+    $thises   = array();
     $usuario = getSessionUser();
     if (!isset($usuario->id) || (!$usuario->id))
       return;
@@ -58,59 +58,59 @@ class Menu
       $thise->agregarItem('Gesti&oacute;n de Docentes','Registro y modificaciones para Docentes','basicset/user4.png',$link);
       $link = Administrador::URL."docente/";
       $thise->agregarItem('Reportes de Docentes','Reportes correspondientes a los Docentes','basicset/graph.png',$link);
-      $menus[] = $thise;
+      $thises[] = $thise;
       $thise = new Menu('Estudiantes');
       $link = Administrador::URL."estudiante/";
       $thise->agregarItem('Gesti&oacute;n de Estudiantes','Registro y modificaciones para estudiantes','basicset/user5.png',$link);
       $link = Administrador::URL."estudiante/";
       $thise->agregarItem('Reportes de Estudiantes','Reportes correspondientes a los Estudiantes','basicset/graph.png',$link);
-      $menus[] = $thise;
+      $thises[] = $thise;
       $thise = new Menu('Tutores');
       $link = Administrador::URL."tutor/";
       $thise->agregarItem('Gesti&oacute;n de Tutores','Registro y modificaciones para Tutores','basicset/user1.png',$link);
       $link = Administrador::URL."tutor/";
       $thise->agregarItem('Reportes de Tutores','Reportes correspondientes a los Tutores','basicset/graph.png',$link);
-      $menus[] = $thise;
+      $thises[] = $thise;
       $thise = new Menu('Autoridades');
       $link = Administrador::URL."autoridad/";
       $thise->agregarItem('Gesti&oacute;n de Autoridades','Registro y modificaciones para Autoridades','basicset/client.png',$link);
       $link = Administrador::URL."autoridad/";
       $thise->agregarItem('Reportes de Autoridades','Reportes correspondientes a los Autoridades','basicset/graph.png',$link);
-      $menus[] = $thise;
+      $thises[] = $thise;
       $thise = new Menu('Permisos');
       $link = Administrador::URL."seguridad/";
       $thise->agregarItem('Gesti&oacute;n de Permisos','Control y restricciones de los grupos para usuarios del Sistema SAPTI','basicset/login.png',$link);
-      $menus[] = $thise;
+      $thises[] = $thise;
       $thise = new Menu('Usuarios');
       $link = Administrador::URL."usuario/";
       $thise->agregarItem('Gesti&oacute;n de Usuarios','Registro y modificaciones para Usuarios','basicset/people.png',$link);
       $link = Administrador::URL."usuario/";
       $thise->agregarItem('Reportes de Usuarios','Reportes correspondientes a los Todos los Usuarios','basicset/graph.png',$link);
-      $menus[] = $thise;  
+      $thises[] = $thise;  
       $thise = new Menu('Reprogramaciones');
       $link = Administrador::URL."estados/";
       $thise->agregarItem('Gesti&oacute;n de Reprogramaciones','Postergar y dar Prorroga a Proyectos','basicset/calendar.png',$link);
-      $menus[] = $thise;
+      $thises[] = $thise;
       $thise = new Menu('Perfil');
       $link = Administrador::URL."pendientes/";
       $thise->agregarItem('Gesti&oacute;n de Perfiles','Gestionar los perfiles de tesis para los estudiantes','basicset/licence.png',$link);
       $link = Administrador::URL."reportes/";
       $thise->agregarItem('Reportes de Perfiles','Reportes correspondientes a los Perfiles','basicset/graph.png',$link);
-      $menus[] = $thise;
+      $thises[] = $thise;
       $thise = new Menu('Proyecto Final');
       $link = Administrador::URL."proyecto/";
       $thise->agregarItem('Gesti&oacute;n de Proyectos Finales','Gestionar los proyectos finales de los estudiantes','basicset/briefcase_48.png',$link);
       $link = Administrador::URL."proyecto/";
       $thise->agregarItem('Reportes de Proyectos Finales','Reportes correspondientes a los Proyectos','basicset/graph.png',$link);
-      $menus[] = $thise;
+      $thises[] = $thise;
       $thise = new Menu('Helpdesk SAPTI');
       $link = Administrador::URL."helpdesk/";
       $thise->agregarItem('Configurar Helpdesk','Gesti&oacute;n de Helpdesk para el sistema SAPTI.','basicset/helpdesk_48.png',$link,0,4);
-      $menus[] = $thise;
+      $thises[] = $thise;
       $thise = new Menu('Sistema SAPTI');
       $link = Administrador::URL."configuracion/";
       $thise->agregarItem('Configuraciones','Configuraciones para el sistema SAPTI.','basicset/gear_48.png',$link,0,15);
-      $menus[] = $thise;
+      $thises[] = $thise;
       $thise = new Menu('Notificaciones y Mensajes');
       $link = Administrador::URL."notificacion/";
       $thise->agregarItem('Gesti&oacute;n de Notificaciones','Gestionar Mis notificaciones','basicset/megaphone.png',$link,0,12);
@@ -127,19 +127,19 @@ class Menu
       $thise->agregarItem('Gesti&oacute;n de Perfiles','Gestionar los perfiles de tesis para los estudiantes','basicset/licence.png',$link);
       $link = Administrador::URL."reportes/";
       $thise->agregarItem('Reportes de Perfiles','Reportes correspondientes a los Perfiles','basicset/graph.png',$link);
-      $menus[] = $thise;
+      $thises[] = $thise;
       $thise = new Menu('Proyecto Final');
       $link = Administrador::URL."proyecto/";
       $thise->agregarItem('Gesti&oacute;n de Proyectos Finales','Gestionar los proyectos finales de los estudiantes','basicset/briefcase_48.png',$link);
       $link = Administrador::URL."proyecto/";
       $thise->agregarItem('Reportes de Proyectos Finales','Reportes correspondientes a los Proyectos','basicset/graph.png',$link);
-      $menus[] = $thise;
+      $thises[] = $thise;
       $thise = new Menu('Notificaciones y Mensajes');
       $link = Administrador::URL."notificacion/";
       $thise->agregarItem('Gesti&oacute;n de Notificaciones','Gestionar Mis notificaciones','basicset/megaphone.png',$link,0,12);
       $link = Administrador::URL."mensajes/";
       $thise->agregarItem('Gesti&oacute;n de Mesajes','Mi correo de Mensajes','basicset/mail.png',$link,14);
-      $menus[] = $thise;
+      $thises[] = $thise;
       
     }
     // Menu de CONSEJO
@@ -150,7 +150,7 @@ class Menu
       $thise->agregarItem('Gesti&oacute;n de Notificaciones','Gestionar Mis notificaciones','basicset/megaphone.png',$link,0,12);
       $link = Administrador::URL."mensajes/";
       $thise->agregarItem('Gesti&oacute;n de Mesajes','Mi correo de Mensajes','basicset/mail.png',$link,14);
-      $menus[] = $thise;
+      $thises[] = $thise;
       
     } 
     // Notificaiones para todos
@@ -167,8 +167,8 @@ class Menu
     $link = Administrador::URL."notificacion/notificacion.gestion.php?estado_notificacion=SV";
     $counter = $notificacion->getTodasNotificaciones($usuario->id, '', '', ' AND estado_notificacion="SV" ');
     $thise->agregarItem('Notificaciones Pendientes','Todas las notificaciones no leidas','basicset/message-not-read.png',$link,$counter[1]);
-    $menus[] = $thise;
-    return $menus;
+    $thises[] = $thise;
+    return $thises;
   }
   
   /**
@@ -180,7 +180,7 @@ class Menu
     leerClase('Grupo');
     leerClase('Estudiante');
    
-    $menus = array();
+    $thises = array();
     $thise = new Menu('Proyecto');
     $link = Estudiante::URL."proyecto-final/";
     $thise->agregarItem('Proyecto','Registro de avances y correcciones para el Proyecto Final','basicset/briefcase_48.png',$link);
@@ -189,7 +189,7 @@ class Menu
       $link = Estudiante::URL."proyecto/proyecto.registro.php";
       $thise->agregarItem('Registro de Formulario','Geti&oacute;n de las Notificaciones','basicset/survey.png',$link,1);
     }
-    $menus[] = $thise;
+    $thises[] = $thise;
 
     // Notificaiones 
    leerClase('Usuario');
@@ -203,9 +203,9 @@ class Menu
     $link = Estudiante::URL."notificacion/notificacion.gestion.php?estado_notificacion=SV";
     $counter = $notificacion->getTodasNotificaciones($usuario->id, '', '', ' AND estado_notificacion="SV" ');
     $thise->agregarItem('Notificaciones Pendientes','Todas las notificaciones no leidas','basicset/message-not-read.png',$link,$counter[1]);
-    $menus[] = $thise;
+    $thises[] = $thise;
     
-    return $menus;
+    return $thises;
   }
   
   /**
@@ -219,14 +219,14 @@ class Menu
     leerClase('Revision');
     leerClase('Estudiante');
    
-    $menus = array();
+    $thises = array();
     $thise = new Menu('Avances');
     $link = Estudiante::URL."proyecto-final/avance.registro.php";
     $thise->agregarItem('Registro de Avances','Registrar Archivos y la descripci&oacute;n del avance presentado','basicset/document_pencil.png',$link);
     $avance = new Avance();
     $link = Estudiante::URL."proyecto-final/avance.gestion.php";
     $thise->agregarItem('Archivo de Avances','Compendio de todos los avances presentados','basicset/cabinet.png',$link,'',$avance->contar( " proyecto_id = '{$proyecto->id}'  " ));
-    $menus[] = $thise;
+    $thises[] = $thise;
     $thise = new Menu('Correciones');
     $revision = new Revision();
     $pendiente = Revision::E1_CREADO;
@@ -237,8 +237,8 @@ class Menu
     $link = Estudiante::URL."proyecto-final/revision.gestion.php?estado_revision=";
     $thise->agregarItem('Archivo de Correciones','Compendio de todas las correciones presentadas','basicset/cabinet.png',$link,'',$pendiente);
 
-    $menus[] = $thise;
-    return $menus;
+    $thises[] = $thise;
+    return $thises;
   }
   
   /**
@@ -277,7 +277,7 @@ ORDER BY ma.id";
   }
   if(mysql_num_rows($resultmate)>0)
       {
-          $menus = array();
+          $thises = array();
   foreach ($materiassemestre as $value) 
    {
         $thise = new Menu($value['nombre']);
@@ -291,7 +291,7 @@ ORDER BY ma.id";
                         $thise->agregarItem('Gesti&oacute;n de Estudiantes Codigo:'.$docmateriassemestre[$i]['grupo'].'','Gesti&oacute;n de Estudiantes Inscritos en la Materia de Perfil.','docente/correccion.png',$link);
             }
          };
-         $menus[] = $thise;
+         $thises[] = $thise;
   };
       }  
       }
@@ -299,15 +299,24 @@ ORDER BY ma.id";
   $thise = new Menu('Tutor');
   $link = Docente::URL."tutor/index.php";
   $thise->agregarItem('Notificaiones','Notificaciones para el Proyecto Final','docente/notificacion.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
-   $menus[] = $thise;
+  $thises[] = $thise;
   
-   $thise = new Menu('Tribunal');
+  $thise = new Menu('Tribunal');
   $link = Docente::URL."tribunal/index.php";
   $thise->agregarItem('Notificaiones','Notificaciones para el Proyecto Final','docente/notificacion.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
-   $menus[] = $thise;
+  $thises[] = $thise;
+  
+  $thise = new Menu('Tiempo');
+  $link = Docente::URL."configuracion/disponibilidad.php";
+  $thise->agregarItem('Disponibilidad','Disponibilidad De Tiempo','docente/notificacion.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+  $thises[] = $thise;
+  
+  $thise = new Menu('Agregar Areas');
+  $link = Docente::URL."configuracion/configuracion.php";
+  $thise->agregarItem('Configuracion','Agregar Areas De Disponibilidad','docente/notificacion.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+  $thises[] = $thise;
    
    // Notificaiones 
-
   $usuario      = getSessionUser();
   $notificacion = new Notificacion();
 
@@ -317,9 +326,9 @@ ORDER BY ma.id";
    $link = Docente::URL."notificacion/notificacion.gestion.php?estado_notificacion=SV";
    $counter = $notificacion->getTodasNotificaciones($usuario->id, '', '', ' AND estado_notificacion="SV" ');
    $thise->agregarItem('Notificaciones Pendientes','Todas las notificaciones no leidas','basicset/message-not-read.png',$link,$counter[1]);
-   $menus[] = $thise;
+   $thises[] = $thise;
   
-    return $menus;
+    return $thises;
   }
   
   

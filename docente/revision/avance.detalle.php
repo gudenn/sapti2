@@ -101,6 +101,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
     if (isset($_POST['observaciones'])) 
     $observaciones=$_POST['observaciones'];
     $revision->fecha_revision=date("d/m/Y");
+    $avance->cambiarEstadoVisto();
 
     if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
     {
