@@ -1,7 +1,7 @@
 
 <div id="resultado"></div>
 <div style="width: 100%;float: left;" class="tbl_filtro">
-     <Hi> LISTA DE PERFIL </Hi>
+     <Hi> LISTA DE PENDIENTES </Hi>
     <table class="tbl_lista" id="docentes"  mane="docentes">
        <thead>
       <tr>
