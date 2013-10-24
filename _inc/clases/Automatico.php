@@ -29,7 +29,15 @@ class Automatico extends Objectbase
   * @var INT(11)
   */
   var $numero_aceptados;
-  
+  /** 
+   * el constructor con el parametro de id docente
+   * para sumar puntos a los docentes
+   * 
+   * @param type $id
+   * @param type $docente_id
+   * @return type
+   * 
+   */
   public function __construct($id = '',$docente_id = false) {
     if ($docente_id != '')
     {

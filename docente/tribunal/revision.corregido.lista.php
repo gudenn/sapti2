@@ -1,6 +1,6 @@
 <?php
 try {
-    define ("MODULO", "DOCENTE");
+  define ("MODULO", "DOCENTE");
   require('../_start.php');
   if(!isDocenteSession())
     header("Location: login.php"); 
@@ -31,12 +31,10 @@ try {
    /**
    * Menu superior
    */
-  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
-  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>'Proyecto Final');
-  $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/'.'estudiante.lista.php','name'=>'Estudiantes Inscritos');
-  $menuList[]     = array('url'=>URL.Docente::URL.'revision/'.basename(__FILE__),'name'=>'Lista de Correcciones');
-  $smarty->assign("menuList", $menuList);
-  
+   $menuList[]     = array('url'=>URL.Docente::URL.'tribunal','name'=>'Tribunal');
+   $menuList[]     = array('url'=>URL.Docente::URL.'tribunal/estudiante.lista.php','name'=>'Lista Estudiante');
+   $smarty->assign("menuList", $menuList);
+   
   if ( isset($_SESSION['iddictapro']) && is_numeric($_SESSION['iddictapro']) ){
       $iddicta=$_SESSION['iddictapro'];
   }

@@ -14,7 +14,7 @@
       <td>{$objs[ic]['nombre']}</td>
       <td>{$objs[ic]['descripcion']}</td>
       <td>
-        <a href="modalidad.crear.php?modalidad_id={$objs[ic]['id']}" >{icono('basicset/pencil_48.png','Editar')} Editar</a>
+        <a href="modalidad.registro.php?modalidad_id={$objs[ic]['id']}" >{icono('basicset/pencil_48.png','Editar')} Editar</a>
       </td>
     </tr>
   </tbody>

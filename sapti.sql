@@ -161,6 +161,9 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`docente` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `usuario_id` INT NOT NULL ,
   `codigo_sis` VARCHAR(20) NULL ,
+  `numero_horas` INT NULL ,
+  `configuracion_area` TINYINT(1) NULL ,
+  `configuracion_horario` TINYINT(1) NULL ,
   `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
@@ -547,10 +550,11 @@ DROP TABLE IF EXISTS `sapti`.`notificacion_tutor` ;
 CREATE  TABLE IF NOT EXISTS `sapti`.`notificacion_tutor` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `notificacion_id` INT NULL ,
+  `tutor_id` INT NULL ,
+  `proyecto_tutor_id` INT NULL ,
   `fecha_visto` DATE NULL ,
   `estado_notificacion` VARCHAR(2) NULL COMMENT 'Sin ver (SV), Visto (VI) , archivado (AR)' ,
   `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
-  `proyecto_tutor_id` INT NOT NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 

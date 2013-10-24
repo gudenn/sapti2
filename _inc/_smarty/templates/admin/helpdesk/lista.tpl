@@ -13,8 +13,8 @@
     <tr  class="{cycle values="light,dark"}">
       <td>{$objs[ic]['id']}</td>
       <td>{$helpdesk->getIconEstadoHD($objs[ic]['estado_helpdesk'])}</td>
-      <td>{$objs[ic]['descripcion']}</td>
-      <td>{$objs[ic]['keywords']}</td>
+      <td>{str_replace('/',' /',$objs[ic]['descripcion'])}</td>
+      <td>{str_replace(',',', ',$objs[ic]['keywords'])}</td>
       <td>
         <a href="helpdesk.registro.php?helpdesk_id={$objs[ic]['id']}" >{icono('basicset/pencil_48.png','Editar')} Editar</a>
         {if ($objs[ic]['estado_helpdesk'] == Helpdesk::EST02_EDITAD)}

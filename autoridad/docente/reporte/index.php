@@ -28,10 +28,10 @@ try {
   $espacio=' ';
   
   //leerClase($semestre);
-  $sqlr="SELECT u.nombre as Nombre ,CONCAT(u.apellido_paterno,u.apellido_materno) as Apellidos
-         FROM usuario u,docente d
+  $sqlr="SELECT u.nombre as Nombre ,CONCAT(u.apellido_paterno,u.apellido_materno) as Apellidos 
+         FROM usuario u,docente d 
          WHERE u.id=d.usuario_id";
-  $sql= utf8_encode($sqlr);
+ 
  
   /**
    * Menu central
@@ -39,7 +39,7 @@ try {
   //----------------------------------//
   leerClase('Menu');
   $menu = new Menu('Reportes');
-  $link = Administrador::URL."reportesistema/reportes.sistema.pdf.php?sql=$sql";
+  $link = Administrador::URL."reportesistema/reportes.sistema.pdf.php?sql=$sqlr";
   $menu->agregarItem('Reporte Docente','Reportes PDF','basicset/filepd.png',$link);
   $link = Administrador::URL."reportesistema/reporte.sistema.excel.php?sql=$sqlr";
   $menu->agregarItem('Reporte Docente','Reportes EXCEL','basicset/boton_excel.png',$link);

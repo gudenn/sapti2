@@ -1,11 +1,11 @@
 <table class="tbl_lista">
   <thead>
     <tr>
-      <th><a href='?order=id'                  class="tajax"  title='Ordenar por Id'           >Id            </a></th>
-      <th><a href='?order=codigo'              class="tajax"  title='Ordenar por Codigo'       >Proyecto </a></th>
-      <th><a href='?order=codigo'              class="tajax"  title='Ordenar por Codigo'       >Normal</a></th>
-      <th><a href='?order=activo'              class="tajax"  title='Ordenar por Activo'       >Postergado   </a></th>
-       <th><a href='?order=activo'              class="tajax"  title='Ordenar por Activo'       >Prorroga    </a></th>
+      <th><a>Id </a></th>
+      <th><a>Proyecto </a></th>
+      <th><a>Normal</a></th>
+      <th><a>Postergado   </a></th>
+       <th><a >Prorroga    </a></th>
       <th>Opciones</th>
     </tr>
   </thead>

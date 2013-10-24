@@ -43,9 +43,13 @@ try {
   leerClase("Tipo_defensa");
   leerClase("Defensa");
   leerClase("Semestre");
+   leerClase("Consejo");
     
   
 
+ $menuList[]     = array('url'=>URL.Consejo::URL,'name'=>'Consejo');
+   $menuList[]     = array('url'=>URL . Consejo::URL.'listadefensa.php' ,'name'=>'Defensa');
+   $smarty->assign("menuList", $menuList);
 
       $lugar= new Lugar();
       $lugar_sql= $lugar->getAll();

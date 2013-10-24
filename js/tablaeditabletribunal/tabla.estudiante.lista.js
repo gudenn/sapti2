@@ -179,7 +179,7 @@ function sessionCorreccion(seccion) {
 		success: function (response) 
 		{ 
                     if(response=="ok"){
-                        document.location.href='../revision/revision.corregido.lista.php';
+                        document.location.href='../tribunal/revision.corregido.lista.php';
                     }else{
                        alert("Intente De Nuevo");
                     }

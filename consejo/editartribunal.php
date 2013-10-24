@@ -44,10 +44,14 @@ try {
   leerClase("Modalidad");
    leerClase("Notificacion");
   leerClase("Proyecto_estudiante");
+  leerClase("Consejo");
 
 
 //contruyendo el usuario
   
+  $menuList[]     = array('url'=>URL.Consejo::URL,'name'=>'Consejo');
+   $menuList[]     = array('url'=>URL . Consejo::URL.'listatribunal.php' ,'name'=>'Lista Estudiantes');
+   $smarty->assign("menuList", $menuList);
   
  $editores = ",
                 {toolbar: [ 

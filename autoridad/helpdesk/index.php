@@ -26,6 +26,19 @@ try {
   $menuList[]     = array('url'=>URL . Administrador::URL . 'helpdesk/','name'=>'Helpdesk SAPTI');
   $smarty->assign("menuList", $menuList);
 
+  if (!isset($_SESSION['editor_online']))
+    $_SESSION['editor_online'] = false;
+  if (isset($_GET['activarEditor']))
+  {
+    $EXITO = true;
+    $_SESSION['editor_online'] = true;
+  }
+  if (isset($_GET['desactivarEditor']))
+  {
+    $EXITO = false;
+    $_SESSION['editor_online'] = false;
+  }
+  
 
   /**
    * Menu central
@@ -37,6 +50,16 @@ try {
   $menu->agregarItem('Gesti&oacute;n de Helpdesk','Gesti&oacute;n de Helpdesk para el sistema SAPTI.','basicset/helpdesk_48.png',$link);
   $link = Administrador::URL."helpdesk/helpdesk.permisos.php?todos";
   $menu->agregarItem('Permisos y Restricciones','Gesti&oacute;n de accesos a los temas de ayuda Helpdesk.','basicset/login.png',$link);
+  if (!$_SESSION['editor_online'])
+  {
+    $link = Administrador::URL."helpdesk/?activarEditor=1";
+    $menu->agregarItem('Activar el editor online','Activamos la herramienta Editor Directo de Tooltips en todas las p&aacute;ginas.','basicset/edit_48.png',$link);
+  }
+  else
+  {
+    $link = Administrador::URL."helpdesk/?desactivarEditor=1";
+    $menu->agregarItem('Desactivar el editor online','Desactivamos la herramienta Editor Directo de Tooltips en todas las p&aacute;ginas.','basicset/editno_48.png',$link);
+  }
   $menus[] = $menu;
   $menu = new Menu('Helpdesk y Tooltips Pendientes');
   $link = Administrador::URL."helpdesk/helpdesk.gestion.php?estado_helpdesk=".Helpdesk::EST01_RECIEN;
@@ -61,12 +84,22 @@ try {
   
   $smarty->assign("menus", $menus);
 
-  
-  $smarty->assign("ERROR", $ERROR);
+  //No hay ERROR
+  $ERROR = ''; 
+  leerClase('Html');
+  $html  = new Html();
+  if (isset($EXITO))
+  {
+    $html = new Html();
+    if ($EXITO)
+      $mensaje = array('mensaje'=>'La Herramienta <b>Editor Directo de Tooltips</b> fue <b style="color:green;">activada</b> correctamente','titulo'=>'Editor Directo de Tooltips' ,'icono'=> 'edit_48.png');
+    else
+      $mensaje = array('mensaje'=>'La Herramienta <b>Editor Directo de Tooltips</b> fue <b style="color:red;">desactivada</b> correctamente','titulo'=>'Editor Directo de Tooltips' ,'icono'=> 'editno_48.png');
+   $ERROR = $html->getMessageBox ($mensaje);
+  }
+  $smarty->assign("ERROR",$ERROR);
   
 
-  //No hay ERROR
-  $smarty->assign("ERROR",'');
   
 } 
 catch(Exception $e) 

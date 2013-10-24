@@ -8,7 +8,7 @@ if(!isDocenteSession())
 
   /** HEADER */
   $smarty->assign('title','SAPTI - Registro Horarios');
-  $smarty->assign('description','Horarios dis ponibles para las defensas');
+  $smarty->assign('description','Horarios Disponibles para las Defensas');
   $smarty->assign('keywords','SAPTI,Materia,Registro');
 
   leerClase('Administrador');

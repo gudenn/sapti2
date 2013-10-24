@@ -11,8 +11,8 @@
   {section name=ic loop=$objs}
   <tbody>
     <tr  class="{cycle values="light,dark"}">
-      <td>{$objs[ic]['descripcion']}</td>
-      <td>{$objs[ic]['keywords']}</td>
+      <td>{str_replace('/',' /',$objs[ic]['descripcion'])}</td>
+      <td>{str_replace(',',', ',$objs[ic]['keywords'])}</td>
       {section name=ia loop=$grupos}
       <td>
         {assign var="permiso" value=$grupos[ia]->tieneAccesoHelpdesk($objs[ic]['id'])}
