@@ -40,6 +40,11 @@ try {
   leerClase("Filtro");
   leerClase("Proyecto_estudiante");
   leerClase("Modalidad");
+  leerClase("Consejo");
+  
+   $menuList[]     = array('url'=>URL.Consejo::URL,'name'=>'Consejo');
+   $menuList[]     = array('url'=>URL . Consejo::URL.'listatribunal.php' ,'name'=>'Tribunal');
+   $smarty->assign("menuList", $menuList);
   
         $rows = array();
        $usuario = new Usuario();

@@ -31,8 +31,7 @@ try {
    $menuList[]     = array('url'=>URL.Consejo::URL,'name'=>'Consejo');
    $menuList[]     = array('url'=>URL . Consejo::URL.'listatribunal.php' ,'name'=>'Tribunal');
    $smarty->assign("menuList", $menuList);
-   $smarty->assign("menuList", $menuList);
- 
+  
 
   //No hay ERROR
   $smarty->assign("ERROR",$ERROR);

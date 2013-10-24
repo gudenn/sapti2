@@ -7,10 +7,6 @@ try {
   }
   if(!isUserSession())
     header("Location: ../login.php");  
-
-  
-  
-  
   leerClase("Usuario");
   leerClase("Proyecto");
   leerClase("Notificacion");
@@ -68,19 +64,13 @@ try {
   $o_string   = $notificacion->getOrderString($filtro);
   $usuario    = getSessionUser();
   $obj_mysql  = $notificacion->getTodasNotificaciones($usuario->id,'',$o_string,$filtro_sql,TRUE);
-  
- // var_dump($obj_mysql);
   $objs_pg    = new Pagination($obj_mysql, 'mis_notificaciones','',false);
-
 
   $smarty->assign("filtros"       ,$filtro);
   $smarty->assign("objs_pg"       ,$objs_pg);
   $smarty->assign("objs"          ,$objs_pg->objs);
   $smarty->assign("pages"         ,$objs_pg->p_pages);
   $smarty->assign("notificacion"  ,$notificacion);
-
-       
-
 
   //No hay ERROR
   $smarty->assign("ERROR",'');
