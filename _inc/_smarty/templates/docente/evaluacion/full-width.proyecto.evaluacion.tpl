@@ -7,7 +7,7 @@
                <label for="nombre de proyecto"><small>NOMBRE DE PROYECTO:</small></label>
                <span>{$proyecto->nombre}</span><br/>
                <label for="nombre de estudiante"><small>NOMBRE DE ESTUDIANTE:</small></label>
-               <span>{$usuario->nombre} {$usuario->apellido_paterno} {$usuario->apellido_materno}</span>
+               <span>{$usuario->nombre|upper} {$usuario->apellido_paterno|upper} {$usuario->apellido_materno|upper}</span>
             </p>
         <div id="wrap">
         <div id="message"></div>
