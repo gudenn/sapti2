@@ -29,17 +29,19 @@ try {
   $JS[]  = URL_JS . "ventanasmodales/historial.notas.js";
   $JS[]  = URL_JS . "ventanasmodales/jquery.simplemodal-1.4.4.js";
   $smarty->assign('JS',$JS);
-    if ( isset($_SESSION['iddictapro']) && is_numeric($_SESSION['iddictapro']) )
+  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
   {
-      $iddicta=$_SESSION['iddictapro'];
+     $iddicta                = $_GET['iddicta'];
+  }  else {
+        header("Location: ../index.php");
   }
   $dicta = new Dicta($iddicta);
    /**
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
-  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>$dicta->getNombreMateria());
-  $menuList[]     = array('url'=>URL.Docente::URL.'evaluacion/'.basename(__FILE__),'name'=>'Evaluacion de Estudiantes');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php?iddicta='.$iddicta,'name'=>$dicta->getNombreMateria());
+  $menuList[]     = array('url'=>URL.Docente::URL.'evaluacion/estudiante.evaluacion-editar.php?iddicta='.$iddicta,'name'=>'Evaluacion de Estudiantes');
   $smarty->assign("menuList", $menuList);
   
   function promedio($promedio){

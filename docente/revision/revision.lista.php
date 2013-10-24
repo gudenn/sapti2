@@ -28,9 +28,16 @@ try {
   $JS[]  = URL_JS . "ventanasmodales/avance.detalle.modal.js";
   $JS[]  = URL_JS . "ventanasmodales/jquery.simplemodal-1.4.4.js";
   $smarty->assign('JS',$JS);
-        if ( isset($_SESSION['iddictapro']) && is_numeric($_SESSION['iddictapro']) )
+  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
   {
-      $iddicta=$_SESSION['iddictapro'];
+     $iddicta                = $_GET['iddicta'];
+  }  else {
+        header("Location: ../index.php");
+  }
+  if( isset($_GET['estudiente_id']) && is_numeric($_GET['estudiente_id']) ){
+       $id_estudiante=$_GET['estudiente_id'];
+  }  else {
+      header("Location: ../index.php");
   }
   $dicta = new Dicta($iddicta);
   
@@ -38,14 +45,10 @@ try {
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
-  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>$dicta->getNombreMateria());
-  $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/'.'estudiante.lista.php','name'=>'Estudiantes Inscritos');
-  $menuList[]     = array('url'=>URL.Docente::URL.'revision/'.basename(__FILE__),'name'=>'Seguimiento');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php?iddicta='.$iddicta,'name'=>$dicta->getNombreMateria());
+  $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/estudiante.lista.php?iddicta='.$iddicta,'name'=>'Estudiantes Inscritos');
+  $menuList[]     = array('url'=>URL.Docente::URL.'revision/revision.lista.php?iddicta='.$iddicta.'&estudiente_id='.$id_estudiante,'name'=>'Seguimiento');
   $smarty->assign("menuList", $menuList);
-  
-    if( isset($_SESSION['pro_estudiente_id']) && is_numeric($_SESSION['pro_estudiente_id']) ){
-       $id_estudiante=$_SESSION['pro_estudiente_id'];
-  }
 
   $estudiante     = new Estudiante($id_estudiante);
   $usuario        = $estudiante->getUsuario();

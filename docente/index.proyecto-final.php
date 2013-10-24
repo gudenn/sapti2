@@ -36,9 +36,8 @@ try {
   if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
   {
      $iddicta                = $_GET['iddicta'];
-     $_SESSION['iddictapro'] = $iddicta;
   }  else {
-      $iddicta=$_SESSION['iddictapro'];
+        header("Location: ../index.php");
   }
   $dicta=new Dicta($iddicta);
   
@@ -46,7 +45,7 @@ try {
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
-  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>$dicta->getNombreMateria());
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php?iddicta='.$iddicta,'name'=>$dicta->getNombreMateria());
   $smarty->assign("menuList", $menuList);
   
   $docente     = getSessionDocente();
@@ -63,20 +62,20 @@ try {
   //----------------------------------//
   leerClase('Menu');
   $menu = new Menu('Estudiantes');
-  $link = Docente::URL."estudiante/estudiante.lista.php";
+  $link = Docente::URL."estudiante/estudiante.lista.php?iddicta=".$iddicta;
   $menu->agregarItem('Estudiantes Registrados','Estudiantes Registrados en la Materia de Proyecto Final','docente/inscritos.png',$link);
-  $link = Docente::URL."evaluacion/estudiante.evaluacion-editar.php";
+  $link = Docente::URL."evaluacion/estudiante.evaluacion-editar.php?iddicta=".$iddicta;
   $menu->agregarItem('Evaluacion de Estudiantes','Evaluacion de Estudiantes Registrados en la Materia de Proyecto Final','docente/evaluacion.png',$link);  
-  $link = Docente::URL."estudiante/inscripcion.estudiante-cvs.php";
+  $link = Docente::URL."estudiante/inscripcion.estudiante-cvs.php?iddicta=".$iddicta;
   $menu->agregarItem('Gesti&oacute;n de Estudiantes','Registro de Estudiantes Inscritos en la Materia de Proyecto Final','docente/correccion.png',$link);
   $menus[] = $menu;
   
   $menu = new Menu('Calendario');
-  $link = Docente::URL."calendario/calendario.evento.php";
+  $link = Docente::URL."calendario/calendario.evento.php?iddicta=".$iddicta;
   $menu->agregarItem('Calendario de Eventos','Calendario de todos los Eventos registrados por Tutor(es), Docente(s) y Tribunales','docente/calendar.png',$link);
-  $link = Docente::URL."calendario/evento.registro.php";
+  $link = Docente::URL."calendario/evento.registro.php?iddicta=".$iddicta;
   $menu->agregarItem('Registro de Eventos','Registro de Eventos y en la Materia de Proyecto Final','docente/registroeve.png',$link);
-  $link = Docente::URL."calendario/evento.lista.php";
+  $link = Docente::URL."calendario/evento.lista.php?iddicta=".$iddicta;
   $menu->agregarItem('Edici&oacute;n de Eventos','Edici&oacute;n de Eventos de la Materia de Proyecto Final','docente/edicion.png',$link);
   $menus[] = $menu;
 

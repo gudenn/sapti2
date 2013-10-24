@@ -33,19 +33,21 @@ try {
   $JS[]  = URL_JS . "jquery.addfield.js";
   $smarty->assign('JS',$JS);
     leerClase('Dicta');
-    if ( isset($_SESSION['iddictapro']) && is_numeric($_SESSION['iddictapro']) )
+  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
   {
-      $iddicta=$_SESSION['iddictapro'];
+     $iddicta                = $_GET['iddicta'];
+  }  else {
+        header("Location: ../index.php");
   }
   $dicta = new Dicta($iddicta);
      /**
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
-  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>$dicta->getNombreMateria());
-  $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/estudiante.lista.php','name'=>'Estudiantes Inscritos');
-  $menuList[]     = array('url'=>URL.Docente::URL.'revision/revision.lista.php','name'=>'Seguimiento');
-  $menuList[]     = array('url'=>URL.Docente::URL.'revision/'.basename(__FILE__),'name'=>'Edicion de Observaciones');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php?iddicta='.$iddicta,'name'=>$dicta->getNombreMateria());
+  $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/estudiante.lista.php?iddicta='.$iddicta,'name'=>'Estudiantes Inscritos');
+  $menuList[]     = array('url'=>URL.Docente::URL.'revision/revision.lista.php?iddicta='.$iddicta,'name'=>'Seguimiento');
+  $menuList[]     = array('url'=>URL.Docente::URL.'revision/observacion.editar.revision.php?iddicta='.$iddicta,'name'=>'Edicion de Observaciones');
   $smarty->assign("menuList", $menuList);
     
   $revid = false;

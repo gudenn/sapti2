@@ -52,9 +52,11 @@ try {
   leerClase('Observacion');
   leerClase('Docente');
   leerClase('Dicta');
-    if ( isset($_SESSION['iddictapro']) && is_numeric($_SESSION['iddictapro']) )
+  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
   {
-      $iddicta=$_SESSION['iddictapro'];
+     $iddicta                = $_GET['iddicta'];
+  }  else {
+        header("Location: ../index.php");
   }
   $dicta = new Dicta($iddicta);
 
@@ -62,10 +64,10 @@ try {
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
-  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>$dicta->getNombreMateria());
-  $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/estudiante.lista.php','name'=>'Estudiantes Inscritos');
-  $menuList[]     = array('url'=>URL.Docente::URL.'revision/revision.corregido.lista.php','name'=>'Lista de Correcciones');
-  $menuList[]     = array('url'=>URL.Docente::URL.'revision/'.basename(__FILE__),'name'=>'Detalle de Avance');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php?iddicta='.$iddicta,'name'=>$dicta->getNombreMateria());
+  $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/estudiante.lista.php?iddicta='.$iddicta,'name'=>'Estudiantes Inscritos');
+  $menuList[]     = array('url'=>URL.Docente::URL.'revision/revision.corregido.lista.php?iddicta='.$iddicta,'name'=>'Lista de Correcciones');
+  $menuList[]     = array('url'=>URL.Docente::URL.'revision/avance.detalle.php?iddicta='.$iddicta,'name'=>'Detalle de Avance');
   $smarty->assign("menuList", $menuList);
   
     $estuid = false;

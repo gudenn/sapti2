@@ -51,31 +51,6 @@
   {/section}
 </table>
         </div>
-{literal}
-<script type="text/javascript">
-function sessionAvance(seccion, est) {
-	$.ajax({ 
-		url: '../variable.session.avac.php',
-		type: 'POST',
-		dataType: "html",
-		data: { 
-			avance : seccion,
-                        estudiante_id : est
-		},
-		success: function (response) 
-		{ 
-                    if(response=="ok"){
-                        document.location.href='avance.detalle.php';
-                    }else{
-                       alert("Intente De Nuevo");
-                    }
-		},
-		error: function() { alert("Ajax failure\n"); },
-		async: true
-	});
-}
-</script>
-{/literal}
     </div>
     {$ERROR}
   </div>

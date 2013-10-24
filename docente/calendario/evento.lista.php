@@ -38,17 +38,19 @@ try {
   $JS[]  = URL_JS . "ui/i18n/jquery.ui.datepicker-es.js";
   $smarty->assign('JS',$JS);
   $smarty->assign('CSS',$CSS);
-    if ( isset($_SESSION['iddictapro']) && is_numeric($_SESSION['iddictapro']) )
+  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
   {
-     $iddicta = $_SESSION['iddictapro'];
+     $iddicta                = $_GET['iddicta'];
+  }  else {
+        header("Location: ../index.php");
   }
   $dicta=new Dicta($iddicta);
   /**
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
-  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>$dicta->getNombreMateria());
-  $menuList[]     = array('url'=>URL.Docente::URL.'calendario/'.basename(__FILE__),'name'=>'Edicion de Eventos');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php?iddicta='.$iddicta,'name'=>$dicta->getNombreMateria());
+  $menuList[]     = array('url'=>URL.Docente::URL.'calendario/evento.lista.php?iddicta='.$iddicta,'name'=>'Edicion de Eventos');
   $smarty->assign("menuList", $menuList);
   
   if (isset($_GET['eliminar']) && isset($_GET['evento_id']) && is_numeric($_GET['evento_id']) )
