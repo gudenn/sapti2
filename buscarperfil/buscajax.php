@@ -14,16 +14,11 @@ try {
 
   //JS
 
-  
    $JS[]  = "js/ajaxbuscarperfil.js";
    $smarty->assign('JS','');
-   
 
-  //CREAR UN TIPO   DE DEF
- 
- 
 }
-catch(Exception $e) 
+  catch(Exception $e) 
 {
   $smarty->assign("ERROR", handleError($e));
 }

@@ -3,7 +3,7 @@ try {
   define ("MODULO", "ADMIN-INDEX");
   require('_start.php');
   if(!isUserSession())
-    header("Location: login.php");  
+  header("Location: login.php");  
 
   /** HEADER */
   $smarty->assign('title','Administraci&oacute;n');

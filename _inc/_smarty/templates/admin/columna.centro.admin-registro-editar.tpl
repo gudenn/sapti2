@@ -1,13 +1,10 @@
       <div id="content">
-        <h1 class="title">Edici&oacute;n del Usuario "<i>{$usuario->getNombreCompleto()}</i>"</h1>
-        <p>Formulario de Edici&oacute;n de Usuario</p>
+        <h1 class="title">Edici&oacute;n del Admin "<i>{$usuario->getNombreCompleto()}</i>"</h1>
+        <p>Formulario de Edici&oacute;n de Admin</p>
         <h2 class="title">Formulario de Edici&oacute;n</h2>
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
-            <p>
-              <input type="text" name="codigo_sis" id="codigo_sis" value="{$docente->codigo_sis}" size="100"  data-validation-engine="validate[required]">
-              <label for="codigo_sis"><small>C&oacute;digo SIS (*){getHelpTip('codigo_sis')}</small></label>
-            </p>
+           
             <p>
               <input type="text" name="ci" id="ci" value="{$usuario->ci}" size="100"  data-validation-engine="validate[required]" >
               <label for="ci"><small>CI (*){getHelpTip('ci')}</small></label>
@@ -31,23 +28,6 @@
             <p>
               {html_radios name="sexo" options=$sexo selected=$sexo_selected separator="<br>"}
             </p>
-            <p>
-          <select name="numero_horas" id="numero_horas">
-          <option>-Seleccione-</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-          <option>6</option>
-          <option>7</option>
-          <option>8</option>
-          <option>9</option>
-          <option>10</option>
-          <option>11</option>
-          <option>12</option>
-          </select>
-          <label for="numero_horas"><small>Numero de Horas Asignadas (*){getHelpTip('Numero de Horas disponibles')}</small></label>
-          
-           </p>
             <p>
               <input type="text" name="email" id="email" value="{$usuario->email}" size="22" data-validation-engine="validate[],custom[email]"  >
               <label for="email"><small>E-Mail{getHelpTip('email')}</small></label>

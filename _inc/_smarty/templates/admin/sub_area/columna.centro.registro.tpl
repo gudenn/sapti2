@@ -1,12 +1,12 @@
       <div id="content">
         <h1 class="title">Registro de Sub-&Aacute;rea para la &Aacute;rea <b>{strtoupper($area->nombre)}</b></h1>
-        <p>Formulario de registro de Sub-&Aacute;</p>
-        <h2 class="title">Formulario de Sub-&Aacute;</h2>
+        <p>Formulario de registro de Sub-&Aacuterea;</p>
+        <h2 class="title">Formulario de Sub-&Aacuterea;</h2>
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
             <p>
               <input type="text" name="nombre" id="nombre" value="{$subarea->nombre}"  data-validation-engine="validate[required]">
-              <label for="nombre"><small>Nombre del Sub-&Aacute; (*) {getHelpTip('nombre')}</small></label>
+              <label for="nombre"><small>Nombre del Sub-&Aacuterea; (*) {getHelpTip('nombre')}</small></label>
             </p>
             <p>
               <input type="text" name="descripcion" id="descripcion" value="{$subarea->descripcion}"  data-validation-engine="validate[required]">

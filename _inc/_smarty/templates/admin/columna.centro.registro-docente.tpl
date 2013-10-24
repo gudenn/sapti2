@@ -74,14 +74,16 @@
         </div>
         <p>{$ERROR}</p>
         <p>Todos los campos con (*) son obligatorios.</p>
-        <script type="text/javascript">
+       <script type="text/javascript">
         {literal} 
           $(function(){
             $('#fecha_nacimiento').datepicker({
               dateFormat:'dd/mm/yy',
               changeMonth: true,
               changeYear: true,
-              yearRange: "1920:2013"
+        {/literal} 
+              yearRange: "1920:{date('Y')}"
+        {literal} 
             });
           });
           jQuery(document).ready(function(){
