@@ -4,9 +4,9 @@
   <table  style="width: {sizeof($filtros->nombres)*105}px;float: left;" class="tbl_filtro">
     <tr>
       {section name=ic loop=$filtros->nombres}
-        <th style="width: 105px;"><label for="{$filtros->valores[ic][1]}">{$filtros->nombres[ic]}{getHelpTip($filtros->valores[ic][1])}</label></th>
+        <th style="width: 120px;"><label for="{$filtros->valores[ic][1]}">{$filtros->nombres[ic]}{getHelpTip($filtros->valores[ic][1])}</label></th>
       {/section}
-      <th style="width: 105px;">&nbsp;</th>
+      <th style="width: 120px;">&nbsp;</th>
     </tr>
     <tr>
       {section name=ic loop=$filtros->valores}
