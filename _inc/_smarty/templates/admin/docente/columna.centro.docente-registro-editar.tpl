@@ -1,5 +1,5 @@
       <div id="content">
-        <h1 class="title">Edici&oacute;n del Docente "<i>{$usuario->getNombreCompleto()}</i>"</h1>
+        <h1 class="title">Edici&oacute;n del Usuario "<i>{$usuario->getNombreCompleto()}</i>"</h1>
         <p>Formulario de Edici&oacute;n de Docente</p>
         <h2 class="title">Formulario de Edici&oacute;n</h2>
         <div id="respond">

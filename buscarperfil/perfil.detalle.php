@@ -69,8 +69,8 @@ try {
   
   
   $sqlr="SELECT p.id,u.nombre,s.codigo,p.nombre as titulo,CONCAT(apellido_paterno,' ',apellido_materno) as apellidos,p.estado as estadop ,a.nombre as area ,c.nombre as carrera, m.nombre as modalidad
-FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,carrera c,proyecto_area pa ,area a,modalidad m
-WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id and p.tipo_proyecto='PR'AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id and p.carrera_id=c.id and m.id=p.modalidad_id  and p.id='".$perfil_id."'";
+         FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,carrera c,proyecto_area pa ,area a,modalidad m
+         WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id and p.tipo_proyecto='PR'AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id and p.carrera_id=c.id and m.id=p.modalidad_id  and p.id='".$perfil_id."'";
   $resultado = mysql_query($sqlr);
   $arraylista= array();
   
@@ -94,11 +94,8 @@ WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id and p.ti
   $formulario=$arraylista[0]['formularioaprobacion'];
   $objetivo_g=$arraylista[0]['objetivogeneral'];
   $objetivo_e=$arraylista[0]['objetivoespecifico'];
-  
-  
   $descripcion=$arraylista[0]['descripcionperfil'];
- 
-
+  
  $smarty->assign("nombre_es", $nombre_es) ;
  $smarty->assign('titulo'  , $titulo);
  $smarty->assign('codigo'  , $codigo);

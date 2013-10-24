@@ -6,9 +6,9 @@ try {
     header("Location: ../login.php");  
 
   /** HEADER */
-  $smarty->assign('title','SAPTI - Registro Materia');
-  $smarty->assign('description','Formulario de registro de Materia');
-  $smarty->assign('keywords','SAPTI,Materia,Registro');
+  $smarty->assign('title','SAPTI - Registro Turno');
+  $smarty->assign('description','Formulario de registro de Turno');
+  $smarty->assign('keywords','SAPTI,Turno,Registro');
 
   leerClase('Administrador');
   /**
