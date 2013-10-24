@@ -47,7 +47,7 @@ try {
   $menu->agregarItem('Cambios de Tema','Registro de Cambios de Tema; Cambios Leves y Cambios Totales.','basicset/reload.png',$link);
   $menus[] = $menu;
   $menu = new Menu('Reportes');
-  $link = Administrador::URL."estudiante/";
+  $link = Administrador::URL."estudiante/reporte";
   $menu->agregarItem('Reportes de Estudiantes','Reportes correspondientes a los Estudiantes','basicset/graph.png',$link);
   $menus[] = $menu;
   

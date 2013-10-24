@@ -1,6 +1,6 @@
 <?php
 
-require('../_start.php');
+require('../../_start.php');
  
 require_once(DIR_LIB.'/tcpdf/config/lang/eng.php');
 require_once(DIR_LIB.'/tcpdf/tcpdf.php');
@@ -70,8 +70,11 @@ $pdf->SetFont('dejavusans', '', 10);
 
 // add a page
 $pdf->AddPage();
-
-$sql =$_GET['sql'];
+$semestre= $_GET['id_p'];
+$sql ='select u.nombre as NOMBRE ,CONCAT(u.apellido_paterno," ",u.apellido_materno) as APELLIDOS ,m.nombre as MATERIA,COUNT(materia_id) as INSCRITOS
+   from usuario u, docente d ,dicta di,materia m ,inscrito i ,evaluacion ev ,semestre s
+   where u.id=d.usuario_id and di.docente_id=d.id and di.materia_id=m.id and i.dicta_id=di.id and ev.id=i.evaluacion_id and s.id=i.semestre_id and s.id="'.$semestre .'"
+   GROUP BY m.nombre';
 $b=1;
 
 function DesplegarTabla($a,$b)
@@ -108,23 +111,23 @@ function DesplegarTabla($a,$b)
         var_dump($html);
     }
     //configurar tamanio columnas para las tablas
-    function tamcolumna($nom){
+   function tamcolumna($nom){
         
         switch ($nom){
      case "NOMBRE":
              $tam='20%';
              break;
      case "APELLIDOS":
-             $tam='15%';
+             $tam='25%';
              break;
      case "MATERIA":
-             $tam='12%';
+             $tam='25%';
              break;
      case "INSCRITO":
              $tam='10%';
              break;
      case "ESTADO":
-             $tam='10%';
+             $tam='15%';
              break;
          default :
              $tam='15%';
@@ -144,7 +147,7 @@ $pdf->lastPage();
 // ---------------------------------------------------------
 
 //Close and output PDF document
-$pdf->Output('Reportesistema.pdf', 'I');
+$pdf->Output('ReporteDocente.pdf', 'I');
 
 //============================================================+
 // END OF FILE                                                
