@@ -74,7 +74,7 @@ try {
   
 
   
-  $columnacentro = 'admin/docente/columna.centro.docente-registro-editar.tpl';
+  $columnacentro = 'admin/columna.centro.admin-registro-editar.tpl';
   $smarty->assign('columnacentro',$columnacentro);
   
   if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar'  && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
