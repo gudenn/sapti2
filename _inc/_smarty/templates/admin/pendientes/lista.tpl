@@ -1,16 +1,16 @@
 
 <div id="resultado"></div>
 <div style="width: 100%;float: left;" class="tbl_filtro">
-     <Hi> LISTA DE PERFIL </Hi>
+     <Hi> LISTA DE PENDIENTES </Hi>
     <table class="tbl_lista" id="docentes"  mane="docentes">
        <thead>
       <tr>
-    <th><a href='?order=id'                class="tajax"   title='Ordenar por Id'               >NUMERO           </a></th>
-    <th><a href='?order=codigo_box'        class="tajax"   title='Ordenar por Codigo'           >NOMBRE       </a></th>
-    <th><a href='?order=proveedor'         class="tajax"   title='Ordenar por Proveedor'        >APELLIDOS     </a></th>
-    <th><a href='?order=especialidad'         class="tajax"   title='Ordenar por Especialidad'        >TITULO</a></th>
-    <th><a href='?order=id'                class="tajax"   title='Ordenar por Id'               >GESTION</a></th>
-     <th>DETALLE</th> 
+    <th><a>NUMERO</a></th>
+    <th><a>NOMBRE</a></th>
+    <th><a>APELLIDOS</a></th>
+    <th><a>T&Iacute;TULO</a></th>
+    <th><a>GESTI&Oacute;N</a></th>
+    <th>DETALLE</th> 
     <th>CONFIRMAR</th> 
       </tr>
   </thead>

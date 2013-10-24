@@ -16,6 +16,7 @@ try {
 
   //JS
   $JS[]  = "js/jquery.min.js";
+  $smarty->assign('header_ui','1');
   $smarty->assign('JS','');
   $smarty->assign('CSS',$CSS);
 
@@ -31,6 +32,7 @@ try {
   $menuList[]     = array('url'=>URL . Administrador::URL . 'docente/','name'=>'Docente');
   $smarty->assign("menuList", $menuList);
 
+  
 
   /**
    * Menu central
@@ -45,16 +47,8 @@ try {
   $link = Administrador::URL."docente/configuracion.dicta.php";
   $menu->agregarItem('Asignacion de Materias','Asignacion de Materias a los Docentes','basicset/survey.png',$link);  
   $menus[] = $menu;
-  
-  $menu = new Menu('Configurar');
-  $link = Administrador::URL."docente/";
-  $menu->agregarItem('Configurar horarios','Configurar horas al docente','basicset/survey.png',$link);  
-  $link = Administrador::URL."docente/";
-  $menu->agregarItem('Configurar Areas','Configurar Areas','basicset/survey.png',$link);  
-  $menus[] = $menu;
-  
   $menu = new Menu('Reportes');
-  $link = Administrador::URL."docente/";
+  $link = Administrador::URL."docente/reporte";
   $menu->agregarItem('Reportes de Docente','Reportes correspondientes a los Docentes','basicset/graph.png',$link);
   $menus[] = $menu;
   //----------------------------------//

@@ -10,7 +10,8 @@
  */
 
 // create our editable grid
-var editableGrid = new EditableGrid("evaluacion1", {
+var time=Math.random();
+var editableGrid = new EditableGrid("evaluacion1"+time, {
 	enableSort: true, // true is the default, set it to false if you don't want sorting to be enabled
 	editmode: "absolute", // change this to "fixed" to test out editorzone, and to "static" to get the old-school mode
 	editorzoneid: "edition", // will be used only if editmode is set to "fixed"

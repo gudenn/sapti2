@@ -18,9 +18,9 @@ try {
   $ERROR = '';
 
   /** HEADER */
-  $smarty->assign('title','Gestion de Usuarios');
-  $smarty->assign('description','Pagina de gestion de Usuarios');
-  $smarty->assign('keywords','Gestion,Usuarios');
+  $smarty->assign('title','Gestion de Reprogramaciones');
+  $smarty->assign('description','Pagina de gestion de Reprogramaciones');
+  $smarty->assign('keywords','Gestion,Reprogramacion');
 
   //CSS
   $CSS[]  = URL_CSS . "academic/tables.css";
