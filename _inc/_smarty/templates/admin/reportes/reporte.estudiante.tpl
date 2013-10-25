@@ -1,10 +1,16 @@
 
 <form action="#" method="post" id="registro" name="registro" >
-     <p>
+            <p>
               <select name="semestre_selec" id="semestre_selec" >
               {html_options values=$semestre_values selected=$semestre_selected output=$semestre_output}
               </select>
               <label for="semestre_selec"><small>Seleccione Semestre(*)</small></label>
+            </p>
+             <p>
+              <select name="materia_id" id="materia_id" >
+              {html_options values=$materia_values selected=$materia_selected output=$materia_output}
+              </select>
+              <label for="materia_id"><small>Materia (*)</small></label>
             </p>
             
             
@@ -29,7 +35,7 @@
                         plotShadow: false
                     },
                     title: {
-                        text: 'Estadisticos Diagrama  de Tortas'
+                        text: 'Estadisticos Diagrama  de Tortas Estudiantes'
                     },
                     tooltip: {
                         formatter: function() {
@@ -50,10 +56,10 @@
                         type: 'pie',
                         name: 'Browser share',
                         data: [
-                            ['Adcripcion', {$cont}],
+                            ['Estudiantes Aprovados', {$ap}],
                           
-                            ['Trabajo Dirigido', {$post}],
-                             ['Proyecto de Grado', {$pro}],
+                            ['Estudiantes Reprovados', {$rp}],
+                             ['Estudiantes Abandonos', {$aba}],
                             
                         ]
                     }]

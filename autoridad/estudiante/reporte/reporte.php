@@ -1,6 +1,6 @@
 <?php
 try {
-  require('_start.php');
+  require('../../_start.php');
    
   
 
@@ -26,7 +26,7 @@ try {
    */
   
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'reportes/','name'=>'Reportes');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'estudiante/reporte','name'=>'Reportes');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'reportes/'.basename(__FILE__),'name'=>'Reportes De Estadisticos');
   $smarty->assign("menuList", $menuList);
 
@@ -53,7 +53,7 @@ try {
   $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
    
    
-  $smarty->assign('lista'       ,'admin/reportes/reporte.tpl');
+  $smarty->assign('lista'       ,'admin/reportes/reporte.estudiante.tpl');
   
   $sql2 = "SELECT *
                 FROM semestre";
@@ -69,20 +69,36 @@ try {
   $smarty->assign("semestre_output", $semestre_output);
   $smarty->assign("semestre_selected", "");
   
+  //Materias de estudiante
+  leerClase('Materia');
+  $materia     = new Materia();
+  $materias    = $materia->getAll();
+  $materia_values[] = '';
+  $materia_output[] = '- Seleccione -';
+  while ($row = mysql_fetch_array($materias[0])) 
+  {
+    $materia_values[] = $row['id'];
+    $materia_output[] = $row['nombre'];
+  }
+  $smarty->assign("materia_values", $materia_values);
+  $smarty->assign("materia_output", $materia_output);
+  $smarty->assign("materia_selected", ""); 
+  
   
   leerClase('Proyecto');
   
  
   
   
-  $p=$_POST['semestre_selec'];;
+  echo $p=$_POST['semestre_selec'];
+  echo $m=$_POST['materia_id'];
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
-  if($_POST['semestre_selec']){
+ if($_POST['semestre_selec']){
  $sqlr="select COUNT(*) as c
- from inscrito i,semestre s
- where i.semestre_id=s.id  and s.id='".$p."'";
+ from inscrito i,semestre s,materia m,dicta di
+ where i.semestre_id=s.id and i.dicta_id=di.id and di.materia_id=m.id and m.id='".$m."' and s.id='".$p."'";
  $resultado = mysql_query($sqlr);
  $areglo= array();
   
@@ -97,70 +113,51 @@ try {
  if ($cont!==0) {
     
   
- //proyecots postergados
-  $sqlr="SELECT count(*) as p 
-  FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
-  WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id and p.tipo_proyecto='PE' AND pe.proyecto_id=p.id AND p.estado='AC' AND p.id=v.proyecto_id AND v.estado_vigencia='PO' and s.id='".$p."'";
+ //Estudiantes con abandono
+  $sqlr="select COUNT(*) as aba
+  from inscrito i,semestre s ,evaluacion ev,materia m,dicta di
+  where i.semestre_id=s.id   and i.evaluacion_id=ev.id and ev.rfinal='ABA' and i.dicta_id=di.id and di.materia_id=m.id and m.id='".$m."' and s.id='".$p."'";
   $resultado = mysql_query($sqlr);
-  $arraytribunal= array();
+  $array= array();
   
  while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
  {
  
-   $arraytribunal[]=$fila;
+   $array[]=$fila;
  }
  
- $post = $arraytribunal[0]['p'];
+ $post = $array[0]['aba'];
  
- $pos=((double)$post/(float)$cont)*100;
+ $aba=((double)$post/(float)$cont)*100;
 
- $smarty->assign('pos'  , $pos);
+ $smarty->assign('aba'  , $aba);
 
  
   
- //proyecots con prorroga
- $sqlr="SELECT count(*)as pr
- FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
- WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id and p.tipo_proyecto='PE' AND pe.proyecto_id=p.id AND p.estado='AC' AND p.id=v.proyecto_id AND v.estado_vigencia='PR' and s.id='".$p."'";
+ //estudiantes reprovados
+ $sqlr="select COUNT(*) as rp
+ from inscrito i,semestre s ,evaluacion ev,materia m,dicta di
+ where i.semestre_id=s.id   and i.evaluacion_id=ev.id and ev.rfinal='RPR' and i.dicta_id=di.id and di.materia_id=m.id and m.id='".$m."' and s.id='".$p."'";
  $resultado = mysql_query($sqlr);
- $arraytribunal= array();
+ $array= array();
   
  while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
  {
   
-   $arraytribunal[]=$fila;
+   $array[]=$fila;
  }
  
- $pro= $arraytribunal[0]['pr'];
- $pr=((double)$pro/(double)$cont)*100;
+ $pro= $array[0]['rp'];
+ $rp=((double)$pro/(double)$cont)*100;
  
- $smarty->assign('pr'  , $pr);  
+ $smarty->assign('rp'  , $rp);  
  
  
  
- //proyecots con cambio
-  $sqlr="SELECT  COUNT( * ) AS cam
- FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe, cambio c
- WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id and p.tipo_proyecto='PE' AND pe.proyecto_id=p.id AND p.estado='AC'AND c.proyecto_id=p.id and s.id='".$p."'";
- $resultado = mysql_query($sqlr);
- $arraytribunal= array();
-  
- while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
- {
- 
-   $arraytribunal[]=$fila;
- }
- 
- $camb  = $arraytribunal[0]['cam'];
- $cam=((double)$camb/(double)$cont)*100;
-
- $smarty->assign('cam'  , $cam); 
-
-//vencidos
-  $fechahoy=  date('Y-m-d');
-  $sqlr="SELECT count(*) as vencido
-   FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
-   WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id and p.tipo_proyecto='PE' AND pe.proyecto_id=p.id AND p.estado='AC' AND p.id=v.proyecto_id AND ('".$fechahoy."'>=v.fecha_fin)and s.id='".$p."'";
+ //Esatudiantes Aprovados
+  $sqlr="select COUNT(*) as ap
+  from inscrito i,semestre s ,evaluacion ev,materia m,dicta di
+  where i.semestre_id=s.id   and i.evaluacion_id=ev.id and ev.rfinal='APR' and i.dicta_id=di.id and di.materia_id=m.id and m.id='".$m."' and s.id='".$p."'";
  $resultado = mysql_query($sqlr);
  $arraytribunal= array();
   
@@ -170,14 +167,11 @@ try {
    $arraytribunal[]=$fila;
  }
  
-  $ve = $arraytribunal[0]['vencido'];
- 
+ $camb  = $arraytribunal[0]['ap'];
+ $ap=((double)$camb/(double)$cont)*100;
 
-     $v=((double)$ve/(double)$cont)*100;
-     
- 
- 
- $smarty->assign('v'  , $v);
+ $smarty->assign('ap'  , $ap); 
+
  }
 }
 

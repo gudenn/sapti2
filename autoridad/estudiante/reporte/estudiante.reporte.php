@@ -23,6 +23,7 @@ try {
   //JS
   leerClase('Semestre');
   leerClase('Proyecto');
+  leerClase('Materia');
   
    $JS[]  = "js/ajaxbuscarperfil.js";
    $smarty->assign('JS','');
@@ -51,7 +52,23 @@ try {
    $smarty->assign("semestre_values", $semestre_values);
    $smarty->assign("semestre_output", $semestre_output);
    $smarty->assign("semestre_selected", "");
-  //lista de proyectos en procesos
+   
+   // Materia del estudiante
+  leerClase('Materia');
+  $materia     = new Materia();
+  $materias    = $materia->getAll();
+  $materia_values[] = '';
+  $materia_output[] = '- Seleccione -';
+  while ($row = mysql_fetch_array($materias[0])) 
+  {
+    $materia_values[] = $row['id'];
+    $materia_output[] = $row['nombre'];
+  }
+  $smarty->assign("materia_values", $materia_values);
+  $smarty->assign("materia_output", $materia_output);
+  $smarty->assign("materia_selected", ""); 
+  
+//lista de estudiantes inscritos
    echo $p=$_POST['semestre_selec'];
    $semestre=new Semestre($p);
    $smarty->assign("semestre", $semestre);
