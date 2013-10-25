@@ -1,9 +1,9 @@
 <?php
 try {
-  define ("MODULO", "ADMIN-PROYECTO-REGISTRO");
-  require('../../_start.php');
-    // if(!isAdminSession())
-   // header("Location: ../login.php");  
+    define ("MODULO", "ADMIN-PROYECTO-REGISTRO");
+    require('../_start.php');
+    if(!isAdminSession())
+    header("Location: ../login.php");  
 
  if (!defined('TIPO'))
     define ('TIPO', 'PR');

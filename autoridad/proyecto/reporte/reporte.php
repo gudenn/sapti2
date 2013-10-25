@@ -3,7 +3,7 @@ try {
   define ("MODULO", "ADMIN-REPORTE");
  require('../../_start.php');
   if(!isAdminSession())
-    header("Location: ../login.php");  
+    header("Location: ../../login.php");  
   leerClase('Administrador');
 
 

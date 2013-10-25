@@ -1,7 +1,9 @@
 <?php
 
-require('../_start.php');
- 
+ require('../_start.php');
+ define ("MODULO", "ADMIN-ESTUDIANTE-REPORTE");
+  if(!isAdminSession())
+  header("Location: ../login.php");  
 require_once(DIR_LIB.'/tcpdf/config/lang/eng.php');
 require_once(DIR_LIB.'/tcpdf/tcpdf.php');
 

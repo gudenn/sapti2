@@ -1,8 +1,9 @@
 <?php
 try {
+  define ("MODULO", "ADMIN-ESTUDIANTE-REPORTE");
   require('../../_start.php');
   if(!isAdminSession())
-    header("Location: login.php");  
+    header("Location: ../../login.php");  
 
   /** HEADER */
   $smarty->assign('title','Gesti&oacute;n de  Estudiante');
@@ -36,7 +37,7 @@ try {
    */
   //----------------------------------//
   leerClase('Menu');
-  $menu = new Menu('Docente');
+  $menu = new Menu('Estudiante');
   $link = Administrador::URL."estudiante/reporte/estudiante.reporte.php";
   $menu->agregarItem('Reprotes','Reportes para Estudiantes','basicset/my-reports.png',$link);
   $link = Administrador::URL."reportes/cambio.php";

@@ -1,4 +1,7 @@
 <?php
+  define ("MODULO", "ADMIN-REPORTE");
+  if(!isAdminSession())
+    header("Location: ../login.php");  
    require('../_start.php');
    leerClase('Usuario');
  
