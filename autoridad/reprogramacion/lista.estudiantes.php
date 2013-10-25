@@ -18,9 +18,9 @@ try {
   $ERROR = '';
 
   /** HEADER */
-  $smarty->assign('title','Gestion de Reprogramaciones');
-  $smarty->assign('description','Pagina de gestion de Reprogramaciones');
-  $smarty->assign('keywords','Gestion,Reprogramacion');
+  $smarty->assign('title','Gesti&oacute;n de Reprogramaciones');
+  $smarty->assign('description','Pagina de gest&oacute;n  de Reprogramaci&oacute;nes');
+  $smarty->assign('keywords','Gestion,Reprogramaci&oacute;n');
 
   //CSS
   $CSS[]  = URL_CSS . "academic/tables.css";
@@ -35,7 +35,7 @@ try {
    * Menu superior
    */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administrador');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'reprogramacion/','name'=>'Reprogarmaci&oacute;n');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'reprogramacion/','name'=>'Reprogramaci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'reprogramacion/'.basename(__FILE__),'name'=>'Gestion de Estados');
   $smarty->assign("menuList", $menuList);
 

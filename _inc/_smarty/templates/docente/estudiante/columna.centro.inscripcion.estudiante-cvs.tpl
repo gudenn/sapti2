@@ -1,8 +1,8 @@
       <div id="content" style="width:685px;min-height: 400px;">
         <div id="respond">
-            <h1 class="title">FORMULARIO DE INSCRIPCION DE ESTUDIANTES A <b>{$materiagrupo[0]['materia']}</b></h1>
+            <h1 class="title">Formulario De Inscripción De Estudiantes A <b>{$materiagrupo[0]['materia']}</b></h1>
             <p>
-               <label for="nombre de materia"><small>NOMBRE DE MATERIA: </small></label>
+               <label for="nombre de materia"><small>Nombre De Materia: </small></label>
                <span><b>{$materiagrupo[0]['materia']} </b><br />Grupo: <b>{$materiagrupo[0]['grupo']}</b></span><br/>
             </p>
           <form action="#" method="post" id="registro" name="registro" >
@@ -14,7 +14,7 @@
             <p>
             <label>Lista Oficial</label> 
             <input type="checkbox" name=listaoficial[] value="borrar" class="checkbox" >
-            <label>Se eliminara a todos los estudiantes que no esten en esta lista.</label>         
+            <label>Se eliminara a todos los estudiantes que no estén en esta lista.</label>         
             </p>
 
             <p>

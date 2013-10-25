@@ -71,7 +71,7 @@ $pdf->SetFont('dejavusans', '', 10);
 // add a page
 $pdf->AddPage();
 
-echo $sql = $_GET['sql'];
+$sql =$_GET['sql'];
 $b=1;
 
 function DesplegarTabla($a,$b)
@@ -111,23 +111,23 @@ function DesplegarTabla($a,$b)
     function tamcolumna($nom){
         
         switch ($nom){
-     case "Nombre":
-             $tam='25%';
+     case "NOMBRE":
+             $tam='20%';
              break;
-     case "Apellidos":
+     case "APELLIDOS":
              $tam='15%';
              break;
-     case "Nombre_Proyecto":
-             $tam='30%';
+     case "MATERIA":
+             $tam='12%';
              break;
-     case "Pro":
-             $tam='6%';
+     case "INSCRITO":
+             $tam='10%';
              break;
-     case "Apro":
-             $tam='7%';
+     case "ESTADO":
+             $tam='10%';
              break;
          default :
-             $tam='5%';
+             $tam='15%';
         }
         return $tam;         
     }

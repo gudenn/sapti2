@@ -3,14 +3,12 @@
 <div class="wrapper row3">
   <div class="rnd">
     <div id="container" class="clear">
-        <h1 class="title">REGISTRO DE OBSERVACIONES</h1>
+        <h1 class="title">Registró De Observación(es)</h1>
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
             <p>
-               <label for="nombre de proyecto"><small>NOMBRE DE PROYECTO:</small></label>
-               <span>{$proyecto->nombre}</span><br/>
-               <label for="nombre de estudiante"><small>NOMBRE DE ESTUDIANTE:</small></label>
-               <span>{$usuario->nombre} {$usuario->apellido_paterno} {$usuario->apellido_materno}</span>
+               <b>Proyecto:</b> {$proyecto->nombre}<br/>
+               <b>Estudiante:</b> {$usuario->getNombreCompleto()|upper}
             </p>
             <br/>
             <object data="/sapti/ARCHIVO/proyecto.pdf" type="application/pdf" width="900" height="300">

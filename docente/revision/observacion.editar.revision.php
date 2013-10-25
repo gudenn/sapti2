@@ -33,30 +33,27 @@ try {
   $JS[]  = URL_JS . "jquery.addfield.js";
   $smarty->assign('JS',$JS);
     leerClase('Dicta');
-    if ( isset($_SESSION['iddictapro']) && is_numeric($_SESSION['iddictapro']) )
+  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
   {
-      $iddicta=$_SESSION['iddictapro'];
+     $iddicta                = $_GET['iddicta'];
+  }  else {
+        header("Location: ../index.php");
   }
+    if ( isset($_GET['revisiones_id']) && is_numeric($_GET['revisiones_id']) ){
+  $revid=$_GET['revisiones_id'];     
+  }
+  $revision=new Revision($revid);
   $dicta = new Dicta($iddicta);
      /**
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
-  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>$dicta->getNombreMateria());
-  $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/estudiante.lista.php','name'=>'Estudiantes Inscritos');
-  $menuList[]     = array('url'=>URL.Docente::URL.'revision/revision.lista.php','name'=>'Seguimiento');
-  $menuList[]     = array('url'=>URL.Docente::URL.'revision/'.basename(__FILE__),'name'=>'Edicion de Observaciones');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php?iddicta='.$iddicta,'name'=>$dicta->getNombreMateria());
+  $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/estudiante.lista.php?iddicta='.$iddicta,'name'=>'Estudiantes Inscritos');
+  $menuList[]     = array('url'=>URL.Docente::URL.'revision/revision.lista.php?iddicta='.$iddicta.'&estudiente_id='.$revision->getEstudiante(),'name'=>'Seguimiento');
+  $menuList[]     = array('url'=>URL.Docente::URL.'revision/observacion.editar.revision.php?iddicta='.$iddicta.'&revisiones_id='.$revid,'name'=>'Edicion de Observaciones');
   $smarty->assign("menuList", $menuList);
     
-  $revid = false;
-  if ( isset($_GET['revisiones_id']) && is_numeric($_GET['revisiones_id']) ){
-  $revid=$_GET['revisiones_id'];
-  $_SESSION['obs_revisiones_id']=$_GET['revisiones_id'];      
-  }
-  elseif (isset($_SESSION['obs_revisiones_id']) && is_numeric($_SESSION['obs_revisiones_id'])) {
-      $revid = $_SESSION['obs_revisiones_id'];
-    }
-
   $resul = "
       SELECT ob.observacion as obser, pr.nombre as nomp, us.nombre as nom,CONCAT(us.apellido_paterno,us.apellido_materno) as ap, re.fecha_revision as fere, proe.id as idestu
 FROM observacion ob, revision re, proyecto pr, docente doc, proyecto_estudiante proe, usuario us
@@ -74,6 +71,8 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
     
   $smarty->assign("arrayobser", $arrayobser);
   $smarty->assign("revisionesid", $revid);
+  $smarty->assign("iddicta", $iddicta);
+  $smarty->assign("revision", $revision);
 
   $columnacentro = 'docente/revision/columna.centro.observacion.editar.revision.tpl';
   $smarty->assign('columnacentro',$columnacentro);

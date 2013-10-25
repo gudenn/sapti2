@@ -25,9 +25,11 @@ try {
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
   $smarty->assign('JS',$JS);
-        if ( isset($_SESSION['iddictapro']) && is_numeric($_SESSION['iddictapro']) )
+  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
   {
-      $iddicta=$_SESSION['iddictapro'];
+     $iddicta                = $_GET['iddicta'];
+  }  else {
+        header("Location: ../index.php");
   }
   $dicta = new Dicta($iddicta);
   
@@ -35,9 +37,9 @@ try {
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
-  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>$dicta->getNombreMateria());
-  $menuList[]     = array('url'=>URL.Docente::URL.'evaluacion/estudiante.evaluacion-editar.php','name'=>'Evaluacion de Estudiantes');
-  $menuList[]     = array('url'=>URL.Docente::URL.'evaluacion/'.basename(__FILE__),'name'=>'Evaluacion de Estudiantes por CSV');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php?iddicta='.$iddicta,'name'=>$dicta->getNombreMateria());
+  $menuList[]     = array('url'=>URL.Docente::URL.'evaluacion/estudiante.evaluacion-editar.php?iddicta='.$iddicta,'name'=>'Evaluacion de Estudiantes');
+  $menuList[]     = array('url'=>URL.Docente::URL.'evaluacion/evaluacion.estudiante-cvs.php?iddicta='.$iddicta,'name'=>'Evaluacion de Estudiantes por CSV');
   $smarty->assign("menuList", $menuList);
 
   $docenteid=getSessionDocente();
@@ -131,7 +133,7 @@ AND di.id=$iddicta
       }
       $inscritos=array_envia($inscritos);
       $noestudiante=array_envia($noestudiante);
-      $url="evaluacion.estudiante-cvs-lista.php?inscritos=$inscritos&noestudiante=$noestudiante";
+      $url="evaluacion.estudiante-cvs-lista.php?iddicta=$iddicta&inscritos=$inscritos&noestudiante=$noestudiante";
             $ir = "Location: $url";
       header($ir);
   }

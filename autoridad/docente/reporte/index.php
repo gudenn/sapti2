@@ -1,18 +1,23 @@
 <?php
 try {
-  define ("MODULO", "ADMIN-PROYECTO");
+  define ("MODULO", "ADMIN-REPORTE");
   require('../../_start.php');
   if(!isAdminSession())
-    header("Location: ../login.php");  
+    header("Location: ../../login.php");  
 
   /** HEADER */
   $smarty->assign('title','Gesti&oacute;n de Proyectos Finales');
   $smarty->assign('description','Gesti&oacute;n de Proyectos Finales');
   $smarty->assign('keywords','Gesti&oacute;n de Proyectos Finales');
 
-  $smarty->assign('header_ui','1');
-  $smarty->assign('CSS','');
+  //CSS
+  $CSS[]  = URL_CSS . "dashboard.css";
+  $CSS[]  = URL_CSS . "academic/3_column.css";
+
+  //JS
+  $JS[]  = "js/jquery.min.js";
   $smarty->assign('JS','');
+  $smarty->assign('CSS',$CSS);
 
  /**
   * Clases
@@ -23,32 +28,21 @@ try {
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Administrador::URL,'name'=>'Administraci&oacute;n');
-  $menuList[]     = array('url'=>URL.Administrador::URL.'proyecto/','name'=>'Gesti&oacute;n Proyectos Finales');
+  $menuList[]     = array('url'=>URL.Administrador::URL.'docente/reporte/','name'=>'Reportes');
   $smarty->assign("menuList", $menuList);
-  $espacio=' ';
-  
-  //leerClase($semestre);
-  $sqlr="SELECT u.nombre as Nombre ,CONCAT(u.apellido_paterno,u.apellido_materno) as Apellidos 
-         FROM usuario u,docente d 
-         WHERE u.id=d.usuario_id";
- 
- 
+
+
   /**
    * Menu central
    */
   //----------------------------------//
   leerClase('Menu');
-  $menu = new Menu('Reportes');
-  $link = Administrador::URL."reportesistema/reportes.sistema.pdf.php?sql=$sqlr";
-  $menu->agregarItem('Reporte Docente','Reportes PDF','basicset/filepd.png',$link);
-  $link = Administrador::URL."reportesistema/reporte.sistema.excel.php?sql=$sqlr";
-  $menu->agregarItem('Reporte Docente','Reportes EXCEL','basicset/boton_excel.png',$link);
+  $menu = new Menu('Detalle Proyecto');
+  $link = Administrador::URL."docente/reporte/docente.reporte.php";
+  $menu->agregarItem('Reportes Docente','Reported de docentes en pdf y excel','basicset/my-reports.png',$link);
+ 
   $menus[] = $menu;
-  $menu = new Menu('Reportes');
-  $link = Administrador::URL."proyecto/";
-  $menu->agregarItem('Reportes de Proyecto Final','Reportes correspondientes a Proyecto Final','basicset/graph.png',$link);
-  $menus[] = $menu;
-  
+ 
   //----------------------------------//
   
   

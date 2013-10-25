@@ -4,10 +4,8 @@
     <div id="container">
         <h1 class="title">Lista de Correcciones y Avances</h1>
             <p>
-               <label for="nombre de proyecto"><small>NOMBRE DE PROYECTO:</small></label>
-               <span>{$proyecto->nombre}</span><br/>
-               <label for="nombre de estudiante"><small>NOMBRE DE ESTUDIANTE:</small></label>
-               <span>{$usuario->nombre} {$usuario->apellido_paterno} {$usuario->apellido_materno}</span>
+               <b>Proyecto:</b> {$proyecto->nombre}<br/>
+               <b>Estudiante:</b> {$usuario->getNombreCompleto()|upper}
             </p>
         <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">       	
@@ -41,9 +39,9 @@
           {/if}</td>
       <td>{$revision->getEstadoRevision($avances[ic]['estoavance'])}</td>
       <td>{if $avances[ic]['correcionrevision'] > 0}
-            <a onclick="sessionAvance({$avances[ic]['id']}, {$estudiante->id});" style="cursor:pointer">{icono('basicset/cabinet.png','Detalle')}Detalle de Correccion</a>
+            <a href="avance.detalle.php?iddicta={$iddicta}&estudiente_id={$estudiante->id}&avance_id={$avances[ic]['id']}" style="cursor:pointer">{icono('basicset/cabinet.png','Detalle')}Detalle de Correccion</a>
           {else}
-            <a onclick="sessionAvance({$avances[ic]['id']}, {$estudiante->id});" style="cursor:pointer">{icono('basicset/cabinet.png','Detalle')}Detalle de Avance</a>
+            <a href="avance.detalle.php?iddicta={$iddicta}&estudiente_id={$estudiante->id}&avance_id={$avances[ic]['id']}" style="cursor:pointer">{icono('basicset/cabinet.png','Detalle')}Detalle de Avance</a>
           {/if}
       </td>    
     </tr>
@@ -51,31 +49,6 @@
   {/section}
 </table>
         </div>
-{literal}
-<script type="text/javascript">
-function sessionAvance(seccion, est) {
-	$.ajax({ 
-		url: '../variable.session.avac.php',
-		type: 'POST',
-		dataType: "html",
-		data: { 
-			avance : seccion,
-                        estudiante_id : est
-		},
-		success: function (response) 
-		{ 
-                    if(response=="ok"){
-                        document.location.href='avance.detalle.php';
-                    }else{
-                       alert("Intente De Nuevo");
-                    }
-		},
-		error: function() { alert("Ajax failure\n"); },
-		async: true
-	});
-}
-</script>
-{/literal}
     </div>
     {$ERROR}
   </div>

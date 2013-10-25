@@ -4,13 +4,8 @@ define ("MODULO", "DOCENTE");
 
   leerClase("Estudiante");
   leerClase('Avance');
-    $estuid = false;
-    $id = false;
-    if (isset($_SESSION['obs_estudiante_id']) && is_numeric($_SESSION['obs_estudiante_id']) && isset($_SESSION['obs_avance_id']) && is_numeric($_SESSION['obs_avance_id'])) {
-        $estuid  =$_SESSION['obs_estudiante_id'];
-        $id     =$_SESSION['obs_avance_id'];         
-    }
-$ideve1=$id;
+  $ideve1=$_GET['idev'];
+  
 $avance   = new Avance($ideve1);
 if($avance->revision_id==0){
       $resul = "
@@ -34,7 +29,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
    $arrayobser[]=$fila1;
  }
  
-  $estudiante=new Estudiante($estuid);
+  $estudiante=new Estudiante($avance->getEstudiante());
 
   $dir='../../'.$avance->getDirectorioAvancedir($estudiante->codigo_sis);
   $archivosruta=obtener_directorios($dir);

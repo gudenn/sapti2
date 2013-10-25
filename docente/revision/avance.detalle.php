@@ -52,9 +52,21 @@ try {
   leerClase('Observacion');
   leerClase('Docente');
   leerClase('Dicta');
-    if ( isset($_SESSION['iddictapro']) && is_numeric($_SESSION['iddictapro']) )
+  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
   {
-      $iddicta=$_SESSION['iddictapro'];
+     $iddicta                = $_GET['iddicta'];
+  }  else {
+        header("Location: ../index.php");
+  }
+    if( isset($_GET['estudiente_id']) && is_numeric($_GET['estudiente_id']) ){
+       $estuid=$_GET['estudiente_id'];
+  }  else {
+      header("Location: ../index.php");
+  }
+    if( isset($_GET['avance_id']) && is_numeric($_GET['avance_id']) ){
+       $id=$_GET['avance_id'];
+  }  else {
+      header("Location: ../index.php");
   }
   $dicta = new Dicta($iddicta);
 
@@ -62,18 +74,11 @@ try {
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
-  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>$dicta->getNombreMateria());
-  $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/estudiante.lista.php','name'=>'Estudiantes Inscritos');
-  $menuList[]     = array('url'=>URL.Docente::URL.'revision/revision.corregido.lista.php','name'=>'Lista de Correcciones');
-  $menuList[]     = array('url'=>URL.Docente::URL.'revision/'.basename(__FILE__),'name'=>'Detalle de Avance');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php?iddicta='.$iddicta,'name'=>$dicta->getNombreMateria());
+  $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/estudiante.lista.php?iddicta='.$iddicta,'name'=>'Estudiantes Inscritos');
+  $menuList[]     = array('url'=>URL.Docente::URL.'revision/revision.corregido.lista.php?iddicta='.$iddicta.'&estudiente_id='.$estuid,'name'=>'Lista de Correcciones');
+  $menuList[]     = array('url'=>URL.Docente::URL.'revision/avance.detalle.php?iddicta='.$iddicta.'&estudiente_id='.$estuid.'&avance_id='.$id,'name'=>'Detalle de Avance');
   $smarty->assign("menuList", $menuList);
-  
-    $estuid = false;
-    $id = false;
-    if (isset($_SESSION['obs_estudiante_id']) && is_numeric($_SESSION['obs_estudiante_id']) && isset($_SESSION['obs_avance_id']) && is_numeric($_SESSION['obs_avance_id'])) {
-        $estuid  =$_SESSION['obs_estudiante_id'];
-        $id     =$_SESSION['obs_avance_id'];         
-    }
     
   $estudiante     = new Estudiante($estuid);
   $usuario        = $estudiante->getUsuario();
@@ -116,7 +121,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
     $observacion->crearObservacion($obser_array, $revision->id);
     }
     $avance->cambiarEstadoCorregido();
-    $ir = "Location: ../estudiante/estudiante.lista.php";
+    $ir = "Location: ../estudiante/estudiante.lista.php?iddicta=".$iddicta;
         header($ir);
     }
     
@@ -147,12 +152,12 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
            }
            $revision1->estadoAprobado();
            $avance->cambiarEstadoCorregido();   
-           $ir = "Location: ../revision/observacion.editar.revision.php?revisiones_id=".$revisionnuevo->id."";
+           $ir = "Location: ../revision/observacion.editar.revision.php?iddicta=".$iddicta."&revisiones_id=".$revisionnuevo->id."";
            header($ir);
            }else {
                    $revision1->estadoAprobado();
                    $avance->cambiarEstadoCorregido();
-                   $ir = "Location: ../estudiante/estudiante.lista.php";
+                   $ir = "Location: ../estudiante/estudiante.lista.php?iddicta=".$iddicta;
                    header($ir);
                 }
            }  else {
@@ -174,7 +179,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
            }}
            $revision1->estadoAprobado();
            $avance->cambiarEstadoCorregido();   
-           $ir = "Location: ../revision/observacion.editar.revision.php?revisiones_id=".$revisionnuevo->id."";
+           $ir = "Location: ../revision/observacion.editar.revision.php?iddicta=".$iddicta."&revisiones_id=".$revisionnuevo->id;
            header($ir);
            }
      }
@@ -187,6 +192,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
   $smarty->assign("usuario", $usuario);
   $smarty->assign("proyecto", $proyecto);
   $smarty->assign("avance", $avance);
+  $smarty->assign("iddicta", $iddicta);
   $smarty->assign("ERROR", $ERROR);
   
 } 
