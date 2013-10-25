@@ -67,9 +67,9 @@ EditableGrid.prototype.initializeGrid = function()
                 
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
 		     cell.innerHTML = "<a onclick=document.location.href='mostrartribunal.php?proyecto_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("detalle.png") + "\" border=\"0\" alt=\"seguimiento\" title=\"Ver Tribunales\" width='30px' height='30px' />Ver Tribunales</a>";
+						 "<img src=\"" + image("ver.png") + "\" border=\"0\" alt=\"seguimiento\" title=\"Ver Tribunales\" width='30px' height='30px' />Ver Tribunales</a>";
                 cell.innerHTML += "<br><a onclick=document.location.href='asignacion.php?estudiante_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
-					 	 "<img src=\"" + image("editar.png") + "\" border=\"0\" alt=\"revisar\" title=\"Asignar La Defensa\"/>Asignar Defensa</a>";
+					 	 "<img src=\"" + image("asignar.png") + "\" border=\"0\" alt=\"revisar\" title=\"Asignar La Defensa\"/>Asignar Defensa</a>";
                
               
                   }}));

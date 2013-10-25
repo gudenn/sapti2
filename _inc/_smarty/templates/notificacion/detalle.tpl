@@ -2,7 +2,8 @@
 
 <div id="content">
   <div class="clear"></div>
-  <p>Fecha</p>
+   <div class='contenido'>
+  <h1> Fecha de Envio</h1>
   <p>{$notificacion->fecha_envio}</p>
 
   <p>Asunto</p>
@@ -29,12 +30,12 @@
         <input type="hidden"  id="id_notificacion" name="id_notificacion" value="{$notificacion->id}" />
         <input type="hidden" name="tarea" value="registrar">
         <input type="hidden" name="token" value="{$token}">
-        <input name="submit" type="submit" id="submit" value="Grabar">
+        <input name="submit" type="submit" id="submit" value="Grabar"  style="text-align: center">
       </div>
 
     </form>
   {/if}
-
+</div>
 </div>
 
 

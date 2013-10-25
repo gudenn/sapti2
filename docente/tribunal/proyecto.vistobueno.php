@@ -4,12 +4,12 @@ try {
   require('../_start.php');
   if(!isDocenteSession())
   header("Location: ../login.php");
-  leerClase('Visto_bueno');
+  
   leerClase('Docente');
- 
   leerClase('Estudiante');
   leerClase('Usuario');
   leerClase('Proyecto');
+  leerClase('Tribunal');
 
   /** HEADER */
   $smarty->assign('title','Proyecto Final');
@@ -36,8 +36,8 @@ try {
   $smarty->assign('JS',$JS);
 
    $menuList[]     = array('url'=>URL.Docente::URL.'tribunal','name'=>'Tribunal');
- $menuList[]     = array('url'=>URL.Docente::URL.'tribunal/visto.estudiante.lista.php','name'=>'Lista Estudiante');
- $smarty->assign("menuList", $menuList);
+   $menuList[]     = array('url'=>URL.Docente::URL.'tribunal/visto.estudiante.lista.php','name'=>'Lista Estudiante');
+   $smarty->assign("menuList", $menuList);
   
   
     
@@ -55,35 +55,38 @@ try {
     
     $urlpdf=".../ARCHIVO/proyecto.pdf";
     $smarty->assign("urlpdf", $urlpdf);
-      $vistobueno= new Visto_bueno();
+    
     date_default_timezone_set('UTC');
-    $vistobueno->fecha_visto_buena=date("d/m/Y");
-
+  
     if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
     {
-    $vistobueno                    =       new Visto_bueno();
-    $docente                       =       getSessionDocente();
-    $vistobueno->objBuidFromPost();    
-    $vistobueno->proyecto_id       =        $_POST['proyecto_id'];
-    $vistobueno->visto_bueno_tipo  =        Visto_bueno::E3_TRIBUNAL;
-    $vistobueno->fecha_visto_bueno =        date("d/m/Y");
-    $vistobueno->visto_bueno_id    =        $docente->id;
-    $vistobueno->estado            =        Objectbase::STATUS_AC;
-   
-     $vistobueno->save();
-     $proyectos=     new Proyecto(  $_POST['proyecto_id']);
-     echo $proyectos->nombre;
-          if((sizeof($proyectos->getVbTribunal()))==3)
-          {
-          $proyecto->estado_proyecto="TV";
-          $proyecto->save();
-          }
-         $ir = "Location: estudiante.lista.php";
-         header($ir);
-        
-        
-        
-    }
+           $docente                       =       getSessionDocente(); 
+           $proyecto                      =       new Proyecto($_POST['proyecto_id']);
+           $tribunal                      =    $proyecto->getTribunal($docente->id);
+           $tribunal->visto_bueno         =  Tribunal::VISTO_BUENO;
+           $tribunal->fecha_vistobueno    =    date("d/m/Y");
+           $tribunal->save();
+           $bandera=true;
+           if(sizeof($proyecto->getTribunalVisto())>0)
+           {
+             foreach ($proyecto->getTribunalVisto()  as $valor)
+             {
+               
+               if(!$valor->visto_bueno==Tribunal::VISTO_BUENO)
+               {
+                 $bandera=false;
+                 break;
+               }
+             }
+           }
+           if($bandera)
+           {
+              $proyecto->estado_proyecto="TV";
+              $proyecto->save();
+           }
+            $ir = "Location: estudiante.lista.php";
+            header($ir);
+     }
 
   //No hay ERROR
   $smarty->assign("ERROR",'');

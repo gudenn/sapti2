@@ -1,4 +1,5 @@
 <div id="content">
+   <div class='contenido'>
  <div class="clear"></div>
  <form action="" method="post" >
   <p>SEÑOR</p>
@@ -21,4 +22,5 @@
         <input type="submit" value="grabar" name="tarea" class="sendme"  />
         </div>
  </form>
+   </div>
   </div>    

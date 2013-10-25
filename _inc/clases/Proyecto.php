@@ -477,12 +477,12 @@ class Proyecto extends Objectbase {
    * @return boolean|\Estudiante
    * retorna un tribunal del proyecto dado el docente_id , proyecto_id 
    */
-   function getTribunal($docente,$idproyecto) 
+   function getTribunal($docente) 
   {
     
     leerClase('Tribunal');
     $activo = Objectbase::STATUS_AC;
-    $sql = "select t.* from " . $this->getTableName('Tribunal') . " as t  where t.proyecto_id = '$this->id' and t.docente_id='$docente' and t.estado = '$activo' and  '$idproyecto'='$this->id'  and '$this->estado' = '$activo' ";
+    $sql = "select t.* from " . $this->getTableName('Tribunal') . " as t  where t.proyecto_id = '$this->id' and t.docente_id='$docente' and t.estado = '$activo'  and '$this->estado' = '$activo' ";
     $resultados= mysql_query($sql);
     if (!$resultados)
       return false;
@@ -714,9 +714,7 @@ class Proyecto extends Objectbase {
    * Retorna la Visto Bueno  del Tutor
    */
  function getVbTribunal() {
-    //@TODO revisar
-    //  leerClase('Proyecto_area');
-    leerClase('Visto_bueno');
+    
      $vistos= array();
      $d= Visto_bueno::E3_TRIBUNAL;
     
@@ -819,14 +817,34 @@ class Proyecto extends Objectbase {
   /**
    * 
    * @return 
+   * retorna la lista de los tribunales aceptados
+   * como tribunales
+   */
+  
+   function getTribunalVisto()
+   {
+    
+    $array= array();
+    $activo = Objectbase::STATUS_AC;
+    $sql = "select t.* from " . $this->getTableName('Tribunal') . " as t   where t.proyecto_id ='$this->id' and t.estado = '$activo'  ";
+    $resultado = mysql_query($sql);
+    if (!$resultado)
+      return  $array;
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+      { 
+         $array[]=  new Tribunal($fila);
+      }
+       return $array;
+    }
+  
+  
+  /**
+   * 
+   * @return 
    * retorna la cantidad de tribunales
    */
   
-  
-  
-  
-  
-    function getTribunales()
+   function getTribunales()
    {
     
     $total= 0;
