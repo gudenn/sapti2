@@ -71,12 +71,13 @@ if(!isDocenteSession())
 
     $smarty->assign("menus", $menus);
  
-  
-   $docente_aux = getSessionDocente();
-   $smarty->assign("docente", $docente);
-   $smarty->assign("usuario", $usuario);
-   $smarty->assign("ERROR", $ERROR);
-    $smarty->assign("ERROR",'');
+    
+    $docente = getSessionDocente();
+   
+    $smarty->assign("docente", $docente);
+    $smarty->assign("usuario", $usuario);
+     $smarty->assign("ERROR", $ERROR);
+     $smarty->assign("ERROR",'');
   
 } 
 catch(Exception $e) 

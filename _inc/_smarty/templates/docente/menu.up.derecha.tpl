@@ -6,6 +6,6 @@
       </ul>
       
       <div  class="boxsession">
-        <p class ='boxsessiontexto'>  Usuario :{$docente->getNombreCompleto()} </p>
+        <p class ='boxsessiontexto'>  Usuario :{} </p>
        </div>
     </div>
