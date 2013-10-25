@@ -1,9 +1,7 @@
 <?php
 
  require('../_start.php');
- define ("MODULO", "ADMIN-ESTUDIANTE-REPORTE");
-  if(!isAdminSession())
-  header("Location: ../login.php");  
+
 require_once(DIR_LIB.'/tcpdf/config/lang/eng.php');
 require_once(DIR_LIB.'/tcpdf/tcpdf.php');
 
@@ -125,22 +123,22 @@ function DesplegarTabla($a,$b)
         
         switch ($nom){
      case "NOMBRE":
-             $tam='15%';
+             $tam='20%';
              break;
-     case "APELLIDOS":
-             $tam='15%';
+     case "APELLIDO":
+             $tam='25%';
              break;
      case "PROYECTO":
-             $tam='50%';
+             $tam='40%';
              break;      
      case "MATERIA":
-             $tam='15%';
+             $tam='20%';
              break;
      case "INSCRITO":
              $tam='10%';
              break;
      case "ESTADO":
-             $tam='10%';
+             $tam='15%';
              break;
          default :
              $tam='10%';
