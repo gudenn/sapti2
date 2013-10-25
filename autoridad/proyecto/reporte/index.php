@@ -27,7 +27,7 @@ try {
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Administrador::URL,'name'=>'Administraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'docente/','name'=>'Reportes');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'proyecto/','name'=>'Reportes');
   $smarty->assign("menuList", $menuList);
 
 
@@ -37,14 +37,18 @@ try {
   //----------------------------------//
   leerClase('Menu');
   $menu = new Menu('Docente');
-  $link = Administrador::URL."docente/docente.gestion.php";
-  $menu->agregarItem('Gesti&oacute;n de Docentes','Registro y modificaciones para Docentes','basicset/my-reports.png',$link);
+  $link = Administrador::URL."reportes/proceso.php";
+  $menu->agregarItem('Reprotes de Proyectos en Proceso','Reprotes de Proyectos en Proceso','basicset/my-reports.png',$link);
+  $link = Administrador::URL."reportes/tribunales.php";
+  $menu->agregarItem('Reprotes de Proyectos con Tribunales','Reprotes de Proyectos con Tribunales','basicset/my-reports.png',$link);
+  $link = Administrador::URL."reportes/defensa.php";
+  $menu->agregarItem('Reprotes de Proyectos en Defensa','Reprotes de Proyectos en Defensa','basicset/my-reports.png',$link);
   
   
   $menus[] = $menu;
   $menu = new Menu('Reportes');
-  $link = Administrador::URL."docente/reporte";
-  $menu->agregarItem('Reportes de Docente','Reportes correspondientes a los Docentes','basicset/graph.png',$link);
+  $link = Administrador::URL."proyecto/reporte/reporte.php";
+  $menu->agregarItem('Reportes de Proyectos',' Reportes de Proyectos','basicset/graph.png',$link);
   $menus[] = $menu;
   //----------------------------------//
   

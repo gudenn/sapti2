@@ -1,17 +1,9 @@
 <?php
 try {
-  require('_start.php');
-   
-  
-
-  
-  
-  
-  
-  leerClase("Usuario");
-  leerClase("Formulario");
-  leerClase("Pagination");
-  leerClase("Filtro");
+  define ("MODULO", "ADMIN-REPORTE");
+ require('../../_start.php');
+  if(!isAdminSession())
+    header("Location: ../login.php");  
   leerClase('Administrador');
 
 
@@ -21,14 +13,20 @@ try {
   $smarty->assign('title','Reportes');
   $smarty->assign('description','Reportes');
   $smarty->assign('keywords','Reportes');
-   /**
+/**
+   * Menu superior
+   */
+   
+  /**
    * Menu superior
    */
   
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'reportes/','name'=>'Reportes');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'reportes/'.basename(__FILE__),'name'=>'Reportes De Estadisticos');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'proyecto/','name'=>'proyecto');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'reporte/'.basename(__FILE__),'name'=>'reportes');
   $smarty->assign("menuList", $menuList);
+ 
+
 
   //CSS
   $CSS[]  = URL_CSS . "academic/tables.css";
@@ -50,10 +48,10 @@ try {
   
   
   $smarty->assign('JS',$JS);
-  $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
+   $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
    
    
-  $smarty->assign('lista'       ,'admin/reportes/reporte.tpl');
+  $smarty->assign('lista'       ,'admin/reportes/reporte.proyecto.tpl');
   
   $sql2 = "SELECT *
                 FROM semestre";
@@ -64,18 +62,24 @@ try {
   while ($row2 = mysql_fetch_array($resultsem, MYSQL_ASSOC)) {
        $semestre_values[] = $row2['id'];
        $semestre_output[] = $row2['codigo'];
-     }
+ }
   $smarty->assign("semestre_values", $semestre_values);
   $smarty->assign("semestre_output", $semestre_output);
   $smarty->assign("semestre_selected", "");
   
   
   leerClase('Proyecto');
+  leerClase('Semestre');
+  
+  
   
  
   
   
-  $p=$_POST['semestre_selec'];;
+  $p=$_POST['semestre_selec'];
+  $semestre=new Semestre($p);
+  $codigo=$semestre->codigo;
+   $codigo;
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
@@ -83,8 +87,9 @@ try {
   
   
  $sqlr="SELECT count(*) as c
- FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
- WHERE u.id=e.usuario_id and e.id=i.estudiante_id and i.semestre_id=s.id and e.id=pe.estudiante_id and pe.proyecto_id=p.id and p.es_actual=1 and s.id='".$p."'";
+FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
+WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
+=s.id AND e.id=pe.estudiante_id and p.tipo_proyecto='PR' AND pe.proyecto_id=p.id AND p.estado='AC' AND p.id=v.proyecto_id and s.id='".$p."'";
  $resultado = mysql_query($sqlr);
  $areglo= array();
   
@@ -94,92 +99,86 @@ try {
    $areglo[]=$fila;
  }
  
- $cont = $areglo[0]['c'];
+ echo $cont = $areglo[0]['c'];
 
- if ($cont!==0) {
+ if ($cont!=0) {
     
-  
- //proyecots postergados
-  $sqlr="SELECT count(*) as p 
-  FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
-  WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id and p.tipo_proyecto='PE' AND pe.proyecto_id=p.id AND p.estado='AC' AND p.id=v.proyecto_id AND v.estado_vigencia='PO' and s.id='".$p."'";
- $resultado = mysql_query($sqlr);
- $arraytribunal= array();
-  
- while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
- {
- 
-   $arraytribunal[]=$fila;
- }
- 
- $post = $arraytribunal[0]['p'];
- 
- $pos=((double)$post/(float)$cont)*100;
-
- $smarty->assign('pos'  , $pos);
-
- 
-  
- //proyecots con prorroga
- $sqlr="SELECT count(*)as pr
- FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
- WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id and p.tipo_proyecto='PE' AND pe.proyecto_id=p.id AND p.estado='AC' AND p.id=v.proyecto_id AND v.estado_vigencia='PR' and s.id='".$p."'";
+ //Proyectos con defensa
+  $sqlr="SELECT COUNT(*)as d
+FROM proyecto p,defensa d
+WHERE p.id=d.proyecto_id AND d.semestre='".$codigo."'";
  $resultado = mysql_query($sqlr);
  $arraytribunal= array();
   
  while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
  {
   
-   $arraytribunal[]=$fila;
+   $array[]=$fila;
  }
  
- $pro= $arraytribunal[0]['pr'];
- $pr=((double)$pro/(double)$cont)*100;
+ echo $def = $array[0]['d'];
  
- $smarty->assign('pr'  , $pr);  
+ $def=((double)$def/(float)$cont)*100;
+ 
+ $smarty->assign('def'  , $def);
  
  
+ //Defensas Privadas
+ $sqlr="SELECT COUNT(*)as dp
+FROM proyecto p,defensa d
+WHERE p.id=d.proyecto_id and tipo_defensa='DPRI' AND d.semestre='".$codigo."'";
+ $resultado = mysql_query($sqlr);
+ $array= array();
+  
+ while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+ {
  
- //proyecots con cambio
-  $sqlr="SELECT  COUNT( * ) AS cam
- FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe, cambio c
- WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id and p.tipo_proyecto='PE' AND pe.proyecto_id=p.id AND p.estado='AC'AND c.proyecto_id=p.id and s.id='".$p."'";
+   $array[]=$fila;
+ }
+ 
+ echo $dp = $array[0]['dp'];
+ 
+ $dp=((double)$dp/(float)$cont)*100;
+
+ $smarty->assign('dp'  , $dp);
+ 
+ //Defensas Publicas
+ $sqlr="SELECT COUNT(*)as pu
+FROM proyecto p,defensa d
+WHERE p.id=d.proyecto_id and tipo_defensa='DPU'AND d.semestre='".$codigo."'";
  $resultado = mysql_query($sqlr);
  $arraytribunal= array();
   
  while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
  {
- 
+  
    $arraytribunal[]=$fila;
  }
  
- $camb  = $arraytribunal[0]['cam'];
- $cam=((double)$camb/(double)$cont)*100;
+ echo $pu = $arraytribunal[0]['pu'];
+ 
+ $pu=((double)$pu/(float)$cont)*100;
+ 
+ $smarty->assign('pu'  , $pu);
 
- $smarty->assign('cam'  , $cam); 
-
-//vencidos
-  $fechahoy=  date('Y-m-d');
-  $sqlr="SELECT count(*) as vencido
-   FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
-   WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id and p.tipo_proyecto='PE' AND pe.proyecto_id=p.id AND p.estado='AC' AND p.id=v.proyecto_id AND ('".$fechahoy."'>=v.fecha_fin)and s.id='".$p."'";
+ //Proyectos con Tribunales
+ $sqlr="SELECT COUNT(DISTINCT p.id) as tri
+FROM proyecto p,tribunal t
+WHERE p.id=t.proyecto_id and t.semestre='".$codigo."'";
  $resultado = mysql_query($sqlr);
  $arraytribunal= array();
   
  while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
  {
- 
-   $arraytribunal[]=$fila;
+  
+   $array[]=$fila;
  }
  
-  $ve = $arraytribunal[0]['vencido'];
+ echo $tri= $array[0]['tri'];
+ $tri=((double)$tri/(double)$cont)*100;
  
-
-     $v=((double)$ve/(double)$cont)*100;
-     
+ $smarty->assign('tri'  , $tri);  
  
- 
- $smarty->assign('v'  , $v);
  }
 }
 

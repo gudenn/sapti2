@@ -123,11 +123,14 @@ function DesplegarTabla($a,$b)
         
         switch ($nom){
      case "NOMBRE":
-             $tam='20%';
+             $tam='15%';
              break;
      case "APELLIDOS":
              $tam='15%';
              break;
+     case "PROYECTO":
+             $tam='50%';
+             break;      
      case "MATERIA":
              $tam='15%';
              break;
@@ -138,7 +141,7 @@ function DesplegarTabla($a,$b)
              $tam='10%';
              break;
          default :
-             $tam='15%';
+             $tam='10%';
         }
         return $tam;         
     }

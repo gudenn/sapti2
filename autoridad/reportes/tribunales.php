@@ -1,6 +1,6 @@
 <?php
 try {
-  require('../../_start.php');
+  require('../_start.php');
   if(!isAdminSession())
     header("Location: ../login.php");  
 
@@ -13,8 +13,8 @@ try {
    */
   
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'docente/','name'=>'Docente');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'reporte/docente'.basename(__FILE__),'name'=>'Reportes');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'proyecto/reporte','name'=>'Reportes');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'reportes/'.basename(__FILE__),'name'=>'Reportes Proyectos Tribunal');
   $smarty->assign("menuList", $menuList);
   //CSS
   $CSS[]  = "css/style.css";
@@ -23,20 +23,20 @@ try {
   //JS
   leerClase('Semestre');
   leerClase('Proyecto');
-  leerClase('Materia');
   
-  
-   //funcion para serializar
-     function array_envia($url_array) 
+   $JS[]  = "js/ajaxbuscarperfil.js";
+   $smarty->assign('JS','');
+   
+   $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
+   $smarty->assign('lista'       ,'admin/reportes/lista.proyecto.tpl');
+   
+   function array_envia($url_array) 
            {
                $tmp = serialize($url_array);
                $tmp = urlencode($tmp);
            
                return $tmp;
            };
-   
-   $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
-   $smarty->assign('lista'       ,'admin/reportes/lista.estudiante.tpl');
    
    $sql2 = "SELECT *
                 FROM semestre";
@@ -51,42 +51,26 @@ try {
    $smarty->assign("semestre_values", $semestre_values);
    $smarty->assign("semestre_output", $semestre_output);
    $smarty->assign("semestre_selected", "");
-   
-   // Materia del estudiante
-  leerClase('Materia');
-  $materia     = new Materia();
-  $materias    = $materia->getAll();
-  $materia_values[] = '';
-  $materia_output[] = '- Seleccione -';
-  while ($row = mysql_fetch_array($materias[0])) 
-  {
-    $materia_values[] = $row['id'];
-    $materia_output[] = $row['nombre'];
-  }
-  $smarty->assign("materia_values", $materia_values);
-  $smarty->assign("materia_output", $materia_output);
-  $smarty->assign("materia_selected", ""); 
-  
-//lista de estudiantes inscritos
-   echo $p=$_POST['semestre_selec'];
+  //lista de proyectos en procesos
+   $p=$_POST['semestre_selec'];
    $semestre=new Semestre($p);
    $smarty->assign("semestre", $semestre);
    $confirmado=  Proyecto::EST6_C;
   
-   $sqlr='select u.nombre as NOMBRE ,CONCAT(u.apellido_paterno," ",u.apellido_materno) as APELLIDO  ,m.nombre as MATERIA,ev.rfinal as ESTADO
-   from usuario u,estudiante e ,inscrito i ,evaluacion ev,semestre s,dicta di,materia m
-   where u.id=e.usuario_id and e.id=i.estudiante_id and i.evaluacion_id=ev.id and s.id=i.semestre_id and i.dicta_id=di.id and di.materia_id=m.id and s.id="'.$p.'"';
+   $sqlr='SELECT u.nombre AS NOMBRE,CONCAT(apellido_paterno,apellido_materno) as APELLIDO,p.nombre as PROYECTO,p.estado_proyecto as ESTADO,s.codigo AS GESTION
+    FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe
+    WHERE u.id=e.usuario_id AND e.id=i.estudiante_id and p.tipo_proyecto="PR" and p.estado_proyecto="TA" AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado="AC" and s.id="'.$p.'"';
    $resultado = mysql_query($sqlr);
-   $estudiante= array();
+   $arraytribunal= array();
   
    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
    {
  
-      $estudiante[]=$fila;
+      $arraytribunal[]=$fila;
    }
  
  
-   $smarty->assign('estudiante'  , $estudiante);
+   $smarty->assign('listaproyectos'  , $arraytribunal);
    $smarty->assign('sqlr'  , array_envia($sqlr));
  
  

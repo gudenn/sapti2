@@ -1,19 +1,8 @@
 <?php
 try {
   require('../../_start.php');
-   
-  
 
-  
-  
-  
-  
-  leerClase("Usuario");
-  leerClase("Formulario");
-  leerClase("Pagination");
-  leerClase("Filtro");
   leerClase('Administrador');
-
 
   $ERROR = '';
 

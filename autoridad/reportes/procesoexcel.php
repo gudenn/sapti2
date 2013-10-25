@@ -14,7 +14,7 @@
 			die('Este archivo solo se puede ver desde un navegador web');
 
 		/** Se agrega la libreria PHPExcel */
-		require_once '../../../sapti.inc/libs/PHPExcel/PHPExcel.php';
+		require_once DIR_LIB.'/PHPExcel/PHPExcel.php';
 
 		// Se crea el objeto PHPExcel
 		$objPHPExcel = new PHPExcel();
