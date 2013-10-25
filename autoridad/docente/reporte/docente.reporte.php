@@ -30,6 +30,14 @@ try {
    $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
    $smarty->assign('lista'       ,'admin/reportes/lista.docente.tpl');
    
+   function array_envia($url_array) 
+           {
+               $tmp = serialize($url_array);
+               $tmp = urlencode($tmp);
+           
+               return $tmp;
+           };
+   
    $sql2 = "SELECT *
                 FROM semestre";
    $resultsem = mysql_query($sql2);
@@ -61,10 +69,10 @@ try {
  
       $docentes[]=$fila;
    }
- 
+   //$sql=
  
    $smarty->assign('listadocentes'  , $docentes);
-   $smarty->assign('sqlr'  , $sqlr);
+   $smarty->assign('sqlr'  , array_envia($sqlr));
  
  
 }

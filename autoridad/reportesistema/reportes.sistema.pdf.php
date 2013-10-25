@@ -71,7 +71,18 @@ $pdf->SetFont('dejavusans', '', 10);
 // add a page
 $pdf->AddPage();
 
-$sql =$_GET['sql'];
+if(isset($_GET['sql']))
+$sql = $_GET['sql'];
+
+$b=1;
+  function array_recibe($url_array) { 
+     $tmp = stripslashes($url_array); 
+     $tmp = urldecode($tmp); 
+     $tmp = unserialize($tmp); 
+
+    return $tmp; 
+  };
+ $sql=  array_recibe($sql); 
 $b=1;
 
 function DesplegarTabla($a,$b)
@@ -118,7 +129,7 @@ function DesplegarTabla($a,$b)
              $tam='15%';
              break;
      case "MATERIA":
-             $tam='12%';
+             $tam='15%';
              break;
      case "INSCRITO":
              $tam='10%';

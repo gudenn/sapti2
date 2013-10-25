@@ -80,11 +80,9 @@ try {
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
   if($_POST['semestre_selec']){
-  
-  
- $sqlr="SELECT count(*) as c
- FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
- WHERE u.id=e.usuario_id and e.id=i.estudiante_id and i.semestre_id=s.id and e.id=pe.estudiante_id and pe.proyecto_id=p.id and p.es_actual=1 and s.id='".$p."'";
+ $sqlr="select COUNT(*) as c
+ from inscrito i,semestre s
+ where i.semestre_id=s.id  and s.id='".$p."'";
  $resultado = mysql_query($sqlr);
  $areglo= array();
   
@@ -103,8 +101,8 @@ try {
   $sqlr="SELECT count(*) as p 
   FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
   WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id and p.tipo_proyecto='PE' AND pe.proyecto_id=p.id AND p.estado='AC' AND p.id=v.proyecto_id AND v.estado_vigencia='PO' and s.id='".$p."'";
- $resultado = mysql_query($sqlr);
- $arraytribunal= array();
+  $resultado = mysql_query($sqlr);
+  $arraytribunal= array();
   
  while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
  {

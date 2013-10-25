@@ -5,9 +5,9 @@ try {
     header("Location: login.php");  
 
   /** HEADER */
-  $smarty->assign('title','Gesti&oacute;n de Docentes');
-  $smarty->assign('description','Gesti&oacute;n de Docentes');
-  $smarty->assign('keywords','Gesti&oacute;n de Docentes');
+  $smarty->assign('title','Gesti&oacute;n de  Estudiante');
+  $smarty->assign('description','Gesti&oacute;n de Estudiante');
+  $smarty->assign('keywords','Gesti&oacute;n de  Estudiante');
 
   //CSS
   $CSS[]  = URL_CSS . "dashboard.css";
@@ -27,7 +27,7 @@ try {
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Administrador::URL,'name'=>'Administraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'docente/','name'=>'Reportes');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'estudiante/','name'=>'Reportes');
   $smarty->assign("menuList", $menuList);
 
 
@@ -40,10 +40,10 @@ try {
   $link = Administrador::URL."estudiante/reporte/estudiante.reporte.php";
   $menu->agregarItem('Reprotes','Reportes para Estudiantes','basicset/my-reports.png',$link);
   $link = Administrador::URL."reportes/cambio.php";
-  $menu->agregarItem('Reprotes','Reportes para Estudiantes que Hicieron Cambios','basicset/my-reports.png',$link);
+  $menu->agregarItem('Reportes Cambios','Reportes para Estudiantes que Hicieron Cambios','basicset/my-reports.png',$link);
   
   $menus[] = $menu;
-  $menu = new Menu('Reportes');
+  $menu = new Menu('Reportes Cambios');
   $link = Administrador::URL."estudiante/reporte/reporte.php";
   $menu->agregarItem('Reportes de Docente','Reportes correspondientes a los Docentes','basicset/graph.png',$link);
   $menus[] = $menu;

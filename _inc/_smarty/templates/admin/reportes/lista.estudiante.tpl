@@ -37,10 +37,10 @@
     <tr  class="selectable">
     <tr  class="{cycle values="light,dark"}">
         
-        <td>{$estudiante[ic]['nombre']}</td>
-        <td>{$estudiante[ic]['apellido']}</td>
-        <td>{$estudiante[ic]['materia']}</td>
-        <td>{$estudiante[ic]['estado']}</td>
+        <td>{$estudiante[ic]['NOMBRE']}</td>
+        <td>{$estudiante[ic]['APELLIDO']}</td>
+        <td>{$estudiante[ic]['MATERIA']}</td>
+        <td>{$estudiante[ic]['ESTADO']}</td>
     
       
      
@@ -55,9 +55,9 @@
     
     </table>  
      
-         <center> 
- <a href="reporte.sistema.pdf.php?id_p={$semestre->id}" target="_blank" >{icono('filepd.png','descargar')}</a>
-      <a href="reporte.sistema.excel.php?id_p={$semestre->id}" target="_blank" >{icono('boton_excel.png','descargar')}</a>
+<center> 
+<a href="../../reportesistema/reportes.sistema.pdf.php?sql={$sqlr}" target="_blank" >{icono('filepd.png','descargar')}</a>
+<a href="../../reportesistema/reporte.sistema.excel.php?sql={$sqlr}" target="_blank" >{icono('boton_excel.png','descargar')}</a>
 </center>
 </div> 
 </body>

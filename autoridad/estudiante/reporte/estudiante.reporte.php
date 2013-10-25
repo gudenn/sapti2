@@ -27,6 +27,14 @@ try {
    $JS[]  = "js/ajaxbuscarperfil.js";
    $smarty->assign('JS','');
    
+     function array_envia($url_array) 
+           {
+               $tmp = serialize($url_array);
+               $tmp = urlencode($tmp);
+           
+               return $tmp;
+           };
+   
    $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
    $smarty->assign('lista'       ,'admin/reportes/lista.estudiante.tpl');
    
@@ -49,9 +57,9 @@ try {
    $smarty->assign("semestre", $semestre);
    $confirmado=  Proyecto::EST6_C;
   
-   $sqlr='select u.nombre ,CONCAT(u.apellido_paterno," ",u.apellido_materno) as apellido ,ev.rfinal as estado ,m.nombre as materia
-from usuario u,estudiante e ,inscrito i ,evaluacion ev,semestre s,dicta di,materia m
-where u.id=e.usuario_id and e.id=i.estudiante_id and i.evaluacion_id=ev.id and s.id=i.semestre_id and i.dicta_id=di.id and di.materia_id=m.id and s.id="'.$p.'"';
+   $sqlr='select u.nombre as NOMBRE ,CONCAT(u.apellido_paterno," ",u.apellido_materno) as APELLIDO  ,m.nombre as MATERIA,ev.rfinal as ESTADO
+   from usuario u,estudiante e ,inscrito i ,evaluacion ev,semestre s,dicta di,materia m
+   where u.id=e.usuario_id and e.id=i.estudiante_id and i.evaluacion_id=ev.id and s.id=i.semestre_id and i.dicta_id=di.id and di.materia_id=m.id and s.id="'.$p.'"';
    $resultado = mysql_query($sqlr);
    $estudiante= array();
   
@@ -63,6 +71,7 @@ where u.id=e.usuario_id and e.id=i.estudiante_id and i.evaluacion_id=ev.id and s
  
  
    $smarty->assign('estudiante'  , $estudiante);
+   $smarty->assign('sqlr'  , array_envia($sqlr));
  
  
 }

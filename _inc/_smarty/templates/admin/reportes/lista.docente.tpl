@@ -56,8 +56,8 @@
     </table>  
      
          <center> 
- <a href="reporte.sistema.pdf.php?id_p={$semestre->id}" target="_blank" >{icono('filepd.png','descargar')}</a>
-      <a href="reporte.sistema.excel.php?id_p={$semestre->id}" target="_blank" >{icono('boton_excel.png','descargar')}</a>
+ <a href="../../reportesistema/reportes.sistema.pdf.php?sql={$sqlr}" target="_blank" >{icono('filepd.png','descargar')}</a>
+ <a href="../../reportesistema/reporte.sistema.excel.php?sql={$sqlr}" target="_blank" >{icono('boton_excel.png','descargar')}</a>
 </center>
 </div> 
 </body>
