@@ -79,6 +79,7 @@ try {
                }
              }
            }
+           
            if($bandera)
            {
               $proyecto->estado_proyecto="TV";
