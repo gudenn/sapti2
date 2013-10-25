@@ -41,7 +41,7 @@ try {
   $menu->agregarItem('Asignar Tutor a un Estudiante','Registro de un nuevo Tutor o seleccionar uno de la lista de tutores disponibles para un estudiante.','basicset/user1.png',$link);
   $menus[] = $menu;
   $menu = new Menu('Reportes');
-  $link = Administrador::URL."tutor/";
+  $link = Administrador::URL."tutor/reporte";
   $menu->agregarItem('Reportes de Tutores','Reportes correspondientes a los Tutores','basicset/graph.png',$link);
   $menus[] = $menu;
   //----------------------------------//
