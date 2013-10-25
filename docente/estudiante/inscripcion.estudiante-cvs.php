@@ -183,13 +183,14 @@ AND es.codigo_sis='$sis'";
       $yainscritos=array_envia($yainscritos);
       $inscritos=array_envia($inscritos);
       $noestudiante=array_envia($noestudiante);
-      $url="inscripcion.estudiante-cvs-lista.php?yainscritos=$yainscritos&inscritos=$inscritos&noestudiante=$noestudiante";
+      $url="inscripcion.estudiante-cvs-lista.php?iddicta=$iddicta&yainscritos=$yainscritos&inscritos=$inscritos&noestudiante=$noestudiante";
             $ir = "Location: $url";
       header($ir);
       mysql_query("COMMIT");
   }
   $columnacentro = 'docente/estudiante/columna.centro.inscripcion.estudiante-cvs.tpl';
   $smarty->assign('columnacentro',$columnacentro);
+  $smarty->assign('iddicta',$iddicta);
   //No hay ERROR
   $smarty->assign("ERROR",'');
 } 

@@ -1,13 +1,13 @@
       <div id="content" style="width:685px;min-height: 450px;">
-        <h1 class="title">SUBIR OBSERVACION(ES) DE ESTUDIANTES USANDO CVS</h1>
-        <h2 class="title">FORMULARIO DE OBSERVACION(ES)</h2>
+        <h1 class="title">Subir Observación(es) De Estudiantes Usando CSV</h1>
+        <h2 class="title">Formulario De Observación(es)</h2>
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
             <p>
               <textarea name="cvs" rows="4" cols="60" style="width: 650px;height: 305px;" data-validation-engine="validate[required]"></textarea>
-              <label for="cvs"><small>Ingrese Contenido CVS (*)</small></label>
+              <label for="cvs"><small>Ingrese Contenido CSV(*)</small></label>
             </p>
-            <h2 class="title">GRAVAR OBSERVACION(ES)</h2>
+            <h2 class="title">Grabar Observación(es)</h2>
             <p>
               <input type="hidden" name="tarea" value="registrar">
               <input type="hidden" name="token" value="{$token}">

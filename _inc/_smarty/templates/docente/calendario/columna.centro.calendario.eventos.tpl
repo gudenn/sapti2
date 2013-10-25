@@ -1,8 +1,8 @@
       <div id="content" style="width:685px;min-height: 450px;">
           <form action="#" method="post" id="registro" name="registro" >
-        <h1 class="title">CALENDARIO DE EVENTOS PROGRAMADOS</h1>
+        <h1 class="title">Calendario De Eventos Programados</h1>
 
-              <h2 class="title">EVENTOS REGISTRADOS DE LA MATERIA</h2>
+              <h2 class="title">Eventos Registrados De La Materia</h2>
         <div id="calendariosalidas"></div>
          </form>
         <p>{$ERROR}</p>

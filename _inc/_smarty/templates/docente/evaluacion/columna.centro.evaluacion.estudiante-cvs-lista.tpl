@@ -1,6 +1,6 @@
     <div id="content" style="width:685px;min-height: 450px;">
         <div id="conteni">
-            <h1 class="title">ESTUDIANTES INSCRITOS</h1>
+            <h1 class="title">Estudiantes Inscritos</h1>
             <table class="tbl_lista_inscrito">
               <thead>
                 <tr>
@@ -23,7 +23,7 @@
               </tbody>
               {/section}
             </table>
-            <h3 class="title">ESTUDIANTES NO ENCONTRADOS</h3>
+            <h3 class="title">Estudiantes No Encontrados</h3>
             <table class="tbl_lista_noestu">
               <thead>
                 <tr>

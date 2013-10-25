@@ -54,6 +54,7 @@ try {
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();
 
+  $smarty->assign("iddicta", $iddicta);
   $smarty->assign("usuario", $usuario);
   $smarty->assign("estudiante", $estudiante);
   $smarty->assign("proyecto", $proyecto);

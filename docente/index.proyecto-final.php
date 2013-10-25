@@ -65,7 +65,7 @@ try {
   $link = Docente::URL."estudiante/estudiante.lista.php?iddicta=".$iddicta;
   $menu->agregarItem('Estudiantes Registrados','Estudiantes Registrados en la Materia de Proyecto Final','docente/inscritos.png',$link);
   $link = Docente::URL."evaluacion/estudiante.evaluacion-editar.php?iddicta=".$iddicta;
-  $menu->agregarItem('Evaluacion de Estudiantes','Evaluacion de Estudiantes Registrados en la Materia de Proyecto Final','docente/evaluacion.png',$link);  
+  $menu->agregarItem('Evaluación de Estudiantes','Evaluacion de Estudiantes Registrados en la Materia de Proyecto Final','docente/evaluacion.png',$link);  
   $link = Docente::URL."estudiante/inscripcion.estudiante-cvs.php?iddicta=".$iddicta;
   $menu->agregarItem('Gesti&oacute;n de Estudiantes','Registro de Estudiantes Inscritos en la Materia de Proyecto Final','docente/correccion.png',$link);
   $menus[] = $menu;

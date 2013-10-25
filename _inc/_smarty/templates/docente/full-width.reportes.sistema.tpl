@@ -2,7 +2,7 @@
 <div class="wrapper row3">
   <div class="rnd">
     <div id="container">
-      <h1 class="title">LISTA DE ESTUDIANTES INSCRITOS</h1>
+      <h1 class="title">Lista De Estudiantes Inscritos</h1>
       <table class="tbl_lista">
            <tr class="dark">
                <th>
@@ -24,7 +24,7 @@
               <select name="evaluacion_selec" id="evaluacion_selec" >
               {html_options values=$evaluacion_values selected=$evaluacion_selected output=$evaluacion_output}
               </select>
-              <label for="evaluacion_selec"><small>Mostrar Evaluacion</small></label>
+              <label for="evaluacion_selec"><small>Mostrar Evaluación</small></label>
               </th>
               <th></th>
               <th></th>
