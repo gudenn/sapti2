@@ -4,4 +4,8 @@
         <li><a href="{$URL}?salir=1">Cerrar Sesion</a></li>
         {include file="helpdesk/help.tpl"}
       </ul>
+      
+      <div  class="boxsession">
+        <p class ='boxsessiontexto'>  Usuario :{$docente->getNombreCompleto()} </p>
+       </div>
     </div>

@@ -44,6 +44,7 @@ try {
   leerClase("Defensa");
   leerClase("Semestre");
    leerClase("Consejo");
+    leerClase("Notificacion");
     
   
 

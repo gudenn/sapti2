@@ -48,7 +48,7 @@ if(!isDocenteSession())
   $link = Tribunal::URL."estudiante.lista.php";
   $menu->agregarItem('Gesti&oacute;n de Estudiantes','Revision y Vistos Buenos a los Proyectos','basicset/user4.png',$link);
   $link = Tribunal::URL."visto.estudiante.lista.php";
-  $menu->agregarItem('Dar Visto Buenos','Habilitar los Proyectos Para la Asignacion de Defensa','basicset/user4.png',$link);
+  $menu->agregarItem('Dar Visto Buenos','Habilitar los Proyectos Para la Asignacion de Defensa','basicset/ok.png',$link);
 
   $menus[] = $menu;
  
@@ -56,9 +56,9 @@ if(!isDocenteSession())
   
   $menu = new Menu('Defensas');
   $link = Tribunal::URL."privada.estudiante.lista.php";
-  $menu->agregarItem('Lista de Defensa  Privada','Revision y modificacion de Proyectos','basicset/user4.png',$link);
+  $menu->agregarItem('Lista de Defensa  Privada','Revision y modificacion de Proyectos','tribunal.png',$link);
   $link = Tribunal::URL."publica.estudiante.lista.php";
-  $menu->agregarItem('Lista de Defensa Publica ','Evaluaci&oacute;n de Proyecto','basicset/graph.png',$link);
+  $menu->agregarItem('Lista de Defensa Publica ','Evaluaci&oacute;n de Proyecto','tribunal.png',$link);
 
   
     $menus[] = $menu;

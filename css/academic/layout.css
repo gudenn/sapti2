@@ -406,3 +406,17 @@ h1{
   border: #006699;
   text-shadow: 5px 5px 5px #cecece;
 }
+
+.boxsession{
+   border: 1px solid;
+  padding:  5px 20px;
+   background: snow;
+   border-radius: 10px; 
+  
+}
+
+.boxsessiontexto{
+ text-decoration: #050505;
+ text-align: left;
+  
+}

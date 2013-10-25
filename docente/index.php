@@ -28,9 +28,9 @@ try {
   $smarty->assign('JS',$JS);
 
   //CREAR UN DOCENTE
-  leerClase('Usuario');
-  leerClase('Docente');
-  leerClase('Semestre');
+   leerClase('Usuario');
+   leerClase('Docente');
+   leerClase('Semestre');
    leerClase('Notificacion');
 
       /**

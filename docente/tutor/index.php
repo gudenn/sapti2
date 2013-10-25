@@ -51,7 +51,7 @@ $notificaciones= new Notificacion();
   $link = Tutor::URL."perfil.estudiante.lista.php";
   $menu->agregarItem('Seguimiento','Seguimiento a los Estudiantes ','basicset/user4.png',$link);
    $link = Tutor::URL."perfil.estudiante.lista.php";
-  $menu->agregarItem('Dar Visto Bueno Perfil ','Reportes correspondientes a los Docentes','basicset/graph.png',$link);
+  $menu->agregarItem('Dar Visto Bueno Perfil ','Reportes correspondientes a los Docentes','basicset/ok.png',$link);
 
   $menus[] = $menu;
   
@@ -59,7 +59,7 @@ $notificaciones= new Notificacion();
   $link = Tutor::URL."estudiante.lista.php";
   $menu->agregarItem('Seguimiento a los estudiantes ','Registro y modificacion de tribunales','basicset/user4.png',$link);
   $link = Tutor::URL."estudiante.lista.php";
-  $menu->agregarItem(' Dar Visto Bueno ','Reportes correspondientes a los Docentes','basicset/graph.png',$link);
+  $menu->agregarItem(' Dar Visto Bueno ','Reportes correspondientes a los Docentes','basicset/ok.png',$link);
 
   
   $menus[] = $menu;
