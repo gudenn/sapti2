@@ -27,7 +27,7 @@ try {
   
   if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
   {
-     $iddicta                = $_GET['iddicta']; echo"mada";
+     $iddicta                = $_GET['iddicta'];
   }  else {
        header("Location: ../index.php");
   }

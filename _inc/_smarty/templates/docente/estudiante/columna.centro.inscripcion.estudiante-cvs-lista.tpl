@@ -1,6 +1,6 @@
     <div id="content" style="width:685px;min-height: 450px;">
         <div id="conteni">
-            <h1 class="title">ESTUDIANTES INSCRITOS</h1>
+            <h1 class="title">Estudiantes Inscritos</h1>
             <table class="tbl_lista_inscrito">
               <thead>
                 <tr>
@@ -17,7 +17,7 @@
               </tbody>
               {/section}
             </table>
-            <h2 class="title">ESTUDIANTES YA REGISTRADOS</h2>
+            <h2 class="title">Estudiantes Ya Registrados</h2>
             <table class="tbl_lista_yainscrito">
               <thead>
                 <tr>
@@ -34,7 +34,7 @@
               </tbody>
               {/section}
             </table>
-            <h3 class="title">ESTUDIANTES REGISTRADOS AL SISTEMA</h3>
+            <h3 class="title">Estudiantes Registrados Al Sistema</h3>
             <table class="tbl_lista_noestu">
               <thead>
                 <tr>

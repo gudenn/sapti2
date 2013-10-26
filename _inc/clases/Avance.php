@@ -180,5 +180,20 @@ class Avance extends Objectbase
     if (!$result)
       return false;
   }
+    /**
+   muestra array con estudiante_id
+   */
+  function getEstudiante() {
+  $buscar = " SELECT av.id as avaid, pe.estudiante_id as estuid
+FROM avance av, proyecto pr, proyecto_estudiante pe
+WHERE av.proyecto_id=pr.id
+AND pe.proyecto_id=pr.id
+AND av.id='$this->id'";
+   $sqlbus = mysql_query($buscar);
+while ($fila1b = mysql_fetch_array($sqlbus, MYSQL_ASSOC)) {
+   $arraybus=$fila1b['estuid'];
+ }
+  return $arraybus;
+    }
 }
 ?>

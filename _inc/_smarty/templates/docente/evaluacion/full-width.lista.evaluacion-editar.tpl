@@ -9,7 +9,7 @@
         <div id="wrap">
         <div id="message"></div>
         	<div id="pagecontrol">
-		<label for="pagecontrol">Filas por Pagina: </label>
+		<label for="pagecontrol">Filas por Página: </label>
 		<select id="pagesize" name="pagesize">
                     <option value="5">5</option>
                     <option value="10">10</option>
@@ -22,18 +22,18 @@
                 </select>
 
                 </div>
-        	<label for="filter">Busqueda Rapida :</label>
+        	<label for="filter">Búsqueda Rápida:</label>
 		<input type="text" id="filter"/>
         
 		<div id="tablecontent"></div>
         
         	<div id="paginator"></div>
                 <center> 
-                    <a href="../reportes.sistema.pdf.php?sql={$sqlreporte}" target="_blank" >{icono('filepd.png','descargar')}Descargar PDF</a>
-                    <a href="../reportes.sistema.excel.php?sql={$sqlreporte}" target="_blank" >{icono('boton_excel.png','descargar')}Descargar EXCEL</a>
+                    <a href="../reportes.sistema.pdf.php?sql={$sqlreporte}&iddicta={$iddicta}" target="_blank" >{icono('filepd.png','descargar')}Descargar PDF</a>
+                    <a href="../reportes.sistema.excel.php?sql={$sqlreporte}&iddicta={$iddicta}" target="_blank" >{icono('boton_excel.png','descargar')}Descargar EXCEL</a>
                 </center>
         </div>
-        <a href="evaluacion.estudiante-cvs.php?iddicta={$iddicta}" class="sendme">CARGAR NOTAS POR CVS</a>
+        <a href="evaluacion.estudiante-cvs.php?iddicta={$iddicta}" class="sendme">Cargar Notas Por CSV</a>
         <script type="text/javascript">
                 editableGrid.onloadXML("loaddata.evaluacion-editar.php?iddicta={$iddicta}");
         </script>

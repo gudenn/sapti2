@@ -87,7 +87,8 @@ AND dc.estado='AC'
     
     if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
   {
-    $EXITO = false;
+        $EXITO = false;
+        if($_POST['docente_id']>0 &&$_POST['materia_id']>0){
     mysql_query("BEGIN");
      $dicta=new Dicta();
      $dicta->objBuidFromPost();
@@ -99,9 +100,9 @@ AND dc.estado='AC'
      $dicta->save();
     $EXITO = TRUE;
     mysql_query("COMMIT");
+        }
   }
     //No hay ERROR
-  $ERROR = ''; 
   leerClase('Html');
   $html  = new Html();
   if (isset($EXITO))

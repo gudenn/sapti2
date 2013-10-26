@@ -4,4 +4,9 @@
         <li><a href="{$URL}?salir=1">Cerrar Sesion</a></li>
         {include file="helpdesk/help.tpl"}
       </ul>
+            {if (getSessionUser())}
+      <ul>
+          <li class="last"><a>Usuario: {$UsuarioSesion}</a></li>
+      </ul>
+      {/if}
     </div>

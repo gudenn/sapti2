@@ -54,11 +54,16 @@ try {
         }  else {
             $est='REPRO';
         }
-        
     }
     return $est;
         };
-
+  function array_envia($url_array) 
+           {
+               $tmp = serialize($url_array);
+               $tmp = urlencode($tmp);
+           
+               return $tmp;
+           };
   $resul = "
       SELECT ev.id as id
 FROM dicta di, estudiante es, usuario us, inscrito it, proyecto pr, proyecto_estudiante pe, evaluacion ev
@@ -86,7 +91,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
      $evaluacion->rfinal=  promedio($promedio);
      $evaluacion->save();
  }
- $sqlreporte="SELECT es.codigo_sis as Codigo_SIS, CONCAT(us.apellido_paterno,' ', us.apellido_materno,' ', us.nombre) as Estudiante, pr.nombre as Nombre_Proyecto, ev.evaluacion_1 as E1, ev.evaluacion_2 as E2, ev.evaluacion_3 as E3, ev.promedio as Pro, ev.rfinal as Apro
+ $sqlreporte="SELECT es.codigo_sis as Codigo_Sis, CONCAT(us.apellido_paterno,' ', us.apellido_materno,' ', us.nombre) as Estudiante, pr.nombre as Nombre_Proyecto, ev.evaluacion_1 as E1, ev.evaluacion_2 as E2, ev.evaluacion_3 as E3, ev.promedio as Pro, ev.rfinal as Apro
  FROM dicta di, estudiante es, usuario us, inscrito it, proyecto pr, proyecto_estudiante pe, evaluacion ev
  WHERE di.id=it.dicta_id
  AND it.estudiante_id=es.id
@@ -96,10 +101,10 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
  AND it.evaluacion_id=ev.id
  AND pr.es_actual=1
  AND di.id='".$iddicta."'";
-      $smarty->assign("iddicta", $iddicta);
+  $sqlreporte=  array_envia($sqlreporte);
       $smarty->assign("sqlreporte", $sqlreporte);
  };
-
+$smarty->assign("iddicta", $iddicta);
   //No hay ERROR
   $smarty->assign("ERROR",$ERROR);
 }

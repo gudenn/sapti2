@@ -62,8 +62,8 @@ EditableGrid.prototype.initializeGrid = function(dicta)
 
 
 		rowSelected = function(oldRowIndex, newRowIndex) {
-			if (oldRowIndex < 0) displayMessage("Selecionada Fila '" + this.getRowId(newRowIndex) + "'");
-			else displayMessage("Selecionada Fila y Cambiada por '" + this.getRowId(oldRowIndex) + "' to '" + this.getRowId(newRowIndex) + "'");
+			if (oldRowIndex < 0) displayMessage("Fila Seleccionada '" + this.getRowId(newRowIndex) + "'");
+			else displayMessage("Fila Seleccionada y Cambiada por '" + this.getRowId(oldRowIndex) + "' to '" + this.getRowId(newRowIndex) + "'");
 		};
                 
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {

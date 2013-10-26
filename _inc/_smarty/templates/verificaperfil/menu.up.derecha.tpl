@@ -4,6 +4,11 @@
       <!--  <li><a href="{$URL}estudiante/editar.cuenta.php">Preferencias</a></li>  -->
         <li class="last"><a href="{$URL}?salirestudiante=1">Cerrar Sesion</a></li>
       </ul>
+            {if (getSessionUser())}
+      <ul>
+          <li class="last"><a>Usuario: {$UsuarioSesion}</a></li>
+      </ul>
+      {/if}
       <form action="#" method="post" id="sitesearch">
         <fieldset>
           <strong>Buscar:</strong>

@@ -4,7 +4,11 @@
   /** Smarty */
   require(DIR_LIB.'/smarty/Smarty.class.php');
   Smarty::muteExpectedErrors();
-
+  if(getSessionUser()){
+    leerClase('Usuario');
+    $usuario=  getSessionUser();
+    $nombre=$usuario->getNombreCompleto();
+  }
   
   $ERROR  = "";
   $smarty = new Smarty;
@@ -18,7 +22,8 @@
   $smarty->assign("URL",URL);  
   $smarty->assign("URL_CSS",URL_CSS);  
   $smarty->assign("URL_IMG",URL_IMG);  
-  $smarty->assign("URL_JS",URL_JS);  
+  $smarty->assign("URL_JS",URL_JS);
+  $smarty->assign("UsuarioSesion",$nombre); 
   
   //$smarty->force_compile = true;
   $smarty->debugging      = false;

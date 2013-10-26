@@ -4,8 +4,8 @@ define ("MODULO", "DOCENTE");
 
   leerClase("Estudiante");
   leerClase('Avance');
+  $ideve1=$_GET['idev'];
   
-$ideve1=$_GET['idev'];
 $avance   = new Avance($ideve1);
 if($avance->revision_id==0){
       $resul = "
@@ -29,7 +29,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
    $arrayobser[]=$fila1;
  }
  
-  $estudiante=new Estudiante(1);
+  $estudiante=new Estudiante($avance->getEstudiante());
 
   $dir='../../'.$avance->getDirectorioAvancedir($estudiante->codigo_sis);
   $archivosruta=obtener_directorios($dir);

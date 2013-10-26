@@ -9,4 +9,9 @@
         <li class="last"><a href="{$URL}docente">Docentes</a></li>
         {/if}
       </ul>
+      {if (getSessionUser())}
+      <ul>
+          <li class="last"><a>Usuario: {$UsuarioSesion}</a></li>
+      </ul>
+      {/if}
     </div>

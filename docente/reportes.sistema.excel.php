@@ -1,9 +1,20 @@
 <?php
+    define ("MODULO", "DOCENTE");
    require('../_start.php');
    leerClase('Usuario');
    leerClase('Dicta');
-	
+	if(isset($_GET['sql']))
         $consulta = $_GET['sql'];
+        $iddicta  = $_GET['iddicta'];
+          function array_recibe($url_array) { 
+                    $tmp = stripslashes($url_array); 
+                    $tmp = urldecode($tmp); 
+                    $tmp = unserialize($tmp); 
+
+            return $tmp; 
+        };
+        $consulta=  array_recibe($consulta); 
+
 	$resultado =mysql_query($consulta); 
 	
 		date_default_timezone_set('America/Mexico_City');
@@ -143,15 +154,14 @@
                	)             
            	)
         ));
-                $iddicta=$_SESSION['iddictapro'];
                 $dicta=new Dicta($iddicta);
                 $usuario=  getSessionUser();
-		$tituloReporte = "Reporte Sistema SAPTI     Usuario: ".$usuario->getNombreCompleto()."     Materia: ".$dicta->getNombreMateria();                
+		$tituloReporte = "Reporte Sistema SAPTI  Usuario: ".$usuario->getNombreCompleto()."  Materia: ".$dicta->getNombreMateria()."  Fecha:".date("d/m/Y")." Hora:".date("H:i:s");
 		$objPHPExcel->setActiveSheetIndex(0)
 					->setCellValue('A1',$tituloReporte); 
 		$objPHPExcel->getActiveSheet()->getStyle('A1:'.$alfa.'1')->applyFromArray($estiloTituloReporte);
 		$objPHPExcel->getActiveSheet()->getStyle('A3:'.$alfa.'3')->applyFromArray($estiloTituloColumnas);		
-		$objPHPExcel->getActiveSheet()->setSharedStyle($estiloInformacion, "A4:".$alfa.($ir-1));
+		//$objPHPExcel->getActiveSheet()->setSharedStyle($estiloInformacion, "A4:".$alfa.($ir-1));
 				
 		for($i = 'A'; $i <= $alfa; $i++){
 			$objPHPExcel->setActiveSheetIndex(0)			

@@ -48,7 +48,7 @@ InfoHeaderRenderer.prototype.render = function(cell, value)
 };
 
 // this function will initialize our editable grid
-EditableGrid.prototype.initializeGrid = function(estid) 
+EditableGrid.prototype.initializeGrid = function(estid, dicta) 
 {
 	with (this) {
                 
@@ -61,26 +61,26 @@ EditableGrid.prototype.initializeGrid = function(estid)
 
 
 		rowSelected = function(oldRowIndex, newRowIndex) {
-			if (oldRowIndex < 0) displayMessage("Fila Selecionada '" + this.getRowId(newRowIndex) + "'");
-			else displayMessage("Fila Selecionada y Cambiada por '" + this.getRowId(oldRowIndex) + "' to '" + this.getRowId(newRowIndex) + "'");
+			if (oldRowIndex < 0) displayMessage("Fila Seleccionada '" + this.getRowId(newRowIndex) + "'");
+			else displayMessage("Fila Seleccionada y Cambiada por '" + this.getRowId(oldRowIndex) + "' to '" + this.getRowId(newRowIndex) + "'");
 		};
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
  
                 if(getValueAt(cell.rowIndex, '1')=='0'){
-                cell.innerHTML = "<a onclick=\"sessionAvanceDe(" + getRowId(cell.rowIndex) + ", " + estid + ");\" class='avancedetalle' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
+                cell.innerHTML = "<a href='#' class='avancedetalle' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("icons/detalle.png") + "\" border=\"0\" alt=\"detalle\" title=\"Detalle Avance\" />Detalle</a>";
-                cell.innerHTML += "<br><a onclick=\"sessionAvance(" + getRowId(cell.rowIndex) + ", " + estid + ");\" style=\"cursor:pointer\">" +
+                cell.innerHTML += "<br><a onclick=document.location.href='../revision/avance.detalle.php?iddicta="+ dicta +"&avance_id=" + getRowId(cell.rowIndex) + "&estudiente_id=" + estid +"' style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("icons/basicset/document_pencil.png") + "\" border=\"0\" alt=\"revisar\" title=\"Revisar\" width='25px' height='25px'/>Revisar</a>";
                 }
                 else if(getValueAt(cell.rowIndex, '1')=='AC'){
                 cell.innerHTML = "<a href='#' class='observaciondetalle' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
 			 "<img src=\"" + image("icons/detalle.png") + "\" border=\"0\" alt=\"detalle\" title=\"Detalle Revision\"/>Detalle</a>";
                 }else{
-                cell.innerHTML = "<a onclick=\"sessionAvanceDe(" + getRowId(cell.rowIndex) + ", " + estid + ");\" class='avancedetalle' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
+                cell.innerHTML = "<a href='#' class='avancedetalle' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("icons/detalle.png") + "\" border=\"0\" alt=\"detalle\" title=\"Detalle Avance\" />Detalle</a>";
                       }
                 if(getValueAt(cell.rowIndex, '2')=='DO' && getValueAt(cell.rowIndex, '4')=='CR'){                        
-                cell.innerHTML += "<br><a onclick=\"sessionRevision(" + getRowId(cell.rowIndex) + ");\" style=\"cursor:pointer\">" +
+                cell.innerHTML += "<br><a onclick=document.location.href='../revision/observacion.editar.revision.php?iddicta="+ dicta +"&revisiones_id=" + getRowId(cell.rowIndex) + "' style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("icons/editar.png") + "\" border=\"0\" alt=\"editar\" title=\"Editar Revision\"/>Editar</a>";
                 }
                 }}));
@@ -115,12 +115,12 @@ EditableGrid.prototype.initializeGrid = function(estid)
 	}
 };
 
-EditableGrid.prototype.onloadXML = function(url, estid) 
+EditableGrid.prototype.onloadXML = function(url, estid, dicta) 
 {
 	// register the function that will be called when the XML has been fully loaded
 	this.tableLoaded = function() { 
 		displayMessage("Numero de Avances, Revisiones y Correcciones al Proyecto " + this.getRowCount()); 
-		this.initializeGrid(estid);
+		this.initializeGrid(estid, dicta);
 	};
 
 	// load XML URL
@@ -248,64 +248,3 @@ function extractText(anchText){
     str1.innerHTML = anchText;
     return str1.innerText;
 }
-function sessionRevision(seccion) {
-	$.ajax({ 
-		url: '../variable.session.rev.php',
-		type: 'POST',
-		dataType: "html",
-		data: { 
-			revicion : seccion
-		},
-		success: function (response) 
-		{ 
-                    if(response=="ok"){
-                        document.location.href='../revision/observacion.editar.revision.php';
-                    }else{
-                       alert("Intente De Nuevo");
-                    }
-		},
-		error: function() { alert("Ajax failure\n"); },
-		async: true
-	});
-};
-function sessionAvance(seccion, est) {
-	$.ajax({ 
-		url: '../variable.session.avac.php',
-		type: 'POST',
-		dataType: "html",
-		data: { 
-			avance : seccion,
-                        estudiante_id : est
-		},
-		success: function (response) 
-		{ 
-                    if(response=="ok"){
-                        document.location.href='../revision/avance.detalle.php';
-                    }else{
-                       alert("Intente De Nuevo");
-                    }
-		},
-		error: function() { alert("Ajax failure\n"); },
-		async: true
-	});
-};
-function sessionAvanceDe(seccion, est) {
-	$.ajax({ 
-		url: '../variable.session.avac.php',
-		type: 'POST',
-		dataType: "html",
-		data: { 
-			avance : seccion,
-                        estudiante_id : est
-		},
-		success: function (response) 
-		{ 
-                    if(response=="ok"){
-                    }else{
-                       alert("Intente De Nuevo");
-                    }
-		},
-		error: function() { alert("Ajax failure\n"); },
-		async: true
-	});
-};

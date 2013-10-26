@@ -1,5 +1,5 @@
         <div id="content" style="width:685px;min-height: 450px;">
-        <h1 class="title">EDICION DE OBSERVACIONES</h1>
+        <h1 class="title">Edición De Observaciones</h1>
           <p>
             <label for="revisor"><small>Nombre del Revisor: </small></label>
             <span><i>{$arrayobser[0]['nom']}</i></b ><i>{$arrayobser[0]['ap']}</i></span>
@@ -9,7 +9,7 @@
             <span>{$arrayobser[0]['nomp']}</span>
           </p>
           <p>
-            <label for="fecha_observacion"><small>Fecha de Observacion: </small></label>
+            <label for="fecha_observacion"><small>Fecha de Observación: </small></label>
             <span>{$arrayobser[0]['fere']}</span>            
           </p>
         <h2 class="title">Formulario de Edici&oacute;n</h2>
@@ -22,15 +22,15 @@
 			<div id="tablecontent"></div>
 
 	    <form name="nueva_observacion" id="nueva_observacion" action="" onsubmit="enviarDatosObservacion(); return false">
-		<h1>Nueva Observacion</h1>
+		<h1>Nueva Observación</h1>
             <table>
                 <tr>
                 <td>
-            <h2 class="title">Observacion: </h2>
+            <h2 class="title">Observación: </h2>
                 <input name="observacion" type="text" style="width:300px;" data-validation-engine="validate[required]"/>
                 </td>
                 <td>
-            <h2 class="title">Grabar Observacion:</h2>
+            <h2 class="title">Grabar Observación:</h2>
             <p>
               <input name="submit" type="submit" value="Grabar">
               &nbsp;
@@ -39,7 +39,7 @@
                 </td>
                 </tr>
             </table>
-                <a href="revision.lista.php" type="button" class="sendme">Enviar</a>  
+                <a href="revision.lista.php?iddicta={$iddicta}&estudiente_id={$revision->getEstudiante()}" type="button" class="sendme">Enviar</a>  
           </form>
         </div>
         <p>{$ERROR}</p>
