@@ -38,7 +38,7 @@ try {
    */
   //----------------------------------//
   leerClase('Menu');
-  $menu = new Menu('Docente');
+  $menu = new Menu('Proyecto');
   $link = Administrador::URL."reportes/proceso.php";
   $menu->agregarItem('Reprotes de Proyectos en Proceso','Reprotes de Proyectos en Proceso','basicset/my-reports.png',$link);
   $link = Administrador::URL."reportes/tribunales.php";

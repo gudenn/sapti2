@@ -36,15 +36,45 @@ try {
    * Menu central
    */
   //----------------------------------//
+  //serialisar sql
+   function array_envia($url_array) 
+           {
+               $tmp = serialize($url_array);
+               $tmp = urlencode($tmp);
+           
+               return $tmp;
+           };
+           //Consulta Aceptados
+  $sqlr='select u.nombre as NOMBRE,CONCAT(u.apellido_paterno," ",u.apellido_materno) as APELLIDO   ,pt.fecha_acepta FECHA,p.nombre as PROYECTO
+from usuario u,tutor t ,proyecto_tutor pt,proyecto p 
+where u.id=t.usuario_id and pt.tutor_id=t.id  and pt.proyecto_id=p.id and pt.estado_tutoria="AC"
+';
+   //Consulta Rechazados
+   $sqlr2='select u.nombre as NOMBRE,CONCAT(u.apellido_paterno," ",u.apellido_materno) as APELLIDO   ,pt.fecha_acepta FECHA,p.nombre as PROYECTO
+from usuario u,tutor t ,proyecto_tutor pt,proyecto p 
+where u.id=t.usuario_id and pt.tutor_id=t.id  and pt.proyecto_id=p.id and pt.estado_tutoria="RE"
+';
+  //serializando
+  $sql=  array_envia($sqlr);
+  $sql2=  array_envia($sqlr2);
+  
+  
   leerClase('Menu');
-  $menu = new Menu('Docente');
-  $link = Administrador::URL."docente/docente.gestion.php";
-  $menu->agregarItem('Gesti&oacute;n de Docentes','Registro y modificaciones para Docentes','basicset/my-reports.png',$link);
+  $menu = new Menu('Reporte Tutor Proyectos Aceptados Pdf');
+  $link = Administrador::URL."reportesistema/reportes.sistema.pdf.php?sql=$sql";
+  $menu->agregarItem('Reporte Pdf','Reportes PDF de tutor Proyectos aceptados','basicset/filepd.png',$link);
   
-  
+  $link = Administrador::URL."reportesistema/reporte.sistema.excel.php?sql=$sql";
+  $menu->agregarItem('Reportes Excel','Reportes Excel de tutor Proyectos aceptados','basicset/boton_excel.png',$link);
+  $menus[] = $menu;
+  $menu = new Menu('Reporte Tutor Proyectos Rechazados');
+  $link = Administrador::URL."reportesistema/reportes.sistema.pdf.php?sql=$sql2";
+  $menu->agregarItem('Reporte Tutor Proyectos Rechazados Pdf','Reporte Tutor Proyectos Rechazados','basicset/filepd.png',$link);
+  $link = Administrador::URL."reportesistema/reporte.sistema.excel.php?sql=$sql2";
+  $menu->agregarItem('Reporte Tutor Proyectos Rechazados Excel','Reporte Tutor Proyectos Rechazados','basicset/boton_excel.png',$link);
   $menus[] = $menu;
   $menu = new Menu('Reportes');
-  $link = Administrador::URL."docente/reporte";
+  $link = Administrador::URL."tutor/reporte/reporte.php";
   $menu->agregarItem('Reportes de Docente','Reportes correspondientes a los Docentes','basicset/graph.png',$link);
   $menus[] = $menu;
   //----------------------------------//
