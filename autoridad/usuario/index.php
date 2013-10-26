@@ -39,7 +39,7 @@ try {
   $menu->agregarItem('Gesti&oacute;n de Grupos','Gesti&oacute;n de Grupos para los usaurios del sistema SAPTI','basicset/people.png',$link);
   $menus[] = $menu;
   $menu = new Menu('Reportes');
-  $link = Administrador::URL."usuario/";
+  $link = Administrador::URL."usuario/reporte";
   $menu->agregarItem('Reportes de Usuarios','Reportes correspondientes a los Todos los Usuarios','basicset/graph.png',$link);
   $menus[] = $menu;
   //----------------------------------//

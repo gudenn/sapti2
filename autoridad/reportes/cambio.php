@@ -13,7 +13,7 @@ try {
    */
   
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'reportes/','name'=>'Reportes');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'estudiante/','name'=>'Estudiante');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'reportes/'.basename(__FILE__),'name'=>'Reportes Cambios');
   $smarty->assign("menuList", $menuList);
   //CSS

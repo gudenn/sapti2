@@ -28,9 +28,9 @@ try {
   $smarty->assign('JS',$JS);
 
   //CREAR UN DOCENTE
-  leerClase('Usuario');
-  leerClase('Docente');
-  leerClase('Semestre');
+   leerClase('Usuario');
+   leerClase('Docente');
+   leerClase('Semestre');
    leerClase('Notificacion');
 
       /**
@@ -42,12 +42,14 @@ try {
     /**
    * Menu central
    */
-  $docente = getSessionDocente();
+ 
   leerClase('Menu');
   $menu = new Menu('');
   $menus = $menu->getDocenteIndex($docente);
   $smarty->assign("menus", $menus);
   
+  $docente = getSessionDocente();
+   $_SESSION['usuario']= $docente;
   $smarty->assign("docente", $docente);
   $smarty->assign("ERROR", $ERROR);
   

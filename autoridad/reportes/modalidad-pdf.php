@@ -2,8 +2,9 @@
 
   require('_start.php');
  
-require_once('../../../sapti.inc/libs/tcpdf/config/lang/eng.php');
-require_once('../../../sapti.inc/libs/tcpdf/tcpdf.php');
+ 
+require_once(DIR_LIB.'/tcpdf/config/lang/eng.php');
+require_once(DIR_LIB.'/tcpdf/tcpdf.php');
 
  //cabecera pdf
 class MYPDF extends TCPDF {

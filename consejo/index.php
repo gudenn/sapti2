@@ -49,17 +49,17 @@ try {
 
   $menu = new Menu('Asignaci&oacute;n de Tribunales');
   $link = Consejo::URL."registro.php";
-  $menu->agregarItem('Asignac&oacute;n  De Tribunales','Se Asigna  Tribunales a Un Estudiante','basicset/user4.png',$link);
+  $menu->agregarItem('Asignac&oacute;n  De Tribunales','Se Asigna  Tribunales a Un Estudiante','tribunal.png',$link);
   $menus[] = $menu;
   
   $menu = new Menu('Asignaci&oacute;n De Fechas  De Defensa');
   $link = Consejo::URL."listadefensa.php";
-  $menu->agregarItem('Gesti&oacute;n de Asignac&oacute;n de Fechas de Defensa','Registro de Fechas de Defensa','basicset/user4.png',$link);
+  $menu->agregarItem('Gesti&oacute;n de Asignac&oacute;n de Fechas de Defensa','Registro de Fechas de Defensa','defensa.png',$link);
    $menus[] = $menu;
  
   $menu = new Menu('Tribunales no Aceptados');
   $link = Consejo::URL."tribunales.rechazados.php";
-  $menu->agregarItem('Gesti&oacute;n de Asignac&oacute;n','Registro y modificaci&oacute;n de Tribunales','basicset/user4.png',$link);
+  $menu->agregarItem('Gesti&oacute;n de Asignac&oacute;n','Registro y modificaci&oacute;n de Tribunales','denegar.png',$link);
    $menus[] = $menu;
   
    $notificacion= new Notificacion();

@@ -424,15 +424,16 @@ if (isset($_POST['proyecto_id']))
      {
                //  echo $id;
                
-                $tribunal= new Tribunal();
+                $tribunal                    = new Tribunal();
                 $tribunal->objBuidFromPost();  
-                $tribunal->docente_id =$id;
-                $tribunal->proyecto_id=$proyectos->id;
-                $tribunal->detalle="";
+                $tribunal->docente_id        =$id;
+                $tribunal->proyecto_id       =$proyectos->id;
+              //  $tribunal->detalle="";
+                $tribunal->visto_bueno       =  Tribunal::VISTO_BUENOPENDIENTE;
                 $tribunal->accion="";
-                $tribunal->visto=  Tribunal::VISTO_NV;
-                $tribunal->fecha_asignacion= date("j/n/Y");
-                $tribunal->estado = Objectbase::STATUS_AC;
+                $tribunal->visto             =  Tribunal::VISTO_NV;
+                $tribunal->fecha_asignacion  = date("j/n/Y");
+                $tribunal->estado            = Objectbase::STATUS_AC;
                 $tribunal->save();
                 
                 

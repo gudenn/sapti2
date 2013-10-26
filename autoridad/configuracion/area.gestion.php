@@ -35,7 +35,22 @@ try {
   //JS
   $JS[]  = URL_JS . "jquery.js";
   $smarty->assign('JS',$JS);
-
+  
+  
+  leerClase('Html');
+  $html  = new Html();
+  
+    $html = new Html();
+  $ERROR='';
+  if ($_GET['mensaje'])
+  {
+   // $ERROR = $html->getMessageBox ($_GET['mensaje']);
+  
+    echo $_GET['mensaje'];
+  }
+  
+  
+  
   
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////

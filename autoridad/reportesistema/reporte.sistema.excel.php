@@ -1,17 +1,22 @@
 <?php
+
+ 
+   
    require('../_start.php');
    leerClase('Usuario');
-   leerClase('Dicta');
+ 
 	
+      	if(isset($_GET['sql']))
         $consulta = $_GET['sql'];
-       /* $consulta="SELECT p.id,s.codigo as gestion,p.nombre as titulo,CONCAT(u.nombre,' ',apellido_paterno,apellido_materno) as nombre ,p.estado as estadop
-        FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe
-        WHERE u.id=e.usuario_id AND e.id=i.estudiante_id and i.semestre_id=s.id  AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado='AC' and s.id=1";
-	 
-        * 
-        * 
-        *  
-        */
+        $iddicta  = $_GET['iddicta'];
+          function array_recibe($url_array) { 
+                    $tmp = stripslashes($url_array); 
+                    $tmp = urldecode($tmp); 
+                    $tmp = unserialize($tmp); 
+
+            return $tmp; 
+        };
+        $consulta=  array_recibe($consulta); 
 	  $resultado =mysql_query($consulta); 
 		date_default_timezone_set('America/Mexico_City');
 
@@ -150,8 +155,7 @@
                	)             
            	)
         ));
-                $iddicta=$_SESSION['iddictapro'];
-                $dicta=new Dicta($iddicta);
+                
                 $usuario=  getSessionUser();
 		$tituloReporte = "Reporte Sistema SAPTI     Usuario: ".$usuario->getNombreCompleto()." ";                
 		$objPHPExcel->setActiveSheetIndex(0)

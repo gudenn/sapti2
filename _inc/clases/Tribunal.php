@@ -24,6 +24,17 @@ class Tribunal extends Objectbase
   const  VISTO_NV  = "NV";
   
   
+   /**
+   *  ACCION DE VISTO  del tribunal dl proyecto
+   */
+  const  VISTO_BUENO  = "VB";
+  /**
+   *  ACCION DE LOS TRIBUNALES no visto bueno es pendiente
+   */
+  const  VISTO_BUENOPENDIENTE  = "VP";
+  
+  
+  
     /**
      *
      * @var type 
@@ -39,6 +50,8 @@ class Tribunal extends Objectbase
      var $fecha_aceptacion;
      
      var $semestre;
+     var $visto_bueno;
+     var $fecha_vistobueno;
      
 
   /**

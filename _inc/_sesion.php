@@ -27,7 +27,9 @@ function initSession($login, $passwd) {
   leerClase("Usuario");
   $user = new Usuario();
   $user = $user->issetUser($login, $passwd);
-  if ($user) {
+  if ($user)
+    {
+    
     $user = new Usuario($user->id);
     $user->getAllObjects();
     saveObject($user, "$SYSTEM_NAME-USER");

@@ -39,7 +39,7 @@ try {
   $menu->agregarItem('Grabar Proyecto Final','Grabar Los datos de un Proyecto Final para un Estudiante.','basicset/user6.png',$link);
   $menus[] = $menu;
   $menu = new Menu('Reportes');
-  $link = Administrador::URL."proyecto/";
+  $link = Administrador::URL."proyecto/reporte";
   $menu->agregarItem('Reportes de Proyecto Final','Reportes correspondientes a Proyecto Final','basicset/graph.png',$link);
   $menus[] = $menu;
   

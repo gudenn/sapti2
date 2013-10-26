@@ -77,13 +77,17 @@ try {
   {
     $html = new Html();
     if ($EXITO)
+    {
       $mensaje = array('mensaje'=>'Se grabo correctamente el Area','titulo'=>'Registro de Area' ,'icono'=> 'tick_48.png');
-    else
+    
+    //  
+    }else{
       $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Area','titulo'=>'Registro de Area' ,'icono'=> 'warning_48.png');
-   $ERROR = $html->getMessageBox ($mensaje);
-  }
-  $smarty->assign("ERROR",$ERROR);
-  
+   }
+      $ERROR = $html->getMessageBox ($mensaje);
+     }
+ $smarty->assign("ERROR",$ERROR);
+ 
 } 
 catch(Exception $e) 
 {

@@ -11,14 +11,7 @@ if (!isDocenteSession())
   $smarty->assign('description','Formulario de Modificacion de Observaciones');
   $smarty->assign('keywords','SAPTI,Observaciones,Registro');
 
-  
-  
-  /** HEADER */
-  $smarty->assign('title', 'Modificacion de Observaciones');
-  $smarty->assign('description', 'Formulario de Modificacion de Observaciones');
-  $smarty->assign('keywords', 'SAPTI,Observaciones,Registro');
-
-  //CSS
+    //CSS
   $CSS[] = URL_CSS . "academic/3_column.css";
   $CSS[] = URL_CSS . "css/multi-select.css";
   $CSS[] = URL_CSS . "css/application.css";
@@ -30,7 +23,7 @@ if (!isDocenteSession())
   $smarty->assign('CSS', $CSS);
 
   //JS
-  $JS[] = URL_JS . "jquery.1.9.1.js";
+  $JS[] = URL_JS . "jquery.min.js";
 
   //Datepicker UI
   $JS[] = URL_JS . "ui/jquery-ui-1.10.2.custom.min.js";
@@ -38,9 +31,7 @@ if (!isDocenteSession())
   $JS[] = URL_JS . "jquery.addfield.js";
   $JS[] = URL_JS . "js/jquery.js";
   $JS[] = URL_JS . "js/jquery.multi-select.js";
-  $JS[] = URL_JS . "js/application.js";
-  $JS[] = URL_JS . "js/jquery.validate.min";
-
+ 
   $smarty->assign('JS', $JS);
   $smarty->assign("ERROR", '');
   //// leer las clases 

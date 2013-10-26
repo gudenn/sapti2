@@ -99,18 +99,19 @@ class Dia extends Objectbase {
       $dia  = new Dia($row);
       $hora = new Hora();
       if ($dia->nombre == 'Lunes')
-        $tdiaextra =  "<div class='horariodia'> Horas";
-      $tdia .=  "<div class='horariodia'> {$dia->nombre}";
+        
+        $tdiaextra =  "<div class='horariodia'> <div class='headhorario'> Horas</div>";
+      $tdia .=  "<div class='horariodia'> <div class='headhorario'>{$dia->nombre}</div>";
       $horas = $hora->getAll('',' ORDER BY id ASC '," WHERE dia_id = '{$dia->id}' ");
       while ($rowd = mysql_fetch_array($horas[0])) {
         $hora  = new Hora($rowd); 
         $check = $hora->getAsignada($iddocente, $hora->id)?'checked="checked"':'';
         $tdia .=  "<div class='horariohora'>
-                {$hora->id}
+               
                 <input type=\"checkbox\" name=\"hora_id[]\" value=\"{$hora->id}\" $check />
                 </div>";
         if ($dia->nombre == 'Lunes')
-          $tdiaextra .= "<div class='horariohora'> {$hora->hora_inicio} -   {$hora->hora_fin}</div>";
+          $tdiaextra .= "<div class='horariohora'> {$hora->hora_inicio} - {$hora->hora_fin}</div>";
       }
       $tdia .= "</div>";
       if ($dia->nombre == 'Lunes')

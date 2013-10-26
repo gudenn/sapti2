@@ -298,22 +298,22 @@ ORDER BY ma.id";
   $notificacion = new Notificacion();
   $thise = new Menu('Tutor');
   $link = Docente::URL."tutor/index.php";
-  $thise->agregarItem('Notificaciones','Notificaciones para el Proyecto Final','docente/notificacion.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+  $thise->agregarItem('Notificaciones','Notificaciones para el Proyecto Final','basicset/tutor.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
   $thises[] = $thise;
   
   $thise = new Menu('Tribunal');
   $link = Docente::URL."tribunal/index.php";
-  $thise->agregarItem('Notificaciones','Notificaciones para el Proyecto Final','docente/notificacion.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+  $thise->agregarItem('Notificaciones','Notificaciones para el Proyecto Final','basicset/user3.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
   $thises[] = $thise;
   
   $thise = new Menu('Tiempo');
   $link = Docente::URL."configuracion/generar.horario.php";
-  $thise->agregarItem('Disponibilidad','Disponibilidad De Tiempo','docente/notificacion.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+  $thise->agregarItem('Disponibilidad','Disponibilidad De Tiempo','basicset/clock.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
   $thises[] = $thise;
   
   $thise = new Menu('Agregar Areas');
   $link = Docente::URL."configuracion/configuracion.php";
-  $thise->agregarItem('Configuracion','Agregar Areas De Disponibilidad','docente/notificacion.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+  $thise->agregarItem('Configuracion','Agregar Areas De Disponibilidad','basicset/add.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
   $thises[] = $thise;
    
    // Notificaciones 

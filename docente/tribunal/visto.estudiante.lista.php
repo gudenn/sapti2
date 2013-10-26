@@ -32,7 +32,9 @@ try {
   
   $docente=  getSessionDocente();
   $docenteid=$docente->id;
+     $docente = getSessionDocente();
    
+  $smarty->assign("docente", $docente);
   $smarty->assign("docente_ids", $docenteid);
 
   //No hay ERROR

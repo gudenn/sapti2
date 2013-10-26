@@ -1,7 +1,7 @@
 <?php
 
-require('../_start.php');
- 
+ require('../_start.php');
+
 require_once(DIR_LIB.'/tcpdf/config/lang/eng.php');
 require_once(DIR_LIB.'/tcpdf/tcpdf.php');
 
@@ -71,7 +71,18 @@ $pdf->SetFont('dejavusans', '', 10);
 // add a page
 $pdf->AddPage();
 
-echo $sql = $_GET['sql'];
+if(isset($_GET['sql']))
+$sql = $_GET['sql'];
+
+$b=1;
+  function array_recibe($url_array) { 
+     $tmp = stripslashes($url_array); 
+     $tmp = urldecode($tmp); 
+     $tmp = unserialize($tmp); 
+
+    return $tmp; 
+  };
+ $sql=  array_recibe($sql); 
 $b=1;
 
 function DesplegarTabla($a,$b)
@@ -111,23 +122,26 @@ function DesplegarTabla($a,$b)
     function tamcolumna($nom){
         
         switch ($nom){
-     case "Nombre":
+     case "NOMBRE":
+             $tam='20%';
+             break;
+     case "APELLIDO":
              $tam='25%';
              break;
-     case "Apellidos":
+     case "PROYECTO":
+             $tam='40%';
+             break;      
+     case "MATERIA":
+             $tam='20%';
+             break;
+     case "INSCRITO":
+             $tam='10%';
+             break;
+     case "ESTADO":
              $tam='15%';
              break;
-     case "Nombre_Proyecto":
-             $tam='30%';
-             break;
-     case "Pro":
-             $tam='6%';
-             break;
-     case "Apro":
-             $tam='7%';
-             break;
          default :
-             $tam='5%';
+             $tam='10%';
         }
         return $tam;         
     }
