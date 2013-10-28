@@ -88,8 +88,7 @@ try {
   
  $sqlr="SELECT count(*) as c
 FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
-WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
-=s.id AND e.id=pe.estudiante_id and p.tipo_proyecto='PR' AND pe.proyecto_id=p.id AND p.estado='AC' AND p.id=v.proyecto_id and s.id='".$p."'";
+WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id and p.tipo_proyecto='PR' AND pe.proyecto_id=p.id AND p.estado='AC' AND p.id=v.proyecto_id and s.id='".$p."'";
  $resultado = mysql_query($sqlr);
  $areglo= array();
   
@@ -99,7 +98,7 @@ WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
    $areglo[]=$fila;
  }
  
- echo $cont = $areglo[0]['c'];
+ $cont = $areglo[0]['c'];
 
  if ($cont!=0) {
     
@@ -116,7 +115,7 @@ WHERE p.id=d.proyecto_id AND d.semestre='".$codigo."'";
    $array[]=$fila;
  }
  
- echo $def = $array[0]['d'];
+ $def = $array[0]['d'];
  
  $def=((double)$def/(float)$cont)*100;
  
@@ -136,7 +135,7 @@ WHERE p.id=d.proyecto_id and tipo_defensa='DPRI' AND d.semestre='".$codigo."'";
    $array[]=$fila;
  }
  
- echo $dp = $array[0]['dp'];
+ $dp = $array[0]['dp'];
  
  $dp=((double)$dp/(float)$cont)*100;
 
@@ -155,7 +154,7 @@ WHERE p.id=d.proyecto_id and tipo_defensa='DPU'AND d.semestre='".$codigo."'";
    $arraytribunal[]=$fila;
  }
  
- echo $pu = $arraytribunal[0]['pu'];
+ $pu = $arraytribunal[0]['pu'];
  
  $pu=((double)$pu/(float)$cont)*100;
  
@@ -174,7 +173,7 @@ WHERE p.id=t.proyecto_id and t.semestre='".$codigo."'";
    $array[]=$fila;
  }
  
- echo $tri= $array[0]['tri'];
+ $tri= $array[0]['tri'];
  $tri=((double)$tri/(double)$cont)*100;
  
  $smarty->assign('tri'  , $tri);  
