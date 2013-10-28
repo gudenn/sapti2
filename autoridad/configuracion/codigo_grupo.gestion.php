@@ -75,7 +75,7 @@ try {
   $smarty->assign("filtros"  ,$filtro);
   $smarty->assign("objs"     ,$objs_pg->objs);
   $smarty->assign("pages"    ,$objs_pg->p_pages);
- $smarty->assign("crear_nuevo"  ,"area.registro.php");
+ $smarty->assign("crear_nuevo"  ,"codigo_grupo.registro.php");
  $ERROR = ''; 
 if(isset($_SESSION['estado']) && $_SESSION['estado']==1)
 {
