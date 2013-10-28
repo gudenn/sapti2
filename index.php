@@ -5,9 +5,10 @@ try {
 
   /** HEADER */
   $smarty->assign('title','Proyecto Final');
-  $smarty->assign('description','Proyecto Final');
+  $smarty->assign('description','Bienvenido a SAPTI');
   $smarty->assign('keywords','Proyecto Final');
-
+ $CSS[]  = URL_CSS . "dashboard.css";
+ $CSS[]  = URL_CSS . "acordion.css";
   //CSS
   $CSS[]  = "css/style.css";
 
@@ -26,14 +27,11 @@ try {
   $menus  = array();
   $menu = new Menu('Defensas');
   $link = "";
-  $menu->agregarItem('Lista de Defensa De Proyecto','Revision y modificacion de Proyectos','tribunal.png',$link);
-  $link ="publica.estudiante.lista.php";
-  $menu->agregarItem('Lista de Defensa Publica ','Evaluaci&oacute;n de Proyecto','tribunal.png',$link);
-
-  
+  $menu->agregarItem('Fechas de Defensa',' Lista de Defensas ','tribunal.png',$link);
+   
     $menus[] = $menu;
-    $menu = new Menu('Notificaciones');
-    $menu->agregarItem('Notificaciones','Geti&oacute;n de las Notificaciones','basicset/megaphone.png',$link, 9);
+    $menu = new Menu('Anuncios');
+    $menu->agregarItem('Anuncios','Geti&oacute;n de Anuncios','basicset/megaphone.png',$link, 9);
     $menus[] = $menu;
 
     $smarty->assign("menus", $menus);
