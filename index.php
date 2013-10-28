@@ -30,10 +30,6 @@ try {
   $menu->agregarItem('Fechas de Defensa',' Lista de Defensas ','tribunal.png',$link);
    
     $menus[] = $menu;
-    $menu = new Menu('Anuncios');
-    $menu->agregarItem('Anuncios','Geti&oacute;n de Anuncios','basicset/megaphone.png',$link, 9);
-    $menus[] = $menu;
-
     $smarty->assign("menus", $menus);
 
   $smarty->assign('listadefensas'  , "");

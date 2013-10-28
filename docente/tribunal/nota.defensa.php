@@ -60,14 +60,61 @@ try {
                     $tribunal->nota_tribunal=$_POST['nota_tribunal'];
                     $tribunal->save();
                     $nota= $proyecto->getNota();
+                   
                     
-                   // foreach ()
+                    $notadefensaa= 0;
+                    $contador=0;
+                        foreach ($proyecto->getTribunalesActivos() as $tribuna)
+                       {
+                         //  echo $tribuna->nota_tribunal;
+                         if($tribuna->nota_tribunal!=0)
+                         {
+                           $contador=$contador+1;
+                         $notadefensaa=$notadefensaa + $tribuna->nota_tribunal;
+                         }
+                       }
+                       $notapromediodefensa=0;
+                       if($notadefensaa!=0)
+                       {
+                       echo  $notadefensaa/$contador;
+                      $notapromediodefensa=(0.7)*($notadefensaa/$contador);
+                       }
+                       echo $notapromediodefensa;
+                       $notafinal=0;
+                       
+                       
+                       
+                       
+                       
+                       
                     
                     
-                    
-                    
-                    
+                    if(!$nota)
+                    {
+                      $nota= new Nota();
+                      $nota->proyecto_id     =  $proyecto->id;
+                    //  $nota->nota_proyecto   =  9;
+                      $nota->nota_defensa    =  $notapromediodefensa;
+                      if($notapromediodefensa!=0 && $nota->nota_proyecto!=0)
+                       {
+                          $nota->nota_final      =   ($nota->nota_proyecto+$notapromediodefensa)/2; 
+                       }
+                     
+                      $nota->estado          =  Objectbase::STATUS_AC;
+                      $nota->save();
+                      
                     }  else {
+                    //  $nota->nota_proyecto=9;
+                      $nota->nota_defensa    =  $notapromediodefensa;
+                      if($notapromediodefensa!=0 && $nota->nota_proyecto!=0)
+                       {
+                          $nota->nota_final      =   ($nota->nota_proyecto+$notapromediodefensa)/2; 
+                       }
+                       
+                      $nota->save();
+                    }
+                    
+                  }  else {
                       
                       
                       

@@ -524,6 +524,26 @@ class Proyecto extends Objectbase {
 
   }
   
+    /**
+   *  retorna el objeto nota del proyecto
+   * @return
+   * retorna el proyecto tutor
+   */
+  function getNota() {
+    //@TODO revisar
+    leerClase('Nota');
+   $activo = Objectbase::STATUS_AC;
+    $sql = "select n.* from " . $this->getTableName('Nota') . " as n    where n.proyecto_id = '$this->id'  and n.estado = '$activo'";
+    $resultado = mysql_query($sql);
+    if (!$resultado)
+      return false;
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) {
+      $nota= new Nota($fila);
+    }
+    return $nota;
+  }
+  
+  
   /**
    * 
    * @return
@@ -842,7 +862,27 @@ class Proyecto extends Objectbase {
        return $array;
     }
   
+   /**
+   *   retorna la lista de tribunales activos de uns proyecto
+   * @return 
+   * retorna la cantidad de tribunales
+   */
   
+   function getTribunalesActivos()
+   {
+     leerClase('Tribunal');
+    $tribunales= array();
+    $activo = Objectbase::STATUS_AC;
+    $sql = "select t.* from " . $this->getTableName('Tribunal') . " as t   where t.proyecto_id ='$this->id' and t.estado = '$activo'  ";
+    $resultado = mysql_query($sql);
+    if (!$resultado)
+      return false;
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+      { 
+       $tribunales[]= new Tribunal($fila);
+      }
+       return  $tribunales;
+    }
   /**
    * 
    * @return 

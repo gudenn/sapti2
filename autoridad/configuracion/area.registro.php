@@ -24,9 +24,7 @@ try {
   //CSS
   $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_JS  . "validate/validationEngine.jquery.css";
-  
-  
-
+ 
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
 
@@ -73,20 +71,29 @@ try {
   $ERROR = ''; 
   leerClase('Html');
   $html  = new Html();
+  $moderador=0;
   if (isset($EXITO))
   {
     $html = new Html();
     if ($EXITO)
     {
+      $moderador=1;
       $mensaje = array('mensaje'=>'Se grabo correctamente el Area','titulo'=>'Registro de Area' ,'icono'=> 'tick_48.png');
-    
-    //  
+     echo "<script>window.location.href='area.gestion.php?moderador=$moderador'</script>"; 
     }else{
       $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Area','titulo'=>'Registro de Area' ,'icono'=> 'warning_48.png');
    }
-      $ERROR = $html->getMessageBox ($mensaje);
+   
+   if($moderador==1)
+   {
+     
+   }  else {
+       $ERROR = $html->getMessageBox ($mensaje);
+        $smarty->assign("ERROR",$ERROR);
+   }
+    
      }
- $smarty->assign("ERROR",$ERROR);
+
  
 } 
 catch(Exception $e) 
