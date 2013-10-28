@@ -71,7 +71,10 @@ EditableGrid.prototype.initializeGrid = function(iddicta)
 						 "<img src=\"" + image("detalle.png") + "\" border=\"0\" alt=\"Ver Tribunales\" title=\"Seguimiento\" width='30px' height='30px' />Tribunales</a>";
                 cell.innerHTML += "<br><a onclick=document.location.href='editartribunal.php?editar&proyecto_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
 						 "<img src=\"" +image("editar.png") + "\" border=\"0\" alt=\"revisar\" title=\"Registrar Observacion\"/>Editar</a>";
-               
+           	cell.innerHTML += " <br><a onclick=\"if (confirm('Esta seguro de eliminar esta? ')) {deletete(" + getRowId(cell.rowIndex) + "); updatetable("+cell.rowIndex+");} \" style=\"cursor:pointer\">" +
+						 "<img src=\"" + image("borrar.png") + "\" border=\"0\" alt=\"delete\" title=\"Delete row\"/></a>";
+
+          
                   }}));
 		
 		// render the grid (parameters will be ignored if we have attached to an existing HTML table)
@@ -87,6 +90,16 @@ EditableGrid.prototype.initializeGrid = function(iddicta)
 		$("#pagesize").val(pageSize).change(function() { editableGrid.setPageSize($("#pagesize").val()); });
 		
 	}
+};
+
+function deletete(obser){
+   ajax=objetoAjax();
+   ajax.open("POST", "eliminar.tribunal.php?eliminar&tribunaleliminar_id="+obser);
+   ajax.send(null);
+};
+function updatetable(rowIndex)
+{
+    editableGrid.remove(rowIndex);
 };
 
 EditableGrid.prototype.onloadXML = function(url, iddicta) 
@@ -143,4 +156,22 @@ EditableGrid.prototype.updatePaginator = function()
 	if (!this.canGoForward()) link.css({ opacity : 0.4, filter: "alpha(opacity=40)" });
 	else link.css("cursor", "pointer").click(function(event) { editableGrid.lastPage(); });
 	paginator.append(link);
+};
+
+
+function objetoAjax(){
+	var xmlhttp=false;
+	try {
+		xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+	} catch (e) {
+	try {
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	} catch (E) {
+		xmlhttp = false;
+	}
+}
+if (!xmlhttp && typeof XMLHttpRequest!='undefined') {
+	  xmlhttp = new XMLHttpRequest();
+	}
+	return xmlhttp;
 };
