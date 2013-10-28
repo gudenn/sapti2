@@ -28,11 +28,25 @@ try {
   $menuList[]     = array('url'=>URL . Administrador::URL . 'estudiante/','name'=>' Estudiantes');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'estudiante/'.basename(__FILE__),'name'=>'Gesti&oacute;n de Estudiantes');
   $smarty->assign("menuList", $menuList);
+//CSS
+  $CSS[]  = URL_CSS . "academic/tables.css";
+  
+   $JS[]  = URL_JS . "jquery.min.js";
 
 
-  $smarty->assign('header_ui','1');
-  $smarty->assign('CSS','');
-  $smarty->assign('JS','');
+  //Validation
+  $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
+  $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
+
+  //BOX
+  $CSS[]  = URL_JS . "box/box.css";
+  $JS[]  = URL_JS ."box/jquery.box.js";
+  //Datepicker & Tooltips $ Dialogs UI
+  $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
+  $JS[]   = URL_JS . "jquery-ui-1.10.3.custom.min.js";
+  $JS[]   = URL_JS . "ui/i18n/jquery.ui.datepicker-es.js";
+  $smarty->assign('CSS',$CSS);
+  $smarty->assign('JS',$JS);
 
   
   //////////////////////////////////////////////////////////////////
@@ -64,12 +78,26 @@ try {
   $smarty->assign("filtros"  ,$filtro);
   $smarty->assign("objs"     ,$objs_pg->objs);
   $smarty->assign("pages"    ,$objs_pg->p_pages);
-
-
-
-
-  //No hay ERROR
-  $smarty->assign("ERROR",'');
+ $smarty->assign("crear_nuevo"  ,"estudiante.registro.php");
+ $ERROR = ''; 
+if(isset($_SESSION['estado']) && $_SESSION['estado']==1)
+{
+  
+  
+  leerClase('Html');
+  $html  = new Html();
+ 
+ 
+    $html = new Html();
+      
+      $mensaje = array('mensaje'=>'Se grabo correctamente el Estudiante','titulo'=>'Registro de Estudiante' ,'icono'=> 'tick_48.png');
+  
+      $ERROR = $html->getMessageBox ($mensaje);
+   
+   $_SESSION['estado']=0;
+$smarty->assign("ERROR",$ERROR);
+     
+}
   $smarty->assign("URL",URL);  
 
 }

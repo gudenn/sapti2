@@ -69,6 +69,7 @@ try {
   {
     
     $EXITO = false;
+    $stado=0;
     mysql_query("BEGIN");
     
 
@@ -102,6 +103,7 @@ try {
     
 
     $EXITO = TRUE;
+    $stado=1;
     mysql_query("COMMIT");
   }
   
@@ -116,20 +118,27 @@ try {
   
   
 
-  //No hay ERROR
+ //No hay ERROR
   $ERROR = ''; 
   leerClase('Html');
   $html  = new Html();
-  if (isset($EXITO))
+  //$moderador=0;
+  if(isset($stado))
   {
-    $html = new Html();
-    if ($EXITO)
-      $mensaje = array('mensaje'=>'Se asigno correctamente el Tutor','titulo'=>'Registro de Tutor' ,'icono'=> 'tick_48.png');
-    else
-      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Tutor','titulo'=>'Registro de Tutor' ,'icono'=> 'warning_48.png');
-   $ERROR = $html->getMessageBox ($mensaje);
+  if($stado==1){
+       $_SESSION['estado']=$stado;
+          header("Location: tutor.gestion.php");
+          
+
+  }  else {
+          $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Tutor','titulo'=>'Registro de Tutor' ,'icono'=> 'warning_48.png');
+          $ERROR = $html->getMessageBox ($mensaje);
   }
+  }
+     
+  
   $smarty->assign("ERROR",$ERROR);
+
   
 } 
 catch(Exception $e) 

@@ -69,31 +69,37 @@ try {
   $cronograma = new Cronograma($id);
   if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
   {
-    $EXITO = false;
+    //$EXITO = false;
+    $stado=0;
     mysql_query("BEGIN");
     $cronograma->objBuidFromPost();
     $cronograma->estado = Objectbase::STATUS_AC;
-     $cronograma->semestre_id=$semestre->id;
+    $cronograma->semestre_id=$semestre->id;
     //$cronograma->validar();
-   
     $cronograma->save();
-    $EXITO = TRUE;
+    
+    //$EXITO = TRUE;
+    $stado=1;
     mysql_query("COMMIT");
   }
   $smarty->assign("cronograma",$cronograma);
 
-  //No hay ERROR
+ //No hay ERROR
   $ERROR = ''; 
   leerClase('Html');
   $html  = new Html();
-  if (isset($EXITO))
+  //$moderador=0;
+  if(isset($stado))
   {
-    $html = new Html();
-    if ($EXITO)
-      $mensaje = array('mensaje'=>'Se grabo correctamente el Evento','titulo'=>'Registro de Evento' ,'icono'=> 'tick_48.png');
-    else
-      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Evento','titulo'=>'Registro de Evento' ,'icono'=> 'warning_48.png');
-   $ERROR = $html->getMessageBox ($mensaje);
+  if($stado==1){
+       $_SESSION['estado']=$stado;
+          header("Location: cronograma.gestion.php");
+          
+
+  }  else {
+          $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Area','titulo'=>'Registro de Area' ,'icono'=> 'warning_48.png');
+          $ERROR = $html->getMessageBox ($mensaje);
+  }
   }
   $smarty->assign("ERROR",$ERROR);
   

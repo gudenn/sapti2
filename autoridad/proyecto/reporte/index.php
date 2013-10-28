@@ -45,6 +45,8 @@ try {
   $menu->agregarItem('Reprotes de Proyectos con Tribunales','Reprotes de Proyectos con Tribunales','basicset/my-reports.png',$link);
   $link = Administrador::URL."reportes/defensa.php";
   $menu->agregarItem('Reprotes de Proyectos en Defensa','Reprotes de Proyectos en Defensa','basicset/my-reports.png',$link);
+  $link = Administrador::URL."reportes/defensa.php";
+  $menu->agregarItem('Reprotes de Proyectos en Finalizados','Reprotes de Proyectos en Finalizados','basicset/my-reports.png',$link);
   
   
   $menus[] = $menu;

@@ -19,15 +19,10 @@ try {
   $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Registro de Turno');
   $smarty->assign("menuList", $menuList);
 
-
-  //CSS
+//CSS
   $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_JS  . "validate/validationEngine.jquery.css";
-  //BOX
-  $CSS[]  = URL_JS . "box/box.css";
-  
-  $smarty->assign('CSS',$CSS);
-
+ 
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
 
@@ -37,9 +32,14 @@ try {
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
 
   //BOX
+  $CSS[]  = URL_JS . "box/box.css";
   $JS[]  = URL_JS ."box/jquery.box.js";
+  //Datepicker & Tooltips $ Dialogs UI
+  $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
+  $JS[]   = URL_JS . "jquery-ui-1.10.3.custom.min.js";
+  $JS[]   = URL_JS . "ui/i18n/jquery.ui.datepicker-es.js";
+  $smarty->assign('CSS',$CSS);
   $smarty->assign('JS',$JS);
-
 
   $smarty->assign("ERROR", '');
 
@@ -54,30 +54,38 @@ try {
   if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
   {
     $EXITO = false;
+    $stado=0;
     mysql_query("BEGIN");
     
    $turno->objBuidFromPost();
     $turno->estado = Objectbase::STATUS_AC;
-    $turno->validar();
+    //$turno->validar();
     $turno->save();
     $EXITO = TRUE;
+    $stado=1;
     mysql_query("COMMIT");
   }
   $smarty->assign("turno",$turno);
 
-  //No hay ERROR
+   //No hay ERROR
   $ERROR = ''; 
   leerClase('Html');
   $html  = new Html();
-  if (isset($EXITO))
+  //$moderador=0;
+  if(isset($stado))
   {
-    $html = new Html();
-    if ($EXITO)
-      $mensaje = array('mensaje'=>'Se grabo correctamente el Turno','titulo'=>'Registro de Turno' ,'icono'=> 'tick_48.png');
-    else
-      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Turno','titulo'=>'Registro de Turno' ,'icono'=> 'warning_48.png');
-   $ERROR = $html->getMessageBox ($mensaje);
+  if($stado==1){
+       $_SESSION['estado']=$stado;
+          header("Location: turno.gestion.php");
+          
+
+  }  else {
+          $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Turno','titulo'=>'Registro de Turno' ,'icono'=> 'warning_48.png');
+          $ERROR = $html->getMessageBox ($mensaje);
   }
+  }
+     
+  
   $smarty->assign("ERROR",$ERROR);
   
 } 

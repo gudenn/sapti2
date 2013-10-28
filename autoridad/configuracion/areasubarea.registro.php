@@ -82,18 +82,22 @@ try {
   }
   $smarty->assign("area",$area);
 
-  //No hay ERROR
+//No hay ERROR
   $ERROR = ''; 
   leerClase('Html');
   $html  = new Html();
-  if (isset($EXITO))
+  //$moderador=0;
+  if(isset($stado))
   {
-    $html = new Html();
-    if ($EXITO)
-      $mensaje = array('mensaje'=>'Se grabo correctamente el Area','titulo'=>'Registro de Area' ,'icono'=> 'tick_48.png');
-    else
-      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Area','titulo'=>'Registro de Area' ,'icono'=> 'warning_48.png');
-   $ERROR = $html->getMessageBox ($mensaje);
+  if($stado==1){
+       $_SESSION['estado']=$stado;
+          header("Location: area.gestion.php");
+          
+
+  }  else {
+          $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Sub-Area','titulo'=>'Registro de Area' ,'icono'=> 'warning_48.png');
+          $ERROR = $html->getMessageBox ($mensaje);
+  }
   }
   $smarty->assign("ERROR",$ERROR);
   

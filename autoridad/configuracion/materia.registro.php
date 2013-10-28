@@ -57,6 +57,7 @@ try {
   if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
   {
     $EXITO = false;
+    $stado=0;
     mysql_query("BEGIN");
     
     $materia->objBuidFromPost();
@@ -64,23 +65,30 @@ try {
     $materia->validar();
     $materia->save();
     $EXITO = TRUE;
+    $stado=1;
     mysql_query("COMMIT");
   }
   $smarty->assign("materia",$materia);
 
-  //No hay ERROR
+   //No hay ERROR
   $ERROR = ''; 
   leerClase('Html');
   $html  = new Html();
-  if (isset($EXITO))
+  //$moderador=0;
+  if(isset($stado))
   {
-    $html = new Html();
-    if ($EXITO)
-      $mensaje = array('mensaje'=>'Se grabo correctamente el Materia','titulo'=>'Registro de Materia' ,'icono'=> 'tick_48.png');
-    else
-      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Materia','titulo'=>'Registro de Materia' ,'icono'=> 'warning_48.png');
-   $ERROR = $html->getMessageBox ($mensaje);
+  if($stado==1){
+       $_SESSION['estado']=$stado;
+          header("Location: materia.gestion.php");
+          
+
+  }  else {
+          $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente la Materia','titulo'=>'Registro de Materia' ,'icono'=> 'warning_48.png');
+          $ERROR = $html->getMessageBox ($mensaje);
   }
+  }
+     
+  
   $smarty->assign("ERROR",$ERROR);
   
 } 

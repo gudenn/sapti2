@@ -59,12 +59,14 @@ try {
   if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
   {
     $EXITO = false;
+    $stado=0;
     mysql_query("BEGIN");
     $titulo->objBuidFromPost();
     $titulo->estado = Objectbase::STATUS_AC;
     $titulo->validar();
     $titulo->save();
     $EXITO = TRUE;
+    $stado=1;
     mysql_query("COMMIT");
   }
   $smarty->assign("titulo",$titulo);
@@ -73,15 +75,21 @@ try {
   $ERROR = ''; 
   leerClase('Html');
   $html  = new Html();
-  if (isset($EXITO))
+  //$moderador=0;
+  if(isset($stado))
   {
-    $html = new Html();
-    if ($EXITO)
-      $mensaje = array('mensaje'=>'Se grabo correctamente el T&iacute;tulo honor&iacute;fico','titulo'=>'Registro de T&iacute;tulo honor&iacute;fico' ,'icono'=> 'tick_48.png');
-    else
-      $mensaje = array('mensaje'=>'Hubo un problema, No se Registro de T&iacute;tulos honor&iacute;ficos','titulo'=>'Registro T&iacute;tulo honor&iacute;fico' ,'icono'=> 'warning_48.png');
-   $ERROR = $html->getMessageBox ($mensaje);
+  if($stado==1){
+       $_SESSION['estado']=$stado;
+          header("Location: titulo_honorifico.gestion.php");
+          
+
+  }  else {
+          $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Titulo','titulo'=>'Registro de Titulo' ,'icono'=> 'warning_48.png');
+          $ERROR = $html->getMessageBox ($mensaje);
   }
+  }
+     
+  
   $smarty->assign("ERROR",$ERROR);
   
 } 

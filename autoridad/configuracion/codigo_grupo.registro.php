@@ -45,6 +45,7 @@ try {
   if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
   {
     $EXITO = false;
+    $stado=0;
     mysql_query("BEGIN");
      $grupo = new Codigo_grupo();
      $grupo->objBuidFromPost();
@@ -52,21 +53,29 @@ try {
      $grupo->validar();
      $grupo->save();
     $EXITO = TRUE;
+    $stado=1;
     mysql_query("COMMIT");
   }
   //No hay ERROR
   $ERROR = ''; 
   leerClase('Html');
   $html  = new Html();
-  if (isset($EXITO))
+  //$moderador=0;
+  if(isset($stado))
   {
-    $html = new Html();
-    if ($EXITO)
-      $mensaje = array('mensaje'=>'Se grabo correctamente el Codigo de Grupo','titulo'=>'Codigo de Grupo' ,'icono'=> 'tick_48.png');
-    else
-      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Codigo de Grupo','titulo'=>'Registro de Codigo de Grupo' ,'icono'=> 'warning_48.png');
-   $ERROR = $html->getMessageBox ($mensaje);
+  if($stado==1){
+       $_SESSION['estado']=$stado;
+          header("Location: codigo_grupo.gestion.php");
+          
+
+  }  else {
+          $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Grupo','titulo'=>'Registro de Grupo' ,'icono'=> 'warning_48.png');
+          $ERROR = $html->getMessageBox ($mensaje);
   }
+  }
+     
+  
+ 
   $smarty->assign('columnacentro','admin/codigo_grupo/columna.centro.registro.tpl');
   $smarty->assign("grupo",$grupo);
   $smarty->assign("ERROR",$ERROR);

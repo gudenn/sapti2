@@ -53,34 +53,42 @@ try {
     $id = $_GET['carrera_id'];
   $carrera = new Carrera($id);
   if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
-  {
+  { 
+    $stado=0;
     $EXITO = false;
     mysql_query("BEGIN");
     $carrera->objBuidFromPost();
     $carrera->estado = Objectbase::STATUS_AC;
     $carrera->validar();
     $carrera->save(/*copiarlaconfiguraciondelalctivo*/);
+    $stado=1;
     $EXITO = TRUE;
     mysql_query("COMMIT");
   }
   $smarty->assign("carrera",$carrera);
 
-  //No hay ERROR
+ //No hay ERROR
   $ERROR = ''; 
   leerClase('Html');
   $html  = new Html();
-  if (isset($EXITO))
+  //$moderador=0;
+  if(isset($stado))
   {
-    $html = new Html();
-    if ($EXITO)
-      $mensaje = array('mensaje'=>'Se grabo correctamente la Carrera','titulo'=>'Registro de Carrera' ,'icono'=> 'tick_48.png');
-    else
-      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente la Carrera','titulo'=>'Registro de Carrera' ,'icono'=> 'warning_48.png');
-   $ERROR = $html->getMessageBox ($mensaje);
+  if($stado==1){
+       $_SESSION['estado']=$stado;
+          header("Location: carrera.gestion.php");
+          
+
+  }  else {
+          $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente la Carrera','titulo'=>'Registro de Carrera' ,'icono'=> 'warning_48.png');
+          $ERROR = $html->getMessageBox ($mensaje);
   }
+  }
+     
   $smarty->assign("ERROR",$ERROR);
   
 } 
+
 catch(Exception $e) 
 {
   mysql_query("ROLLBACK");

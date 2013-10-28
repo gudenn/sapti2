@@ -12,8 +12,6 @@
             <!-- ############ -->
             {include file="admin/usuario/registro.base.tpl"}
             <!-- ############ -->
-            
-            
           <p>
           <select name="numero_horas" id="numero_horas">
           <option>-Seleccione-</option>
@@ -64,20 +62,6 @@
             jQuery('textarea').data('promptPosition',wo);
             jQuery('select').attr('data-prompt-position',wo);
             jQuery('select').data('promptPosition',wo);
-          });
-          jQuery(function(){
-            jQuery("select#materia_id").change(function(){
-              if (jQuery('#semestre_id').val() == '')
-                return jQuery('#semestre_id').validationEngine('showPrompt', 'Seleccione un semestre', 'error', true);;
-                
-              jQuery.getJSON("ajax.estudiante.registro.php",{'materia': jQuery(this).val(),'semestre': jQuery('#semestre_id').val(),  ajax: 'true'}, function(j){
-                var options = '';
-                for (var i = 0; i < j.length; i++) {
-                  options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
-                }
-                jQuery("select#dicta_id").html(options);
-              })
-            })
           });
         {/literal} 
         </script>

@@ -38,7 +38,7 @@
     <tr  class="{cycle values="light,dark"}">
         
         <td>{$listadocentes[ic]['NOMBRE']}</td>
-        <td>{$listadocentes[ic]['APELLIDOS']}</td>
+        <td>{$listadocentes[ic]['APELLIDO']}</td>
         <td>{$listadocentes[ic]['MATERIA']}</td>
         <td>{$listadocentes[ic]['INSCRITOS']}</td>
     
