@@ -33,7 +33,8 @@ try {
   $JS[]  = URL_JS . "jquery.addfield.js";
   $smarty->assign('JS',$JS);
     leerClase('Dicta');
-  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
+    $docente     = getSessionDocente();
+  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) && $docente->getDictaverifica($_GET['iddicta']))
   {
      $iddicta                = $_GET['iddicta'];
   }  else {

@@ -22,6 +22,11 @@ class Revision extends Objectbase
   const T3_TUTOR          = "TU";
   const T4_TRIBUNAL       = "TR";
   
+    /** constantes para los valores de materia tipo
+   * materia 1 proyectofinal (PR), materia 2 perfil (PE)
+   */
+  const T1_PROYECTOFINAL  = "PR";
+  const T2_PERFIL         = "PE";
  /**
   * Codigo identificador del Objeto Proyecto
   * @var INT(11)
@@ -188,11 +193,17 @@ class Revision extends Objectbase
     $filtro_sql = '';
     return $filtro_sql;
   }
-      function crearRevisionDocente($usu_id, $pro_id) 
+      function crearRevisionDocente($usu_id, $pro_id, $tipo) 
   {
     $this->estado = Objectbase::STATUS_AC;
     $this->revisor=$usu_id;
-    $this->revisor_tipo= self::T1_DOCENTE;
+    if($tipo==self::T1_PROYECTOFINAL){
+        $this->revisor_tipo= self::T1_DOCENTE;
+    }elseif ($tipo==self::T2_PERFIL) {
+            $this->revisor_tipo= self::T2_DOCENTEPERFIL;
+        }  else {
+            $this->revisor_tipo= $tipo;
+        }
     $this->estado_revision=  self::E1_CREADO;
     $this->proyecto_id=$pro_id;
     $this->fecha_revision=date("d/m/Y");

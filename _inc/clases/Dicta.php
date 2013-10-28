@@ -54,8 +54,8 @@ class Dicta extends Objectbase
   }
   
     /**
-   * Obtiene el nombre completo del docente que dicta la materia
-   * @return string el nombre completo del docente que dicta la materia
+   * Obtiene el nombre y el grupo de la materia segun el digta
+   * @return string el nombre completo de la materia
    */
   function getNombreMateria() 
   {
@@ -65,6 +65,18 @@ class Dicta extends Objectbase
     $grupo      = new Codigo_grupo($this->codigo_grupo_id);
     $mat_grupo= trim(strtoupper("{$materia->nombre} {$grupo->nombre}"));
     return $mat_grupo;
+  }
+      /**
+   * Obtiene el nombre y el grupo de la materia segun el digta
+   * @return string el nombre completo de la materia
+   */
+  function getTipoMateria() 
+  {
+    leerClase('Materia');
+    $materia    = new Materia($this->materia_id);
+    $tipo      = $materia->tipo;
+    
+    return $tipo;
   }
 }
 ?>

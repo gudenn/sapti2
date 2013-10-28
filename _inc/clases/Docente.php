@@ -272,6 +272,17 @@ where  hd.dia_id=d.id and hd.turno_id=t.id  and hd.docente_id=1 and d.id=1;
           }
        return $dias;  
   }
+    function getDictaverifica($iddicta) {
+    $res=FALSE;
+    leerClase('Dicta');
+    $activo = Objectbase::STATUS_AC;
+    $sql = "select d.* from " . $this->getTableName('Dicta') . " as d where d.docente_id = '$this->id'  and d.estado = '$activo'  and d.id='$iddicta'"; 
+    $resultado = mysql_query($sql);
+    if (mysql_num_rows($resultado)>0)
+      $res=TRUE;
+
+      return $res;
+  }
   
   
   
