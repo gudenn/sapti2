@@ -72,25 +72,27 @@ try {
   $smarty->assign("pages"    ,$objs_pg->p_pages);
   $smarty->assign("crear_nuevo"  ,"area.registro.php");
  $ERROR = ''; 
-if(isset($_GET['moderador'])  )
+if(isset($_SESSION['estado']) && $_SESSION['estado']==1)
 {
+  
   
   leerClase('Html');
   $html  = new Html();
  
-  if ($_GET['moderador']==1)
-  {
+ 
     $html = new Html();
       
       $mensaje = array('mensaje'=>'Se grabo correctamente el Area','titulo'=>'Registro de Area' ,'icono'=> 'tick_48.png');
   
       $ERROR = $html->getMessageBox ($mensaje);
-   }
+   
+   $_SESSION['estado']=0;
+$smarty->assign("ERROR",$ERROR);
      
 }
      
      
- $smarty->assign("ERROR",$ERROR);
+// $smarty->assign("ERROR",$ERROR);
  
   
   
@@ -98,7 +100,7 @@ if(isset($_GET['moderador'])  )
 
 
   //No hay ERROR
- // $smarty->assign("ERROR",'');
+ //$smarty->assign("ERROR",'');
   $smarty->assign("URL",URL);  
 
 }

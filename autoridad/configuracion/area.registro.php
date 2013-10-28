@@ -56,14 +56,17 @@ try {
   $area = new Area($id);
   if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
   {
-    $EXITO = false;
+    //$EXITO = false;
+    $stado=0;
     mysql_query("BEGIN");
     $area->objBuidFromPost();
     $area->estado = Objectbase::STATUS_AC;
     $area->validar();
     $area->save();
-    $EXITO = TRUE;
+    //$EXITO = TRUE;
+    $stado=1;
     mysql_query("COMMIT");
+  
   }
   $smarty->assign("area",$area);
 
@@ -71,28 +74,23 @@ try {
   $ERROR = ''; 
   leerClase('Html');
   $html  = new Html();
-  $moderador=0;
-  if (isset($EXITO))
+  //$moderador=0;
+  if(isset($stado))
   {
-    $html = new Html();
-    if ($EXITO)
-    {
-      $moderador=1;
-      $mensaje = array('mensaje'=>'Se grabo correctamente el Area','titulo'=>'Registro de Area' ,'icono'=> 'tick_48.png');
-     echo "<script>window.location.href='area.gestion.php?moderador=$moderador'</script>"; 
-    }else{
-      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Area','titulo'=>'Registro de Area' ,'icono'=> 'warning_48.png');
-   }
-   
-   if($moderador==1)
-   {
+  if($stado==1){
+       $_SESSION['estado']=$stado;
+          header("Location: area.gestion.php");
+          
+
+  }  else {
+          $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Area','titulo'=>'Registro de Area' ,'icono'=> 'warning_48.png');
+          $ERROR = $html->getMessageBox ($mensaje);
+  }
+  }
      
-   }  else {
-       $ERROR = $html->getMessageBox ($mensaje);
-        $smarty->assign("ERROR",$ERROR);
-   }
-    
-     }
+  
+  $smarty->assign("ERROR",$ERROR);
+
 
  
 } 
