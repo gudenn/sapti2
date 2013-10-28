@@ -10,9 +10,9 @@ try {
   leerClase('Dicta');
   
   /** HEADER */
-  $smarty->assign('title','Proyecto Final');
-  $smarty->assign('description','Proyecto Final');
-  $smarty->assign('keywords','Proyecto Final');
+  $smarty->assign('title','Registro de Eventos');
+  $smarty->assign('description','Formulario de Registro de Eventos del Sistema');
+  $smarty->assign('keywords','Eventos,Registro,Sistema');
 
   //CSS
   $CSS[]  = URL_JS . "calendar/css/eventCalendar.css";

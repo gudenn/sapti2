@@ -6,9 +6,9 @@ try {
     header("Location: ../login.php");  
 
   /** HEADER */
-  $smarty->assign('title','SAPTI - Inscripcion de Estudiantes');
-  $smarty->assign('description','Formulario de Inscripcion de Estudiantes');
-  $smarty->assign('keywords','SAPTI,Estudiantes,Inscripcion');
+  $smarty->assign('title','Gestion de Evaluaciones');
+  $smarty->assign('description','Gestion de Evaluaciones');
+  $smarty->assign('keywords','Gestion,Evaluacion,Estudiantes,Inscritos');
 
   //CSS
   $CSS[]  = URL_CSS . "academic/3_column.css";

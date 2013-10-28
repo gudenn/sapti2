@@ -12,9 +12,9 @@ try {
   $ERROR = '';
 
   /** HEADER */
-  $smarty->assign('title','Gestion de Observaciones');
-  $smarty->assign('description','Pagina de gestion de Observaciones');
-  $smarty->assign('keywords','Gestion,Observaciones');
+  $smarty->assign('title','Gestion de Evaluaciones');
+  $smarty->assign('description','Gestion de Evaluaciones de Estudiantes Inscritos');
+  $smarty->assign('keywords','Gestion,Evaluacion,Estudiantes,Inscritos');
 
   //CSS
   $CSS[]  = URL_CSS . "academic/tables.css";

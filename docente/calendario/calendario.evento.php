@@ -10,9 +10,9 @@ try {
   $ERROR = '';
   
   /** HEADER */
-  $smarty->assign('title','SAPTI - Inscripcion de Estudiantes');
-  $smarty->assign('description','Formulario de Inscripcion de Estudiantes');
-  $smarty->assign('keywords','SAPTI,Estudiantes,Inscripcion');
+  $smarty->assign('title','Calendario de Eventos');
+  $smarty->assign('description','Calendario de Eventos del Sistema');
+  $smarty->assign('keywords','SAPTI,Eventos,Sistema,Gestion');
 
   //CSS
   $CSS[]  = URL_CSS . "academic/3_column.css";

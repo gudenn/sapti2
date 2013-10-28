@@ -11,9 +11,9 @@ try {
   leerClase('Dicta');
   
   /** HEADER */
-  $smarty->assign('title','Gestion de Observaciones');
-  $smarty->assign('description','Pagina de gestion de Observaciones');
-  $smarty->assign('keywords','Gestion,Observaciones');
+  $smarty->assign('title','Seguimiento al Proyecto');
+  $smarty->assign('description','Seguimiento del Avemce del Proyecto');
+  $smarty->assign('keywords','Gestion,Observaciones,revision,avance');
 
   $CSS[]  = URL_CSS . "academic/tables.css";
   $CSS[]  = URL_CSS . "editablegrid.css";

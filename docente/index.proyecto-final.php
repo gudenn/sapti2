@@ -5,11 +5,6 @@ try {
   if(!isDocenteSession())
     header("Location: login.php");  
 
-  /** HEADER */
-  $smarty->assign('title','Proyecto Final');
-  $smarty->assign('description','Proyecto Final');
-  $smarty->assign('keywords','Proyecto Final');
-
   //CSS
   $CSS[]  = URL_CSS . "academic/3_column.css";
     $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
@@ -43,6 +38,10 @@ try {
         header("Location: ../index.php");
   }
   $dicta=new Dicta($iddicta);
+    /** HEADER */
+  $smarty->assign('title',$dicta->getNombreMateria());
+  $smarty->assign('description',$dicta->getNombreMateria());
+  $smarty->assign('keywords','Proyecto Final');
   
   /**
    * Menu superior

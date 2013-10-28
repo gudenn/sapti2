@@ -7,7 +7,7 @@ try {
 
   /** HEADER */
   $smarty->assign('title','SAPTI - Inscripcion de Estudiantes');
-  $smarty->assign('description','Formulario de Inscripcion de Estudiantes');
+  $smarty->assign('description','Inscripcion de Estudiantes');
   $smarty->assign('keywords','SAPTI,Estudiantes,Inscripcion');
 
   //CSS

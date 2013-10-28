@@ -14,9 +14,9 @@ try {
   $ERROR = '';
 
   /** HEADER */
-  $smarty->assign('title','Lista de Estudiantes');
-  $smarty->assign('description','Pagina de Lista de Incritos');
-  $smarty->assign('keywords','Gestion,Estudiantes');
+  $smarty->assign('title','Lista de Correcciones');
+  $smarty->assign('description','Lista de Correcciones realizadas el Proyecto');
+  $smarty->assign('keywords','Gestion,Estudiantes,correcciones,revisiones');
 
   //CSS
   $CSS[]  = URL_CSS . "academic/tables.css";

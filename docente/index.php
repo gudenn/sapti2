@@ -6,7 +6,7 @@ try {
     header("Location: login.php");  
 
   /** HEADER */
-  $smarty->assign('title','Proyecto Final');
+  $smarty->assign('title','Materias Asignadas');
   $smarty->assign('description','Menu de Materias Asignadas');
   $smarty->assign('keywords','Proyecto Final');
 
@@ -42,14 +42,11 @@ try {
     /**
    * Menu central
    */
- 
+  $docente = getSessionDocente(); 
   leerClase('Menu');
   $menu = new Menu('');
   $menus = $menu->getDocenteIndex($docente);
   $smarty->assign("menus", $menus);
-  
-  $docente = getSessionDocente();
-   $_SESSION['usuario']= $docente;
   $smarty->assign("docente", $docente);
   $smarty->assign("ERROR", $ERROR);
   

@@ -7,9 +7,9 @@ try {
 
 
   /** HEADER */
-  $smarty->assign('title','Proyecto Final - Detalle de Avance ');
-  $smarty->assign('description','Detalle de avance en Proyecto Final');
-  $smarty->assign('keywords','Proyecto Final,detalle,avance');
+  $smarty->assign('title','Detalle de Avance');
+  $smarty->assign('description','Detalle de avance del Proyecto');
+  $smarty->assign('keywords','Proyecto Final,detalle,avance,perfil');
 
   //CSS
   $CSS[]  = URL_JS . "ui/overcast/jquery-ui.css";
