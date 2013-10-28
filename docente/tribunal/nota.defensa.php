@@ -43,18 +43,103 @@ try {
        $menuList[]     = array('url'=>URL.Docente::URL.'tribunal/publica.estudiante.lista.php','name'=>'Lista Estudiante');
        $smarty->assign("menuList", $menuList);
 
+       
+    if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
+         {
+            $docente=  getSessionDocente();
+              
+            
+            
+            if(isset($_POST['nota_tribunal']))
+                 {
+                    if($_POST['nota_tribunal']>0 && is_numeric($_POST['nota_tribunal']) && $_POST['nota_tribunal'] <=100)
+                    {
+                    $estudiantes   =  new Estudiante($_POST['estudiante_id']);
+                    $proyecto      =  $estudiantes ->getProyecto();
+                    $tribunal      =  $proyecto->getTribunal( $docente->id);
+                    $tribunal->nota_tribunal=$_POST['nota_tribunal'];
+                    $tribunal->save();
+                    $nota= $proyecto->getNota();
+                   
+                    
+                    $notadefensaa= 0;
+                    $contador=0;
+                        foreach ($proyecto->getTribunalesActivos() as $tribuna)
+                       {
+                         //  echo $tribuna->nota_tribunal;
+                         if($tribuna->nota_tribunal!=0)
+                         {
+                           $contador=$contador+1;
+                         $notadefensaa=$notadefensaa + $tribuna->nota_tribunal;
+                         }
+                       }
+                       $notapromediodefensa=0;
+                       if($notadefensaa!=0)
+                       {
+                       echo  $notadefensaa/$contador;
+                      $notapromediodefensa=(0.7)*($notadefensaa/$contador);
+                       }
+                       echo $notapromediodefensa;
+                       $notafinal=0;
+                       
+                       
+                       
+                       
+                       
+                       
+                    
+                    
+                    if(!$nota)
+                    {
+                      $nota= new Nota();
+                      $nota->proyecto_id     =  $proyecto->id;
+                    //  $nota->nota_proyecto   =  9;
+                      $nota->nota_defensa    =  $notapromediodefensa;
+                      if($notapromediodefensa!=0 && $nota->nota_proyecto!=0)
+                       {
+                          $nota->nota_final      =   ($nota->nota_proyecto+$notapromediodefensa)/2; 
+                       }
+                     
+                      $nota->estado          =  Objectbase::STATUS_AC;
+                      $nota->save();
+                      
+                    }  else {
+                    //  $nota->nota_proyecto=9;
+                      $nota->nota_defensa    =  $notapromediodefensa;
+                      if($notapromediodefensa!=0 && $nota->nota_proyecto!=0)
+                       {
+                          $nota->nota_final      =   ($nota->nota_proyecto+$notapromediodefensa)/2; 
+                       }
+                       
+                      $nota->save();
+                    }
+                    
+                  }  else {
+                      
+                      
+                      
+                    }
+                  }
+           
+             
+         }
+
+       
        if (isset($_POST['observaciones'])) 
             $observaciones=$_POST['observaciones'];
            if (isset($_GET['id_estudiante'])) 
                $id_estudiante=$_GET['id_estudiante'];
-
+           $docentes=  getSessionDocente();
+           
            $estudiante     = new Estudiante($id_estudiante);
            $usuario        = $estudiante->getUsuario();
            $proyecto       = $estudiante->getProyecto();
-
+           $tribuanls       = $proyecto->getTribunal($docentes->id);
+            
             $smarty->assign("usuario", $usuario);
             $smarty->assign("estudiante", $estudiante);
             $smarty->assign("proyecto", $proyecto);
+            $smarty->assign("tribunal",$tribuanls);
 
             $urlpdf=".../ARCHIVO/proyecto.pdf";
             $smarty->assign("urlpdf", $urlpdf);
@@ -62,56 +147,7 @@ try {
             date_default_timezone_set('UTC');
             $vistobueno->fecha_visto_buena=date("d/m/Y");
 
-         if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
-         {
-               $docente=  getSessionDocente();
-               $docente->getAllObject();
-
-               $docenteid=$docente->id;
-
-               $estudiantes   =  new Estudiante($_POST['estudiante_id']);
-               $proyecto      =  $estudiantes ->getProyecto();
-               $tribunal      =  $proyecto->getTribunal($docenteid, $proyecto->id);
-
-               $notatribunal = new Nota_tribunal();
-               $notatribunal->objBuidFromPost();
-               $notatribunal->tribunal_id=$docenteid;
-              // $notatribunal->nota_tribunal=
-               $notatribunal->proyecto_id=$proyecto->id;
-               $notatribunal->estado=  Objectbase::STATUS_AC;
-               $notatribunal->save();
-
-               $notatribuanl= new  Nota ();
-               $notadicta=  $proyecto-> getCalcularNota();
-
-                  $contador=0;
-                 foreach ($notadicta  as $valor)
-                 {
-                   $contador=$contador+$valor->nota_tribunal;
-                 }
-
-                  $promedionota= $contador/sizeof($notadicta);
-                   $nota =new Nota();
-
-              foreach ($proyecto ->$tribunal_objs  as $docen) 
-                {
-
-                  $nota->nota_proyecto = 40;
-                  $nota->nota_defensa=$contador;
-                  $nota->proyecto_id   = $proyecto->id;
-                  $nota->tribunal_id   =$docen->id;
-                  $nota->estado        ='AC';
-                  $nota->seave();
-               }
-         if(($proyecto->getCantidadNotas())==3)
-            {
-
-              $proyecto->estado_proyecto=  Proyecto::EST5_F;
-              $proyecto->save();
-            }
-
-         }
-
+ 
        //No hay ERROR
        $smarty->assign("ERROR",'');
      } 

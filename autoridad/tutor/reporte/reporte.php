@@ -1,10 +1,6 @@
 <?php
 try {
-  define ("MODULO", "ADMIN-ESTUDIANTE-REPORTE");
   require('../../_start.php');
-  if(!isAdminSession())
-    header("Location: ../../login.php");  
-  require('_start.php');
    
   
 
@@ -30,8 +26,8 @@ try {
    */
   
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'reportes/','name'=>'Reportes');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'reportes/'.basename(__FILE__),'name'=>'Reportes De Estadisticos');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'tutor/reporte','name'=>'Tutor');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'reporte/'.basename(__FILE__),'name'=>'Reportes Estadisticos');
   $smarty->assign("menuList", $menuList);
 
   //CSS
@@ -57,7 +53,7 @@ try {
   $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
    
    
-  $smarty->assign('lista'       ,'admin/reportes/reporte.tpl');
+  $smarty->assign('lista'       ,'admin/reportes/reporte.tutor.tpl');
   
   $sql2 = "SELECT *
                 FROM semestre";
@@ -79,16 +75,10 @@ try {
  
   
   
-  $p=$_POST['semestre_selec'];;
-  //////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////
-  if($_POST['semestre_selec']){
-  
-  
+   
  $sqlr="SELECT count(*) as c
- FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
- WHERE u.id=e.usuario_id and e.id=i.estudiante_id and i.semestre_id=s.id and e.id=pe.estudiante_id and pe.proyecto_id=p.id and p.es_actual=1 and s.id='".$p."'";
+FROM proyecto p
+WHERE p.tipo_proyecto='PR' AND p.estado_proyecto='CO'";
  $resultado = mysql_query($sqlr);
  $areglo= array();
   
@@ -100,13 +90,15 @@ try {
  
  $cont = $areglo[0]['c'];
 
- if ($cont!==0) {
+ if ($cont!=0) {
     
   
- //proyecots postergados
-  $sqlr="SELECT count(*) as p 
-  FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
-  WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id and p.tipo_proyecto='PE' AND pe.proyecto_id=p.id AND p.estado='AC' AND p.id=v.proyecto_id AND v.estado_vigencia='PO' and s.id='".$p."'";
+ 
+ //Consulta Aceptados
+  $sqlr='select count(*) as ac 
+from usuario u,tutor t ,proyecto_tutor pt,proyecto p 
+where u.id=t.usuario_id and pt.tutor_id=t.id  and pt.proyecto_id=p.id and pt.estado_tutoria="AC"
+';
  $resultado = mysql_query($sqlr);
  $arraytribunal= array();
   
@@ -116,18 +108,17 @@ try {
    $arraytribunal[]=$fila;
  }
  
- $post = $arraytribunal[0]['p'];
+ $post = $arraytribunal[0]['ac'];
  
- $pos=((double)$post/(float)$cont)*100;
+ $ac=((double)$post/(float)$cont)*100;
 
- $smarty->assign('pos'  , $pos);
+ $smarty->assign('ac'  , $ac);
 
- 
-  
- //proyecots con prorroga
- $sqlr="SELECT count(*)as pr
- FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
- WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id and p.tipo_proyecto='PE' AND pe.proyecto_id=p.id AND p.estado='AC' AND p.id=v.proyecto_id AND v.estado_vigencia='PR' and s.id='".$p."'";
+ ///Consulta Rechazados
+   $sqlr='select count(*) as re
+        from usuario u,tutor t ,proyecto_tutor pt,proyecto p 
+        where u.id=t.usuario_id and pt.tutor_id=t.id  and pt.proyecto_id=p.id and pt.estado_tutoria="RE"';
+
  $resultado = mysql_query($sqlr);
  $arraytribunal= array();
   
@@ -137,55 +128,15 @@ try {
    $arraytribunal[]=$fila;
  }
  
- $pro= $arraytribunal[0]['pr'];
+ $pro= $arraytribunal[0]['re'];
  $pr=((double)$pro/(double)$cont)*100;
  
  $smarty->assign('pr'  , $pr);  
  
  
  
- //proyecots con cambio
-  $sqlr="SELECT  COUNT( * ) AS cam
- FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe, cambio c
- WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id and p.tipo_proyecto='PE' AND pe.proyecto_id=p.id AND p.estado='AC'AND c.proyecto_id=p.id and s.id='".$p."'";
- $resultado = mysql_query($sqlr);
- $arraytribunal= array();
-  
- while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
- {
- 
-   $arraytribunal[]=$fila;
  }
- 
- $camb  = $arraytribunal[0]['cam'];
- $cam=((double)$camb/(double)$cont)*100;
 
- $smarty->assign('cam'  , $cam); 
-
-//vencidos
-  $fechahoy=  date('Y-m-d');
-  $sqlr="SELECT count(*) as vencido
-   FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
-   WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id and p.tipo_proyecto='PE' AND pe.proyecto_id=p.id AND p.estado='AC' AND p.id=v.proyecto_id AND ('".$fechahoy."'>=v.fecha_fin)and s.id='".$p."'";
- $resultado = mysql_query($sqlr);
- $arraytribunal= array();
-  
- while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
- {
- 
-   $arraytribunal[]=$fila;
- }
- 
-  $ve = $arraytribunal[0]['vencido'];
- 
-
-     $v=((double)$ve/(double)$cont)*100;
-     
- 
- 
- $smarty->assign('v'  , $v);
- }
-}
 
   //No hay ERROR
   $smarty->assign("ERROR",'');

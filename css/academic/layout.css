@@ -420,3 +420,12 @@ h1{
  text-align: left;
   
 }
+.notacontenido{
+   border: 1px solid;
+   padding:  5px 50px;
+   width: 800px;
+   height: auto;
+   background: snow;
+   border-radius: 10px; 
+  
+}

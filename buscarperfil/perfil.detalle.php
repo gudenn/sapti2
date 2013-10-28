@@ -132,7 +132,7 @@ catch(Exception $e)
 {
   $smarty->assign("ERROR", handleError($e));
 }
-  $TEMPLATE_TOSHOW = 'perfil/3columnas.tpl';
+  $TEMPLATE_TOSHOW = 'buscarperfil/3columnas.tpl';
   $smarty->display($TEMPLATE_TOSHOW);
 
 ?>

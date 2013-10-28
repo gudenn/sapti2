@@ -24,7 +24,9 @@ if(!isDocenteSession())
   $smarty->assign("diass", $diass);
   $smarty->assign("iddocente", $docente->id);
   
-  
+  $CSS[] = URL_CSS . "check.css";
+
+  $smarty->assign('CSS', $CSS);
   
   
   /**
@@ -35,8 +37,6 @@ if(!isDocenteSession())
   $smarty->assign("menuList", $menuList);
 
   $smarty->assign('header_ui','1');
-  $smarty->assign('CSS','');
-  $smarty->assign('JS','');
 
 
   $smarty->assign("ERROR", '');

@@ -219,6 +219,12 @@ class Proyecto extends Objectbase {
   var $tribunal_objs;
 
   /**
+   *
+   * @var type retorna las notas del proyecto tribunal
+   */
+   var $nota_tribunal_objs;
+  
+  /**
    * (Objeto simple) Todas las areas asignadas a este proyecto
    * @var object|null 
    */
@@ -518,6 +524,26 @@ class Proyecto extends Objectbase {
 
   }
   
+    /**
+   *  retorna el objeto nota del proyecto
+   * @return
+   * retorna el proyecto tutor
+   */
+  function getNota() {
+    //@TODO revisar
+    leerClase('Nota');
+   $activo = Objectbase::STATUS_AC;
+    $sql = "select n.* from " . $this->getTableName('Nota') . " as n    where n.proyecto_id = '$this->id'  and n.estado = '$activo'";
+    $resultado = mysql_query($sql);
+    if (!$resultado)
+      return false;
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) {
+      $nota= new Nota($fila);
+    }
+    return $nota;
+  }
+  
+  
   /**
    * 
    * @return
@@ -785,13 +811,12 @@ class Proyecto extends Objectbase {
          $activo = Objectbase::STATUS_AC;
          $sql = "select nt.* from " . $this->getTableName('Nota_tribunal') . " as nt    where nt.proyecto_id ='$this->id' and t.estado = '$activo'  ";
          $resultado = mysql_query($sql);
-         if (!$resultado)
-          return false;
+         if ($resultado)
           while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
          { 
         $notatribunal[] = new Nota_tribunal($fila );
          }
-       return  $notatribunal;
+       return   $notatribunal;
  }
 
   /**
@@ -837,7 +862,27 @@ class Proyecto extends Objectbase {
        return $array;
     }
   
+   /**
+   *   retorna la lista de tribunales activos de uns proyecto
+   * @return 
+   * retorna la cantidad de tribunales
+   */
   
+   function getTribunalesActivos()
+   {
+     leerClase('Tribunal');
+    $tribunales= array();
+    $activo = Objectbase::STATUS_AC;
+    $sql = "select t.* from " . $this->getTableName('Tribunal') . " as t   where t.proyecto_id ='$this->id' and t.estado = '$activo'  ";
+    $resultado = mysql_query($sql);
+    if (!$resultado)
+      return false;
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+      { 
+       $tribunales[]= new Tribunal($fila);
+      }
+       return  $tribunales;
+    }
   /**
    * 
    * @return 

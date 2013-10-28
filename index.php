@@ -5,9 +5,10 @@ try {
 
   /** HEADER */
   $smarty->assign('title','Proyecto Final');
-  $smarty->assign('description','Proyecto Final');
+  $smarty->assign('description','Bienvenido a SAPTI');
   $smarty->assign('keywords','Proyecto Final');
-
+ $CSS[]  = URL_CSS . "dashboard.css";
+ $CSS[]  = URL_CSS . "acordion.css";
   //CSS
   $CSS[]  = "css/style.css";
 
@@ -21,8 +22,15 @@ try {
   
   $smarty->assign('CSS',$CSS);
   $smarty->assign('JS',$JS);
+  leerClase('Menu');
   
-  
+  $menus  = array();
+  $menu = new Menu('Defensas');
+  $link = "";
+  $menu->agregarItem('Fechas de Defensa',' Lista de Defensas ','tribunal.png',$link);
+   
+    $menus[] = $menu;
+    $smarty->assign("menus", $menus);
 
   $smarty->assign('listadefensas'  , "");
   

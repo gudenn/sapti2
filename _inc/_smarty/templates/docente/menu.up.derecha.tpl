@@ -9,7 +9,4 @@
           <li class="last"><a>Usuario: {$UsuarioSesion}</a></li>
       </ul>
       {/if}
-      <div  class="boxsession">
-        <p class ='boxsessiontexto'>Usuario:{$UsuarioSesion}</p>
-       </div>
     </div>

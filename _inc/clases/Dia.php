@@ -109,7 +109,8 @@ class Dia extends Objectbase {
         $tdia .=  "<div class='horariohora'>
                
                 <input type=\"checkbox\" name=\"hora_id[]\" value=\"{$hora->id}\" $check />
-                </div>";
+   
+                  </div>";
         if ($dia->nombre == 'Lunes')
           $tdiaextra .= "<div class='horariohora'> {$hora->hora_inicio} - {$hora->hora_fin}</div>";
       }

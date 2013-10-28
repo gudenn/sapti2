@@ -30,27 +30,25 @@ try {
   //CSS
   $CSS[]  = URL_CSS . "academic/tables.css";
   //$CSS[]  = URL_CSS . "pg.css";
-  $smarty->assign('CSS',$CSS);
+ // $smarty->assign('CSS',$CSS);
 
-  //JS
-  $JS[]  = URL_JS . "jquery.js";
+  
+   $JS[]  = URL_JS . "jquery.min.js";
+
+
+  //Validation
+  $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
+  $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
+
+  //BOX
+  $CSS[]  = URL_JS . "box/box.css";
+  $JS[]  = URL_JS ."box/jquery.box.js";
+  //Datepicker & Tooltips $ Dialogs UI
+  $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
+  $JS[]   = URL_JS . "jquery-ui-1.10.3.custom.min.js";
+  $JS[]   = URL_JS . "ui/i18n/jquery.ui.datepicker-es.js";
+  $smarty->assign('CSS',$CSS);
   $smarty->assign('JS',$JS);
-  
-  
-  leerClase('Html');
-  $html  = new Html();
-  
-    $html = new Html();
-  $ERROR='';
-  if ($_GET['mensaje'])
-  {
-   // $ERROR = $html->getMessageBox ($_GET['mensaje']);
-  
-    echo $_GET['mensaje'];
-  }
-  
-  
-  
   
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
@@ -73,12 +71,36 @@ try {
   $smarty->assign("objs"     ,$objs_pg->objs);
   $smarty->assign("pages"    ,$objs_pg->p_pages);
   $smarty->assign("crear_nuevo"  ,"area.registro.php");
-
-
+ $ERROR = ''; 
+if(isset($_SESSION['estado']) && $_SESSION['estado']==1)
+{
+  
+  
+  leerClase('Html');
+  $html  = new Html();
+ 
+ 
+    $html = new Html();
+      
+      $mensaje = array('mensaje'=>'Se grabo correctamente el Area','titulo'=>'Registro de Area' ,'icono'=> 'tick_48.png');
+  
+      $ERROR = $html->getMessageBox ($mensaje);
+   
+   $_SESSION['estado']=0;
+$smarty->assign("ERROR",$ERROR);
+     
+}
+     
+     
+// $smarty->assign("ERROR",$ERROR);
+ 
+  
+  
+  
 
 
   //No hay ERROR
-  $smarty->assign("ERROR",'');
+ //$smarty->assign("ERROR",'');
   $smarty->assign("URL",URL);  
 
 }
