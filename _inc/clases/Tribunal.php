@@ -51,6 +51,8 @@ class Tribunal extends Objectbase
      
      var $semestre;
      var $visto_bueno;
+     
+     var $nota_tribunal;
      var $fecha_vistobueno;
      
 

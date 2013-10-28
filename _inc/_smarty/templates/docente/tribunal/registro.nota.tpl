@@ -1,21 +1,32 @@
       <div id="content">
-        <h1 class="title">NOTA DE LA DEFENSA</h1>
+        <div  class="notacontenido">
+        <h1 class="title">Nota De Defensa</h1>
         <div id="respond">
-          <form action="#" method="post" id="registro" name="registro" >
+          <form action="#" method="post" id="registro"  id="registro" name="registro" >
             <p>
-               <label for="nombre de proyecto"><small>NOMBRE DE PROYECTO:</small></label>
+                <label for="nombre de estudiante"><small>Nombre De Estudiante:</small></label>
+               <span>{$usuario->nombre} {$usuario->apellido_paterno} {$usuario->apellido_materno}</span><br/>
+         
+               <label for="nombre de proyecto"><small>Nombre De Proyecto:</small></label>
                <span>{$proyecto->nombre}</span><br/>
-               <label for="nombre de estudiante"><small>NOMBRE DE ESTUDIANTE:</small></label>
-               <span>{$usuario->nombre} {$usuario->apellido_paterno} {$usuario->apellido_materno}</span>
-            </p>
+               
+               
+                <label for="nombre de proyecto"><small>Objetivo General:</small></label>
+                <span>{$proyecto->objetivo_general}</span><br/>
+                <label for="nombre de proyecto"><small>Objetivo Específicos:</small></label>
+                <span>{$proyecto->nombre}</span><br/>
+                <label for="nombre de proyecto"><small>Descripción:</small></label>
+                <span>{$proyecto->descripcion}</span><br/>
+               
+               </p>
             <br/>
            
             
         
             
               <p>
-              <input type="text" name="nota_tribunal" id="nota_tribunal" value="{$nota->nota_tribunal}" size="22"/>
-              <label for="Nota"><small>Ingrese la Nota</small></label>
+              <input type="text" name="nota_tribunal" id="nota_tribunal" value="{$tribunal->nota_tribunal}" size="22"/>
+              <label for="Nota"><small>Ingrese la Nota  (*)</small></label>
             </p>
            
             
@@ -28,8 +39,7 @@
               <input type="hidden" name="token" value="{$token}">
 
               <input name="submit" type="submit" id="submit" value="Grabar">
-              &nbsp;
-              <input name="reset" type="reset" id="reset" tabindex="5" value="Resetear">
+             
             </p>
           </form>
         </div>
@@ -37,42 +47,32 @@
         <p>Todos los campos con (*) son obligatorios.</p>
         
         
-        <script>
-         jQuery.validator.setDefaults({
-         debug: true,
-         success: "valid"
-         });
-         $( "#registro" ).validate({
-        rules: {
-         nota_tribunal: {
-         required: true,
-         range: [13, 23]
-         }
-         }
-         });
+     <script type="text/javascript">
+ $().ready(function() {	
+	// Configuramos la validación de los distintos campos del formulario
+	$("#registro").validationEngine({
+		// Empezamos por las reglas
+		  rules: {
+			nota_tribunal: {  // Una cantidad entre un rango
+				required: true,
+				range: [1, 100]  // Aqui indico que no puede ser menor de 1 ni mayor de 100
+			}	
+		},
+		messages: { // La segunda parte es configurar los mensajes, por lo que tengo que ir indicando para cada campo y cada regla el mensaje que quiero mostrar si no se cumple.
+			
+			nota_tribunal: {
+				required: "Por favor, introduzca su calificacion",
+				range: "Tiene que poner su Calificacion entre 1 y 100",
+				
+			},
+		
+		}
+	});
+});
+
 </script>
         
-        <script type="text/javascript">
-        {literal} 
-          $(function(){
-            $('#fecha_revision').datepicker({
-              dateFormat:'dd/mm/yy',
-              changeMonth: true,
-              changeYear: true,
-              yearRange: "2000:2050"
-            });
-          });
-          jQuery(document).ready(function(){
-            jQuery("#registro").validationEngine();
-            var wo = 'bottomRight';
-            jQuery('input').attr('data-prompt-position',wo);
-            jQuery('input').data('promptPosition',wo);
-            jQuery('textarea').attr('data-prompt-position',wo);
-            jQuery('textarea').data('promptPosition',wo);
-            jQuery('select').attr('data-prompt-position',wo);
-            jQuery('select').data('promptPosition',wo);
-          });
-        {/literal} 
-        </script>
-      </div>
+
+        </div>
+        </div>
         

@@ -21,8 +21,22 @@ try {
   
   $smarty->assign('CSS',$CSS);
   $smarty->assign('JS',$JS);
+  leerClase('Menu');
   
+  $menus  = array();
+  $menu = new Menu('Defensas');
+  $link = "";
+  $menu->agregarItem('Lista de Defensa De Proyecto','Revision y modificacion de Proyectos','tribunal.png',$link);
+  $link ="publica.estudiante.lista.php";
+  $menu->agregarItem('Lista de Defensa Publica ','Evaluaci&oacute;n de Proyecto','tribunal.png',$link);
+
   
+    $menus[] = $menu;
+    $menu = new Menu('Notificaciones');
+    $menu->agregarItem('Notificaciones','Geti&oacute;n de las Notificaciones','basicset/megaphone.png',$link, 9);
+    $menus[] = $menu;
+
+    $smarty->assign("menus", $menus);
 
   $smarty->assign('listadefensas'  , "");
   

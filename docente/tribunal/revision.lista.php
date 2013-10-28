@@ -31,9 +31,9 @@ try {
      /**
    * Menu superior
    */
-   $menuList[]     = array('url'=>URL.Docente::URL.'tribunal','name'=>'Tribunal');
- $menuList[]     = array('url'=>URL.Docente::URL.'tribunal/estudiante.lista.php','name'=>'Lista Estudiante');
- $smarty->assign("menuList", $menuList);
+  $menuList[]     = array('url'=>URL.Docente::URL.'tribunal','name'=>'Tribunal');
+  $menuList[]     = array('url'=>URL.Docente::URL.'tribunal/visto.estudiante.lista.php','name'=>'Lista Estudiante');
+  $smarty->assign("menuList", $menuList);
   
   
     if( isset($_SESSION['pro_estudiente_id']) && is_numeric($_SESSION['pro_estudiente_id']) ){

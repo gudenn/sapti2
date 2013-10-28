@@ -219,6 +219,12 @@ class Proyecto extends Objectbase {
   var $tribunal_objs;
 
   /**
+   *
+   * @var type retorna las notas del proyecto tribunal
+   */
+   var $nota_tribunal_objs;
+  
+  /**
    * (Objeto simple) Todas las areas asignadas a este proyecto
    * @var object|null 
    */
@@ -785,13 +791,12 @@ class Proyecto extends Objectbase {
          $activo = Objectbase::STATUS_AC;
          $sql = "select nt.* from " . $this->getTableName('Nota_tribunal') . " as nt    where nt.proyecto_id ='$this->id' and t.estado = '$activo'  ";
          $resultado = mysql_query($sql);
-         if (!$resultado)
-          return false;
+         if ($resultado)
           while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
          { 
         $notatribunal[] = new Nota_tribunal($fila );
          }
-       return  $notatribunal;
+       return   $notatribunal;
  }
 
   /**
