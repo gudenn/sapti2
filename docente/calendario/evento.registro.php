@@ -34,7 +34,8 @@ try {
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
   $smarty->assign('JS',$JS);
-  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
+    $docente     = getSessionDocente();
+  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) && $docente->getDictaverifica($_GET['iddicta']))
   {
      $iddicta                = $_GET['iddicta'];
   }  else {

@@ -38,8 +38,8 @@ try {
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
   $JS[]  = URL_JS . "calendar/js/jquery.eventCalendar.js";
   $smarty->assign('JS',$JS);
-  
-  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
+  $docente     = getSessionDocente();
+  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) && $docente->getDictaverifica($_GET['iddicta']))
   {
      $iddicta                = $_GET['iddicta'];
   }  else {

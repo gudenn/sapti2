@@ -28,7 +28,8 @@ try {
   $JS[]  = URL_JS . "tablaeditable/editablegrid-2.0.1.js";
   $JS[]  = URL_JS . "tablaeditable/tabla.estudiante.lista.js";
   $smarty->assign('JS',$JS);
-  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
+  $docente     = getSessionDocente();
+  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) && $docente->getDictaverifica($_GET['iddicta']))
   {
      $iddicta                = $_GET['iddicta'];
   }  else {
@@ -50,7 +51,6 @@ try {
   $menuList[]     = array('url'=>URL.Docente::URL.'revision/revision.corregido.lista.php?iddicta='.$iddicta.'&estudiente_id='.$id_estudiante,'name'=>'Lista de Correcciones');
   $smarty->assign("menuList", $menuList);
   
-  $docente=  getSessionDocente();
   $estudiante     = new Estudiante($id_estudiante);
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();

@@ -33,7 +33,10 @@ try {
   leerClase('Notificacion');
   leerClase('Dicta');
 
-  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
+  $docente     = getSessionDocente();
+  $usuario     = $docente->getUsuario();
+
+  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) && $docente->getDictaverifica($_GET['iddicta']))
   {
      $iddicta                = $_GET['iddicta'];
   }  else {
@@ -47,9 +50,6 @@ try {
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
   $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php?iddicta='.$iddicta,'name'=>$dicta->getNombreMateria());
   $smarty->assign("menuList", $menuList);
-  
-  $docente     = getSessionDocente();
-  $usuario     = $docente->getUsuario();
   
   $smarty->assign("docente", $docente);
   $smarty->assign("usuario", $usuario);

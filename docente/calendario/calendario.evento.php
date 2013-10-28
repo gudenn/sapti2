@@ -27,7 +27,8 @@ try {
   $smarty->assign('JS',$JS);
   $smarty->assign('CSS',$CSS);
   $smarty->assign("ERROR", $ERROR);
-  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
+  $docente     = getSessionDocente();
+  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) && $docente->getDictaverifica($_GET['iddicta']))
   {
      $iddicta                = $_GET['iddicta'];
   }  else {

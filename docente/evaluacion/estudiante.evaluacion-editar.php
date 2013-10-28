@@ -29,7 +29,8 @@ try {
   $JS[]  = URL_JS . "ventanasmodales/historial.notas.js";
   $JS[]  = URL_JS . "ventanasmodales/jquery.simplemodal-1.4.4.js";
   $smarty->assign('JS',$JS);
-  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
+  $docente     = getSessionDocente();
+  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) && $docente->getDictaverifica($_GET['iddicta']))
   {
      $iddicta                = $_GET['iddicta'];
   }  else {

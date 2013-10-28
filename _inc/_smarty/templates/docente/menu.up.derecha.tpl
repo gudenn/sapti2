@@ -10,6 +10,6 @@
       </ul>
       {/if}
       <div  class="boxsession">
-        <p class ='boxsessiontexto'>  Usuario :{} </p>
+        <p class ='boxsessiontexto'>Usuario:{$UsuarioSesion}</p>
        </div>
     </div>
