@@ -86,7 +86,7 @@ if (empty($action)&&$avance->revision_id==0) {
                       </tbody>
             </table>
             <p>
-            <label for='descripcion'>Descripcion del Avance:</label>
+            <label for='descripcion'>Descripción del Avance:</label>
             <span><i>".getRespuesta($avance->descripcion)."</i></span>
             </p>
 	</form>
@@ -146,7 +146,7 @@ if (empty($action)&&$avance->revision_id==0) {
             $output .="
                       </tbody>
             </table>
-            <label for='descripcion'>Descripcion del Avance:</label>
+            <label for='descripcion'>Descripción del Avance:</label>
             <span><i>".getRespuesta($avance->descripcion)."</i></span>
             </form>
         </div>

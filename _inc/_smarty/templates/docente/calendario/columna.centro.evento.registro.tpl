@@ -4,15 +4,15 @@
           <form action="#" method="post" id="registro" name="registro" >
             <p>
               <input type="text" name="asunto" id="asunto" value="{$evento->asunto}" size="22" data-validation-engine="validate[required]">
-              <label for="asunto"><small>TITULO EVENTO (*)</small></label>
+              <label for="asunto">Titulo Evento (*)</label>
             </p>
             <p>
               <textarea name="descripcion" id="descripcion" value="{$evento->descripcion}" size="22" style="width: 650px;height: 100px;" data-validation-engine="validate[required]"></textarea>
-              <label for="descripcion"><small>DESCRIPCION DEL EVENTO (*)</small></label>
+              <label for="descripcion">Descripción del Evento (*)</label>
             </p>
             <p>
               <input type="text" name="fecha_evento" id="fecha_evento" value="{$evento->fecha_evento}" size="22" data-validation-engine="validate[required]">
-              <label for="fecha_evento"><small>FECHA DE EVENTO (*)</small></label>
+              <label for="fecha_evento">Fecha de Evento (*)</label>
             </p>
             <h2 class="title">Grabar Evento</h2>
             <p>
