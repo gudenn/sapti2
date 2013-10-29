@@ -267,7 +267,10 @@ ____IMG;
 function getHelp($ancla = '') {
   global $help;
   if (!is_object($help) || get_class($help) != 'Helpdesk') {
-    $help = new Helpdesk();
+    $MODULO = 'VISITA';
+    if (defined('MODULO') )
+      $MODULO = MODULO;
+    $help = new Helpdesk('',$MODULO);
     $help->getAllObjects();
   }
   $help->getHelp($ancla);

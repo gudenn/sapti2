@@ -58,10 +58,11 @@ class Permiso extends Objectbase
    * @param type $id
    * @param type $modulo_id id del modulo
    * @param type $grupo_id id del grupo
-   * @param type $helpdesk_id id del helpdesk
+   * @param type $helpdesk_modulo_id id del helpdesk
    * @return boolean
    */
-  function __construct($id = '',$modulo_id = false , $grupo_id = false, $helpdesk_id = false) {
+  function __construct($id = '',$modulo_id = false , $grupo_id = false, $helpdesk_modulo_id = false) {
+    //PERMISO DE ACCESO A LOS MODULOS
     if ($modulo_id && $grupo_id)
     {
       $sql = "SELECT * FROM ".$this->getTableName()." WHERE modulo_id = '$modulo_id' AND grupo_id = '$grupo_id' ";
@@ -83,9 +84,12 @@ class Permiso extends Objectbase
       /** solo para los leidos desde la base de datos */
       $this->datesSTH();
     }
-    elseif ($helpdesk_id && $grupo_id)
+    // PERMISO AL HELPDESK
+    // nos basaremos en la estructura ya existente 
+    // de permisos en el sistema dada por MODULOS
+    elseif ($helpdesk_modulo_id && $grupo_id)
     {
-      $sql = "SELECT * FROM ".$this->getTableName()." WHERE helpdesk_id = '$helpdesk_id' AND grupo_id = '$grupo_id' ";
+      $sql = "SELECT * FROM ".$this->getTableName()." WHERE modulo_id = '$helpdesk_modulo_id' AND grupo_id = '$grupo_id' ";
       //echo $sql;
       $result = mysql_query($sql);
       if (!$result)
