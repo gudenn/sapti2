@@ -48,8 +48,12 @@ try {
   $menu = new Menu('Temas de Ayuda');
   $link = Administrador::URL."helpdesk/helpdesk.gestion.php?todos";
   $menu->agregarItem('Gesti&oacute;n de Temas de Ayuda','Gesti&oacute;n de Temas de Ayuda para el sistema SAPTI.','basicset/helpdesk_48.png',$link);
+  /**
+   * DEPRECATED!!!
+   * los permisos son automaticos junto a los accesos a los modulos
   $link = Administrador::URL."helpdesk/helpdesk.permisos.php?todos";
   $menu->agregarItem('Permisos y Restricciones','Gesti&oacute;n de accesos a los temas de ayuda Temas de Ayuda.','basicset/login.png',$link);
+   */
   if (!$_SESSION['editor_online'])
   {
     $link = Administrador::URL."helpdesk/?activarEditor=1";
@@ -60,7 +64,21 @@ try {
     $link = Administrador::URL."helpdesk/?desactivarEditor=1";
     $menu->agregarItem('Desactivar el editor En-linea','Desactivamos la herramienta Editor Directo de Consejos en todas las p&aacute;ginas.','basicset/editno_48.png',$link);
   }
+  $link = Administrador::URL."helpdesk/helpdesk.gestion.php?estado_helpdesk=";
+  // CONTADOR //
+  $helpdesk   = new Helpdesk();
+  $pendientes = $helpdesk->contar();
+  // -CONTADOR //
+  $menu->agregarItem('Gesti&oacute;n de Temas de Ayuda','Gesti&oacute;n de todos los Temas de Ayuda para el Sistema.','basicset/tag.png',$link,'',$pendientes);
+  $link = Administrador::URL."helpdesk/helpdesk.tooltips.php?todos";
+  // CONTADOR //
+  leerClase('Tooltip');
+  $tooltips   = new Tooltip();
+  $pendientes = $tooltips->contar();
+  // -CONTADOR //
+  $menu->agregarItem('Gesti&oacute;n de Consejos','Gesti&oacute;n de todos los consejos o ayudas en ventanas flotantes que ofrece el Sistema.','basicset/tag.png',$link,'',$pendientes);
   $menus[] = $menu;
+
   $menu = new Menu('Temas de Ayuda Pendientes');
   $link = Administrador::URL."helpdesk/helpdesk.gestion.php?estado_helpdesk=".Helpdesk::EST01_RECIEN;
   // CONTADOR //

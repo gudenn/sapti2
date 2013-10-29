@@ -270,7 +270,7 @@ function getHelp($ancla = '') {
     $MODULO = 'VISITA';
     if (defined('MODULO') )
       $MODULO = MODULO;
-    $help = new Helpdesk('',$MODULO);
+    $help = new Helpdesk('',$MODULO,1);
     $help->getAllObjects();
   }
   $help->getHelp($ancla);

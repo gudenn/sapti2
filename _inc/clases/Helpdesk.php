@@ -58,7 +58,7 @@ class Helpdesk extends Objectbase
    * @param type $id
    * @param type $autogenerar generaa la autoayuda para la pagina actual
    */
-  public function __construct($id = '' ,$modulo_base = '' , $autogenerar = true) 
+  public function __construct($id = '' ,$modulo_base = '' , $autogenerar = false) 
   {
     if ('' == $id && $autogenerar)
     {
@@ -281,11 +281,16 @@ ____TEST;
 
     if (isset($_GET['order']))
       $filtro->order($_GET['order']);
+    $filtro->nombres[] = 'Estado';
+    /** Constante para indicar el estado de la ayuda  */
+    $filtro->valores[] = array ('select','estado_helpdesk'  ,$filtro->filtro('estado_helpdesk'),
+        array(''      ,'RC'         ,'ED'           ,'AP'        ),
+        array('Todos' ,'Pendiente'  ,'Ya Editado'   ,'Aprobado' ));
     $filtro->nombres[] = 'Codigo';
     $filtro->valores[] = array('input', 'codigo', $filtro->filtro('codigo'));
     $filtro->nombres[] = 'Descripci&oacute;n';
     $filtro->valores[] = array('input', 'descripcion', $filtro->filtro('descripcion'));
-    $filtro->nombres[] = 'Palabras Clave';
+    $filtro->nombres[] = 'Claves';
     $filtro->valores[] = array('input', 'keywords', $filtro->filtro('keywords'));
   }
 

@@ -15,7 +15,7 @@ try {
 
   /** HEADER */
   $smarty->assign('title','Gesti&oacute;n de Ayuda');
-  $smarty->assign('description','Gestion de Ayuda para el sistema');
+  $smarty->assign('description','Gesti&oacute;n de Ayuda para el sistema');
   $smarty->assign('keywords','Temas de Ayuda,Semestre');
   leerClase('Administrador');
   /**
