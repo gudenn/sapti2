@@ -6,9 +6,9 @@ try {
     header("Location: ../login.php");  
 
   /** HEADER */
-  $smarty->assign('title','SAPTI - Registro Tooltips');
-  $smarty->assign('description','Formulario de registro de Tooltips');
-  $smarty->assign('keywords','SAPTI,tooltips,Registro');
+  $smarty->assign('title','SAPTI - Registro Consejos');
+  $smarty->assign('description','Formulario de registro de Consejos');
+  $smarty->assign('keywords','SAPTI,Consejos,Registro');
 
   leerClase('Administrador');
   leerClase('Html');
@@ -17,8 +17,8 @@ try {
    */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'helpdesk/','name'=>'Helpdesk SAPTI');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'helpdesk/tooltip.gestion.php','name'=>'Gesti&oacute;n de Tooltips');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'helpdesk/'.basename(__FILE__),'name'=>'Registro de Tooltips de ayuda');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'helpdesk/tooltip.gestion.php','name'=>'Gesti&oacute;n de Consejos');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'helpdesk/'.basename(__FILE__),'name'=>'Registro de Consejos de ayuda');
   $smarty->assign("menuList", $menuList);
 
 
@@ -88,9 +88,9 @@ try {
   {
     $html = new Html();
     if ($EXITO)
-      $mensaje = array('mensaje'=>'Se grabo correctamente el La Ayuda','titulo'=>'Registro de Tooltip' ,'icono'=> 'tick_48.png');
+      $mensaje = array('mensaje'=>'Se grabo correctamente el Consejo de Ayuda','titulo'=>'Registro de Consejo' ,'icono'=> 'tick_48.png');
     else
-      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Tooltip','titulo'=>'Registro de Tooltip' ,'icono'=> 'warning_48.png');
+      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Consejo','titulo'=>'Registro de Consejo' ,'icono'=> 'warning_48.png');
    $ERROR = $html->getMessageBox ($mensaje);
   }
   $smarty->assign("ERROR",$ERROR);

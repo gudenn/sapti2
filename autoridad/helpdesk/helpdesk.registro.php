@@ -6,9 +6,9 @@ try {
     header("Location: ../login.php");  
 
   /** HEADER */
-  $smarty->assign('title','SAPTI - Registro Helpdesk');
-  $smarty->assign('description','Formulario de registro de Helpdesk');
-  $smarty->assign('keywords','SAPTI,Helpdesk,Registro');
+  $smarty->assign('title','SAPTI - Registro Temas de Ayuda');
+  $smarty->assign('description','Formulario de registro de Temas de Ayuda');
+  $smarty->assign('keywords','SAPTI,Temas de Ayuda,Registro');
 
   leerClase('Administrador');
   leerClase('Html');
@@ -16,7 +16,7 @@ try {
    * Menu superior
    */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'helpdesk/','name'=>'Helpdesk SAPTI');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'helpdesk/','name'=>'Temas de Ayuda SAPTI');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'helpdesk/helpdesk.gestion.php','name'=>'Gesti&oacute;n de Temas de Ayuda');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'helpdesk/'.basename(__FILE__),'name'=>'Registro de Temas de ayuda');
   $smarty->assign("menuList", $menuList);
@@ -89,9 +89,9 @@ try {
   {
     $html = new Html();
     if ($EXITO)
-      $mensaje = array('mensaje'=>'Se grabo correctamente La Ayuda','titulo'=>'Registro de Helpdesk' ,'icono'=> 'tick_48.png');
+      $mensaje = array('mensaje'=>'Se grabo correctamente La Ayuda','titulo'=>'Registro de Temas de Ayuda' ,'icono'=> 'tick_48.png');
     else
-      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Helpdesk','titulo'=>'Registro de Helpdesk' ,'icono'=> 'warning_48.png');
+      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Tema de Ayuda','titulo'=>'Registro de Temas de Ayuda' ,'icono'=> 'warning_48.png');
    $ERROR = $html->getMessageBox ($mensaje);
   }
   $smarty->assign("ERROR",$ERROR);
