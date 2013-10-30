@@ -269,6 +269,11 @@ ____TEST;
 
     if (isset($_GET['order']))
       $filtro->order($_GET['order']);
+    $filtro->nombres[] = 'Estado';
+    /** Constante para indicar el estado de la ayuda  */
+    $filtro->valores[] = array ('select','estado_tooltip'  ,$filtro->filtro('estado_tooltip'),
+        array(''      ,'RC'         ,'CL'        ,'AP'        ),
+        array('Todos' ,'Pendiente'  ,'Clonado'   ,'Aprobado' ));
     $filtro->nombres[] = 'C&oacute;digo';
     $filtro->valores[] = array('input', 'codigo', $filtro->filtro('codigo'));
     $filtro->nombres[] = 'T&iacute;tulo';

@@ -52,7 +52,7 @@ try {
             
             if(isset($_POST['nota_tribunal']))
                  {
-                    if($_POST['nota_tribunal']>0 && is_numeric($_POST['nota_tribunal']) && $_POST['nota_tribunal'] <=100)
+               if($_POST['nota_tribunal']>0 && is_numeric($_POST['nota_tribunal']) && $_POST['nota_tribunal'] <=100)
                     {
                     $estudiantes   =  new Estudiante($_POST['estudiante_id']);
                     $proyecto      =  $estudiantes ->getProyecto();
@@ -104,7 +104,7 @@ try {
                       $nota->save();
                       
                     }  else {
-                    //  $nota->nota_proyecto=9;
+                    // $nota->nota_proyecto=9;
                       $nota->nota_defensa    =  $notapromediodefensa;
                       if($notapromediodefensa!=0 && $nota->nota_proyecto!=0)
                        {

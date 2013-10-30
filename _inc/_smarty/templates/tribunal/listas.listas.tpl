@@ -30,7 +30,7 @@
         	<div id="paginator"></div>
         </div>
            <script type="text/javascript">
-                editableGrid.onloadXML("defensa.loaddata.estudiante.lista.php");
+                editableGrid.onloadXML("loaddata.estudiante.lista.php");
         </script>
     </div>
     {$ERROR}

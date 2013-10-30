@@ -11,10 +11,22 @@ class Helpdesk extends Objectbase
   const EST03_APROBA  = "AP";
   
  /**
+  * modulo_id
+  * @var INT(11) 
+  */
+  var $modulo_id;
+  
+ /**
   * codigo
   * @var VARCHAR(100) 
   */
   var $codigo;
+
+ /**
+  * directorio
+  * @var VARCHAR(300) 
+  */
+  var $directorio;
 
  /**
   * descripcion
@@ -46,7 +58,7 @@ class Helpdesk extends Objectbase
    * @param type $id
    * @param type $autogenerar generaa la autoayuda para la pagina actual
    */
-  public function __construct($id = '' , $autogenerar = true) 
+  public function __construct($id = '' ,$modulo_base = '' , $autogenerar = false) 
   {
     if ('' == $id && $autogenerar)
     {
@@ -57,10 +69,14 @@ class Helpdesk extends Objectbase
       $this->getByCodigo($this->codigo);
       if (!$this->id)
       {
-        $this->descripcion     = "$script";
-        $this->keywords        = ltrim(str_replace(array('.','/'), ',', str_replace('.php', ',ayuda', $script)),',');
-        $this->estado_helpdesk = Helpdesk::EST01_RECIEN;
+        leerClase('Modulo');
+        $modulo                = new Modulo('', $modulo_base);
         $this->estado          = Objectbase::STATUS_AC;
+        $this->keywords        = ltrim(str_replace(array('.','/'), ',', str_replace('.php', ',ayuda', $script)),',');
+        $this->modulo_id       = $modulo->id;
+        $this->directorio      = "$script";
+        $this->descripcion     = "$script";
+        $this->estado_helpdesk = Helpdesk::EST01_RECIEN;
         $this->save ();
       }
     }
@@ -107,10 +123,8 @@ class Helpdesk extends Objectbase
               return false;
             });
             $('a.ayudapopup').click(function(){
-              //screen.height;
               var x = screen.width - 510;
               window.open($(this).attr('href'), '_blank', 'location=no,width=500,height=600,left='+x+'top=0');
-              //console.log(  );
               return false;
             });
         });
@@ -267,11 +281,16 @@ ____TEST;
 
     if (isset($_GET['order']))
       $filtro->order($_GET['order']);
+    $filtro->nombres[] = 'Estado';
+    /** Constante para indicar el estado de la ayuda  */
+    $filtro->valores[] = array ('select','estado_helpdesk'  ,$filtro->filtro('estado_helpdesk'),
+        array(''      ,'RC'         ,'ED'           ,'AP'        ),
+        array('Todos' ,'Pendiente'  ,'Ya Editado'   ,'Aprobado' ));
     $filtro->nombres[] = 'Codigo';
     $filtro->valores[] = array('input', 'codigo', $filtro->filtro('codigo'));
     $filtro->nombres[] = 'Descripci&oacute;n';
     $filtro->valores[] = array('input', 'descripcion', $filtro->filtro('descripcion'));
-    $filtro->nombres[] = 'Palabras Clave';
+    $filtro->nombres[] = 'Claves';
     $filtro->valores[] = array('input', 'keywords', $filtro->filtro('keywords'));
   }
 
