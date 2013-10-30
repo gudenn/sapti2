@@ -15,7 +15,10 @@ try {
   $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_CSS . "spams.css";
   $CSS[]  = URL_JS  . "validate/validationEngine.jquery.css";
-  $CSS[]  = '../js/box/box.css';;
+  
+   $CSS[]  = URL_JS . "box/box.css";
+   $JS[]  = URL_JS ."box/jquery.box.js";
+  
   $smarty->assign('CSS',$CSS);
   
   $JS[]  = URL_JS . "jquery.min.js";
@@ -26,7 +29,6 @@ try {
   //CK Editor
   $JS[]  = URL_JS . "ckeditor/ckeditor.js";
   //BOX
-  $JS[]  = '../js/box/jquery.box.js';
   
   $smarty->assign('JS',$JS);
 

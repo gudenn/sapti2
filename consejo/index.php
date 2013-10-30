@@ -1,13 +1,12 @@
 <?php
 try {
  define ("MODULO", "CONSEJO");
-  
-  
+   
     require('_start.php');
     if(!isConsejoSession())
     header("Location: login.php"); 
      $smarty->assign('title','Proyecto Final');
-     $smarty->assign('description','Proyecto Final');
+     $smarty->assign('description','Proyecto Final Consejo');
      $smarty->assign('keywords','Proyecto Final');
 
   //CSS
@@ -47,34 +46,13 @@ try {
    */
   //----------------------------------//
 
-  $menu = new Menu('Asignaci&oacute;n de Tribunales');
-  $link = Consejo::URL."registro.php";
-  $menu->agregarItem('Asignac&oacute;n  De Tribunales','Se Asigna  Tribunales a Un Estudiante','tribunal.png',$link);
-  $menus[] = $menu;
   
-  $menu = new Menu('Asignaci&oacute;n De Fechas  De Defensa');
-  $link = Consejo::URL."listadefensa.php";
-  $menu->agregarItem('Gesti&oacute;n de Asignac&oacute;n de Fechas de Defensa','Registro de Fechas de Defensa','defensa.png',$link);
-   $menus[] = $menu;
- 
-  $menu = new Menu('Tribunales no Aceptados');
-  $link = Consejo::URL."tribunales.rechazados.php";
-  $menu->agregarItem('Gesti&oacute;n de Asignac&oacute;n','Registro y modificaci&oacute;n de Tribunales','denegar.png',$link);
-   $menus[] = $menu;
-  
-   $notificacion= new Notificacion();
-    echo sizeof($notificacion->getNotificacionConsejo(2));
-    
-     
-     $menu = new Menu('Reportes');
-     $link = Consejo::URL."reporte.php";
-     $menu->agregarItem('Reportes','','basicset/graph.png',$link);
-     $menus[] = $menu;
+    $menu= new Menu('');
+    $menuse = $menu->getConsejoIndex();
+   $smarty->assign("menus", $menuse);
   
   
   
- $smarty->assign("menus", $menus);
-
   $smarty->assign('JS',$JS);
   $smarty->assign("ERROR", $ERROR);
   

@@ -241,6 +241,45 @@ class Menu
     return $thises;
   }
   
+    /**
+   * Menu principal del Consejo de carrera
+   * @param Docente $docente
+   * @return Menu
+   */
+  function getConsejoIndex() {
+      leerClase('Consejo');
+      leerClase('Notificacion');
+         $menus = array();
+ 
+  $menu = new Menu('Asignaci&oacute;n de Tribunales');
+  $link = Consejo::URL."registro.php";
+  $menu->agregarItem('Asignac&oacute;n  De Tribunales','Se Asigna  Tribunales a Un Estudiante','tribunal.png',$link);
+  $menus[] = $menu;
+  
+  $menu = new Menu('Asignaci&oacute;n De Fechas  De Defensa');
+  $link = Consejo::URL."listadefensa.php";
+  $menu->agregarItem('Gesti&oacute;n de Asignac&oacute;n de Fechas de Defensa','Registro de Fechas de Defensa','defensa.png',$link);
+   $menus[] = $menu;
+ 
+  $menu = new Menu('Tribunales no Aceptados');
+  $link = Consejo::URL."tribunales.rechazados.php";
+  $menu->agregarItem('Gesti&oacute;n de Asignac&oacute;n','Registro y modificaci&oacute;n de Tribunales','denegar.png',$link);
+   $menus[] = $menu;
+  
+   $notificacion= new Notificacion();
+    //echo sizeof($notificacion->getNotificacionConsejo(2));
+    
+     
+     $menu = new Menu('Reportes');
+     $link = Consejo::URL."reporte.php";
+     $menu->agregarItem('Reportes','','basicset/graph.png',$link);
+     $menus[] = $menu;
+  
+  
+       return $menus;
+  }
+  
+  
   /**
    * Menu principal del Docente
    * @param Docente $docente
@@ -313,7 +352,7 @@ ORDER BY ma.id";
   
   $thise = new Menu('Agregar Areas');
   $link = Docente::URL."configuracion/configuracion.php";
-  $thise->agregarItem('Configuracion','Agregar Areas De Disponibilidad','basicset/add.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+  $thise->agregarItem('Configuraci&oacute;n','Agregar Areas en la que desea Apoyar c&oacute;mo Tribunal','basicset/add.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
   $thises[] = $thise;
    
    // Notificaciones 

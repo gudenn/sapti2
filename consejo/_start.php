@@ -27,5 +27,6 @@
   $smarty->debugging      = false;
   $smarty->caching        = false;
   $smarty->cache_lifetime = 120;
-
+  
+  require('menu.left.php');
 ?>
