@@ -17,7 +17,7 @@
 
 	$resultado =mysql_query($consulta); 
 	
-		date_default_timezone_set('America/Mexico_City');
+		date_default_timezone_set('America/La_Paz');
 
 		if (PHP_SAPI == 'cli')
 			die('Este archivo solo se puede ver desde un navegador web');

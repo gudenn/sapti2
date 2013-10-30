@@ -53,19 +53,19 @@ ORDER BY ma.nombre, cg.nombre
   $smarty->assign("materia_output", $materia_output);
   $smarty->assign("materia_selected", "");
   
-       $sql2 = "SELECT *
-                FROM semestre";
-   $resultsem = mysql_query($sql2);
-   
-   $semestre_values[] = '';
-   $semestre_output[] = '- Seleccione -';
-  while ($row2 = mysql_fetch_array($resultsem, MYSQL_ASSOC)) {
-       $semestre_values[] = $row2['id'];
-       $semestre_output[] = $row2['codigo'];
- }
-  $smarty->assign("semestre_values", $semestre_values);
-  $smarty->assign("semestre_output", $semestre_output);
-  $smarty->assign("semestre_selected", "");
+   $tiporeporte_values[] = '';
+   $tiporeporte_output[] = '- Seleccione -';
+  
+       $tiporeporte_values[] = 0;
+       $tiporeporte_values[] = 1;
+       $tiporeporte_values[] = 2;
+       $tiporeporte_output[] = 'Lista de Estudiantes Inscritos';
+       $tiporeporte_output[] = 'Lista de Estudiantes Evaluados';
+       $tiporeporte_output[] = 'Lista de Estudiantes Aprobados';
+ 
+  $smarty->assign("tiporeporte_values", $tiporeporte_values);
+  $smarty->assign("tiporeporte_output", $tiporeporte_output);
+  $smarty->assign("tiporeporte_selected", "");
 
   $evaluacion_values[] = '';
   $evaluacion_output[] = '- Seleccione -';
