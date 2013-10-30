@@ -5,11 +5,6 @@ try {
   if(!isDocenteSession())
     header("Location: login.php");  
 
-  /** HEADER */
-  $smarty->assign('title','Proyecto Final');
-  $smarty->assign('description','Proyecto Final');
-  $smarty->assign('keywords','Proyecto Final');
-
   //CSS
   $CSS[]  = URL_CSS . "academic/3_column.css";
     $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
@@ -33,13 +28,20 @@ try {
   leerClase('Notificacion');
   leerClase('Dicta');
 
-  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
+  $docente     = getSessionDocente();
+  $usuario     = $docente->getUsuario();
+
+  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) && $docente->getDictaverifica($_GET['iddicta']))
   {
      $iddicta                = $_GET['iddicta'];
   }  else {
         header("Location: ../index.php");
   }
   $dicta=new Dicta($iddicta);
+    /** HEADER */
+  $smarty->assign('title',$dicta->getNombreMateria());
+  $smarty->assign('description',$dicta->getNombreMateria());
+  $smarty->assign('keywords','Proyecto Final');
   
   /**
    * Menu superior
@@ -47,9 +49,6 @@ try {
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
   $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php?iddicta='.$iddicta,'name'=>$dicta->getNombreMateria());
   $smarty->assign("menuList", $menuList);
-  
-  $docente     = getSessionDocente();
-  $usuario     = $docente->getUsuario();
   
   $smarty->assign("docente", $docente);
   $smarty->assign("usuario", $usuario);

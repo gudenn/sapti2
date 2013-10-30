@@ -1,9 +1,9 @@
 <?php
 try {
-  require('../../_start.php');
- define ("MODULO", "ADMIN-REPORTE");
+  require('../_start.php');
   if(!isAdminSession())
-    header("Location: ../../login.php");  
+    header("Location: ../login.php");  
+
   /** HEADER */
   $smarty->assign('title','Reportes');
   $smarty->assign('description','Reportes');
@@ -13,8 +13,8 @@ try {
    */
   
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'docente/','name'=>'Docente');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'reporte/docente'.basename(__FILE__),'name'=>'Reportes');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'proyecto/reporte','name'=>'Reportes');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'reportes/'.basename(__FILE__),'name'=>'Reportes Proyectos Tribunal');
   $smarty->assign("menuList", $menuList);
   //CSS
   $CSS[]  = "css/style.css";
@@ -28,7 +28,7 @@ try {
    $smarty->assign('JS','');
    
    $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
-   $smarty->assign('lista'       ,'admin/reportes/lista.docente.tpl');
+   $smarty->assign('lista'       ,'admin/reportes/lista.proyecto.tpl');
    
    function array_envia($url_array) 
            {
@@ -57,21 +57,20 @@ try {
    $smarty->assign("semestre", $semestre);
    $confirmado=  Proyecto::EST6_C;
   
-   $sqlr='select u.nombre as NOMBRE ,CONCAT(u.apellido_paterno," ",u.apellido_materno) as APELLIDO ,m.nombre as MATERIA,COUNT(materia_id) as INSCRITOS
-   from usuario u, docente d ,dicta di,materia m ,inscrito i ,evaluacion ev ,semestre s
-   where u.id=d.usuario_id and di.docente_id=d.id and di.materia_id=m.id and i.dicta_id=di.id and ev.id=i.evaluacion_id and s.id=i.semestre_id and s.id="'.$p.'"
-   GROUP BY ev.rfinal,m.nombre';
+   $sqlr='SELECT u.nombre AS NOMBRE,CONCAT(apellido_paterno,apellido_materno) as APELLIDO,p.nombre as PROYECTO,p.estado_proyecto as ESTADO,s.codigo AS GESTION
+    FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe
+    WHERE u.id=e.usuario_id AND e.id=i.estudiante_id and p.tipo_proyecto="PR" and p.estado_proyecto="TA" AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado="AC" and s.id="'.$p.'"';
    $resultado = mysql_query($sqlr);
-   $docentes= array();
+   $arraytribunal= array();
   
    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
    {
  
-      $docentes[]=$fila;
+      $arraytribunal[]=$fila;
    }
-   //$sql=
  
-   $smarty->assign('listadocentes'  , $docentes);
+ 
+   $smarty->assign('listaproyectos'  , $arraytribunal);
    $smarty->assign('sqlr'  , array_envia($sqlr));
  
  

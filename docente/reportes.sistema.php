@@ -10,9 +10,9 @@ try {
   leerClase('Docente');
   
   /** HEADER */
-  $smarty->assign('title','Lista de Estudiantes');
-  $smarty->assign('description','Pagina de Lista de Incritos');
-  $smarty->assign('keywords','Gestion,Estudiantes');
+  $smarty->assign('title','Reportes del Sistema');
+  $smarty->assign('description','Generar Reportes de las Asignaturas del Sistema');
+  $smarty->assign('keywords','Gestion,Reportes,Sistema');
 
   //CSS
   $CSS[]  = URL_CSS . "academic/tables.css";

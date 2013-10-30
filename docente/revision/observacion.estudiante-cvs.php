@@ -9,9 +9,9 @@ try {
   leerClase('Observacion');
   
   /** HEADER */
-  $smarty->assign('title','SAPTI - Inscripcion de Estudiantes');
-  $smarty->assign('description','Formulario de Inscripcion de Estudiantes');
-  $smarty->assign('keywords','SAPTI,Estudiantes,Inscripcion');
+  $smarty->assign('title','Registro de Observaciones');
+  $smarty->assign('description','Formulario de Registro de Observaciones');
+  $smarty->assign('keywords','SAPTI,Estudiantes,Inscripcion,Observaciones');
 
   //CSS
   $CSS[]  = URL_CSS . "academic/3_column.css";
@@ -26,7 +26,8 @@ try {
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
   $smarty->assign('JS',$JS);
     leerClase('Dicta');
-  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
+    $docenteid     = getSessionDocente();
+  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) && $docenteid->getDictaverifica($_GET['iddicta']))
   {
      $iddicta                = $_GET['iddicta'];
   }  else {
@@ -41,8 +42,6 @@ try {
   $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/estudiante.lista.php?iddicta='.$iddicta,'name'=>'Estudiantes Inscritos');
   $menuList[]     = array('url'=>URL.Docente::URL.'revision/observacion.estudiante-cvs.php?iddicta='.$iddicta,'name'=>'Revision de Estudiantes por CSV');
   $smarty->assign("menuList", $menuList);
-  
-  $docenteid=getSessionDocente();
 
     function estainscrito($sis) {
       $cond=0;

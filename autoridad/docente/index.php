@@ -45,7 +45,7 @@ try {
   $link = Administrador::URL."docente/docente.registro.php";
   $menu->agregarItem('Registro de Docente','Registro de un nuevo Docente','basicset/user4.png',$link);
   $link = Administrador::URL."docente/configuracion.dicta.php";
-  $menu->agregarItem('Asignacion de Materias','Asignacion de Materias a los Docentes','basicset/survey.png',$link);  
+  $menu->agregarItem('Asignación de Materias','Asignación de Materias a los Docentes','basicset/survey.png',$link);  
   $menus[] = $menu;
   $menu = new Menu('Reportes');
   $link = Administrador::URL."docente/reporte";

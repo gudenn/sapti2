@@ -18,6 +18,7 @@ try {
   $smarty->assign("menuList", $menuList);
 
   //CSS
+  $smarty->assign('header_ui','1');
   $CSS[]  = URL_CSS . "academic/3_column.css";
   /////css del calendario
   
@@ -101,6 +102,7 @@ try {
 
 
     $EXITO = false;
+    $stado=0;
     mysql_query("BEGIN");
     $usuario->objBuidFromPost();
     $usuario->estado           = Objectbase::STATUS_AC;
@@ -131,6 +133,7 @@ try {
     }
             
     $EXITO = TRUE;
+    $stado=1;
     mysql_query("COMMIT");
   }
 
@@ -145,18 +148,26 @@ try {
 
   $smarty->assign("usuario", $usuario);
   //No hay ERROR
-  $ERROR = '';
+  $ERROR = ''; 
   leerClase('Html');
-  $html = new Html();
-  if (isset($EXITO)) {
-    $html = new Html();
-    if ($EXITO)
-      $mensaje = array('mensaje' => 'Se grabo correctamente el Docente', 'titulo' => 'Registro de Docente', 'icono' => 'tick_48.png');
-    else
-      $mensaje = array('mensaje' => 'Hubo un problema, No se grabo correctamente el docente', 'titulo' => 'Registro de Docente', 'icono' => 'warning_48.png');
-    $ERROR = $html->getMessageBox($mensaje);
+  $html  = new Html();
+  //$moderador=0;
+  if(isset($stado))
+  {
+  if($stado==1){
+       $_SESSION['estado']=$stado;
+          header("Location: docente.gestion.php");
+          
+
+  }  else {
+          $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Docente','titulo'=>'Registro de Docente' ,'icono'=> 'warning_48.png');
+          $ERROR = $html->getMessageBox ($mensaje);
   }
-  $smarty->assign("ERROR", $ERROR);
+  }
+     
+  
+  $smarty->assign("ERROR",$ERROR);
+
 } catch (Exception $e) {
   $smarty->assign("ERROR", handleError($e));
 }

@@ -38,7 +38,8 @@ try {
   $JS[]  = URL_JS . "ui/i18n/jquery.ui.datepicker-es.js";
   $smarty->assign('JS',$JS);
   $smarty->assign('CSS',$CSS);
-  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
+  $docente     = getSessionDocente();
+  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) && $docente->getDictaverifica($_GET['iddicta']))
   {
      $iddicta                = $_GET['iddicta'];
   }  else {

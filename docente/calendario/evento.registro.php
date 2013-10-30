@@ -10,9 +10,9 @@ try {
   leerClase('Dicta');
   
   /** HEADER */
-  $smarty->assign('title','Proyecto Final');
-  $smarty->assign('description','Proyecto Final');
-  $smarty->assign('keywords','Proyecto Final');
+  $smarty->assign('title','Registro de Eventos');
+  $smarty->assign('description','Formulario de Registro de Eventos del Sistema');
+  $smarty->assign('keywords','Eventos,Registro,Sistema');
 
   //CSS
   $CSS[]  = URL_JS . "calendar/css/eventCalendar.css";
@@ -34,7 +34,8 @@ try {
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
   $smarty->assign('JS',$JS);
-  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
+    $docente     = getSessionDocente();
+  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) && $docente->getDictaverifica($_GET['iddicta']))
   {
      $iddicta                = $_GET['iddicta'];
   }  else {

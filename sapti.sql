@@ -197,6 +197,9 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`tribunal` (
   `fecha_asignacion` DATE NULL ,
   `fecha_aceptacion` DATE NULL ,
   `semestre` VARCHAR(45) NULL ,
+  `visto_bueno` VARCHAR(2) NULL ,
+  `fecha_vistobueno` DATE NULL ,
+  `nota_tribunal` INT NULL ,
   `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
@@ -580,7 +583,9 @@ DROP TABLE IF EXISTS `sapti`.`helpdesk` ;
 
 CREATE  TABLE IF NOT EXISTS `sapti`.`helpdesk` (
   `id` INT NOT NULL AUTO_INCREMENT ,
+  `modulo_id` INT NULL ,
   `codigo` VARCHAR(100) NULL ,
+  `directorio` VARCHAR(300) NULL ,
   `descripcion` VARCHAR(500) NULL ,
   `keywords` VARCHAR(500) NULL ,
   `estado_helpdesk` VARCHAR(2) NULL COMMENT 'Recien creado RC , Editado ED, Aprobado AP' ,
@@ -959,21 +964,6 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`nota` (
   `nota_defensa` VARCHAR(45) NULL COMMENT 'nota del defensa del proyecto' ,
   `nota_final` TINYINT(1) NULL COMMENT 'nota final del proyecto' ,
   `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `sapti`.`nota_tribunal`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `sapti`.`nota_tribunal` ;
-
-CREATE  TABLE IF NOT EXISTS `sapti`.`nota_tribunal` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `nota_tribunal` INT NULL COMMENT 'nota del proyecto final' ,
-  `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
-  `proyecto_id` INT NOT NULL ,
-  `tribunal_id` INT NOT NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 

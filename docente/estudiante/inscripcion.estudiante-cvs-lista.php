@@ -7,7 +7,7 @@ try {
 
   /** HEADER */
   $smarty->assign('title','SAPTI - Inscripcion de Estudiantes');
-  $smarty->assign('description','Formulario de Inscripcion de Estudiantes');
+  $smarty->assign('description','Inscripcion de Estudiantes');
   $smarty->assign('keywords','SAPTI,Estudiantes,Inscripcion');
 
   //CSS
@@ -25,8 +25,8 @@ try {
   $smarty->assign("ERROR", '');
   leerClase('Docente');
   leerClase('Dicta');
-  
-  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
+  $docente     = getSessionDocente();
+  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) && $docente->getDictaverifica($_GET['iddicta']))
   {
      $iddicta                = $_GET['iddicta'];
   }  else {

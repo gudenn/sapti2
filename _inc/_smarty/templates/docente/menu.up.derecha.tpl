@@ -9,5 +9,4 @@
           <li class="last"><a>Usuario: {$UsuarioSesion}</a></li>
       </ul>
       {/if}
-      
     </div>

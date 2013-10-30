@@ -55,12 +55,14 @@ if (isset($_GET['lugar_id']) && is_numeric($_GET['lugar_id']))
   {
       
    $EXITO = false;
+   $stado=0;
     mysql_query("BEGIN");
     $lugar->objBuidFromPost();
     $lugar->estado = Objectbase::STATUS_AC;
    // $lugar->validar();
     $lugar->save();
     $EXITO = TRUE;
+    $stado=1;
     mysql_query("COMMIT");
   }
   
@@ -70,16 +72,23 @@ if (isset($_GET['lugar_id']) && is_numeric($_GET['lugar_id']))
   $ERROR = ''; 
   leerClase('Html');
   $html  = new Html();
-  if (isset($EXITO))
+  //$moderador=0;
+  if(isset($stado))
   {
-    $html = new Html();
-    if ($EXITO)
-      $mensaje = array('mensaje'=>'Se grabo correctamente el Lugar','titulo'=>'Registro el Lugar' ,'icono'=> 'tick_48.png');
-    else
-      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Lugar','titulo'=>'Registro de Lugar' ,'icono'=> 'warning_48.png');
-   $ERROR = $html->getMessageBox ($mensaje);
+  if($stado==1){
+       $_SESSION['estado']=$stado;
+          header("Location: lugar.gestion.php");
+          
+
+  }  else {
+          $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Lugar','titulo'=>'Registro de Lugar' ,'icono'=> 'warning_48.png');
+          $ERROR = $html->getMessageBox ($mensaje);
   }
+  }
+     
+  
   $smarty->assign("ERROR",$ERROR);
+
   
 } 
 catch(Exception $e) 

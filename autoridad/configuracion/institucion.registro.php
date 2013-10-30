@@ -55,30 +55,38 @@ if (isset($_GET['institucion_id']) && is_numeric($_GET['institucion_id']))
   {
       
    $EXITO = false;
+   $stado=0;
     mysql_query("BEGIN");
     $institucion->objBuidFromPost();
     $institucion->estado = Objectbase::STATUS_AC;
     $institucion->validar();
     $institucion->save();
     $EXITO = TRUE;
+    $stado=1;
     mysql_query("COMMIT");
   }
   
   $smarty->assign("institucion",$institucion);
 
-  //No hay ERROR
+ //No hay ERROR
   $ERROR = ''; 
   leerClase('Html');
   $html  = new Html();
-  if (isset($EXITO))
+  //$moderador=0;
+  if(isset($stado))
   {
-    $html = new Html();
-    if ($EXITO)
-      $mensaje = array('mensaje'=>'Se grabo correctamente la Intitucion','titulo'=>'Registro de Institucion' ,'icono'=> 'tick_48.png');
-    else
-      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente la Institucion','titulo'=>'Registro de Institucion' ,'icono'=> 'warning_48.png');
-   $ERROR = $html->getMessageBox ($mensaje);
+  if($stado==1){
+       $_SESSION['estado']=$stado;
+          header("Location: institucion.gestion.php");
+          
+
+  }  else {
+          $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente la Institucion','titulo'=>'Registro de Institucion' ,'icono'=> 'warning_48.png');
+          $ERROR = $html->getMessageBox ($mensaje);
   }
+  }
+     
+  
   $smarty->assign("ERROR",$ERROR);
   
 } 

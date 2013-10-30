@@ -10,9 +10,9 @@ try {
   $ERROR = '';
   
   /** HEADER */
-  $smarty->assign('title','SAPTI - Inscripcion de Estudiantes');
-  $smarty->assign('description','Formulario de Inscripcion de Estudiantes');
-  $smarty->assign('keywords','SAPTI,Estudiantes,Inscripcion');
+  $smarty->assign('title','Calendario de Eventos');
+  $smarty->assign('description','Calendario de Eventos del Sistema');
+  $smarty->assign('keywords','SAPTI,Eventos,Sistema,Gestion');
 
   //CSS
   $CSS[]  = URL_CSS . "academic/3_column.css";
@@ -27,7 +27,8 @@ try {
   $smarty->assign('JS',$JS);
   $smarty->assign('CSS',$CSS);
   $smarty->assign("ERROR", $ERROR);
-  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
+  $docente     = getSessionDocente();
+  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) && $docente->getDictaverifica($_GET['iddicta']))
   {
      $iddicta                = $_GET['iddicta'];
   }  else {

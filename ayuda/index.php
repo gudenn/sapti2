@@ -20,7 +20,7 @@ try {
   
           
   //obtenemos el grupo del usuario actual
-  //TODO permisos
+  // Si 
   if(isUserSession())
   {
     leerClase('Usuario');
@@ -29,8 +29,7 @@ try {
     $tieneAccesoHelpdesk = false;
     foreach ($grupos as $grupo) 
     {
-      $permiso = $grupo->tieneAccesoHelpdesk($helpdesk->id);
-      
+      $permiso = $grupo->tieneAccesoHelpdesk($helpdesk->modulo_id);
       if ($permiso->ver)
       {
         $tieneAccesoHelpdesk = true;

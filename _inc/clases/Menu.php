@@ -103,9 +103,9 @@ class Menu
       $link = Administrador::URL."proyecto/";
       $thise->agregarItem('Reportes de Proyectos Finales','Reportes correspondientes a los Proyectos','basicset/graph.png',$link);
       $thises[] = $thise;
-      $thise = new Menu('Helpdesk SAPTI');
+      $thise = new Menu('Servicio de Ayuda');
       $link = Administrador::URL."helpdesk/";
-      $thise->agregarItem('Configurar Helpdesk','Gesti&oacute;n de Helpdesk para el sistema SAPTI.','basicset/helpdesk_48.png',$link,0,4);
+      $thise->agregarItem('Configurar Temas de Ayuda','Gesti&oacute;n de temas de ayuda para el sistema.','basicset/helpdesk_48.png',$link,0,4);
       $thises[] = $thise;
       $thise = new Menu('Sistema SAPTI');
       $link = Administrador::URL."configuracion/";
@@ -227,7 +227,7 @@ class Menu
     $link = Estudiante::URL."proyecto-final/avance.gestion.php";
     $thise->agregarItem('Archivo de Avances','Compendio de todos los avances presentados','basicset/cabinet.png',$link,'',$avance->contar( " proyecto_id = '{$proyecto->id}'  " ));
     $thises[] = $thise;
-    $thise = new Menu('Correciones');
+    $thise = new Menu('Correcciones');
     $revision = new Revision();
     $pendiente = Revision::E1_CREADO;
     $pendiente = $revision->contar( " proyecto_id = '{$proyecto->id}' AND estado_revision = '{$pendiente}'  " );
@@ -235,7 +235,7 @@ class Menu
     $thise->agregarItem('Correcciones Pendientes','Todas las correcciones pendientes presentadas por Tutor(es), Docente(s) y Tribunales','basicset/document_pencil.png',$link,$pendiente);
     $pendiente = $revision->contar( " proyecto_id = '{$proyecto->id}' " );
     $link = Estudiante::URL."proyecto-final/revision.gestion.php?estado_revision=";
-    $thise->agregarItem('Archivo de Correciones','Compendio de todas las correciones presentadas','basicset/cabinet.png',$link,'',$pendiente);
+    $thise->agregarItem('Archivo de Correcciones','Compendio de todas las correcciones presentadas','basicset/cabinet.png',$link,'',$pendiente);
 
     $thises[] = $thise;
     return $thises;

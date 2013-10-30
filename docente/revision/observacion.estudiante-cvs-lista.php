@@ -6,8 +6,8 @@ try {
     header("Location: ../login.php");  
 
   /** HEADER */
-  $smarty->assign('title','SAPTI - Inscripcion de Estudiantes');
-  $smarty->assign('description','Formulario de Inscripcion de Estudiantes');
+  $smarty->assign('title','Registro de Observaciones');
+  $smarty->assign('description','Observaciones Registradas en el Sistema');
   $smarty->assign('keywords','SAPTI,Estudiantes,Inscripcion');
 
   //CSS
@@ -24,7 +24,8 @@ try {
   $smarty->assign('JS',$JS);
   $smarty->assign("ERROR", '');
       leerClase('Dicta');
-  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
+      $docente     = getSessionDocente();
+  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) && $docente->getDictaverifica($_GET['iddicta']))
   {
      $iddicta                = $_GET['iddicta'];
   }  else {

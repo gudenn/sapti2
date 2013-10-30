@@ -7,9 +7,9 @@ try {
 
 
   /** HEADER */
-  $smarty->assign('title','Proyecto Final - Detalle de Avance ');
-  $smarty->assign('description','Detalle de avance en Proyecto Final');
-  $smarty->assign('keywords','Proyecto Final,detalle,avance');
+  $smarty->assign('title','Detalle de Avance');
+  $smarty->assign('description','Detalle de avance del Proyecto');
+  $smarty->assign('keywords','Proyecto Final,detalle,avance,perfil');
 
   //CSS
   $CSS[]  = URL_JS . "ui/overcast/jquery-ui.css";
@@ -52,7 +52,8 @@ try {
   leerClase('Observacion');
   leerClase('Docente');
   leerClase('Dicta');
-  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
+  $docente     = getSessionDocente();
+  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) && $docente->getDictaverifica($_GET['iddicta']))
   {
      $iddicta                = $_GET['iddicta'];
   }  else {
@@ -101,8 +102,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
       $revision1=new Revision($avance->revision_id);
   }
     $observacion1=new Observacion();
-  
-    $docente = getSessionDocente();
+
     if (isset($_POST['observaciones'])) 
     $observaciones=$_POST['observaciones'];
     $revision->fecha_revision=date("d/m/Y");
@@ -112,7 +112,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
     {
     $observacion = new Observacion();
     $revision = new Revision();
-    $revision->crearRevisionDocente($docente->usuario_id, $proyecto->id);
+    $revision->crearRevisionDocente($docente->usuario_id, $proyecto->id, $dicta->getTipoMateria());
     $revision->objBuidFromPost();
     $revision->save();
     
@@ -138,7 +138,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
            $desaprobados=$revision1->listaDesaprobados();
            if(count($desaprobados)>0){
            $revisionnuevo = new Revision();
-           $revisionnuevo->crearRevisionDocente($docente->usuario_id, $proyecto->id);
+           $revisionnuevo->crearRevisionDocente($docente->usuario_id, $proyecto->id, $dicta->getTipoMateria());
            $revisionnuevo->save();
            foreach ($desaprobados as $des) {
                $obsermodes=new Observacion($des);
@@ -165,7 +165,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
            $desaprobados=$revision1->listaObservaciones();
            if(count($desaprobados)>0){
            $revisionnuevo = new Revision();
-           $revisionnuevo->crearRevisionDocente($docente->usuario_id, $proyecto->id);
+           $revisionnuevo->crearRevisionDocente($docente->usuario_id, $proyecto->id, $dicta->getTipoMateria());
            $revisionnuevo->save();
            foreach ($desaprobados as $des) {
                $obsermodes=new Observacion($des);

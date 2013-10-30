@@ -12,9 +12,9 @@ try {
   $ERROR = '';
 
   /** HEADER */
-  $smarty->assign('title','Gestion de Observaciones');
-  $smarty->assign('description','Pagina de gestion de Observaciones');
-  $smarty->assign('keywords','Gestion,Observaciones');
+  $smarty->assign('title','Gestion de Evaluaciones');
+  $smarty->assign('description','Gestion de Evaluaciones de Estudiantes Inscritos');
+  $smarty->assign('keywords','Gestion,Evaluacion,Estudiantes,Inscritos');
 
   //CSS
   $CSS[]  = URL_CSS . "academic/tables.css";
@@ -29,7 +29,8 @@ try {
   $JS[]  = URL_JS . "ventanasmodales/historial.notas.js";
   $JS[]  = URL_JS . "ventanasmodales/jquery.simplemodal-1.4.4.js";
   $smarty->assign('JS',$JS);
-  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
+  $docente     = getSessionDocente();
+  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) && $docente->getDictaverifica($_GET['iddicta']))
   {
      $iddicta                = $_GET['iddicta'];
   }  else {

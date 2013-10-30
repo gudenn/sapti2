@@ -11,9 +11,9 @@ try {
   leerClase('Dicta');
   
   /** HEADER */
-  $smarty->assign('title','Gestion de Observaciones');
-  $smarty->assign('description','Pagina de gestion de Observaciones');
-  $smarty->assign('keywords','Gestion,Observaciones');
+  $smarty->assign('title','Seguimiento al Proyecto');
+  $smarty->assign('description','Seguimiento del Avemce del Proyecto');
+  $smarty->assign('keywords','Gestion,Observaciones,revision,avance');
 
   $CSS[]  = URL_CSS . "academic/tables.css";
   $CSS[]  = URL_CSS . "editablegrid.css";
@@ -28,7 +28,8 @@ try {
   $JS[]  = URL_JS . "ventanasmodales/avance.detalle.modal.js";
   $JS[]  = URL_JS . "ventanasmodales/jquery.simplemodal-1.4.4.js";
   $smarty->assign('JS',$JS);
-  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) )
+  $docente     = getSessionDocente();
+  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) && $docente->getDictaverifica($_GET['iddicta']))
   {
      $iddicta                = $_GET['iddicta'];
   }  else {
