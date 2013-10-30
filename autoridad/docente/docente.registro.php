@@ -17,33 +17,9 @@ try {
   $menuList[] = array('url' => URL . Administrador::URL . 'docente/' . basename(__FILE__), 'name' => 'Registro de Docente');
   $smarty->assign("menuList", $menuList);
 
-  //CSS
-  $smarty->assign('header_ui','1');
-  $CSS[]  = URL_CSS . "academic/3_column.css";
-  /////css del calendario
-  
-
-  //JS
-  $JS[]  = URL_JS . "jquery.min.js";
-
-  //Datepicker & Tooltips $ Dialogs UI
-  $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
-  $JS[]   = URL_JS . "jquery-ui-1.10.3.custom.min.js";
-  $JS[]   = URL_JS . "ui/i18n/jquery.ui.datepicker-es.js";
-
-  //Validation
-  $CSS[] = URL_JS . "/validate/validationEngine.jquery.css";
-  $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
-  $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
-
-  //BOX
-  $CSS[] = URL_JS . "box/box.css";
-  $JS[]  = URL_JS . "box/jquery.box.js";
-
-  
-  $smarty->assign('CSS',$CSS);
-  $smarty->assign('JS',$JS);
-  $smarty->assign('header_ui','1');
+   $smarty->assign('header_ui','1');
+  $smarty->assign('CSS','');
+  $smarty->assign('JS','');
 
 
   $smarty->assign("ERROR", '');
@@ -62,6 +38,7 @@ try {
   //CREAR UN DOCENTE
   leerClase('Docente');
   leerClase('Usuario');
+  leerClase('Grupo');
 
 
   //Sexo del usuario
@@ -83,19 +60,22 @@ try {
   $smarty->assign("titulo_h_output", $titulo_h_output);
  
  
-
+  $id     = '';
   $editar = FALSE;
-  
-  if (isset($_GET['docente_id']) && is_numeric($_GET['docente_id'])){
-       $editar = TRUE;
-    $id = $_GET['docente_id'];
-    
-    
+  if ( isset($_GET['docente_id']) && is_numeric($_GET['docente_id']) )
+  {
+    $editar = TRUE;
+    $id     = $_GET['docente_id'];
   }
-  $docente = new Docente($id);
-  $docente->usuario_id;
-  $usuario = new Usuario($docente->usuario_id);
 
+  $docente = new Docente($id);
+  $usuario    = new Usuario($docente->usuario_id);
+  
+  if (!$editar)
+    $columnacentro = 'admin/docente/columna.centro.registro-docente.tpl';
+  else
+    $columnacentro = 'admin/docente/columna.centro.docente-registro-editar.tpl';
+  $smarty->assign('columnacentro',$columnacentro);
 
 
   if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token']) {
@@ -111,7 +91,6 @@ try {
     $usuario->validar($es_nuevo);
     $usuario->save();
 
-    leerClase('Grupo');
     $usuario->asignarGrupo(Grupo::GR_DO);
 
     $docente->objBuidFromPost();
@@ -138,11 +117,7 @@ try {
   }
 
 
- if (!$editar)
-    $columnacentro = 'admin/docente/columna.centro.registro-docente.tpl';
-  else
-    $columnacentro = 'admin/docente/columna.centro.docente-registro-editar.tpl';
-  $smarty->assign('columnacentro',$columnacentro);
+ 
 
   $smarty->assign("docente", $docente);
 
@@ -169,7 +144,8 @@ try {
   $smarty->assign("ERROR",$ERROR);
 
 } catch (Exception $e) {
-  $smarty->assign("ERROR", handleError($e));
+ mysql_query("ROLLBACK");
+ $smarty->assign("ERROR", handleError($e));
 }
 
 $token = sha1(URL . time());
