@@ -1,4 +1,4 @@
-<?php
+<?php //
 try {
   define ("MODULO", "DOCENTE");
   require('../_start.php');

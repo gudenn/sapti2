@@ -32,7 +32,21 @@ try {
     $menus[] = $menu;
     $smarty->assign("menus", $menus);
 
-  $smarty->assign('listadefensas'  , "");
+        $sqlr="SELECT  u.nombre, u.apellido_paterno, u.apellido_materno, p.nombre as nombreproyecto, l.nombre as nombrelugar, d.fecha_defensa, d.hora_inicio,d.hora_final
+from   usuario  u, estudiante  e, proyecto_estudiante  pe , proyecto p , defensa  d , lugar l
+where   u.id=e.usuario_id and e.id=pe.estudiante_id  and pe.proyecto_id=p.id
+and p.id=d.proyecto_id and d.tipo_defensa='DPU' and p.estado_proyecto='LD'
+and d.lugar_id= l.id  and d.fecha_defensa <= NOW()
+ORDER  by   d.`fecha_defensa`  DESC;";
+ $resultado = mysql_query($sqlr);
+ $arraydefensa= array();
+
+ while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+   { 
+     $arraydefensa[]= $fila;
+       
+   }
+  $smarty->assign('listadefensas'  ,  $arraydefensa);
   
   
   if (isset($_GET['notienepermiso']))

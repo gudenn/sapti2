@@ -429,3 +429,14 @@ h1{
    border-radius: 10px; 
   
 }
+.defensacontenido
+{
+   border: 1px solid;
+   padding:  5px 50px;
+   width: auto;
+   height: auto;
+   background: snow;
+   border-radius: 10px; 
+  
+  
+}
