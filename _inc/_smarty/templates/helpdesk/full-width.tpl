@@ -2,6 +2,8 @@
 <div class="wrapper row3">
   <div class="rnd">
     <div id="container">
+      directorio de ayuda!!
+      
       <div style="clear: both"></div>
       {if (isset($template) )}
         {include file=$template}

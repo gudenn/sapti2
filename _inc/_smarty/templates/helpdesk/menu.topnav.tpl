@@ -2,7 +2,10 @@
   <div class="rnd">
     <div id="topnav">
       <ul>
-        <li class="active"><a href="{$URL}ayuda/">Ayuda</a></li>
+        <li><a href="{$URL}ayuda/">Ayuda</a></li>
+        {section name=ic loop=$topnav}
+        <li {if $smarty.section.ic.last} class="active" {/if} ><a href="{$URL}ayuda/?codigo={$helpdesk->getLinkByDirectory($topnav[ic])}">{$topnav[ic]}</a></li>
+        {/section}
       </ul>
     </div>
   </div>

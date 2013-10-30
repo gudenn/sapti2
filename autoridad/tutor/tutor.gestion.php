@@ -41,7 +41,7 @@ try {
 
   //BOX
   $CSS[]  = URL_JS . "box/box.css";
-  $JS[]  = URL_JS ."box/jquery.box.js";
+  $JS[]   = URL_JS ."box/jquery.box.js";
   //Datepicker & Tooltips $ Dialogs UI
   $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
   $JS[]   = URL_JS . "jquery-ui-1.10.3.custom.min.js";
@@ -74,6 +74,7 @@ try {
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
   $filtro_mis_tutores = false;
+  $crear_nuevo        = false;
   //Buscamos los tutores de un determinado estudiante
   if ($proyecto->id)
   {
@@ -98,6 +99,7 @@ try {
     }
     if ($total_asignados < $maximo_tutores)
       $smarty->assign("crear_nuevo"  ,"tutor.asignar.php?estudiante_id={$estudiante->id}");
+    $crear_nuevo = true;
     $smarty->assign('cabecera_file'  ,'admin/tutor/estudiante.cabecera.tpl');
     
     $smarty->assign('maximo_tutores'  ,$maximo_tutores);
@@ -134,7 +136,10 @@ try {
   $smarty->assign("filtros"  ,$filtro);
   $smarty->assign("objs"     ,$objs_pg->objs);
   $smarty->assign("pages"    ,$objs_pg->p_pages);
- $smarty->assign("crear_nuevo"  ,"tutor.registro.php");
+  
+  if (!$crear_nuevo)
+    $smarty->assign("crear_nuevo"  ,"tutor.asignar.php");
+  
  $ERROR = ''; 
 if(isset($_SESSION['estado']) && $_SESSION['estado']==1)
 {
