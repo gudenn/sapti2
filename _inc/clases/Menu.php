@@ -308,12 +308,12 @@ ORDER BY ma.id";
   
   $thise = new Menu('Tiempo');
   $link = Docente::URL."configuracion/generar.horario.php";
-  $thise->agregarItem('Disponibilidad','Disponibilidad De Tiempo','basicset/clock.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+  $thise->agregarItem('Disponibilidad','Disponibilidad de Tiempo','basicset/clock.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
   $thises[] = $thise;
   
-  $thise = new Menu('Agregar Areas');
+  $thise = new Menu('Agregar &Aacute;reas');
   $link = Docente::URL."configuracion/configuracion.php";
-  $thise->agregarItem('Configuracion','Agregar Areas De Disponibilidad','basicset/add.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+  $thise->agregarItem('Configuraci&oacute;n','Agregar &Aacute;reas de Disponibilidad','basicset/add.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
   $thises[] = $thise;
    
    // Notificaciones 

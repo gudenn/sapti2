@@ -74,6 +74,40 @@ class Docente extends Objectbase{
     else
       parent::__construct($id);
   }
+   /**
+   * Validamos al usuario ya sea para actualizar o para crear uno nuevo
+   * @param type $es_nuevo
+   */
+  function validar($es_nuevo = true) {
+    leerClase('Formulario');
+    Formulario::validar('codigo_sis', $this->codigo_sis, 'texto', 'El Codigo SIS');
+    if ($es_nuevo) // nuevo
+      $this->getByCodigoSis($this->codigo_sis, true);
+  }
+    /**
+   * Crear un estudiante a partir de su codigo sis o verificar que se puede usar un nuevo estudiante
+   * 
+   * @param string $codigo_sis el codigo_sis
+   * @param type $verSiEstaDisponible para solo verificar si es que se puede usar este email
+   * @return boolean
+   * @throws Exception 
+   */
+  public function getByCodigoSis($codigo_sis, $verSifueTomado = false) {
+    $sql = "select * from " . $this->getTableName() . " where codigo_sis = '$codigo_sis'";
+    $result = mysql_query($sql);
+    if ($result === false)
+      throw new Exception("?" . $this->getTableName() . "&m=Cant getByEmail <br />$sql<br /> " . $this->getTableName() . ' -> ' . mysql_error());
+
+    if ($verSifueTomado) {
+      if (mysql_num_rows($result))
+        throw new Exception("?codigo_sis&m=Este Codigo SIS ya esta en Uso.");
+      return;
+    }
+
+    $docente = mysql_fetch_array($result, MYSQL_BOTH);
+    self::__construct($docente['id']);
+    return true;
+  }
   
   /**
    * Retorna el nombre completo del usuario
