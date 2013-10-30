@@ -17,13 +17,13 @@ try {
   /** HEADER */
   $smarty->assign('title','Gesti&oacute;n de Ayudas Pendientes');
   $smarty->assign('description','Gesti&oacute;n de ventanas de Ayuda para el sistema');
-  $smarty->assign('keywords','Helpdesk,tooltips,Semestre');
+  $smarty->assign('keywords','Temas de Ayuda,tooltips,Semestre');
   leerClase('Administrador');
   /**
    * Menu superior
    */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'helpdesk/','name'=>'Helpdesk SAPTI');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'helpdesk/','name'=>'Temas de Ayuda SAPTI');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'helpdesk/'.basename(__FILE__),'name'=>'Gesti&oacute;n de Temas de Ayuda');
   $smarty->assign("menuList", $menuList);
 

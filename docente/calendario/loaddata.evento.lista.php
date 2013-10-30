@@ -18,7 +18,7 @@ $grid = new EditableGrid();
 
 $grid->addColumn('id', 'ID', 'integer', NULL, false); 
 $grid->addColumn('asunto', 'Titulo', 'string', NULL, false); 
-$grid->addColumn('descripcion', 'Descripcion', 'string', NULL, false);  
+$grid->addColumn('descripcion', 'Descripción', 'string', NULL, false);  
 $grid->addColumn('fecha_evento', 'Fecha', 'string', NULL, false);
 $grid->addColumn('action', 'Opciones', 'html', NULL, false);
 

@@ -91,7 +91,7 @@ EditableGrid.prototype.onloadXML = function(url)
 {
 	// register the function that will be called when the XML has been fully loaded
 	this.tableLoaded = function() { 
-		displayMessage("Numero de Eventos Registrados: " + this.getRowCount()); 
+		displayMessage("Número de Eventos Registrados: " + this.getRowCount()); 
 		this.initializeGrid();
 	};
 

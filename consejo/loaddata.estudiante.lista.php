@@ -1,8 +1,8 @@
 <?php     
 define ("MODULO", "DOCENTE");
-require  '../_start.php';
-include '../../_inc/_configurar.php';      
-require_once('../EditableGrid.php');
+require  '_start.php';
+include '../_inc/_configurar.php';      
+require_once('../docente/EditableGrid.php');
 
 if(isset($_GET['iddicta'])){
 $iddicta=$_GET['iddicta'];
@@ -24,16 +24,9 @@ $grid->addColumn('nombrep', 'Nombre Proyecto', 'string', NULL, false);
 $grid->addColumn('action', 'Opciones', 'html', NULL, false);
 
 $result = $mysqli->query('
-    SELECT es.id as id, es.codigo_sis as codigosis, us.nombre as nombre, CONCAT(us.apellido_paterno," ",us.apellido_materno) as apellidos, pr.nombre as nombrep
-FROM dicta di, estudiante es, usuario us, inscrito it, proyecto pr, proyecto_estudiante pe
-WHERE di.id=it.dicta_id
-AND it.estudiante_id=es.id
-AND es.usuario_id=us.id
-AND pe.estudiante_id=es.id
-AND pe.proyecto_id=pr.id
-AND pr.es_actual=1
-AND di.id="'.$iddicta.'"');
-
+  SELECT DISTINCT (p.id)  as id, es.`codigo_sis` as codigosis, u.nombre ,CONCAT(u.apellido_paterno,u.apellido_materno) as apellidos, p.nombre as nombrep
+  FROM proyecto p , usuario u, estudiante es , proyecto_estudiante pe, tribunal t
+  WHERE  u.id=es.usuario_id and  es.id=pe.estudiante_id and  pe.proyecto_id=p.id and p.id=t.proyecto_id');
 $mysqli->close();
 
 $grid->renderXML($result);

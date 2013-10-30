@@ -27,8 +27,13 @@
         <a href="{$URL}">{icono('SAPTI_241x58.png','SAPTI','241px','58px')}</a>
       </h1>
     </div>
-    <div class="fl_right">
-      {icono('basicset/helpdesk_48.png','Ayuda','48px')}<br>Ayuda SAPTI
+    <div class="fl_right" style="padding-top: 8px;">
+      <form action="#" method="post" id="sitesearch">
+        <fieldset>
+          <input type="text" value="Buscar en Ayuda" onfocus="this.value=(this.value=='Buscar en Ayuda')? '' : this.value ;" style="width: 130px;"  />
+          <input type="image" src="{$URL_IMG}icons/Search.png" id="search" alt="Search" />
+        </fieldset>
+      </form>
     </div>
   </div>
 </div>

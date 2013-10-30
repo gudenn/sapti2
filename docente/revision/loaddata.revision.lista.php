@@ -19,9 +19,9 @@ $grid = new EditableGrid();
 $grid->addColumn('id', 'ID', 'integer', NULL, false); 
 $grid->addColumn('tipo', 'Tipo', 'string', NULL, false);
 $grid->addColumn('revtipo', 'Revisor', 'string', NULL, false);
-$grid->addColumn('fecha', 'Fecha Creacion', 'string', NULL, false);
+$grid->addColumn('fecha', 'Fecha Creación', 'string', NULL, false);
 $grid->addColumn('estado', 'Estado', 'html', NULL, false);
-$grid->addColumn('correccion', 'Fecha Correccion', 'string', NULL, false);
+$grid->addColumn('correccion', 'Fecha Corrección', 'string', NULL, false);
 $grid->addColumn('num', 'Nº Observaciones', 'string', NULL, false);
 $grid->addColumn('action', 'Opciones', 'html', NULL, false);
 

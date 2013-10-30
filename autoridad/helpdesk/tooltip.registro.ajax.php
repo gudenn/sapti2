@@ -11,7 +11,6 @@ try {
   leerClase('Html');
 
   //CREAR 
-  leerClase('Tooltip');
   $smarty->assign('columnacentro','admin/tooltip/registro.tpl');
   
   

@@ -120,17 +120,12 @@ AND di.id=$iddicta
                           if($estudiante_array[3]!=''){
                                 $revision = new Revision();
                                 $observacion = new Observacion();
-                                date_default_timezone_set('UTC');
-                                $revision->fecha_revision=date("d/m/Y");
-                                $revision->objBuidFromPost();
-                                $revision->estado = Objectbase::STATUS_AC;
-                                $revision->revisor=$docenteid;
-                                $revision->proyecto_id=$arrayestudiantes[$i]['idproy'];
+                                date_default_timezone_set('America/La_Paz');
+                                $revision->crearRevisionDocente($docenteid->usuario_id, $arrayestudiantes[$i]['idproy'], $dicta->getTipoMateria());
                                 $revision->save();
+
                                 $observacion->objBuidFromPost();
-                                $observacion->estado = Objectbase::STATUS_AC;
-                                $observacion->observacion=$estudiante_array[3];
-                                $observacion->revision_id = $revision->id;
+                                $observacion->crearObservacion($estudiante_array[3], $revision->id);
                                 $observacion->save();
                                   $inscritos[]=$estudiante_array;
                                   $ins=1;

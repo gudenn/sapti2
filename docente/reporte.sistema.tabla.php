@@ -5,7 +5,7 @@
     header("Location: ../login.php");
 
 $materia=$_POST['materia'];
-$semestre=$_POST['semestre'];
+$tiporeporte=$_POST['tiporeporte'];
 $evaluacion=$_POST['evaluacion'];
 
 $var=0;
@@ -22,7 +22,7 @@ function selectmuestra($mat,$eva){
     if($mat!='')
         $ab.="
             es.codigo_sis as Codigo_Sis, CONCAT(us.nombre,' ',us.apellido_paterno,' ',us.apellido_materno) as Estudiante, pro.nombre as Nombre_Proyecto";
-    if($eva!='')
+    if($eva==1)
         $ab.="
             , eva.promedio as Promedio";
     return $ab;
@@ -32,26 +32,26 @@ function wheremuestra($mat,$sem,$eva){
     if($mat!='')
     $ac.="
         AND di.id=".$mat."";
-    if($sem!='')
-    $ac.="
-        AND ins.semestre_id=".$sem."";
+
     return $ac;
 }
 function consulta($mat,$sem,$eva){
-    $sql="SELECT ".selectmuestra($mat,$eva)."
-  FROM estudiante es, usuario us, materia ma, inscrito ins, dicta di, proyecto pro, proyecto_estudiante proes, evaluacion eva
+    $sql="SELECT ".selectmuestra($mat,$sem)."
+  FROM estudiante es, usuario us, materia ma, inscrito ins, dicta di, proyecto pro, proyecto_estudiante proes, evaluacion eva, semestre se
  WHERE es.usuario_id=us.id
  AND eva.id=ins.evaluacion_id
  AND proes.estudiante_id=es.id
  AND proes.proyecto_id=pro.id
  AND ins.estudiante_id=es.id
  AND ins.dicta_id=di.id
- AND di.materia_id=ma.id
+ AND di.materia_id=ma.id 
+ AND di.semestre_id=se.id
+ AND se.activo=1
 ".wheremuestra($mat,$sem,$eva)."";
     return $sql;
 }
-if ($materia!=''&&$semestre!='') {
-    MysqlFunciones::DesplegarTabla(consulta($materia,$semestre,$evaluacion), $var, $materia);
+if ($materia!=''&&$tiporeporte!='') {
+    MysqlFunciones::DesplegarTabla(consulta($materia,$tiporeporte,$evaluacion), $var, $materia);
 }else{
     echo 'Por favor Seleccione una Opcion para Generar el Reporte...';
 }

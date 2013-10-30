@@ -76,7 +76,7 @@ try {
            };
  function esvacio($val){
      if($val!=null){
-         if($val>0){
+         if($val>0 && $val<=100){
              $res=$val;
          }else{
          $res=0;             

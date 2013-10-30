@@ -21,7 +21,7 @@ if (empty($action)) {
 			<input type='text' id='contact-titulo' class='contact-input' name='titulo' tabindex='1001' value='{$evento1->asunto}'/>
 			<label for='contact-fecha'>Fecha:</label>
 			<input type='text' id='contact-fecha' class='contact-input' name='fecha' tabindex='1002' value='{$evento1->fecha_evento}' />
-                        <label for='contact-descripcion'>Descripcion:</label>
+                        <label for='contact-descripcion'>Descripción:</label>
 			<textarea id='contact-descripcion' class='contact-input' name='descripcion' cols='40' rows='4' tabindex='1003'>{$evento1->descripcion}</textarea>
 			<br/><label>&nbsp;</label>
 			<button type='submit' class='contact-send contact-button' tabindex='1005'>Grabar</button>

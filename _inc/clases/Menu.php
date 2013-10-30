@@ -103,9 +103,9 @@ class Menu
       $link = Administrador::URL."proyecto/";
       $thise->agregarItem('Reportes de Proyectos Finales','Reportes correspondientes a los Proyectos','basicset/graph.png',$link);
       $thises[] = $thise;
-      $thise = new Menu('Helpdesk SAPTI');
+      $thise = new Menu('Servicio de Ayuda');
       $link = Administrador::URL."helpdesk/";
-      $thise->agregarItem('Configurar Helpdesk','Gesti&oacute;n de Helpdesk para el sistema SAPTI.','basicset/helpdesk_48.png',$link,0,4);
+      $thise->agregarItem('Configurar Temas de Ayuda','Gesti&oacute;n de temas de ayuda para el sistema.','basicset/helpdesk_48.png',$link,0,4);
       $thises[] = $thise;
       $thise = new Menu('Sistema SAPTI');
       $link = Administrador::URL."configuracion/";
@@ -227,7 +227,7 @@ class Menu
     $link = Estudiante::URL."proyecto-final/avance.gestion.php";
     $thise->agregarItem('Archivo de Avances','Compendio de todos los avances presentados','basicset/cabinet.png',$link,'',$avance->contar( " proyecto_id = '{$proyecto->id}'  " ));
     $thises[] = $thise;
-    $thise = new Menu('Correciones');
+    $thise = new Menu('Correcciones');
     $revision = new Revision();
     $pendiente = Revision::E1_CREADO;
     $pendiente = $revision->contar( " proyecto_id = '{$proyecto->id}' AND estado_revision = '{$pendiente}'  " );
@@ -235,11 +235,50 @@ class Menu
     $thise->agregarItem('Correcciones Pendientes','Todas las correcciones pendientes presentadas por Tutor(es), Docente(s) y Tribunales','basicset/document_pencil.png',$link,$pendiente);
     $pendiente = $revision->contar( " proyecto_id = '{$proyecto->id}' " );
     $link = Estudiante::URL."proyecto-final/revision.gestion.php?estado_revision=";
-    $thise->agregarItem('Archivo de Correciones','Compendio de todas las correciones presentadas','basicset/cabinet.png',$link,'',$pendiente);
+    $thise->agregarItem('Archivo de Correcciones','Compendio de todas las correcciones presentadas','basicset/cabinet.png',$link,'',$pendiente);
 
     $thises[] = $thise;
     return $thises;
   }
+  
+    /**
+   * Menu principal del Consejo de carrera
+   * @param Docente $docente
+   * @return Menu
+   */
+  function getConsejoIndex() {
+      leerClase('Consejo');
+      leerClase('Notificacion');
+         $menus = array();
+ 
+  $menu = new Menu('Asignaci&oacute;n de Tribunales');
+  $link = Consejo::URL."registro.php";
+  $menu->agregarItem('Asignac&oacute;n  De Tribunales','Se Asigna  Tribunales a Un Estudiante','tribunal.png',$link);
+  $menus[] = $menu;
+  
+  $menu = new Menu('Asignaci&oacute;n De Fechas  De Defensa');
+  $link = Consejo::URL."listadefensa.php";
+  $menu->agregarItem('Gesti&oacute;n de Asignac&oacute;n de Fechas de Defensa','Registro de Fechas de Defensa','defensa.png',$link);
+   $menus[] = $menu;
+ 
+  $menu = new Menu('Tribunales no Aceptados');
+  $link = Consejo::URL."tribunales.rechazados.php";
+  $menu->agregarItem('Gesti&oacute;n de Asignac&oacute;n','Registro y modificaci&oacute;n de Tribunales','denegar.png',$link);
+   $menus[] = $menu;
+  
+   $notificacion= new Notificacion();
+    //echo sizeof($notificacion->getNotificacionConsejo(2));
+    
+     
+     $menu = new Menu('Reportes');
+     $link = Consejo::URL."reporte.php";
+     $menu->agregarItem('Reportes','','basicset/graph.png',$link);
+     $menus[] = $menu;
+  
+  
+       return $menus;
+  }
+  
   
   /**
    * Menu principal del Docente
@@ -314,6 +353,7 @@ ORDER BY ma.id";
   $thise = new Menu('Agregar &Aacute;reas');
   $link = Docente::URL."configuracion/configuracion.php";
   $thise->agregarItem('Configuraci&oacute;n','Agregar &Aacute;reas de Disponibilidad','basicset/add.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+  $thise->agregarItem('Configuraci&oacute;n','Agregar Areas en la que desea Apoyar c&oacute;mo Tribunal','basicset/add.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
   $thises[] = $thise;
    
    // Notificaciones 

@@ -90,14 +90,16 @@ class Grupo extends Objectbase
   
   
   /**
-   * obtiene los permisos por modulo
+   * obtiene los permisos por modulo para los temas de ayuda
+   * si tienes permiso de ver el modulo tienes permiso de ver 
+   * el tema de ayuda, SIMPLE!!
    * @param type $codigo_modulo codigo del modulo
    * @return Permiso
    */
-  function tieneAccesoHelpdesk($helpdesk_id)
+  function tieneAccesoHelpdesk($helpdesk_modulo_id)
   {
     leerClase('Permiso');
-    $permiso = new Permiso('',false,$this->id,$helpdesk_id);
+    $permiso = new Permiso('',false,$this->id,$helpdesk_modulo_id);
     return $permiso;     // solo usaremos los permisos de visita!!
   }
   
