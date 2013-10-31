@@ -337,12 +337,12 @@ ORDER BY ma.id";
   $notificacion = new Notificacion();
   $thise = new Menu('Tutor');
   $link = Docente::URL."tutor/index.php";
-  $thise->agregarItem('Notificaciones','Notificaciones para el Proyecto Final','basicset/tutor.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+  $thise->agregarItem('Tutor','Lista De Estudiante','basicset/tutor.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
   $thises[] = $thise;
   
   $thise = new Menu('Tribunal');
   $link = Docente::URL."tribunal/index.php";
-  $thise->agregarItem('Notificaciones','Notificaciones para el Proyecto Final','basicset/user3.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+  $thise->agregarItem('Tribunal','Lista de Estudiantes','basicset/user3.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
   $thises[] = $thise;
   
   $thise = new Menu('Tiempo');
@@ -353,8 +353,7 @@ ORDER BY ma.id";
   $thise = new Menu('Agregar &Aacute;reas');
   $link = Docente::URL."configuracion/configuracion.php";
   $thise->agregarItem('Configuraci&oacute;n','Agregar &Aacute;reas de Disponibilidad','basicset/add.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
-  $thise->agregarItem('Configuraci&oacute;n','Agregar Areas en la que desea Apoyar c&oacute;mo Tribunal','basicset/add.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
-  $thises[] = $thise;
+   $thises[] = $thise;
    
    // Notificaciones 
   $usuario      = getSessionUser();

@@ -37,7 +37,9 @@ a.tooltip {outline:none;text-decoration:none;border-bottom:dotted 1px blue;}
                    visibility: visible; 
                    overflow: visible;
                     margin-top:20px;
-                     display: inline; margin-left: 12px; }
+                     display: inline; 
+                     margin-left: 12px;
+                     width: auto}
                       a.tooltip span b {
                        width: 15px; 
                       height: 15px; 

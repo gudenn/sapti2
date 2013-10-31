@@ -99,17 +99,14 @@
         
        </a>
 </td>
-<td>     <a  class="tooltip"> DIS
+<td> <a  class="tooltip"> DIS
   <span>
-  <b>
- </b>
-{foreach name=outer item=contact from=$listadocentes[ic][4]}
-  <hr />
-  {foreach key=key item=item from=$contact}
-  {$item}
-  {/foreach}
-{/foreach}
- </span> 
+    <div id="content"  style="width:685px;min-height: 450px;">
+    <div id="verhorario">
+    {$diass->llemartabla($listadocentes[ic][0])}
+    </div>
+</div>
+  </span> 
     </a>
 </td>
      

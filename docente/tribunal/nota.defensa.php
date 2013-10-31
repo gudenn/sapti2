@@ -38,7 +38,7 @@ try {
        $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
        $JS[]  = URL_JS . "jquery.addfield.js";
        $smarty->assign('JS',$JS);
-
+ $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
        $menuList[]     = array('url'=>URL.Docente::URL.'tribunal','name'=>'Tribunal');
        $menuList[]     = array('url'=>URL.Docente::URL.'tribunal/publica.estudiante.lista.php','name'=>'Lista Estudiante');
        $smarty->assign("menuList", $menuList);

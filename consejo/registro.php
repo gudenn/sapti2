@@ -48,6 +48,7 @@ try {
   leerClase("Consejo");
   leerClase("Semestre");
   leerClase("Semestre");
+   leerClase("Dia");
    
   $menuList[]     = array('url'=>URL.Consejo::URL,'name'=>'Consejo');
   $menuList[]     = array('url'=>URL . Consejo::URL ,'name'=>'Asignaci&oacute;n');
@@ -60,7 +61,9 @@ try {
                   [ 'FontSize', 'TextColor', 'BGColor' ]]}";
   
   $smarty->assign("editores", $editores);
-  
+    $diass= new Dia();
+    $smarty->assign("diass", $diass);
+    
   if(isset($_POST['buscar']) && isset($_POST['codigosis']))
   {
      $estudiante   = new Estudiante(false,$_POST['codigosis']);
@@ -143,43 +146,16 @@ ORDER BY  a.valor  DESC;";
         $lista_areas[] =  $fila["nombre"];
         $lista_areas[] =  $fila["apellidos"];
  
- /**
-$sqla="select  d.id , d.nombre
-from dia d, horario_docente hd
-where  d.id=hd.dia_id and  d.estado='AC' and hd.estado='AC' and hd.docente_id=".$fila["id"].";";
- $resultadoa = mysql_query($sqla);
-//if(mysql_fetch_array($resultadoa, MYSQL_ASSOC)){
-  while ($filas = mysql_fetch_array($resultadoa, MYSQL_ASSOC)) 
-  {
-     $listaareas[]=$filas;
-  }
- //}else
-//{
- //  $listaareas[]="NO HAY DATOS";
- //}
-  $lista_areas[]=$listaareas;
-  $listatiempo=array();
-  */
-  /*
-$sqltiempo="select  d.`id` , d.`nombre` , t.`nombre` as nombreturno
-from `dia` d, `horario_doc` hd , `turno` t
-where  d.`id`=hd.`dia_id` and hd.`turno_id`=t.`id` and  d.`estado`='AC' and hd.`estado`='AC'and t.`estado`='AC' and hd.`docente_id`=".$fila["id"].";";
- $resultadotiempo= mysql_query($sqltiempo);
- 
-  while ($filatiempo = mysql_fetch_array($resultadotiempo, MYSQL_ASSOC)) 
-  {
-     $listatiempo[]=$filatiempo;
-  }
-  //$lista_tiempo[]= $listatiempo;
-  $lista_areas[]= $listatiempo;
-  */
   $arraytribunal[]= $lista_areas;
   
  }
   $smarty->assign('listadocentes'  , $arraytribunal);
   $contenido = 'tribunal/registrotribunal.tpl';
   $smarty->assign('contenido',$contenido);
+  
 //   asignacion manual de los tribunales
+  
+  
   if(isset($_POST['ma']))
   {
     

@@ -22,7 +22,7 @@ try {
   $smarty->assign('JS',$JS);
   
             leerClase('Docente');
-
+            $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
             $menuList[]       = array('url'=>URL.Docente::URL.'tribunal','name'=>'Tribunal');
              $menuList[]      = array('url'=>URL.Docente::URL.'tribunal/estudiante.lista.php','name'=>'Lista Estudiante');
               $smarty->assign("menuList", $menuList);
