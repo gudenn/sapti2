@@ -40,7 +40,7 @@ class Revision extends Objectbase
   var $revisor;
   
   /**
-   * docente (DO), tutor (TU), tribunal (TR)'
+   * docente (DO),docente perfil (DP), tutor (TU), tribunal (TR)'
    * @var VARCHAR(2)
    */
   var $revisor_tipo;

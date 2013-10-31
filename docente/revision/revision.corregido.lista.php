@@ -62,7 +62,7 @@ WHERE av.proyecto_id=pr.id
 AND av.revision_id=re.id
 AND re.estado_revision='RE'
 AND av.proyecto_id='".$proyecto->id."'
-AND re.revisor_tipo='DO'
+AND re.revisor_tipo='DP' OR re.revisor_tipo='DO'
 AND re.revisor='".$docente->usuario_id."'
 ORDER BY av.fecha_avance
           ";

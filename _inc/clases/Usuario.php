@@ -165,8 +165,13 @@ class Usuario  extends Objectbase
     $grupos = $this->getMisGrupos();
     if (!sizeof($grupos))
       return false;
-    $grupo = $grupos[0];
-    return $grupo->getPermisoModulo($codigo_modulo);
+    //revisamos para todos los grupos si es que alguno tiene permiso
+    foreach ($grupos as $grupo) {
+      $permiso = $grupo->getPermisoModulo($codigo_modulo); 
+      if ($permiso['ver'])
+        return $permiso;
+    }
+    return $permiso;
   }
   
   /**
