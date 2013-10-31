@@ -12,9 +12,9 @@
 
 <center> 
 
-<h1><b>BUSQUEDA DE PROYECTOS</b></h1>
+<h1><b>B&Uacute;SQUEDA DE PROYECTOS</b></h1>
 
-<input type="text" id="bus" style="width : 400px; length:150px" placeholder="Rellene en este campo el T&iacute;tulo ,Nombre del Estudiante o  La Gesti&oacute;n"  autofocus="autofocus" name="bus" onkeyup="loadXMLDoc()" required /><b>BUSCAR {icono('Search.png','Buscador')}</b>
+<input type="text" id="bus" style="width : 400px; length:150px" placeholder="Rellene en este campo el T&iacute;tulo del Proyecto,Nombre del Estudiante o  La Gesti&oacute;n"  autofocus="autofocus" name="bus" onkeyup="loadXMLDoc()" required /><b>BUSCAR {icono('Search.png','Buscador')}</b>
 
 <div id="myDiv"></div>
 
