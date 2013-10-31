@@ -63,25 +63,10 @@ ORDER BY ma.nombre, cg.nombre
        $tiporeporte_output[] = 'Lista de Estudiantes Evaluados';
        $tiporeporte_output[] = 'Lista de Estudiantes Aprobados';
  
-  $smarty->assign("tiporeporte_values", $tiporeporte_values);
-  $smarty->assign("tiporeporte_output", $tiporeporte_output);
-  $smarty->assign("tiporeporte_selected", "");
+  //$smarty->assign("tiporeporte_values", $tiporeporte_values);
+  //$smarty->assign("tiporeporte_output", $tiporeporte_output);
+  //$smarty->assign("tiporeporte_selected", "");
 
-  $evaluacion_values[] = '';
-  $evaluacion_output[] = '- Seleccione -';
- 
-       $evaluacion_values[] = 0;
-       $evaluacion_values[] = 1;
-       $evaluacion_values[] = 2;
-       $evaluacion_values[] = 3;
-       $evaluacion_output[] = 'Todos';
-       $evaluacion_output[] = 'Aprobados';
-       $evaluacion_output[] = 'Reprobados';
-       $evaluacion_output[] = 'Abandonos';
- 
-  $smarty->assign("evaluacion_values", $evaluacion_values);
-  $smarty->assign("evaluacion_output", $evaluacion_output);
-  $smarty->assign("evaluacion_selected", "");
   //No hay ERROR
   $smarty->assign("ERROR",'');
   $smarty->assign("URL",URL);  

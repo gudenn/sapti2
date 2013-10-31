@@ -32,7 +32,9 @@ function wheremuestra($mat,$sem,$eva){
     if($mat!='')
     $ac.="
         AND di.id=".$mat."";
-
+    if($sem=='2')
+    $ac.="
+        AND eva.promedio >='51'";
     return $ac;
 }
 function consulta($mat,$sem,$eva){

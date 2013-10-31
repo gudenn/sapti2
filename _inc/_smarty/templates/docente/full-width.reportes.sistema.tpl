@@ -8,39 +8,32 @@
                <th>
               <select name="materia_selec" id="materia_selec" >
               {html_options values=$materia_values selected=$materia_selected output=$materia_output}
+              </select>&nbsp;<span id='Buscando'></span>
               </select>
               <label for="materia_selec"><small>Seleccione Materia(*)</small></label>
                </th>
                <th>
               <select name="tiporeporte_selec" id="tiporeporte_selec" >
               {html_options values=$tiporeporte_values selected=$tiporeporte_selected output=$tiporeporte_output}
+              
               </select>
               <label for="tiporeporte_selec"><small>Seleccione Tipo Reporte(*)</small></label>
               </th>
               <th></th>
            </tr>
-           <tr class="light">
-               <th>
-              <select name="evaluacion_selec" id="evaluacion_selec" >
-              {html_options values=$evaluacion_values selected=$evaluacion_selected output=$evaluacion_output}
-              </select>
-              <label for="evaluacion_selec"><small>Mostrar Evaluación</small></label>
-              </th>
-              <th></th>
-              <th></th>
-           </tr>
+
       </table>
-              <input type="button" href="javascript:;" onclick="realizaProceso($('#materia_selec').val(), $('#tiporeporte_selec').val(), $('#evaluacion_selec').val());return false;" value="Generar Reporte"/>
+              <input type="button" href="javascript:;" onclick="realizaProceso($('#materia_selec').val(), $('#tiporeporte_selec').val());return false;" value="Generar Reporte"/>
               <div id="tablaresultado" style="width:685px;min-height: 450px;"></div>
     </div>
     {$ERROR}
   </div>
   <script>
-function realizaProceso(valorCaja1, valorCaja2, valorCaja3){
+function realizaProceso(valorCaja1, valorCaja2){
         var parametros = {
                 "materia" : valorCaja1,
-                "tiporeporte" : valorCaja2,
-                "evaluacion" : valorCaja3
+                "tiporeporte" : valorCaja2
+                
         };
         $.ajax({
                 data:  parametros,
@@ -57,3 +50,24 @@ function realizaProceso(valorCaja1, valorCaja2, valorCaja3){
 </script>
 </div>
 {include file="footer.tpl"}
+{literal}
+<script type="text/javascript">
+jQuery('#materia_selec').change(function () {
+var numero =document.getElementById("materia_selec").value;
+var to=document.getElementById("Buscando");
+to.innerHTML="buscando....";
+
+jQuery.ajax({
+type: "POST", 
+url: "reporte.sistema.carga.php",
+data: 'idmateria='+numero,
+success: function(a) {
+jQuery('#tiporeporte_selec').html(a);
+var to=document.getElementById("Buscando");
+to.innerHTML="";
+}
+});
+})
+.change();
+</script>
+{/literal}

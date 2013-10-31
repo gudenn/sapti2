@@ -195,6 +195,7 @@ class Revision extends Objectbase
   }
       function crearRevisionDocente($usu_id, $pro_id, $tipo) 
   {
+    date_default_timezone_set('America/La_Paz');
     $this->estado = Objectbase::STATUS_AC;
     $this->revisor=$usu_id;
     if($tipo==self::T1_PROYECTOFINAL){

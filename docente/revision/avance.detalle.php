@@ -70,6 +70,7 @@ try {
       header("Location: ../index.php");
   }
   $dicta = new Dicta($iddicta);
+  date_default_timezone_set('America/La_Paz');
 
      /**
    * Menu superior
