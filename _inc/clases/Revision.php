@@ -99,7 +99,7 @@ class Revision extends Objectbase
   function getRevisor($revisor_id = false,$tipo=false,$gettipo = false) 
   {
     if (!$revisor_id)
-      $revisor_id = $this->revisor;
+      return "Error en los datos";
     if (!$tipo)
       $tipo = $this->revisor_tipo;
     if ($tipo == '')
@@ -195,6 +195,7 @@ class Revision extends Objectbase
   }
       function crearRevisionDocente($usu_id, $pro_id, $tipo) 
   {
+    date_default_timezone_set('America/La_Paz');
     $this->estado = Objectbase::STATUS_AC;
     $this->revisor=$usu_id;
     if($tipo==self::T1_PROYECTOFINAL){

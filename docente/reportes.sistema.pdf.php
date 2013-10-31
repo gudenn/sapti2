@@ -11,7 +11,7 @@ require_once(DIR_LIB.'/tcpdf/tcpdf.php');
 if(isset($_GET['sql']))
 $sql = $_GET['sql'];
 $iddicta  = $_GET['iddicta'];
-
+date_default_timezone_set('America/La_Paz');
 $b=1;
   function array_recibe($url_array) { 
      $tmp = stripslashes($url_array); 
@@ -147,7 +147,7 @@ $pdf->setLanguageArray($l);
 // ---------------------------------------------------------
 
 // set font
-$pdf->SetFont('dejavusans', '', 10);
+$pdf->SetFont('dejavusans', '', 9);
 
 // add a page
 $pdf->AddPage();

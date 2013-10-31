@@ -296,7 +296,7 @@ and es.id='$this->id'";
    */
   function validar($es_nuevo = true) {
     leerClase('Formulario');
-    Formulario::validar('codigo_sis', $this->codigo_sis, 'texto', 'El Codigo SIS');
+    Formulario::validar('codigo_sis', $this->codigo_sis, 'numero', 'El Codigo SIS');
     if ($es_nuevo) // nuevo
       $this->getByCodigoSis($this->codigo_sis, true);
   }

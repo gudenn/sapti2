@@ -63,7 +63,7 @@ try {
     $evento->dicta_id=$iddicta;
     $evento->save();
 
-    $url="calendario.evento.php";
+    $url="calendario.evento.php?iddicta=".$iddicta;
     $ir = "Location: $url";
         header($ir);
     }

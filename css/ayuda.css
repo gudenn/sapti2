@@ -3,3 +3,10 @@
 #topnav{width: 458px!important;}
 #header, #container, #footer{width: 459px!important;padding: 13px 5px;}
 #header .fl_right {width: 215px;text-align:right;color: #fff;}
+.resumen {color:#76A3CF;}
+.ayudaindice {}
+.ayudaindice h2{cursor: pointer;color:#55ABDA;}
+.ayudaindice h2:hover{cursor: pointer;color:#06213F;}
+.ayudaindice .oculto {display: none}
+.ayudaindice .noexpandido {display: none}
+.ayudaindice .actual a{color:#000!important;}

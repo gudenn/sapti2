@@ -8,9 +8,9 @@ try {
   leerClase('Administrador');
   
   /** HEADER */
-  $smarty->assign('title','SAPTI - Registro Estudiantes');
-  $smarty->assign('description','Formulario de registro de estudiantes');
-  $smarty->assign('keywords','SAPTI,Estudiantes,Registro');
+  $smarty->assign('title','SAPTI - Editar Cuenta');
+  $smarty->assign('description','Formulario de Edici&oacute;n de cuenta');
+  $smarty->assign('keywords','SAPTI,Autoridad,Registro');
   /**
    * Menu superior
    */
@@ -18,31 +18,9 @@ try {
   $menuList[]     = array('url'=>URL . Administrador::URL . basename(__FILE__),'name'=>'Editar mi cuenta');
   $smarty->assign("menuList", $menuList);
 
-  //CSS
-  $CSS[]  = URL_CSS . "academic/3_column.css";
-  /////css del calendario
-  
-
-  //JS
-  $JS[]  = URL_JS . "jquery.min.js";
-
-  //Datepicker & Tooltips $ Dialogs UI
-  $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
-  $JS[]   = URL_JS . "jquery-ui-1.10.3.custom.min.js";
-  $JS[]   = URL_JS . "ui/i18n/jquery.ui.datepicker-es.js";
-
-  //Validation
-  $CSS[] = URL_JS . "/validate/validationEngine.jquery.css";
-  $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
-  $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
-
-  //BOX
-  $CSS[] = URL_JS . "box/box.css";
-  $JS[]  = URL_JS . "box/jquery.box.js";
-
-  
-  $smarty->assign('CSS',$CSS);
-  $smarty->assign('JS',$JS);
+  $smarty->assign('header_ui','1');
+  $smarty->assign('CSS','');
+  $smarty->assign('JS','');
 
 
   $smarty->assign("ERROR", '');
@@ -112,9 +90,9 @@ try {
   {
     $html = new Html();
     if ($EXITO)
-      $mensaje = array('mensaje'=>'Se actualiz&oacute; correctamente la informaci&oacute;n del Estudiante','titulo'=>'Registro de Estudiante' ,'icono'=> 'tick_48.png');
+      $mensaje = array('mensaje'=>'Se actualiz&oacute; correctamente la informaci&oacute;n del su Cuenta','titulo'=>'Registro de Autoridad' ,'icono'=> 'tick_48.png');
     else
-      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Estudiante','titulo'=>'Registro de Estudiante' ,'icono'=> 'warning_48.png');
+      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el sus datos','titulo'=>'Registro de Autoridad' ,'icono'=> 'warning_48.png');
    $ERROR = $html->getMessageBox ($mensaje);
   }
   $smarty->assign("ERROR",$ERROR);

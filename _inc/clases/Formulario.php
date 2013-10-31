@@ -6,6 +6,7 @@ class Formulario {
     */
   const listaDeNombresNoValidos = "admin,administrator,cargoyellowpages,cargo,yellowpages,yellow";
   const VALIDTEXT = "a-zA-Z0-9'\-''\_''\(''\)''#''@''.'','';'':'' ''\s''\t''\n''&''<''>'áéíóúäëïöüñÑÁÉÍÓÚÄËÏÖÜ\/";
+  const VALIDNUMR = "0-9";
 
   
   public function __construct($code) {
@@ -38,6 +39,9 @@ class Formulario {
         break;
       case "texto_tags":
         $TESTER     = Formulario::VALIDTEXT."'<''>'";
+        break;
+      case "numero":
+        $TESTER     = Formulario::VALIDNUMR;
         break;
         case "texto":
       default:
