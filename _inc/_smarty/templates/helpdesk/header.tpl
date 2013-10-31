@@ -28,9 +28,9 @@
       </h1>
     </div>
     <div class="fl_right" style="padding-top: 8px;">
-      <form action="#" method="post" id="sitesearch">
+      <form action="index.php" method="post" id="sitesearch">
         <fieldset>
-          <input type="text" value="Buscar en Ayuda" onfocus="this.value=(this.value=='Buscar en Ayuda')? '' : this.value ;" style="width: 130px;"  />
+          <input type="text"  name="buscar" value="Buscar en Ayuda" onfocus="this.value=(this.value=='Buscar en Ayuda')? '' : this.value ;" style="width: 130px;"  />
           <input type="image" src="{$URL_IMG}icons/Search.png" id="search" alt="Search" />
         </fieldset>
       </form>

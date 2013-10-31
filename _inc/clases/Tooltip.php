@@ -111,13 +111,12 @@ class Tooltip extends Objectbase
       return true;
   }
   
+  
   /**
-   * Mostramos el toltip
+   * Si el usuario puede editar o no online
+   * @return BOOL
    */
-  function mostrar($echo = true) 
-  {
-    leerClase('Administrador');
-    leerClase('Usuario');
+  function puedeEditar() {
     $editar  = false;
     $usuario = getSessionUser();
     
@@ -130,6 +129,17 @@ class Tooltip extends Objectbase
       }
       
     }
+    return $editar;
+  }
+  
+  /**
+   * Mostramos el toltip
+   */
+  function mostrar($echo = true) 
+  {
+    leerClase('Administrador');
+    leerClase('Usuario');
+    $editar  = $this->puedeEditar();
  
     if (!$this->mostrar && !$editar)
       return;

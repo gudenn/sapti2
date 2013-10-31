@@ -142,6 +142,10 @@
             <label for="codigo"><small>Codigo de helpdesk (*)</small></label>
           </p>-->
           <p>
+            <textarea name="titulo" id="titulo" style="width: 308px;height: 30px;" data-validation-engine="validate[required]">{$helpdesk->titulo}</textarea>
+            <label for="titulo"><small>T&iacute;tulo (*) {getHelpTip('titulo')}</small></label>
+          </p>
+          <p>
             <textarea name="descripcion" id="descripcion" style="width: 308px;height: 30px;" data-validation-engine="validate[required]">{$helpdesk->descripcion}</textarea>
             <label for="descripcion"><small>descripci&oacute;n (*) {getHelpTip('descripcion')}</small></label>
           </p>

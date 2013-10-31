@@ -586,6 +586,7 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`helpdesk` (
   `modulo_id` INT NULL ,
   `codigo` VARCHAR(100) NULL ,
   `directorio` VARCHAR(300) NULL ,
+  `titulo` VARCHAR(300) NULL ,
   `descripcion` VARCHAR(500) NULL ,
   `keywords` VARCHAR(500) NULL ,
   `estado_helpdesk` VARCHAR(2) NULL COMMENT 'Recien creado RC , Editado ED, Aprobado AP' ,
