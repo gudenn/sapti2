@@ -1,8 +1,6 @@
 <div id="comments">
   <h2>Resustados de la B&uacute;squeda de &quot;{$busqueda}&quot;</h2>
   <ul class="commentlist">
-
-
       {section name=ic loop=$helpdesks}
       <li class="{cycle values="comment_odd,comment_even"}">
         <div class="author"><img class="avatar" src="{$URL_IMG}icons/basicset/helpdesk_48.png" width="32" height="32" alt="{$busqueda}" title="{$busqueda}"><span class="name"><a href="index.php?codigo={$helpdesks[ic]->codigo}">{$helpdesks[ic]->titulo}</a></span></div>
@@ -15,7 +13,6 @@
         <div class="author"><img class="avatar" src="{$URL_IMG}icons/basicset/helpdesk_48.png" width="32" height="32" alt="{$busqueda}" title="{$busqueda}"><span class="name"><a href="#">No se encontr&oacute; Temas de Ayuda relacionados</a></span></div>
         <div class="submitdate"><a href="#">{$busqueda}</a></div>
         <p>Lo sentimos No se encontr&oacute; ning&uacute;n tema de ayuda relacionado a su b&uacute;squeda.</p>
-        <p class="readmore"><a href="index.php?codigo={$helpdesks[ic]->codigo}">Seguir leyendo &raquo;</a></p>
       </li>
       {/section}
   </ul>

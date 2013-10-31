@@ -8,11 +8,13 @@ try {
   $smarty->assign('keywords','Proyecto Final');
 
   //CSS
-  $CSS[]  = URL_CSS . "ayuda.css";
+  $CSS[] = URL_CSS . "ayuda.css";
+  $JS[]  = URL_JS . "jquery.min.js";
   $smarty->assign('CSS',$CSS);
-  $smarty->assign('JS','');
+  $smarty->assign('JS',$JS);
 
   leerClase('Helpdesk');
+  leerClase('Administrador');
 
   $helpdesk = new Helpdesk();
   if ( isset($_GET['codigo']) )
@@ -32,6 +34,7 @@ try {
     leerClase('Usuario');
     $usuario = getSessionUser();
     $grupos  = $usuario->getMisGrupos();
+    $smarty->assign('misGrupos'   , $grupos);
     foreach ($grupos as $grupo) 
     {
       $permiso = $grupo->tieneAccesoHelpdesk($helpdesk->modulo_id);
@@ -47,14 +50,21 @@ try {
     //@TODO $busqueda validar
     $helpdesks = $helpdesk->buscarAyudaParaUsuario($busqueda,$grupos);
     $template  = TEMPLATES_DIR."helpdesk/presentar.tpl";
-    $smarty->assign('busqueda'   , $busqueda);
+    $smarty->assign('busqueda'    , $busqueda);
     $smarty->assign('helpdesks'   , $helpdesks);
   }
   else {
+    //Editamos el tema online
+    if ( $helpdesk->puedeEditar() )
+      $smarty->assign('URLEDITAR' , URL.Administrador::URL.Helpdesk::URL."helpdesk.registro.php?helpdesk_id=".$helpdesk->id);
+    // Incluimos el indice
+    $indice   = TEMPLATES_DIR."helpdesk/indice.tpl";
+    $smarty->assign('indice' , $indice);
+
     $template = TEMPLATES_DIR."helpdesk/archivo/{$helpdesk->codigo}.tpl";
-    if (!file_exists($template))
+    if (!file_exists($template) || !($helpdesk->codigo) )
       $template = TEMPLATES_DIR."helpdesk/archivo/defecto.tpl";
-    if (!$tieneAccesoHelpdesk)
+    if (!$tieneAccesoHelpdesk && $helpdesk->codigo )
       $template = TEMPLATES_DIR."helpdesk/archivo/denegado.tpl";
   }
   

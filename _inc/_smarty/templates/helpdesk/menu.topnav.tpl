@@ -4,7 +4,7 @@
       <ul>
         <li><a href="{$URL}ayuda/">Ayuda</a></li>
         {section name=ic loop=$topnav}
-        <li {if $smarty.section.ic.last} class="active" {/if} ><a href="{$URL}ayuda/?codigo={$helpdesk->getLinkByDirectory($topnav[ic])}">{$topnav[ic]}</a></li>
+        <li {if $smarty.section.ic.last} class="active" {/if} ><a href="{$URL}ayuda/?codigo={$helpdesk->getCodeByDirectory($topnav[ic])}">{$topnav[ic]}</a></li>
         {/section}
       </ul>
     </div>

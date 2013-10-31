@@ -13,6 +13,10 @@ class Helpdesk extends Objectbase
   /** Constante para definir el minimo tamaño de busqueda de palabras */
   const TAMA_PALA   = 4;
   
+  /** url del helpdesk 
+   * @todo actualizar esto en todas partes */
+  const URL   = 'helpdesk/';
+  
  /**
   * modulo_id
   * @var INT(11) 
@@ -74,13 +78,13 @@ class Helpdesk extends Objectbase
       $script       = $_SERVER['SCRIPT_NAME'];
       $this->codigo = sha1($script);
       if (defined('MODULO'))
-        $this->codigo = sha1(MODULO.basename($script));
+        $this->codigo = sha1(MODULO.$script);
       $this->getByCodigo($this->codigo);
       if (!$this->id)
       {
         leerClase('Modulo');
         $modulo                = new Modulo('', $modulo_base);
-        $this->titulo          = basename($script);
+        $this->titulo          = $script;
         $this->estado          = Objectbase::STATUS_AC;
         $this->keywords        = ltrim(str_replace(array('.','/'), ',', str_replace('.php', ',ayuda', $script)),',');
         $this->modulo_id       = $modulo->id;
@@ -179,7 +183,7 @@ ____TEST;
    * @param string $parte_de_directorio
    * @return string
    */
-  function getLinkByDirectory($parte_de_directorio) 
+  function getCodeByDirectory($parte_de_directorio,$echo = true) 
   {
     $pos = strpos($this->directorio, $parte_de_directorio);
     $dir = substr($this->directorio,0 ,$pos + strlen($parte_de_directorio) + 1).'index.php';
@@ -190,7 +194,61 @@ ____TEST;
     $helpdesk   = array();
     while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) 
       $helpdesk = new Helpdesk($row);
-    echo $helpdesk->codigo;
+    if ($echo)
+      echo $helpdesk->codigo;
+    else
+      return $helpdesk->codigo;
+  }
+  
+  /**
+   * Hacemos el indice de navegacion para el sistema de ayuda
+   * @param Grupo $misGrupos con todos mis grupos
+   */
+  function getTodosTemasAyuda($misGrupos) {
+    $temas   = $this->buscarAyudaParaUsuario('',$misGrupos);
+    $dir     = 'Inicio';
+    $URL_IMG = URL_IMG;
+    $lista   = '';
+    $conta   = 0;
+    foreach ($temas as $tema) {
+      $actual = '';
+      if ($tema->id == $this->id)
+        $actual = 'actual';
+      if ( dirname($tema->directorio) != $dir )
+      {
+        $conta ++;
+        //{cycle values="comment_odd,comment_even"}
+        $oculto = 'noexpandido';
+        if ($tema->estado == 'ACMISMO')
+          $oculto = '';
+          
+        
+        $dir    = dirname($tema->directorio);
+        // contenedor
+        $lista .= <<<________LISTA
+        </ul></li>
+        <li class="comment_odd" ><div class="author"> <span class="name"><a href="#"  onclick="$('#sublist$conta').toggle();return false;" >{$tema->titulo}</a></span></div>
+          <ul class="$oculto" id="sublist$conta">
+________LISTA;
+        // normal
+        $lista .= <<<________LISTA
+          <li class="comment_even $actual"><div class="author"><span class="name"><a href="index.php?codigo={$tema->codigo}">{$tema->titulo}</a></span></div></li>
+________LISTA;
+      }
+      else
+      {
+        $lista .= <<<________LISTA
+          <li class="comment_even $actual"><div class="author"><span class="name"><a href="index.php?codigo={$tema->codigo}">{$tema->titulo}</a></span></div></li>
+________LISTA;
+      }
+        
+    }
+    $lista  = ltrim($lista,'        </ul></li>');
+    $lista .= <<<____LISTA
+          </ul>
+        </li>
+____LISTA;
+    return $lista; 
   }
   
   /**
@@ -251,6 +309,28 @@ ____TEST;
     return $resp;
   }
 
+  
+  /**
+   * Si el usuario puede editar o no online copia fiel del mismo metodo en tooltip
+   * @see Tooltip::puedeEditar()
+   * @return BOOL
+   */
+  function puedeEditar() {
+    $editar  = false;
+    $usuario = getSessionUser();
+    
+    if ( isset($usuario->id) && $usuario->id)
+    {
+      $permiso = $usuario->getPermiso('ADMIN-HELPDESK');
+      if ($permiso['ver'] && isset($_SESSION['editor_online']) && ($_SESSION['editor_online']))
+      {
+        $editar = true;
+      }
+      
+    }
+    return $editar;
+  }
+
   /**
    * Creamos un helpdesk a partir del codigo
    * 
@@ -273,12 +353,14 @@ ____TEST;
    * Buscamos ayuda en el sistema para el usuario actual
    * teniendo en cuenta su grupo y sus permisos
    * @param String $busqueda
-   * @param Grupo $grupos
+   * @param Grupo $misGrupos
    * @return Helpdesk todos los temas de ayuda encontrados
    */
-  function buscarAyudaParaUsuario($busqueda,$grupos)
+  function buscarAyudaParaUsuario($busqueda,$misGrupos)
   {
     leerClase('Permiso');
+    if (!sizeof($misGrupos))
+      return array();
     $activo = Objectbase::STATUS_AC;
     // Tomamos en cuenta
     // descripcion claves y permisos
@@ -286,7 +368,7 @@ ____TEST;
     // Buscamos tdos los grupos a los que 
     // pertenezca este usuario
     $grupos_id = "";
-    foreach ($grupos as $grupo) {
+    foreach ($misGrupos as $grupo) {
       $grupos_id .= $grupo->id . ',';
     }
     $grupos_id = rtrim($grupos_id, ',');
@@ -306,27 +388,42 @@ ____TEST;
     // dividimos la busqueda por palabras
     $sql       = " SELECT * FROM ($sql) as busqueda WHERE "; 
     // buscamos por cada palabra mayor a x caracteres
-    $busqueda  = explode(" ", $busqueda);
-    foreach ($busqueda as $palabra) 
+    if (trim ($busqueda) != '') 
     {
-      // no tomamos en cuenta parabras menores "TAMA_PALA" 
-      if (strlen($palabra)< Helpdesk::TAMA_PALA )
-        continue;
-      $subsql      .= " busqueda.keywords LIKE '%$palabra%' ";
-      $subsql      .= " OR busqueda.descripcion LIKE '%$palabra%'   ";
-      $subsql      .= " OR busqueda.titulo LIKE '%$palabra%'   ";
-      $subsql      .= " OR ";
+      $busqueda  = explode(" ", $busqueda);
+      foreach ($busqueda as $palabra) 
+      {
+        // no tomamos en cuenta parabras menores "TAMA_PALA" 
+        if (strlen($palabra)< Helpdesk::TAMA_PALA )
+          continue;
+        $subsql      .= " busqueda.keywords LIKE '%$palabra%' ";
+        $subsql      .= " OR busqueda.descripcion LIKE '%$palabra%'   ";
+        $subsql      .= " OR busqueda.titulo LIKE '%$palabra%'   ";
+        $subsql      .= " OR ";
+      }
+      $subsql         = rtrim($subsql, " OR ");
     }
-    $subsql         = rtrim($subsql, " OR ");
+    else //buscamos todo!!
+      $subsql       = " 1 ";
     $sql           .= $subsql;
-    
+    // Ordenamos por modulo y por el directorio
+    $sql           .= " ORDER BY modulo_id ASC, directorio DESC";
 
     $result = mysql_query($sql);
     if (!$result)
       return array();
-    $helpdesks = array();
+    $helpdesks  = array();
+    $directorio = dirname($this->directorio); 
     while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) 
-      $helpdesks[] = new Helpdesk($row);
+    {
+      // OJO CON ESTO SERA UNA CLAVE PARA VER SI ES UN
+      // TEMA DEL MISMO NIVEL QUE EL ACTUAL 
+      if ($directorio == dirname($row['directorio']) )
+        $row['estado'] = 'AC'.'MISMO';
+      else
+        $row['estado'] = 'AC'.'OTRO';
+      $helpdesks[]   = new Helpdesk($row);
+    }
     return $helpdesks;
   }
 

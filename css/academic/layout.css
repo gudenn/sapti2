@@ -404,7 +404,8 @@ div.wrapper h1, div.wrapper h2, div.wrapper h3, div.wrapper h4, div.wrapper h5, 
 
 h1{
   border: #006699;
-  text-shadow: 5px 5px 5px #cecece;
+  /* muyfuerte el anterior */
+  text-shadow: 0px 0px 6px #E2E4FF;
 }
 
 .boxsession{
