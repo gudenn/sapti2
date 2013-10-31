@@ -121,7 +121,7 @@ AND di.id=$iddicta
                                 $revision = new Revision();
                                 $observacion = new Observacion();
                                 date_default_timezone_set('America/La_Paz');
-                                $revision->crearRevisionDocente($docenteid->usuario_id, $arrayestudiantes[$i]['idproy'], $dicta->getTipoMateria());
+                                $revision->crearRevisionDocente($docenteid->id, $arrayestudiantes[$i]['idproy'], $dicta->getTipoMateria());
                                 $revision->save();
 
                                 $observacion->objBuidFromPost();
