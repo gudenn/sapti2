@@ -72,8 +72,9 @@ class Materia extends Objectbase
   function getOrderString(&$filtro) {
     $order_array = array();
     $order_array['id']          = " {$this->getTableName()}.id ";
+     $order_array['sigla']      = " {$this->getTableName()}.sigla ";
     $order_array['nombre']      = " {$this->getTableName()}.nombre ";
-   $order_array['sigla']      = " {$this->getTableName()}.sigla ";
+   
     $order_array['estado']      = " {$this->getTableName()}.estado ";
     return $filtro->getOrderString($order_array);
   }

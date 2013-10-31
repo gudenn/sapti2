@@ -63,7 +63,7 @@ AND codigo_grupo.id=cg.id)
     $materia_output[] = $filamateria['nombre'];
  }
 
-  $sqldoc="SELECT dc.id as id, CONCAT(us.apellido_paterno, us.apellido_materno, us.nombre) as nombre
+  $sqldoc="SELECT dc.id as id, CONCAT(us.titulo_honorifico,' ',us.apellido_paterno,' ', us.apellido_materno,' ', us.nombre) as nombre
 FROM usuario us, docente dc
 WHERE us.id=dc.usuario_id
 AND us.estado='AC'
@@ -120,7 +120,7 @@ if (isset($_GET['eliminar']) && isset($_GET['dicta_id']) && is_numeric($_GET['di
     $dictaborrar->delete();
   }
   
- $sql="SELECT di.id as id, se.codigo as semestre, CONCAT(us.apellido_paterno, us.apellido_materno, us.nombre) as nombre, ma.nombre as materia, cg.nombre as grupo
+ $sql="SELECT di.id as id, se.codigo as semestre, CONCAT(us.titulo_honorifico,' ',us.apellido_paterno,' ', us.apellido_materno,' ', us.nombre) as nombre, ma.nombre as materia, cg.nombre as grupo
 FROM dicta di, docente dc, usuario us, materia ma, semestre se, codigo_grupo cg
 WHERE di.docente_id=dc.id
 AND dc.usuario_id=us.id

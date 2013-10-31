@@ -15,7 +15,7 @@ try {
 
   /** HEADER */
   $smarty->assign('title','Gestion de Institucion');
-  $smarty->assign('description','Pagina de gesti&oacute;n de Institucion');
+  $smarty->assign('description','Pagina de gesti&oacute;n de Instituci&oacute;n');
   $smarty->assign('keywords','Gesti&acoute;n,Institucion');
   leerClase('Administrador');
   /**
@@ -23,7 +23,7 @@ try {
    */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/','name'=>'Configuraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Registro de Institucion');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Gesti&oacute;n de Instituci&oacute;n');
   $smarty->assign("menuList", $menuList);
 
   
@@ -83,7 +83,7 @@ if(isset($_SESSION['estado']) && $_SESSION['estado']==1)
  
     $html = new Html();
       
-      $mensaje = array('mensaje'=>'Se grabo correctamente la Institucion','titulo'=>'Registro de Institucion' ,'icono'=> 'tick_48.png');
+      $mensaje = array('mensaje'=>'Se grabo correctamente la Instituci&oacute;n','titulo'=>'Registro de Instituci&oacute;n' ,'icono'=> 'tick_48.png');
   
       $ERROR = $html->getMessageBox ($mensaje);
    

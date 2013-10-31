@@ -19,7 +19,7 @@
             </p>
           </form>
         </div>
-        <p>{$ERROR}adwadw</p>
+        <p>{$ERROR}</p>
         <p>Todos los campos con (*) son obligatorios.</p>
         <script type="text/javascript">
         {literal} 

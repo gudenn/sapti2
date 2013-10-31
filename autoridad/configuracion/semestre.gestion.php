@@ -24,7 +24,7 @@ try {
    */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/','name'=>'Configuraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Registro de Semestre');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Gesti&acoute;n de Semestre');
   $smarty->assign("menuList", $menuList);
 
  

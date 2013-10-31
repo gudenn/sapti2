@@ -78,7 +78,7 @@ try {
   $link = Administrador::URL."configuracion/materia.gestion.php";
   $menu->agregarItem('Gesti&oacute;n de Materias','Lista de todas las Materias configuradas para el sistema.','basicset/book.png',$link);
   $link = Administrador::URL."configuracion/materia.registro.php";
-  $menu->agregarItem('Registro de Mat&eacute;ria','Registro de una nueva Mat&eacute;ria.','basicset/plus_48.png',$link);
+  $menu->agregarItem('Registro de Materia','Registro de una nueva Materia.','basicset/plus_48.png',$link);
   $link = Administrador::URL."configuracion/codigo_grupo.gestion.php";
   $menu->agregarItem('Gesti&oacute;n de Grupos','Lista de todos los Grupos configurados para el sistema.','basicset/book.png',$link);
   $link = Administrador::URL."configuracion/codigo_grupo.registro.php";
