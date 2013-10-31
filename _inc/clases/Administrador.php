@@ -28,6 +28,11 @@ class Administrador extends Objectbase
   }  
   
   
+  /**
+   * No hay nada que validar en el admin
+   */
+  function validar() {
+  }
   
   
 /**

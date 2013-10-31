@@ -8,9 +8,9 @@ try {
   leerClase('Administrador');
   
   /** HEADER */
-  $smarty->assign('title','SAPTI - Registro Estudiantes');
-  $smarty->assign('description','Formulario de registro de estudiantes');
-  $smarty->assign('keywords','SAPTI,Estudiantes,Registro');
+  $smarty->assign('title','SAPTI - Editar Cuenta');
+  $smarty->assign('description','Formulario de Edici&oacute;n de cuenta');
+  $smarty->assign('keywords','SAPTI,Autoridad,Registro');
   /**
    * Menu superior
    */
@@ -112,9 +112,9 @@ try {
   {
     $html = new Html();
     if ($EXITO)
-      $mensaje = array('mensaje'=>'Se actualiz&oacute; correctamente la informaci&oacute;n del Estudiante','titulo'=>'Registro de Estudiante' ,'icono'=> 'tick_48.png');
+      $mensaje = array('mensaje'=>'Se actualiz&oacute; correctamente la informaci&oacute;n del su Cuenta','titulo'=>'Registro de Autoridad' ,'icono'=> 'tick_48.png');
     else
-      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Estudiante','titulo'=>'Registro de Estudiante' ,'icono'=> 'warning_48.png');
+      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el sus datos','titulo'=>'Registro de Autoridad' ,'icono'=> 'warning_48.png');
    $ERROR = $html->getMessageBox ($mensaje);
   }
   $smarty->assign("ERROR",$ERROR);

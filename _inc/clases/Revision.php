@@ -99,7 +99,7 @@ class Revision extends Objectbase
   function getRevisor($revisor_id = false,$tipo=false,$gettipo = false) 
   {
     if (!$revisor_id)
-      $revisor_id = $this->revisor;
+      return "Error en los datos";
     if (!$tipo)
       $tipo = $this->revisor_tipo;
     if ($tipo == '')

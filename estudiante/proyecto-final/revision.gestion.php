@@ -64,6 +64,8 @@ try {
  
   $objs_pg    = new Pagination($obj_mysql, 'e_revision','',false,10);
 
+  //var_dump($objs_pg->objs);
+  
   $smarty->assign("revision" ,$revision);
   $smarty->assign("filtros"  ,$filtro);
   $smarty->assign("objs"     ,$objs_pg->objs);

@@ -96,6 +96,8 @@ try {
   $titulo_h_output[] = '- Seleccione -';
   while ($row = mysql_fetch_array($titulo_hs[0])) 
   {
+    if ($row['nombre'] != 'Est.')
+      continue;
     $titulo_h_values[] = $row['nombre'];
     $titulo_h_output[] = $row['nombre'];
   }

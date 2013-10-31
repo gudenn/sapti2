@@ -45,6 +45,7 @@ class Menu
   function getAdminIndex() {
     leerClase('Grupo');
     leerClase('Usuario');
+    leerClase('Helpdesk');
     leerClase('Administrador');
     $thises   = array();
     $usuario = getSessionUser();
@@ -104,12 +105,16 @@ class Menu
       $thise->agregarItem('Reportes de Proyectos Finales','Reportes correspondientes a los Proyectos','basicset/graph.png',$link);
       $thises[] = $thise;
       $thise = new Menu('Servicio de Ayuda');
+      // CONTADOR //
+      $helpdesk   = new Helpdesk();
+      $pendientes = Helpdesk::EST01_RECIEN;
+      $pendientes = $helpdesk->contar(" estado_helpdesk = '{$pendientes}' ");
       $link = Administrador::URL."helpdesk/";
-      $thise->agregarItem('Configurar Temas de Ayuda','Gesti&oacute;n de temas de ayuda para el sistema.','basicset/helpdesk_48.png',$link,0,4);
+      $thise->agregarItem('Configurar Temas de Ayuda','Gesti&oacute;n de temas de ayuda para el sistema.','basicset/helpdesk_48.png',$link,$pendientes);
       $thises[] = $thise;
       $thise = new Menu('Sistema SAPTI');
       $link = Administrador::URL."configuracion/";
-      $thise->agregarItem('Configuraciones','Configuraciones para el sistema SAPTI.','basicset/gear_48.png',$link,0,15);
+      $thise->agregarItem('Configuraciones','Configuraciones para el sistema SAPTI.','basicset/gear_48.png',$link,0,25);
       $thises[] = $thise;
       $thise = new Menu('Notificaciones y Mensajes');
       $link = Administrador::URL."notificacion/";

@@ -10,7 +10,7 @@
         {include file=$template}
       {/if}
       {if (isset($URLEDITAR))}
-        <p class="readmore"><a href="{$URLEDITAR}">[+] Editar Tema de Ayuda &raquo;</a></p>
+        <p class="readmore"><a href="{$URLEDITAR}" target="_blank">[+] Editar Tema de Ayuda &raquo;</a></p>
       {/if}
       <div style="clear: both"></div>
     </div>
