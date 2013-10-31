@@ -16,16 +16,16 @@ try {
 
   /** HEADER */
   $smarty->assign('title','Gestion de Sub-Area');
-  $smarty->assign('description','Pagina de gesti&oacute;n de Sub-Area');
-  $smarty->assign('keywords','Gesti&acoute;n,Sub-Area');
+  $smarty->assign('description','Pagina de gesti&oacute;n de Sub-&Aacutereas');
+  $smarty->assign('keywords','Gesti&acoute;n,Sub-&Aacutereas');
   leerClase('Administrador');
   /**
    * Menu superior
    */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/','name'=>'Configuraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/area.gestion.php','name'=>'Gesti&oacute;n de Sub-Areas');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Gesti&oacute;n de Sub-Areas');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/area.gestion.php','name'=>'Gesti&oacute;n de Sub-&Aacutereas');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Gesti&oacute;n de Sub-&Aacutereas');
   $smarty->assign("menuList", $menuList);
 
   //CSS

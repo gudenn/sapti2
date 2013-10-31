@@ -24,7 +24,7 @@ try {
    */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/','name'=>'Configuraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Gesti&oacute;n de Areas');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Gesti&oacute;n de &Aacutereas');
   $smarty->assign("menuList", $menuList);
 
   //CSS
@@ -47,6 +47,8 @@ try {
   $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
   $JS[]   = URL_JS . "jquery-ui-1.10.3.custom.min.js";
   $JS[]   = URL_JS . "ui/i18n/jquery.ui.datepicker-es.js";
+  $smarty->assign('header_ui','1');
+  $smarty->assign('CSS','');
   $smarty->assign('CSS',$CSS);
   $smarty->assign('JS',$JS);
   

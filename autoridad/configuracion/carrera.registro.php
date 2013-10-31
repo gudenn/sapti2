@@ -22,6 +22,7 @@ try {
 
 
   //CSS
+  
   $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
   //BOX

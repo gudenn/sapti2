@@ -17,7 +17,7 @@ try {
   $menuList[] = array('url' => URL . Administrador::URL . 'docente/' . basename(__FILE__), 'name' => 'Registro de Docente');
   $smarty->assign("menuList", $menuList);
 
-   $smarty->assign('header_ui','1');
+  $smarty->assign('header_ui','1');
   $smarty->assign('CSS','');
   $smarty->assign('JS','');
 
