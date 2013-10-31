@@ -31,14 +31,9 @@ try {
   $menuList[]     = array('url'=>URL . Administrador::URL . 'reprogramacion/'.basename(__FILE__),'name'=>'Gesti&oacute;n de Reprogramaci&oacute;n');
   $smarty->assign("menuList", $menuList);
 
-  //CSS
-  $CSS[]  = URL_CSS . "academic/tables.css";
-  //$CSS[]  = URL_CSS . "pg.css";
-  $smarty->assign('CSS',$CSS);
-
-  //JS
-  $JS[]  = URL_JS . "jquery.min.js";
-  $smarty->assign('JS',$JS);
+  $smarty->assign('header_ui','1');
+  $smarty->assign('CSS','');
+  $smarty->assign('JS','');
   
   $id_es=$_GET['id_post'];
   $estudiante=new Estudiante($id_es);

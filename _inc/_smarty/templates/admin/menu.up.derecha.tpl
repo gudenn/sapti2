@@ -12,7 +12,8 @@
        <ul>
         <li><a href="{$URL}estudiante">Estudiantes</a></li>
         <li><a href="{$URL}docente">Tutores</a></li>
-        <li class="last"><a href="{$URL}docente">Docentes</a></li>
+        <li><a href="{$URL}docente">Docentes</a></li>
+        {include file="helpdesk/help.tpl"}
       </ul>
       {/if}
     </div>
