@@ -111,6 +111,9 @@ class Revision extends Objectbase
       case 'DO':
         $clase = 'Docente';
         break;
+      case 'DP':
+        $clase = 'Docente';
+        break;
       case 'TR':
         $clase = 'Tribunal';
         break;
