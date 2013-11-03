@@ -10,7 +10,6 @@ try {
   $smarty->assign('description','Proyecto Final');
   $smarty->assign('keywords','Proyecto Final');
   $CSS[]  = URL_JS . "ui/overcast/jquery-ui.css";
-  //$CSS[]  = URL_JS . "jQfu/css/demo.css";
   $CSS[]  = URL_JS . "jQfu/css/jquery.fileupload-ui.css";
   $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_CSS . "spams.css";
@@ -19,7 +18,7 @@ try {
    $CSS[]  = URL_JS . "box/box.css";
    $JS[]  = URL_JS ."box/jquery.box.js";
   
-  $smarty->assign('CSS',$CSS);
+   $smarty->assign('CSS',$CSS);
   
   $JS[]  = URL_JS . "jquery.min.js";
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
@@ -48,10 +47,12 @@ try {
   leerClase("Consejo");
   leerClase("Semestre");
   leerClase("Semestre");
-   leerClase("Dia");
-   
+  leerClase("Dia");
+  leerClase('Html');
+  
+  $smarty->assign("ERROR", '');
   $menuList[]     = array('url'=>URL.Consejo::URL,'name'=>'Consejo');
-  $menuList[]     = array('url'=>URL . Consejo::URL ,'name'=>'Asignaci&oacute;n');
+  $menuList[]     = array('url'=>URL . Consejo::URL.'registro.php' ,'name'=>'Asignaci&oacute;n');
   $smarty->assign("menuList", $menuList);
 
  
@@ -60,7 +61,7 @@ try {
                   [ 'Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
                   [ 'FontSize', 'TextColor', 'BGColor' ]]}";
   
-  $smarty->assign("editores", $editores);
+    $smarty->assign("editores", $editores);
     $diass= new Dia();
     $smarty->assign("diass", $diass);
     
@@ -84,25 +85,21 @@ try {
     if($proyecto->estado_proyecto=='VB')
     {
       
-   $array =$proyecto ->getVigencia();
-   $proyeareas=$proyecto->getArea();
-   $tutores= $proyecto->getTutores();
-   $usuariobuscado= new Usuario($estudiante->usuario_id);
-   $smarty->assign('usuariobuscado',  $usuariobuscado);
-   $smarty->assign('estudiantebuscado', $estudiante);
-   $smarty->assign('proyectobuscado', $proyecto);
-   $smarty->assign('proyectoarea', $proyecto->getArea());
-   $smarty->assign('tutores', $arraytutores);
+        $array =$proyecto ->getVigencia();
+        $proyeareas=$proyecto->getArea();
+        $tutores= $proyecto->getTutores();
+        $usuariobuscado= new Usuario($estudiante->usuario_id);
+        $smarty->assign('usuariobuscado',  $usuariobuscado);
+        $smarty->assign('estudiantebuscado', $estudiante);
+        $smarty->assign('proyectobuscado', $proyecto);
+        $smarty->assign('proyectoarea', $proyecto->getArea());
+        $smarty->assign('tutores', $arraytutores);
 
    
-   $automatico= new Automatico();
-   $automatico->getListaParaProyecto($proyecto->id);
-   
-   
-  
-   // $tutores= $proyecto->getTutores();
-   
-        foreach ($tutores as $valor)
+          $automatico= new Automatico();
+          $automatico->getListaParaProyecto($proyecto->id);
+
+     foreach ($tutores as $valor)
         {
 
         $sqlp="select  d.id
@@ -116,14 +113,17 @@ try {
             delete from `automatico`  where  docente_id=$vars;";
              mysql_query($sqldeliteau);
             }
-
         }  
-    }else
-    {
-      
-        echo "<script>alert('El Proyecto No Esta Habilitado Para La Asignacion De Tribunales');</script>";
     }
-    }  else {
+    else
+    {
+             $html  = new Html();
+             $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente la Carrera','titulo'=>'Registro de Carrera' ,'icono'=> 'warning_48.png');
+             $ERROR = $html->getMessageBox ($mensaje);
+       //   echo "<script>alert('El Proyecto No Esta Habilitado Para La Asignacion De Tribunales');</script>";
+    }
+    }  else 
+      {
       
        echo "<script>alert('El Proyecto ya tiene Tribunales');</script>";
       
@@ -205,141 +205,92 @@ ORDER BY  a.valor  DESC;";
   {
      $listaareas[]=$filas;
   }
- //}else
-//{
- //  $listaareas[]="NO HAY DATOS";
- //}
+
   $lista_areas[]=$listaareas;
-  /**
-  $listatiempo=array();
-$sqltiempo="select  d.`id` , d.`nombre` , t.`nombre` as nombreturno
-from `dia` d, `horario_doc` hd , `turno` t
-where  d.`id`=hd.`dia_id` and hd.`turno_id`=t.`id` and  d.`estado`='AC' and hd.`estado`='AC'and t.`estado`='AC' and hd.`docente_id`=".$fila["id"].";";
- $resultadotiempo= mysql_query($sqltiempo);
- 
-  while ($filatiempo = mysql_fetch_array($resultadotiempo, MYSQL_ASSOC)) 
-  {
-     $listatiempo[]=$filatiempo;
-  }
-  //$lista_tiempo[]= $listatiempo;
-  $lista_areas[]= $listatiempo;
-  $arraytribunal[]= $lista_areas;
-  */
+
  }
   $smarty->assign('listadocentes'  , $arraytribunal);
   $contenido = 'tribunal/registrotribunal.tpl';
   $smarty->assign('contenido',$contenido);
   }
+  //////////asignacion automatico de tribunales////////////
   
 if(isset($_POST['a']))
  {
-   $estudiante   = new Estudiante(false,$_POST['estudiante_id']);
-   
-    $proyecto     = new Proyecto();
-   
-    $proyecto_aux = $estudiante->getProyecto();
-    if ($proyecto_aux)
+     $estudiante   = new Estudiante(false,$_POST['estudiante_id']);
+     $proyecto     = new Proyecto();
+     $proyecto_aux = $estudiante->getProyecto();
+     if ($proyecto_aux)
       $proyecto = $proyecto_aux;
-    else
-    {
+     else
+      {
       //@todo no tiene proyecto 
        echo "<script>alert('El Estudiante no Tiene Proyecto');</script>";
-      
-    }
+       }
    
-    $proyeareas=$proyecto->getArea();
-   $usuariobuscado= new Usuario($estudiante->usuario_id);
-   $smarty->assign('usuariobuscado',  $usuariobuscado);
-   $smarty->assign('estudiantebuscado', $estudiante);
-   $smarty->assign('proyectobuscado', $proyecto);
-   $smarty->assign('proyectoarea', $proyecto->getArea());
-  
+          $proyeareas=$proyecto->getArea();
+          $usuariobuscado= new Usuario($estudiante->usuario_id);
+          $smarty->assign('usuariobuscado',  $usuariobuscado);
+          $smarty->assign('estudiantebuscado', $estudiante);
+          $smarty->assign('proyectobuscado', $proyecto);
+          $smarty->assign('proyectoarea', $proyecto->getArea());
+
   $sqlr="SELECT  DISTINCT(d.id), u.nombre, CONCAT (u.apellido_paterno,u.apellido_materno) as apellidos
-FROM  usuario u ,docente d, automatico a
-WHERE  u.id=d.usuario_id and  a.`docente_id`=d.`id` and u.estado='AC'
-ORDER BY  a.valor  DESC;";
- $resultado = mysql_query($sqlr);
- $arraytribunal= array();
- $arraytribunalasignados= array();
-$contador=0;
- while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
- { 
-       if($contador<3)
-         {
+         FROM  usuario u ,docente d, automatico a
+         WHERE  u.id=d.usuario_id and  a.`docente_id`=d.`id` and u.estado='AC'
+         ORDER BY  a.valor  DESC;";
+         $resultado = mysql_query($sqlr);
+         $arraytribunal= array();
+         $arraytribunalasignados= array();
+         $contador=0;
+         while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+         { 
+           if($contador<3)
+             {
               
-        $listaareas=array();
-        $lista_areas=array();
-        $lista_areas[] = $fila["id"];
-        $lista_areas[] =  $fila["nombre"];
-        $lista_areas[] =  $fila["apellidos"];
- 
- 
-          $sqla="select  a.`nombre`
-          from `docente` d , `apoyo` ap , `area` a
-          where  d.`id`=ap.`docente_id` and a.`id`=ap.`area_id` and d.`estado`='AC' and ap.`estado`='AC' and a.`estado`='AC'and d.`id`=".$fila["id"];
-           $resultadoa = mysql_query($sqla);
-        //if(mysql_fetch_array($resultadoa, MYSQL_ASSOC)){
-          while ($filas = mysql_fetch_array($resultadoa, MYSQL_ASSOC)) 
-          {
-             $listaareas[]=$filas;
-          }
- //}else
-//{
- //  $listaareas[]="NO HAY DATOS";
- //}
-     $lista_areas[]=$listaareas;
-      $listatiempo=array();
-  
-  /**
-        $sqltiempo="select  d.`id` , d.`nombre` , t.`nombre` as nombreturno
-        from `dia` d, `horario_doc` hd , `turno` t
-        where  d.`id`=hd.`dia_id` and hd.`turno_id`=t.`id` and  d.`estado`='AC' and hd.`estado`='AC'and t.`estado`='AC' and hd.`docente_id`=".$fila["id"].";";
-         $resultadotiempo= mysql_query($sqltiempo);
+              $listaareas=array();
+              $lista_areas=array();
+              $lista_areas[] = $fila["id"];
+              $lista_areas[] =  $fila["nombre"];
+              $lista_areas[] =  $fila["apellidos"];
 
-          while ($filatiempo = mysql_fetch_array($resultadotiempo, MYSQL_ASSOC)) 
-          {
-             $listatiempo[]=$filatiempo;
-          }
-          //$lista_tiempo[]= $listatiempo;
-          $lista_areas[]= $listatiempo;
-          */
-          $arraytribunalasignados[]= $lista_areas;
+              $sqla="select  a.`nombre`
+                     from `docente` d , `apoyo` ap , `area` a
+                     where  d.`id`=ap.`docente_id` and a.`id`=ap.`area_id` and d.`estado`='AC' and ap.`estado`='AC' and a.`estado`='AC'and d.`id`=".$fila["id"];
+                     $resultadoa = mysql_query($sqla);
+                     while ($filas = mysql_fetch_array($resultadoa, MYSQL_ASSOC)) 
+                       {
+                         $listaareas[]=$filas;
+                       }
+                         $lista_areas[]=$listaareas;
+                         $listatiempo=array();
+                        $arraytribunalasignados[]= $lista_areas;
 
-
-         /////////////////
-       
-         }  else {
-            $listaareas=array();
-        $lista_areas=array();
-        $lista_areas[] = $fila["id"];
-        $lista_areas[] =  $fila["nombre"];
-        $lista_areas[] =  $fila["apellidos"];
- 
- 
-$sqla="select  a.`nombre`
-from `docente` d , `apoyo` ap , `area` a
-where  d.`id`=ap.`docente_id` and a.`id`=ap.`area_id` and d.`estado`='AC' and ap.`estado`='AC' and a.`estado`='AC'and d.`id`=".$fila["id"];
- $resultadoa = mysql_query($sqla);
-  while ($filas = mysql_fetch_array($resultadoa, MYSQL_ASSOC)) 
-  {
-     $listaareas[]=$filas;
-  }
-
-  $lista_areas[]=$listaareas;
-  $listatiempo=array();
+                        }  else {
+                                $listaareas=array();
+                                $lista_areas=array();
+                                $lista_areas[] = $fila["id"];
+                                $lista_areas[] =  $fila["nombre"];
+                                $lista_areas[] =  $fila["apellidos"];
   
-    $arraytribunal[]= $lista_areas;
-  
-  
-       
-           
-   }
-  $contador++;
- }
- $smarty->assign('asignados'  , $arraytribunalasignados);
-  $smarty->assign('listadocentes'  , $arraytribunal);
-  $contenido = 'tribunal/registrotribunal.tpl';
-  $smarty->assign('contenido',$contenido);
+                            $sqla="select  a.`nombre`
+                                   from `docente` d , `apoyo` ap , `area` a
+                                   where  d.`id`=ap.`docente_id` and a.`id`=ap.`area_id` and d.`estado`='AC' and ap.`estado`='AC' and a.`estado`='AC'and d.`id`=".$fila["id"];
+                                   $resultadoa = mysql_query($sqla);
+                               while ($filas = mysql_fetch_array($resultadoa, MYSQL_ASSOC)) 
+                                      {
+                                       $listaareas[]=$filas;
+                                       }
+                                       $lista_areas[]=$listaareas;
+                                       $listatiempo=array();
+                                       $arraytribunal[]= $lista_areas;
+                                    }
+                                  $contador++;
+            }
+             $smarty->assign('asignados'  , $arraytribunalasignados);
+             $smarty->assign('listadocentes'  , $arraytribunal);
+             $contenido = 'tribunal/registrotribunal.tpl';
+             $smarty->assign('contenido',$contenido);
    
  }
    
@@ -441,7 +392,7 @@ if (isset($_POST['proyecto_id']))
  
  }
  
-   leerClase('Html');
+
   if (isset($EXITO))
     {
    $html = new Html();
@@ -450,16 +401,15 @@ if (isset($_POST['proyecto_id']))
      else
       $mensaje = array('mensaje' => 'Hubo un problema, No se grabo correctamente la Asignacion de Tribunales', 'titulo' => 'Registro de Tribunales', 'icono' => 'warning_48.png');
     $ERROR = $html->getMessageBox($mensaje);
-     }
-
+   }
+     echo "Hola eli";
+    $htmls = new Html();
+    $mensaje = array('mensaje' => 'Hubo un problema, No se grabo correctamente la Asignacion de Tribunales', 'titulo' => 'Registro de Tribunales', 'icono' => 'warning_48.png');
+    $ERROR = $htmls->getMessageBox($mensaje);
   
   
-  $smarty->assign("ERROR", $ERROR);
-  
-
-  //No hay ERROR
-  $smarty->assign("ERROR",'');
-  
+  $smarty->assign("ERROR",  $ERROR);
+   
 } 
 catch(Exception $e) 
 {

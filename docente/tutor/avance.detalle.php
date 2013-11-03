@@ -51,6 +51,7 @@ try {
   leerClase('Revision');
   leerClase('Observacion');
   leerClase('Docente');
+  leerClase('Tutor');
 
   /**
    * Menu superior
@@ -92,9 +93,13 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
 
     if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
     {
+       $usuarioss= getSessionUser();
+      $tutor=  $usuarioss->getTutor();
+      
+      
     $observacion = new Observacion();
     $revision = new Revision();
-    $revision->crearRevisionDocente($docente->id, $proyecto->id);
+    $revision->crearRevisionDocente( $tutor->id, $proyecto->id);
     $revision->objBuidFromPost();
     $revision->save();
     

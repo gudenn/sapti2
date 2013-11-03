@@ -146,9 +146,13 @@ try {
           
                   }
                   
-                 $ir = "Location: estudiante.lista.php";
-                  header($ir);
-        
+                  
+
+          $_SESSION['estado']=1;
+          header("Location: perfil.estudiante.lista.php");
+                    
+                  
+       
         
         
     }

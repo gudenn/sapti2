@@ -15,7 +15,9 @@ try {
   $smarty->assign('title','Lista de Estudiantes');
   $smarty->assign('description','Pagina de Lista de Incritos');
   $smarty->assign('keywords','Gestion,Estudiantes');
-
+//BOX
+  $CSS[]  = URL_JS . "box/box.css";
+  $JS[]  = URL_JS ."box/jquery.box.js";
   //CSS
   $CSS[]  = URL_CSS . "academic/tables.css";
   $CSS[]  = URL_CSS . "editablegrid.css";
@@ -41,7 +43,33 @@ try {
   $smarty->assign("docente_ids",$docente->usuario_id);
 
   //No hay ERROR
-  $smarty->assign("ERROR",$ERROR);
+    $ERROR = ''; 
+if(isset($_SESSION['estado']) && $_SESSION['estado']==1)
+{
+  
+  
+  leerClase('Html');
+  $html  = new Html();
+ 
+ 
+    $html = new Html();
+      
+      $mensaje = array('mensaje'=>'Se grabo correctamente','titulo'=>'Visto Bueno' ,'icono'=> 'tick_48.png');
+  
+      $ERROR = $html->getMessageBox ($mensaje);
+   
+    $_SESSION['estado']=1;
+$smarty->assign("ERROR",$ERROR);
+     
+}
+  
+  
+  
+  
+  
+  
+  
+//  $smarty->assign("ERROR",$ERROR);
 }
 catch(Exception $e) 
 {

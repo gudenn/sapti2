@@ -37,5 +37,6 @@
   {/if}
 </div>
 </div>
+     <p>{$ERROR}</p>
 
 

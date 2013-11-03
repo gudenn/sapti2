@@ -7,8 +7,8 @@ try {
   }
   if(!isUserSession())
     header("Location: ../login.php");  
-
-
+  // no hay error
+ $ERROR='';
   
   /** HEADER */
   $smarty->assign('title','Gesti&oacute;n de Accesos');
@@ -16,8 +16,10 @@ try {
   $smarty->assign('keywords','Gesti&oacute;n de Accesos');
 
   $smarty->assign('header_ui','1');
-  $smarty->assign('CSS','');
-  $smarty->assign('JS','');
+   $CSS[]  = URL_JS . "box/box.css";
+  $JS[]  = URL_JS ."box/jquery.box.js";
+  $smarty->assign('CSS', $CSS);
+  $smarty->assign('JS', $JS);
 
  /**
   * Clases
@@ -72,16 +74,31 @@ try {
   }
   //----------------------------------//
   
+   if( isset(  $_SESSION['estado']) && $_SESSION['estado'] ==1)
+   {
+     
+     
+  leerClase('Html');
+  $html  = new Html();
+ 
+ 
+    $html = new Html();
+      
+      $mensaje = array('mensaje'=>'Se grabo correctamente  la Solicitud','titulo'=>'Acepto la  Solicitud' ,'icono'=> 'tick_48.png');
+  
+      $ERROR = $html->getMessageBox ($mensaje);
+   
+   $_SESSION['estado']=0;
+  $smarty->assign("ERROR",$ERROR);        
+   }
+  
   
   $smarty->assign("menus", $menus);
 
   
-  $smarty->assign("ERROR", $ERROR);
+  //$smarty->assign("ERROR", $ERROR);
   
 
-  //No hay ERROR
-  $smarty->assign("ERROR",'');
-  
 } 
 catch(Exception $e) 
 {

@@ -26,8 +26,11 @@ try {
   $smarty->assign("menuList", $menuList);
 
   $smarty->assign('header_ui','1');
-  $smarty->assign('CSS','');
-  $smarty->assign('JS','');
+  //BOX
+  $CSS[]  = URL_JS . "box/box.css";
+  $JS[]  = URL_JS ."box/jquery.box.js";
+  $smarty->assign('CSS', $CSS);
+  $smarty->assign('JS',$JS);
 
 
 
@@ -43,7 +46,9 @@ try {
   leerClase('Estudiante');
   leerClase('Proyecto');
   leerClase('Tribunal');
-  
+   leerClase('html');
+   //no hay error
+  $ERROR='';
 
   //Sexo del usuario
       $smarty->assign('sexo', array(
@@ -75,11 +80,10 @@ try {
   }
   
 
-  if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token']){
+  if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
+    { 
     
-    $EXITO = false;
-    mysql_query("BEGIN");
-    if(isset($_POST['id_notificacion'])){
+      if(isset($_POST['id_notificacion'])){
       
       $notificacion = new Notificacion($_POST['id_notificacion']);
       $notificacion->getAllObjects();
@@ -101,13 +105,15 @@ try {
         $notificacions->fecha_envio = date("j/n/Y");
         $notificacions->prioridad   = 7;
         $notificacions->asunto      = "Asignacion de Tribunales";
+        //$notificacions->detalle     =   $_POST['accion'] ;
         $notificacions->tipo        = Notificacion::TIPO_MENSAJE;
         $notificacions->estado      = Objectbase::STATUS_AC;
 
         $noticaciones= array('estudiantes'=>array($proyecto->getEstudiante()->id));
         $notificacions->enviarNotificaion( $noticaciones);
-
-       
+          
+  
+        
       }else{ // notificaiones para asignar tutor
        
         leerClase('Proyecto_tutor');
@@ -137,33 +143,18 @@ try {
 
       }
     }
-    $EXITO = TRUE;
-    mysql_query("COMMIT");
-  }
-
-
+    
+          
+          $_SESSION['estado']=1;
+          header("Location:  ../../docente/notificacion");
   
+  }
   $token = sha1(URL . time());
   $_SESSION['register'] = $token;
   $smarty->assign('token',$token);
   
-  
-  
+  $smarty->assign("ERROR", $ERROR);
 
-  //No hay ERROR
-  $ERROR = ''; 
-  leerClase('Html');
-  $html  = new Html();
-  if (isset($EXITO))
-  {
-    $html = new Html();
-    if ($EXITO)
-      $mensaje = array('mensaje'=>'Se asigno correctamente el Tutor','titulo'=>'Registro de Tutor' ,'icono'=> 'tick_48.png');
-    else
-      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Tutor','titulo'=>'Registro de Tutor' ,'icono'=> 'warning_48.png');
-   $ERROR = $html->getMessageBox ($mensaje);
-  }
-  $smarty->assign("ERROR",$ERROR);
   
 } 
 catch(Exception $e) 

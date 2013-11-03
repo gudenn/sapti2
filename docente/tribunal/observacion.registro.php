@@ -62,9 +62,11 @@ try {
 
     if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
     {
+      $docentesesion= getSessionDocente();
+    $tribunal = $proyecto->getTribunal($docentesesion->id);
     $revision->objBuidFromPost();
     $revision->estado = Objectbase::STATUS_AC;
-    $revision->revisor=4;
+    $revision->revisor=$tribunal->id;
     $revision->revisor_tipo='DO';
     $revision->proyecto_id=$proyecto->id;
     $revision->save();

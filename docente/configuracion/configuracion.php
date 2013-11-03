@@ -39,8 +39,8 @@ if (!isDocenteSession())
   leerClase("Apoyo");
   leerClase("Usuario");
   leerClase("Docente");
-
-  $menuList[] = array('url' => URL . Docente::URL, 'name' => 'Docente');
+  
+  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
   $menuList[] = array('url' => URL . Docente::URL.'configuracion/' . basename(__FILE__), 'name' => 'Tiempo');
   $smarty->assign("menuList", $menuList);
 

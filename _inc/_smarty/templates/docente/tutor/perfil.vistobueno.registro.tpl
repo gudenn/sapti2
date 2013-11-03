@@ -1,13 +1,26 @@
       <div id="content">
+        <div  class="notacontenido">
         <h1 class="title">Registro de Visto Bueno</h1>
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
             <p>
+                <label for="nombre de estudiante"><small>Nombre De Estudiante:</small></label>
+               <span>{$usuario->nombre} {$usuario->apellido_paterno} {$usuario->apellido_materno}</span><br/>
+          
                <label for="nombre de proyecto"><small>Nombre De Proyecto:</small></label>
                <span>{$proyecto->nombre}</span><br/>
-               <label for="nombre de estudiante"><small>Nombre De Estudiante:</small></label>
-               <span>{$usuario->nombre} {$usuario->apellido_paterno} {$usuario->apellido_materno}</span>
-            </p>
+               
+                <label for="nombre de proyecto"><small>Objetivo General:</small></label>
+               <span>{$proyecto->nombre}</span><br/>
+               
+                <label for="nombre de proyecto"><small>Objetivos Especificos:</small></label>
+               <span>{$proyecto->nombre}</span><br/>
+              
+               <label for="nombre de proyecto"><small>Descripcion:</small></label>
+               <span>{$proyecto->nombre}</span><br/>
+               
+               
+               </p>
             <br/>
              
               <input type="text" name="fecha_revision" id="fecha_revision" value="{$revision->fecha_revision}" size="22"/>
@@ -53,4 +66,5 @@
         {/literal} 
         </script>
       </div>
+        </div>
         

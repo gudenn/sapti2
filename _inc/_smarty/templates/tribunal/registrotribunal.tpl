@@ -1,4 +1,5 @@
- <div id="content">
+
+<div id="content">
    <center> <strong> <h1>Formulario De Asignación De Tribunales </h1></strong></td></center>
     
     <div style="width: 50%;float: left;"  class="tbl_filtro">
@@ -204,9 +205,9 @@
      </div>
    </div>
  </form>
-            </div>
+ </div>
     </div>
- 
+
 
  
 
@@ -247,4 +248,6 @@
 
 
 </script>
-      </div>        
+      </div>     
+        <p>{$ERROR}</p>
+  

@@ -6,7 +6,7 @@ try {
     if(!isConsejoSession())
     header("Location: login.php"); 
      $smarty->assign('title','Proyecto Final');
-     $smarty->assign('description','Proyecto Final Consejo');
+     $smarty->assign('description',' Consejo');
      $smarty->assign('keywords','Proyecto Final');
 
   //CSS

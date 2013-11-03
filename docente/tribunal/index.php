@@ -53,9 +53,7 @@ if(!isDocenteSession())
 
   $menus[] = $menu;
  
- 
-  
-  $menu = new Menu('Defensas');
+   $menu = new Menu('Defensas');
   $link = Tribunal::URL."privada.estudiante.lista.php";
   $menu->agregarItem('Lista de Defensa  Privada','Revision y modificacion de Proyectos','tribunal.png',$link);
   $link = Tribunal::URL."publica.estudiante.lista.php";

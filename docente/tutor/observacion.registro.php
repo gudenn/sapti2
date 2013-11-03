@@ -9,6 +9,7 @@ try {
   leerClase('Observacion');
   leerClase('Estudiante');
   leerClase('Usuario');
+   leerClase('Tutor');
 
   /** HEADER */
   $smarty->assign('title','Proyecto Final');
@@ -60,23 +61,12 @@ try {
 
     if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
     {
-       $docente=  getSessionDocente();
-  
-      
-    $sql="select t.id
-from usuario u , tutor t
-where u.id=t.usuario_id and u.id=$docente->id;";
-    $resultados  =  mysql_query($sql);
-    
-    $iddocente   =  0;
- 
- while ($fila = mysql_fetch_array($resultados)) 
- {
-    $iddocente=$fila['id'];
- }  
+        $usuarioss= getSessionUser();
+        $tutor=  $usuarioss->getTutor();
+     
     $revision->objBuidFromPost();
     $revision->estado = Objectbase::STATUS_AC;
-    $revision->revisor=$iddocente;
+    $revision->revisor=$tutor->id;
     $revision->revisor_tipo='TU';
     $revision->estado_revision=Revision::E1_CREADO;
     $revision->proyecto_id=$proyecto->id;

@@ -230,18 +230,9 @@ class Usuario  extends Objectbase
   function getTutor() 
   {
     leerClase('Tutor');
-    
-    $activo = Objectbase::STATUS_AC;
-    $sql = "select t.* from " . $this->getTableName('Tutor') . " as t ,where t.usuario_id = '$this->usuario_id'  and t.estado = '$activo'  ";
-    $resultado = mysql_query($sql);
-    
-    if (!$resultado)
-      return false;
-
-    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
-         { 
-        $tutor =new Tutor($fila);
-          }
+     $this->getAllObjects();
+    //tutor
+    foreach ($this->tutor_objs as $tutor)
        return $tutor;
   
   }
