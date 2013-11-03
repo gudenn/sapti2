@@ -62,7 +62,7 @@ try {
   $link = Administrador::URL."configuracion/area.registro.php";
   $menu->agregarItem('Registro de &Aacute;rea','Registro de una nueva &Aacute;rea.','basicset/plus_48.png',$link);
   $menus[] = $menu;
-  $menu = new Menu('Carreras');
+  $menu = new Menu('Carreras');;
   $link = Administrador::URL."configuracion/carrera.gestion.php";
   $menu->agregarItem('Gesti&oacute;n de Carreras','Lista de todas las carreras configuradas para el sistema.','basicset/licence.png',$link);
   $link = Administrador::URL."configuracion/carrera.registro.php";
