@@ -27,7 +27,7 @@ try {
   
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'tutor/reporte','name'=>'Tutor');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'reporte/'.basename(__FILE__),'name'=>'Reportes Estadisticos');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'reporte/'.basename(__FILE__),'name'=>'Reportes Estadist&oacute;cos');
   $smarty->assign("menuList", $menuList);
 
   //CSS
