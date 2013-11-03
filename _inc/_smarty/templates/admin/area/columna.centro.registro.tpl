@@ -10,7 +10,7 @@
             </p>
             <p>
               <input type="text" name="descripcion" value="{$area->descripcion}"  data-validation-engine="validate[required]">
-              <label for="descripcion"><small>Descripcion del &Aacute;rea (*){getHelpTip('descripcion')}</small></label>
+              <label for="descripcion"><small>Descripci&oacute;n del &Aacute;rea (*){getHelpTip('descripcion')}</small></label>
             </p>
             <h2 class="title">Grabar &Aacute;rea</h2>
             <p>

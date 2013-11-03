@@ -7,15 +7,15 @@ try {
 
   /** HEADER */
   $smarty->assign('title','SAPTI - Registro Institucion');
-  $smarty->assign('description','Formulario de registro de Institucion');
-  $smarty->assign('keywords','SAPTI,Institucion,Registro');
+  $smarty->assign('description','Formulario de registro de Instituci&oacute;n');
+  $smarty->assign('keywords','SAPTI,Instituci&oacute;n,Registro');
   leerClase('Administrador');
   /**
    * Menu superior
    */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/','name'=>'Configuraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Registro de Institucion');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Registro de Instituci&oacute;n');
   $smarty->assign("menuList", $menuList);
  
   //CSS

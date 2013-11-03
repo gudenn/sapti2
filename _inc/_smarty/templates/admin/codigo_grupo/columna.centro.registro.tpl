@@ -6,7 +6,7 @@
           <form action="#" method="post" id="registro" name="registro" >
               <p>
               <input type="text" name="nombre" id="nombre"  value="{$grupo->nombre}"  data-validation-engine="validate[required]">
-              <label for="nombre"><small>Nombre de Grupo(*) {getHelpTip('nombre')}</small></label>
+              <label for="nombre"><small>Codigo de Grupo(*) {getHelpTip('nombre')}</small></label>
             </p>
             
             <h2 class="title">Grabar Codigo de Grupo</h2>
