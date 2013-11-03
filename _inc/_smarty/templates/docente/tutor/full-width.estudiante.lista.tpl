@@ -22,6 +22,7 @@
                 </select>
 
                 </div>
+        <p>{$ERROR}</p>
         	<label for="filter">Busqueda Rapida :</label>
 		<input type="text" id="filter"/>
         
@@ -30,7 +31,7 @@
         	<div id="paginator"></div>
         </div>
             <script type="text/javascript">
-                editableGrid.onloadXML("loaddata.estudiante.lista.php?doc={$docente_ids}");
+                editableGrid.onloadXML("loaddata.estudiante.lista.php?doc={$docente_ids} & idtutor={$tutor->id}");
         </script>
     </div>
     {$ERROR}

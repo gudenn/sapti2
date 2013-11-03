@@ -32,9 +32,9 @@ try {
    /**
    * Menu superior
    */
- $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
+   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
  $menuList[]     = array('url'=>URL.Docente::URL.'tutor','name'=>'Tutor');
-  $menuList[]     = array('url'=>URL.Docente::URL.'tutor/'.basename(__FILE__),'name'=>'Lista Estudiante de Perfil');
+  $menuList[]     = array('url'=>URL.Docente::URL.'tutor/'.basename(__FILE__),'name'=>'Lista Estudiante');
  $smarty->assign("menuList", $menuList);
   
  
@@ -43,7 +43,7 @@ try {
   $usuarioid= $usuario->id;
   
   $smarty->assign("usuarioid_ids", $usuarioid);
-   $smarty->assign("tutor",  $usuario->getTutor());
+   $smarty->assign("tutor",$usuario->getTutor());
 
    
   // $_SESSION['estado']=1;
@@ -71,5 +71,5 @@ catch(Exception $e)
 {
   $smarty->assign("ERROR", handleError($e));
 }
-  $smarty->display('docente/tutor/perfil.estudiante.lista.tpl');
+  $smarty->display('docente/tutor/perfil.vistobueno.lista.tpl');
 ?>
