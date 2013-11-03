@@ -35,7 +35,7 @@
                         plotShadow: false
                     },
                     title: {
-                        text: 'Estadisticos Diagrama  de Tortas Estudiantes'
+                        text: ' Diagrama  de Tortas Estudiantes'
                     },
                     tooltip: {
                         formatter: function() {

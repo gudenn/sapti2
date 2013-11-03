@@ -58,7 +58,7 @@ try {
   $menus[] = $menu;
   $menu = new Menu('&Aacute;rea');
   $link = Administrador::URL."configuracion/area.gestion.php";
-  $menu->agregarItem('Gesti&oacute;n de Areas','Lista de todos las areas configuradas para el sistema','basicset/database.png',$link);
+  $menu->agregarItem('Gesti&oacute;n de &Aacute;rea','Lista de todos las &Aacute;rea configuradas para el sistema','basicset/database.png',$link);
   $link = Administrador::URL."configuracion/area.registro.php";
   $menu->agregarItem('Registro de &Aacute;rea','Registro de una nueva &Aacute;rea.','basicset/plus_48.png',$link);
   $menus[] = $menu;
