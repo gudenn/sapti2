@@ -35,9 +35,11 @@
                         plotShadow: false
                     },
                     title: {
+
                         text: ' Diagrama  de Tortas Estudiantes'
-                    },
-                    tooltip: {
+
+                   },
+                   tooltip: {
                         formatter: function() {
                             return '<b>'+ this.point.name +'</b>: '+ this.y +' %';
                         }
@@ -56,10 +58,10 @@
                         type: 'pie',
                         name: 'Browser share',
                         data: [
-                            ['Estudiantes Aprovados', {$ap}],
+                            ['Estudiantes Aprobados', {$ap}],
                           
-                            ['Estudiantes Reprovados', {$rp}],
-                             ['Estudiantes Abandonos', {$aba}],
+                            ['Estudiantes Reprobados', {$rp}],
+                             ['Estudiantes que Abandonnaron la Materia', {$aba}],
                             
                         ]
                     }]
