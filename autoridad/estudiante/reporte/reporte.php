@@ -102,7 +102,7 @@ try {
  
  $cont = $areglo[0]['c'];
 
- if ($cont!==0) {
+ if ($cont!=0) {
     
   
  //Estudiantes con abandono
