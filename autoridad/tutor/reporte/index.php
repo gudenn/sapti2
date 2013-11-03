@@ -6,9 +6,9 @@ try {
     header("Location: ../../login.php");  
 
   /** HEADER */
-  $smarty->assign('title','Gesti&oacute;n de Docentes');
-  $smarty->assign('description','Gesti&oacute;n de Docentes');
-  $smarty->assign('keywords','Gesti&oacute;n de Docentes');
+  $smarty->assign('title','Gesti&oacute;n de Reprte');
+  $smarty->assign('description','Gesti&oacute;n de Reprte');
+  $smarty->assign('keywords','Gesti&oacute;n de Reprte');
 
   //CSS
   $CSS[]  = URL_CSS . "dashboard.css";
@@ -75,7 +75,7 @@ where u.id=t.usuario_id and pt.tutor_id=t.id  and pt.proyecto_id=p.id and pt.est
   $menus[] = $menu;
   $menu = new Menu('Reportes');
   $link = Administrador::URL."tutor/reporte/reporte.php";
-  $menu->agregarItem('Reportes de Docente','Reportes correspondientes a los Docentes','basicset/graph.png',$link);
+  $menu->agregarItem('Reportes de Tutor','Reportes correspondientes a los Tutores','basicset/graph.png',$link);
   $menus[] = $menu;
   //----------------------------------//
   

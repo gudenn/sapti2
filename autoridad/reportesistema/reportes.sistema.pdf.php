@@ -12,7 +12,7 @@ class MYPDF extends TCPDF {
     public function Header() {
         // Logo
         $image_file = K_PATH_IMAGES.'cabesera.jpg';
-        $this->Image($image_file,20,20, 170, 20, 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+        $this->Image($image_file,20,6, 170, 20, 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
         // Set font
         $this->SetFont('helvetica', 'B', 20);
        
@@ -147,7 +147,7 @@ function DesplegarTabla($a,$b)
     }
 
 // output the HTML content
-$pdf->SetXY(10, 50);
+//$pdf->SetXY(20, 50);
 $pdf->writeHTML(DesplegarTabla($sql,$b), true, false, true, false, '');
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
