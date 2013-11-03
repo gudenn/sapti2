@@ -27,7 +27,7 @@
       </div>
       <div class="featured_box" id="fc4"><img src="{$URL_IMG}academic/slider/4.jpg" alt="" />
         <div class="floater">
-          <h2>Ojetivos Generales</h2>
+          <h2>Objetivos Generales</h2>
           <p>Incorporar en el currículum los nuevos desafíos de la educación superior para responder las necesidades y desarrollo de la región y el país, en el ámbito de la alta competitividad nacional ...</p>
           <p class="readmore"><a href="{$URL}descripcion.php">Continuar &raquo;</a></p>
         </div>
@@ -44,7 +44,7 @@
       <li><a href="#fc1">Reseña Hist&oacute;rica</a></li>
       <li><a href="#fc2">Misi&oacute;n</a></li>
       <li><a href="#fc3">Visi&oacute;n</a></li>
-      <li><a href="#fc4">Ojetivos Generales</a></li>
+      <li><a href="#fc4">Objetivos Generales</a></li>
       <li class="last"><a href="#fc5">Perfil Profesional</a></li>
     </ul>
     <div class="overlay_right"></div>

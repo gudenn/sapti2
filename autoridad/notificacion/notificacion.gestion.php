@@ -34,7 +34,7 @@ try {
   {
     $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
     $menuList[]     = array('url'=>URL . Administrador::URL . 'notificacion/','name'=>'Notificaciones');
-    $menuList[]     = array('url'=>URL . Administrador::URL . 'notificacion/notificacion.gestion.php','name'=>'Archivo de Notificaiones');
+    $menuList[]     = array('url'=>URL . Administrador::URL . 'notificacion/notificacion.gestion.php','name'=>'Archivo de Notificaciones');
   }
   $smarty->assign("menuList", $menuList);
 
