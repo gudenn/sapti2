@@ -92,17 +92,18 @@ try {
         $proyeareas=$proyecto->getArea();
         $tutores= $proyecto->getTutores();
         
-        foreach ($tutores as $tuto)
-        {
-          echo $tuto->id;
-        }
+       $arraytutores=array();
+       foreach ($tutores  as $tuto)
+       {
+         $arraytutores[]=new Usuario($tuto->usuario_id);
+       }
         
         $usuariobuscado= new Usuario($estudiante->usuario_id);
         $smarty->assign('usuariobuscado',  $usuariobuscado);
         $smarty->assign('estudiantebuscado', $estudiante);
         $smarty->assign('proyectobuscado', $proyecto);
         $smarty->assign('proyectoarea', $proyecto->getArea());
-        $smarty->assign('tutores', $tutores);
+        $smarty->assign('tutores', $arraytutores);
 
    
           $automatico= new Automatico();
@@ -171,6 +172,7 @@ ORDER BY  a.valor  DESC;";
   
   if(isset($_POST['ma']))
   {
+    echo $_POST['estudiante_id'];
     
     $estudiante   = new Estudiante(false,$_POST['estudiante_id']);
    
@@ -187,11 +189,19 @@ ORDER BY  a.valor  DESC;";
     }
    
     $proyeareas=$proyecto->getArea();
-   $usuariobuscado= new Usuario($estudiante->usuario_id);
-   $smarty->assign('usuariobuscado',  $usuariobuscado);
-   $smarty->assign('estudiantebuscado', $estudiante);
-   $smarty->assign('proyectobuscado', $proyecto);
-   $smarty->assign('proyectoarea', $proyecto->getArea());
+   $tutores= $proyecto->getTutores();
+       $arraytutores=array();
+       foreach ($tutores  as $tuto)
+       {
+         $arraytutores[]=new Usuario($tuto->usuario_id);
+       }
+        
+        $usuariobuscado= new Usuario($estudiante->usuario_id);
+        $smarty->assign('usuariobuscado',  $usuariobuscado);
+        $smarty->assign('estudiantebuscado', $estudiante);
+        $smarty->assign('proyectobuscado', $proyecto);
+        $smarty->assign('proyectoarea', $proyecto->getArea());
+        $smarty->assign('tutores', $arraytutores);
    
     $sqlr="SELECT  DISTINCT(d.id), u.nombre, CONCAT (u.apellido_paterno,u.apellido_materno) as apellidos
     FROM  usuario u ,docente d, automatico a
@@ -220,8 +230,10 @@ ORDER BY  a.valor  DESC;";
   }
 
   $lista_areas[]=$listaareas;
+   $arraytribunal[]= $lista_areas;
 
  }
+
   $smarty->assign('listadocentes'  , $arraytribunal);
   $contenido = 'tribunal/registrotribunal.tpl';
   $smarty->assign('contenido',$contenido);
@@ -242,11 +254,19 @@ if(isset($_POST['a']))
        }
    
           $proyeareas=$proyecto->getArea();
-          $usuariobuscado= new Usuario($estudiante->usuario_id);
-          $smarty->assign('usuariobuscado',  $usuariobuscado);
-          $smarty->assign('estudiantebuscado', $estudiante);
-          $smarty->assign('proyectobuscado', $proyecto);
-          $smarty->assign('proyectoarea', $proyecto->getArea());
+          $tutores=$proyecto->getTutores();
+       $arraytutores=array();
+       foreach ($tutores  as $tuto)
+       {
+         $arraytutores[]=new Usuario($tuto->usuario_id);
+       }
+        
+        $usuariobuscado= new Usuario($estudiante->usuario_id);
+        $smarty->assign('usuariobuscado',  $usuariobuscado);
+        $smarty->assign('estudiantebuscado', $estudiante);
+        $smarty->assign('proyectobuscado', $proyecto);
+        $smarty->assign('proyectoarea', $proyecto->getArea());
+        $smarty->assign('tutores', $arraytutores);
 
   $sqlr="SELECT  DISTINCT(d.id), u.nombre, CONCAT (u.apellido_paterno,u.apellido_materno) as apellidos
          FROM  usuario u ,docente d, automatico a

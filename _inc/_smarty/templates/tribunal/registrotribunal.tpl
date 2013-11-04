@@ -30,10 +30,10 @@
     
          <label for="nombre">Area(as):   {foreach from=$proyectoarea item=curr_id}
                                      {$curr_id->nombre}<br />
-                                   {/foreach}</label><br />
-        <label for="nombre">Tutor:   {foreach from=$tutores item=curr_idd}
-                                     {$curr_idd->id}<br />
-                                      {$curr_idd->apellido_paterno}<br />
+                                   {/foreach}</label>
+        <label for="nombre">Tutor(es):   {foreach from=$tutores item=curr_idd}
+                                     {$curr_idd->getNombrecompleto()}
+                                      {$curr_idd->apellido_paterno}
                                    {/foreach}</label><br />
 </div>   
           <div style ="clear:both;"></div>
