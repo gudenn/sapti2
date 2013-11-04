@@ -49,18 +49,22 @@ $notificaciones= new Notificacion();
   leerClase('Tutor');
   $menu = new Menu('Lista de Estudiantes  de Perfil');
   
-  $link = Tutor::URL."perfil.estudiante.lista.php";
+  $link = Tutor::URL."perfil.seguimiento.lista.php";
   $menu->agregarItem('Seguimiento','Seguimiento a los Estudiantes ','basicset/user4.png',$link);
    $link = Tutor::URL."perfil.estudiante.lista.php";
-  $menu->agregarItem('Dar Visto Bueno Perfil ','Reportes correspondientes a los Docentes','basicset/ok.png',$link);
+  $menu->agregarItem('Dar Visto Bueno ','Dar visto Bueno a los Proyectos de Los Estudiantes','basicset/ok.png',$link);
+ $link = Tutor::URL."perfil.vistobueno.lista.php";
+  $menu->agregarItem('Lista  de  Visto Bueno  ','Lista de Proyectos Aprobados','basicset/ok.png',$link);
 
   $menus[] = $menu;
   
   $menu = new Menu('Lista de Estudiantes De Proyecto Final');
+  $link = Tutor::URL."seguimiento.lista.php";
+  $menu->agregarItem('Seguimiento a los estudiantes ','Seguimiento al Proyecto de los Estudiantes','basicset/user4.png',$link);
   $link = Tutor::URL."estudiante.lista.php";
-  $menu->agregarItem('Seguimiento a los estudiantes ','Registro y modificacion de tribunales','basicset/user4.png',$link);
-  $link = Tutor::URL."estudiante.lista.php";
-  $menu->agregarItem(' Dar Visto Bueno ','Reportes correspondientes a los Docentes','basicset/ok.png',$link);
+  $menu->agregarItem(' Dar Visto Bueno ','Visto Bueno a los Proyectos','basicset/ok.png',$link);
+   $link = Tutor::URL."proyecto.vistobueno.lista.php";
+  $menu->agregarItem('Lista Visto Bueno ','Lista de Proyectos Aprobados','basicset/ok.png',$link);
 
   
   $menus[] = $menu;

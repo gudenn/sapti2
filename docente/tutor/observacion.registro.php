@@ -34,16 +34,29 @@ try {
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
   $JS[]  = URL_JS . "jquery.addfield.js";
   $smarty->assign('JS',$JS);
-
-  
+     
   if (isset($_POST['observaciones'])) 
   $observaciones=$_POST['observaciones'];
     if (isset($_GET['id_estudiante'])) 
   $id_estudiante=$_GET['id_estudiante'];
     
+    
+    
   $estudiante     = new Estudiante($id_estudiante);
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();
+    $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
+    $menuList[]     = array('url'=>URL.Docente::URL.'tutor','name'=>'Tutor');
+  echo  $proyecto ->tipo_proyecto;
+    if( $proyecto ->tipo_proyecto == Proyecto::TIPO_PERFIL)
+    {
+    $menuList[]     = array('url'=>URL.Docente::URL.'tutor/perfil.estudiante.lista.php','name'=>'Lista Estudiantes Perfil');
+    }else
+    {
+       $menuList[]     = array('url'=>URL.Docente::URL.'tutor/seguimiento.lista.php','name'=>'Lista Estudiantes Proyecto');
+  
+    }
+      $smarty->assign("menuList", $menuList);
 
   $observacion = new Observacion();
   $revision = new Revision();
