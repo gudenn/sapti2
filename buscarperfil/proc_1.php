@@ -18,7 +18,7 @@ $smarty->assign('JS','');
 
 $q=$_POST[q];
   
-$sqlr="SELECT p.id,u.nombre,s.codigo,p.nombre as titulo,CONCAT(apellido_paterno,' ',apellido_materno) as apellidos,p.estado as estadop
+$sqlr="SELECT DISTINCT  p.id,u.nombre,s.codigo,p.nombre as titulo,CONCAT(apellido_paterno,' ',apellido_materno) as apellidos,p.estado as estadop
 FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe
 WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id and p.tipo_proyecto='PR' and p.es_actual=1 AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id 
 AND (

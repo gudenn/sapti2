@@ -78,7 +78,7 @@ try {
    
  $sqlr="SELECT count(*) as c
 FROM proyecto p
-WHERE p.tipo_proyecto='PR' AND p.estado_proyecto='CO'";
+WHERE p.tipo_proyecto='PR' ";
  $resultado = mysql_query($sqlr);
  $areglo= array();
   
