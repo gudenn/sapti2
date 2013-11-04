@@ -35,7 +35,7 @@
                         plotShadow: false
                     },
                     title: {
-                        text: 'Estadisticos Diagrama  de Tortas Estudiantes'
+                        text: 'Diagrama Estadístico de Estudiantes'
                     },
                     tooltip: {
                         formatter: function() {
@@ -56,10 +56,10 @@
                         type: 'pie',
                         name: 'Browser share',
                         data: [
-                            ['Estudiantes Aprovados', {$ap}],
+                            ['Estudiantes Aprobados', {$ap}],
                           
-                            ['Estudiantes Reprovados', {$rp}],
-                             ['Estudiantes Abandonos', {$aba}],
+                            ['Estudiantes Reprobados', {$rp}],
+                             ['Estudiantes que Abandonnaron la Materia', {$aba}],
                             
                         ]
                     }]
