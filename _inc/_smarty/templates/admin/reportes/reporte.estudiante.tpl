@@ -35,9 +35,11 @@
                         plotShadow: false
                     },
                     title: {
-                        text: 'Diagrama Estadístico de Estudiantes'
-                    },
-                    tooltip: {
+
+                        text: ' Diagrama  de Tortas Estudiantes'
+
+                   },
+                   tooltip: {
                         formatter: function() {
                             return '<b>'+ this.point.name +'</b>: '+ this.y +' %';
                         }

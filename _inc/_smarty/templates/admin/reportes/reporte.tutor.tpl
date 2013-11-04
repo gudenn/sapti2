@@ -12,7 +12,7 @@
                         plotShadow: false
                     },
                     title: {
-                        text: 'Estadisticos Diagrama  de Tortas'
+                        text: 'Diagrama  de Tortas'
                     },
                     tooltip: {
                         formatter: function() {

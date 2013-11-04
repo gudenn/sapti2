@@ -187,8 +187,11 @@ class Docente extends Objectbase{
     $usuario = new Usuario();
     $usuario->iniciarFiltro($filtro);
 
+
     $filtro->nombres[] = 'Código Sis';
 
+
+    $filtro->nombres[] = 'Codigo Sis';
     $filtro->valores[] = array('input', 'codigo_sis', $filtro->filtro('nombre'));
   }
   
