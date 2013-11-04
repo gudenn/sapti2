@@ -1,11 +1,11 @@
       <div id="content">
-        <h1 class="title">TITULO":
+        <h1 class="title">T&Iacute;TULO":
 
             <i>{$proyecto->nombre}</i>"</h1>
         <div id="respond">
          
              <p>
-              <label for="nombre"><small>NUMERO:</small></label>
+              <label for="nombre"><small>N&Uacute;MERO:</small></label>
             <span>{$proyecto->numero_asignado}</span>
             
           </p>
@@ -29,7 +29,7 @@
           </p>
          
           <p>
-              <label for="area"><small>AREA:</small></label>
+              <label for="area"><small>&Aacute;REA:</small></label>
             <span>{$area}</span>
             
           </p>
@@ -56,7 +56,7 @@
            </div>
             <div>
 <p>
-                <h1 class="title">OBJETIVOS ESPECIFICOS</h1>
+                <h1 class="title">OBJETIVOS ESPEC&Iacute;FICOS</h1>
                 
                  <table class="tbl_lista" id="docentes"  mane="docentes">
      <tbody>                  
@@ -75,7 +75,7 @@
           </p>
             </div>
             <div>
-                <h1 class="title">DESCRIPCION:</h1>
+                <h1 class="title">DESCRIPCI&Oacute;N:</h1>
                 <p>
               
             <span>{$proyecto->descripcion}</span>

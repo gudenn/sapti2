@@ -19,7 +19,7 @@ try {
   
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'estudiante/reporte','name'=>'Reportes');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'reportes/'.basename(__FILE__),'name'=>'Reportes De Estadisticos');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'reportes/'.basename(__FILE__),'name'=>'Reportes De Estadist&iacute;cos');
   $smarty->assign("menuList", $menuList);
 
   //CSS
@@ -102,7 +102,7 @@ try {
  
  $cont = $areglo[0]['c'];
 
- if ($cont!==0) {
+ if ($cont!=0) {
     
   
  //Estudiantes con abandono

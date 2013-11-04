@@ -46,7 +46,7 @@ try {
   $menus[] = $menu;
   $menu = new Menu('Reportes Estudiantes');
   $link = Administrador::URL."estudiante/reporte/reporte.php";
-  $menu->agregarItem('Reportes de Docente','Reportes correspondientes a los Docentes','basicset/graph.png',$link);
+  $menu->agregarItem('Reportes de Estudiante','Reportes correspondientes a los Estudiante','basicset/graph.png',$link);
   $menus[] = $menu;
   //----------------------------------//
   
