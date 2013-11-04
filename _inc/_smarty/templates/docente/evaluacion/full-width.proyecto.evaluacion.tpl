@@ -99,7 +99,6 @@
             document.getElementById('evaluacion_1').disabled = false;
             document.getElementById('evaluacion_2').disabled = false;
             document.getElementById('evaluacion_3').disabled = false;
-            return confirm('Seguro desea modificar la evaluacion?');
             }
             function validarNro(e) {
             var key;
