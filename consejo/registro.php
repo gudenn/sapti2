@@ -80,6 +80,9 @@ try {
        echo "<script>alert('El Estudiante no Tiene Proyecto');</script>";
       
     }
+    
+   if(sizeof($proyeareas=$proyecto->getArea())>0)
+   {
     if($proyecto->estado_proyecto!='TA')
     {
     if($proyecto->estado_proyecto=='VB')
@@ -88,12 +91,18 @@ try {
         $array =$proyecto ->getVigencia();
         $proyeareas=$proyecto->getArea();
         $tutores= $proyecto->getTutores();
+        
+        foreach ($tutores as $tuto)
+        {
+          echo $tuto->id;
+        }
+        
         $usuariobuscado= new Usuario($estudiante->usuario_id);
         $smarty->assign('usuariobuscado',  $usuariobuscado);
         $smarty->assign('estudiantebuscado', $estudiante);
         $smarty->assign('proyectobuscado', $proyecto);
         $smarty->assign('proyectoarea', $proyecto->getArea());
-        $smarty->assign('tutores', $arraytutores);
+        $smarty->assign('tutores', $tutores);
 
    
           $automatico= new Automatico();
@@ -127,7 +136,11 @@ try {
       
        echo "<script>alert('El Proyecto ya tiene Tribunales');</script>";
       
-    }    
+    }
+   }else
+   {
+       echo "<script>alert('El Proyecto no Tiene Areas');</script>";
+   }
  
  }
    
@@ -402,7 +415,7 @@ if (isset($_POST['proyecto_id']))
       $mensaje = array('mensaje' => 'Hubo un problema, No se grabo correctamente la Asignacion de Tribunales', 'titulo' => 'Registro de Tribunales', 'icono' => 'warning_48.png');
     $ERROR = $html->getMessageBox($mensaje);
    }
-     echo "Hola eli";
+    
     $htmls = new Html();
     $mensaje = array('mensaje' => 'Hubo un problema, No se grabo correctamente la Asignacion de Tribunales', 'titulo' => 'Registro de Tribunales', 'icono' => 'warning_48.png');
     $ERROR = $htmls->getMessageBox($mensaje);

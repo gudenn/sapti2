@@ -31,9 +31,9 @@
          <label for="nombre">Area(as):   {foreach from=$proyectoarea item=curr_id}
                                      {$curr_id->nombre}<br />
                                    {/foreach}</label><br />
-        <label for="nombre">Tutor:   {foreach from=$tutores item=curr_id}
-                                     {$curr_id->nombre}<br />
-                                      {$curr_id->apellido_paterno}<br />
+        <label for="nombre">Tutor:   {foreach from=$tutores item=curr_idd}
+                                     {$curr_idd->id}<br />
+                                      {$curr_idd->apellido_paterno}<br />
                                    {/foreach}</label><br />
 </div>   
           <div style ="clear:both;"></div>
