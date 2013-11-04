@@ -49,7 +49,7 @@ if(!isDocenteSession())
   $link = Tribunal::URL."estudiante.lista.php";
   $menu->agregarItem('Gesti&oacute;n de Estudiantes','Revision y Vistos Buenos a los Proyectos','basicset/user4.png',$link);
   $link = Tribunal::URL."visto.estudiante.lista.php";
-  $menu->agregarItem('Dar Visto Buenos','Habilitar los Proyectos Para la Asignacion de Defensa','basicset/ok.png',$link);
+  $menu->agregarItem('Dar Visto Bueno','Habilitar los Proyectos Para la Asignacion de Defensa','basicset/ok.png',$link);
 
   $menus[] = $menu;
  
