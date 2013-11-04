@@ -5,7 +5,7 @@
     
       
         <div class="clear"></div>
-    <center> <td bgcolor="#F7F7F7" style="text-align:center"><strong>RESULTADO DE LA BUSQUEDA</strong></td></center>
+    <center> <td bgcolor="#F7F7F7" style="text-align:center"><strong>RESULTADO DE LA B&Uacute;SQUEDA</strong></td></center>
     
     <div class="clear"></div>
     
@@ -26,7 +26,7 @@
   
   
    <div style="width: 100%;float: left;" class="tbl_filtro">
-     <Hi> LISTA DE PERFIL </Hi>
+     <Hi> LISTA DE PROYECTO </Hi>
     <table class="tbl_lista" id="docentes"  mane="docentes">
   <thead>
   <tr>
