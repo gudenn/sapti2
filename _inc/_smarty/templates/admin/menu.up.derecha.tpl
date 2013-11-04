@@ -2,7 +2,7 @@
       {if (getSessionUser())}
       <ul>
         <li><a href="{$URL}autoridad/editar.cuenta.php">Modificar Cuenta</a></li>
-        <li><a href="{$URL}?salir=1">Cerrar Sesion</a></li>
+        <li><a href="{$URL}?salir=1">Cerrar Sesi&oacute;n</a></li>
         {include file="helpdesk/help.tpl"}
       </ul>
       <ul>

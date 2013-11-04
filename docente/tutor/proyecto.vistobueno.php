@@ -44,10 +44,15 @@ try {
   $estudiante     = new Estudiante($id_estudiante);
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();
-  echo  $usuario->tutor_id;
+  // echo  $usuario->tutor_id;
     //////creando la clase de visto bueno para realizar el visto bueno del proyecto de un estudiante
  
-  
+    $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
+    $menuList[]     = array('url'=>URL.Docente::URL.'tutor','name'=>'Tutor');
+    $menuList[]     = array('url'=>URL.Docente::URL.'tutor/estudiante.lista.php','name'=>'Lista Estudiantes de Proyecto');
+     
+    $smarty->assign("menuList", $menuList);
+    
   $smarty->assign("usuario", $usuario);
   $smarty->assign("proyecto", $proyecto);
     $smarty->assign("estudiante",  $estudiante );
@@ -65,7 +70,7 @@ try {
         $docente                       =       getSessionDocente();
 
         
-         $estudiante= new Estudiante($_SESSION['pro_estudiente_id']);/// crando el estudiante
+         $estudiante= new Estudiante($_POST['estudiante_id']);/// crando el estudiante
         $proyectoestudiante= $estudiante->getProyecto();  // obtien e el proyecto del estudioante
         $usuario= getSessionUser();
         $usuario->getAllObjects();

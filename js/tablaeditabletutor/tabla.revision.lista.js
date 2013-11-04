@@ -71,9 +71,7 @@ EditableGrid.prototype.initializeGrid = function(estid)
                 if(getValueAt(cell.rowIndex, '1')=='0'){
                 cell.innerHTML = "<a href='#' class='avancedetalle' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("icons/detalle.png") + "\" border=\"0\" alt=\"detalle\" title=\"Detalle Avance\" />Detalle</a>";
-                cell.innerHTML += "<br><a onclick=document.location.href='avance.detalle.php?estudiante_id="+estid+"&avance_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("icons/basicset/document_pencil.png") + "\" border=\"0\" alt=\"revisar\" title=\"Revisar\" width='25px' height='25px'/>Revisar</a>";
-                }
+                              }
                 else if(getValueAt(cell.rowIndex, '4')=='CO'){
                 cell.innerHTML = "<a href='#' class='avancedetalle' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("icons/detalle.png") + "\" border=\"0\" alt=\"detalle\" title=\"Detalle Avance\" />Detalle</a>";

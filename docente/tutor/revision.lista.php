@@ -28,26 +28,33 @@ try {
   $JS[]  = URL_JS . "ventanasmodales/jquery.simplemodal-1.4.4.js";
   $smarty->assign('JS',$JS);
   
-     /**
-   * Menu superior
-   */
-  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
-  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php','name'=>'Proyecto Final');
-  $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/'.'estudiante.lista.php','name'=>'Estudiantes Inscritos');
-  $menuList[]     = array('url'=>URL.Docente::URL.'revision/'.basename(__FILE__),'name'=>'Seguimiento');
-  $smarty->assign("menuList", $menuList);
-  
-    if( isset($_SESSION['pro_estudiente_id']) && is_numeric($_SESSION['pro_estudiente_id']) ){
-       $id_estudiante=$_SESSION['pro_estudiente_id'];
-  }
-
-  $estudiante     = new Estudiante($id_estudiante);
+   if(isset($_GET['id_estudiante']) && is_numeric($_GET['id_estudiante']))
+  $estudiante     = new Estudiante($_GET['id_estudiante']);
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();
 
   $smarty->assign("usuario", $usuario);
   $smarty->assign("estudiante", $estudiante);
   $smarty->assign("proyecto", $proyecto);
+
+  
+  
+    /**
+   * Menu superior
+      * 
+      */
+    $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
+    $menuList[]     = array('url'=>URL.Docente::URL.'tutor','name'=>'Tutor');
+    echo $proyecto->tipo_proyecto;
+    
+    if($proyecto->tipo_proyecto==Proyecto::TIPO_PERFIL)
+    {
+    $menuList[]     = array('url'=>URL.Docente::URL.'tutor/perfil.estudiante.lista.php','name'=>'Lista Estudiantes de Perfil');
+    }  else {
+       $menuList[]     = array('url'=>URL.Docente::URL.'tutor/seguimiento.lista.php','name'=>'Lista Estudiantes de Proyecto');
+ 
+    } 
+    $smarty->assign("menuList", $menuList);
 
   //No hay ERROR
   $smarty->assign("ERROR",'');

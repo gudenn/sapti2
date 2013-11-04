@@ -26,7 +26,7 @@ try {
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
   $JS[]  = URL_JS . "tablaeditabletutor/editablegrid-2.0.1.js";
-  $JS[]  = URL_JS . "tablaeditabletutor/tabla.estudiante.lista.js";
+  $JS[]  = URL_JS . "tablaeditabletutor/proyecto.seguimiento.lista.js";
    $smarty->assign('JS',$JS);
   
    /**
@@ -34,15 +34,13 @@ try {
    */
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
   $menuList[]     = array('url'=>URL.Docente::URL.'tutor','name'=>'Tutor');
- $menuList[]     = array('url'=>URL.Docente::URL.'tutor/estudiante.lista.php','name'=>'Lista Estudiante de Proyectos');
+ $menuList[]     = array('url'=>URL.Docente::URL.'tutor/seguimiento.lista.php','name'=>'Lista Estudiante de Proyectos');
  $smarty->assign("menuList", $menuList);
 
   $docente=  getSessionDocente();
   $docenteid=$docente->id;
-  $tutor= getSessionUser()->getTutor();
   
   $smarty->assign("docente_ids",$docente->usuario_id);
-  $smarty->assign("tutor",$tutor);
 $_SESSION['estado']=1;
   //No hay ERROR
     $ERROR = ''; 
