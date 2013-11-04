@@ -311,7 +311,7 @@ and es.id='$this->id'";
       $filtro->order($_GET['order']);
     $usuario = new Usuario();
     $usuario->iniciarFiltro($filtro);
-    $filtro->nombres[] = 'Codigo Sis';
+    $filtro->nombres[] = 'C&oacute;digo Sis';
     $filtro->valores[] = array('input', 'codigo_sis', $filtro->filtro('nombre'));
   }
 
