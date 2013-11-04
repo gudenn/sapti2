@@ -80,6 +80,9 @@ try {
        echo "<script>alert('El Estudiante no Tiene Proyecto');</script>";
       
     }
+    
+   if(sizeof($proyeareas=$proyecto->getArea())>0)
+   {
     if($proyecto->estado_proyecto!='TA')
     {
     if($proyecto->estado_proyecto=='VB')
@@ -88,6 +91,13 @@ try {
         $array =$proyecto ->getVigencia();
         $proyeareas=$proyecto->getArea();
         $tutores= $proyecto->getTutores();
+        
+       $arraytutores=array();
+       foreach ($tutores  as $tuto)
+       {
+         $arraytutores[]=new Usuario($tuto->usuario_id);
+       }
+        
         $usuariobuscado= new Usuario($estudiante->usuario_id);
         $smarty->assign('usuariobuscado',  $usuariobuscado);
         $smarty->assign('estudiantebuscado', $estudiante);
@@ -127,7 +137,11 @@ try {
       
        echo "<script>alert('El Proyecto ya tiene Tribunales');</script>";
       
-    }    
+    }
+   }else
+   {
+       echo "<script>alert('El Proyecto no Tiene Areas');</script>";
+   }
  
  }
    
@@ -158,6 +172,7 @@ ORDER BY  a.valor  DESC;";
   
   if(isset($_POST['ma']))
   {
+    echo $_POST['estudiante_id'];
     
     $estudiante   = new Estudiante(false,$_POST['estudiante_id']);
    
@@ -174,11 +189,19 @@ ORDER BY  a.valor  DESC;";
     }
    
     $proyeareas=$proyecto->getArea();
-   $usuariobuscado= new Usuario($estudiante->usuario_id);
-   $smarty->assign('usuariobuscado',  $usuariobuscado);
-   $smarty->assign('estudiantebuscado', $estudiante);
-   $smarty->assign('proyectobuscado', $proyecto);
-   $smarty->assign('proyectoarea', $proyecto->getArea());
+   $tutores= $proyecto->getTutores();
+       $arraytutores=array();
+       foreach ($tutores  as $tuto)
+       {
+         $arraytutores[]=new Usuario($tuto->usuario_id);
+       }
+        
+        $usuariobuscado= new Usuario($estudiante->usuario_id);
+        $smarty->assign('usuariobuscado',  $usuariobuscado);
+        $smarty->assign('estudiantebuscado', $estudiante);
+        $smarty->assign('proyectobuscado', $proyecto);
+        $smarty->assign('proyectoarea', $proyecto->getArea());
+        $smarty->assign('tutores', $arraytutores);
    
     $sqlr="SELECT  DISTINCT(d.id), u.nombre, CONCAT (u.apellido_paterno,u.apellido_materno) as apellidos
     FROM  usuario u ,docente d, automatico a
@@ -207,8 +230,10 @@ ORDER BY  a.valor  DESC;";
   }
 
   $lista_areas[]=$listaareas;
+   $arraytribunal[]= $lista_areas;
 
  }
+
   $smarty->assign('listadocentes'  , $arraytribunal);
   $contenido = 'tribunal/registrotribunal.tpl';
   $smarty->assign('contenido',$contenido);
@@ -229,11 +254,19 @@ if(isset($_POST['a']))
        }
    
           $proyeareas=$proyecto->getArea();
-          $usuariobuscado= new Usuario($estudiante->usuario_id);
-          $smarty->assign('usuariobuscado',  $usuariobuscado);
-          $smarty->assign('estudiantebuscado', $estudiante);
-          $smarty->assign('proyectobuscado', $proyecto);
-          $smarty->assign('proyectoarea', $proyecto->getArea());
+          $tutores=$proyecto->getTutores();
+       $arraytutores=array();
+       foreach ($tutores  as $tuto)
+       {
+         $arraytutores[]=new Usuario($tuto->usuario_id);
+       }
+        
+        $usuariobuscado= new Usuario($estudiante->usuario_id);
+        $smarty->assign('usuariobuscado',  $usuariobuscado);
+        $smarty->assign('estudiantebuscado', $estudiante);
+        $smarty->assign('proyectobuscado', $proyecto);
+        $smarty->assign('proyectoarea', $proyecto->getArea());
+        $smarty->assign('tutores', $arraytutores);
 
   $sqlr="SELECT  DISTINCT(d.id), u.nombre, CONCAT (u.apellido_paterno,u.apellido_materno) as apellidos
          FROM  usuario u ,docente d, automatico a
@@ -402,7 +435,7 @@ if (isset($_POST['proyecto_id']))
       $mensaje = array('mensaje' => 'Hubo un problema, No se grabo correctamente la Asignacion de Tribunales', 'titulo' => 'Registro de Tribunales', 'icono' => 'warning_48.png');
     $ERROR = $html->getMessageBox($mensaje);
    }
-     echo "Hola eli";
+    
     $htmls = new Html();
     $mensaje = array('mensaje' => 'Hubo un problema, No se grabo correctamente la Asignacion de Tribunales', 'titulo' => 'Registro de Tribunales', 'icono' => 'warning_48.png');
     $ERROR = $htmls->getMessageBox($mensaje);

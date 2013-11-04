@@ -22,7 +22,7 @@ try {
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
   $JS[]  = URL_JS . "tablaeditable/editablegrid-2.0.1.js";
-  $JS[]  = URL_JS . "tablaeditabletribunal/tabla.revision.lista.js";
+   $JS[]  = URL_JS . "tablaeditabletutor/tabla.revision.lista.js";
   $JS[]  = URL_JS . "ventanasmodales/observacion.detalle.js";
   $JS[]  = URL_JS . "ventanasmodales/avance.detalle.modal.js";
   $JS[]  = URL_JS . "ventanasmodales/jquery.simplemodal-1.4.4.js";
@@ -37,11 +37,8 @@ try {
   $smarty->assign("menuList", $menuList);
   
   
-    if( isset($_SESSION['pro_estudiente_id']) && is_numeric($_SESSION['pro_estudiente_id']) ){
-       $id_estudiante=$_SESSION['pro_estudiente_id'];
-  }
-
-  $estudiante     = new Estudiante($id_estudiante);
+  if(isset($_GET['id_estudiante'])  && is_numeric($_GET['id_estudiante']))
+  $estudiante     = new Estudiante($_GET['id_estudiante']);
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();
 

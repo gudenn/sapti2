@@ -62,12 +62,13 @@ try {
 
     if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
     {
-      $docentesesion= getSessionDocente();
+    $docentesesion= getSessionDocente();
     $tribunal = $proyecto->getTribunal($docentesesion->id);
     $revision->objBuidFromPost();
     $revision->estado = Objectbase::STATUS_AC;
     $revision->revisor=$tribunal->id;
-    $revision->revisor_tipo='DO';
+    $revision->revisor_tipo='TR';
+     $revision->estado_revision=Revision::E1_CREADO;
     $revision->proyecto_id=$proyecto->id;
     $revision->save();
     foreach ($observaciones as $obser_array){
@@ -75,6 +76,7 @@ try {
     $observacion->estado = Objectbase::STATUS_AC;
     $observacion->observacion=$obser_array;
     $observacion->revision_id = $revision->id;
+    $observacion->estado_observacion = Observacion::E1_CREADO;
     $observacion->save();
     }
 

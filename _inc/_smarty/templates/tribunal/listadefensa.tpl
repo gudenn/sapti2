@@ -2,7 +2,7 @@
 <div class="wrapper row3">
   <div class="rnd">
     <div id="container">
-        <h1 class="title">Lista de Estudiantes Inscritos</h1>
+        <h1 class="title">Lista de Estudiantes con Defensa</h1>
         <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">       	
         </head>
