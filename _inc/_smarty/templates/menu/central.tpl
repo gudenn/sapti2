@@ -11,7 +11,7 @@
               {if (isset($menu_item->nopendientes) && $menu_item->nopendientes)}<span class="nopendientes">{$menu_item->nopendientes}</span>{/if}
               {$menu_item->menu_icono->mostrar()}
               <h3>{$menu_item->titulo}</h3>
-              <p>{$menu_item->descripcion}</p>
+              <p>{$menu->ucpalabras($menu_item->descripcion)}</p>
             </a>
           {/section}
         </div>
