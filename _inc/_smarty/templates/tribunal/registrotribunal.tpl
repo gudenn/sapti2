@@ -48,8 +48,7 @@
     <th><a >NOMBRE      </a></th>
     <th><a  >APELLIDOS     </a></th>
     <th><a >&Aacute;REA</a></th>
-    <th><a  >TIEMPO  </a></th>
-     </tr>
+        </tr>
   </thead>
   <tbody>
   
@@ -79,16 +78,7 @@
         
        </a>
 </td>
-<td> <a  class="tooltip"> DIS
-  <span>
-    <div id="content"  style="width:685px;min-height: 450px;">
-    <div id="verhorario">
-    {$diass->llemartabla($listadocentes[ic][0])}
-    </div>
-</div>
-  </span> 
-    </a>
-</td>
+
      
     </tr>
     
@@ -105,9 +95,8 @@
             <th>ID          </th>
             <th>NOMBRE       </th>
             <th>APELLIDOS   </th>
-             <th>AREA</th>
-             <th>TIEMPO</th>
-           
+             <th>&Aacute;REA</th>
+            
           </tr>
         </thead>
         <tbody>
@@ -137,19 +126,7 @@
         
        </a>
 </td>
-<td>     <a  class="tooltip"> DIS
-  <span>
-  <b>
- </b>
-{foreach name=outer item=contact from=$asignados[ic][4]}
-  <hr />
-  {foreach key=key item=item from=$contact}
-  {$item}
-  {/foreach}
-{/foreach}
- </span> 
-    </a>
-</td>
+
      
     </tr>
     

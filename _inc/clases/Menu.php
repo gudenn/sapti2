@@ -275,9 +275,7 @@ class Menu
    $menus[] = $menu;
   
    $notificacion= new Notificacion();
-    //echo sizeof($notificacion->getNotificacionConsejo(2));
-    
-     
+       
      $menu = new Menu('Reportes');
      $link = Consejo::URL."reporte.php";
      $menu->agregarItem('Reportes','','basicset/graph.png',$link);

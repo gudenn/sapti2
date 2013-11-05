@@ -1,6 +1,6 @@
       <div id="left_column">
           <div class="subnav">
-            <h2>Menu Docente</h2>
+            <h2>Mnu Docente</h2>
             <ul id="accordion">
               <li><a href="{$URL}docente/">Inicio</a></li>
               <li><a href="{$URL}docente/">Proyecto Final</a></li>

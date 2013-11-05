@@ -1,7 +1,7 @@
 {if (isset($menuizquierda))}
 <div id="column">
   <div class="subnav">
-    <h2>Menu Consejo</h2>
+    <h2>Men&uacute; Consejo</h2>
     <ul id="menuizq">
     {section name=ic loop=$menuizquierda}
       {assign var="menu" value=$menuizquierda[ic]}

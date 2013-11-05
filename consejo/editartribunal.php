@@ -12,26 +12,27 @@ try {
 
   //CSS
  //CSS
-   $CSS[]  = URL_JS . "jQfu/css/jquery.fileupload-ui.css";
+    $CSS[]  = URL_JS . "ui/overcast/jquery-ui.css";
+  $CSS[]  = URL_JS . "jQfu/css/jquery.fileupload-ui.css";
   $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_CSS . "spams.css";
   $CSS[]  = URL_JS  . "validate/validationEngine.jquery.css";
-  $CSS[]  = URL_CSS . "box/box.css";
- 
-  $smarty->assign('CSS',$CSS);
-  //JS
+
+  
+   
+  
   $JS[]  = URL_JS . "jquery.min.js";
-  //Validation
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
 
+    
+   $CSS[]  = URL_JS . "box/box.css";
+   $JS[]  = URL_JS ."box/jquery.box.js";
   //CK Editor
   $JS[]  = URL_JS . "ckeditor/ckeditor.js";
   //BOX
-  $JS[]  = URL_JS ."box/jquery.box.js";
-  
+  $smarty->assign('CSS',$CSS);
   $smarty->assign('JS',$JS);
-
   //CREAR UN TIPO   DE DEF
   leerClase('Tribunal');
   leerClase("Proyecto");
@@ -50,7 +51,8 @@ try {
 //contruyendo el usuario
   
   $menuList[]     = array('url'=>URL.Consejo::URL,'name'=>'Consejo');
-   $menuList[]     = array('url'=>URL . Consejo::URL.'listatribunal.php' ,'name'=>'Lista Estudiantes');
+  $menuList[]     = array('url'=>URL . Consejo::URL.'tribunales.rechazados.php' ,'name'=>'Tribunales');
+
    $smarty->assign("menuList", $menuList);
   
  $editores = ",
@@ -58,33 +60,32 @@ try {
                   [ 'Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
                   [ 'FontSize', 'TextColor', 'BGColor' ]]}";
   
-  $smarty->assign("editores", $editores);
+  $smarty->assign("editores",$editores);
  
   if ( isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' )
-  {
-    echo $_POST['proyecto_id'];
-      
+  {  
+   
+     $stado=0;
+    mysql_query("BEGIN");
     $listatribunales= array();
     $proyecto= new Proyecto($_POST['proyecto_id']);
     
-  //  echo $proyecto->nombre;
+  
     $listatribunales=$proyecto->getIdTribunles();
     $tribunalesactuales= array();
     $tribunalesactuales=$_POST['ids'];
     
-         if(isset($_POST['ids']))
+      if(isset($_POST['ids']))
      { 
      
      
      foreach ($_POST['ids'] as $id)
             {
-            //     echo $id;
-       
-       
+          
                
             if(!in_array($id, $listatribunales))
              {
-               // echo $id;
+              
                 $tribunal= new Tribunal();
                 $tribunal->objBuidFromPost();  
                 $tribunal->docente_id =$id;
@@ -100,10 +101,10 @@ try {
                 $notificacions= new Notificacion();
                 $notificacions->objBuidFromPost();
                 $notificacions->proyecto_id=$_POST['proyecto_id']; 
-                $notificacions->tipo="Solicitud";
+                $notificacions->tipo=Notificacion::TIPO_ASIGNACION;
                 $notificacions->fecha_envio= date("j/n/Y");
                 $notificacions->asunto="Asignacion de Tribunales";
-                $notificacions->detalle="fasdf";
+                $notificacions->detalle=$_POST['detalle'];
                 $notificacions->prioridad=5;
                 $notificacions->estado = Objectbase::STATUS_AC;
 
@@ -127,6 +128,24 @@ try {
                  
      }
      }
+    $stado=1;
+    mysql_query("COMMIT"); 
+    
+      if(isset($stado))
+        {
+        if($stado==1)
+        {
+          $_SESSION['estado']=$stado;
+          header("Location:tribunales.rechazados.php");
+         
+          
+        }else  
+          {
+          $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Area','titulo'=>'Registro de Area' ,'icono'=> 'warning_48.png');
+          $ERROR = $html->getMessageBox ($mensaje);
+          }
+         }
+     
     
     
    }
@@ -221,6 +240,9 @@ where  d.`id`=ap.`docente_id` and a.`id`=ap.`area_id` and d.`estado`='AC' and ap
  $smarty->assign('listadocenteselec'  , $arraytribunalselec);
           
       
+  }else
+  {
+     header("Location:tribunales.rechazados.php");
   }
   
   
@@ -243,7 +265,6 @@ $contenido = 'tribunal/editartribunal.tpl';
 
 
 $TEMPLATE_TOSHOW = 'tribunal/tribunal.3columnas.tpl';
-//$TEMPLATE_TOSHOW = 'tribunal/editartribunal.tpl';
 $smarty->display($TEMPLATE_TOSHOW);
 
 ?>
