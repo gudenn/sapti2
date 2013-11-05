@@ -3,8 +3,8 @@
 	
         $p=$_GET['id_p'];
 	$consulta = "SELECT s.codigo as gestion,CONCAT(u.nombre,' ',apellido_paterno,apellido_materno) as nombre ,p.nombre as titulo,v.estado_vigencia as estadop,p.id
-        FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
-        WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id and i.estado_inscrito='AC' AND pe.proyecto_id=p.id and p.tipo_proyecto='PR' and p.estado_proyecto='CO' AND p.estado='AC' AND p.id=v.proyecto_id AND v.estado_vigencia='PO' and s.id='".$p."'";
+        FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v,dicta d
+        WHERE u.id=e.usuario_id AND e.id=i.estudiante_id  and d.semestre_id=s.id and i.dicta_id=d.id AND e.id=pe.estudiante_id and i.estado_inscrito='AC' AND pe.proyecto_id=p.id and p.tipo_proyecto='PR' and p.estado_proyecto='CO' AND p.estado='AC' AND p.id=v.proyecto_id AND v.estado_vigencia='PO' and s.id='".$p."'";
 	$resultado =mysql_query($consulta); 
 	
 						
