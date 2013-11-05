@@ -236,7 +236,7 @@ class Menu
     if( $proyecto->estado_proyecto==Proyecto::EST2_BUE)
     {
       $link = Estudiante::URL."proyecto/proyecto.registro.php";
-      $thise->agregarItem('Registro de Formulario','Geti&oacute;n de las Notificaciones','basicset/survey.png',$link,1);
+      $thise->agregarItem('Registro de Formulario','Registro de Formulario de Proyecto Final del Estudiante','basicset/survey.png',$link,1);
     }
     $thises[] = $thise;
 
