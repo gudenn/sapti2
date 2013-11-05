@@ -4,12 +4,11 @@
      
           
      <form action="" method="post">
-      <h1> Detalle Del Proyecto </h1>
+      <h1> Detalle</h1>
         
-       <label for="nombre">Nombre:  {$usuario->nombre}</label><br />
-        <label for="nombre">Apellidos:  {$usuario->apellido_paterno} {$usuario->apellido_materno}</label><br />
-         <label for="nombre">Codigo Sis:  {$estudiante->codigo_sis}</label><br />
-          <label for="nombre">Proyecto:  {$proyecto->nombre}</label><br />
+       <label for="nombre">Estudiante:  {$usuario->getNombreCompleto()}</label><br />
+       <label for="nombre">Codigo Sis:  {$estudiante->codigo_sis}</label><br />
+       <label for="nombre">Proyecto:  {$proyecto->nombre}</label><br />
            
    
  </form>
@@ -21,15 +20,15 @@
   
   
    <div >
-     <Hi> LISTA DE LOS DOCENTES</Hi>
+     <Hi> Lista de Docentes</Hi>
     <table class="tbl_lista" id="docentes"  mane="docentes">
   <thead>
   <tr>
     <th><a >ID          </a></th>
-    <th><a >Nombre      </a></th>
-    <th><a  >Apellidos    </a></th>
-    <th><a >Area</a></th>
-      <th><a >Tiempo</a></th>
+    <th><a >NOMBRE      </a></th>
+    <th><a  >APELLIDOS    </a></th>
+    <th><a >&Aacute;REA</a></th>
+  
      </tr>
   </thead>
   <tbody>
@@ -58,20 +57,7 @@
         
        </a>
 </td>
-<td>     <a  class="tooltip"> DIS
-  <span>
-  <b>
- </b>
-{foreach name=outer item=contact from=$listadocentes[ic][4]}
-  <hr />
-  {foreach key=key item=item from=$contact}
-  {$item}
-  {/foreach}
-{/foreach}
- </span> 
-    </a>
-</td>
-     
+  
     </tr>
   {/section}
     </tbody> 
@@ -81,17 +67,17 @@
       
        <form action="" method="post" id="pedido_form" >
  <div  >
-   <Hi> LISTA DE LOS DOCENTES ASIGNADOS</Hi>
+   <Hi> Lista de Docentes Asignados</Hi>
      
       
        <table  multiple id="asignados" >
         <thead>
           <tr>
             <th>ID          </th>
-            <th>Nnombre     </th>
-            <th>Apellidos   </th>
-             <th>Area</th>
-             <th>Tiempo</th>
+            <th>NOMBRE   </th>
+            <th>APELLIODS </th>
+             <th>&Aacute;REA</th>
+          
            
           </tr>
         </thead>
@@ -121,39 +107,29 @@
         
        </a>
 </td>
-<td>     <a  class="tooltip"> DIS
-  <span>
-  <b>
- </b>
-{foreach name=outer item=contact from=$listadocenteselec[ic][4]}
-  <hr />
-  {foreach key=key item=item from=$contact}
-  {$item}
-  {/foreach}
-{/foreach}
- </span> 
-    </a>
-</td>
-     
+
     </tr>
   {/section}
         </tbody>
       </table>
         
      
-      <input type="hidden" id="proyecto_id" name="proyecto_id" value="{$proyecto->id}" /><br />
-       <input type="hidden" id="proyecto_id" name="estudiante_id" value="{$estudiantebuscado->codigo_sis}" /><br />
+      <input type="hidden" id="proyecto_id" name="proyecto_id" value="{$proyecto->id}" />
+       <input type="hidden" id="proyecto_id" name="estudiante_id" value="{$estudiantebuscado->codigo_sis}" />
       
         </div>
        <div style ="clear:both;"></div>
      
-      <div>
+        <div>
         Mensaje<br/>
-        <textarea name="detalle" rows="5" style="width: 90%"></textarea>
+        <textarea name="detalle" rows="5" style="width: 90%">
+Se le Asigno los Tribunales  correspondientes al proyecto:{$proyecto->nombre}  del estudiante:{$usuario->getNombreCompleto()} para q usted realize las funciones como tribunal al proyecto ya mencionado esperamos su pronta respuesta 
+      </textarea>
         <script>
           CKEDITOR.replace('detalle'{$editores})
         </script>
-      </div>     
+      </div>
+         
       
       <div style="text-align: center">
         <input type="hidden" name="id" value="" />

@@ -80,12 +80,12 @@ try {
     else
     {
       //@todo no tiene proyecto 
-       echo "<script>alert('El Estudiante no Tiene Proyecto');</script>";
+       //echo "<script>alert('El Estudiante no Tiene Proyecto');</script>";
     }
     
    if(sizeof($proyeareas=$proyecto->getArea())>0)
    {
-        $array       =  $proyecto ->getVigencia();
+       
         $proyeareas  =  $proyecto->getArea();
         $tutores     =  $proyecto->getTutores();
         
@@ -123,7 +123,7 @@ try {
         }  
    
    }  else {
-        echo "<script>alert('El Estudiante No tiene  Area');</script>";
+       // echo "<script>alert('El Estudiante No tiene  Area');</script>";
   
    }
  
@@ -180,7 +180,7 @@ try {
     else
     {
       //@todo no tiene proyecto 
-       echo "<script>alert('El Estudiante no Tiene Proyecto');</script>";
+       //e//cho "<script>alert('El Estudiante no Tiene Proyecto');</script>";
       
     }
    
@@ -251,7 +251,7 @@ if(isset($_POST['automatico']))
      else
       {
       //@todo no tiene proyecto 
-       echo "<script>alert('El Estudiante no Tiene Proyecto');</script>";
+      // echo "<script>alert('El Estudiante no Tiene Proyecto');</script>";
        }
    
           $proyeareas=$proyecto->getArea();
@@ -355,9 +355,7 @@ if (isset($_POST['proyecto_id']))
     $notificacion->enviarNotificaion( $noticaciones);
     foreach ($_POST['ids'] as $id)
      {
-               //  echo $id;
-               
-                $tribunal                    = new Tribunal();
+                 $tribunal                    = new Tribunal();
                 $tribunal->objBuidFromPost();  
                 $tribunal->docente_id        =$id;
                 $tribunal->proyecto_id       =$proyectos->id;
@@ -393,13 +391,15 @@ if (isset($_POST['proyecto_id']))
     if($stado==1)
       {
        $_SESSION['estado']=$stado;
-          header("Location:listatribunal.php");
+       header("Location: listatribunal.php");
           
 
-      }  else {
+      }else
+        
+        {
           $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Area','titulo'=>'Registro de Area' ,'icono'=> 'warning_48.png');
           $ERROR = $html->getMessageBox ($mensaje);
-               }
+       }
     }
     
     
