@@ -1,16 +1,15 @@
 <?php
 try {
-  define ("MODULO", "DOCENTE");
+ define ("MODULO", "REPORTE");
  require('../_start.php');
- // if(!isDocenteSession())
- //   header("Location: login.php"); 
+ 
 
   leerClase('Docente');
   $ERROR = '';
 
   /** HEADER */
   $smarty->assign('title','Proyectos Vencidos');
-  $smarty->assign('description','P&aacute;gina de Lista de Perfiles vencidos');
+  $smarty->assign('description','Pagina de Lista de Perfiles vencidos');
   $smarty->assign('keywords','Gestion,');
 
   //CSS

@@ -1,8 +1,8 @@
 <?php
 try {
-  define ("MODULO", "ADMIN-ESTUDIANTE-REPORTE");
+  define ("MODULO", "REPORTE");
   require('../../_start.php');
-  if(!isAdminSession())
+  if(!isUserSession())
     header("Location: ../../login.php");  
 
   leerClase('Administrador');
@@ -18,7 +18,7 @@ try {
    */
   
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'estudiante/reporte','name'=>'Reportes');
+
   $menuList[]     = array('url'=>URL . Administrador::URL . 'reportes/'.basename(__FILE__),'name'=>'Reportes De Estadist&iacute;cos');
   $smarty->assign("menuList", $menuList);
 
