@@ -48,7 +48,8 @@ class Menu
    */
    function ucpalabras($frace) { 
         $excepciones = array( 
-          'de','a','el','y','o','no','para','la','las','lo','los',
+          'de','a','el','y','o','no','para',
+          'la','las','lo','los','que',
           'un','dar','es','si','por', 
           'sino','cuando', 'usa','una', 
           'de','del','por','en' 
@@ -155,39 +156,39 @@ class Menu
     // Menu de AUTORIDADES
     if ($usuario->perteneceGrupo(Grupo::GR_AU))
     {
-  $menu = new Menu('Proyecto');
-  $link = Administrador::URL."reportes/proceso.php";
-  $menu->agregarItem('Reprotes de Proyectos en Proceso','Reprotes de Proyectos en Proceso','basicset/my-reports.png',$link);
-  $link = Administrador::URL."reportes/tribunales.php";
-  $menu->agregarItem('Reprotes de Proyectos con Tribunales','Reprotes de Proyectos con Tribunales','basicset/my-reports.png',$link);
-  $link = Administrador::URL."reportes/defensa.php";
-  $menu->agregarItem('Reprotes de Proyectos en Defensa','Reprotes de Proyectos en Defensa','basicset/my-reports.png',$link);
-  $link = Administrador::URL."reportes/defensa.php";
-  $menu->agregarItem('Reprotes de Proyectos en Finalizados','Reprotes de Proyectos en Finalizados','basicset/my-reports.png',$link);
-  $menus[] = $menu;
- 
-  $menu = new Menu('Reporte Docente');
-  $link = Administrador::URL."docente/reporte/docente.reporte.php";
-  $menu->agregarItem('Reportes Docente','Reported de docentes en pdf y excel','basicset/my-reports.png',$link);
-  $menus[] = $menu;
-  $menu = new Menu('Estudiante');
-  $link = Administrador::URL."estudiante/reporte/estudiante.reporte.php";
-  $menu->agregarItem('Reprotes','Reportes para Estudiantes','basicset/my-reports.png',$link);
-  $link = Administrador::URL."reportes/cambio.php";
-  $menu->agregarItem('Reportes Cambios','Reportes para Estudiantes que Hicieron Cambios','basicset/my-reports.png',$link);
-  $menus[] = $menu;
-  $menu = new Menu('Reportes');
-  $link = Administrador::URL."proyecto/reporte/reporte.php";
-  $menu->agregarItem('Reportes de Proyectos',' Reportes de Proyectos','basicset/graph.png',$link);
-  $menus[] = $menu;
-  $menu = new Menu('Reportes Estudiantes');
-  $link = Administrador::URL."estudiante/reporte/reporte.php";
-  $menu->agregarItem('Reportes de Estudiante','Reportes correspondientes a los Estudiante','basicset/graph.png',$link);
-  $menus[] = $menu;
-  $menu = new Menu('Reportes de los Estados de un Proyecto');
-  $link = Administrador::URL."reportes/reporte.php";
-  $menu->agregarItem('Reportes Estados de Proyecto','Reportes Correspondientes a los Estados de Proyecto','basicset/graph.png',$link);
-  $menus[] = $menu;
+      $thise = new Menu('Proyecto');
+      $link = Administrador::URL."reportes/proceso.php";
+      $thise->agregarItem('Reprotes de Proyectos en Proceso','Reprotes de Proyectos en Proceso','basicset/my-reports.png',$link);
+      $link = Administrador::URL."reportes/tribunales.php";
+      $thise->agregarItem('Reprotes de Proyectos con Tribunales','Reprotes de Proyectos con Tribunales','basicset/my-reports.png',$link);
+      $link = Administrador::URL."reportes/defensa.php";
+      $thise->agregarItem('Reprotes de Proyectos en Defensa','Reprotes de Proyectos en Defensa','basicset/my-reports.png',$link);
+      $link = Administrador::URL."reportes/defensa.php";
+      $thise->agregarItem('Reprotes de Proyectos en Finalizados','Reprotes de Proyectos en Finalizados','basicset/my-reports.png',$link);
+      $thises[] = $thise;
+
+      $thise = new Menu('Reporte Docente');
+      $link = Administrador::URL."docente/reporte/docente.reporte.php";
+      $thise->agregarItem('Reportes Docente','Reported de docentes en pdf y excel','basicset/my-reports.png',$link);
+      $thises[] = $thise;
+      $thise = new Menu('Estudiante');
+      $link = Administrador::URL."estudiante/reporte/estudiante.reporte.php";
+      $thise->agregarItem('Reprotes','Reportes para Estudiantes','basicset/my-reports.png',$link);
+      $link = Administrador::URL."reportes/cambio.php";
+      $thise->agregarItem('Reportes Cambios','Reportes para Estudiantes que Hicieron Cambios','basicset/my-reports.png',$link);
+      $thises[] = $thise;
+      $thise = new Menu('Reportes');
+      $link = Administrador::URL."proyecto/reporte/reporte.php";
+      $thise->agregarItem('Reportes de Proyectos',' Reportes de Proyectos','basicset/graph.png',$link);
+      $thises[] = $thise;
+      $thise = new Menu('Reportes Estudiantes');
+      $link = Administrador::URL."estudiante/reporte/reporte.php";
+      $thise->agregarItem('Reportes de Estudiante','Reportes correspondientes a los Estudiante','basicset/graph.png',$link);
+      $thises[] = $thise;
+      $thise = new Menu('Reportes de los Estados de un Proyecto');
+      $link = Administrador::URL."reportes/reporte.php";
+      $thise->agregarItem('Reportes Estados de Proyecto','Reportes Correspondientes a los Estados de Proyecto','basicset/graph.png',$link);
+      $thises[] = $thise;
       
     }
     // Menu de CONSEJO
