@@ -15,7 +15,7 @@ try {
 
   /** HEADER */
   $smarty->assign('title','Gestion de Institucion');
-  $smarty->assign('description','Pagina de gesti&oacute;n de Instituci&oacute;n');
+  $smarty->assign('description','P&aacute;gina de gesti&oacute;n de Instituci&oacute;n');
   $smarty->assign('keywords','Gesti&acoute;n,Institucion');
   leerClase('Administrador');
   /**

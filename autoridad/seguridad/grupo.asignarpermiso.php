@@ -18,7 +18,7 @@ try {
 
   /** HEADER */
   $smarty->assign('title','Gesti&oacute;n de Grupos');
-  $smarty->assign('description','Pagina de Gesti&oacute;n  de Grupos');
+  $smarty->assign('description','P&aacute;gina de Gesti&oacute;n  de Grupos');
   $smarty->assign('keywords','Gesti&oacute;n ,Grupos');
 //  $smarty->assign('menudirslast','Gestion Grupos');
 

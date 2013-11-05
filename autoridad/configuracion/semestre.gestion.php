@@ -16,7 +16,7 @@ try {
 
   /** HEADER */
   $smarty->assign('title','Gesti&oacute;n de Semestres');
-  $smarty->assign('description','Pagina de gesti&oacute;n de Semestres');
+  $smarty->assign('description','P&aacute;gina de gesti&oacute;n de Semestres');
   $smarty->assign('keywords','Gestion,Semestre');
   leerClase('Administrador');
   /**

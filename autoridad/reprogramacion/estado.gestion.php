@@ -15,7 +15,7 @@ try {
 
   /** HEADER */
   $smarty->assign('title','Gestion de Estado');
-  $smarty->assign('description','Pagina de gestion de Estados');
+  $smarty->assign('description','P&aacute;gina de gestion de Estados');
   $smarty->assign('keywords','Gestion,estados');
   leerClase('Administrador');
   leerClase('Estudiante');

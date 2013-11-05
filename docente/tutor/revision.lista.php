@@ -11,7 +11,7 @@ try {
   
   /** HEADER */
   $smarty->assign('title','Gestion de Observaciones');
-  $smarty->assign('description','Pagina de gestion de Observaciones');
+  $smarty->assign('description','P&aacute;gina de gestion de Observaciones');
   $smarty->assign('keywords','Gestion,Observaciones');
 
   $CSS[]  = URL_CSS . "academic/tables.css";

@@ -10,7 +10,7 @@ try {
 
   /** HEADER */
   $smarty->assign('title','Proyectos Vencidos');
-  $smarty->assign('description','Pagina de Lista de Perfiles vencidos');
+  $smarty->assign('description','P&aacute;gina de Lista de Perfiles vencidos');
   $smarty->assign('keywords','Gestion,');
 
   //CSS

@@ -8,7 +8,7 @@ try {
 
   /** HEADER */
   $smarty->assign('title','Ingresar');
-  $smarty->assign('description','Pagina de inicio');
+  $smarty->assign('description','P&aacute;gina de inicio');
   $smarty->assign('keywords','Ingreso,usuario');
 
   $smarty->assign('header_ui','1');

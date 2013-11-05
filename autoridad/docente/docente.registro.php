@@ -7,7 +7,7 @@ try {
 
   /** HEADER */
   $smarty->assign('title', 'Registro de Docentes');
-  $smarty->assign('description', 'Pagina de Registro de Docente');
+  $smarty->assign('description', 'P&aacute;gina de Registro de Docente');
   $smarty->assign('keywords', 'Registro,Docentes');
   /**
    * Menu superior

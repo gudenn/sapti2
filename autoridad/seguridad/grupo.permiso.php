@@ -19,7 +19,7 @@ try {
 
   /** HEADER */
   $smarty->assign('title','Gestion de Permisos');
-  $smarty->assign('description','Pagina de gestion de Permisos');
+  $smarty->assign('description','P&aacute;gina de gestion de Permisos');
   $smarty->assign('keywords','Gestion,Permisos');
   $smarty->assign('menudirslast','Gestion Permisos');
 

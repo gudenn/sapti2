@@ -16,7 +16,7 @@ try {
 
   /** HEADER */
   $smarty->assign('title','Gestion de Sub-Area');
-  $smarty->assign('description','Pagina de gesti&oacute;n de Sub-&Aacutereas');
+  $smarty->assign('description','P&aacute;gina de gesti&oacute;n de Sub-&Aacutereas');
   $smarty->assign('keywords','Gesti&acoute;n,Sub-&Aacutereas');
   leerClase('Administrador');
   /**

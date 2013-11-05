@@ -17,7 +17,7 @@ try {
 
   /** HEADER */
   $smarty->assign('title','Gestion de Cronograma');
-  $smarty->assign('description','Pagina de gesti&oacute;n de Cronograma');
+  $smarty->assign('description','P&aacute;gina de gesti&oacute;n de Cronograma');
   $smarty->assign('keywords','Gesti&acoute;Cronograma');
   leerClase('Administrador');
   /**
