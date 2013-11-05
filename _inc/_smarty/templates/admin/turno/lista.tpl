@@ -3,7 +3,7 @@
     <tr>
       <th><a href='?order=id'                  class="tajax"  title='Ordenar por Id'                 >Id                 {$filtros->iconOrder('id')}</a></th>
       <th><a href='?order=nombre'              class="tajax"  title='Ordenar por Nombre'             >Nombre            {$filtros->iconOrder('nombre')}</a></th>
-      <th><a href='?order=descripcion'              class="tajax"  title='Ordenar por Descripcion'             >Descripcion            {$filtros->iconOrder('descripcion')}</a></th>
+      <th><a href='?order=descripcion'              class="tajax"  title='Ordenar por Descripcion'             >Descripci&oacute;n            {$filtros->iconOrder('descripcion')}</a></th>
       
       <th>Opciones</th>
     </tr>

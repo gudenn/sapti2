@@ -16,7 +16,7 @@
             </p>
             <p>
               <input type="text" name="descripcion" value="{$dep->descripcion}"  data-validation-engine="validate[required]">
-              <label for="descripcion"><small>Descripcion del Departamento (*) </small></label>
+              <label for="descripcion"><small>Descripci&oacute;n del Departamento (*) </small></label>
             </p>
             
             <h2 class="title">Grabar Departamento</h2>
