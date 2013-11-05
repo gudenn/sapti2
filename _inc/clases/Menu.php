@@ -25,6 +25,7 @@ class Menu
     $this->nombre_menu = $nombre_menu;
   }
 
+  
   /**
    * Agregamos items al menu
    * @param type $titulo
@@ -39,9 +40,36 @@ class Menu
   {
     $item               = new Menu_item($titulo,$descripcion,$file_icono,$link,$pendientes,$nopendientes,$target);
     $this->menu_items[] = $item;
-    
   }
 
+  /**
+   * Mostarmos el string conformado
+   * @param type $string
+   */
+   function ucpalabras($frace) { 
+        $excepciones = array( 
+          'de','a','el','y','o','no','para','la','las','lo','los',
+          'un','dar','es','si','por', 
+          'sino','cuando', 'usa','una', 
+          'de','del','por','en' 
+        ); 
+
+        $palabras = explode(' ', $frace); 
+        foreach ($palabras as $key => $palabra) 
+        { 
+            if (!in_array($palabra, $excepciones)) 
+            $palabras[$key] = ucwords($palabra); 
+        } 
+
+        $nuevafrace = implode(' ', $palabras); 
+        return $nuevafrace; 
+    } 
+
+  
+  /**
+   * Mostramos el menu de las autoridades
+   * @return \Menu
+   */
   function getAdminIndex() {
     leerClase('Grupo');
     leerClase('Usuario');
