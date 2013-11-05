@@ -3,10 +3,6 @@ define ("MODULO", "DOCENTE");
 require  '_start.php';
 include '../_inc/_configurar.php';      
 require_once('../docente/EditableGrid.php');
-
-if(isset($_GET['iddicta'])){
-$iddicta=$_GET['iddicta'];
-};
          
 // Database connection
 $mysqli = mysqli_init();
@@ -23,10 +19,11 @@ $grid->addColumn('apellidos', 'Apellidos', 'string', NULL, false);
 $grid->addColumn('nombrep', 'Nombre Proyecto', 'string', NULL, false);
 $grid->addColumn('action', 'Opciones', 'html', NULL, false);
 
+
 $result = $mysqli->query('
-  SELECT DISTINCT (p.id)  as id, es.`codigo_sis` as codigosis, u.nombre ,CONCAT(u.apellido_paterno,u.apellido_materno) as apellidos, p.nombre as nombrep
-  FROM proyecto p , usuario u, estudiante es , proyecto_estudiante pe, tribunal t
-  WHERE  u.id=es.usuario_id and  es.id=pe.estudiante_id and  pe.proyecto_id=p.id and p.id=t.proyecto_id');
+  select DISTINCT (es.id), es.codigo_sis as codigosis , u.nombre as nombre, CONCAT(u.apellido_paterno,   u.apellido_materno) apellidos, p.nombre as nombrep
+  from proyecto p , usuario u, estudiante es , proyecto_estudiante pe, tribunal t
+  where  u.id=es.usuario_id and  es.id=pe.estudiante_id and  pe.proyecto_id=p.id and p.id=t.proyecto_id');
 $mysqli->close();
 
 $grid->renderXML($result);

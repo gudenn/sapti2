@@ -10,8 +10,7 @@
         <label for="nombre">Apellidos:  {$usuario->apellido_paterno} {$usuario->apellido_materno}</label><br />
          <label for="nombre">Codigo Sis:  {$estudiante->codigo_sis}</label><br />
           <label for="nombre">Proyecto:  {$proyecto->nombre}</label><br />
-            <label for="nombre">Modalidad:  {$modalidad->nombre}</label><br />
-       
+           
    
  </form>
 

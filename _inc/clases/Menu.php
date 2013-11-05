@@ -286,20 +286,20 @@ class Menu
  
   $menu = new Menu('Asignaci&oacute;n de Tribunales');
   $link = Consejo::URL."lista.estudiante.php";
-  $menu->agregarItem('Asignac&oacute;n  De Tribunales','Se Asigna  Tribunales a Un Estudiante','tribunal.png',$link);
+  $menu->agregarItem('Asignaci&oacute;n  de Tribunales','Se Asigna  Tribunales a un Estudiante','tribunal.png',$link);
   $link = Consejo::URL."listatribunal.php";
-  $menu->agregarItem('Lista de Estudiantes','Lista De Estudiantes con Tribunales','tribunal.png',$link);
+  $menu->agregarItem('Lista de Estudiantes','Lista de Estudiantes con Tribunales','tribunal.png',$link);
 
   $menus[] = $menu;
   
-  $menu = new Menu('Asignaci&oacute;n De Fechas  De Defensa');
+  $menu = new Menu('Asignaci&oacute;n de Fechas  de Defensa');
   $link = Consejo::URL."listadefensa.php";
   $menu->agregarItem('Gesti&oacute;n de Asignac&oacute;n de Fechas de Defensa','Registro de Fechas de Defensa','defensa.png',$link);
    $menus[] = $menu;
  
   $menu = new Menu('Tribunales no Aceptados');
   $link = Consejo::URL."tribunales.rechazados.php";
-  $menu->agregarItem('Gesti&oacute;n de Asignac&oacute;n','Registro y modificaci&oacute;n de Tribunales','denegar.png',$link);
+  $menu->agregarItem('Gesti&oacute;n de Asignaci&oacute;n','Registro y Modificaci&oacute;n de Tribunales','denegar.png',$link);
    $menus[] = $menu;
   
    $notificacion= new Notificacion();

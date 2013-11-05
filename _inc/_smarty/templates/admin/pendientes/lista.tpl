@@ -10,7 +10,8 @@
     <th><a>APELLIDOS</a></th>
     <th><a>T&Iacute;TULO</a></th>
     <th><a>GESTI&Oacute;N</a></th>
-    <th>DETALLE</th> 
+    <th>DETALLE</th>
+    <th>EDITAR</th> 
     <th>CONFIRMAR</th> 
       </tr>
   </thead>
@@ -26,7 +27,8 @@
           <td>{$listadocentes[ic]['codigo']}</td>
           
           
-    <td><a href="../detalle/proyecto.detalle.php?estudiante_id={$listadocentes[ic]['eid']}" >{icono('basicset/document.png','Detalle')} Ver Detalle</a></td> 
+    <td><a href="../detalle/proyecto.detalle.php?estudiante_id={$listadocentes[ic]['eid']}" >{icono('basicset/document.png','Detalle')} Ver Detalle</a></td>
+     <td><a href="../proyecto/proyecto.registro.php?estudiante_id={$listadocentes[ic]['eid']}" >{icono('basicset/pencil_48.png','Editar')} Editar</a></td> 
     <td><a href="pendientes.gestion.php?proyecto_id={$listadocentes[ic]['pid']}" >{icono('basicset/tick_48.png','Confirmar')} Confirmar</a></td>
     
     

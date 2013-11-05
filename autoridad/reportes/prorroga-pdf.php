@@ -75,7 +75,7 @@ $pdf->AddPage();
 
   $CSS[]  = URL_CSS . "academic/tables.css";
 $p=$_GET['id_p'];
-$sql = "SELECT u.nombre AS NOMBRE,CONCAT(apellido_paterno,apellido_materno) as APELLIDOS ,p.nombre as TITULO,s.codigo as GESTION,v.estado_vigencia as ESTADO
+$sql = "SELECT u.nombre AS NOMBRE,CONCAT(apellido_paterno,' ',apellido_materno) as APELLIDOS ,p.nombre as TITULO,s.codigo as GESTION,v.estado_vigencia as ESTADO
 FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v,dicta d
 WHERE u.id=e.usuario_id AND e.id=i.estudiante_id  and d.semestre_id=s.id and i.dicta_id=d.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id and p.tipo_proyecto='PR' and p.estado_proyecto='CO' AND p.estado='AC' AND p.id=v.proyecto_id AND v.estado_vigencia='PR' and s.id='".$p."'";
 
