@@ -7,6 +7,7 @@
       <th><a>Postergado   </a></th>
        <th><a >Prorroga    </a></th>
       <th>Opciones</th>
+      <th>Normal</th>
     </tr>
   </thead>
  
@@ -22,7 +23,12 @@
            <a href="estado.gestion.php?id_post={$estudiante->id}&postergar">{icono('basicset/tick_48.png','Postergar')} Postergar</a>
            <a href="estado.gestion.php?id_post={$estudiante->id}&prorroga">{icono('basicset/tick_48.png','Prorroga')} Prorroga</a>
       {/if}
+        
       </td>
+      <td>
+         <a href="estado.gestion.php?id_post={$estudiante->id}&normal">{icono('basicset/tick_48.png','Postergar')}Normal</a>
+      </td>
+      
     </tr>
   
   </tbody>

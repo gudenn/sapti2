@@ -72,6 +72,12 @@ try {
      $vigencia->estado_vigencia='PR';
      $vigencia->save();
  }
+      if (isset($_GET['normal'])&$vigencia->estado_vigencia!='NO' )
+  { 
+     $fechafin=$v[0]->fecha_fin;
+     $vigencia->estado_vigencia='NO';
+     $vigencia->save();
+ }
      $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
      $smarty->assign('lista'       ,'admin/estado/lista.tpl');
 
