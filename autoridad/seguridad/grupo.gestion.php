@@ -20,7 +20,7 @@ try {
   $smarty->assign('title','Gesti&oacute;n de Grupos');
   $smarty->assign('description','P&aacute;gina de Gesti&oacute;n  de Grupos');
   $smarty->assign('keywords','Gesti&oacute;n ,Grupos');
-//  $smarty->assign('menudirslast','Gestion Grupos');
+//  $smarty->assign('menudirslast','Gesti&oacute;n Grupos');
 
   $smarty->assign('header_ui','1');
   $smarty->assign('CSS','');

@@ -10,7 +10,7 @@ try {
   leerClase('Docente');
   
   /** HEADER */
-  $smarty->assign('title','Gestion de Observaciones');
+  $smarty->assign('title','Gesti&oacute;n de Observaciones');
   $smarty->assign('description','P&aacute;gina de gestion de Observaciones');
   $smarty->assign('keywords','Gestion,Observaciones');
 

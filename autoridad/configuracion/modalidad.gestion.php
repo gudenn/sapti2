@@ -15,7 +15,7 @@ try {
   $ERROR = '';
 
   /** HEADER */
-  $smarty->assign('title','Gestion de Modalidad');
+  $smarty->assign('title','Gesti&oacute;n de Modalidad');
   $smarty->assign('description','P&aacute;gina de gesti&oacute;n de Modalidad');
   $smarty->assign('keywords','Gesti&acoute;n,Modalidad');
   leerClase('Administrador');

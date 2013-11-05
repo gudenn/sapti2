@@ -14,7 +14,7 @@ try {
   $ERROR = '';
 
   /** HEADER */
-  $smarty->assign('title','Gestion de Lugar');
+  $smarty->assign('title','Gesti&oacute;n de Lugar');
   $smarty->assign('description','P&aacute;gina de gesti&oacute;n de Lugar');
   $smarty->assign('keywords','Gesti&acoute;n,Lugar');
   leerClase('Administrador');

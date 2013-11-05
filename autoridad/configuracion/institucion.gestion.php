@@ -14,7 +14,7 @@ try {
   $ERROR = '';
 
   /** HEADER */
-  $smarty->assign('title','Gestion de Institucion');
+  $smarty->assign('title','Gesti&oacute;n de Institucion');
   $smarty->assign('description','P&aacute;gina de gesti&oacute;n de Instituci&oacute;n');
   $smarty->assign('keywords','Gesti&acoute;n,Institucion');
   leerClase('Administrador');

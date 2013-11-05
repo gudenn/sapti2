@@ -14,7 +14,7 @@ try {
   $ERROR = '';
 
   /** HEADER */
-  $smarty->assign('title','Gestion de Carrera');
+  $smarty->assign('title','Gesti&oacute;n de Carrera');
   $smarty->assign('description','P&aacute;gina de gesti&oacute;n de Carrera');
   $smarty->assign('keywords','Gestion,Carrera');
   leerClase('Administrador');
