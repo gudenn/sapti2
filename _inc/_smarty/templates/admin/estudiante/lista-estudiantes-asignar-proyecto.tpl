@@ -19,7 +19,7 @@
         {if ($objs[ic]['usuario_sexo']==Usuario::FEMENINO)}
           {icono('basicset/user2.png','Femenino')}
         {else}
-          {icono('basicset/user1.png','Femenino')}
+          {icono('basicset/user1.png','Masculino')}
         {/if}
       </td>
       <td>{$objs[ic]['usuario_nombre']}</td>
