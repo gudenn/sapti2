@@ -14,21 +14,21 @@ try {
   $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_CSS . "spams.css";
   $CSS[]  = URL_JS  . "validate/validationEngine.jquery.css";
+
   
-   $CSS[]  = URL_JS . "box/box.css";
-   $JS[]  = URL_JS ."box/jquery.box.js";
-  
-   $smarty->assign('CSS',$CSS);
+   
   
   $JS[]  = URL_JS . "jquery.min.js";
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
 
-  
+    
+   $CSS[]  = URL_JS . "box/box.css";
+   $JS[]  = URL_JS ."box/jquery.box.js";
   //CK Editor
   $JS[]  = URL_JS . "ckeditor/ckeditor.js";
   //BOX
-  
+  $smarty->assign('CSS',$CSS);
   $smarty->assign('JS',$JS);
 
   //Leendo las clases para 
@@ -50,6 +50,8 @@ try {
   leerClase("Dia");
   leerClase('Html');
   
+ //  no hay error
+  
   $smarty->assign("ERROR", '');
   $menuList[]     = array('url'=>URL.Consejo::URL,'name'=>'Consejo');
    $menuList[]     = array('url'=>URL . Consejo::URL.'lista.estudiante.php' ,'name'=>'Asignación');
@@ -65,10 +67,10 @@ try {
     $smarty->assign("editores", $editores);
     $diass= new Dia();
     $smarty->assign("diass", $diass);
-    
-  if(isset($_POST['buscar']) && isset($_POST['codigosis']))
+    $html = new Html();
+  if(isset($_GET['estudiante_id']))
   {
-     $estudiante   = new Estudiante(false,$_POST['codigosis']);
+     $estudiante   = new Estudiante($_GET['estudiante_id']);
    
     $proyecto     = new Proyecto();
    
@@ -79,19 +81,13 @@ try {
     {
       //@todo no tiene proyecto 
        echo "<script>alert('El Estudiante no Tiene Proyecto');</script>";
-      
     }
     
    if(sizeof($proyeareas=$proyecto->getArea())>0)
    {
-    if($proyecto->estado_proyecto!='TA')
-    {
-    if($proyecto->estado_proyecto=='VB')
-    {
-      
-        $array =$proyecto ->getVigencia();
-        $proyeareas=$proyecto->getArea();
-        $tutores= $proyecto->getTutores();
+        $array       =  $proyecto ->getVigencia();
+        $proyeareas  =  $proyecto->getArea();
+        $tutores     =  $proyecto->getTutores();
         
        $arraytutores=array();
        foreach ($tutores  as $tuto)
@@ -125,31 +121,30 @@ try {
              mysql_query($sqldeliteau);
             }
         }  
-    }
-    else
-    {
-             $html  = new Html();
-             $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente la Carrera','titulo'=>'Registro de Carrera' ,'icono'=> 'warning_48.png');
-             $ERROR = $html->getMessageBox ($mensaje);
-       //   echo "<script>alert('El Proyecto No Esta Habilitado Para La Asignacion De Tribunales');</script>";
-    }
-    }  else 
-      {
-      
-       echo "<script>alert('El Proyecto ya tiene Tribunales');</script>";
-      
-    }
-   }else
-   {
-       echo "<script>alert('El Proyecto no Tiene Areas');</script>";
+   
+   }  else {
+        echo "<script>alert('El Estudiante No tiene  Area');</script>";
+  
    }
  
+ }else
+ {
+   
+   
+       $estudiante   = new Estudiante($_POST['estudiante_id']);
+       $proyecto     =  $estudiante->getProyecto();
+        $usuariobuscado= new Usuario($estudiante->usuario_id);
+        $smarty->assign('usuariobuscado',  $usuariobuscado);
+        $smarty->assign('estudiantebuscado', $estudiante);
+        $smarty->assign('proyectobuscado', $proyecto);
+        $smarty->assign('proyectoarea', $proyecto->getArea());
+        $smarty->assign('tutores', $arraytutores);
  }
    
-    $sqlr="SELECT  DISTINCT(d.id), u.nombre, CONCAT (u.apellido_paterno,u.apellido_materno) as apellidos
-FROM  usuario u ,docente d, automatico a
-WHERE  u.id=d.usuario_id and  a.`docente_id`=d.`id` and u.estado='AC'
-ORDER BY  a.valor  DESC;";
+ $sqlr="SELECT  DISTINCT(d.id), u.nombre, CONCAT (u.apellido_paterno,u.apellido_materno) as apellidos
+  FROM  usuario u ,docente d, automatico a
+  WHERE  u.id=d.usuario_id and  a.`docente_id`=d.`id` and u.estado='AC'
+  ORDER BY  a.valor  DESC;";
  $resultado = mysql_query($sqlr);
  $arraytribunal= array();
 
@@ -171,11 +166,11 @@ ORDER BY  a.valor  DESC;";
 //   asignacion manual de los tribunales
   
   
-  if(isset($_POST['ma']))
+  if(isset($_POST['manual']) )
   {
-    echo $_POST['estudiante_id'];
-    
-    $estudiante   = new Estudiante(false,$_POST['estudiante_id']);
+    if(isset($_POST['estudiante_id']))
+    {
+     $estudiante   = new Estudiante($_POST['estudiante_id']);
    
     $proyecto     = new Proyecto();
    
@@ -238,12 +233,17 @@ ORDER BY  a.valor  DESC;";
   $smarty->assign('listadocentes'  , $arraytribunal);
   $contenido = 'tribunal/registrotribunal.tpl';
   $smarty->assign('contenido',$contenido);
+  }  else {
+      $html = new Html();
+    $mensaje = array('mensaje' => 'Hubo un problema, No se grabo correctamente la Asignacion de Tribunales', 'titulo' => 'Registro de Tribunales', 'icono' => 'warning_48.png');
+    $ERROR = $html->getMessageBox($mensaje);
+  }
   }
   //////////asignacion automatico de tribunales////////////
   
-if(isset($_POST['a']))
+if(isset($_POST['automatico']))
  {
-     $estudiante   = new Estudiante(false,$_POST['estudiante_id']);
+     $estudiante   = new Estudiante($_POST['estudiante_id']);
      $proyecto     = new Proyecto();
      $proyecto_aux = $estudiante->getProyecto();
      if ($proyecto_aux)
@@ -327,63 +327,33 @@ if(isset($_POST['a']))
              $smarty->assign('contenido',$contenido);
    
  }
-   
 
-if(isset($_POST['estudiante_id']) && isset($_POST['automatico']) && $_POST['automatico']='automatico')
-  {
-   
-    $estudiante   = new Estudiante(false,$_POST['estudiante_id']);
-    $proyecto     = new Proyecto();
-    $proyecto_aux = $estudiante->getProyecto();
-  if ($proyecto_aux)
-      $proyecto = $proyecto_aux;
-    else
-     {
-      //@todo no tiene proyecto 
-       echo "<script>alert('El Estudiante no Tiene Proyecto');</script>";
-     }
-  
-   $usuariobuscado= new Usuario($estudiante->usuario_id);
-   $smarty->assign('usuariobuscado',  $usuariobuscado);
-   $smarty->assign('estudiantebuscado', $estudiante);
-   $smarty->assign('proyectobuscado', $proyecto);
-   $smarty->assign('proyectoarea', $proyecto->getArea());
-}
-   
-if ( isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' )
+if( isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' )
  {
-
 if (isset($_POST['proyecto_id']))
  {
+  if(isset($_POST['ids'])  && sizeof($_POST['ids'])==3)
+  {
   
     $EXITO = false;
+    $stado=0;
     mysql_query("BEGIN");
     $idproyecto=$_POST['proyecto_id'];
-   
+    $proyectos   = new Proyecto($idproyecto);
     
-   $query = "UPDATE proyecto p SET p.estado_proyecto='TA'  WHERE p.id=$idproyecto";
-     mysql_query($query);
-      $proyectos   = new Proyecto($idproyecto);
-    
-      
-
     $estudiante   = new Estudiante($proyectos->getEstudiante()->id);
     $notificacion = new Notificacion();
     $notificacion->objBuidFromPost();
     $notificacion->proyecto_id=$_POST['proyecto_id']; 
     $notificacion->tipo=  Notificacion::TIPO_MENSAJE;
     $notificacion->fecha_envio= date("j/n/Y");
-  //  $notificacion->asunto="Asignacion de Tribunales";
-   // $notificacion->detalle="fasdf";
+    $notificacion->asunto="Asignacion de Tribunales";
+     $notificacion->detalle="Se le Asigno Tribunales";
     $notificacion->prioridad=5;
     $notificacion->estado = Objectbase::STATUS_AC;
-
     $noticaciones= array('estudiantes'=>array($proyectos->getEstudiante()->id));
     $notificacion->enviarNotificaion( $noticaciones);
-
-     if(isset($_POST['ids']))
-     { 
-     foreach ($_POST['ids'] as $id)
+    foreach ($_POST['ids'] as $id)
      {
                //  echo $id;
                
@@ -406,42 +376,48 @@ if (isset($_POST['proyecto_id']))
                 $notificacions->tipo=  Notificacion::TIPO_ASIGNACION;
                 $notificacions->fecha_envio= date("j/n/Y");
                 $notificacions->asunto="Asignacion de Tribunales";
-                $notificacions->detalle="fasdf";
+                $notificacions->detalle=$_POST['detalle'];
                 $notificacions->prioridad=5;
                 $notificacions->estado = Objectbase::STATUS_AC;
                 $noticaciones= array('tribunales'=>array( $tribunal->id));
                 $notificacions->enviarNotificaion( $noticaciones);
         
      }
-     }
+     
     $EXITO = TRUE;
+    $stado=1;
     mysql_query("COMMIT");
+    
+  if(isset($stado))
+   {
+    if($stado==1)
+      {
+       $_SESSION['estado']=$stado;
+          header("Location:listatribunal.php");
+          
+
+      }  else {
+          $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Area','titulo'=>'Registro de Area' ,'icono'=> 'warning_48.png');
+          $ERROR = $html->getMessageBox ($mensaje);
+               }
+    }
+    
     
         
      }else
  {
-   
-   echo "<script>alert('No Existe elProyecto Para Asignar Tribunales');</script>";
+   $mensaje = array('mensaje' => 'Error,La Cantidad minima de Tribunales debe Ser 3', 'titulo' => 'Numero De Tribunales', 'icono' => 'warning_48.png');
+    $ERROR = $html->getMessageBox($mensaje);;
  }
- 
+ }else
+ {
+     $mensaje = array('mensaje' => 'Hubo un problema, No se grabo correctamente la Asignacion de Tribunales', 'titulo' => 'Registro de Tribunales', 'icono' => 'warning_48.png');
+    $ERROR = $html->getMessageBox($mensaje);
+ }
  }
  
 
-  if (isset($EXITO))
-    {
-   $html = new Html();
-    if ($EXITO)
-      $mensaje = array('mensaje' => 'Se grabo correctamente la Asignacion de Tribunales', 'titulo' => 'Registro de Tribunales', 'icono' => 'tick_48.png');
-     else
-      $mensaje = array('mensaje' => 'Hubo un problema, No se grabo correctamente la Asignacion de Tribunales', 'titulo' => 'Registro de Tribunales', 'icono' => 'warning_48.png');
-    $ERROR = $html->getMessageBox($mensaje);
-   }
-    
-    $htmls = new Html();
-    $mensaje = array('mensaje' => 'Hubo un problema, No se grabo correctamente la Asignacion de Tribunales', 'titulo' => 'Registro de Tribunales', 'icono' => 'warning_48.png');
-    $ERROR = $htmls->getMessageBox($mensaje);
-  
-  
+
   $smarty->assign("ERROR",  $ERROR);
    
 } 

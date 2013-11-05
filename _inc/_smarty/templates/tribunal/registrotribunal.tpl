@@ -1,34 +1,13 @@
 
 <div id="content">
    <center> <strong> <h1>Formulario De Asignación De Tribunales </h1></strong></td></center>
+   
+<div >
+        <label for="nombre">Estudiante:  {$usuariobuscado->getNombreCompleto()}</label><br />
+        <label for="nombre">C&oacute;digo Sis:   {$estudiantebuscado->codigo_sis}</label><br />
+        <label for="nombre">Proyecto:   {$proyectobuscado->nombre}</label><br />
     
-    <div style="width: 50%;float: left;"  class="tbl_filtro">
-    <form action="" method="post" >
-             <h1>  Busqueda Por Estudiante</h1>
-          <table>
-          <tr>
-              <th><label for="estado_lugar">Codigo Sis</label></th>
-               
-          </tr>
-           <tr>
-           <td>
-                      <input type="text" name="codigosis"  id="codigosis" value="{$estudiantebuscado->codigo_sis}" />
-            </td>
-        <td><input type="submit" value="Buscar" name="buscar" class="sendme" /></td>
-           </tr>
-          
-          </table>
-     </form>
-  </div>
-<div style="width: 50%;float: left;" class="tbl_filtro">
-        
-      <h1> Resultado </h1>
-        <label for="nombre">Nombre:  {$usuariobuscado->nombre}</label><br />
-        <label for="nombre">Apellidos:   {$usuariobuscado->apellido_paterno}{$usuariobuscado->apellido_materno}</label><br />
-         <label for="nombre">Codigo Sis:   {$estudiantebuscado->codigo_sis}</label><br />
-         <label for="nombre">Proyecto:   {$proyectobuscado->nombre}</label><br />
-    
-         <label for="nombre">Area(as):   {foreach from=$proyectoarea item=curr_id}
+         <label for="nombre">&Aacute;rea(as):   {foreach from=$proyectoarea item=curr_id}
                                      {$curr_id->nombre}<br />
                                    {/foreach}</label>
         <label for="nombre">Tutor(es):   {foreach from=$tutores item=curr_idd}
@@ -44,11 +23,11 @@
    <form action="" method="post">
  
         <input type="hidden" id="proyecto_id" name="proyecto_id" value="{$proyectobuscado->id}" />
-        <input type="hidden" id="proyecto_id" name="estudiante_id" value="{$estudiantebuscado->codigo_sis}" />
+        <input type="hidden" id="proyecto_id" name="estudiante_id" value="{$estudiantebuscado->id}" />
          <div style="text-align: center">
-       
-        <input type="submit" name="a" value ="A">
-        <input type="submit" name="ma" value ="Ma">
+         <input type="submit" name="manual" value ="Manual">
+         <input type="submit" name="automatico" value ="Automático">
+        
         <input type="hidden" name="token" value="{$token}">
        
                   &nbsp;
@@ -68,7 +47,7 @@
     <th><a >ID          </a></th>
     <th><a >NOMBRE      </a></th>
     <th><a  >APELLIDOS     </a></th>
-    <th><a >AREA</a></th>
+    <th><a >&Aacute;REA</a></th>
     <th><a  >TIEMPO  </a></th>
      </tr>
   </thead>
@@ -179,19 +158,16 @@
   
         </tbody>
       </table>
-        
-     
-      <input type="hidden" id="proyecto_id" name="proyecto_id" value="{$proyectobuscado->id}" /><br />
-      <input type="hidden" id="proyecto_id" name="estudiante_id" value="{$estudiantebuscado->codigo_sis}" /><br />
-        Asunto<br/>
-       <input type="text" id="asunto" name="asunto" value="Asignacion de Tribunales" /><br />
-   
-       <div style ="clear"></div>
+      <input type="hidden" id="proyecto_id" name="proyecto_id" value="{$proyectobuscado->id}" />
+      <input type="hidden" id="estudiante_id" name="estudiante_id" value="{$estudiantebuscado->id}" />
+      <div style ="clear"></div>
        <div>
        
       <div>
         Detalle<br/>
-        <textarea name="detalle" rows="5" style="width: 90%"></textarea>
+        <textarea name="detalle" rows="5" style="width: 90%">
+Se le Asigno los Tribunales  correspondientes al proyecto:{$proyectobuscado->nombre}  del estudiante:{$usuariobuscado->getNombreCompleto()} para q usted realize las funciones como tribunal al proyecto ya mencionado esperamos su pronta respuesta 
+      </textarea>
         <script>
           CKEDITOR.replace('detalle'{$editores})
         </script>
