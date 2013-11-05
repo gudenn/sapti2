@@ -342,6 +342,33 @@ class Proyecto extends Objectbase {
     return $areas;
   }
   
+  /**
+   * Retorna la subarea del proyecto
+   *
+   */
+  function getSubarea() {
+    //@TODO revisar
+    //  leerClase('Proyecto_area');
+    leerClase('Sub_area');
+    $subareas = array();
+    $activo = Objectbase::STATUS_AC;
+    $sql = "select s.* from " . $this->getTableName('Proyecto_sub_area') . " as psa , " . $this->getTableName('Sub_area') . " as s   where psa.proyecto_id = '$this->id' and psa.sub_area_id= s.id and psa.estado = '$activo' and s.estado = '$activo'";
+    /**
+       $sql = "SELECT a.*
+    from  proyecto_area  pa ,area a
+    where pa.area_id=a.id  and pa.proyecto_id='$this->id' and pa.estado='AC'  and a.estado='AC';";
+  
+    */
+    $resultado = mysql_query($sql);
+    // var_dump(mysql_fetch_array($resultado, MYSQL_ASSOC));
+    if (!$resultado)
+      return false;
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) {
+      $subareas[] = new Sub_area($fila);
+    }
+    return $subareas;
+  }
+  
    /**
    * Creamos un proyecto inicial de tal manera que los estudiantes nunca estnen sin proyectos
    */
@@ -421,7 +448,7 @@ class Proyecto extends Objectbase {
     leerClase('Proyecto_area');
     leerClase('Proyecto_sub_area');
     // Area
-    $p_area = new Proyecto_area();
+    $p_area = new Proyecto_area($area_id);
     $p_area->area_id = $area_id;
     $p_area->estado = Objectbase::STATUS_AC;
     $this->proyecto_area_objs[] = $p_area;
