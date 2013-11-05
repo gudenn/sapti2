@@ -16,9 +16,9 @@ try {
   $ERROR = '';
 
   /** HEADER */
-  $smarty->assign('title','Agregar Nueva Autoridad');
-  $smarty->assign('description','P&aacute;gina de registro de Autoridades');
-  $smarty->assign('keywords','registro,Autoridades');
+  $smarty->assign('title','Agregar Nuevo Consejo');
+  $smarty->assign('description','P&aacute;gina de registro de Consejo');
+  $smarty->assign('keywords','registro,Consejos');
 
   
   $smarty->assign('header_ui','1');
@@ -31,8 +31,8 @@ try {
    */
   $menuList[]     = array('url'=>URL . Administrador::URL,'name'=>'Administraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'autoridad/','name'=>'Autoridades');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'autoridad/autoridad.gestion.php','name'=>'Gesti&oacute;n Autoridades');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'autoridad/'.basename(__FILE__),'name'=>'Registro de Autoridades');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'autoridad/consejo.gestion.php','name'=>'Gesti&oacute;n Consejos');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'autoridad/'.basename(__FILE__),'name'=>'Registro Consejo');
   $smarty->assign("menuList", $menuList);
 
 
@@ -42,10 +42,10 @@ try {
 
 
   $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
-  $smarty->assign('lista'       ,'admin/autoridad/lista.registro.tpl');
+  $smarty->assign('lista'       ,'admin/autoridad/consejo.lista.registro.tpl');
 
   //Filtro
-  $filtro  = new Filtro('autoridades',__FILE__);
+  $filtro  = new Filtro('consejos_asignar',__FILE__);
   
   
   
@@ -54,30 +54,33 @@ try {
   $pertenece_autoridades->iniciarFiltro($filtro);
   $filtro_sql = $pertenece_autoridades->filtrar($filtro);
 
-   //Habilitamos a un Usuario en el grupo de autoridades
+  //Habilitamos a un Usuario en el grupo de Consejos
   if ( isset($_GET['usuario_id_agregar']) && is_numeric($_GET['usuario_id_agregar']) )
   {
     $usuario = new Usuario($_GET['usuario_id_agregar']);
     if ($usuario->id)
-      $usuario->asignarGrupo(Grupo::GR_AU);
+      $usuario->asignarGrupo(Grupo::GR_CO);
     $_SESSION['estado'] = true;
-       header("Location: autoridad.gestion.php");
+       header("Location: consejo.gestion.php");
     
   }
   
   $pertenece_autoridades->usuario_id = '%';
-  //buscamos el grupo autoridades
-  $grupo = new Grupo('', Grupo::GR_DO);
-  $pertenece_autoridades->grupo_id   = $grupo->id;
+  //Todos pueden ser consejo
+  //$grupo = new Grupo('', Grupo::GR_DO);
+  //$pertenece_autoridades->grupo_id   = $grupo->id;
   
   $o_string   = $pertenece_autoridades->getOrderString($filtro);
 
-  //buscamos el grupo autoridades para evitar cargar duplicados
-  $grupoAu     = new Grupo('', Grupo::GR_AU);
+  //buscamos el grupo Consejos para evitar cargar duplicados
+  $grupoAu     = new Grupo('', Grupo::GR_CO);
+  $grupoEs     = new Grupo('', Grupo::GR_ES);
+  $grupoDo     = new Grupo('', Grupo::GR_DO);
+  $filtro_sql .= " AND ( pertenece.grupo_id = '{$grupoEs->id}' OR  pertenece.grupo_id = '{$grupoDo->id}' ) "; 
   $filtro_sql .= " AND usuario.id NOT IN (SELECT usuario_id FROM pertenece WHERE grupo_id = '{$grupoAu->id}') "; 
   
   $obj_mysql  = $pertenece_autoridades->getAll('',$o_string,$filtro_sql,TRUE,TRUE);
-  $objs_pg    = new Pagination($obj_mysql, 'autoridades','',false);
+  $objs_pg    = new Pagination($obj_mysql, 'consejos_asignar','',false);
 
 
   $smarty->assign("filtros"  ,$filtro);

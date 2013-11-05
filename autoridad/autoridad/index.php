@@ -36,7 +36,13 @@ try {
   $link = Administrador::URL."autoridad/autoridad.gestion.php?todos=1";
   $menu->agregarItem('Gesti&oacute;n de Autoridades','Registro y modificaciones de Autoridades','basicset/people.png',$link);
   $link = Administrador::URL."autoridad/autoridad.registro.php?todos=1";
-  $menu->agregarItem('Agregar Nueva Autoridad','Crear una nueva Autoridad','basicset/people.png',$link);
+  $menu->agregarItem('Agregar Nueva Autoridad','Crear una nueva Autoridad','basicset/client.png',$link);
+  $menus[] = $menu;
+  $menu = new Menu('Consejos');
+  $link = Administrador::URL."autoridad/consejo.gestion.php?todos=1";
+  $menu->agregarItem('Gesti&oacute;n de Consejos','Registro y modificaciones de Autoridades de Consejo','basicset/people.png',$link);
+  $link = Administrador::URL."autoridad/consejo.registro.php?todos=1";
+  $menu->agregarItem('Agregar Nueva Autoridad de Consejo','Crear una nueva Autoridad tipo Consejo','basicset/user3.png',$link);
   $menus[] = $menu;
   //----------------------------------//
   

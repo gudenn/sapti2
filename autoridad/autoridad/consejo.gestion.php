@@ -16,9 +16,9 @@ try {
   $ERROR = '';
 
   /** HEADER */
-  $smarty->assign('title','Agregar Nueva Autoridad');
-  $smarty->assign('description','P&aacute;gina de registro de Autoridades');
-  $smarty->assign('keywords','registro,Autoridades');
+  $smarty->assign('title','Gesti&oacute;n de Consejos');
+  $smarty->assign('description','Gesti&oacute;n de Consejos');
+  $smarty->assign('keywords','Gesti&oacute;n,Autoridades,Consejos');
 
   
   $smarty->assign('header_ui','1');
@@ -31,8 +31,7 @@ try {
    */
   $menuList[]     = array('url'=>URL . Administrador::URL,'name'=>'Administraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'autoridad/','name'=>'Autoridades');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'autoridad/autoridad.gestion.php','name'=>'Gesti&oacute;n Autoridades');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'autoridad/'.basename(__FILE__),'name'=>'Registro de Autoridades');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'autoridad/consejo.gestion.php','name'=>'Gesti&oacute;n Consejos');
   $smarty->assign("menuList", $menuList);
 
 
@@ -42,10 +41,10 @@ try {
 
 
   $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
-  $smarty->assign('lista'       ,'admin/autoridad/lista.registro.tpl');
+  $smarty->assign('lista'       ,'admin/autoridad/consejo.lista.tpl');
 
   //Filtro
-  $filtro  = new Filtro('autoridades',__FILE__);
+  $filtro  = new Filtro('consejos_gestion',__FILE__);
   
   
   
@@ -54,41 +53,50 @@ try {
   $pertenece_autoridades->iniciarFiltro($filtro);
   $filtro_sql = $pertenece_autoridades->filtrar($filtro);
 
-   //Habilitamos a un Usuario en el grupo de autoridades
-  if ( isset($_GET['usuario_id_agregar']) && is_numeric($_GET['usuario_id_agregar']) )
+  //Habilitamos a un Usuario en el grupo de autoridades
+  if ( isset($_GET['usuario_id_quitar']) && is_numeric($_GET['usuario_id_quitar']) )
   {
-    $usuario = new Usuario($_GET['usuario_id_agregar']);
+    $usuario = new Usuario($_GET['usuario_id_quitar']);
     if ($usuario->id)
-      $usuario->asignarGrupo(Grupo::GR_AU);
-    $_SESSION['estado'] = true;
-       header("Location: autoridad.gestion.php");
-    
+      $usuario->quitarGrupo(Grupo::GR_CO);
+    leerClase('Html');
+    $html               = new Html();
+    $mensaje            = array('mensaje'=>'Se quito correctamente Consejo','titulo'=>'Registro de Consejo' ,'icono'=> 'tick_48.png');
+    $ERROR              = $html->getMessageBox ($mensaje);
   }
   
   $pertenece_autoridades->usuario_id = '%';
-  //buscamos el grupo autoridades
-  $grupo = new Grupo('', Grupo::GR_DO);
+  //buscamos el grupo Consejos
+  $grupo = new Grupo('', Grupo::GR_CO);
   $pertenece_autoridades->grupo_id   = $grupo->id;
   
   $o_string   = $pertenece_autoridades->getOrderString($filtro);
 
   //buscamos el grupo autoridades para evitar cargar duplicados
-  $grupoAu     = new Grupo('', Grupo::GR_AU);
-  $filtro_sql .= " AND usuario.id NOT IN (SELECT usuario_id FROM pertenece WHERE grupo_id = '{$grupoAu->id}') "; 
+  //$grupoAu     = new Grupo('', Grupo::GR_AU);
+  //$filtro_sql .= " AND usuario.id IN (SELECT usuario_id FROM pertenece WHERE grupo_id = '{$grupoAu->id}') "; 
   
   $obj_mysql  = $pertenece_autoridades->getAll('',$o_string,$filtro_sql,TRUE,TRUE);
-  $objs_pg    = new Pagination($obj_mysql, 'autoridades','',false);
+  $objs_pg    = new Pagination($obj_mysql, 'consejos_gestion','',false);
 
 
   $smarty->assign("filtros"  ,$filtro);
   $smarty->assign("objs"     ,$objs_pg->objs);
   $smarty->assign("pages"    ,$objs_pg->p_pages);
+  $smarty->assign("crear_nuevo"  ,"consejo.registro.php");
 
 
 
-
-  //No hay ERROR
-  $smarty->assign("ERROR",'');
+  // mostramos el mensaje de que se grabo correctamente el avance
+  if(isset($_SESSION['estado']) && $_SESSION['estado'])
+  {
+    leerClase('Html');
+    $html               = new Html();
+    $mensaje            = array('mensaje'=>'Se asigno correctamente el nuevo Consejo','titulo'=>'Registro de Consejo' ,'icono'=> 'tick_48.png');
+    $ERROR              = $html->getMessageBox ($mensaje);
+    $_SESSION['estado'] = 0;
+  }
+  $smarty->assign("ERROR",$ERROR);
   $smarty->assign("URL",URL);  
 
 }
