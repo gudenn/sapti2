@@ -186,7 +186,7 @@ class Menu
   $menus[] = $menu;
   $menu = new Menu('Reportes de los Estados de un Proyecto');
   $link = Administrador::URL."reportes/reporte.php";
-  $menu->agregarItem('Reportes Estados de Proyecto','Reportes correspondientes a los Estados de Proyecto','basicset/graph.png',$link);
+  $menu->agregarItem('Reportes Estados de Proyecto','Reportes Correspondientes a los Estados de Proyecto','basicset/graph.png',$link);
   $menus[] = $menu;
       
     }
