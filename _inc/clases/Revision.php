@@ -33,6 +33,12 @@ class Revision extends Objectbase
   */
   var $proyecto_id;
 
+ /**
+  * Codigo identificador del Avance en el Proyecto
+  * @var INT(11)
+  */
+  var $avance_id;
+
    /**
   * Codigo identificador del Objeto Revisor
   * @var INT(11)

@@ -68,16 +68,7 @@ $notificaciones= new Notificacion();
 
   
   $menus[] = $menu;
-  
-  $notificacion= $notificaciones->getNotificacionTutor(getSessionUser()->id);
-    $menu = new Menu('Notificaciones');
-    $link = Tutor::URL."notificacion/lista.notificacion.php";
-    $menu->agregarItem('Notificaciones','Geti&oacute;n de las Notificaciones','basicset/megaphone.png',$link,  sizeof($notificacion));
-    $menus[] = $menu;
-  
-  
-  
-  
+   
   
  $smarty->assign("menus", $menus);
   

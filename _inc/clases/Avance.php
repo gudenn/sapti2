@@ -24,11 +24,6 @@ class Avance extends Objectbase
   */
   var $proyecto_id;
 
- /**
-  * Codigo identificador del Objeto Revision si es que pertenece a una revision
-  * @var INT(11)
-  */
-  var $revision_id;
 
  /**
   * Fecha de registro de avance
@@ -55,7 +50,12 @@ class Avance extends Objectbase
   */
   var $estado_avance;
 
-  
+
+ /**
+  * (Objeto simple) Todas las Revisioness que tiene este avance
+  * @var Revision|null 
+  */
+  var $revision_objs;  
   
   
   function asignarDirectorio() 

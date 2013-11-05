@@ -23,6 +23,17 @@ class Estudiante extends Objectbase {
    * @var VARCHAR(100)
    */
   var $codigo_sis;
+     /**
+  * Cantidad de cambios_leves que tiene este estudiante
+  * @var INT(11)
+  */
+  var $numero_cambio_leve;
+  
+    /**
+  * Cantidad de cambios_total que tiene este estudiante
+  * @var INT(11)
+  */
+  var $numero_cambio_total;
 
  /**
   * (Objeto simple) Todas las materias en la que esta inscrito este estudiante
@@ -35,17 +46,7 @@ class Estudiante extends Objectbase {
   * @var object|null 
   */
   var $notificacion_estudiante_objs;
-     /**
-  * Cantidad de cambios_leves que tiene este estudiante
-  * @var INT(11)
-  */
-  var $numero_cambio_leve;
-  
-    /**
-  * Cantidad de cambios_total que tiene este estudiante
-  * @var INT(11)
-  */
-  var $numero_cambio_total;
+
   /**
    * Constructor del estudiante
    * @param type $id id de la tabla

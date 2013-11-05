@@ -31,6 +31,7 @@ try {
   $menuList[]     = array('url'=>URL . Administrador::URL . 'tutor/','name'=>'Tutores');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'tutor/'.basename(__FILE__),'name'=>'Gesti&oacute;n de Tutores');
   //CSS
+    $smarty->assign("menuList", $menuList);
    $CSS[]  = URL_CSS . "academic/tables.css";
  
    $JS[]  = URL_JS . "jquery.min.js";

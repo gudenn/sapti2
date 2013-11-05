@@ -1,6 +1,6 @@
 <?php
 try {
-       define ("MODULO", "DOCENTE");
+     define ("MODULO", "DOCENTE");
   require('../_start.php');
   if(!isDocenteSession())
     header("Location: ../login.php"); 
@@ -8,7 +8,6 @@ try {
   leerClase("Evento");
   leerClase("Pagination");
   leerClase('Docente');
-   leerClase('Tribunal');
   $ERROR = '';
 
   /** HEADER */
@@ -24,21 +23,23 @@ try {
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
   $JS[]  = URL_JS . "tablaeditable/editablegrid-2.0.1.js";
-  $JS[]  = URL_JS . "tablaeditabletribunal/publica.tabla.estudiante.lista.js";
+  $JS[]  = URL_JS . "tablaeditabletribunal/tabla.seguimiento.lista.js";
   $smarty->assign('JS',$JS);
+   
    $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
-   $menuList[]     = array('url'=>URL.Docente::URL.'tribunal','name'=>'Tribunal');
- $menuList[]     = array('url'=>URL.Docente::URL.'tribunal/publica.estudiante.lista.php','name'=>'Lista Estudiante');
+ $menuList[]     = array('url'=>URL.Docente::URL.'tribunal','name'=>'Tribunal');
+ $menuList[]     = array('url'=>URL.Docente::URL.'tribunal/estudiante.lista.php','name'=>'Lista Estudiante');
  $smarty->assign("menuList", $menuList);
-
   
   $docente=  getSessionDocente();
   $docenteid=$docente->id;
-   
-  $smarty->assign("docente_ids", $docenteid);
+  
   $docente = getSessionDocente();
    
   $smarty->assign("docente", $docente);
+   
+  $smarty->assign("docente_ids", $docenteid);
+
   //No hay ERROR
   $smarty->assign("ERROR",$ERROR);
 }
@@ -46,5 +47,5 @@ catch(Exception $e)
 {
   $smarty->assign("ERROR", handleError($e));
 }
-  $smarty->display('docente/tribunal/publica.estudiante.lista.tpl');
+  $smarty->display('docente/tribunal/full-width.estudiante.lista.tpl');
 ?>

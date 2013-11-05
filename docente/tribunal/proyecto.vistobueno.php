@@ -52,10 +52,7 @@ try {
    
   $smarty->assign("usuario", $usuario);
   $smarty->assign("proyecto", $proyecto);
-    
-    $urlpdf=".../ARCHIVO/proyecto.pdf";
-    $smarty->assign("urlpdf", $urlpdf);
-    
+      
     date_default_timezone_set('UTC');
   
     if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
@@ -67,14 +64,15 @@ try {
            $tribunal->fecha_vistobueno    =    date("d/m/Y");
            $tribunal->save();
            $bandera=true;
+           
            if(sizeof($proyecto->getTribunalVisto())>0)
            {
+             
              foreach ($proyecto->getTribunalVisto()  as $valor)
              {
-               
-               if(!$valor->visto_bueno==Tribunal::VISTO_BUENO)
+              if($valor->visto_bueno==Tribunal::VISTO_BUENOPENDIENTE)
                {
-                 $bandera=false;
+                   $bandera=false;
                  break;
                }
              }
@@ -82,6 +80,7 @@ try {
            
            if($bandera)
            {
+         
               $proyecto->estado_proyecto="TV";
               $proyecto->save();
            }
