@@ -14,6 +14,7 @@ try {
   $smarty->assign('JS',$JS);
 
   leerClase('Helpdesk');
+  leerClase('Modulo');
   leerClase('Administrador');
 
   $helpdesk = new Helpdesk();
@@ -64,7 +65,10 @@ try {
     $template = TEMPLATES_DIR."helpdesk/archivo/{$helpdesk->codigo}.tpl";
     if (!file_exists($template) || !($helpdesk->codigo) )
       $template = TEMPLATES_DIR."helpdesk/archivo/defecto.tpl";
-    if (!$tieneAccesoHelpdesk && $helpdesk->codigo )
+    
+    //modulo vista para todos
+    $modulo_visita = new Modulo('','VISITA');
+    if (!$tieneAccesoHelpdesk && $helpdesk->codigo && $helpdesk->modulo_id != $modulo_visita->id)
       $template = TEMPLATES_DIR."helpdesk/archivo/denegado.tpl";
   }
   
