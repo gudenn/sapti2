@@ -72,8 +72,16 @@ try {
   $smarty->assign('mascara'     ,'estudiante/listas.mascara.tpl');
   $smarty->assign('lista'       ,'estudiante/avance.lista.tpl');
 
-  //No hay ERROR
-  $smarty->assign("ERROR",'');
+  // mostramos el mensaje de que se grabo correctamente el avance
+  if(isset($_SESSION['estado']) && $_SESSION['estado'])
+  {
+    leerClase('Html');
+    $html               = new Html();
+    $mensaje            = array('mensaje'=>'Se grabo correctamente el Avance','titulo'=>'Registro de Avance' ,'icono'=> 'tick_48.png');
+    $ERROR              = $html->getMessageBox ($mensaje);
+    $_SESSION['estado'] = 0;
+  }
+  $smarty->assign("ERROR",$ERROR);
   $smarty->assign("URL",URL);  
 
 }

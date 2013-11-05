@@ -50,7 +50,7 @@ try {
     $revision = new Revision($_GET['revision_id']);
     $revision->getAllObjects();
     $smarty->assign("revision", $revision);
-    
+    $_GET['avance_id'] = $revision->avance_id;
     
     $editores = ",
                 {toolbar: [ 
@@ -72,6 +72,8 @@ try {
     $EXITO = false;
     if ($proyecto->id)
       $avance = $estudiante->grabarAvance();
+    $_SESSION['estado'] = true;
+       header("Location: avance.gestion.php");
     $EXITO = true;
   }
 
@@ -86,17 +88,6 @@ try {
 
   //No hay ERROR
   $ERROR = ''; 
-  leerClase('Html');
-  $html  = new Html();
-  if (isset($EXITO))
-  {
-    $html = new Html();
-    if ($EXITO)
-      $mensaje = array('mensaje'=>'Se grabo correctamente el Avance','titulo'=>'Registro de Avance' ,'icono'=> 'tick_48.png');
-    else
-      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Avance','titulo'=>'Registro de Avance' ,'icono'=> 'warning_48.png');
-   $ERROR = $html->getMessageBox ($mensaje);
-  }
   $smarty->assign("ERROR",$ERROR);
   
 } 

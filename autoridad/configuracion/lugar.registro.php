@@ -48,7 +48,7 @@ try {
   $id = '';
  
 if (isset($_GET['lugar_id']) && is_numeric($_GET['lugar_id']))
-  echo  $id = $_GET['lugar_id'];
+  $id = $_GET['lugar_id'];
   $lugar = new Lugar($id);
   
   if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])

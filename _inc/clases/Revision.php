@@ -33,6 +33,12 @@ class Revision extends Objectbase
   */
   var $proyecto_id;
 
+ /**
+  * Codigo identificador del Avance en el Proyecto
+  * @var INT(11)
+  */
+  var $avance_id;
+
    /**
   * Codigo identificador del Objeto Revisor
   * @var INT(11)
@@ -82,6 +88,8 @@ class Revision extends Objectbase
    * revision
    * @param INT(11) $revision_id
    * @return Avance
+   * @deprecated since version 1.01 se a causa de una modificacion 
+   * en la base de datos esta funcion queda obsoleta !!!
    */
   function getAvance($revision_id = false) {
     leerClase('Avance');

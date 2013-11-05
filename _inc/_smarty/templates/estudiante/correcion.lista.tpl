@@ -25,8 +25,7 @@
         {if ($objs[ic]['estado_revision']==$E1_CREADO)}
         <a href="observacion.gestion.php?revision_id={$objs[ic]['id']}" target="_blank" >Ver Detalle {icono('basicset/search_48.png','Detalle')}</a>
         {else}
-          {assign var='avance' value=$revision->getAvance($objs[ic]['id'])}
-        <a href="avance.detalle.php?avance_id={$avance->id}" target="_blank" >Ver Detalle {icono('basicset/search_48.png','Detalle')}</a>
+        <a href="avance.detalle.php?avance_id={$objs[ic]['avance_id']}" target="_blank" >Ver Detalle {icono('basicset/search_48.png','Detalle')}</a>
         {/if}
       </td>
     </tr>

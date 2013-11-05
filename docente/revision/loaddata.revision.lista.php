@@ -41,7 +41,7 @@ WHERE pr.id=pe.proyecto_id
 AND pe.estudiante_id="'.$estuid.'"
 AND av.revision_id=0
 AND av.proyecto_id=pr.id) cs
-ORDER BY cs.id ASC
+ORDER BY cs.id DESC
 ');
 $mysqli->close();
 

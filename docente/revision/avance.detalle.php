@@ -13,7 +13,6 @@ try {
 
   //CSS
   $CSS[]  = URL_JS . "ui/overcast/jquery-ui.css";
-  //$CSS[]  = URL_JS . "jQfu/css/demo.css";
   $CSS[]  = URL_JS . "jQfu/css/jquery.fileupload-ui.css";
   $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_CSS . "academic/tables.css";

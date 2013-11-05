@@ -444,6 +444,24 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `sapti`.`avance`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `sapti`.`avance` ;
+
+CREATE  TABLE IF NOT EXISTS `sapti`.`avance` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `proyecto_id` INT NULL ,
+  `fecha_avance` DATE NULL ,
+  `detalle` VARCHAR(1500) NULL ,
+  `directorio` VARCHAR(45) NULL ,
+  `descripcion` TEXT NULL ,
+  `estado_avance` VARCHAR(2) NULL COMMENT 'estado 1 creado (CR), estado 2 visto (VI), estado 3 aprobado (AP)' ,
+  `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `sapti`.`revision`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `sapti`.`revision` ;
@@ -451,6 +469,7 @@ DROP TABLE IF EXISTS `sapti`.`revision` ;
 CREATE  TABLE IF NOT EXISTS `sapti`.`revision` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `proyecto_id` INT NULL ,
+  `avance_id` INT NULL ,
   `revisor` INT NULL COMMENT 'dependiendo de tipo docente_id' ,
   `revisor_tipo` VARCHAR(2) NULL COMMENT 'docente (DO), docente perfil(DP), tutor (TU), tribunal (TR)' ,
   `fecha_revision` DATE NULL ,
@@ -760,25 +779,6 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`evento` (
   `asunto` VARCHAR(100) NULL ,
   `descripcion` VARCHAR(1500) NULL ,
   `fecha_evento` DATE NULL ,
-  `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `sapti`.`avance`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `sapti`.`avance` ;
-
-CREATE  TABLE IF NOT EXISTS `sapti`.`avance` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `proyecto_id` INT NULL ,
-  `revision_id` INT NULL ,
-  `fecha_avance` DATE NULL ,
-  `detalle` VARCHAR(1500) NULL ,
-  `directorio` VARCHAR(45) NULL ,
-  `descripcion` TEXT NULL ,
-  `estado_avance` VARCHAR(2) NULL COMMENT 'estado 1 creado (CR), estado 2 visto (VI), estado 3 aprobado (AP)' ,
   `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
