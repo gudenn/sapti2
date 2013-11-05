@@ -11,9 +11,9 @@ try {
  $ERROR='';
   
   /** HEADER */
-  $smarty->assign('title','Gesti&oacute;n de Accesos');
-  $smarty->assign('description','Gesti&oacute;n de Accesos');
-  $smarty->assign('keywords','Gesti&oacute;n de Accesos');
+  $smarty->assign('title','Gesti&oacute;n de Notificaciones');
+  $smarty->assign('description','Gesti&oacute;n de Notificaciones');
+  $smarty->assign('keywords','Gesti&oacute;n de Notificaciones');
 
   $smarty->assign('header_ui','1');
    $CSS[]  = URL_JS . "box/box.css";
@@ -57,13 +57,13 @@ try {
     $menu = new Menu('Notificaciones y Mensajes');
     $counter = $notificacion->getTodasNotificaciones($usuario->id, '', '', '');
     $link = $url_base."notificacion/notificacion.gestion.php?estado_notificacion=";
-    $menu->agregarItem('Archivo de notificaciones','Archivo de Todas las notificaciones y mensajes','basicset/message-archived.png',$link,'',$counter[1]);
+    $menu->agregarItem('Archivo de Notificaciones','Archivo de Todas las notificaciones y mensajes','basicset/message-archived.png',$link,'',$counter[1]);
     $counter = $notificacion->getTodasNotificaciones($usuario->id, '', '', " AND estado_notificacion='VI' ");
     $link = $url_base."notificacion/notificacion.gestion.php?estado_notificacion=VI";
     $menu->agregarItem('Notificaciones Leidas','Todas las notificaciones leidas','basicset/message-already-read.png',$link,'',$counter[1]);
     $counter = $notificacion->getTodasNotificaciones($usuario->id, '', '', " AND estado_notificacion='AR' ");
     $link = $url_base."notificacion/notificacion.gestion.php?estado_notificacion=AR";
-    $menu->agregarItem('Nortificaciones Archivadas','Notificaciones archivadas','basicset/message-archived.png',$link,'',$counter[1]);
+    $menu->agregarItem('Notificaciones Archivadas','Notificaciones archivadas','basicset/message-archived.png',$link,'',$counter[1]);
     $menus[] = $menu;
     $menu = new Menu('Notificaciones Pendientes');
     // CONTADOR
