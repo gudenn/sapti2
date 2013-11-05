@@ -129,7 +129,7 @@ try {
  //estudiantes reprovados
  $sqlr="select COUNT(*) as rp
  from inscrito i,semestre s ,evaluacion ev,materia m,dicta di
- where i.semestre_id=s.id   and i.evaluacion_id=ev.id and ev.rfinal='RPR' and i.dicta_id=di.id and di.materia_id=m.id and m.id='".$m."' and s.id='".$p."'";
+ where i.semestre_id=s.id   and i.evaluacion_id=ev.id and ev.rfinal='REPRO' and i.dicta_id=di.id and di.materia_id=m.id and m.id='".$m."' and s.id='".$p."'";
  $resultado = mysql_query($sqlr);
  $array= array();
   
@@ -149,7 +149,7 @@ try {
  //Esatudiantes Aprovados
   $sqlr="select COUNT(*) as ap
   from inscrito i,semestre s ,evaluacion ev,materia m,dicta di
-  where i.semestre_id=s.id   and i.evaluacion_id=ev.id and ev.rfinal='APR' and i.dicta_id=di.id and di.materia_id=m.id and m.id='".$m."' and s.id='".$p."'";
+  where i.semestre_id=s.id   and i.evaluacion_id=ev.id and ev.rfinal='APRO' and i.dicta_id=di.id and di.materia_id=m.id and m.id='".$m."' and s.id='".$p."'";
  $resultado = mysql_query($sqlr);
  $arraytribunal= array();
   

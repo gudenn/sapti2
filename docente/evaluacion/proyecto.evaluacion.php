@@ -19,6 +19,7 @@ try {
   $CSS[]  = URL_CSS . "academic/tables.css";
   $CSS[]  = URL_CSS . "editablegrid.css";
   $CSS[]  = URL_JS . "ventanasmodales/simplemodaldetalle.css";
+  $CSS[]  = URL_JS . "box/box.css";
   $smarty->assign('CSS',$CSS);
 
   //JS
@@ -29,6 +30,7 @@ try {
   $JS[]  = URL_JS . "ventanasmodales/avance.detalle.modal.js";
   $JS[]  = URL_JS . "ventanasmodales/historial.notas.js";
   $JS[]  = URL_JS . "ventanasmodales/jquery.simplemodal-1.4.4.js";
+    $JS[]   = URL_JS . "box/jquery.box.js";
   $smarty->assign('JS',$JS);
   $docente     = getSessionDocente();
   if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) && $docente->getDictaverifica($_GET['iddicta']))
@@ -75,6 +77,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
   
      if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
     {
+    $EXITO = false;
     $evaluacion->objBuidFromPost();
     $eva1=$evaluacion->evaluacion_1;
     $eva2=$evaluacion->evaluacion_2;
@@ -82,10 +85,23 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
     $promedio=  round((($eva1+$eva2+$eva3)/3));
     $evaluacion->promedio=$promedio;
     $evaluacion->save();
+    $EXITO = true;
     }
 
   //No hay ERROR
-  $smarty->assign("ERROR",'');
+  $ERROR = '';
+    leerClase('Html');
+  $html  = new Html();
+  if (isset($EXITO))
+  {
+    $html = new Html();
+    if ($EXITO)
+      $mensaje = array('mensaje'=>'Se grabo correctamente la Evaluación','titulo'=>'Registro de Evaluación' ,'icono'=> 'tick_48.png');
+    else
+      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente la Evaluación','titulo'=>'Registro de Evaluación' ,'icono'=> 'warning_48.png');
+   $ERROR = $html->getMessageBox ($mensaje);
+  }
+  $smarty->assign("ERROR",$ERROR);
 }
 catch(Exception $e) 
 {

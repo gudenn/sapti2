@@ -3,8 +3,8 @@
 	//consulta
         $p=$_GET['id_p'];
 	$consulta = "SELECT p.id, u.nombre,s.codigo,CONCAT(apellido_paterno,apellido_materno) as apellidos, COUNT( * ) AS cantidadcambios, c.tipo,p.nombre as titulo,p.estado as estadop,e.numero_cambio_leve as cambioleve ,e.numero_cambio_total as cambiototal
-        FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe, cambio c
-        WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado='AC'and p.tipo_proyecto='PR' and p.estado_proyecto='CO' AND c.proyecto_id=p.id and s.id='".$p."'
+        FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe, cambio c,dicta d
+        WHERE u.id=e.usuario_id AND e.id=i.estudiante_id and d.semestre_id=s.id and i.dicta_id=d.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado='AC'and p.tipo_proyecto='PR' and p.estado_proyecto='CO' AND c.proyecto_id=p.id and s.id='".$p."'
         GROUP BY p.id, c.tipo";
 	$resultado =mysql_query($consulta); 
 	

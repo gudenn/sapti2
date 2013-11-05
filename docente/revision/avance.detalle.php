@@ -52,6 +52,7 @@ try {
   leerClase('Observacion');
   leerClase('Docente');
   leerClase('Dicta');
+
   $docente     = getSessionDocente();
   if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) && $docente->getDictaverifica($_GET['iddicta']))
   {
@@ -122,6 +123,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
     $observacion->crearObservacion($obser_array, $revision->id);
     }
     $avance->cambiarEstadoCorregido();
+    $revision->notificacionRevision($estudiante->id, $proyecto->id, $docente->getNombreCompleto());
     $ir = "Location: ../estudiante/estudiante.lista.php?iddicta=".$iddicta;
         header($ir);
     }
@@ -152,7 +154,8 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
                $obsermodes->cambiarEstadoRechazado();
            }
            $revision1->estadoAprobado();
-           $avance->cambiarEstadoCorregido();   
+           $avance->cambiarEstadoCorregido();
+           $revision1->notificacionRevision($estudiante->id, $proyecto->id, $docente->getNombreCompleto());
            $ir = "Location: ../revision/observacion.editar.revision.php?iddicta=".$iddicta."&revisiones_id=".$revisionnuevo->id."";
            header($ir);
            }else {
@@ -179,6 +182,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
                $obsermodes->cambiarEstadoRechazado();
            }}
            $revision1->estadoAprobado();
+           $revision1->notificacionRevision($estudiante->id, $proyecto->id, $docente->getNombreCompleto());
            $avance->cambiarEstadoCorregido();   
            $ir = "Location: ../revision/observacion.editar.revision.php?iddicta=".$iddicta."&revisiones_id=".$revisionnuevo->id;
            header($ir);

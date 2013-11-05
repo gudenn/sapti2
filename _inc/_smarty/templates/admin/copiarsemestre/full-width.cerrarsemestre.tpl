@@ -56,7 +56,7 @@ function realizaProceso(valorCaja1){
         };
         $.ajax({
                 data:  parametros,
-                url:   'copiarsemestre2.php',
+                url:   'cerrarsemestre2.php',
                 type:  'post',
                 beforeSend: function () {
                         $("#tablaresultado").html("Procesando, espere por favor...");

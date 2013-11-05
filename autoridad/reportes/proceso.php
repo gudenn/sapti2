@@ -50,8 +50,8 @@ try {
    $confirmado=  Proyecto::EST6_C;
   
    $sqlr='SELECT p.id,u.nombre,s.codigo,p.nombre as titulo,CONCAT(apellido_paterno,apellido_materno) as apellidos,p.estado as estadop
-    FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe
-    WHERE u.id=e.usuario_id AND e.id=i.estudiante_id and p.tipo_proyecto="PR" and p.estado_proyecto="CO" AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado="AC" and s.id="'.$p.'"';
+    FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,dicta d
+    WHERE u.id=e.usuario_id AND e.id=i.estudiante_id and d.semestre_id=s.id and i.dicta_id=d.id and p.tipo_proyecto="PR" and p.estado_proyecto="CO" AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado="AC" and s.id="'.$p.'"';
    $resultado = mysql_query($sqlr);
    $arraytribunal= array();
   
