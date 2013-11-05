@@ -120,7 +120,7 @@ try {
                   
                   $vistobuenodocente=$proyectoestudiante->getVbDocenteProyecto($docentestudiante->id);
                  
-                  if((sizeof($vistobuenodocente)!=0)  && $totalvistobuenotutor )
+                  if((sizeof($vistobuenodocente)!=0)  && $totalvistobuenotutor)
                   {
                     
                    $proyectoestudiante->estado_proyecto="VB";

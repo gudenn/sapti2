@@ -29,32 +29,11 @@ $grid->addColumn('nombrep', 'Nombre Proyecto', 'string', NULL, false);
 $grid->addColumn('action', 'Opciones', 'html', NULL, false);
 
 
-/**
+
 $result = $mysqli->query('select DISTINCT (e.id) as id, e.codigo_sis as codigosis, u.nombre as nombre, CONCAT(u.apellido_paterno,u.apellido_materno) apellidos, p.nombre as nombrep
 from  usuario u , estudiante e, proyecto_estudiante pe, proyecto p, proyecto_tutor pt , tutor  t
 where   u.id=e.usuario_id and e.id=pe.estudiante_id and  pe.proyecto_id=p.id and p.id=pt.proyecto_id
-and pt.tutor_id=t.id  and pt.estado_tutoria="AC" and  p.tipo_proyecto="PR"  and  t.usuario_id="'.$docid.'"'
- .'and
-NOT EXISTS(
-select  pp.id
-from  proyecto  pp , visto_bueno  v
-where   pp.id=v.proyecto_id  and v.visto_bueno_tipo="TU" and v.visto_bueno_id="'.$idtutor.'"
-)');
-
-*/
-$result = $mysqli->query('select DISTINCT (e.id) as id, e.codigo_sis as codigosis, u.nombre as nombre, CONCAT(u.apellido_paterno,u.apellido_materno) apellidos, p.nombre as nombrep
-from  usuario u , estudiante e, proyecto_estudiante pe, proyecto p, proyecto_tutor pt , tutor  t
-where   u.id=e.usuario_id and e.id=pe.estudiante_id and  pe.proyecto_id=p.id and p.id=pt.proyecto_id
-and pt.tutor_id=t.id  and pt.estado_tutoria="AC" and  p.tipo_proyecto="PR"  and t.id="'.$idtutor.'"  and p.id
-NOT IN  (
-select  v.proyecto_id
-from visto_bueno  v
-where  v.visto_bueno_id="'.$idtutor.'"
-)');
-
-
-
-
+and pt.tutor_id=t.id  and pt.estado_tutoria="AC" and  p.tipo_proyecto="PR"  and  t.usuario_id="'.$docid.'"');
 $mysqli->close();
 
 

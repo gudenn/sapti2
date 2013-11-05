@@ -36,8 +36,8 @@ try {
 from   usuario  u, estudiante  e, proyecto_estudiante  pe , proyecto p , defensa  d , lugar l
 where   u.id=e.usuario_id and e.id=pe.estudiante_id  and pe.proyecto_id=p.id
 and p.id=d.proyecto_id and d.tipo_defensa='DPU' and p.estado_proyecto='LD'
-and d.lugar_id= l.id  and d.fecha_defensa <= NOW()
-ORDER  by   d.`fecha_defensa`  DESC;";
+and d.lugar_id= l.id  and d.fecha_defensa>= NOW()
+ORDER  by   d.fecha_defensa  DESC;";
  $resultado = mysql_query($sqlr);
  $arraydefensa= array();
 

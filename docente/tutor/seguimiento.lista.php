@@ -39,8 +39,10 @@ try {
 
   $docente=  getSessionDocente();
   $docenteid=$docente->id;
+   $tutor= getSessionUser()->getTutor();
   
   $smarty->assign("docente_ids",$docente->usuario_id);
+  //$smarty->assign("tutor",$tutor);
 $_SESSION['estado']=1;
   //No hay ERROR
     $ERROR = ''; 
@@ -73,5 +75,5 @@ catch(Exception $e)
 {
   $smarty->assign("ERROR", handleError($e));
 }
-  $smarty->display('docente/tutor/full-width.estudiante.lista.tpl');
+  $smarty->display('docente/tutor/seguimiento.lista.tpl');
 ?>

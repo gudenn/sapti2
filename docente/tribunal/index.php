@@ -46,10 +46,12 @@ if(!isDocenteSession())
   $smarty->assign("menuList", $menuList);
 
   $menu = new Menu('Lista de Estudiantes');
-  $link = Tribunal::URL."estudiante.lista.php";
+  $link = Tribunal::URL."seguimiento.lista.php";
   $menu->agregarItem('Gesti&oacute;n de Estudiantes','Revision y Vistos Buenos a los Proyectos','basicset/user4.png',$link);
-  $link = Tribunal::URL."visto.estudiante.lista.php";
+  $link = Tribunal::URL."estudiante.lista.php";
   $menu->agregarItem('Dar Visto Bueno','Habilitar los Proyectos Para la Asignacion de Defensa','basicset/ok.png',$link);
+ $link = Tribunal::URL."visto.estudiante.lista.php";
+  $menu->agregarItem('Lista de Visto Bueno','Habilitar los Proyectos Para la Asignacion de Defensa','basicset/ok.png',$link);
 
   $menus[] = $menu;
  
@@ -60,12 +62,6 @@ if(!isDocenteSession())
   $menu->agregarItem('Lista de Defensa Publica ','Evaluaci&oacute;n de Proyecto','tribunal.png',$link);
 
   
-    $menus[] = $menu;
-
-    $notificaciontotal= $notificacion->getNotificacionTribunal(getSessionUser()->id);
-    $menu = new Menu('Notificaciones');
-    $link = Tribunal::URL."notificacion/lista.notificacion.php";
-    $menu->agregarItem('Notificaciones','Geti&oacute;n de las Notificaciones','basicset/megaphone.png',$link,  sizeof($notificaciontotal));
     $menus[] = $menu;
 
     $smarty->assign("menus", $menus);

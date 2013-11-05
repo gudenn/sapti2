@@ -257,10 +257,10 @@ class Menu
          $menus = array();
  
   $menu = new Menu('Asignaci&oacute;n de Tribunales');
-  $link = Consejo::URL."registro.php";
+  $link = Consejo::URL."lista.estudiante.php";
   $menu->agregarItem('Asignac&oacute;n  De Tribunales','Se Asigna  Tribunales a Un Estudiante','tribunal.png',$link);
   $link = Consejo::URL."listatribunal.php";
-  $menu->agregarItem('Lista de Proyecto','Lista De Proyectos con Tribunales','tribunal.png',$link);
+  $menu->agregarItem('Lista de Estudiantes','Lista De Estudiantes con Tribunales','tribunal.png',$link);
 
   $menus[] = $menu;
   
