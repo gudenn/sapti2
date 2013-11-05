@@ -13,7 +13,9 @@ INSERT INTO `grupo` (`id`, `codigo`, `descripcion`, `estado`) VALUES
 (NULL, 'DOCENTES'    , 'docentes', 'AC'),
 (NULL, 'TUTORES'     , 'tutores', 'AC'),
 (NULL, 'TRIBUNALES'  , 'tribunales', 'AC'),
-(NULL, 'CONSEJOS'    , 'consejos', 'AC');
+(NULL, 'CONSEJOS'    , 'consejos', 'AC'),
+(NULL, 'AUTORIDADES' , 'autoridades', 'AC');
+
 
 INSERT INTO `titulo_honorifico` ( `nombre`, `descripcion`, `estado`) VALUES
 ( 'Est.', 'Est.', 'AC'),
