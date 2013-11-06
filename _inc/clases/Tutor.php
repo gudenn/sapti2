@@ -131,7 +131,7 @@ class Tutor extends Objectbase
     $notificacion->proyecto_id = $proyecto->id;
     $notificacion->tipo        = Notificacion::TIPO_ASIGNACION;
     $notificacion->fecha_envio = date('d/m/Y');
-    $notificacion->asunto      = 'Peticion de Tutor';
+    $notificacion->asunto      = 'Petici&oacute;n de Tutor';
     $notificacion->detalle     = "El estudiante {$estudiante->getNombreCompleto()} solicita que {$this->getNombreCompleto()} sea su tutor para el proyecto {$proyecto->nombre} ";
     $notificacion->prioridad   = 5;
     $notificacion->estado      = Objectbase::STATUS_AC;

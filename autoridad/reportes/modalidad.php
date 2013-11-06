@@ -2,8 +2,8 @@
 try {
   define ("MODULO", "REPORTE");
   require('../_start.php');
-  if(!isAdminSession())
-    header("Location: ../login.php");  
+  if(!isUserSession())
+    //header("Location: ../login.php");  
 
   /** HEADER */
   $smarty->assign('title','Reportes');
@@ -14,7 +14,7 @@ try {
    */
   
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'reportes/','name'=>'Reportes');
+  
   $menuList[]     = array('url'=>URL . Administrador::URL . 'reportes/'.basename(__FILE__),'name'=>'Reportes Modalidad');
   $smarty->assign("menuList", $menuList);
   //CSS

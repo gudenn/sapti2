@@ -759,8 +759,32 @@ class Proyecto extends Objectbase {
     }
     return $vistos;
   }
-  
-  
+  function  getVistoDocentePE($iddocente)
+  {
+    
+     //@TODO revisar
+    //  leerClase('Proyecto_area');
+    leerClase('Visto_bueno');
+    // $visto= new Visto_bueno();
+    $d= Visto_bueno::E1_DOCENTE; 
+    $tipo= Proyecto::TIPO_PERFIL;
+    $activo = Objectbase::STATUS_AC;
+   // $sql = "select v.* from " . $this->getTableName('Visto_bueno') . " as v    where v.proyecto_id = '$this->id' and v.visto_bueno_id='$iddocente' and  '$this->tipo_proyecto'='$tipo' and v.visto_bueno_tipo='$d' and v.estado='$activo'";
+    $sql="select  v.*
+from  visto_bueno  v 
+where   v.proyecto_id='$this->id' and v.visto_bueno_id='$iddocente' and v.visto_bueno_tipo='DO'";
+    $resultado = mysql_query($sql);
+    if (!$resultado)
+      return false;
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC))
+       {
+      $visto = new Visto_bueno($fila);
+    }
+    return  $visto;
+    
+  }
+
+
   /**
    * 
    * @return
