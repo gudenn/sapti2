@@ -14,11 +14,12 @@ try {
   $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
   $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
   $CSS[]  = URL_CSS . "spams.css";
-  $smarty->assign('CSS',$CSS);
+ 
 
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
-
+  $CSS[]  = URL_JS . "box/box.css";
+   $JS[]  = URL_JS ."box/jquery.box.js";
   //Datepicker UI
   $JS[]  = URL_JS . "ui/jquery-ui-1.10.2.custom.min.js";
   $JS[]  = URL_JS . "ui/i18n/jquery.ui.datepicker-es.js";
@@ -27,7 +28,7 @@ try {
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
  
-  
+   $smarty->assign('CSS',$CSS);
   $smarty->assign('JS',$JS);
   //CREAR UN TIPO   DE DEF
   leerClase('Tribunal');
@@ -45,6 +46,8 @@ try {
   leerClase("Semestre");
    leerClase("Consejo");
     leerClase("Notificacion");
+    leerClase("Dia");
+  leerClase('Html');
     
   
 
@@ -62,6 +65,8 @@ try {
          $lugar_id[]     = $ro['id'];
          $lugar_nombre[] = $ro['nombre'];
        }
+       $diass= new Dia();
+    $smarty->assign("diass", $diass);
 
       $smarty->assign('lugar_id',$lugar_id);
       $smarty->assign('lugar_nombre',$lugar_nombre);
@@ -98,7 +103,7 @@ try {
 
  $sqlr="SELECT  DISTINCT(d.id), u.nombre, CONCAT (u.apellido_paterno,u.apellido_materno) as apellidos
 FROM  usuario u ,docente d ,  tribunal  t
-WHERE  u.`id`= d.`usuario_id` and   d.`id`= t.`docente_id` and   t.estado='AC' and u.`estado`='AC'  and d.`estado`='AC' and t.`proyecto_id`=1;";
+WHERE  u.id= d.usuario_id and   d.id= t.docente_id and   t.estado='AC' and u.estado='AC'  and d.estado='AC' and t.proyecto_id= $proyecto->id;";
  $resultado = mysql_query($sqlr);
  $arraytribunal= array();
 
@@ -110,19 +115,7 @@ WHERE  u.`id`= d.`usuario_id` and   d.`id`= t.`docente_id` and   t.estado='AC' a
         $lista_areas[] =  $fila["nombre"];
         $lista_areas[] =  $fila["apellidos"];
  
-       $listatiempo=array();
-
-        $sqltiempo="select  d.`id` , d.`nombre` , t.`nombre` as nombreturno
-        from `dia` d, `horario_doc` hd , `turno` t
-        where  d.`id`=hd.`dia_id` and hd.`turno_id`=t.`id` and  d.`estado`='AC' and hd.`estado`='AC'and t.`estado`='AC' and hd.`docente_id`=".$fila["id"].";";
-        $resultadotiempo= mysql_query($sqltiempo);
- 
-  while ($filatiempo = mysql_fetch_array($resultadotiempo, MYSQL_ASSOC)) 
-  {
-     $listatiempo[]=$filatiempo;
-  }
-  //$lista_tiempo[]= $listatiempo;
-  $lista_areas[]= $listatiempo;
+      
   $arraytribunal[]= $lista_areas;
   
  }
@@ -201,10 +194,10 @@ WHERE  u.`id`= d.`usuario_id` and   d.`id`= t.`docente_id` and   t.estado='AC' a
            
               $defensa->semestre= $semestreactual->codigo;
               $defensa->estado = Objectbase::STATUS_AC;
-              $defensa->save();
+             $defensa->save();
              
         $query = "UPDATE proyecto p SET p.estado_proyecto='LD'  WHERE p.id=$idproyecto";
-     mysql_query($query);
+         mysql_query($query);
             
     $proyectos   = new Proyecto($idproyecto);
     $estudiante   = new Estudiante($proyectos->getEstudiante()->id);
@@ -221,17 +214,35 @@ WHERE  u.`id`= d.`usuario_id` and   d.`id`= t.`docente_id` and   t.estado='AC' a
     $noticaciones= array('estudiantes'=>array($proyectos->getEstudiante()->id));
     $notificacion->enviarNotificaion( $noticaciones);
   
+           $stado=1;
+           
              }  else {
-            echo " El docent no tiene hoara disponible";
+            echo " El docente no tiene hoara disponible";
              }
             }
 
-  
-  $smarty->assign("ERROR", $ERROR);
-  
-
   //No hay ERROR
-  $smarty->assign("ERROR",'');
+  $ERROR = ''; 
+  leerClase('Html');
+  $html  = new Html();
+  //$moderador=0;
+  if(isset($stado))
+  {
+  if($stado==1){
+       $_SESSION['estado']=$stado;
+          header("Location: proyecto.defensa.php");
+          
+
+  }  else {
+          $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Area','titulo'=>'Registro de Area' ,'icono'=> 'warning_48.png');
+          $ERROR = $html->getMessageBox ($mensaje);
+  }
+  }
+     
+  
+  $smarty->assign("ERROR",$ERROR);
+     
+
   
 } 
 catch(Exception $e) 

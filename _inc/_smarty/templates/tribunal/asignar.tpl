@@ -1,13 +1,12 @@
  <div id="content">
      <form action="" method="post">
       <h1> Detalle del Proyecto </h1>
-       <label for="nombre">Nombre:  {$usuariobuscado->nombre}</label><br />
-        <label for="nombre">Apellidos:   {$usuariobuscado->apellidos}</label><br />
-         <label for="nombre">C&oacute;digo sis:   {$estudiantebuscado->codigo_sis}</label><br />
+       <label for="nombre">Estudiante:  {$usuariobuscado->getNombreCompleto()}</label><br />
+           <label for="nombre">C&oacute;digo sis:   {$estudiantebuscado->codigo_sis}</label><br />
          <label for="nombre">Proyecto:   {$proyectobuscado->nombre}</label><br />
  
          <label for="nombre">Area:   {foreach from=$proyectoarea item=curr_id}
-                                    Nombre: {$curr_id->nombre}<br />
+                                    {$curr_id->nombre}<br />
                                    {/foreach}</label><br />
        <p>
          
@@ -38,14 +37,11 @@
 
 <td>     <a  class="tooltip"> Dis
   <span>
-  <b>
- </b>
-{foreach name=outer item=contact from=$listadocentes[ic][4]}
-  <hr />
-  {foreach key=key item=item from=$contact}
-  {$item}
-  {/foreach}
-{/foreach}
+ <div id="content"  style="width:685px;min-height: 450px;">
+    <div id="verhorario">
+    {$diass->llemartabla($listadocentes[ic][0])}
+    </div>
+</div>
  </span> 
     </a>
 </td>

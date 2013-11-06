@@ -106,6 +106,9 @@ try {
 
       
                  $totalvistobuenotutor=true;
+                 if(sizeof($listatutores)>0)
+                 {
+                 
                 foreach ($listatutores as $value) 
                   {
 
@@ -116,6 +119,9 @@ try {
 
                   }
                   }
+                 }  else {
+                    $totalvistobuenotutor=FALSE;
+                 }
                   
                   
                   $vistobuenodocente=$proyectoestudiante->getVbDocenteProyecto($docentestudiante->id);

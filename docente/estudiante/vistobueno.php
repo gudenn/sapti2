@@ -11,7 +11,8 @@ try {
   leerClase('Usuario');
   leerClase('Proyecto');
   leerClase('Notificacion');
-
+  leerClase('Docente');
+  leerClase('Dicta');
   /** HEADER */
   $smarty->assign('title','Proyecto Final');
   $smarty->assign('description','Proyecto Final');
@@ -36,11 +37,12 @@ try {
   $JS[]  = URL_JS . "jquery.addfield.js";
   $smarty->assign('JS',$JS);
   
+   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
+    $smarty->assign("menuList", $menuList);
+  
  if (isset($_GET['id_estudiante']))
   {
- 
-     
-  $estudiante     = new Estudiante($_GET['id_estudiante']);
+   $estudiante     = new Estudiante($_GET['id_estudiante']);
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();
   
@@ -55,13 +57,19 @@ try {
     
     if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
     {
+      $stado=1;
     
     //  $docen
     $proyecto =    new Proyecto($_POST['proyecto_id']);
     $listavistobueno= $proyecto->getVbTutor();
     $listatutores=$proyecto->getTutores();
-   
+    //echo $proyecto->estado_proyecto;
+   ///////////////////////////////////////////////////perfil///////////////////////
+    if($proyecto->estado_proyecto==Proyecto::TIPO_PERFIL)
+    {
     $vistobuenotutores= $proyecto->getVbTutorPerfilIds();
+    
+    //$vistobuenotutores= $proyecto->getVbTutor();
     
      $vistobueno                    =       new Visto_bueno();
      $docente                       =       getSessionDocente();
@@ -70,24 +78,26 @@ try {
      $vistobueno->visto_bueno_tipo  =        Visto_bueno::E1_DOCENTE;
      $vistobueno->visto_bueno_id    =        $docente->id;
      $vistobueno->estado            =        Objectbase::STATUS_AC;
-   
      $vistobueno->save();
      
-                $notificacions= new Notificacion();
+                    $notificacions= new Notificacion();
                     $notificacions->objBuidFromPost();
                     $notificacions->proyecto_id = $proyecto->id; 
                     $notificacions->tipo        =  Notificacion::TIPO_MENSAJE;
                     $notificacions->fecha_envio = date("j/n/Y");
-                    $notificacions->asunto      =  " Visto bueno del Docente de Proyecto final";
+                    $notificacions->asunto      =  " Visto bueno del Docente";
                     $notificacions->prioridad   = 7;
                     $notificacions->estado      = Objectbase::STATUS_AC;
 
-                    $noticaciones = array('estudiantes'=>array($estudiantes->id));
+                    $noticaciones = array('estudiantes'=>array($_POST['estudiante_id']));
                     $notificacions->enviarNotificaion( $noticaciones);
     
   
     
     $totalvistobuenotutor=true;
+    
+    if(sizeof($listatutores)>0)
+    {
     foreach ($listatutores as $value) 
       {
       
@@ -98,6 +108,9 @@ try {
         
       }
      }
+    }  else {
+       $totalvistobuenotutor=FALSE;
+    }
      
      
    //  $vistobuenodocente= $proyecto->getVbDocentePerfil(getSessionDocente()->id);
@@ -105,7 +118,7 @@ try {
      
      if( $totalvistobuenotutor)
        {
-        $proyecto = new Proyecto($vistobueno->proyecto_id);
+       // $proyecto = new Proyecto($vistobueno->proyecto_id);
         $proyecto->estado_proyecto="VB";
         $proyecto->save();
         
@@ -114,19 +127,108 @@ try {
                     $notificacions->proyecto_id = $proyecto->id; 
                     $notificacions->tipo        =  Notificacion::TIPO_MENSAJE;
                     $notificacions->fecha_envio = date("j/n/Y");
-                    $notificacions->asunto      = "Estas Habilitado para Para tus Defensas";
+                    $notificacions->asunto      = "Esta Habilitado tu Formulario";
                     $notificacions->prioridad   = 7;
                     $notificacions->estado      = Objectbase::STATUS_AC;
 
-                    $noticaciones = array('estudiantes'=>array($estudiantes->id));
+                    $noticaciones = array('estudiantes'=>array($_POST['estudiante_id']));
                     $notificacions->enviarNotificaion( $noticaciones);
         
         
        }
-     }
+     }  else {
+       
+       
+        $vistobuenotutores= $proyecto->getVbTutorProyectoIds();
+    
+    //$vistobuenotutores= $proyecto->getVbTutor();
+    
+     $vistobueno                    =       new Visto_bueno();
+     $docente                       =       getSessionDocente();
+     $vistobueno->objBuidFromPost();
+     $vistobueno->proyecto_id       =        $proyecto->id;
+     $vistobueno->visto_bueno_tipo  =        Visto_bueno::E1_DOCENTE;
+     $vistobueno->visto_bueno_id    =        $docente->id;
+     $vistobueno->estado            =        Objectbase::STATUS_AC;
+     $vistobueno->save();
+     
+                    $notificacions= new Notificacion();
+                    $notificacions->objBuidFromPost();
+                    $notificacions->proyecto_id = $proyecto->id; 
+                    $notificacions->tipo        =  Notificacion::TIPO_MENSAJE;
+                    $notificacions->fecha_envio = date("j/n/Y");
+                    $notificacions->asunto      =  " Visto bueno del Docente";
+                    $notificacions->prioridad   = 7;
+                    $notificacions->estado      = Objectbase::STATUS_AC;
 
-  //No hay ERROR
-  $smarty->assign("ERROR",'');
+                    $noticaciones = array('estudiantes'=>array($_POST['estudiante_id']));
+                    $notificacions->enviarNotificaion( $noticaciones);
+    
+  
+    
+    $totalvistobuenotutor=true;
+    if(sizeof($listatutores)>0)
+    {
+    foreach ($listatutores as $value) 
+      {
+      
+      if(!in_array($value->id, $vistobuenotutores))
+      {
+        $totalvistobuenotutor=FALSE;
+        break;;
+        
+      }
+     }
+    }  else {
+        $totalvistobuenotutor=FALSE;
+    }
+     
+   //  $vistobuenodocente= $proyecto->getVbDocentePerfil(getSessionDocente()->id);
+     
+     
+     if( $totalvistobuenotutor)
+       {
+       // $proyecto = new Proyecto($vistobueno->proyecto_id);
+        $proyecto->estado_proyecto="VB";
+        $proyecto->save();
+        
+                   $notificacions= new Notificacion();
+                    $notificacions->objBuidFromPost();
+                    $notificacions->proyecto_id = $proyecto->id; 
+                    $notificacions->tipo        =  Notificacion::TIPO_MENSAJE;
+                    $notificacions->fecha_envio = date("j/n/Y");
+                    $notificacions->asunto      = "Estas Habilitado para tus Defensas";
+                    $notificacions->prioridad   = 7;
+                    $notificacions->estado      = Objectbase::STATUS_AC;
+
+                    $noticaciones = array('estudiantes'=>array($_POST['estudiante_id']));
+                    $notificacions->enviarNotificaion( $noticaciones);
+        
+        
+       }
+       
+     }
+    
+    }
+          $ERROR = ''; 
+  leerClase('Html');
+  $html  = new Html();
+  //$moderador=0;
+  if(isset($stado))
+  {
+  if($stado==1){
+       $_SESSION['estado']=$stado;
+                header("Location: ../../docente");
+  
+  }  else {
+          $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente','titulo'=>'Visto Bueno' ,'icono'=> 'warning_48.png');
+          $ERROR = $html->getMessageBox ($mensaje);
+  }
+  }
+  
+  
+  $smarty->assign("ERROR",$ERROR);
+
 } 
 catch(Exception $e) 
 {
