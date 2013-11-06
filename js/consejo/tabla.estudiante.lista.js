@@ -62,8 +62,8 @@ EditableGrid.prototype.initializeGrid = function(iddicta)
 
 
 		rowSelected = function(oldRowIndex, newRowIndex) {
-			if (oldRowIndex < 0) displayMessage("Selecionada Fila '" + this.getRowId(newRowIndex) + "'");
-			else displayMessage("Selecionada Fila y Cambiada por '" + this.getRowId(oldRowIndex) + "' to '" + this.getRowId(newRowIndex) + "'");
+			if (oldRowIndex < 0) displayMessage("Fila Selecionada '" + this.getRowId(newRowIndex) + "'");
+			else displayMessage("Fila Selecionada y Cambiada por '" + this.getRowId(oldRowIndex) + "' to '" + this.getRowId(newRowIndex) + "'");
 		};
                 
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
@@ -72,7 +72,7 @@ EditableGrid.prototype.initializeGrid = function(iddicta)
                 cell.innerHTML += "<br><a onclick=document.location.href='editartribunal.php?editar&proyecto_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
 						 "<img src=\"" +image("editar.png") + "\" border=\"0\" alt=\"revisar\" title=\"Editar Tribunales\"/>Editar</a>";
            	cell.innerHTML += " <br><a onclick=\"if (confirm('Esta seguro de eliminar esta? ')) {deletete(" + getRowId(cell.rowIndex) + "); updatetable("+cell.rowIndex+");} \" style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("borrar.png") + "\" border=\"0\" alt=\"delete\" title=\"Delete row\"/></a>";
+						 "<img src=\"" + image("borrar.png") + "\" border=\"0\" alt=\"delete\" title=\"Eliminar Tribunal\"/></a>";
 
           
                   }}));
@@ -106,7 +106,7 @@ EditableGrid.prototype.onloadXML = function(url, iddicta)
 {
 	// register the function that will be called when the XML has been fully loaded
 	this.tableLoaded = function() { 
-		displayMessage("Numero de Estudiantes Inscritos " + this.getRowCount()); 
+		displayMessage("N&uacute;mero de Estudiantes Inscritos " + this.getRowCount()); 
 		this.initializeGrid(iddicta);
 	};
 

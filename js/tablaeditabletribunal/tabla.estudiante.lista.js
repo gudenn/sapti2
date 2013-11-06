@@ -94,7 +94,7 @@ EditableGrid.prototype.onloadXML = function(url)
 {
 	// register the function that will be called when the XML has been fully loaded
 	this.tableLoaded = function() { 
-		displayMessage("Numero de Estudiantes Inscritos " + this.getRowCount()); 
+		displayMessage("N&uacute;mero de Estudiantes Inscritos " + this.getRowCount()); 
 		this.initializeGrid();
 	};
 
