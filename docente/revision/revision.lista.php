@@ -72,7 +72,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
    $objs[]=$fila1["estado_avance"];
    $objs[]=$fila1["fecha_avance"];
    $objs[]=$fila1["descripcion"];
-   $resul1 = "SELECT av.id as idav, re.id as id, re.estado_revision as estado, re.fecha_revision as fecha_re, re.revisor_tipo as revisor, re.fecha_correccion as fecha_co
+   $resul1 = "SELECT av.id as idav, re.id as id, re.estado_revision as estado, re.fecha_revision as fecha_re, re.revisor_tipo as revisor, re.fecha_correccion as fecha_co, re.revisor as idrev
 FROM proyecto pr, revision re, avance av
 WHERE re.avance_id=av.id
 AND av.proyecto_id=pr.id

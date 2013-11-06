@@ -17,10 +17,11 @@ AND av.id='".$ideve1."'
 }else{
     $resul = "
       SELECT CONCAT(us.nombre,' ',us.apellido_paterno,' ', us.apellido_materno) as nombreRevisor, av.fecha_avance as fecha, pr.nombre as nombrep
-FROM avance av, revision re, proyecto pr, usuario us
-WHERE av.revision_id=re.id
+FROM avance av, revision re, proyecto pr, usuario us, docente dc
+WHERE av.id=re.avance_id
+AND dc.usuario_id=us.id
 AND av.proyecto_id=pr.id
-AND re.revisor=us.id
+AND re.revisor=dc.id
 AND av.id='".$ideve1."' 
           ";
 }
