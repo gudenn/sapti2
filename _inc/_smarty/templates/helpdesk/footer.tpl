@@ -20,7 +20,6 @@
           <ul>
             <li><a style="background-position:0 0;" href="https://twitter.com/fcytumss">Twitter</a></li>
             <li><a style="background-position:-142px 0;" href="https://www.facebook.com/pages/Ingenieria-de-Sistemas-UMSS/362198733809625">Facebook</a></li>
-            <li><a style="background-position:-282px 0;" href="http://www.lostiempos.com/rss/lostiempos-ultimas.xml">RSS</a></li>
           </ul>
         </div>
       </div>
