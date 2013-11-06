@@ -13,7 +13,7 @@ require_once(DIR_LIB.'/tcpdf/tcpdf.php');
     public function Header() {
         // Logo
         $image_file = K_PATH_IMAGES.'cabesera.jpg';
-        $this->Image($image_file,20,20, 150, '20', 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+        $this->Image($image_file,20,6, 150, '20', 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
         // Set font
         $this->SetFont('helvetica', 'B', 20);
        

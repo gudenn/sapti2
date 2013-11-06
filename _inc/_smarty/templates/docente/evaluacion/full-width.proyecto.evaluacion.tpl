@@ -34,7 +34,7 @@
           <a href='#' class='avancedetalle' id="{$objs[ic][0]}" style=\"cursor:pointer\">Ver {icono('basicset/search_48.png','Detalle')}</a>
         <br><a href="../revision/avance.detalle.php?iddicta={$iddicta}&avance_id={$objs[ic][0]}&estudiente_id={$estudiante->id}" target="_blank" >Revisar {icono('basicset/document_pencil.png','Detalle')}</a>
       </td>
-      <td style="cursor:pointer" onclick="ver('m{$objs[ic][0]}')"> Mostrar </td>
+      <td style="cursor:pointer" onclick="ver('m{$objs[ic][0]}')"> Mostrar Revisiones </td>
  
     </tr>
     <tr id="m{$objs[ic][0]}" class="oculto">

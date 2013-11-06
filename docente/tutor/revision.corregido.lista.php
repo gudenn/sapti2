@@ -48,17 +48,18 @@ try {
   $estudiante     = new Estudiante($id_estudiante);
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();
-
+   $usuarioss= getSessionUser();
+  $tutor=  $usuarioss->getTutor();
   $resul = "
-SELECT av.id as id, pr.nombre as nombrep, av.descripcion as descripcion, av.fecha_avance as fecha, av.revision_id as correcionrevision, av.estado_avance as estoavance
+SELECT av.id as id, pr.nombre as nombrep, av.descripcion as descripcion, av.fecha_avance as fecha, re.id as correcionrevision, av.estado_avance as estoavance
 FROM proyecto pr, avance av, revision re
 WHERE av.proyecto_id=pr.id
-AND av.revision_id=re.id
+AND av.id=re.avance_id
 AND re.estado_revision='RE'
 AND av.proyecto_id='".$proyecto->id."'
-AND re.revisor_tipo='DO'
-AND re.revisor='".$docente->id."'
-ORDER BY av.fecha_avance
+AND re.revisor_tipo='TU'
+AND re.revisor='".$tutor->id."'
+ORDER BY id DESC
           ";
    $sql = mysql_query($resul);
 while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {

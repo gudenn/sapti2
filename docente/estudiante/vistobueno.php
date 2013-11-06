@@ -38,8 +38,19 @@ try {
   $JS[]  = URL_JS . "jquery.addfield.js";
   $smarty->assign('JS',$JS);
   
-   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
-    $smarty->assign("menuList", $menuList);
+      $docente     = getSessionDocente();
+  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) && $docente->getDictaverifica($_GET['iddicta']))
+  {
+     $iddicta                = $_GET['iddicta'];
+  }  else {
+       header("Location: ../index.php");
+  }
+  $dicta=new Dicta($iddicta);
+  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php?iddicta='.$iddicta,'name'=>$dicta->getNombreMateria());
+  $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/estudiante.lista.php?iddicta='.$iddicta,'name'=>'Estudiantes Inscritos');
+  $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/vistobueno.php?id_estudiante='.$_GET['id_estudiante'].'&iddicta='.$iddicta,'name'=>'Estudiantes Inscritos');
+  $smarty->assign("menuList", $menuList);
   
  if (isset($_GET['id_estudiante']))
   {

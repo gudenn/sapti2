@@ -301,6 +301,10 @@ while ($fila1b = mysql_fetch_array($sqlbus, MYSQL_ASSOC)) {
     $usuarios['estudiantes'] = array($idest);
     $noti->enviarNotificaion($usuarios);
   }
+  function getRevisorTipo(){
+      $tipo=  $this->revisor_tipo;
+      return $tipo;
+  }
 
 }
 ?>
