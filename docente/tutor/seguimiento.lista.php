@@ -43,33 +43,8 @@ try {
   
   $smarty->assign("docente_ids",$docente->usuario_id);
   //$smarty->assign("tutor",$tutor);
-$_SESSION['estado']=1;
-  //No hay ERROR
-    $ERROR = ''; 
-if(isset($_SESSION['estado']) && $_SESSION['estado']==1)
-{
-  
-  
-  leerClase('Html');
-  $html  = new Html();
- 
- 
-    $html = new Html();
-      
-      $mensaje = array('mensaje'=>'Se grabo correctamente','titulo'=>'Visto Bueno' ,'icono'=> 'tick_48.png');
-  
-      $ERROR = $html->getMessageBox ($mensaje);
-$_SESSION['estado']=1;
-$smarty->assign("ERROR",$ERROR);     
-}
-  
-  
-  
-  
-  
-  
-  
-//  $smarty->assign("ERROR",$ERROR);
+
+     $smarty->assign("ERROR",'');
 }
 catch(Exception $e) 
 {

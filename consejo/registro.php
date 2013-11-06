@@ -68,24 +68,15 @@ try {
     $diass= new Dia();
     $smarty->assign("diass", $diass);
     $html = new Html();
+
   if(isset($_GET['estudiante_id']))
   {
      $estudiante   = new Estudiante($_GET['estudiante_id']);
-   
-    $proyecto     = new Proyecto();
-   
-    $proyecto_aux = $estudiante->getProyecto();
-    if ($proyecto_aux)
-      $proyecto = $proyecto_aux;
-    else
-    {
-      //@todo no tiene proyecto 
-       //echo "<script>alert('El Estudiante no Tiene Proyecto');</script>";
-    }
+    
+       $proyecto = $estudiante->getProyecto();
     
    if(sizeof($proyeareas=$proyecto->getArea())>0)
    {
-       
         $proyeareas  =  $proyecto->getArea();
         $tutores     =  $proyecto->getTutores();
         
@@ -127,18 +118,12 @@ try {
   
    }
  
- }else
+ }
+ else
  {
    
-   
-       $estudiante   = new Estudiante($_POST['estudiante_id']);
-       $proyecto     =  $estudiante->getProyecto();
-        $usuariobuscado= new Usuario($estudiante->usuario_id);
-        $smarty->assign('usuariobuscado',  $usuariobuscado);
-        $smarty->assign('estudiantebuscado', $estudiante);
-        $smarty->assign('proyectobuscado', $proyecto);
-        $smarty->assign('proyectoarea', $proyecto->getArea());
-        $smarty->assign('tutores', $arraytutores);
+     header("Location: lista.estudiante.php");
+     
  }
    
  $sqlr="SELECT  DISTINCT(d.id), u.nombre, CONCAT (u.apellido_paterno,u.apellido_materno) as apellidos

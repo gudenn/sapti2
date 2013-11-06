@@ -56,7 +56,7 @@ try {
                     {
                     $estudiantes   =  new Estudiante($_POST['estudiante_id']);
                     $proyecto      =  $estudiantes ->getProyecto();
-                    $tribunal      =  $proyecto->getTribunal( $docente->id);
+                    $tribunal      =  $proyecto->getTribunal($docente->id);
                     $tribunal->nota_tribunal=$_POST['nota_tribunal'];
                     $tribunal->save();
                     $nota= $proyecto->getNota();
@@ -76,10 +76,10 @@ try {
                        $notapromediodefensa=0;
                        if($notadefensaa!=0)
                        {
-                       echo  $notadefensaa/$contador;
+                    //   echo  $notadefensaa/$contador;
                       $notapromediodefensa=(0.7)*($notadefensaa/$contador);
                        }
-                       echo $notapromediodefensa;
+                     //  echo $notapromediodefensa;
                        $notafinal=0;
                        
                        
@@ -93,8 +93,9 @@ try {
                     {
                       $nota= new Nota();
                       $nota->proyecto_id     =  $proyecto->id;
-                    //  $nota->nota_proyecto   =  9;
+                      $nota->nota_proyecto   =  80;
                       $nota->nota_defensa    =  $notapromediodefensa;
+                
                       if($notapromediodefensa!=0 && $nota->nota_proyecto!=0)
                        {
                           $nota->nota_final      =   ($nota->nota_proyecto+$notapromediodefensa)/2; 
@@ -114,11 +115,7 @@ try {
                       $nota->save();
                     }
                     
-                  }  else {
-                      
-                      
-                      
-                    }
+                  } 
                   }
            
              

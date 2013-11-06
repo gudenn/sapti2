@@ -104,8 +104,7 @@ class Menu
       $thise = new Menu('Autoridades');
       $link = Administrador::URL."autoridad/";
       $thise->agregarItem('Gesti&oacute;n de Autoridades','Registro y modificaciones para Autoridades','basicset/client.png',$link);
-      $link = Administrador::URL."autoridad/reporte";
-      $thise->agregarItem('Reportes de Autoridades','Reportes correspondientes a los Autoridades','basicset/graph.png',$link);
+      
       $thises[] = $thise;
       $thise = new Menu('Permisos');
       $link = Administrador::URL."seguridad/";

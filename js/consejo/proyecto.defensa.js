@@ -74,11 +74,7 @@ EditableGrid.prototype.initializeGrid = function()
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
 		     cell.innerHTML = "<a onclick=document.location.href='mostrartribunal.php?proyecto_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("ver.png") + "\" border=\"0\" alt=\"seguimiento\" title=\"Ver Tribunales\" width='30px' height='30px' />Ver Tribunales</a>";
-                cell.innerHTML += "<br><a onclick=document.location.href='finalizar="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
-					 	 "<img src=\"" + image("final.png") + "\" border=\"0\" alt=\"Finalizar\" title=\"Finalizar\"/>Finalizar el Proyecto</a>";
-               
-              
-                  }}));
+                     }}));
 		
 		// render the grid (parameters will be ignored if we have attached to an existing HTML table)
 		renderGrid("tablecontent", "testgrid", "tableid");
