@@ -1,5 +1,5 @@
       <div id="content">
-        <h1 class="title">DETALLE DE OBSERVACION</h1>
+        <h1 class="title">Detalle de Observaci&oacute;n</h1>
         <div id="respond">
           <p>
             <label for="revisor"><small>Nombre del Revisor: </small></label>
@@ -10,7 +10,7 @@
             <span>{{$arrayobser[0]['nomp']}}</span>
           </p>
           <p>
-            <label for="fecha_observacion"><small>Fecha de Observacion: </small></label>
+            <label for="fecha_observacion"><small>Fecha de Observaci&oacute;n: </small></label>
             <span>{{$arrayobser[0]['fere']}}</span>            
           </p>
             <table class="tbl_lista">

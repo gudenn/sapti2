@@ -71,9 +71,7 @@ EditableGrid.prototype.initializeGrid = function()
 						 "<img src=\"" + image("detalle.png") + "\" border=\"0\" alt=\"delete\" title=\"Seguimiento\"/></a>";
                 cell.innerHTML += "&nbsp;<a onclick=document.location.href='observacion.registro.php?id_estudiante="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("editar.png") + "\" border=\"0\" alt=\"delete\" title=\"Registrar Observacion\"/></a>";
-                	  cell.innerHTML += "&nbsp;<a onclick=document.location.href='proyecto.vistobueno.php?id_estudiante="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("basicset/ok.png") + "\" border=\"0\" alt=\"delete\" title=\"Registrar Observacion\"/></a>";
-            
+              
                   }}));
 		
 		// render the grid (parameters will be ignored if we have attached to an existing HTML table)

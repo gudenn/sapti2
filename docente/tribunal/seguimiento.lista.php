@@ -47,5 +47,5 @@ catch(Exception $e)
 {
   $smarty->assign("ERROR", handleError($e));
 }
-  $smarty->display('docente/tribunal/full-width.estudiante.lista.tpl');
+  $smarty->display('docente/tribunal/seguimiento.lista.tpl');
 ?>

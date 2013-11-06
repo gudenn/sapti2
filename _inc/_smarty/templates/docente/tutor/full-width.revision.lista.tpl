@@ -4,15 +4,15 @@
     <div id="container">
         <h1 class="title">Seguimiento de Proyecto</h1>
             <p>
-               <label for="nombre de proyecto"><small>NOMBRE DE PROYECTO:</small></label>
+               <label for="nombre de proyecto"><small>Nombre de Proyecto:</small></label>
                <span>{$proyecto->nombre}</span><br/>
-               <label for="nombre de estudiante"><small>NOMBRE DE ESTUDIANTE:</small></label>
-               <span>{$usuario->nombre} {$usuario->apellido_paterno} {$usuario->apellido_materno}</span>
+               <label for="nombre de estudiante"><small>Nombre de Estudiante:</small></label>
+               <span>{$usuario->getNombreCompleto()}</span>
             </p>
         <div id="wrap">
         <div id="message"></div>
         	<div id="pagecontrol">
-		<label for="pagecontrol">Filas por Pagina: </label>
+		<label for="pagecontrol">Filas por P&aacute;gina: </label>
 		<select id="pagesize" name="pagesize">
                     <option value="5">5</option>
                     <option value="10">10</option>
@@ -25,7 +25,7 @@
                 </select>
 
                 </div>
-        	<label for="filter">Busqueda Rapida :</label>
+        	<label for="filter">B&uacute;squeda R&aacute;pida :</label>
 		<input type="text" id="filter"/>
         
 		<div id="tablecontent"></div>

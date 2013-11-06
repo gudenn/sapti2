@@ -6,7 +6,7 @@
                <label for="nombre de proyecto"><small>Nombre  De Proyecto:</small></label>
                <span>{$proyecto->nombre}</span><br/>
                <label for="nombre de estudiante"><small>Nombre De Estudiante:</small></label>
-               <span>{$usuario->nombre} {$usuario->apellido_paterno} {$usuario->apellido_materno}</span>
+               <span>{$usuario->getNombreCompleto()}</span>
             </p>
             <br/>
            
