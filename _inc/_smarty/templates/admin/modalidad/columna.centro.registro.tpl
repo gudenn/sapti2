@@ -10,7 +10,7 @@
             </p>
             <p>
               <input type="text" name="descripcion" id="descripcion" value="{$modalidad->descripcion}"  data-validation-engine="validate[required]">
-              <label for="descripcion"><small>Descripcion del Modalidad (*) {getHelpTip('descripcion')}</small></label>
+              <label for="descripcion"><small>Descripci&oacute;n del Modalidad (*) {getHelpTip('descripcion')}</small></label>
             </p>
             <p>
               {html_radios name="datos_adicionales" options=$datos_adicionales selected=$modalidad->datos_adicionales separator="<br>"}

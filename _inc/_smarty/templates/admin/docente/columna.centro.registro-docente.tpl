@@ -26,7 +26,7 @@
           <option>11</option>
           <option>12</option>
           </select>
-          <label for="numero_horas"><small>Numero de Horas Asignadas (*){getHelpTip('Numero de Horas disponibles')}</small></label>
+          <label for="numero_horas"><small>N&uacute;mero de Horas Asignadas (*){getHelpTip('Numero de Horas disponibles')}</small></label>
           </p>
             <h2 class="title">Grabar Docente</h2>
             <p>

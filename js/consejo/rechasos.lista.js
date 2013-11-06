@@ -68,7 +68,7 @@ EditableGrid.prototype.initializeGrid = function(iddicta)
                 
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
 		     cell.innerHTML = "<a onclick=document.location.href='editartribunal.php?editar&proyecto_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("editar.png") + "\" border=\"0\" alt=\"Ver Tribunales\" title=\"Seguimiento\" width='30px' height='30px' />Tribunales</a>";
+						 "<img src=\"" + image("editar.png") + "\" border=\"0\" alt=\"Ver Tribunales\" title=\"Editar Tribunales\" width='30px' height='30px' />Editar Tribunales</a>";
                         }}));
 		
 		// render the grid (parameters will be ignored if we have attached to an existing HTML table)

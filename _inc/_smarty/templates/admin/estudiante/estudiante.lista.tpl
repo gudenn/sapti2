@@ -1,7 +1,7 @@
 <table class="tbl_lista">
   <thead>
     <tr>
-      <th><a href='?order=codigo_sis'          class="tajax"  title='Ordenar por Codigo Sis'       >Codigo Sis   {$filtros->iconOrder('codigo_sis')}</a></th>
+      <th><a href='?order=codigo_sis'          class="tajax"  title='Ordenar por C&oacute;digo Sis'       >C&oacute;digo Sis   {$filtros->iconOrder('codigo_sis')}</a></th>
       <th></th>
       <th><a href='?order=nombre'              class="tajax"  title='Ordenar por Nombre'           >Nombre       {$filtros->iconOrder('nombre')}</a></th>
       <th><a href='?order=apellido_paterno'    class="tajax"  title='Ordenar por Apellido Paterno' >Ap. Paterno  {$filtros->iconOrder('apellido_paterno')}</a></th>

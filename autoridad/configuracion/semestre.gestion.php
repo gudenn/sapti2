@@ -16,7 +16,7 @@ try {
 
   /** HEADER */
   $smarty->assign('title','Gesti&oacute;n de Semestres');
-  $smarty->assign('description','Pagina de gesti&oacute;n de Semestres');
+  $smarty->assign('description','P&aacute;gina de gesti&oacute;n de Semestres');
   $smarty->assign('keywords','Gestion,Semestre');
   leerClase('Administrador');
   /**
@@ -24,7 +24,7 @@ try {
    */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/','name'=>'Configuraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Gesti&acoute;n de Semestre');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Gesti&oacute;n de Semestre');
   $smarty->assign("menuList", $menuList);
 
  

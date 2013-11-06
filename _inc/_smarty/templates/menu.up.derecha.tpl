@@ -4,9 +4,11 @@
         <li><a href="{$URL}docente">Tutores</a></li>
         {if (isUserSession())}
         <li><a href="{$URL}docente">Docentes</a></li>
-        <li class="last"><a href="{$URL}?salir=1">Cerrar Sesion</a></li>
+        <li><a href="{$URL}?salir=1">Cerrar Sesion</a></li>
+        {include file="helpdesk/help.tpl"}
         {else}
-        <li class="last"><a href="{$URL}docente">Docentes</a></li>
+        <li><a href="{$URL}docente">Docentes</a></li>
+        {include file="helpdesk/help.tpl"}
         {/if}
       </ul>
       {if (getSessionUser())}

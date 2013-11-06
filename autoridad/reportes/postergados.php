@@ -1,5 +1,6 @@
 <?php
 try {
+  define ("MODULO", "REPORTE");
   require('../_start.php');
   if(!isAdminSession())
     header("Location: ../login.php");  
@@ -48,7 +49,7 @@ $sql2 = "SELECT *
   $semestre=new Semestre($p);
   $smarty->assign("semestre", $semestre);
   
-    $sqlr="SELECT u.nombre,s.codigo,CONCAT(apellido_paterno,apellido_materno) as apellidos ,p.nombre as titulo,v.estado_vigencia as estadop,p.id
+    $sqlr="SELECT u.nombre,s.codigo,CONCAT(apellido_paterno,' ',apellido_materno) as apellidos ,p.nombre as titulo,v.estado_vigencia as estadop,p.id
 FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v,dicta d
 WHERE u.id=e.usuario_id AND e.id=i.estudiante_id and d.semestre_id=s.id and i.dicta_id=d.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id and p.tipo_proyecto='PR' and p.estado_proyecto='CO' AND p.id=v.proyecto_id AND v.estado_vigencia='PO' and s.id='".$p."'";
  $resultado = mysql_query($sqlr);

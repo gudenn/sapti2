@@ -19,7 +19,7 @@ try {
 
   /** HEADER */
   $smarty->assign('title','Gesti&oacute;n de Correciones');
-  $smarty->assign('description','Pagina de gestion de Correciones');
+  $smarty->assign('description','P&aacute;gina de gestion de Correciones');
   $smarty->assign('keywords','Gestion,Correciones');
 
   $smarty->assign('header_ui','1');

@@ -3,7 +3,7 @@
     <tr>
       <th><a href='?order=estado_avance' class="tajax"  title='Ordenar por Estado'      >Estado       {$filtros->iconOrder('estado_avance')}</a></th>
       <th><a href='?order=fecha_avance'  class="tajax"  title='Ordenar por Fecha'       >Fecha        {$filtros->iconOrder('fecha_avance')}</a></th>
-      <th><a href='?order=descripcion'   class="tajax"  title='Ordenar por Descripcion' >Descripcion  {$filtros->iconOrder('descripcion')}</a></th>
+      <th><a href='?order=descripcion'   class="tajax"  title='Ordenar por Descripcion' >Descripci&oacute;n  {$filtros->iconOrder('descripcion')}</a></th>
       <th>Detalle</th>
     </tr>
   </thead>

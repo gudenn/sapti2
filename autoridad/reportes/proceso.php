@@ -1,7 +1,8 @@
 <?php
 try {
+  define ("MODULO", "REPORTE");
   require('../_start.php');
-  if(!isAdminSession())
+    if(!isUserSession())
     header("Location: ../login.php");  
 
   /** HEADER */
@@ -13,7 +14,7 @@ try {
    */
   
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'reportes/','name'=>'Reportes');
+
   $menuList[]     = array('url'=>URL . Administrador::URL . 'reportes/'.basename(__FILE__),'name'=>'Reportes Proceso');
   $smarty->assign("menuList", $menuList);
   //CSS
@@ -49,7 +50,7 @@ try {
    $smarty->assign("semestre", $semestre);
    $confirmado=  Proyecto::EST6_C;
   
-   $sqlr='SELECT p.id,u.nombre,s.codigo,p.nombre as titulo,CONCAT(apellido_paterno,apellido_materno) as apellidos,p.estado as estadop
+   $sqlr='SELECT p.id,u.nombre,s.codigo,p.nombre as titulo,CONCAT(apellido_paterno," ",apellido_materno) as apellidos,p.estado as estadop
     FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,dicta d
     WHERE u.id=e.usuario_id AND e.id=i.estudiante_id and d.semestre_id=s.id and i.dicta_id=d.id and p.tipo_proyecto="PR" and p.estado_proyecto="CO" AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado="AC" and s.id="'.$p.'"';
    $resultado = mysql_query($sqlr);

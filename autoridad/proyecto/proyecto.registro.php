@@ -209,7 +209,6 @@ try {
   $smarty->assign('docresp_sel',  $proyecto->responsable);
   
   
-  
   if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token']  )
   {
     $EXITO = false;
@@ -264,6 +263,8 @@ try {
         $subarea_id = $subarea->id;
       }
       $proyecto->asignarAreaSubArea($area_id,$subarea_id);
+    
+     
       $contador ++;
 
       

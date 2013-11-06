@@ -19,7 +19,7 @@ try {
 
   /** HEADER */
   $smarty->assign('title','Gesti&oacute;n de Reprogramaciones');
-  $smarty->assign('description','Pagina de gest&oacute;n  de Reprogramaci&oacute;nes');
+  $smarty->assign('description','P&aacute;gina de gest&oacute;n  de Reprogramaci&oacute;nes');
   $smarty->assign('keywords','Gestion,Reprogramaci&oacute;n');
 
   $smarty->assign('header_ui','1');

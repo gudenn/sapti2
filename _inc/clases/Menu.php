@@ -5,8 +5,8 @@
  *
  * @author Guyen Campero <guyencu@gmail.com>
  */
-  leerClase('Menu_icono');
-  leerClase('Menu_item');
+leerClase('Menu_icono');
+leerClase('Menu_item');
 class Menu
 {
 
@@ -25,6 +25,7 @@ class Menu
     $this->nombre_menu = $nombre_menu;
   }
 
+  
   /**
    * Agregamos items al menu
    * @param type $titulo
@@ -39,9 +40,37 @@ class Menu
   {
     $item               = new Menu_item($titulo,$descripcion,$file_icono,$link,$pendientes,$nopendientes,$target);
     $this->menu_items[] = $item;
-    
   }
 
+  /**
+   * Mostarmos el string conformado
+   * @param type $string
+   */
+   function ucpalabras($frace) { 
+        $excepciones = array( 
+          'de','a','el','y','o','no','para',
+          'la','las','lo','los','que',
+          'un','dar','es','si','por', 
+          'sino','cuando', 'usa','una', 
+          'de','del','por','en' 
+        ); 
+
+        $palabras = explode(' ', $frace); 
+        foreach ($palabras as $key => $palabra) 
+        { 
+            if (!in_array($palabra, $excepciones)) 
+            $palabras[$key] = ucwords($palabra); 
+        } 
+
+        $nuevafrace = implode(' ', $palabras); 
+        return $nuevafrace; 
+    } 
+
+  
+  /**
+   * Mostramos el menu de las autoridades
+   * @return \Menu
+   */
   function getAdminIndex() {
     leerClase('Grupo');
     leerClase('Usuario');
@@ -127,23 +156,38 @@ class Menu
     // Menu de AUTORIDADES
     if ($usuario->perteneceGrupo(Grupo::GR_AU))
     {
-      $thise = new Menu('Perfil');
-      $link = Administrador::URL."proyeco/";
-      $thise->agregarItem('Gesti&oacute;n de Perfiles','Gestionar los perfiles de tesis para los estudiantes','basicset/licence.png',$link);
-      $link = Administrador::URL."reportes/";
-      $thise->agregarItem('Reportes de Perfiles','Reportes correspondientes a los Perfiles','basicset/graph.png',$link);
+      $thise = new Menu('Proyecto');
+      $link = Administrador::URL."reportes/proceso.php";
+      $thise->agregarItem('Reprotes de Proyectos en Proceso','Reprotes de Proyectos en Proceso','basicset/my-reports.png',$link);
+      $link = Administrador::URL."reportes/tribunales.php";
+      $thise->agregarItem('Reprotes de Proyectos con Tribunales','Reprotes de Proyectos con Tribunales','basicset/my-reports.png',$link);
+      $link = Administrador::URL."reportes/defensa.php";
+      $thise->agregarItem('Reprotes de Proyectos en Defensa','Reprotes de Proyectos en Defensa','basicset/my-reports.png',$link);
+      $link = Administrador::URL."reportes/defensa.php";
+      $thise->agregarItem('Reprotes de Proyectos en Finalizados','Reprotes de Proyectos en Finalizados','basicset/my-reports.png',$link);
       $thises[] = $thise;
-      $thise = new Menu('Proyecto Final');
-      $link = Administrador::URL."proyecto/";
-      $thise->agregarItem('Gesti&oacute;n de Proyectos Finales','Gestionar los proyectos finales de los estudiantes','basicset/briefcase_48.png',$link);
-      $link = Administrador::URL."proyecto/";
-      $thise->agregarItem('Reportes de Proyectos Finales','Reportes correspondientes a los Proyectos','basicset/graph.png',$link);
+
+      $thise = new Menu('Reporte Docente');
+      $link = Administrador::URL."docente/reporte/docente.reporte.php";
+      $thise->agregarItem('Reportes Docente','Reported de docentes en pdf y excel','basicset/my-reports.png',$link);
       $thises[] = $thise;
-      $thise = new Menu('Notificaciones y Mensajes');
-      $link = Administrador::URL."notificacion/";
-      $thise->agregarItem('Gesti&oacute;n de Notificaciones','Gestionar Mis notificaciones','basicset/megaphone.png',$link,0,12);
-      $link = Administrador::URL."mensajes/";
-      $thise->agregarItem('Gesti&oacute;n de Mesajes','Mi correo de Mensajes','basicset/mail.png',$link,14);
+      $thise = new Menu('Estudiante');
+      $link = Administrador::URL."estudiante/reporte/estudiante.reporte.php";
+      $thise->agregarItem('Reprotes','Reportes para Estudiantes','basicset/my-reports.png',$link);
+      $link = Administrador::URL."reportes/cambio.php";
+      $thise->agregarItem('Reportes Cambios','Reportes para Estudiantes que Hicieron Cambios','basicset/my-reports.png',$link);
+      $thises[] = $thise;
+      $thise = new Menu('Reportes');
+      $link = Administrador::URL."proyecto/reporte/reporte.php";
+      $thise->agregarItem('Reportes de Proyectos',' Reportes de Proyectos','basicset/graph.png',$link);
+      $thises[] = $thise;
+      $thise = new Menu('Reportes Estudiantes');
+      $link = Administrador::URL."estudiante/reporte/reporte.php";
+      $thise->agregarItem('Reportes de Estudiante','Reportes correspondientes a los Estudiante','basicset/graph.png',$link);
+      $thises[] = $thise;
+      $thise = new Menu('Reportes de los Estados de un Proyecto');
+      $link = Administrador::URL."reportes/reporte.php";
+      $thise->agregarItem('Reportes Estados de Proyecto','Reportes Correspondientes a los Estados de Proyecto','basicset/graph.png',$link);
       $thises[] = $thise;
       
     }
@@ -192,7 +236,7 @@ class Menu
     if( $proyecto->estado_proyecto==Proyecto::EST2_BUE)
     {
       $link = Estudiante::URL."proyecto/proyecto.registro.php";
-      $thise->agregarItem('Registro de Formulario','Geti&oacute;n de las Notificaciones','basicset/survey.png',$link,1);
+      $thise->agregarItem('Registro de Formulario','Registro de Formulario de Proyecto Final del Estudiante','basicset/survey.png',$link,1);
     }
     $thises[] = $thise;
 
@@ -258,26 +302,24 @@ class Menu
  
   $menu = new Menu('Asignaci&oacute;n de Tribunales');
   $link = Consejo::URL."lista.estudiante.php";
-  $menu->agregarItem('Asignac&oacute;n  De Tribunales','Se Asigna  Tribunales a Un Estudiante','tribunal.png',$link);
+  $menu->agregarItem('Asignaci&oacute;n  de Tribunales','Se Asigna  Tribunales a un Estudiante','tribunal.png',$link);
   $link = Consejo::URL."listatribunal.php";
-  $menu->agregarItem('Lista de Estudiantes','Lista De Estudiantes con Tribunales','tribunal.png',$link);
+  $menu->agregarItem('Lista de Estudiantes','Lista de Estudiantes con Tribunales','tribunal.png',$link);
 
   $menus[] = $menu;
   
-  $menu = new Menu('Asignaci&oacute;n De Fechas  De Defensa');
+  $menu = new Menu('Asignaci&oacute;n de Fechas  de Defensa');
   $link = Consejo::URL."listadefensa.php";
   $menu->agregarItem('Gesti&oacute;n de Asignac&oacute;n de Fechas de Defensa','Registro de Fechas de Defensa','defensa.png',$link);
    $menus[] = $menu;
  
   $menu = new Menu('Tribunales no Aceptados');
   $link = Consejo::URL."tribunales.rechazados.php";
-  $menu->agregarItem('Gesti&oacute;n de Asignac&oacute;n','Registro y modificaci&oacute;n de Tribunales','denegar.png',$link);
+  $menu->agregarItem('Gesti&oacute;n de Asignaci&oacute;n','Registro y Modificaci&oacute;n de Tribunales','denegar.png',$link);
    $menus[] = $menu;
   
    $notificacion= new Notificacion();
-    //echo sizeof($notificacion->getNotificacionConsejo(2));
-    
-     
+       
      $menu = new Menu('Reportes');
      $link = Consejo::URL."reporte.php";
      $menu->agregarItem('Reportes','','basicset/graph.png',$link);

@@ -10,9 +10,9 @@
             </p>
             <p>
               <input type="text" name="descripcion" id="descripcion" value="{$subarea->descripcion}"  data-validation-engine="validate[required]">
-              <label for="descripcion"><small>Descripci&oacute;n del Sub-Area (*) {getHelpTip('descripcion')}</small></label>
+              <label for="descripcion"><small>Descripci&oacute;n del Sub-&Aacuterea; (*) {getHelpTip('descripcion')}</small></label>
             </p>
-            <h2 class="title">Grabar Sub-Area</h2>
+            <h2 class="title">Grabar Sub-&Aacuterea;</h2>
             <p>
               <input type="hidden" name="id"    value="{$subarea->id}">
               <input type="hidden" name="tarea" value="registrar">

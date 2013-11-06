@@ -1,6 +1,6 @@
 <?php
 try {
-  define ("MODULO", "ADMIN-REPORTE");
+  define ("MODULO", "REPORTE");
   require('../../_start.php');
   if(!isAdminSession())
     header("Location: ../../login.php");  
@@ -37,7 +37,7 @@ try {
    */
   //----------------------------------//
   leerClase('Menu');
-  $menu = new Menu('Detalle Proyecto');
+  $menu = new Menu('Reporte Proyecto');
   $link = Administrador::URL."docente/reporte/docente.reporte.php";
   $menu->agregarItem('Reportes Docente','Reported de docentes en pdf y excel','basicset/my-reports.png',$link);
  

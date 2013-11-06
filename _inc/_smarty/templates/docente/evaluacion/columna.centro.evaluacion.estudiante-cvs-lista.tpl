@@ -6,7 +6,7 @@
                 <tr>
                   <th><a>CODIGO SIS             </a></th>
                   <th><a>APELLIDOS Y NOMBRES     </a></th>
-                  <th><a>EVALUACION 1           </a></th>
+                  <th><a>EVALUACIN 1           </a></th>
                   <th><a>EVALUACION 2           </a></th>
                   <th><a>EVALUACION 3           </a></th>
                 </tr>

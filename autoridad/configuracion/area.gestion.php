@@ -15,7 +15,7 @@ try {
   $ERROR = '';
 
   /** HEADER */
-  $smarty->assign('title','Gestion de Area');
+  $smarty->assign('title','Gesti&oacute;n de Area');
   $smarty->assign('description','P&aacute;gina de gesti&oacute;n de &Aacute;reas');
   $smarty->assign('keywords','Gesti&acoute;n,Areas');
   leerClase('Administrador');
@@ -84,7 +84,7 @@ if(isset($_SESSION['estado']) && $_SESSION['estado']==1)
  
     $html = new Html();
       
-      $mensaje = array('mensaje'=>'Se grabo correctamente el &Aacute;rea','titulo'=>'Registro de Area' ,'icono'=> 'tick_48.png');
+      $mensaje = array('mensaje'=>'Se grabo correctamente el &Aacute;rea','titulo'=>'Registro de &Aacuterea;' ,'icono'=> 'tick_48.png');
   
       $ERROR = $html->getMessageBox ($mensaje);
    

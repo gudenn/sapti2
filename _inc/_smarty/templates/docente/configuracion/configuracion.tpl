@@ -1,6 +1,6 @@
 <div id="content">
   <form   id="form1" action="" method="post"  id="sitesearch">
-    <h3>SELECIONE LAS AREAS QUE DESEA APOYAR COMO TRIBUNAL</h3>
+    <h3>SELECIONE LAS &Aacute;REAS QUE DESEA APOYAR COMO TRIBUNAL</h3>
     <br/>
     <div  class='select-area'>
     <div class='span12'>

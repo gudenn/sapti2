@@ -12,8 +12,8 @@ try {
   $ERROR = '';
 
   /** HEADER */
-  $smarty->assign('title','Gestion de Evaluaciones');
-  $smarty->assign('description','Gestion de Evaluaciones de Estudiantes Inscritos');
+  $smarty->assign('title','Gesti&oacute;n de Evaluaciones');
+  $smarty->assign('description','Gesti&oacute;n de Evaluaciones de Estudiantes Inscritos');
   $smarty->assign('keywords','Gestion,Evaluacion,Estudiantes,Inscritos');
 
   //CSS

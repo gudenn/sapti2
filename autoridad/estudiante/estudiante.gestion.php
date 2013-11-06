@@ -19,7 +19,7 @@ try {
 
   /** HEADER */
   $smarty->assign('title','Gesti&oacute;n de Estudiantes');
-  $smarty->assign('description','Pagina de Gesti&oacute;n de Estudiantes');
+  $smarty->assign('description','P&aacute;gina de Gesti&oacute;n de Estudiantes');
   $smarty->assign('keywords','Gesti&oacute;n,Estudiantes');
   /**
    * Menu superior

@@ -18,10 +18,10 @@ try {
   $ERROR = '';
 
   /** HEADER */
-  $smarty->assign('title','Gestion de Permisos');
-  $smarty->assign('description','Pagina de gestion de Permisos');
+  $smarty->assign('title','Gesti&oacute;n de Permisos');
+  $smarty->assign('description','P&aacute;gina de gestion de Permisos');
   $smarty->assign('keywords','Gestion,Permisos');
-  $smarty->assign('menudirslast','Gestion Permisos');
+  $smarty->assign('menudirslast','Gesti&oacute;n Permisos');
 
   $smarty->assign('header_ui','1');
   $smarty->assign('CSS','');

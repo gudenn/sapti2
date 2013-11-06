@@ -14,8 +14,8 @@ try {
   $ERROR = '';
 
   /** HEADER */
-  $smarty->assign('title','Gestion de Lugar');
-  $smarty->assign('description','Pagina de gesti&oacute;n de Lugar');
+  $smarty->assign('title','Gesti&oacute;n de Lugar');
+  $smarty->assign('description','P&aacute;gina de gesti&oacute;n de Lugar');
   $smarty->assign('keywords','Gesti&acoute;n,Lugar');
   leerClase('Administrador');
   /**
@@ -23,7 +23,7 @@ try {
    */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/','name'=>'Configuraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Gesti&acoute;n de el Lugar');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Gesti&oacute;n de el Lugar');
   $smarty->assign("menuList", $menuList);
 
  

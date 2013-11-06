@@ -1,13 +1,9 @@
 <?php
 try {
+  define ("MODULO", "REPORTE");
+  require('../_start.php');
+  if(!isUserSession())
   require('_start.php');
-   
-  
-
-  
-  
-  
-  
   leerClase("Usuario");
   leerClase("Formulario");
   leerClase("Pagination");
@@ -26,8 +22,7 @@ try {
    */
   
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'reportes/','name'=>'Reportes');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'reportes/'.basename(__FILE__),'name'=>'Reportes De Estadist&oacute;cos');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'reportes/'.basename(__FILE__),'name'=>'Reportes De Estad&iacute;sticos');
   $smarty->assign("menuList", $menuList);
 
   //CSS

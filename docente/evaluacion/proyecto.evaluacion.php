@@ -13,7 +13,7 @@ try {
 
   /** HEADER */
   $smarty->assign('title','Evalucion de Proyecto');
-  $smarty->assign('description','Gestion de Evaluciones del Proyecto');
+  $smarty->assign('description','Gesti&oacute;n de Evaluciones del Proyecto');
   $smarty->assign('keywords','Gestion,Evaluacion,Estudiante');
 
   $CSS[]  = URL_CSS . "academic/tables.css";

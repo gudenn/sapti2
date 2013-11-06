@@ -66,6 +66,7 @@ try {
      $estudiante_id= $estudiante->id;
      $tutores=$proyecto->getProyectoTutor();
      $areas=$proyecto->getArea();
+     $subarea=$proyecto->getSubarea();
      $objetivos=$proyecto->getObjetivo();
  
      if($proyecto_aux->estado_proyecto!='CO'){
@@ -112,6 +113,19 @@ try {
     $parea->estado=  Objectbase::STATUS_AC;
     $parea->save();
     }
+    //copiar Subarea
+    
+    leerClase('Sub_area');
+    leerClase('Proyecto_sub_area');
+    
+    foreach ($subarea as $nsub)
+    { 
+    $psarea=new Proyecto_sub_area();
+    $psarea->sub_area_id=$nsub->id;
+    $psarea->proyecto_id=$actualproyecto->id;
+    $psarea->estado=  Objectbase::STATUS_AC;
+    $psarea->save();
+    }
     //copiar Objetivos
     leerClase('Objetivo_especifico');
     foreach ($objetivos as $especifico)
@@ -156,7 +170,7 @@ try {
   
   //buscamos el proyeco
   
-    $sqlr="SELECT p.id as pid,e.id as eid,u.nombre,s.codigo,p.nombre as titulo,CONCAT(apellido_paterno,' ',apellido_materno) as apellidos,p.estado as estadop,p.estado_proyecto
+    $sqlr="SELECT DISTINCT  e.id ,p.id as pid,e.id as eid,u.nombre,s.codigo,p.nombre as titulo,CONCAT(apellido_paterno,' ',apellido_materno) as apellidos,p.estado as estadop,p.estado_proyecto
            FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe
            WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id  and p.estado='AC' and p.estado_proyecto='".$estado."'";
            $resultado = mysql_query($sqlr);

@@ -3,7 +3,7 @@
       <h1> Detalle del Proyecto </h1>
        <label for="nombre">Nombre:  {$usuariobuscado->nombre}</label><br />
         <label for="nombre">Apellidos:   {$usuariobuscado->apellidos}</label><br />
-         <label for="nombre">Codigo sis:   {$estudiantebuscado->codigo_sis}</label><br />
+         <label for="nombre">C&oacute;digo sis:   {$estudiantebuscado->codigo_sis}</label><br />
          <label for="nombre">Proyecto:   {$proyectobuscado->nombre}</label><br />
  
          <label for="nombre">Area:   {foreach from=$proyectoarea item=curr_id}

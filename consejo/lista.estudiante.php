@@ -2,20 +2,20 @@
 try {
   define ("MODULO", "CONSEJO");
   require('_start.php');
- //if(!isDocenteSession())
-  //  header("Location: ../login.php"); 
+  if(!isConsejoSession())
+  header("Location: ../login.php"); 
   leerClase('Docente');
   leerClase('Consejo');
   $ERROR = '';
 
   /** HEADER */
   $smarty->assign('title','Lista de Estudiantes');
-  $smarty->assign('description','Pagina de Lista de Incritos');
+  $smarty->assign('description','P&aacute;gina de Lista de Incritos');
   $smarty->assign('keywords','Gestion,Estudiantes');
 
   //CSS
   $CSS[]  = URL_CSS . "academic/tables.css";
- $CSS[]  = URL_CSS . "editablegrid.css";
+  $CSS[]  = URL_CSS . "editablegrid.css";
  // $CSS[] = '../css/editablegrid.css';
   $smarty->assign('CSS',$CSS);
 

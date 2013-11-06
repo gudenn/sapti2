@@ -9,7 +9,7 @@
                <th>
              <p>
               <input type="text" name="nombre" id="nombre" value="{$semestre->codigo}"  readonly>
-              <label for="nombre"><small>Codigo Semestre Actual {getHelpTip('semestre')}</small></label>
+              <label for="nombre"><small>C&oacute;digo Semestre Actual {getHelpTip('semestre')}</small></label>
             </p>
                </th>
                <th>

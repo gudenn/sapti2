@@ -6,9 +6,9 @@ try {
     header("Location: ../login.php");  
 
   /** HEADER */
-  $smarty->assign('title','SAPTI - Registro Sub-Area');
-  $smarty->assign('description','Formulario de registro de  Sub-Area');
-  $smarty->assign('keywords','SAPTI, Sub-Area,Registro');
+  $smarty->assign('title','SAPTI - Registro Sub-&Aacuterea;');
+  $smarty->assign('description','Formulario de registro de  Sub-&Aacuterea;');
+  $smarty->assign('keywords','SAPTI, Sub-&Aacuterea;,Registro');
 
   leerClase('Administrador');
   /**
@@ -16,9 +16,9 @@ try {
    */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/','name'=>'Configuraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/area.gestion.php','name'=>'Gesti&oacute;n de Areas');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/subarea.gestion.php','name'=>'Gesti&oacute;n de Sub-Areas');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Registro de Sub-Area');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/area.gestion.php','name'=>'Gesti&oacute;n de &Aacuterea;');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/subarea.gestion.php','name'=>'Gesti&oacute;n de Sub-&Aacuterea;');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Registro de Sub-&Aacuterea;');
 
   $smarty->assign("menuList", $menuList);
 
@@ -90,9 +90,9 @@ try {
   {
     $html = new Html();
     if ($EXITO)
-      $mensaje = array('mensaje'=>'Se grabo correctamente el Sub-Area','titulo'=>'Registro de Sub-Area' ,'icono'=> 'tick_48.png');
+      $mensaje = array('mensaje'=>'Se grabo correctamente el Sub-&Aacuterea;','titulo'=>'Registro de Sub-&Aacuterea;' ,'icono'=> 'tick_48.png');
     else
-      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Sub-Area','titulo'=>'Registro de Sub-Area' ,'icono'=> 'warning_48.png');
+      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Sub-&Aacuterea;','titulo'=>'Registro de Sub-&Aacuterea;' ,'icono'=> 'warning_48.png');
    $ERROR = $html->getMessageBox ($mensaje);
   }
   $smarty->assign("ERROR",$ERROR);

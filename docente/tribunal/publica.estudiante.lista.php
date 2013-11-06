@@ -13,7 +13,7 @@ try {
 
   /** HEADER */
   $smarty->assign('title','Lista de Estudiantes');
-  $smarty->assign('description','Pagina de Lista de Incritos');
+  $smarty->assign('description','P&aacute;gina de Lista de Incritos');
   $smarty->assign('keywords','Gestion,Estudiantes');
 
   //CSS

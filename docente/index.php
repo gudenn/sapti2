@@ -7,7 +7,7 @@ try {
 
   /** HEADER */
   $smarty->assign('title','Materias Asignadas');
-  $smarty->assign('description','Menu de Materias Asignadas');
+  $smarty->assign('description','Men&uacute; de Materias Asignadas');
   $smarty->assign('keywords','Proyecto Final');
 
   //CSS

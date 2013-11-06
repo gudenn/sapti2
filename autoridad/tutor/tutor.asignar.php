@@ -19,7 +19,7 @@ try {
 
   /** HEADER */
   $smarty->assign('title','Enviar Solicitud');
-  $smarty->assign('description','Pagina de listado de tutores');
+  $smarty->assign('description','P&aacute;gina de listado de tutores');
   $smarty->assign('keywords','Docentes');
   /**
    * Menu superior

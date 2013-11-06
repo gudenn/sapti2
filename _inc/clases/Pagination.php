@@ -13,7 +13,7 @@ class Pagination {
   const First    = "&laquo;Primer";
   const Prev     = "&laquo;Previo";
   const Next     = "Siguiente&raquo;";
-  const Last     = "Ultimo&raquo;";
+  const Last     = "&Uacute;ltimo&raquo;";
   const To       = "a";
   const Of       = "de";
   const PP       = "15";
