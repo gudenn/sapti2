@@ -91,7 +91,7 @@ EditableGrid.prototype.onloadXML = function(url, iddicta)
 	// register the function that will be called when the XML has been fully loaded
 	this.tableLoaded = function() { 
     
-		displayMessage("Numero de Proyetos con Tribunales no Aceptados    " + this.getRowCount()); 
+		displayMessage("N&uacute;mero de Proyetos con Tribunales no Aceptados    " + this.getRowCount()); 
 		this.initializeGrid(iddicta);
 	};
 
