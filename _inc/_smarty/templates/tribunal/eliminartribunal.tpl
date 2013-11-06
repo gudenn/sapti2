@@ -10,7 +10,7 @@
              <h1>  Busqueda por Estudiante</h1>
           <table  style="width: 100%;float: left;" class="tbl_filtro">
           <tr>
-              <th><label for="estado_lugar">Codigo Sis</label></th>
+              <th><label for="estado_lugar">C&oacute;digo Sis</label></th>
                
           </tr>
            <tr>
@@ -31,7 +31,7 @@
       <h1> Resultado de la  Busqueda</h1>
         <label for="nombre">nombre:  {$usuariobuscado->nombre}</label><br />
         <label for="nombre">Apellidos:   {$usuariobuscado->apellidos}</label><br />
-         <label for="nombre">Codigo Sis:   {$estudiantebuscado->codigo_sis}</label><br />
+         <label for="nombre">C&oacute;digo Sis:   {$estudiantebuscado->codigo_sis}</label><br />
          <label for="nombre">Proyecto:   {$proyectobuscado->nombre}</label><br />
          <label for="Area">Numero:   {$proyectobuscado->id}</label><br />
          <label for="nombre">Area del Proyecto:   {$proyectoarea->nombre}</label><br />

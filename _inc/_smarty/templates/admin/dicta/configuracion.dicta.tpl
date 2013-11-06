@@ -49,7 +49,7 @@
                 <tr>
                     <td>
               <input type="text" name="codigo" value="{$semestre->codigo}"  readonly>
-              <label for="codigo"><small>Codigo Semestre Actual (*)</small></label>
+              <label for="codigo"><small>C&oacute;digo Semestre Actual (*)</small></label>
                     </td>
                     <td>
               <select name="docente_id" id="docente_id" >
@@ -70,7 +70,7 @@
               <select name="grupo_id" id="grupo_id" >
               {html_options values=$grupoid selected=$grupoid output=$gruponombre}
               </select>                    
-              <label for="grupo_id"><small>Codigo de Grupo(*)</small></label>
+              <label for="grupo_id"><small>C&oacute;digo de Grupo(*)</small></label>
                 </td>
                 <td>
 

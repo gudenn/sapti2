@@ -7,7 +7,7 @@
       <h1> Detalle</h1>
         
        <label for="nombre">Estudiante:  {$usuario->getNombreCompleto()}</label><br />
-       <label for="nombre">Codigo Sis:  {$estudiante->codigo_sis}</label><br />
+       <label for="nombre">C&oacute;digo Sis:  {$estudiante->codigo_sis}</label><br />
        <label for="nombre">Proyecto:  {$proyecto->nombre}</label><br />
            
    

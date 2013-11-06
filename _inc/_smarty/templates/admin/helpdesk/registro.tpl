@@ -139,7 +139,7 @@
         <form action="#" method="post" id="registro" name="registro" >
           <!--<p>
             <span><b>{$helpdesk->codigo}</b></span>
-            <label for="codigo"><small>Codigo de helpdesk (*)</small></label>
+            <label for="codigo"><small>C&oacute;digo de helpdesk (*)</small></label>
           </p>-->
           <p>
             <textarea name="titulo" id="titulo" style="width: 308px;height: 30px;" data-validation-engine="validate[required]">{$helpdesk->titulo}</textarea>
