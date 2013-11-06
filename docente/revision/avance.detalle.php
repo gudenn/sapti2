@@ -72,7 +72,7 @@ try {
   $dicta = new Dicta($iddicta);
   date_default_timezone_set('America/La_Paz');
 
-     /**
+   /**
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
@@ -85,9 +85,23 @@ try {
   $estudiante     = new Estudiante($estuid);
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();
+  $rev=new Revision();
   $avance         = new Avance($id);
   $avance->asignarDirectorio();
   $avance->cambiarEstadoVisto();
+    $resulrev = "SELECT re.id
+FROM avance av, revision re
+WHERE re.avance_id=av.id
+AND av.id='".$avance->id."'
+AND re.revisor_tipo='".$avance->revision_id."'
+AND re.revisor='".$docente->id."'
+AND re.estado_revision='".$rev."'
+";
+   $sqlrev = mysql_query($resulrev);
+while ($fila1rev = mysql_fetch_array($sqlrev, MYSQL_ASSOC)) {
+   $obserrev[]=$fila1rev;
+ }
+ 
   $resul = "
        SELECT *
 FROM observacion ov
