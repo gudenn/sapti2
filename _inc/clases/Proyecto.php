@@ -755,7 +755,7 @@ class Proyecto extends Objectbase {
       return false;
     while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC))
        {
-      $vistos[] = new Visto_bueno($fila);
+      $vistos[] = new Visto_bueno($fila['visto_bueno_id']);
     }
     return $vistos;
   }

@@ -93,6 +93,7 @@ try {
                 $tribunal->detalle="";
                 $tribunal->accion="";
                 $tribunal->visto=  Tribunal::VISTO_NV;
+                $tribunal->visto_bueno       =  Tribunal::VISTO_BUENOPENDIENTE;
                 $tribunal->fecha_asignacion= date("j/n/Y");
                 $tribunal->estado = Objectbase::STATUS_AC;
                 $tribunal->save();

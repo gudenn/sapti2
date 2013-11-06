@@ -1,4 +1,5 @@
       <div id="content">
+        <div class='contenido'>
         <h1 class="title">Registro de Visto  Bueno</h1>
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
@@ -53,5 +54,6 @@
           });
         {/literal} 
         </script>
+        </div>
       </div>
         

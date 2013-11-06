@@ -18,10 +18,7 @@
         <select name=accion>
           {html_options options=$accion}
         </select><br/>
-        Asunto<br/>
-        <input type="text" id="asunto" name="asunto" value="" /><br />
-
-        <div>
+          <div>
           Detalle<br/>
           <textarea name="detalle" rows="4" style="width: 90%"></textarea>
         </div>

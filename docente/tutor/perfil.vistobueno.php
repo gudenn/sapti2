@@ -103,12 +103,11 @@ try {
               
        }
        
-    //  var_dump($proyectoestudiante);
-             $listatutores=$proyectoestudiante->getTutores();  ///  retorna lista de los tutores de un estudiante
+              $listatutores=$proyectoestudiante->getTutores();  ///  retorna lista de los tutores de un estudiante
             $vistobuenotutores= $proyectoestudiante->getVbTutorPerfilIds();  //  retorna la lista de los vistos buenos de los tutores
-
-      //echo "Elis";
                  $totalvistobuenotutor=true;
+                 if(sizeof($listatutores)>0)
+                 {
                 foreach ($listatutores as $value) 
                   {
                   if(sizeof($vistobuenotutores)>0)
@@ -126,6 +125,11 @@ try {
                     break;
                   }
                   }
+                 }  else {
+                   
+                   $totalvistobuenotutor=FALSE;
+                   
+                 }
                   
                   
                   $vistobuenodocente=$proyectoestudiante->getVbDocentePerfil($docentestudiante->id);

@@ -311,7 +311,11 @@ class Menu
   $menu = new Menu('Asignaci&oacute;n de Fechas  de Defensa');
   $link = Consejo::URL."listadefensa.php";
   $menu->agregarItem('Gesti&oacute;n de Asignac&oacute;n de Fechas de Defensa','Registro de Fechas de Defensa','defensa.png',$link);
-   $menus[] = $menu;
+  
+  $link = Consejo::URL."proyecto.defensa.php";
+  $menu->agregarItem('Gesti&oacute;n de Defensa','Lista de Defensas','defensa.png',$link);
+
+  $menus[] = $menu;
  
   $menu = new Menu('Tribunales no Aceptados');
   $link = Consejo::URL."tribunales.rechazados.php";
