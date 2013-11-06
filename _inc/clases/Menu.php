@@ -176,6 +176,9 @@ class Menu
       $thise->agregarItem('Reprotes','Reportes para Estudiantes','basicset/my-reports.png',$link);
       $link = Administrador::URL."reportes/cambio.php";
       $thise->agregarItem('Reportes Cambios','Reportes para Estudiantes que Hicieron Cambios','basicset/my-reports.png',$link);
+      //$thises[] = $thise;
+      $link = Administrador::URL."reportes/modalidad.php";
+      $thise->agregarItem('Reportes Modalidad','Reportes para Estudiantes que Modalidad','basicset/my-reports.png',$link);
       $thises[] = $thise;
       $thise = new Menu('Reportes');
       $link = Administrador::URL."proyecto/reporte/reporte.php";
@@ -188,6 +191,10 @@ class Menu
       $thise = new Menu('Reportes de los Estados de un Proyecto');
       $link = Administrador::URL."reportes/reporte.php";
       $thise->agregarItem('Reportes Estados de Proyecto','Reportes Correspondientes a los Estados de Proyecto','basicset/graph.png',$link);
+      $thises[] = $thise;
+      $thise = new Menu('Reportes Modalidad');
+      $link = Administrador::URL."reportes/reportemodalidad.php";
+      $thise->agregarItem('Reportes Modalidad','Reportes Correspondientes Modalidad','basicset/graph.png',$link);
       $thises[] = $thise;
       
     }
