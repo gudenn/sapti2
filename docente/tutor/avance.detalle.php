@@ -141,7 +141,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
     }
     $avance->cambiarEstadoCorregido();
     $revision->notificacionRevision($estudiante->id, $proyecto->id, $docente->getNombreCompleto());
-    $ir = "Location: ../estudiante/estudiante.lista.php?iddicta=".$iddicta;
+    $ir = "Location: revision.lista.php?id_estudiante=".$estudiante->id."";
         header($ir);
     }
     
@@ -179,7 +179,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
            }else {
                    $revision1->estadoAprobado();
                    $avance->cambiarEstadoCorregido();
-                   $ir = "Location: ../estudiante/estudiante.lista.php?iddicta=".$iddicta;
+                   $ir = "Location: revision.lista.php?id_estudiante=".$estudiante->id."";
                    header($ir);
                 }
            }  else {
