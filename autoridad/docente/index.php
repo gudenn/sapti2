@@ -43,7 +43,7 @@ try {
   $link = Administrador::URL."docente/docente.gestion.php";
   $menu->agregarItem('Gesti&oacute;n de Docentes','Registro y modificaciones para Docentes','basicset/people.png',$link);
   $link = Administrador::URL."docente/docente.registro.cvs.php";
-  $menu->agregarItem('Registro de Docentes por CVS','Registro de Docentes a travez de un archivo CVS','basicset/people.png',$link);
+  $menu->agregarItem('Registro de Docentes por CSV','Registro de Docentes a travez de un archivo CSV','basicset/people.png',$link);
   $link = Administrador::URL."docente/docente.registro.php";
   $menu->agregarItem('Registro de Docente','Registro de un nuevo Docente','basicset/user4.png',$link);
   $link = Administrador::URL."docente/configuracion.dicta.php";
