@@ -320,6 +320,24 @@ class Usuario  extends Objectbase
   }
 
   /**
+   * Quitar a un usario a un grupo dado
+   * @param INT(11) $grupo_id   Codigo identificador del grupo
+   * @param INT(11) $usuario_id Codigo identificador del usuario o el actual
+   * @return boolean
+   */
+  function quitarGrupo($codigo_grupo,$usuario_id ='') {
+    if (!$usuario_id)
+      $usuario_id = $this->id;
+
+    leerClase('Pertenece');
+    $pertenece = $this->perteneceGrupo($codigo_grupo,$usuario_id);
+    
+    if ($pertenece)
+      $pertenece->delete();
+    return true;
+  }
+
+  /**
    * Esta funcion creara un objeto si se asigna un usuario a ceirto grupo 
    * como por ejemplo si se asigna un usuario al grupo de consejo
    * se creara un objeto consejo asociado a este usuario

@@ -9,7 +9,7 @@
       
       <form action="" method="post">
        
-         <h2 class="title">LISTA DE AREAS</h2>
+         <h2 class="title">LISTA DE &Aacute;REAS</h2>
       
       
      {html_checkboxes name="area_id" values=$area_id output=$area_nombre

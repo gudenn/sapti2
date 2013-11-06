@@ -134,8 +134,8 @@ function DesplegarTabla($a,$b)
      case "MATERIA":
              $tam='20%';
              break;
-     case "INSCRITO":
-             $tam='10%';
+     case "INSCRITOS":
+             $tam='20%';
              break;
      case "ESTADO":
              $tam='15%';

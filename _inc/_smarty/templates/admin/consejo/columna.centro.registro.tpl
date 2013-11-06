@@ -1,12 +1,12 @@
 <div id="content">
-  <h1 class="title">Buscar Docente por Codigo Sis.</h1>     
+  <h1 class="title">Buscar Docente por C&oacute;digo Sis.</h1>     
   
   <div id="respond">
           <form action="#" method="post" id="registro" name="buscar" >
             
             <p>
               <input type="text" name="codigosis" id="codigosis" value="" size="100"  data-validation-engine="validate[required]" >
-              <label for="codigosis"><small>Ingrese Codigo Sis del Docente (*){getHelpTip('codigosis')}</small></label>
+              <label for="codigosis"><small>Ingrese C&oacute;digo Sis del Docente (*){getHelpTip('codigosis')}</small></label>
             </p>
 
             <h2 class="title">Registrar Consejo</h2>

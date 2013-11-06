@@ -10,8 +10,8 @@ try {
   leerClase("Dicta");
   
   /** HEADER */
-  $smarty->assign('title','Gestion de Evaluaciones');
-  $smarty->assign('description','Formulario de Gestion de Evaluaciones');
+  $smarty->assign('title','Gesti&oacute;n de Evaluaciones');
+  $smarty->assign('description','Formulario de Gesti&oacute;n de Evaluaciones');
   $smarty->assign('keywords','Gestion,Evaluacion,Estudiantes,Inscritos');
 
   //CSS

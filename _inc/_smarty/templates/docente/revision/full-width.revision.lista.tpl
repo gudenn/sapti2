@@ -8,31 +8,48 @@
                <b>Estudiante:</b> {$usuario->getNombreCompleto()|upper}
             </p>
         <div id="wrap">
-        <div id="message"></div>
-        	<div id="pagecontrol">
-		<label for="pagecontrol">Filas por Página: </label>
-		<select id="pagesize" name="pagesize">
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="15">15</option>
-                    <option value="20">20</option>
-                    <option value="25">25</option>
-                    <option value="30">30</option>
-                    <option value="40">40</option>
-                    <option value="50">50</option>
-                </select>
+            <table class="tbl_lista">
+  <thead>
+    <tr>
+      <th>Id           </th>
+      <th>Estado       </th>
+      <th>Fecha        </th>
+      <th>Descripcion  </th>
+      <th>Revisor      </th>
+      <th>Detalle      </th>
 
-                </div>
-        	<label for="filter">Búsqueda Rápida:</label>
-		<input type="text" id="filter"/>
-        
-		<div id="tablecontent"></div>
-        
-        	<div id="paginator"></div>
+    </tr>
+  </thead>
+  {section name=ic loop=$objs}
+  <tbody>
+    <tr  class="{cycle values="light,dark"}" >
+      <td>{$objs[ic][0]}</td>
+      <td>{$avance->getEstadoAvance($objs[ic][1])}</td>
+      <td>{$objs[ic][2]}</td>
+      <td>{$avance->getResumen($objs[ic][3])}</td>
+      <td>Avance</td>
+      <td>
+          <a href='#' class='avancedetalle' id="{$objs[ic][0]}" style=\"cursor:pointer\">Ver {icono('basicset/search_48.png','Detalle')}</a>
+        <br><a href="../revision/avance.detalle.php?iddicta={$iddicta}&avance_id={$objs[ic][0]}&estudiente_id={$estudiante->id}" target="_blank" >Revisar {icono('basicset/document_pencil.png','Detalle')}</a>
+      </td>
+ 
+    </tr>
+    {section name=ic1 loop=$objs[ic][4]}
+     <tr>
+    <td>{$objs[ic][4][ic1]['id']}</td> 
+    <td>{$revision->getEstadoRevision($objs[ic][4][ic1]['estado'])}</td> 
+    <td>{$objs[ic][4][ic1]['fecha_re']}</td>
+        <td></td>
+    <td>{$revision->getRevisor(4,$objs[ic][4][ic1]['revisor'])}</td>
+    <td><a href='#' class='observaciondetalle' id="{$objs[ic][4][ic1]['id']}" style="cursor:pointer">Ver {icono('basicset/search_48.png','Detalle')}</a></td>
+    </tr>
+        {/section}
+
+  </tbody>
+  {/section}
+</table>
+
         </div>
-        <script type="text/javascript">
-                editableGrid.onloadXML("loaddata.revision.lista.php?doc={$estudiante->id}",{$estudiante->id},{$iddicta});
-        </script>
         <p>{$ERROR}</p>
      </div>
     {$ERROR}

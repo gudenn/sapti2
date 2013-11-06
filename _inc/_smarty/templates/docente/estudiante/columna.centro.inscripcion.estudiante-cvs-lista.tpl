@@ -4,7 +4,7 @@
             <table class="tbl_lista_inscrito">
               <thead>
                 <tr>
-                  <th><a>CODIGO SIS      </a></th>
+                  <th><a>C&Oacute;DIGO SIS      </a></th>
                   <th><a>APELLIDOS Y NOMBRES          </a></th>
                 </tr>
               </thead>
@@ -21,7 +21,7 @@
             <table class="tbl_lista_yainscrito">
               <thead>
                 <tr>
-                  <th><a>CODIGO SIS      </a></th>
+                  <th><a>C&Oacute;DIGO SIS      </a></th>
                   <th><a>APELLIDOS Y NOMBRES          </a></th>
                 </tr>
               </thead>

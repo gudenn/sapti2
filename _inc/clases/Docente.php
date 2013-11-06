@@ -80,7 +80,7 @@ class Docente extends Objectbase{
    */
   function validar($es_nuevo = true) {
     leerClase('Formulario');
-    Formulario::validar('codigo_sis', $this->codigo_sis, 'texto', 'El Codigo SIS');
+    Formulario::validar('codigo_sis', $this->codigo_sis, 'texto', 'El C&oacute;digo SIS');
     if ($es_nuevo) // nuevo
       $this->getByCodigoSis($this->codigo_sis, true);
   }
@@ -100,7 +100,7 @@ class Docente extends Objectbase{
 
     if ($verSifueTomado) {
       if (mysql_num_rows($result))
-        throw new Exception("?codigo_sis&m=Este Codigo SIS ya esta en Uso.");
+        throw new Exception("?codigo_sis&m=Este C&oacute;digo SIS ya esta en Uso.");
       return;
     }
 

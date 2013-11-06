@@ -14,8 +14,8 @@ try {
   $ERROR = '';
 
   /** HEADER */
-  $smarty->assign('title','Gestion de Estado');
-  $smarty->assign('description','Pagina de gestion de Estados');
+  $smarty->assign('title','Gesti&oacute;n de Estado');
+  $smarty->assign('description','P&aacute;gina de gestion de Estados');
   $smarty->assign('keywords','Gestion,estados');
   leerClase('Administrador');
   leerClase('Estudiante');
@@ -70,6 +70,12 @@ try {
      $fechafin=$v[0]->fecha_fin;
      $vigencia->fecha_fin=  date("d/m/Y",strtotime("$fechafin +6 month") );
      $vigencia->estado_vigencia='PR';
+     $vigencia->save();
+ }
+      if (isset($_GET['normal'])&$vigencia->estado_vigencia!='NO' )
+  { 
+     $fechafin=$v[0]->fecha_fin;
+     $vigencia->estado_vigencia='NO';
      $vigencia->save();
  }
      $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');

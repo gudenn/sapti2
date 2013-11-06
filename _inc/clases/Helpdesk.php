@@ -499,8 +499,6 @@ ____LISTA;
     $filtro->valores[] = array ('select','estado_helpdesk'  ,$filtro->filtro('estado_helpdesk'),
         array(''      ,'RC'         ,'ED'           ,'AP'        ),
         array('Todos' ,'Pendiente'  ,'Ya Editado'   ,'Aprobado' ));
-    $filtro->nombres[] = 'Codigo';
-    $filtro->valores[] = array('input', 'codigo', $filtro->filtro('codigo'));
     $filtro->nombres[] = 'Descripci&oacute;n';
     $filtro->valores[] = array('input', 'descripcion', $filtro->filtro('descripcion'));
     $filtro->nombres[] = 'Claves';

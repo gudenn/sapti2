@@ -1,9 +1,9 @@
 <?php
 try {
-  define ("MODULO", "ADMIN-REPORTE");
+  define ("MODULO", "REPORTE");
   require('../../_start.php');
-  if(!isAdminSession())
-    header("Location: ../../login.php");  
+  if(!isUserSession())
+  
 
   /** HEADER */
   $smarty->assign('title','Gesti&oacute;n de Reprte');

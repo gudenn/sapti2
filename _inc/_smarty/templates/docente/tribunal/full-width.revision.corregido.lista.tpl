@@ -18,7 +18,7 @@
     <tr>
       <th>Id                 </th>
       <th>Nombre Proyecto    </th>
-      <th>Descripcion        </th>
+      <th>Descripci&oacute;n        </th>
       <th>Fecha de Avance    </th>
       <th>Tipo Avance        </th>
       <th>Estado Avance      </th>

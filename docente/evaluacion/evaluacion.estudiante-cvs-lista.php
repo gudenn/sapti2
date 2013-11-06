@@ -6,8 +6,8 @@ try {
     header("Location: ../login.php");  
 
   /** HEADER */
-  $smarty->assign('title','Gestion de Evaluaciones');
-  $smarty->assign('description','Gestion de Evaluaciones');
+  $smarty->assign('title','Gesti&oacute;n de Evaluaciones');
+  $smarty->assign('description','Gesti&oacute;n de Evaluaciones');
   $smarty->assign('keywords','Gestion,Evaluacion,Estudiantes,Inscritos');
 
   //CSS

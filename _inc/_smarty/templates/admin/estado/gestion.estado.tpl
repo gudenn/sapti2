@@ -7,7 +7,7 @@
        <th><a href='?order=apellido_materno'           class="tajax"  title='Ordenar por Apellidos'    >Apellidos Materno   {$filtros->iconOrder('apellido_materno')}</a></th>
       <th><a href='?order=login'               class="tajax"  title='Ordenar por Login'        >Login        {$filtros->iconOrder('login')}</a></th>
       <th><a href='?order=email'               class="tajax"  title='Ordenar por Email'        >Email        {$filtros->iconOrder('email')}</a></th>
-      <th><a href='?order=codigo_sis'          class="tajax"  title='Ordenar por Codigo Sis'   >Codigo Sis   {$filtros->iconOrder('codigo_sis')}</a></th>
+      <th><a href='?order=codigo_sis'          class="tajax"  title='Ordenar por C&oacute;digo Sis'   >C&oacute;digo Sis   {$filtros->iconOrder('codigo_sis')}</a></th>
       <th>Opciones</th>
     </tr>
   </thead>

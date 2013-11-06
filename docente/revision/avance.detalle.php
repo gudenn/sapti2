@@ -115,6 +115,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
     $revision = new Revision();
     $revision->crearRevisionDocente($docente->id, $proyecto->id, $dicta->getTipoMateria());
     $revision->objBuidFromPost();
+    $revision->avance_id=$avance->id;
     $revision->save();
     
     foreach ($observaciones as $obser_array){
@@ -141,6 +142,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
            if(count($desaprobados)>0){
            $revisionnuevo = new Revision();
            $revisionnuevo->crearRevisionDocente($docente->id, $proyecto->id, $dicta->getTipoMateria());
+           $revisionnuevo->avance_id=$avance->id;
            $revisionnuevo->save();
            foreach ($desaprobados as $des) {
                $obsermodes=new Observacion($des);
@@ -169,6 +171,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
            if(count($desaprobados)>0){
            $revisionnuevo = new Revision();
            $revisionnuevo->crearRevisionDocente($docente->id, $proyecto->id, $dicta->getTipoMateria());
+           $revisionnuevo->avance_id=$avance->id;
            $revisionnuevo->save();
            foreach ($desaprobados as $des) {
                $obsermodes=new Observacion($des);

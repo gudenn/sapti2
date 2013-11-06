@@ -1,9 +1,8 @@
 <?php
 try {
-  define ("MODULO", "DOCENTE");
+ define ("MODULO", "REPORTE");
  require('../_start.php');
- // if(!isDocenteSession())
- //   header("Location: login.php"); 
+ 
 
   leerClase('Docente');
   $ERROR = '';

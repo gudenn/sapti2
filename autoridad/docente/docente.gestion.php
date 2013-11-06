@@ -20,7 +20,7 @@ try {
 
    /** HEADER */
   $smarty->assign('title','Gesti&oacute;n de Docentes');
-  $smarty->assign('description','Pagina de Gesti&oacute;n de Docente');
+  $smarty->assign('description','P&aacute;gina de Gesti&oacute;n de Docente');
   $smarty->assign('keywords','Gesti&oacute;n,Docentes');
   /**
    * Menu superior

@@ -1,5 +1,5 @@
 <?php     
-define ("MODULO", "DOCENTE");
+define ("MODULO", "REPORTE");
 require  '../_start.php';
 include '../../_inc/_configurar.php';      
 require_once('EditableGrid.php');

@@ -9,7 +9,7 @@
           <form action="#" method="post" id="registro" name="registro" >
             <p>
               <input type="text" name="login" id="login" value="" size="100"  data-validation-engine="validate[required]">
-              <label for="login"><small>Codigo Sis(*)</small></label>
+              <label for="login"><small>C&oacute;digo Sis(*)</small></label>
             </p>
             <p>
               <input type="password" name="clave" id="clave" value="" data-validation-engine="validate[required]"  size="22">
