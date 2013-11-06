@@ -73,7 +73,7 @@ EditableGrid.prototype.initializeGrid = function(dicta)
 				"<img src=\"" + image("editar.png") + "\" border=\"0\" alt=\"revisar\" title=\"Correcciones Pendientes\"/>Correcci&oacute;n</a>";
                 cell.innerHTML += "<br><a onclick=document.location.href='../evaluacion/proyecto.evaluacion.php?iddicta="+ dicta +"&estudiente_id=" + getRowId(cell.rowIndex) + "' style=\"cursor:pointer\">" +
 				"<img src=\"" + image("evaluar.png") + "\" border=\"0\" alt=\"evaluar\" title=\"Evaluar Proyecto\"/>Evaluar</a>";
-                cell.innerHTML += "<br><a onclick=document.location.href='vistobueno.php?id_estudiante="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
+                cell.innerHTML += "<br><a onclick=document.location.href='vistobueno.php?id_estudiante="+getRowId(cell.rowIndex)+"&iddicta="+ dicta +"' style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("basicset/ok.png") + "\" border=\"0\" alt=\"evaluar\" title=\"Evaluar Proyecto\" width='30px' height='30px' />Visto Bueno</a>";
 
                   }}));
