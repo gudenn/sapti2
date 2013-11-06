@@ -10,6 +10,8 @@ try {
   leerClase("Evaluacion");
   leerClase("Docente");
   leerClase("Dicta");
+  leerClase('Avance');
+  leerClase('Revision');
 
   /** HEADER */
   $smarty->assign('title','Evalucion de Proyecto');
@@ -51,12 +53,44 @@ try {
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
   $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php?iddicta='.$iddicta,'name'=>$dicta->getNombreMateria());
   $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/estudiante.lista.php?iddicta='.$iddicta,'name'=>'Estudiantes Inscritos');
-  $menuList[]     = array('url'=>URL.Docente::URL.'evaluacion/proyecto.evaluacion.php?iddicta='.$iddicta.'&estudiente_id='.$id_estudiante,'name'=>'Evaluacion al Proyecto');
+  $menuList[]     = array('url'=>URL.Docente::URL.'evaluacion/proyecto.evaluacion.php?iddicta='.$iddicta.'&estudiente_id='.$id_estudiante,'name'=>'Evaluaci&oacute;n al Proyecto');
   $smarty->assign("menuList", $menuList);
 
   $estudiante     = new Estudiante($id_estudiante);
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();
+  $avance   = new Avance();
+  $revision   = new Revision();
+  
+    $resul = "SELECT id, estado_avance, fecha_avance, descripcion
+FROM avance av
+WHERE av.proyecto_id='".$proyecto->id."'
+ORDER BY id DESC";
+   $sql = mysql_query($resul);
+   $objs2=array();
+while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
+    $objs=array();
+    $objs1=array();
+   $objs[]=$fila1["id"];
+   $objs[]=$fila1["estado_avance"];
+   $objs[]=$fila1["fecha_avance"];
+   $objs[]=$fila1["descripcion"];
+   $resul1 = "SELECT av.id as idav, re.id as id, re.estado_revision as estado, re.fecha_revision as fecha_re, re.revisor_tipo as revisor, re.fecha_correccion as fecha_co
+FROM proyecto pr, revision re, avance av
+WHERE re.avance_id=av.id
+AND av.proyecto_id=pr.id
+AND av.id='".$fila1['id']."'
+";
+   $sql1 = mysql_query($resul1);
+while ($fila11 = mysql_fetch_array($sql1, MYSQL_ASSOC)) {
+   $objs1[]=$fila11; 
+   
+ }
+    $objs[]=$objs1;
+    $objs2[]=$objs;
+ }
+
+  $smarty->assign("objs", $objs2);
   $resul = "
       SELECT it.evaluacion_id as id
 FROM dicta di, inscrito it
@@ -74,6 +108,8 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
   $smarty->assign("proyecto", $proyecto);
   $smarty->assign("estudiante", $estudiante);
   $smarty->assign("evaluacion", $evaluacion);
+    $smarty->assign("avance", $avance);
+  $smarty->assign("revision", $revision);
   
      if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
     {

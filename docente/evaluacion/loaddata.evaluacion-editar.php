@@ -20,7 +20,7 @@ $mysqli->real_connect(DBHOST,DBUSER,BDPASS,BDNAME);
 $grid = new EditableGrid();
 
 $grid->addColumn('id', 'ID', 'integer', NULL, false); 
-$grid->addColumn('codigo', 'Codigo SIS', 'string', NULL, false);
+$grid->addColumn('codigo', 'Código SIS', 'string', NULL, false);
 $grid->addColumn('nombre', 'Nombres', 'string', NULL, false);  
 $grid->addColumn('apellidos', 'Apellidos', 'string', NULL, false);
 $grid->addColumn('nombrep', 'Nombre Proyecto', 'string', NULL, false);
@@ -28,7 +28,7 @@ $grid->addColumn('evaluacion_1', 'EVA 1', 'integer');
 $grid->addColumn('evaluacion_2', 'EVA 2', 'integer');
 $grid->addColumn('evaluacion_3', 'EVA 3', 'integer');
 $grid->addColumn('pro', 'PROM', 'integer', NULL, false);
-$grid->addColumn('apro', 'Aprobacion', 'string', NULL, false);
+$grid->addColumn('apro', 'Aprobación', 'string', NULL, false);
 $grid->addColumn('action', 'Historial', 'html', NULL, false);
 
 $result = $mysqli->query('
