@@ -22,7 +22,7 @@
        </select>
 
                 </div>
-        	<label for="filter">B&uacute;squeda R&aacute;pida :</label>
+        	<label for="filter">B&uacute;squeda R&aacute;pida:</label>
 		<input type="text" id="filter"/>
         
 		<div id="tablecontent"></div>

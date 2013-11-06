@@ -204,7 +204,7 @@ where  d.`id`=ap.`docente_id` and a.`id`=ap.`area_id` and d.`estado`='AC' and ap
  //Tribunal::
      
      //////////////////////////seleccionados////////////////////
-   $sqlselec="SELECT  d.id, u.nombre, CONCAT (u.apellido_paterno, u.apellido_materno) as apellidos
+   $sqlselec="SELECT  d.id, u.nombre, CONCAT (u.apellido_paterno,' ' ,u.apellido_materno) as apellidos
 FROM  usuario u ,docente d
 WHERE  u.id=d.usuario_id and u.estado='AC' and   d.id  in(
 select dd.id

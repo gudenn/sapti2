@@ -75,7 +75,7 @@
           <tr>
             <th>ID          </th>
             <th>NOMBRE   </th>
-            <th>APELLIODS </th>
+            <th>APELLIDOS </th>
              <th>&Aacute;REA</th>
           
            
@@ -123,7 +123,7 @@
         <div>
         Mensaje<br/>
         <textarea name="detalle" rows="5" style="width: 90%">
-Se le Asigno los Tribunales  correspondientes al proyecto:{$proyecto->nombre}  del estudiante:{$usuario->getNombreCompleto()} para q usted realize las funciones como tribunal al proyecto ya mencionado esperamos su pronta respuesta 
+Se le Asigno los Tribunales  correspondientes al proyecto: {$proyecto->nombre}  del estudiante: {$usuario->getNombreCompleto()} para que usted realice las funciones como tribunal al proyecto ya mencionado esperamos su pronta respuesta. 
       </textarea>
         <script>
           CKEDITOR.replace('detalle'{$editores})
