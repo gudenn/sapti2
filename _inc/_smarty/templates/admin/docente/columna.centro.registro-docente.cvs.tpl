@@ -8,7 +8,7 @@
               <textarea name="cvs" id="cvs" rows="4" cols="60" style="width: 431px;height: 305px;" data-validation-engine="validate[required]"></textarea>
             </p>
             <p>
-              <label for="cvs"><small>Ingrese Contenido CVS (*)</small></label>
+              <label for="cvs"><small>Ingrese Contenido CSV (*)</small></label>
             </p>
             <h2 class="title">Grabar Docentes</h2>
             <p>
