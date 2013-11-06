@@ -80,12 +80,13 @@ try {
       if(isset($_GET['proyecto_id']))
       {
 
-        echo $_GET['proyecto_id'];
+   $estudiante=  new Estudiante($_GET['proyecto_id']) ;
+   $proyec= $estudiante->getProyecto();
     $sql="
     SELECT d.id, u.nombre , CONCAT (u.apellido_paterno ,'  ', u.apellido_materno) as apellidos
     FROM  usuario u, docente d, tribunal t, proyecto p
     WHERE  u.id=d.usuario_id  and d.id=t.docente_id  and t.proyecto_id=p.id  and u.estado='AC'  and d.estado='AC'
-    and t.estado='AC'  and p.estado='AC' and p.id=".$_GET['proyecto_id'];
+    and t.estado='AC'  and p.estado='AC' and p.id=$proyec->id";
      $resultado = mysql_query($sql);
      $arraytribunal= array();
 

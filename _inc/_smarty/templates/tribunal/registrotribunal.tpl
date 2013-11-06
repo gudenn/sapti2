@@ -3,17 +3,14 @@
    <center> <strong> <h1>Formulario De Asignación De Tribunales </h1></strong></td></center>
    
 <div >
-        <label for="nombre">Estudiante:  {$usuariobuscado->getNombreCompleto()}</label><br />
+        <label for="nombre">Estudiante:  {$usuariobuscado->nombre}</label><br />
         <label for="nombre">C&oacute;digo Sis:   {$estudiantebuscado->codigo_sis}</label><br />
         <label for="nombre">Proyecto:   {$proyectobuscado->nombre}</label><br />
     
          <label for="nombre">&Aacute;rea(as):   {foreach from=$proyectoarea item=curr_id}
                                      {$curr_id->nombre}<br />
                                    {/foreach}</label>
-        <label for="nombre">Tutor(es):   {foreach from=$tutores item=curr_idd}
-                                     {$curr_idd->getNombrecompleto()}
-                                      {$curr_idd->apellido_paterno}
-                                   {/foreach}</label><br />
+     
 </div>   
           <div style ="clear:both;"></div>
   <hr>

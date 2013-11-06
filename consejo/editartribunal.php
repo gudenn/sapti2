@@ -153,10 +153,10 @@ try {
 
    if(isset($_GET['editar']) && isset($_GET['proyecto_id']) && is_numeric($_GET['proyecto_id']) )
   {
-     
-       $proyectos =  new Proyecto($_GET['proyecto_id']);
+       $estudiante= new Estudiante($_GET['proyecto_id']);
+       $proyectos =  $estudiante->getProyecto();
       
-      $estudiante= $proyectos->getEstudiante();
+     // $estudiante= $proyectos->getEstudiante();
       $usuario =  new Usuario($estudiante->usuario_id);
       $modalidad=  new Modalidad( $proyectos->modalidad_id);
       $areaproyecto= $proyectos->getArea();
@@ -173,7 +173,7 @@ FROM  usuario u ,docente d
 WHERE  u.id=d.usuario_id and u.estado='AC' and  d.estado='AC' and d.id not in(
 select dd.id
 from  proyecto p, tribunal t ,docente dd
-where     p.id=t.proyecto_id  and t.docente_id= dd.id  and p.estado='AC' and t.estado='AC' and dd.estado='AC' and p.id=".$_GET['proyecto_id'].");";
+where     p.id=t.proyecto_id  and t.docente_id= dd.id  and p.estado='AC' and t.estado='AC' and dd.estado='AC' and p.id=".$proyectos->id.");";
  $resultado = mysql_query($sqlr);
  $arraytribunal= array();
  
@@ -210,7 +210,7 @@ FROM  usuario u ,docente d
 WHERE  u.id=d.usuario_id and u.estado='AC' and   d.id  in(
 select dd.id
 from  proyecto p, tribunal t ,docente dd
-where   p.id=t.proyecto_id and t.accion!='RE' and t.docente_id= dd.id and  p.estado='AC' and t.estado='AC' and dd.estado='AC'  and p.id=".$_GET['proyecto_id'].");";
+where   p.id=t.proyecto_id and t.accion!='RE' and t.docente_id= dd.id and  p.estado='AC' and t.estado='AC' and dd.estado='AC'  and p.id=".$proyectos->id.");";
  $resultadoselect = mysql_query($sqlselec);
  $arraytribunalselec= array();
  

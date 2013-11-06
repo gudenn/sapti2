@@ -19,7 +19,7 @@
 <div >
   
   
-   <div >
+   <div  style='height: 200px; width: 100%; font-size: 12px; overflow: auto;'>
      <Hi> Lista de Docentes</Hi>
     <table class="tbl_lista" id="docentes"  mane="docentes">
   <thead>
