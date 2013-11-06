@@ -13,6 +13,7 @@ try {
   leerClase('Notificacion');
   leerClase('Docente');
   leerClase('Dicta');
+  leerClase('Visto_bueno');
   /** HEADER */
   $smarty->assign('title','Proyecto Final');
   $smarty->assign('description','Proyecto Final');
@@ -65,14 +66,27 @@ try {
     $listatutores=$proyecto->getTutores();
     //echo $proyecto->estado_proyecto;
    ///////////////////////////////////////////////////perfil///////////////////////
-    if($proyecto->estado_proyecto==Proyecto::TIPO_PERFIL)
+    if($proyecto->tipo_proyecto==Proyecto::TIPO_PERFIL)
     {
     $vistobuenotutores= $proyecto->getVbTutorPerfilIds();
     
     //$vistobuenotutores= $proyecto->getVbTutor();
+   
     
-     $vistobueno                    =       new Visto_bueno();
+    
+     
      $docente                       =       getSessionDocente();
+     $sql="SELECT v.*
+from  visto_bueno  v
+where   v.proyecto_id=11 and v.visto_bueno_id=4 and v.visto_bueno_tipo='DO'";
+    $resultado = mysql_query($sql);
+  
+     
+     $visto= $proyecto->getVistoDocentePE($docente->id);
+   
+  
+    // echo $visto->proyecto_id;
+      $vistobueno                    =       new Visto_bueno($visto->id);
      $vistobueno->objBuidFromPost();
      $vistobueno->proyecto_id       =        $proyecto->id;
      $vistobueno->visto_bueno_tipo  =        Visto_bueno::E1_DOCENTE;
@@ -137,13 +151,14 @@ try {
         
        }
      }  else {
-       
+         
+     
        
         $vistobuenotutores= $proyecto->getVbTutorProyectoIds();
     
     //$vistobuenotutores= $proyecto->getVbTutor();
-    
-     $vistobueno                    =       new Visto_bueno();
+    $visto= $proyecto->getVistoDocentePE($docente->id);
+     $vistobueno                    =       new Visto_bueno( $visto->id);
      $docente                       =       getSessionDocente();
      $vistobueno->objBuidFromPost();
      $vistobueno->proyecto_id       =        $proyecto->id;
@@ -218,7 +233,7 @@ try {
   {
   if($stado==1){
        $_SESSION['estado']=$stado;
-                header("Location: ../../docente");
+          header("Location: ../../docente");
   
   }  else {
           $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente','titulo'=>'Visto Bueno' ,'icono'=> 'warning_48.png');
