@@ -5,10 +5,11 @@ define ("MODULO", "DOCENTE");
 $ideve1=$_GET['idev'];
   $resul = "
       SELECT ob.observacion as observacion, ob.respuesta as respuesta, pr.nombre as nomp, CONCAT(us.apellido_paterno,' ',us.apellido_materno,' ', us.nombre) as nombre, re.fecha_revision as fere, ob.estado_observacion as estado
-FROM observacion ob, revision re, proyecto pr, usuario us
+FROM observacion ob, revision re, proyecto pr, usuario us, docente dc
 WHERE ob.revision_id=re.id
 AND re.proyecto_id=pr.id
-AND re.revisor=us.id
+AND re.revisor=dc.id
+AND dc.usuario_id=us.id
 AND ob.revision_id='".$ideve1."' 
           ";
    $sql = mysql_query($resul);
