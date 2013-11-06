@@ -42,7 +42,7 @@ try {
    */
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
   $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php?iddicta='.$iddicta,'name'=>$dicta->getNombreMateria());
-  $menuList[]     = array('url'=>URL.Docente::URL.'evaluacion/estudiante.evaluacion-editar.php?iddicta='.$iddicta,'name'=>'Evaluacion de Estudiantes');
+  $menuList[]     = array('url'=>URL.Docente::URL.'evaluacion/estudiante.evaluacion-editar.php?iddicta='.$iddicta,'name'=>'Evaluaci&oacute;n de Estudiantes');
   $smarty->assign("menuList", $menuList);
   
   function promedio($promedio){

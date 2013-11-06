@@ -62,20 +62,20 @@ try {
   leerClase('Menu');
   $menu = new Menu('Estudiantes');
   $link = Docente::URL."estudiante/estudiante.lista.php?iddicta=".$iddicta;
-  $menu->agregarItem('Estudiantes Registrados','Estudiantes Registrados en la Materia de Proyecto Final','docente/inscritos.png',$link);
+  $menu->agregarItem('Estudiantes Registrados','Estudiantes Registrados en la Materia de '.$dicta->getNombreMateria(),'docente/inscritos.png',$link);
   $link = Docente::URL."evaluacion/estudiante.evaluacion-editar.php?iddicta=".$iddicta;
-  $menu->agregarItem('Evaluación de Estudiantes','Evaluacion de Estudiantes Registrados en la Materia de Proyecto Final','docente/evaluacion.png',$link);  
+  $menu->agregarItem('Evaluaci&oacute;n de Estudiantes','Evaluaci&oacute;n de Estudiantes Registrados en la Materia de '.$dicta->getNombreMateria(),'docente/evaluacion.png',$link);  
   $link = Docente::URL."estudiante/inscripcion.estudiante-cvs.php?iddicta=".$iddicta;
-  $menu->agregarItem('Gesti&oacute;n de Estudiantes','Registro de Estudiantes Inscritos en la Materia de Proyecto Final','docente/correccion.png',$link);
+  $menu->agregarItem('Inscripci&oacute;n de Estudiantes','Registro de Estudiantes Inscritos en la Materia de '.$dicta->getNombreMateria(),'docente/correccion.png',$link);
   $menus[] = $menu;
   
   $menu = new Menu('Calendario');
   $link = Docente::URL."calendario/calendario.evento.php?iddicta=".$iddicta;
   $menu->agregarItem('Calendario de Eventos','Calendario de todos los Eventos registrados por Tutor(es), Docente(s) y Tribunales','docente/calendar.png',$link);
   $link = Docente::URL."calendario/evento.registro.php?iddicta=".$iddicta;
-  $menu->agregarItem('Registro de Eventos','Registro de Eventos y en la Materia de Proyecto Final','docente/registroeve.png',$link);
+  $menu->agregarItem('Registro de Eventos','Registro de Eventos y en la Materia de '.$dicta->getNombreMateria(),'docente/registroeve.png',$link);
   $link = Docente::URL."calendario/evento.lista.php?iddicta=".$iddicta;
-  $menu->agregarItem('Edici&oacute;n de Eventos','Edici&oacute;n de Eventos de la Materia de Proyecto Final','docente/edicion.png',$link);
+  $menu->agregarItem('Edici&oacute;n de Eventos','Edici&oacute;n de Eventos de la Materia de '.$dicta->getNombreMateria(),'docente/edicion.png',$link);
   $menus[] = $menu;
 
   //----------------------------------//  

@@ -40,7 +40,7 @@ try {
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
   $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php?iddicta='.$iddicta,'name'=>$dicta->getNombreMateria());
   $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/estudiante.lista.php?iddicta='.$iddicta,'name'=>'Estudiantes Inscritos');
-  $menuList[]     = array('url'=>URL.Docente::URL.'revision/observacion.estudiante-cvs.php?iddicta='.$iddicta,'name'=>'Revision de Estudiantes por CSV');
+  $menuList[]     = array('url'=>URL.Docente::URL.'revision/observacion.estudiante-cvs.php?iddicta='.$iddicta,'name'=>'Revisi&oacute;n de Estudiantes por CSV');
   $smarty->assign("menuList", $menuList);
 
     function estainscrito($sis) {

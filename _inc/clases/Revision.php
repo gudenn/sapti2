@@ -224,7 +224,7 @@ class Revision extends Objectbase
    Actualizar fecha de aprobacion de revisiones
    */
   function fechaAprobacion() {
-    $fecha = date("d/m/Y");
+    $fecha = date("Y/m/d");
     $sql = " UPDATE  `{$this->getTableName()}` SET `fecha_aprobacion` = '$fecha' WHERE id='$this->id'";
     $result = mysql_query($sql);
     if (!$result)

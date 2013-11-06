@@ -17,7 +17,7 @@ $mysqli->real_connect(DBHOST,DBUSER,BDPASS,BDNAME);
 $grid = new EditableGrid();
 
 $grid->addColumn('id', 'ID', 'integer', NULL, false); 
-$grid->addColumn('codigosis', 'Codigo Sis', 'string', NULL, false); 
+$grid->addColumn('codigosis', 'Código Sis', 'string', NULL, false); 
 $grid->addColumn('nombre', 'Nombres', 'string', NULL, false);  
 $grid->addColumn('apellidos', 'Apellidos', 'string', NULL, false);
 $grid->addColumn('nombrep', 'Nombre Proyecto', 'string', NULL, false);

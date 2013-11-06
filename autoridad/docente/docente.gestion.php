@@ -89,24 +89,20 @@ try {
   $smarty->assign("pages"    ,$objs_pg->p_pages);
  $smarty->assign("crear_nuevo"  ,"docente.registro.php");
  $ERROR = ''; 
-if(isset($_SESSION['estado']) && $_SESSION['estado']==1)
-{
-  
-  
-  leerClase('Html');
-  $html  = new Html();
  
- 
-    $html = new Html();
-      
+  if(isset($_SESSION['estado']) && $_SESSION['estado']>=1)
+  {
+    leerClase('Html');
+    $html    = new Html();
+    if ($_SESSION['estado']>1)
+      $mensaje = array('mensaje'=>"Se graboron correctamente los {$_SESSION['estado']} Docentes",'titulo'=>'Registro de Docentes' ,'icono'=> 'tick_48.png');
+    else
       $mensaje = array('mensaje'=>'Se grabo correctamente el Docente','titulo'=>'Registro de Docente' ,'icono'=> 'tick_48.png');
-  
-      $ERROR = $html->getMessageBox ($mensaje);
-   
-   $_SESSION['estado']=0;
-$smarty->assign("ERROR",$ERROR);
-     
-}
+    $ERROR   = $html->getMessageBox ($mensaje);
+    $_SESSION['estado']=0;
+    $smarty->assign("ERROR",$ERROR);
+
+  }
   $smarty->assign("URL",URL);  
 
 }

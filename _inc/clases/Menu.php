@@ -378,10 +378,10 @@ ORDER BY ma.id";
         {
             if($value['idmat']==$docmateriassemestre[$i]['idmat']&&$docmateriassemestre[$i]['tipo']=='PR'){
                   $link = Docente::URL."index.proyecto-final.php?iddicta=".$docmateriassemestre[$i]['iddicta']."";
-                  $thise->agregarItem('Gesti&oacute;n de Estudiantes Codigo:'.$docmateriassemestre[$i]['grupo'].'','Gesti&oacute;n de Estudiantes Inscritos en la Materia Proyecto Final.','basicset/project.png',$link);
+                  $thise->agregarItem('Gesti&oacute;n de Estudiantes C&oacute;digo:'.$docmateriassemestre[$i]['grupo'].'','Gesti&oacute;n de Estudiantes Inscritos en la Materia Proyecto Final.','basicset/project.png',$link);
             }elseif ($value['idmat']==$docmateriassemestre[$i]['idmat']&&$docmateriassemestre[$i]['tipo']=='PE') {
                         $link = Docente::URL."index.proyecto-final.php?iddicta=".$docmateriassemestre[$i]['iddicta']."";
-                        $thise->agregarItem('Gesti&oacute;n de Estudiantes Codigo:'.$docmateriassemestre[$i]['grupo'].'','Gesti&oacute;n de Estudiantes Inscritos en la Materia de Perfil.','basicset/profile.png',$link);
+                        $thise->agregarItem('Gesti&oacute;n de Estudiantes C&oacute;digo:'.$docmateriassemestre[$i]['grupo'].'','Gesti&oacute;n de Estudiantes Inscritos en la Materia de Perfil.','basicset/profile.png',$link);
             }
          };
          $thises[] = $thise;

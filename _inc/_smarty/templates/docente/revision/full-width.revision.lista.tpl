@@ -8,15 +8,17 @@
                <b>Estudiante:</b> {$usuario->getNombreCompleto()|upper}
             </p>
         <div id="wrap">
-            <table class="tbl_lista">
+        <div style="height: 250px; width: 920px; font-size: 12px; overflow: auto;">
+<table class="tbl_lista">
   <thead>
     <tr>
       <th>Id           </th>
       <th>Estado       </th>
       <th>Fecha        </th>
-      <th>Descripcion  </th>
+      <th>Descripci&oacute;n  </th>
       <th>Revisor      </th>
       <th>Detalle      </th>
+      <th>Opciones     </th>
 
     </tr>
   </thead>
@@ -32,9 +34,14 @@
           <a href='#' class='avancedetalle' id="{$objs[ic][0]}" style=\"cursor:pointer\">Ver {icono('basicset/search_48.png','Detalle')}</a>
         <br><a href="../revision/avance.detalle.php?iddicta={$iddicta}&avance_id={$objs[ic][0]}&estudiente_id={$estudiante->id}" target="_blank" >Revisar {icono('basicset/document_pencil.png','Detalle')}</a>
       </td>
+      <td style="cursor:pointer" onclick="ver('m{$objs[ic][0]}')"> Mostrar </td>
  
     </tr>
-    {section name=ic1 loop=$objs[ic][4]}
+    <tr id="m{$objs[ic][0]}" class="oculto">
+        <td colspan="7"> 
+    <table>
+        <tbody>
+        {section name=ic1 loop=$objs[ic][4]}
      <tr>
     <td>{$objs[ic][4][ic1]['id']}</td> 
     <td>{$revision->getEstadoRevision($objs[ic][4][ic1]['estado'])}</td> 
@@ -42,13 +49,18 @@
         <td></td>
     <td>{$revision->getRevisor(4,$objs[ic][4][ic1]['revisor'])}</td>
     <td><a href='#' class='observaciondetalle' id="{$objs[ic][4][ic1]['id']}" style="cursor:pointer">Ver {icono('basicset/search_48.png','Detalle')}</a></td>
-    </tr>
+    <td></td>
+     </tr>
         {/section}
+        </tbody>
+    </table>
+    </td>
+    </tr>
 
   </tbody>
   {/section}
 </table>
-
+</div>
         </div>
         <p>{$ERROR}</p>
      </div>
@@ -56,3 +68,19 @@
     </div>
 </div>
 {include file="footer.tpl"}
+<script type="text/javascript">
+var visto = null;
+function ver(num) {
+
+obj = document.getElementById(num);
+obj.style.display = (obj==visto) ? 'none' : 'block';
+if (visto != null)
+visto.style.display = 'none';
+visto = (obj==visto) ? null : obj;
+}	
+</script>
+<style>
+.oculto {
+display:none;
+} 
+</style>

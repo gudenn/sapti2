@@ -72,7 +72,7 @@ try {
   $dicta = new Dicta($iddicta);
   date_default_timezone_set('America/La_Paz');
 
-     /**
+   /**
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
@@ -85,13 +85,35 @@ try {
   $estudiante     = new Estudiante($estuid);
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();
+  $rev1=new Revision();
   $avance         = new Avance($id);
   $avance->asignarDirectorio();
   $avance->cambiarEstadoVisto();
+  function getRevisortipo($tipo,$rev){
+      if($tipo==$rev::T1_PROYECTOFINAL){
+          $tipo1=$rev::T1_DOCENTE;
+      }elseif ($tipo==$rev::T2_PERFIL) {
+            $tipo1=$rev::T2_DOCENTEPERFIL;
+        }
+        return $tipo1;
+  }
+    $resulrev = "SELECT re.id
+FROM avance av, revision re
+WHERE re.avance_id=av.id
+AND av.id='".$avance->id."'
+AND re.revisor_tipo='".getRevisortipo($dicta->getTipoMateria(), $rev1)."'
+AND re.revisor='".$docente->id."'
+AND re.estado_revision='".$rev1::E3_RESPONDIDO."'
+";
+   $sqlrev = mysql_query($resulrev);
+while ($fila1rev = mysql_fetch_array($sqlrev, MYSQL_ASSOC)) {
+   $obserrev=$fila1rev['id'];
+ }
+ 
   $resul = "
        SELECT *
 FROM observacion ov
-WHERE ov.revision_id='".$avance->revision_id."'
+WHERE ov.revision_id='".$obserrev."'
 ";
    $sql = mysql_query($resul);
 while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
@@ -100,7 +122,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
     $obsertabla='no';
   if(mysql_num_rows($sql)>0){
       $obsertabla='si';
-      $revision1=new Revision($avance->revision_id);
+      $revision1=new Revision($obserrev);
   }
     $observacion1=new Observacion();
 

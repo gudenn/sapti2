@@ -146,7 +146,6 @@ break;
 // output the HTML content
 $pdf->SetXY(10, 50);
 $pdf->writeHTML(DesplegarTabla($sql,$b), true, false, true, false, '');
-
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // reset pointer to the last page
