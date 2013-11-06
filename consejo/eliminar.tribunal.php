@@ -12,12 +12,14 @@ try {
     
     if(isset($_GET['eliminar']) && isset($_GET['tribunaleliminar_id']) && is_numeric($_GET['tribunaleliminar_id']) )
   {
+       
+      $estudiante= new Estudiante($_GET['tribunaleliminar_id']);
+     $proyecto= $estudiante->getProyecto();
      
-    $sqlss= "DELETE FROM tribunal WHERE proyecto_id=".$_GET['tribunaleliminar_id'];
+    $sqlss= "DELETE FROM tribunal WHERE proyecto_id=".$proyecto->id;
    if( mysql_query( $sqlss))
    {
-   $proyecto= new Proyecto($_GET['tribunaleliminar_id']);
- 
+  
    $proyecto->estado_proyecto=  Proyecto::EST2_BUE;
    $proyecto->save();
    
@@ -27,7 +29,7 @@ try {
     $notificacion->objBuidFromPost();
   // $notificacion->enviarNotificaion($usuarios);
     $notificacion->proyecto_id= $proyecto->id; 
-    $notificacion->tipo="Notificación";
+    $notificacion->tipo=  Notificacion::TIPO_MENSAJE;
     $notificacion->fecha_envio= date("j/n/Y");
     $notificacion->asunto= "Ha sido eliminado Tus Tribunales";
     $notificacion->detalle="Asignación de Fechas de Defensa";

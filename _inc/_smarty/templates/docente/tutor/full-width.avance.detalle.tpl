@@ -115,7 +115,7 @@ $('#theme-switcher').change(function () {
 <![endif]-->
 {/literal}
         
-        <h3><b>Descripcion</b></h3>
+        <h3><b>Descripci&oacute;n</b></h3>
         <p>
           {$avance->getDescripcion()}
         </p>

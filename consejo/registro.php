@@ -204,10 +204,10 @@ try {
     WHERE  u.id=d.usuario_id and  a.docente_id=d.id and u.estado='AC'
     ORDER BY  a.valor  DESC;";
     $resultado = mysql_query($sqlr);
+    
     $arraytribunal= array();
-
  while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
-         { 
+   { 
         $listaareas=array();
         $lista_areas=array();
         $lista_areas[] = $fila["id"];
@@ -231,6 +231,7 @@ try {
  }
 
   $smarty->assign('listadocentes'  , $arraytribunal);
+  
   $contenido = 'tribunal/registrotribunal.tpl';
   $smarty->assign('contenido',$contenido);
   }  else {
@@ -339,7 +340,9 @@ if (isset($_POST['proyecto_id']))
     $stado=0;
     mysql_query("BEGIN");
     $idproyecto=$_POST['proyecto_id'];
-    $proyectos   = new Proyecto($idproyecto);
+     $proyectos   = new Proyecto($idproyecto);
+     $proyectos->estado_proyecto= Proyecto::EST2_TA;
+     $proyectos->save();
     
     $estudiante   = new Estudiante($proyectos->getEstudiante()->id);
     $notificacion = new Notificacion();
@@ -355,7 +358,7 @@ if (isset($_POST['proyecto_id']))
     $notificacion->enviarNotificaion( $noticaciones);
     foreach ($_POST['ids'] as $id)
      {
-                 $tribunal                    = new Tribunal();
+                $tribunal                    = new Tribunal();
                 $tribunal->objBuidFromPost();  
                 $tribunal->docente_id        =$id;
                 $tribunal->proyecto_id       =$proyectos->id;
@@ -381,6 +384,7 @@ if (isset($_POST['proyecto_id']))
                 $notificacions->enviarNotificaion( $noticaciones);
         
      }
+    
      
     $EXITO = TRUE;
     $stado=1;

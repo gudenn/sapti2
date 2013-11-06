@@ -144,7 +144,7 @@ try {
       }
     }
     
-          
+          $_SESSION['accion']=$_POST['accion'];
           $_SESSION['estado']=1;
           header("Location:  ../../docente/notificacion");
   

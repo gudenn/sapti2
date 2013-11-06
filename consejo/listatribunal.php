@@ -36,7 +36,7 @@ try {
    $menuList[]     = array('url'=>URL . Consejo::URL.'listatribunal.php' ,'name'=>'Tribunal');
    $smarty->assign("menuList", $menuList);
   
-    $ERROR = ''; 
+ $ERROR = ''; 
   
  if(isset($_SESSION['estado']) && $_SESSION['estado']==1)
    {
@@ -48,8 +48,6 @@ try {
         $smarty->assign("ERROR",$ERROR);
    
    }
-  
-
   //No hay ERROR
  // $smarty->assign("ERROR",$ERROR);
 }

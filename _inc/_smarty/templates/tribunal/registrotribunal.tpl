@@ -71,7 +71,7 @@
 {foreach name=outer item=contact from=$listadocentes[ic][3]}
   <hr />
   {foreach key=key item=item from=$contact}
-  {$item}<br />
+  {$key}{$item}<br />
   {/foreach}
 {/foreach}
  </span> 
