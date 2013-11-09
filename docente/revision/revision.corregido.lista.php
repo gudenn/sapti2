@@ -55,18 +55,41 @@ try {
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();
 
+  function tipoconsulta($mat, $pro, $doc){
+   switch ($mat) {
+      case 'PR':
   $resul = "
 SELECT av.id as id, pr.nombre as nombrep, av.descripcion as descripcion, av.fecha_avance as fecha, re.id as correcionrevision, av.estado_avance as estoavance
 FROM proyecto pr, avance av, revision re
 WHERE av.proyecto_id=pr.id
 AND av.id=re.avance_id
 AND re.estado_revision='RE'
-AND av.proyecto_id='".$proyecto->id."'
+AND av.proyecto_id='".$pro."'
 AND re.revisor_tipo='DO' OR re.revisor_tipo='DP'
-AND re.revisor='".$docente->id."'
+AND re.revisor='".$doc."'
 ORDER BY id DESC
           ";
-   $sql = mysql_query($resul);
+        break;
+      case 'PE':
+  $resul = "
+SELECT av.id as id, pr.nombre as nombrep, av.descripcion as descripcion, av.fecha_avance as fecha, re.id as correcionrevision, av.estado_avance as estoavance
+FROM proyecto pr, avance av, revision re
+WHERE av.proyecto_id=pr.id
+AND av.id=re.avance_id
+AND re.estado_revision='RE'
+AND av.proyecto_id='".$pro."'
+AND re.revisor_tipo='DP'
+AND re.revisor='".$doc."'
+ORDER BY id DESC
+          ";
+        break;
+      default:
+        break;
+    } 
+    return $resul;
+}
+
+   $sql = mysql_query(tipoconsulta($dicta->getTipoMateria(), $proyecto->id,$docente->id));
 while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
    $avances[]=$fila1;
  }
