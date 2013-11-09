@@ -11,6 +11,8 @@ try {
   leerClase('Usuario');
   leerClase('Proyecto');
   leerClase('Notificacion');
+  leerClase('Tutor');
+  leerClase('Proyecto_tutor');
   /** HEADER */
   $smarty->assign('title','Proyecto Final');
   $smarty->assign('description','Proyecto Final');
@@ -101,10 +103,26 @@ try {
        }
        
        
-            $listatutores=$proyectoestudiante->getTutores();  ///  retorna lista de los tutores de un estudiante
-            $vistobuenotutores= $proyectoestudiante->getVbTutorProyectoIds();  //  retorna la lista de los vistos buenos de los tutores
+          $listatutores=$proyectoestudiante->getTutores();  ///  retorna lista de los tutores de un estudiante
+         //   var_dump($listatutores);
+            $listatotaltutores=        $proyectoestudiante->getVbTutorProyectoIds();
+             $vistobuenotutores=array();  
+              foreach ( $listatotaltutores as $v)
+                {
+                          $tutor= new Tutor($v);
+                           $tutor->getAllObjects();
+    //Consejo
+                          foreach ( $tutor->proyecto_tutor_objs as $proyecttutor)
+                          {
+                            if (  $proyecttutor->estado_tutoria!='FI'  && $proyecttutor->proyecto_id==$proyectoestudiante->id)
+                            {
+                            $vistobuenotutores[]=$v;
+                            }
 
-      
+                          }
+   
+                 }
+               // var_dump($vistobuenotutores);
                  $totalvistobuenotutor=true;
                  if(sizeof($listatutores)>0)
                  {
@@ -130,7 +148,7 @@ try {
                   {
                     
                    $proyectoestudiante->estado_proyecto="VB";
-                   $proyectoestudiante->save();
+                $proyectoestudiante->save();
                    
                    
                    

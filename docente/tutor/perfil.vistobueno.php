@@ -84,7 +84,7 @@ try {
               $vistobueno->visto_bueno_tipo  =        Visto_bueno::E2_TUTOR;
               $vistobueno->visto_bueno_id    =     $tutor_id->id;    
               $vistobueno->estado            =        Objectbase::STATUS_AC;
-              $vistobueno->save();
+            //  $vistobueno->save();
               
               
                     $notificacions= new Notificacion();
@@ -104,11 +104,41 @@ try {
        }
        
               $listatutores=$proyectoestudiante->getTutores();  ///  retorna lista de los tutores de un estudiante
-            $vistobuenotutores= $proyectoestudiante->getVbTutorPerfilIds();  //  retorna la lista de los vistos buenos de los tutores
+          // $vistobuenotutores= $proyectoestudiante->getVbTutorPerfilIds();  //  retorna la lista de los vistos buenos de los tutores
+                 
+            
+           // var_dump( $vistobuenotutores);
+            
+            
+                  $listatutores=$proyectoestudiante->getTutores();  ///  retorna lista de los tutores de un estudiante
+         //   var_dump($listatutores);
+             $vistobuenotutores=array();  
+            $listatotaltutores=        $proyectoestudiante->getVbTutorPerfilIds();
+           // var_dump($listatotaltutores);
+              foreach ( $listatotaltutores as $v)
+                {
+                          $tutor= new Tutor($v);
+                          $tutor->getAllObjects();
+    //Consejo
+                          foreach ( $tutor->proyecto_tutor_objs as $proyecttutor)
+                          {
+                            if ($proyecttutor->estado_tutoria!='FI'  &&  $proyecttutor->proyecto_id==$proyectoestudiante->id)
+                            {
+                            $vistobuenotutores[]=$v;
+                            echo $proyectoestudiante->id.$v;
+                            }
+
+                          }
+   
+                 }
+               
+            
+            
+            
                  $totalvistobuenotutor=true;
                  if(sizeof($listatutores)>0)
                  {
-                foreach ($listatutores as $value) 
+                  foreach ($listatutores as $value) 
                   {
                   if(sizeof($vistobuenotutores)>0)
                   {
@@ -125,11 +155,12 @@ try {
                     break;
                   }
                   }
-                 }  else {
+                 }  else
+                   {
                    
                    $totalvistobuenotutor=FALSE;
                    
-                 }
+                   }
                   
                   
                   $vistobuenodocente=$proyectoestudiante->getVbDocentePerfil($docentestudiante->id);
@@ -138,7 +169,7 @@ try {
                   {
                     
                    $proyectoestudiante->estado_proyecto="VB";
-                   $proyectoestudiante->save();
+                   //$proyectoestudiante->save();
 
                    $notificacions= new Notificacion();
                     $notificacions->objBuidFromPost();
