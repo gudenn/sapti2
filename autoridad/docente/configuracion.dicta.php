@@ -68,6 +68,7 @@ FROM usuario us, docente dc
 WHERE us.id=dc.usuario_id
 AND us.estado='AC'
 AND dc.estado='AC'
+ORDER BY us.apellido_paterno ASC
     ";
  $resultadodoc = mysql_query($sqldoc);
     $docentes_values[] = '';

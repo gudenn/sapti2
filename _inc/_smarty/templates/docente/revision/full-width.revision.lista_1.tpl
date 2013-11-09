@@ -34,34 +34,22 @@
           <a href='#' class='avancedetalle' id="{$objs[ic][0]}" style=\"cursor:pointer\">Ver {icono('basicset/search_48.png','Detalle')}</a>
         <br><a href="../revision/avance.detalle.php?iddicta={$iddicta}&avance_id={$objs[ic][0]}&estudiente_id={$estudiante->id}" target="_blank" >Revisar {icono('basicset/document_pencil.png','Detalle')}</a>
       </td>
-      <td> <div align="center" id="best{$objs[ic][0]}" onClick="desplegar('tdesp{$objs[ic][0]}','best{$objs[ic][0]}')" style="cursor: pointer;">Mostrar Revisiones</div></td>
+      <td style="cursor:pointer" onclick="ver('m{$objs[ic][0]}')"> Mostrar Revisiones </td>
  
     </tr>
-    <tr>
-        <td colspan="7"> 
-    <table id="tdesp{$objs[ic][0]}" style="display:none;">
-          <thead>
-    <tr>
-      <th>Id                         </th>
-      <th>Estado                     </th>
-      <th>Fecha Revision            </th>
-      <th>Tipo Revisor              </th>
-      <th>Nombre Revisor            </th>
-      <th>Fecha Correcci&oacuten    </th>
-      <th>Opciones                  </th>
-
-    </tr>
-           </thead>
+    <tr id="m{$objs[ic][0]}" class="oculto">
+        <td> 
+    <table>
         <tbody>
         {section name=ic1 loop=$objs[ic][4]}
      <tr>
     <td>{$objs[ic][4][ic1]['id']}</td> 
     <td>{$revision->getEstadoRevision($objs[ic][4][ic1]['estado'])}</td> 
     <td>{$objs[ic][4][ic1]['fecha_re']}</td>
-    <td>{icono($objs[ic][4][ic1]['revisor']|cat:'_48.png','Revisor')}</td>
+        <td></td>
     <td>{$revision->getRevisor($objs[ic][4][ic1]['idrev'],$objs[ic][4][ic1]['revisor'])}</td>
-    <td>{$objs[ic][4][ic1]['fecha_co']}</td>
     <td><a href='#' class='observaciondetalle' id="{$objs[ic][4][ic1]['id']}" style="cursor:pointer">Ver {icono('basicset/search_48.png','Detalle')}</a></td>
+    <td></td>
      </tr>
         {/section}
         </tbody>
@@ -81,8 +69,18 @@
     </div>
 </div>
 {include file="footer.tpl"}
+<script type="text/javascript">
+var visto = null;
+function ver(num) {
+
+obj = document.getElementById(num);
+obj.style.display = (obj==visto) ? 'none' : 'block';
+if (visto != null)
+visto.style.display = 'none';
+visto = (obj==visto) ? null : obj;
+}	
+</script>
 <script type="text/javascript"> 
-    var visto = null;
 function desplegar(tabla_a_desplegar,estadoT) { 
 var tablA = document.getElementById(tabla_a_desplegar); 
 var estadOt = document.getElementById(estadoT);  
@@ -96,10 +94,11 @@ default:
 tablA.style.display = "none"; 
 estadOt.innerHTML = "Mostrar Revisiones" 
 break; 
-}
-if (visto != null)
-visto.style.display = 'none';
-visto = (tablA==visto) ? null : tablA;
+} 
 } 
 </script> 
-
+<style>
+.oculto {
+display:none;
+} 
+</style>

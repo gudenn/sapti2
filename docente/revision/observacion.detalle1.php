@@ -10,7 +10,7 @@ function tipoconsulta($cons, $ideve){
    switch ($cons) {
       case 'TU':
           $resul = "
-      SELECT ob.observacion as observacion, ob.respuesta as respuesta, pr.nombre as nomp, CONCAT(us.apellido_paterno,' ',us.apellido_materno,' ', us.nombre) as nombre, re.fecha_revision as fere, ob.estado_observacion as estado
+      SELECT ob.observacion as observacion, ob.respuesta as respuesta, pr.nombre as nomp, CONCAT(us.titulo_honorifico,' ', us.apellido_paterno,' ', us.apellido_materno,' ', us.nombre) as nombre, re.fecha_revision as fere, ob.estado_observacion as estado
 FROM observacion ob, revision re, proyecto pr, usuario us, tutor tu
 WHERE ob.revision_id=re.id
 AND re.proyecto_id=pr.id
@@ -21,7 +21,7 @@ AND ob.revision_id='".$ideve."'
         break;
       case 'DO':
           $resul = "
-      SELECT ob.observacion as observacion, ob.respuesta as respuesta, pr.nombre as nomp, CONCAT(us.apellido_paterno,' ',us.apellido_materno,' ', us.nombre) as nombre, re.fecha_revision as fere, ob.estado_observacion as estado
+      SELECT ob.observacion as observacion, ob.respuesta as respuesta, pr.nombre as nomp, CONCAT(us.titulo_honorifico,' ', us.apellido_paterno,' ', us.apellido_materno,' ', us.nombre) as nombre, re.fecha_revision as fere, ob.estado_observacion as estado
 FROM observacion ob, revision re, proyecto pr, usuario us, docente dc
 WHERE ob.revision_id=re.id
 AND re.proyecto_id=pr.id
@@ -32,7 +32,7 @@ AND ob.revision_id='".$ideve."'
         break;
       case 'DP':
           $resul = "
-      SELECT ob.observacion as observacion, ob.respuesta as respuesta, pr.nombre as nomp, CONCAT(us.apellido_paterno,' ',us.apellido_materno,' ', us.nombre) as nombre, re.fecha_revision as fere, ob.estado_observacion as estado
+      SELECT ob.observacion as observacion, ob.respuesta as respuesta, pr.nombre as nomp, CONCAT(us.titulo_honorifico,' ', us.apellido_paterno,' ', us.apellido_materno,' ', us.nombre) as nombre, re.fecha_revision as fere, ob.estado_observacion as estado
 FROM observacion ob, revision re, proyecto pr, usuario us, docente dc
 WHERE ob.revision_id=re.id
 AND re.proyecto_id=pr.id
@@ -68,7 +68,7 @@ if (empty($action)) {
                 <form action='#' style='display:none'>
           <p>
             <label for='revisor'>Nombre del Revisor:</label>
-            <span><b>{$arrayobser[0]['nombre']}</b></span>
+            <span>{$arrayobser[0]['nombre']}</span>
           </p>
           <p>
             <label for='proyecto_id'>Nombres de Proyecto: </label>
