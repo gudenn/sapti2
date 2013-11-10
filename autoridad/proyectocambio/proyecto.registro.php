@@ -292,7 +292,7 @@ try {
     }
     $proyecto->validar();
     $proyecto->tipo_proyecto = TIPO;
-    $proyecto->estado_proyecto= Proyecto::EST5_P;
+    //$proyecto->estado_proyecto= Proyecto::EST5_P;
     $proyecto->save();
     $proyecto->saveAllSonObjects(TRUE);
     $estudiante->marcarComoProyectoActual($proyecto->id);
@@ -313,10 +313,10 @@ try {
      //cambio_leve
     $cantidad=$estudiante->numero_cambio_leve;
     if ( isset($_GET['cambio_leve']))
-    {  
+    {      
        leerClase('Semestre');
        $semestre             = new Semestre('',1);
-       $maximo_cambios_leves = $semestre->getValor('maximo cambios leves', 3);
+       echo $maximo_cambios_leves = $semestre->getValor('maximo cambios leves', 3);
        $cambio               = new Cambio();
        $cambio->estado       = Objectbase::STATUS_AC;
        $cambio->fecha_cambio = date('d/m/Y');
@@ -325,9 +325,9 @@ try {
        $cambio->save();
       
       if ( $maximo_cambios_leves <= $estudiante->numero_cambio_leve )
-      
+    
          echo "<script>alert('El estudiante {$estudiante->getNombreCompleto()} ha alcanzado el maximo de cambios totales');</script>";
-         throw new Exception("?nombre&m='El estudiante {$estudiante->getNombreCompleto()} ha alcanzado el maximo de cambios totales'");
+         //throw new Exception("?nombre&m='El estudiante {$estudiante->getNombreCompleto()} ha alcanzado el maximo de cambios totales'");
        $estudiante->numero_cambio_leve = $estudiante->numero_cambio_leve + 1;
        $estudiante->save();
     }
@@ -345,7 +345,7 @@ try {
        $cambio->save();
        if ( $maximo_cambios_total <= $estudiante->numero_cambio_total )
          echo "<script>alert('El estudiante {$estudiante->getNombreCompleto()} ha alcanzado el maximo de cambios totales');</script>";
-         throw new Exception("?nombre&m='El estudiante {$estudiante->getNombreCompleto()} ha alcanzado el maximo de cambios totales'");
+        // throw new Exception("?nombre&m='El estudiante {$estudiante->getNombreCompleto()} ha alcanzado el maximo de cambios totales'");
        $estudiante->numero_cambio_total = $estudiante->numero_cambio_total + 1;
        $estudiante->save();
        //desactivamos el proyecto anterior
@@ -371,7 +371,7 @@ try {
   {
     $html = new Html();
     if ($EXITO)
-      $mensaje = array('mensaje'=>'Se grabo correctamente el Proyecto','titulo'=>'Registro de Proyecto' ,'icono'=> 'tick_48.png');
+      $mensaje = array('mensaje'=>'Se grabo correctamente el Cambio al Proyecto','titulo'=>'Registro de Cambio de Proyecto' ,'icono'=> 'tick_48.png');
     else
       $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Proyecto','titulo'=>'Registro de Proyecto' ,'icono'=> 'warning_48.png');
    $ERROR = $html->getMessageBox ($mensaje);

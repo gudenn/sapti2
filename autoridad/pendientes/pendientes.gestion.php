@@ -161,7 +161,7 @@ try {
   }
      $proyecto->estado_proyecto=  Proyecto::EST6_C;
      $proyecto->es_actual=0;
-     $proyecto->tipo_proyecto=  Proyecto::TIPO_PERFIL;
+     //$proyecto->tipo_proyecto=  Proyecto::TIPO_PERFIL;
      $proyecto->save();
     
      
