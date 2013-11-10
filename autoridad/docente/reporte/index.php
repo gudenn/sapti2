@@ -39,7 +39,7 @@ try {
   leerClase('Menu');
   $menu = new Menu('Reporte Proyecto');
   $link = Administrador::URL."docente/reporte/docente.reporte.php";
-  $menu->agregarItem('Reportes Docente','Reported de docentes en pdf y excel','basicset/my-reports.png',$link);
+  $menu->agregarItem('Reportes Docente','Reportes de docentes en pdf y excel','basicset/my-reports.png',$link);
  
   $menus[] = $menu;
  

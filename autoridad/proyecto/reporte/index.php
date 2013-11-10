@@ -39,13 +39,13 @@ try {
   leerClase('Menu');
   $menu = new Menu('Proyecto');
   $link = Administrador::URL."reportes/proceso.php";
-  $menu->agregarItem('Reprotes de Proyectos en Proceso','Reprotes de Proyectos en Proceso','basicset/my-reports.png',$link);
+  $menu->agregarItem('Reportes de Proyectos en Proceso','Reprotes de Proyectos en Proceso','basicset/my-reports.png',$link);
   $link = Administrador::URL."reportes/tribunales.php";
-  $menu->agregarItem('Reprotes de Proyectos con Tribunales','Reprotes de Proyectos con Tribunales','basicset/my-reports.png',$link);
+  $menu->agregarItem('Reportes de Proyectos con Tribunales','Reportes de Proyectos con Tribunales','basicset/my-reports.png',$link);
   $link = Administrador::URL."reportes/defensa.php";
-  $menu->agregarItem('Reprotes de Proyectos en Defensa','Reprotes de Proyectos en Defensa','basicset/my-reports.png',$link);
+  $menu->agregarItem('Reportes de Proyectos en Defensa','Reportes de Proyectos en Defensa','basicset/my-reports.png',$link);
   $link = Administrador::URL."reportes/defensa.php";
-  $menu->agregarItem('Reprotes de Proyectos en Finalizados','Reprotes de Proyectos en Finalizados','basicset/my-reports.png',$link);
+  $menu->agregarItem('Reportes de Proyectos en Finalizados','Reportes de Proyectos en Finalizados','basicset/my-reports.png',$link);
   
   
   $menus[] = $menu;

@@ -157,22 +157,22 @@ class Menu
     {
       $thise = new Menu('Proyecto');
       $link = Administrador::URL."reportes/proceso.php";
-      $thise->agregarItem('Reprotes de Proyectos en Proceso','Reprotes de Proyectos en Proceso','basicset/my-reports.png',$link);
+      $thise->agregarItem('Reportes de Proyectos en Proceso','Reprotes de Proyectos en Proceso','basicset/my-reports.png',$link);
       $link = Administrador::URL."reportes/tribunales.php";
-      $thise->agregarItem('Reprotes de Proyectos con Tribunales','Reprotes de Proyectos con Tribunales','basicset/my-reports.png',$link);
+      $thise->agregarItem('Reportes de Proyectos con Tribunales','Reprotes de Proyectos con Tribunales','basicset/my-reports.png',$link);
       $link = Administrador::URL."reportes/defensa.php";
-      $thise->agregarItem('Reprotes de Proyectos en Defensa','Reprotes de Proyectos en Defensa','basicset/my-reports.png',$link);
+      $thise->agregarItem('Reportes de Proyectos en Defensa','Reprotes de Proyectos en Defensa','basicset/my-reports.png',$link);
       $link = Administrador::URL."reportes/defensa.php";
-      $thise->agregarItem('Reprotes de Proyectos en Finalizados','Reprotes de Proyectos en Finalizados','basicset/my-reports.png',$link);
+      $thise->agregarItem('Reportes de Proyectos en Finalizados','Reprotes de Proyectos en Finalizados','basicset/my-reports.png',$link);
       $thises[] = $thise;
 
       $thise = new Menu('Reporte Docente');
       $link = Administrador::URL."docente/reporte/docente.reporte.php";
-      $thise->agregarItem('Reportes Docente','Reported de docentes en pdf y excel','basicset/my-reports.png',$link);
+      $thise->agregarItem('Reportes Docente','Reportes de docentes en pdf y excel','basicset/my-reports.png',$link);
       $thises[] = $thise;
       $thise = new Menu('Estudiante');
       $link = Administrador::URL."estudiante/reporte/estudiante.reporte.php";
-      $thise->agregarItem('Reprotes','Reportes para Estudiantes','basicset/my-reports.png',$link);
+      $thise->agregarItem('Reportes','Reportes para Estudiantes','basicset/my-reports.png',$link);
       $link = Administrador::URL."reportes/cambio.php";
       $thise->agregarItem('Reportes Cambios','Reportes para Estudiantes que Hicieron Cambios','basicset/my-reports.png',$link);
       //$thises[] = $thise;
@@ -235,6 +235,8 @@ class Menu
     leerClase('Grupo');
     leerClase('Estudiante');
    
+    
+   
     $thises = array();
     $thise = new Menu('Proyecto');
     $link = Estudiante::URL."proyecto-final/";
@@ -245,6 +247,7 @@ class Menu
       $thise->agregarItem('Registro de Formulario','Registro de Formulario de Proyecto Final del Estudiante','basicset/survey.png',$link,1);
     }
     $thises[] = $thise;
+   
 
     // Notificaciones 
    leerClase('Usuario');
@@ -259,6 +262,8 @@ class Menu
     $counter = $notificacion->getTodasNotificaciones($usuario->id, '', '', ' AND estado_notificacion="SV" ');
     $thise->agregarItem('Notificaciones Pendientes','Todas las notificaciones no leidas','basicset/message-not-read.png',$link,$counter[1]);
     $thises[] = $thise;
+  
+   
     
     return $thises;
   }
