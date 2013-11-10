@@ -84,7 +84,7 @@ try {
               $vistobueno->visto_bueno_tipo  =        Visto_bueno::E2_TUTOR;
               $vistobueno->visto_bueno_id    =     $tutor_id->id;    
               $vistobueno->estado            =        Objectbase::STATUS_AC;
-            //  $vistobueno->save();
+          $vistobueno->save();
               
               
                     $notificacions= new Notificacion();
@@ -125,15 +125,12 @@ try {
                             if ($proyecttutor->estado_tutoria!='FI'  &&  $proyecttutor->proyecto_id==$proyectoestudiante->id)
                             {
                             $vistobuenotutores[]=$v;
-                            echo $proyectoestudiante->id.$v;
-                            }
+                        }
 
                           }
    
                  }
-               
-            
-            
+                
             
                  $totalvistobuenotutor=true;
                  if(sizeof($listatutores)>0)
@@ -169,7 +166,7 @@ try {
                   {
                     
                    $proyectoestudiante->estado_proyecto="VB";
-                   //$proyectoestudiante->save();
+                   $proyectoestudiante->save();
 
                    $notificacions= new Notificacion();
                     $notificacions->objBuidFromPost();
@@ -188,7 +185,7 @@ try {
                   
 
           $_SESSION['estado']=1;
-          header("Location: perfil.estudiante.lista.php");
+          header("Location:perfil.vistobueno.lista.php");
                     
                   
        

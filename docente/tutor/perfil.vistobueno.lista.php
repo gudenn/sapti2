@@ -15,17 +15,18 @@ try {
   $smarty->assign('description','P&aacute;gina de Lista de Incritos');
   $smarty->assign('keywords','Gestion,Estudiantes');
   
-  $CSS[]  = URL_JS . "box/box.css";
-  $JS[]  = URL_JS ."box/jquery.box.js"; 
-  //CSS
+
   $CSS[]  = URL_CSS . "academic/tables.css";
   $CSS[]  = URL_CSS . "editablegrid.css";
-  $smarty->assign('CSS',$CSS);
 
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
   $JS[]  = URL_JS . "tablaeditabletutor/editablegrid-2.0.1.js";
   $JS[]  = URL_JS . "tablaeditabletutor/pefil.estudiante.lista.js";
+  $CSS[]  = URL_JS . "box/box.css";
+  $JS[]  = URL_JS ."box/jquery.box.js"; 
+  //CSS
+    $smarty->assign('CSS',$CSS);
 
   $smarty->assign('JS',$JS);
   
