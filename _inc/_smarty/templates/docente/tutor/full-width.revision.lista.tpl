@@ -4,14 +4,11 @@
     <div id="container">
         <h1 class="title">Seguimiento de Proyecto</h1>
             <p>
-               <label for="nombre de proyecto"><small>Nombre de Proyecto:</small></label>
-               <span>{$proyecto->nombre}</span><br/>
-               <label for="nombre de estudiante"><small>Nombre de Estudiante:</small></label>
-               <span>{$usuario->getNombreCompleto()}</span>
+               <b>Proyecto:</b> {$proyecto->nombre}<br/>
+               <b>Estudiante:</b> {$usuario->getNombreCompleto()|upper}
             </p>
         <div id="wrap">
-        
-        <div style="height: 250px; width: 920px; font-size: 12px; overflow: auto;">
+        <div style="height: 1000px; width: 920px; font-size: 102px; overflow: auto;">
 <table class="tbl_lista">
   <thead>
     <tr>
@@ -35,34 +32,47 @@
       <td>Avance</td>
       <td>
           <a href='#' class='avancedetalle' id="{$objs[ic][0]}" style=\"cursor:pointer\">Ver {icono('basicset/search_48.png','Detalle')}</a>
-        <br><a href="avance.detalle.php?iddicta={$iddicta}&avance_id={$objs[ic][0]}&estudiente_id={$estudiante->id}" target="_blank" >Revisar {icono('basicset/document_pencil.png','Detalle')}</a>
+        <br><a href="avance.detalle.php?avance_id={$objs[ic][0]}&estudiente_id={$estudiante->id}" target="_blank" >Revisar {icono('basicset/document_pencil.png','Detalle')}</a>
       </td>
-      <td style="cursor:pointer" onclick="ver('m{$objs[ic][0]}')"> Mostrar Revisiones</td>
+      <td> <div align="center" id="best{$objs[ic][0]}" onClick="desplegar('tdesp{$objs[ic][0]}','best{$objs[ic][0]}')" style="cursor: pointer;">Mostrar Revisiones</div></td>
  
     </tr>
-    <tr id="m{$objs[ic][0]}" class="oculto">
+    <tr>
         <td colspan="7"> 
-    <table>
+    <table id="tdesp{$objs[ic][0]}" style="display:none;">
+          <thead>
+    <tr>
+      <th>Id                         </th>
+      <th>Estado                     </th>
+      <th>Fecha Revision            </th>
+      <th>Tipo Revisor              </th>
+      <th>Nombre Revisor            </th>
+      <th>Fecha Correcci&oacuten    </th>
+      <th>Opciones                  </th>
+
+    </tr>
+           </thead>
         <tbody>
         {section name=ic1 loop=$objs[ic][4]}
      <tr>
     <td>{$objs[ic][4][ic1]['id']}</td> 
     <td>{$revision->getEstadoRevision($objs[ic][4][ic1]['estado'])}</td> 
     <td>{$objs[ic][4][ic1]['fecha_re']}</td>
-        <td></td>
+    <td>{icono($objs[ic][4][ic1]['revisor']|cat:'_48.png','Revisor')}</td>
     <td>{$revision->getRevisor($objs[ic][4][ic1]['idrev'],$objs[ic][4][ic1]['revisor'])}</td>
+    <td>{$objs[ic][4][ic1]['fecha_co']}</td>
     <td><a href='#' class='observaciondetalle' id="{$objs[ic][4][ic1]['id']}" style="cursor:pointer">Ver {icono('basicset/search_48.png','Detalle')}</a></td>
-    <td></td>
      </tr>
         {/section}
         </tbody>
     </table>
-    </td>
+        </td>
     </tr>
 
   </tbody>
   {/section}
 </table>
+
 </div>
         </div>
         <p>{$ERROR}</p>
@@ -71,19 +81,25 @@
     </div>
 </div>
 {include file="footer.tpl"}
-<script type="text/javascript">
-var visto = null;
-function ver(num) {
+<script type="text/javascript"> 
+    var visto = null;
+function desplegar(tabla_a_desplegar,estadoT) { 
+var tablA = document.getElementById(tabla_a_desplegar); 
+var estadOt = document.getElementById(estadoT);  
 
-obj = document.getElementById(num);
-obj.style.display = (obj==visto) ? 'none' : 'block';
+switch(tablA.style.display) { 
+case "none": 
+tablA.style.display = "block"; 
+estadOt.innerHTML = "Ocultar Revisiones"; 
+break; 
+default: 
+tablA.style.display = "none"; 
+estadOt.innerHTML = "Mostrar Revisiones" 
+break; 
+}
 if (visto != null)
 visto.style.display = 'none';
-visto = (obj==visto) ? null : obj;
-}	
-</script>
-<style>
-.oculto {
-display:none;
+visto = (tablA==visto) ? null : tablA;
 } 
-</style>
+</script> 
+

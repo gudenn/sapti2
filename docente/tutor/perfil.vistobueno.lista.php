@@ -22,7 +22,7 @@ try {
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
   $JS[]  = URL_JS . "tablaeditabletutor/editablegrid-2.0.1.js";
-  $JS[]  = URL_JS . "tablaeditabletutor/pefil.estudiante.lista.js";
+  $JS[]  = URL_JS . "tablaeditabletutor/perfil.estudiante.vistobueno.js";
   $CSS[]  = URL_JS . "box/box.css";
   $JS[]  = URL_JS ."box/jquery.box.js"; 
   //CSS

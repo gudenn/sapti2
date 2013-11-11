@@ -49,7 +49,7 @@ $notificaciones= new Notificacion();
   leerClase('Tutor');
   $menu = new Menu('Lista de Estudiantes  de Perfil');
   
-  $link = Tutor::URL."perfil.estudiante.lista.php";
+  $link = Tutor::URL."perfil.seguimiento.lista.php";
   $menu->agregarItem('Seguimiento','Seguimiento a los Estudiantes ','basicset/user4.png',$link);
    $link = Tutor::URL."perfil.estudiante.lista.php";
   $menu->agregarItem('Dar Visto Bueno ','Dar visto Bueno a los Proyectos de Los Estudiantes','basicset/ok.png',$link);

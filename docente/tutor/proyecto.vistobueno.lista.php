@@ -25,7 +25,7 @@ try {
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
   $JS[]  = URL_JS . "tablaeditabletutor/editablegrid-2.0.1.js";
-  $JS[]  = URL_JS . "tablaeditabletutor/pefil.estudiante.lista.js";
+  $JS[]  = URL_JS . "tablaeditabletutor/perfil.estudiante.vistobueno.js";
 
   $smarty->assign('JS',$JS);
   
@@ -44,9 +44,6 @@ try {
   
   $smarty->assign("usuarioid_ids", $usuarioid);
    $smarty->assign("tutor",$usuario->getTutor());
-
-   
-  // $_SESSION['estado']=1;
   
    //No hay ERROR
     $ERROR = ''; 

@@ -174,7 +174,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
            $revision1->estadoAprobado();
            $avance->cambiarEstadoCorregido();
            $revision1->notificacionRevision($estudiante->id, $proyecto->id, $docente->getNombreCompleto());
-           $ir = "Location: ../revision/observacion.editar.revision.php?iddicta=".$iddicta."&revisiones_id=".$revisionnuevo->id."";
+           $ir = "Location:observacion.editar.revision.php?revisiones_id=".$revisionnuevo->id."";
            header($ir);
            }else {
                    $revision1->estadoAprobado();

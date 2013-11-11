@@ -43,7 +43,7 @@ try {
   
   $smarty->assign("docente_ids",$docente->usuario_id);
   $smarty->assign("tutor",$tutor);
-$_SESSION['estado']=1;
+
   //No hay ERROR
     $ERROR = ''; 
 if(isset($_SESSION['estado']) && $_SESSION['estado']==1)
