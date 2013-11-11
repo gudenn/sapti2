@@ -78,6 +78,12 @@ try {
   $menu->agregarItem('Edici&oacute;n de Eventos','Edici&oacute;n de Eventos de la Materia de '.$dicta->getNombreMateria(),'docente/edicion.png',$link);
   $menus[] = $menu;
 
+  $menu = new Menu('Aprobaciones');
+  $link = Docente::URL."vistobueno/estudiante.vistobueno.php?iddicta=".$iddicta;
+  $menu->agregarItem('Lista de Estudiantes','Lista de Estudiantes en Espera de Revision y Visto Bueno de su proyecto','docente/calendar.png',$link);
+  $link = Docente::URL."vistobueno/estudiante.lista.vistobueno.php?iddicta=".$iddicta;
+  $menu->agregarItem('Lista de Estudiantes con Visto Bueno','Lista de Estudiantes en que Revision y aprobo con el Visto Bueno de su proyecto','docente/edicion.png',$link);
+  $menus[] = $menu;
   //----------------------------------//  
   
   $smarty->assign("menus", $menus);

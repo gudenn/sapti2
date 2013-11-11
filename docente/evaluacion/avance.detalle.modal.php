@@ -16,11 +16,12 @@ AND av.id='".$ideve1."'
           ";
 }else{
     $resul = "
-      SELECT CONCAT(us.nombre,' ',us.apellido_paterno,' ', us.apellido_materno) as nombreRevisor, av.fecha_avance as fecha, pr.nombre as nombrep
-FROM avance av, revision re, proyecto pr, usuario us
-WHERE av.revision_id=re.id
+SELECT CONCAT(us.titulo_honorifico,' ', us.apellido_paterno,' ', us.apellido_materno,' ', us.nombre) as nombreRevisor, av.fecha_avance as fecha, pr.nombre as nombrep
+FROM avance av, revision re, proyecto pr, usuario us, docente dc
+WHERE av.id=re.avance_id
+AND dc.usuario_id=us.id
 AND av.proyecto_id=pr.id
-AND re.revisor=us.id
+AND re.revisor=dc.id
 AND av.id='".$ideve1."' 
           ";
 }
@@ -46,11 +47,11 @@ if (empty($action)&&$avance->revision_id==0) {
 
           <p>
             <label for='proyecto_id'>Nombres de Proyecto: </label>
-            <span><b>{$arrayobser[0]['nombrep']}.</b></span>
+            <span>{$arrayobser[0]['nombrep']}.</span>
           </p>
           <p>
             <label for='fecha_observacion'>Fecha de Avance: </label>
-            <span><b>{$arrayobser[0]['fecha']}.</b></span>            
+            <span>{$arrayobser[0]['fecha']}.</span>            
           </p>
           <div style='height: 200px; width: 650px; font-size: 12px; overflow: auto;'>
             <table class='tbl_lista'>

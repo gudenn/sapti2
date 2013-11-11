@@ -9,6 +9,7 @@ try {
   leerClase("Docente");
   leerClase("Evaluacion");
   leerClase("Dicta");
+  leerClase("Nota");
   $ERROR = '';
 
   /** HEADER */
@@ -91,6 +92,11 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
      $evaluacion->promedio=$promedio;
      $evaluacion->rfinal=  promedio($promedio);
      $evaluacion->save();
+     $nota= new Nota();
+     $nota->proyecto_id     =  $evaluacion->getProyecto();
+     $nota->nota_proyecto   =  0.3*($evaluacion->promedio);
+     $nota->save();
+     
  }
  $sqlreporte="SELECT es.codigo_sis as Codigo_Sis, CONCAT(us.apellido_paterno,' ', us.apellido_materno,' ', us.nombre) as Estudiante, pr.nombre as Nombre_Proyecto, ev.evaluacion_1 as E1, ev.evaluacion_2 as E2, ev.evaluacion_3 as E3, ev.promedio as Pro, ev.rfinal as Apro
  FROM dicta di, estudiante es, usuario us, inscrito it, proyecto pr, proyecto_estudiante pe, evaluacion ev

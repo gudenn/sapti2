@@ -75,7 +75,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
    $objs[]=$fila1["estado_avance"];
    $objs[]=$fila1["fecha_avance"];
    $objs[]=$fila1["descripcion"];
-   $resul1 = "SELECT av.id as idav, re.id as id, re.estado_revision as estado, re.fecha_revision as fecha_re, re.revisor_tipo as revisor, re.fecha_correccion as fecha_co
+   $resul1 = "SELECT av.id as idav, re.id as id, re.estado_revision as estado, re.fecha_revision as fecha_re, re.revisor_tipo as revisor, re.fecha_correccion as fecha_co, re.revisor as idrev
 FROM proyecto pr, revision re, avance av
 WHERE re.avance_id=av.id
 AND av.proyecto_id=pr.id
@@ -98,8 +98,8 @@ WHERE it.dicta_id=di.id
 AND it.estudiante_id='".$estudiante->id."'
 AND di.id='".$iddicta."' 
           ";
-   $sql = mysql_query($resul);
-while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
+   $sql2 = mysql_query($resul);
+while ($fila1 = mysql_fetch_array($sql2, MYSQL_ASSOC)) {
    $idevaluacion[]=$fila1;
  }
   $evaluacion     = new Evaluacion($idevaluacion[0]['id']);  

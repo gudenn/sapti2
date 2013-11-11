@@ -1,17 +1,56 @@
 <?php
 define ("MODULO", "DOCENTE");
   require('../_start.php');
+  leerClase('Revision');
+  
 
 $ideve1=$_GET['idev'];
-  $resul = "
-      SELECT ob.observacion as observacion, ob.respuesta as respuesta, pr.nombre as nomp, CONCAT(us.apellido_paterno,' ',us.apellido_materno,' ', us.nombre) as nombre, re.fecha_revision as fere, ob.estado_observacion as estado
-FROM observacion ob, revision re, proyecto pr, usuario us
+$revision=new Revision($ideve1);
+function tipoconsulta($cons, $ideve){
+   switch ($cons) {
+      case 'TU':
+          $resul = "
+      SELECT ob.observacion as observacion, ob.respuesta as respuesta, pr.nombre as nomp, CONCAT(us.titulo_honorifico,' ', us.apellido_paterno,' ', us.apellido_materno,' ', us.nombre) as nombre, re.fecha_revision as fere, ob.estado_observacion as estado
+FROM observacion ob, revision re, proyecto pr, usuario us, tutor tu
 WHERE ob.revision_id=re.id
 AND re.proyecto_id=pr.id
-AND re.revisor=us.id
-AND ob.revision_id='".$ideve1."' 
+AND re.revisor=tu.id
+AND tu.usuario_id=us.id
+AND ob.revision_id='".$ideve."' 
           ";
-   $sql = mysql_query($resul);
+        break;
+      case 'DO':
+          $resul = "
+      SELECT ob.observacion as observacion, ob.respuesta as respuesta, pr.nombre as nomp, CONCAT(us.titulo_honorifico,' ', us.apellido_paterno,' ', us.apellido_materno,' ', us.nombre) as nombre, re.fecha_revision as fere, ob.estado_observacion as estado
+FROM observacion ob, revision re, proyecto pr, usuario us, docente dc
+WHERE ob.revision_id=re.id
+AND re.proyecto_id=pr.id
+AND re.revisor=dc.id
+AND dc.usuario_id=us.id
+AND ob.revision_id='".$ideve."' 
+          ";
+        break;
+      case 'DP':
+          $resul = "
+      SELECT ob.observacion as observacion, ob.respuesta as respuesta, pr.nombre as nomp, CONCAT(us.titulo_honorifico,' ', us.apellido_paterno,' ', us.apellido_materno,' ', us.nombre) as nombre, re.fecha_revision as fere, ob.estado_observacion as estado
+FROM observacion ob, revision re, proyecto pr, usuario us, docente dc
+WHERE ob.revision_id=re.id
+AND re.proyecto_id=pr.id
+AND re.revisor=dc.id
+AND dc.usuario_id=us.id
+AND ob.revision_id='".$ideve."' 
+          ";
+        break;
+      case 'TR':
+        $resul = 'Tribunal';
+        break;
+      default:
+        break;
+    } 
+    return $resul;
+}
+
+   $sql = mysql_query(tipoconsulta($revision->getRevisorTipo(), $ideve1));
 while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
    $arrayobser[]=$fila1;
  }
@@ -29,7 +68,7 @@ if (empty($action)) {
                 <form action='#' style='display:none'>
           <p>
             <label for='revisor'>Nombre del Revisor:</label>
-            <span><b>{$arrayobser[0]['nombre']}</b></span>
+            <span>{$arrayobser[0]['nombre']}</span>
           </p>
           <p>
             <label for='proyecto_id'>Nombres de Proyecto: </label>
