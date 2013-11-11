@@ -20,7 +20,6 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 
 -- --------------------------------------------------------
-
 --
 -- Estructura de tabla para la tabla `administrador`
 --
@@ -743,6 +742,7 @@ INSERT INTO `institucion` (`id`, `nombre`, `descripcion`, `estado`) VALUES
 CREATE TABLE IF NOT EXISTS `lugar` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) DEFAULT NULL,
+  `descripcion` varchar(100) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
