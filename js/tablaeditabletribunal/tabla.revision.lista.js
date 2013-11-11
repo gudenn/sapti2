@@ -10,7 +10,8 @@
  */
 
 // create our editable grid
-var editableGrid = new EditableGrid("listarevision123", {
+var time=Math.random();
+var editableGrid = new EditableGrid("listarevisiondocente"+time, {
 	enableSort: true, // true is the default, set it to false if you don't want sorting to be enabled
 	editmode: "absolute", // change this to "fixed" to test out editorzone, and to "static" to get the old-school mode
 	editorzoneid: "edition", // will be used only if editmode is set to "fixed"
@@ -47,7 +48,7 @@ InfoHeaderRenderer.prototype.render = function(cell, value)
 };
 
 // this function will initialize our editable grid
-EditableGrid.prototype.initializeGrid = function(estid) 
+EditableGrid.prototype.initializeGrid = function(estid, dicta) 
 {
 	with (this) {
                 
@@ -60,26 +61,27 @@ EditableGrid.prototype.initializeGrid = function(estid)
 
 
 		rowSelected = function(oldRowIndex, newRowIndex) {
-			if (oldRowIndex < 0) displayMessage("Fila Selecionada '" + this.getRowId(newRowIndex) + "'");
-			else displayMessage("Fila Selecionada y Cambiada por '" + this.getRowId(oldRowIndex) + "' to '" + this.getRowId(newRowIndex) + "'");
+			if (oldRowIndex < 0) displayMessage("Fila Seleccionada '" + this.getRowId(newRowIndex) + "'");
+			else displayMessage("Fila Seleccionada y Cambiada por '" + this.getRowId(oldRowIndex) + "' to '" + this.getRowId(newRowIndex) + "'");
 		};
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
-                if(getValueAt(cell.rowIndex, '2')=='DO'&& getValueAt(cell.rowIndex, '4')=='CR'){                        
-                cell.innerHTML += "<br><a onclick=document.location.href='observacion.editar.php?revisiones_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("icons/editar.png") + "\" border=\"0\" alt=\"editar\" title=\"Editar Revision\"/>Editar</a>";
-                } 
+ 
                 if(getValueAt(cell.rowIndex, '1')=='0'){
                 cell.innerHTML = "<a href='#' class='avancedetalle' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("icons/detalle.png") + "\" border=\"0\" alt=\"detalle\" title=\"Detalle Avance\" />Detalle</a>";
-                cell.innerHTML += "<br><a onclick=document.location.href='avance.detalle.php?estudiante_id="+estid+"&avance_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
+                cell.innerHTML += "<br><a onclick=document.location.href='../revision/avance.detalle.php?iddicta="+ dicta +"&avance_id=" + getRowId(cell.rowIndex) + "&estudiente_id=" + estid +"' style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("icons/basicset/document_pencil.png") + "\" border=\"0\" alt=\"revisar\" title=\"Revisar\" width='25px' height='25px'/>Revisar</a>";
                 }
-                else if(getValueAt(cell.rowIndex, '4')=='CO'){
+                else if(getValueAt(cell.rowIndex, '1')=='AC'){
+                cell.innerHTML = "<a href='#' class='observaciondetalle' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
+			 "<img src=\"" + image("icons/detalle.png") + "\" border=\"0\" alt=\"detalle\" title=\"Detalle Revision\"/>Detalle</a>";
+                }else{
                 cell.innerHTML = "<a href='#' class='avancedetalle' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("icons/detalle.png") + "\" border=\"0\" alt=\"detalle\" title=\"Detalle Avance\" />Detalle</a>";
-                }else{
-                cell.innerHTML = "<a href='#' class='observaciondetalle' id="+getRowId(cell.rowIndex)+" style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("icons/detalle.png") + "\" border=\"0\" alt=\"detalle\" title=\"Detalle Revision\"/>Detalle</a>";
+                      }
+                if(getValueAt(cell.rowIndex, '2')=='DO' && getValueAt(cell.rowIndex, '4')=='CR'){                        
+                cell.innerHTML += "<br><a onclick=document.location.href='../revision/observacion.editar.revision.php?iddicta="+ dicta +"&revisiones_id=" + getRowId(cell.rowIndex) + "' style=\"cursor:pointer\">" +
+						 "<img src=\"" + image("icons/editar.png") + "\" border=\"0\" alt=\"editar\" title=\"Editar Revision\"/>Editar</a>";
                 }
                 }}));
                 setCellRenderer("num", new CellRenderer({
@@ -113,12 +115,12 @@ EditableGrid.prototype.initializeGrid = function(estid)
 	}
 };
 
-EditableGrid.prototype.onloadXML = function(url, estid) 
+EditableGrid.prototype.onloadXML = function(url, estid, dicta) 
 {
 	// register the function that will be called when the XML has been fully loaded
 	this.tableLoaded = function() { 
 		displayMessage("Numero de Avances, Revisiones y Correcciones al Proyecto " + this.getRowCount()); 
-		this.initializeGrid(estid);
+		this.initializeGrid(estid, dicta);
 	};
 
 	// load XML URL

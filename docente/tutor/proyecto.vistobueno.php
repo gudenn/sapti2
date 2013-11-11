@@ -54,16 +54,16 @@ try {
     $menuList[]     = array('url'=>URL.Docente::URL.'tutor/estudiante.lista.php','name'=>'Lista Estudiantes de Proyecto');
      
     $smarty->assign("menuList", $menuList);
-    
+    $proyecto->objetivo_general;
   $smarty->assign("usuario", $usuario);
   $smarty->assign("proyecto", $proyecto);
     $smarty->assign("estudiante",  $estudiante );
-    
-    $urlpdf=".../ARCHIVO/proyecto.pdf";
-    $smarty->assign("urlpdf", $urlpdf);
+   
       $vistobueno= new Visto_bueno();
-    date_default_timezone_set('UTC');
-    $vistobueno->fecha_visto_buena=date("d/m/Y");
+      date_default_timezone_set('America/La_Paz');
+      date_default_timezone_set('UTC');
+      $smarty->assign("fechavisto", date("d/m/Y"));
+    //$vistobueno->fecha_visto_buena=date("d/m/Y");
 
     if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
     {
