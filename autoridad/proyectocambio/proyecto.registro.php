@@ -292,7 +292,7 @@ try {
     }
     $proyecto->validar();
     $proyecto->tipo_proyecto = TIPO;
-    //$proyecto->estado_proyecto= Proyecto::EST5_P;
+    $proyecto->estado_proyecto= Proyecto::EST5_P;
     $proyecto->save();
     $proyecto->saveAllSonObjects(TRUE);
     $estudiante->marcarComoProyectoActual($proyecto->id);
@@ -326,7 +326,7 @@ try {
       
       if ( $maximo_cambios_leves <= $estudiante->numero_cambio_leve )
     
-         echo "<script>alert('El estudiante {$estudiante->getNombreCompleto()} ha alcanzado el maximo de cambios totales');</script>";
+       echo "<script>alert('El estudiante {$estudiante->getNombreCompleto()} ha alcanzado el maximo de cambios totales');</script>";
          //throw new Exception("?nombre&m='El estudiante {$estudiante->getNombreCompleto()} ha alcanzado el maximo de cambios totales'");
        $estudiante->numero_cambio_leve = $estudiante->numero_cambio_leve + 1;
        $estudiante->save();

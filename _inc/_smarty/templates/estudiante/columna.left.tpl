@@ -19,7 +19,7 @@
     {/section}
     </ul>
   </div>
-   {if ($dia=='0' )}
+   {if ($dia=='0' && $anio=='0' && $mes=='0')}
     <h2>El Plazo de Su Proyecto Culmino</h2>
    {else}
     <h2>El plazo de su Proyecto para su realizacion son de {$anio} a&ntilde;os, {$mes} meses y {$dia} dias</h2>

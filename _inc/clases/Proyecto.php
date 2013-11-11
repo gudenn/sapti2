@@ -287,7 +287,7 @@ class Proyecto extends Objectbase {
    */
   function crearProyectoInicial($estudiante_id , $dicta_id,$tipo, $grabar = true) {
       
-       if($tipo!=Proyecto::TIPO_PROYECTO){
+    if($tipo!=Proyecto::TIPO_PROYECTO){
     $this->estado_proyecto = Proyecto::EST1_INI;
     $this->es_actual       = 1;
     $this->tipo_proyecto   = $tipo;
