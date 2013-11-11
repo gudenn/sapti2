@@ -154,13 +154,13 @@ class Tooltip extends Objectbase
         switch ($this->estado_tooltip) {
           case Tooltip::EST01_RECIEN:
           default:
-            $icono = icono('basicset/help_pendiente.png', $this->codigo . " (Pendiente)", '15px');
+            $icono = icono('basicset/help_pendiente.png', $this->titulo . " (Pendiente)", '15px');
             break;
           case Tooltip::EST01_CLONAD:
-            $icono = icono('basicset/help_clonado.png', $this->codigo . " (Clonado)", '15px');
+            $icono = icono('basicset/help_clonado.png', $this->titulo . " (Clonado)", '15px');
             break;
           case Tooltip::EST02_APROBA:
-            $icono = icono('basicset/help_verificado.png', $this->codigo . " (Verificado)", '15px');
+            $icono = icono('basicset/help_verificado.png', $this->titulo . " (Verificado)", '15px');
             break;
         }
         
@@ -168,7 +168,7 @@ class Tooltip extends Objectbase
     else
       $icono = icono('basicset/eyeclose.png', $this->codigo . " (Oculto al p&uacute;blico) ", '15px');
     $link = <<<____TEST
-      <a href="#" tooltip="ayuda_{$this->id}"  tabindex="-1" class="ayudatip"> {$icono} </a> 
+      <a href="#" tooltip="ayuda_{$this->id}"  tabindex="-1" title="{$this->titulo}"  class="ayudatip"> {$icono} </a> 
       <div id="ayuda_{$this->id}" title="{$this->titulo}" style="display:none;">
         <span class="ui-icon ui-icon-circle-check" style="float: left; margin: 0 7px 50px 0;"></span>
         <p id="tooltip_p_{$this->id}">{$this->descripcion}.</p>
