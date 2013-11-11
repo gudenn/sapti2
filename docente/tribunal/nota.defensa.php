@@ -24,10 +24,12 @@ try {
        $CSS[]  = URL_CSS . "academic/tables.css";
        $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
        $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
-       $smarty->assign('CSS',$CSS);
-
+        $JS[]  = URL_JS . "jquery.min.js";
+      //BOX
+      $CSS[]  = URL_JS . "box/box.css";
+      $JS[]  = URL_JS ."box/jquery.box.js";
        //JS
-       $JS[]  = URL_JS . "jquery.min.js";
+    
 
        //Datepicker UI
        $JS[]  = URL_JS . "ui/jquery-ui-1.10.2.custom.min.js";
@@ -37,8 +39,9 @@ try {
        $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
        $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
        $JS[]  = URL_JS . "jquery.addfield.js";
+       $smarty->assign('CSS',$CSS);
        $smarty->assign('JS',$JS);
- $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
+       $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
        $menuList[]     = array('url'=>URL.Docente::URL.'tribunal','name'=>'Tribunal');
        $menuList[]     = array('url'=>URL.Docente::URL.'tribunal/publica.estudiante.lista.php','name'=>'Lista Estudiante');
        $smarty->assign("menuList", $menuList);
@@ -46,6 +49,7 @@ try {
        
     if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
          {
+             $stado=0;
             $docente=  getSessionDocente();
               
             
@@ -118,7 +122,7 @@ try {
                   } 
                   }
            
-             
+              $stado=1;
          }
 
        
@@ -145,8 +149,20 @@ try {
             $vistobueno->fecha_visto_buena=date("d/m/Y");
 
  
-       //No hay ERROR
-       $smarty->assign("ERROR",'');
+        leerClase('Html');
+       $html = new Html();
+       $ERROR='';
+       if(isset($stado))
+            {
+         if($stado==1){
+           $mensaje = array('mensaje'=>'Se grabo correctamente  la Nota','titulo'=>'Registro de la Nota;' ,'icono'=> 'tick_48.png');
+           $ERROR = $html->getMessageBox ($mensaje);
+            }  else {
+          $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente','titulo'=>'Registro de Area' ,'icono'=> 'warning_48.png');
+          $ERROR = $html->getMessageBox ($mensaje);
+                }
+           }
+       $smarty->assign("ERROR",$ERROR);
      } 
      catch(Exception $e) 
      {
