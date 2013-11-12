@@ -64,6 +64,19 @@ try {
   leerClase('Vigencia');
 
   leerClase('Objetivo_especifico');
+  
+  $sqlr="select max( p.numero_asignado) as num
+         from proyecto p";
+ $resultado = mysql_query($sqlr);
+ $num= array();
+
+ while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+   { 
+        $num[]=$fila;;
+   }
+   
+  $numero=$num[0]['num']+1;
+  $smarty->assign('numero'  , $numero);
 
   
   $semestre   = new Semestre(false,true);
@@ -280,6 +293,7 @@ try {
     $proyecto->validar();
     $proyecto->tipo_proyecto =  Proyecto::TIPO_PERFIL;
     $proyecto->estado_proyecto= Proyecto::EST5_P;
+    $proyecto->numero_asignado=$numero;
     $proyecto->save();
     $proyecto->saveAllSonObjects(TRUE);
     $estudiante->marcarComoProyectoActual($proyecto->id);
@@ -315,6 +329,8 @@ try {
   
   
   $smarty->assign("semestre",$semestre);
+  
+  //Registro de numero
 
   //No hay ERROR
   $ERROR = ''; 
