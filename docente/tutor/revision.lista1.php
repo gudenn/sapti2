@@ -13,9 +13,9 @@ try {
   leerClase('Revision');
   
   /** HEADER */
-  $smarty->assign('title','Seguimiento al Proyecto');
-  $smarty->assign('description','Seguimiento del Avemce del Proyecto');
-  $smarty->assign('keywords','Gestion,Observaciones,revision,avance');
+  $smarty->assign('title','Gesti&oacute;n de Observaciones');
+  $smarty->assign('description','P&aacute;gina de gestion de Observaciones');
+  $smarty->assign('keywords','Gestion,Observaciones');
 
   $CSS[]  = URL_CSS . "academic/tables.css";
   $CSS[]  = URL_JS . "ventanasmodales/simplemodaldetalle.css";
@@ -27,31 +27,13 @@ try {
   $JS[]  = URL_JS . "ventanasmodales/avance.detalle.modal.js";
   $JS[]  = URL_JS . "ventanasmodales/jquery.simplemodal-1.4.4.js";
   $smarty->assign('JS',$JS);
-
-  if( isset($_GET['id_estudiante']) && is_numeric($_GET['id_estudiante']) ){
-       $id_estudiante=$_GET['id_estudiante'];
-  }  else {
-      header("Location: ../index.php");
-  }
-
-  $estudiante     = new Estudiante($id_estudiante);
+  
+   if(isset($_GET['id_estudiante']) && is_numeric($_GET['id_estudiante']))
+  $estudiante     = new Estudiante($_GET['id_estudiante']);
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();
   $avance   = new Avance();
   $revision   = new Revision();
-  
-      /**
-      Menu superior
-    */
-    $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
-    $menuList[]     = array('url'=>URL.Docente::URL.'tutor','name'=>'Tutor');
-    if($proyecto->tipo_proyecto==Proyecto::TIPO_PERFIL){
-    $menuList[]     = array('url'=>URL.Docente::URL.'tutor/perfil.seguimiento.lista.php','name'=>'Lista Estudiantes de Perfil');
-    }else {
-    $menuList[]     = array('url'=>URL.Docente::URL.'tutor/seguimiento.lista.php','name'=>'Lista Estudiantes de Proyecto');
-    }
-    $menuList[]     = array('url'=>URL.Docente::URL.'tutor/revision.lista.php?id_estudiante='.$id_estudiante,'name'=>'Seguimiento Estudiante');
-    $smarty->assign("menuList", $menuList);
   
     $resul = "SELECT id, estado_avance, fecha_avance, descripcion
 FROM avance av
@@ -89,14 +71,34 @@ while ($fila11 = mysql_fetch_array($sql1, MYSQL_ASSOC)) {
   $smarty->assign("avance", $avance);
   $smarty->assign("revision", $revision);
 
+  
+  
+    /**
+   * Menu superior
+      * 
+      */
+    $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
+    $menuList[]     = array('url'=>URL.Docente::URL.'tutor','name'=>'Tutor');
+    echo $proyecto->tipo_proyecto;
+    
+    if($proyecto->tipo_proyecto==Proyecto::TIPO_PERFIL)
+    {
+    $menuList[]     = array('url'=>URL.Docente::URL.'tutor/perfil.estudiante.lista.php','name'=>'Lista Estudiantes de Perfil');
+    }  else {
+       $menuList[]     = array('url'=>URL.Docente::URL.'tutor/seguimiento.lista.php','name'=>'Lista Estudiantes de Proyecto');
+ 
+    } 
+    $smarty->assign("menuList", $menuList);
+
   //No hay ERROR
   $smarty->assign("ERROR",'');
   $smarty->assign("URL",URL);  
-
 }
 catch(Exception $e) 
 {
   $smarty->assign("ERROR", handleError($e));
 }
+
   $smarty->display('docente/tutor/full-width.revision.lista.tpl');
+
 ?>

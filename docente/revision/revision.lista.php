@@ -18,14 +18,11 @@ try {
   $smarty->assign('keywords','Gestion,Observaciones,revision,avance');
 
   $CSS[]  = URL_CSS . "academic/tables.css";
-  $CSS[]  = URL_CSS . "editablegrid.css";
   $CSS[]  = URL_JS . "ventanasmodales/simplemodaldetalle.css";
   $smarty->assign('CSS',$CSS);
 
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
-  $JS[]  = URL_JS . "tablaeditable/editablegrid-2.0.1.js";
-  $JS[]  = URL_JS . "tablaeditable/tabla.revision.lista.js";
   $JS[]  = URL_JS . "ventanasmodales/observacion.detalle.js";
   $JS[]  = URL_JS . "ventanasmodales/avance.detalle.modal.js";
   $JS[]  = URL_JS . "ventanasmodales/jquery.simplemodal-1.4.4.js";
@@ -77,6 +74,7 @@ FROM proyecto pr, revision re, avance av
 WHERE re.avance_id=av.id
 AND av.proyecto_id=pr.id
 AND av.id='".$fila1['id']."'
+ORDER BY re.id DESC
 ";
    $sql1 = mysql_query($resul1);
 while ($fila11 = mysql_fetch_array($sql1, MYSQL_ASSOC)) {

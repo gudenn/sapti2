@@ -139,7 +139,33 @@ class Revision extends Objectbase
     return $obj->getNombreCompleto();
 
   }
+  function getRevisorTipoNom($tipo=false) 
+  {
+    if (!$tipo)
+      $tipo = $this->revisor_tipo;
+    if ($tipo == '')
+      return 'Desconocido';
+    switch ($tipo) {
+      case 'TU':
+        $clase = 'Tutor';
+        break;
+      case 'DO':
+        $clase = 'Docente';
+        break;
+      case 'DP':
+        $clase = 'Docente';
+        break;
+      case 'TR':
+        $clase = 'Tribunal';
+        break;
+      default:
+        return 'Desconocido';
+        return;
+        break;
+    }
+    return $clase;
 
+  }
   function getEstadoRevision($estado_revision = '') 
   {
     $estado   = $this->estado_revision;
