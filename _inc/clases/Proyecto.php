@@ -507,7 +507,7 @@ class Proyecto extends Objectbase {
    * 
    * @param type $docente
    * @param type $idproyecto
-   * @return boolean|\Estudiante
+   * @return boolean|
    * retorna un tribunal del proyecto dado el docente_id , proyecto_id 
    */
    function getTribunal($docente) 

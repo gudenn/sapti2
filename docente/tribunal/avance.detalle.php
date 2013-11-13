@@ -51,9 +51,8 @@ try {
   leerClase('Observacion');
   leerClase('Docente');
   leerClase('Dicta');
+   leerClase('Tribunal');
 
-  $docente     = getSessionDocente();
- 
     if( isset($_GET['estudiente_id']) && is_numeric($_GET['estudiente_id']) ){
        $estuid=$_GET['estudiente_id'];
   }  else {
@@ -64,40 +63,42 @@ try {
   }  else {
       header("Location: ../index.php");
   }
-  $dicta = new Dicta($iddicta);
   date_default_timezone_set('America/La_Paz');
+  $usuarioss= getSessionUser();
+ // $docente= getSessionDocente();
+   $estudiante     = new Estudiante($estuid);
+   $proyecto       = $estudiante->getProyecto();
+   
+  $usuario        = $estudiante->getUsuario();
+ 
+  $tribunalacitivo=   $proyecto->getTribunal($docente->id);
+  $tribunalacitivo->id;
 
-   /**
+     /**
    * Menu superior
    */
-  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
-  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php?iddicta='.$iddicta,'name'=>$dicta->getNombreMateria());
-  $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/estudiante.lista.php?iddicta='.$iddicta,'name'=>'Estudiantes Inscritos');
-  $menuList[]     = array('url'=>URL.Docente::URL.'revision/revision.corregido.lista.php?iddicta='.$iddicta.'&estudiente_id='.$estuid,'name'=>'Lista de Correcciones');
-  $menuList[]     = array('url'=>URL.Docente::URL.'revision/avance.detalle.php?iddicta='.$iddicta.'&estudiente_id='.$estuid.'&avance_id='.$id,'name'=>'Detalle de Avance');
-  $smarty->assign("menuList", $menuList);
-    
-  $estudiante     = new Estudiante($estuid);
-  $usuario        = $estudiante->getUsuario();
-  $proyecto       = $estudiante->getProyecto();
+    $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
+    $menuList[]     = array('url'=>URL.Docente::URL.'tribunal','name'=>'Tribunal');
+    if($proyecto->tipo_proyecto==Proyecto::TIPO_PERFIL){
+    $menuList[]     = array('url'=>URL.Docente::URL.'tribunal/perfil.seguimiento.lista.php','name'=>'Lista Estudiantes de Perfil');
+    }else {
+    $menuList[]     = array('url'=>URL.Docente::URL.'tribunal/seguimiento.lista.php','name'=>'Lista Estudiantes de Proyecto');
+    }
+    $menuList[]     = array('url'=>URL.Docente::URL.'tribunal/revision.lista.php?id_estudiante='.$estuid,'name'=>'Seguimiento Estudiante');
+    $menuList[]     = array('url'=>URL.Docente::URL.'tribunal/avance.detalle.php?avance_id='.$id.'&estudiente_id='.$estuid,'name'=>'Detalle de Avance');
+    $smarty->assign("menuList", $menuList); $smarty->assign("menuList", $menuList);
+  
   $rev1=new Revision();
   $avance         = new Avance($id);
   $avance->asignarDirectorio();
   $avance->cambiarEstadoVisto();
-  function getRevisortipo($tipo,$rev){
-      if($tipo==$rev::T1_PROYECTOFINAL){
-          $tipo1=$rev::T1_DOCENTE;
-      }elseif ($tipo==$rev::T2_PERFIL) {
-            $tipo1=$rev::T2_DOCENTEPERFIL;
-        }
-        return $tipo1;
-  }
+
     $resulrev = "SELECT re.id
 FROM avance av, revision re
 WHERE re.avance_id=av.id
 AND av.id='".$avance->id."'
-AND re.revisor_tipo='".getRevisortipo($dicta->getTipoMateria(), $rev1)."'
-AND re.revisor='".$docente->id."'
+AND re.revisor_tipo='TR'
+AND re.revisor='".$tribunalacitivo->docente_id."'
 AND re.estado_revision='".$rev1::E3_RESPONDIDO."'
 ";
    $sqlrev = mysql_query($resulrev);
@@ -130,7 +131,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
     {
     $observacion = new Observacion();
     $revision = new Revision();
-    $revision->crearRevisionDocente($docente->id, $proyecto->id, $dicta->getTipoMateria());
+    $revision->crearRevisionDocente($tribunalacitivo->id, $proyecto->id, 'TR');
     $revision->objBuidFromPost();
     $revision->avance_id=$avance->id;
     $revision->save();
@@ -140,8 +141,8 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
     $observacion->crearObservacion($obser_array, $revision->id);
     }
     $avance->cambiarEstadoCorregido();
-    $revision->notificacionRevision($estudiante->id, $proyecto->id, $docente->getNombreCompleto());
-    $ir = "Location: ../estudiante/estudiante.lista.php?iddicta=".$iddicta;
+    $revision->notificacionRevision($estudiante->id, $proyecto->id, $usuarioss->getNombreCompleto());
+    $ir = "Location: revision.lista.php?id_estudiante=".$estuid;
         header($ir);
     }
     
@@ -158,7 +159,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
            $desaprobados=$revision1->listaDesaprobados();
            if(count($desaprobados)>0){
            $revisionnuevo = new Revision();
-           $revisionnuevo->crearRevisionDocente($docente->id, $proyecto->id, $dicta->getTipoMateria());
+           $revisionnuevo->crearRevisionDocente($tribunalacitivo->docente_id, $proyecto->id, 'TR');
            $revisionnuevo->avance_id=$avance->id;
            $revisionnuevo->save();
            foreach ($desaprobados as $des) {
@@ -173,13 +174,13 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
            }
            $revision1->estadoAprobado();
            $avance->cambiarEstadoCorregido();
-           $revision1->notificacionRevision($estudiante->id, $proyecto->id, $docente->getNombreCompleto());
-           $ir = "Location: ../revision/observacion.editar.revision.php?iddicta=".$iddicta."&revisiones_id=".$revisionnuevo->id."";
+           $revision1->notificacionRevision($estudiante->id, $proyecto->id, $usuarioss->getNombreCompleto());
+           $ir = "Location:observacion.editar.revision.php?iddicta=".$iddicta."&revisiones_id=".$revisionnuevo->id."";
            header($ir);
            }else {
                    $revision1->estadoAprobado();
                    $avance->cambiarEstadoCorregido();
-                   $ir = "Location: ../estudiante/estudiante.lista.php?iddicta=".$iddicta;
+                   $ir = "Location:seguimiento.lista.php";
                    header($ir);
                 }
            }  else {
@@ -187,7 +188,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
            $desaprobados=$revision1->listaObservaciones();
            if(count($desaprobados)>0){
            $revisionnuevo = new Revision();
-           $revisionnuevo->crearRevisionDocente($docente->id, $proyecto->id, $dicta->getTipoMateria());
+           $revisionnuevo->crearRevisionDocente($tribunalacitivo->docente_id, $proyecto->id,'TR');
            $revisionnuevo->avance_id=$avance->id;
            $revisionnuevo->save();
            foreach ($desaprobados as $des) {
@@ -201,9 +202,9 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
                $obsermodes->cambiarEstadoRechazado();
            }}
            $revision1->estadoAprobado();
-           $revision1->notificacionRevision($estudiante->id, $proyecto->id, $docente->getNombreCompleto());
+           $revision1->notificacionRevision($estudiante->id, $proyecto->id, $usuarioss->getNombreCompleto());
            $avance->cambiarEstadoCorregido();   
-           $ir = "Location: ../revision/observacion.editar.revision.php?iddicta=".$iddicta."&revisiones_id=".$revisionnuevo->id;
+           $ir = "Location:observacion.editar.revision.php?iddicta=".$iddicta."&revisiones_id=".$revisionnuevo->id;
            header($ir);
            }
      }
@@ -228,7 +229,7 @@ catch(Exception $e)
   $_SESSION['register'] = $token;
   $smarty->assign('token',$token);
   
-$TEMPLATE_TOSHOW = 'docente/revision/full-width.avance.detalle.tpl';
+$TEMPLATE_TOSHOW = 'docente/tribunal/full-width.avance.detalle.tpl';
 $smarty->display($TEMPLATE_TOSHOW);
 
 ?>

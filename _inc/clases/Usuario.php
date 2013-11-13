@@ -239,6 +239,7 @@ class Usuario  extends Objectbase
   
   
   
+  
   /**
    * Obtenemos los nombres y apellidos del usuario de una cadena 
    * @param string $nombreyapellidos cadena con el nombre y los appellidos ejemplo BASTO RODRIGUEZ PEDRO EDUARDO
