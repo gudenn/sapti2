@@ -131,7 +131,7 @@ try {
   //Tutores
   $tutores = $proyecto->getTutores();
   $smarty->assign('tutores', $tutores);
-  $registro_tutor[] = '-- Selecione --';
+  $registro_tutor[] = '-- Seleccione --';
   foreach ($tutores as $tutor) {
     $registro_tutor[] = $tutor->getNombreCompleto();    
   }

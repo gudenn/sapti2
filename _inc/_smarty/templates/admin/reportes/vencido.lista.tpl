@@ -29,8 +29,8 @@
         	<div id="paginator"></div>
         </div>
       <center>
-        <a href="vencido-pdf.php?id_p={$semestre->id}" target="_blank" >{icono('filepd.png','descargar')}</a>
-        <a href="venceexcel.php?id_p={$semestre->id}" target="_blank" >{icono('boton_excel.png','descargar')}</a>  
+        <a href="vencido-pdf.php?id_p={$semestre->id}" target="_blank" >{icono('filepd.png','descargar')}descargar pdf</a>
+        <a href="venceexcel.php?id_p={$semestre->id}" target="_blank" >{icono('boton_excel.png','descargar')}descargar excel</a>  
      </center>
         <script type="text/javascript">
                 editableGrid.onloadXML("loaddata.vencido.lista.php");

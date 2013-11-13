@@ -24,7 +24,7 @@
                   <input type="text" name="nombre" value="{$usuario->nombre}"  readonly="readonly" >
                 </td>
                 <td>
-                  <input type="text" class="numero" name="proyecto_numero_asignado" id="proyecto_numero_asignado" value="{$proyecto->numero_asignado}"  data-validation-engine="validate[required]">
+                  {$proyecto->numero_asignado}
                 </td>
               </tr>
               <tr>

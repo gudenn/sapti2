@@ -50,7 +50,7 @@
                         type: 'pie',
                         name: 'Browser share',
                         data: [
-                            ['Adcripcion', {$cont}],
+                            ['Adcripción', {$cont}],
                           
                             ['Trabajo Dirigido', {$post}],
                              ['Proyecto de Grado', {$pro}],

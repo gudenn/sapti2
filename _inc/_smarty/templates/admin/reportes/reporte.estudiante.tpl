@@ -61,7 +61,7 @@
                             ['Estudiantes Aprobados', {$ap}],
                           
                             ['Estudiantes Reprobados', {$rp}],
-                             ['Estudiantes que Abandonnaron la Materia', {$aba}],
+                             ['Estudiantes que Abandonaron la Materia', {$aba}],
                             
                         ]
                     }]
