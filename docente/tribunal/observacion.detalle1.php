@@ -42,7 +42,16 @@ AND ob.revision_id='".$ideve."'
           ";
         break;
       case 'TR':
-        $resul = 'Tribunal';
+        $resul = "
+      SELECT ob.observacion as observacion, ob.respuesta as respuesta, pr.nombre as nomp, CONCAT(us.titulo_honorifico,' ', us.apellido_paterno,' ', us.apellido_materno,' ', us.nombre) as nombre, re.fecha_revision as fere, ob.estado_observacion as estado
+FROM observacion ob, revision re, proyecto pr, usuario us, docente dc, tribunal tr
+WHERE ob.revision_id=re.id
+AND re.proyecto_id=pr.id
+AND re.revisor=tr.id
+AND tr.docente_id=dc.id
+AND dc.usuario_id=us.id
+AND ob.revision_id='".$ideve."' 
+          ";
         break;
       default:
         break;
@@ -72,7 +81,7 @@ if (empty($action)) {
           </p>
           <p>
             <label for='proyecto_id'>Nombres de Proyecto: </label>
-            <span>{$arrayobser[0]['nomp']}</span>
+            <span>{$arrayobser[0]['nomp']}.</span>
           </p>
           <p>
             <label for='fecha_observacion'>Fecha de Observacion: </label>

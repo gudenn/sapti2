@@ -47,11 +47,11 @@ if (empty($action)&&$avance->revision_id==0) {
 
           <p>
             <label for='proyecto_id'>Nombres de Proyecto: </label>
-            <span><b>{$arrayobser[0]['nombrep']}.</b></span>
+            <span>{$arrayobser[0]['nombrep']}.</span>
           </p>
           <p>
             <label for='fecha_observacion'>Fecha de Avance: </label>
-            <span><b>{$arrayobser[0]['fecha']}.</b></span>            
+            <span>{$arrayobser[0]['fecha']}.</span>            
           </p>
           <div style='height: 200px; width: 650px; font-size: 12px; overflow: auto;'>
             <table class='tbl_lista'>

@@ -8,9 +8,9 @@ try {
   header("Location: ../login.php");  
 
   /** HEADER */
-  $smarty->assign('title','Proyecto Final');
-  $smarty->assign('description','Proyecto Final');
-  $smarty->assign('keywords','Proyecto Final');
+  $smarty->assign('title','Tutor');
+  $smarty->assign('description','Men&uacute de Tutor&iacuteas');
+  $smarty->assign('keywords','Tutor');
 
   //CSS
   $CSS[]  = URL_CSS . "academic/3_column.css";
@@ -44,15 +44,15 @@ try {
    $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
   $menuList[]     = array('url'=>URL.Tutor::URL,'name'=>'Tutor');
   $smarty->assign("menuList", $menuList);
-$notificaciones= new Notificacion();
+  $notificaciones= new Notificacion();
   leerClase('Menu');
   leerClase('Tutor');
   $menu = new Menu('Lista de Estudiantes  de Perfil');
   
   $link = Tutor::URL."perfil.seguimiento.lista.php";
-  $menu->agregarItem('Seguimiento','Seguimiento a los Estudiantes ','basicset/user4.png',$link);
+  $menu->agregarItem('Estudiantes Tutorados','Lista de Estudiantes Tutorados','basicset/user4.png',$link);
    $link = Tutor::URL."perfil.estudiante.lista.php";
-  $menu->agregarItem('Dar Visto Bueno ','Dar visto Bueno a los Proyectos de Los Estudiantes','basicset/ok.png',$link);
+  $menu->agregarItem('Dar Visto Bueno ','Visto Bueno a los Proyectos de los Estudiantes Tutorados','basicset/ok.png',$link);
  $link = Tutor::URL."perfil.vistobueno.lista.php";
   $menu->agregarItem('Lista  de  Visto Bueno  ','Lista de Proyectos Aprobados','basicset/ok.png',$link);
 
@@ -60,9 +60,9 @@ $notificaciones= new Notificacion();
   
   $menu = new Menu('Lista de Estudiantes De Proyecto Final');
   $link = Tutor::URL."seguimiento.lista.php";
-  $menu->agregarItem('Seguimiento a los estudiantes ','Seguimiento al Proyecto de los Estudiantes','basicset/user4.png',$link);
+  $menu->agregarItem('Estudiantes Tutorados','Lista de Estudiantes Tutorados','basicset/user4.png',$link);
   $link = Tutor::URL."estudiante.lista.php";
-  $menu->agregarItem(' Dar Visto Bueno ','Visto Bueno a los Proyectos','basicset/ok.png',$link);
+  $menu->agregarItem(' Dar Visto Bueno ','Visto Bueno a los Proyectos de los Estudiantes Tutorados','basicset/ok.png',$link);
    $link = Tutor::URL."proyecto.vistobueno.lista.php";
   $menu->agregarItem('Lista Visto Bueno ','Lista de Proyectos Aprobados','basicset/ok.png',$link);
 

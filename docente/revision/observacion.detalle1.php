@@ -72,7 +72,7 @@ if (empty($action)) {
           </p>
           <p>
             <label for='proyecto_id'>Nombres de Proyecto: </label>
-            <span>{$arrayobser[0]['nomp']}</span>
+            <span>{$arrayobser[0]['nomp']}.</span>
           </p>
           <p>
             <label for='fecha_observacion'>Fecha de Observacion: </label>

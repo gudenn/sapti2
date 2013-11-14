@@ -8,6 +8,7 @@ try {
   leerClase("Revision");
   leerClase("Observacion");
   leerClase("Docente");
+  leerClase("Proyecto");
   
     /** HEADER */
   $smarty->assign('title','Modificacion de Observaciones');
@@ -32,28 +33,31 @@ try {
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
   $JS[]  = URL_JS . "jquery.addfield.js";
   $smarty->assign('JS',$JS);
-    leerClase('Dicta');
-    $docente     = getSessionDocente();
-  if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) && $docente->getDictaverifica($_GET['iddicta']))
-  {
-     $iddicta                = $_GET['iddicta'];
-  }  else {
-        header("Location: ../index.php");
-  }
-    if ( isset($_GET['revisiones_id']) && is_numeric($_GET['revisiones_id']) ){
+
+  if ( isset($_GET['revisiones_id']) && is_numeric($_GET['revisiones_id']) ){
   $revid=$_GET['revisiones_id'];     
   }
+  if ( isset($_GET['avance']) && is_numeric($_GET['avance']) ){
+  $id=$_GET['avance'];     
+  }
   $revision=new Revision($revid);
-  $dicta = new Dicta($iddicta);
+  $proyecto=new Proyecto($revision->proyecto_id);
+  $estuid=$revision->getEstudiante();
      /**
    * Menu superior
    */
-  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
-  $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php?iddicta='.$iddicta,'name'=>$dicta->getNombreMateria());
-  $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/estudiante.lista.php?iddicta='.$iddicta,'name'=>'Estudiantes Inscritos');
-  $menuList[]     = array('url'=>URL.Docente::URL.'revision/revision.lista.php?iddicta='.$iddicta.'&estudiente_id='.$revision->getEstudiante(),'name'=>'Seguimiento');
-  $menuList[]     = array('url'=>URL.Docente::URL.'revision/observacion.editar.revision.php?iddicta='.$iddicta.'&revisiones_id='.$revid,'name'=>'Edicion de Observaciones');
-  $smarty->assign("menuList", $menuList);
+    $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
+    $menuList[]     = array('url'=>URL.Docente::URL.'tutor','name'=>'Tutor');
+    if($proyecto->tipo_proyecto==Proyecto::TIPO_PERFIL){
+    $menuList[]     = array('url'=>URL.Docente::URL.'tutor/perfil.seguimiento.lista.php','name'=>'Lista Estudiantes de Perfil');
+    }else {
+    $menuList[]     = array('url'=>URL.Docente::URL.'tutor/seguimiento.lista.php','name'=>'Lista Estudiantes de Proyecto');
+    }
+    $menuList[]     = array('url'=>URL.Docente::URL.'tutor/revision.lista.php?id_estudiante='.$estuid,'name'=>'Seguimiento Estudiante');
+    $menuList[]     = array('url'=>URL.Docente::URL.'tutor/avance.detalle.php?avance_id='.$id.'&estudiente_id='.$estuid,'name'=>'Detalle de Avance');
+  $menuList[]     = array('url'=>URL.Docente::URL.'revision/observacion.editar.revision.php?revisiones_id='.$revid,'name'=>'Edicion de Observaciones');
+    $smarty->assign("menuList", $menuList); $smarty->assign("menuList", $menuList);
+  
     
   $resul = "
       SELECT ob.observacion as obser, pr.nombre as nomp, us.nombre as nom,CONCAT(us.apellido_paterno,us.apellido_materno) as ap, re.fecha_revision as fere, proe.id as idestu
@@ -72,7 +76,6 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
     
   $smarty->assign("arrayobser", $arrayobser);
   $smarty->assign("revisionesid", $revid);
-  $smarty->assign("iddicta", $iddicta);
   $smarty->assign("revision", $revision);
 
   $columnacentro = 'docente/revision/columna.centro.observacion.editar.revision.tpl';

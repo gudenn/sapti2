@@ -1,21 +1,22 @@
 <?php
 try {
-  define ("MODULO", "DOCENTE");
+    define ("MODULO", "DOCENTE");
   require('../_start.php');
   if(!isDocenteSession())
-    header("Location: login.php"); 
+    header("Location: ../login.php"); 
 
   leerClase("Estudiante");
   leerClase('Docente');
   leerClase('Usuario');
   leerClase('Avance');
   leerClase('Revision');
+  leerClase('Dicta');
   $ERROR = '';
 
   /** HEADER */
-  $smarty->assign('title','Lista de Estudiantes');
-  $smarty->assign('description','P&aacute;gina de Lista de Incritos');
-  $smarty->assign('keywords','Gestion,Estudiantes');
+  $smarty->assign('title','Lista de Correcciones');
+  $smarty->assign('description','Lista de Correcciones realizadas el Proyecto');
+  $smarty->assign('keywords','Gestion,Estudiantes,correcciones,revisiones');
 
   //CSS
   $CSS[]  = URL_CSS . "academic/tables.css";
@@ -25,39 +26,41 @@ try {
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
   $JS[]  = URL_JS . "tablaeditable/editablegrid-2.0.1.js";
-  $JS[]  = URL_JS . "tablaeditabletribunal/tabla.estudiante.lista.js";
+  $JS[]  = URL_JS . "tablaeditable/tabla.estudiante.lista.js";
   $smarty->assign('JS',$JS);
-  
-   /**
-   * Menu superior
-   */
-   $menuList[]     = array('url'=>URL.Docente::URL.'tribunal','name'=>'Tribunal');
-   $menuList[]     = array('url'=>URL.Docente::URL.'tribunal/estudiante.lista.php','name'=>'Lista Estudiante');
-   $smarty->assign("menuList", $menuList);
-   
-  if ( isset($_SESSION['iddictapro']) && is_numeric($_SESSION['iddictapro']) ){
-      $iddicta=$_SESSION['iddictapro'];
+
+    if( isset($_GET['estudiente_id']) && is_numeric($_GET['estudiente_id']) ){
+       $id_estudiante=$_GET['estudiente_id'];
+  }  else {
+      header("Location: ../index.php");
   }
-  if( isset($_SESSION['pro_estudiente_id']) && is_numeric($_SESSION['pro_estudiente_id']) ){
-       $id_estudiante=$_SESSION['pro_estudiente_id'];
-  }
-  
-  $docente=  getSessionDocente();
   $estudiante     = new Estudiante($id_estudiante);
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();
-
+    $docentesesion= getSessionDocente();
+  $tribunal = $proyecto->getTribunal($docentesesion->id);
+ 
+    /**
+      Menu superior
+    */
+    $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
+    $menuList[]     = array('url'=>URL.Docente::URL.'tribunal','name'=>'Tribunal');
+    $menuList[]     = array('url'=>URL.Docente::URL.'tribunal/seguimiento.lista.php','name'=>'Lista Estudiantes');
+    $menuList[]     = array('url'=>URL.Docente::URL.'tribunal/revision.corregido.lista.php?estudiente_id='.$id_estudiante,'name'=>'Lista de Correcciones');
+    $smarty->assign("menuList", $menuList);
+   
   $resul = "
-SELECT av.id as id, pr.nombre as nombrep, av.descripcion as descripcion, av.fecha_avance as fecha, av.revision_id as correcionrevision, av.estado_avance as estoavance
+SELECT av.id as id, pr.nombre as nombrep, av.descripcion as descripcion, av.fecha_avance as fecha, re.id as correcionrevision, av.estado_avance as estoavance
 FROM proyecto pr, avance av, revision re
 WHERE av.proyecto_id=pr.id
-AND av.revision_id=re.id
+AND av.id=re.avance_id
 AND re.estado_revision='RE'
 AND av.proyecto_id='".$proyecto->id."'
-AND re.revisor_tipo='DO'
-AND re.revisor='".$docente->id."'
-ORDER BY av.fecha_avance
+AND re.revisor_tipo='TR'
+AND re.revisor='".$tribunal->id."'
+ORDER BY id DESC
           ";
+
    $sql = mysql_query($resul);
 while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
    $avances[]=$fila1;
@@ -71,7 +74,6 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
   $smarty->assign("estudiante", $estudiante);
   $smarty->assign("usuario", $usuario);
   $smarty->assign("proyecto", $proyecto);
-  $smarty->assign("iddicta", $iddicta);
 
   //No hay ERROR
   $smarty->assign("ERROR",$ERROR);
@@ -80,5 +82,5 @@ catch(Exception $e)
 {
   $smarty->assign("ERROR", handleError($e));
 }
-  $smarty->display('docente/revision/full-width.revision.corregido.lista.tpl');
+  $smarty->display('docente/tutor/full-width.revision.corregido.lista.tpl');
 ?>

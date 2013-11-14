@@ -17,7 +17,7 @@ try {
   $smarty->assign('keywords','Gestion,Estudiantes');
 //BOX
   $CSS[]  = URL_JS . "box/box.css";
-  $JS[]  = URL_JS ."box/jquery.box.js";
+
   //CSS
   $CSS[]  = URL_CSS . "academic/tables.css";
   $CSS[]  = URL_CSS . "editablegrid.css";
@@ -25,6 +25,7 @@ try {
 
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
+    $JS[]  = URL_JS ."box/jquery.box.js";
   $JS[]  = URL_JS . "tablaeditabletutor/editablegrid-2.0.1.js";
   $JS[]  = URL_JS . "tablaeditabletutor/tabla.estudiante.lista.js";
    $smarty->assign('JS',$JS);

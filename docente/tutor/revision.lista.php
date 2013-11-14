@@ -18,6 +18,7 @@ try {
   $smarty->assign('keywords','Gestion,Observaciones,revision,avance');
 
   $CSS[]  = URL_CSS . "academic/tables.css";
+  $CSS[]  = URL_CSS . "editablegrid.css";
   $CSS[]  = URL_JS . "ventanasmodales/simplemodaldetalle.css";
   $smarty->assign('CSS',$CSS);
 

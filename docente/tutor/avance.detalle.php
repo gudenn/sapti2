@@ -169,12 +169,12 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
            $revision1->estadoAprobado();
            $avance->cambiarEstadoCorregido();
            $revision1->notificacionRevision($estudiante->id, $proyecto->id, $tutor->getNombreCompleto());
-           $ir = "Location: ../revision/observacion.editar.revision.php?iddicta=".$iddicta."&revisiones_id=".$revisionnuevo->id."";
+           $ir = "Location: ../tutor/observacion.editar.revision.php?revisiones_id=".$revisionnuevo->id."&avance=".$id;
            header($ir);
            }else {
                    $revision1->estadoAprobado();
                    $avance->cambiarEstadoCorregido();
-                   $ir = "Location: ../estudiante/estudiante.lista.php?iddicta=".$iddicta;
+                   $ir = "Location: ../tutor/revision.lista.php?id_estudiante=".$estuid;
                    header($ir);
                 }
            }  else {
@@ -198,7 +198,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
            $revision1->estadoAprobado();
            $revision1->notificacionRevision($estudiante->id, $proyecto->id, $tutor->getNombreCompleto());
            $avance->cambiarEstadoCorregido();   
-           $ir = "Location: ../revision/observacion.editar.revision.php?iddicta=".$iddicta."&revisiones_id=".$revisionnuevo->id;
+           $ir = "Location: ../tutor/observacion.editar.revision.php?revisiones_id=".$revisionnuevo->id."&avance=".$id;
            header($ir);
            }
      }
@@ -211,7 +211,6 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
   $smarty->assign("usuario", $usuario);
   $smarty->assign("proyecto", $proyecto);
   $smarty->assign("avance", $avance);
-  $smarty->assign("iddicta", $iddicta);
   $smarty->assign("ERROR", $ERROR);
   
 } 

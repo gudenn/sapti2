@@ -16,7 +16,7 @@ try {
   $smarty->assign('keywords','Gestion,Estudiantes');
   
   $CSS[]  = URL_JS . "box/box.css";
-  $JS[]  = URL_JS ."box/jquery.box.js"; 
+ 
   //CSS
   $CSS[]  = URL_CSS . "academic/tables.css";
   $CSS[]  = URL_CSS . "editablegrid.css";
@@ -24,6 +24,7 @@ try {
 
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
+  $JS[]  = URL_JS ."box/jquery.box.js";
   $JS[]  = URL_JS . "tablaeditabletutor/editablegrid-2.0.1.js";
   $JS[]  = URL_JS . "tablaeditabletutor/perfil.seguimiento.lista.js";
 
@@ -34,7 +35,7 @@ try {
    */
  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
  $menuList[]     = array('url'=>URL.Docente::URL.'tutor','name'=>'Tutor');
-  $menuList[]     = array('url'=>URL.Docente::URL.'tutor/'.basename(__FILE__),'name'=>'Lista Estudiante de Perfil');
+  $menuList[]     = array('url'=>URL.Docente::URL.'tutor/'.basename(__FILE__),'name'=>'Lista Estudiantes de Perfil');
  $smarty->assign("menuList", $menuList);
   
  

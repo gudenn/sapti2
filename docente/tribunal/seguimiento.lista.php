@@ -28,7 +28,7 @@ try {
    
    $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
  $menuList[]     = array('url'=>URL.Docente::URL.'tribunal','name'=>'Tribunal');
- $menuList[]     = array('url'=>URL.Docente::URL.'tribunal/estudiante.lista.php','name'=>'Lista Estudiante');
+ $menuList[]     = array('url'=>URL.Docente::URL.'tribunal/seguimiento.lista.php','name'=>'Lista Estudiantes');
  $smarty->assign("menuList", $menuList);
   
   $docente=  getSessionDocente();
