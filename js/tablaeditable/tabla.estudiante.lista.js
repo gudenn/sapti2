@@ -17,7 +17,6 @@ var editableGrid = new EditableGrid("listaestudiantes"+time, {
 	editorzoneid: "edition", // will be used only if editmode is set to "fixed"
 	pageSize: 10
 });
-var res="";
 
 // helper function to display a message
 function displayMessage(text, style) { 
@@ -158,9 +157,12 @@ function pendientes(estid, dicta) {
 		},
 		success: function (response) 
 		{ 
-                        $('#sp'+estid+'').html(response);
+                    if(response==0){
+                        var spa = document.getElementById('sp'+estid);
+                        spa.style.display = "none";
+                    }else{
+                      $('#sp'+estid+'').html(response);                       
+                    }
 		}
 	});
-        return res;
-        
 };
