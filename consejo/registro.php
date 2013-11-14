@@ -75,8 +75,7 @@ try {
     
        $proyecto = $estudiante->getProyecto();
     
-   if(sizeof($proyeareas=$proyecto->getArea())>0)
-   {
+  
         $proyeareas  =  $proyecto->getArea();
         $tutores     =  $proyecto->getTutores();
         
@@ -113,10 +112,7 @@ try {
             }
         }  
    
-   }  else {
-       // echo "<script>alert('El Estudiante No tiene  Area');</script>";
-  
-   }
+ 
  
  }
  else

@@ -4,7 +4,7 @@
     <th><a href='?order=nombre'              class="tajax"  title='Ordenar por Nombre'           >Nombre           {$filtros->iconOrder('nombre')}</a></th>
     <th><a href='?order=apellido_paterno'    class="tajax"  title='Ordenar por Apellido Paterno' >Apellido Paterno {$filtros->iconOrder('apellido_paterno')}</a></th>
     <th><a href='?order=apellido_materno'    class="tajax"  title='Ordenar por Apellido Materno' >Apellido Materno {$filtros->iconOrder('apellido_materno')}</a></th>
-    <th>Profecional</th>
+    <th>Profesional</th>
      <th>Activo AC, Inactivo IN</th>
       <th>Desactivar Cuenta</th>
       <th>Opciones</th>

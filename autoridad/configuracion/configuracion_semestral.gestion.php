@@ -75,9 +75,10 @@ try {
   //Filtro
   $filtro   = new Filtro('g_configuracions',__FILE__);
   $objeto = new Configuracion_semestral();
+ 
   $objeto->iniciarFiltro($filtro);
   $filtro_sql = $objeto->filtrar($filtro);
-
+ $objeto->semestre_id=$semestre->id;
   
   $o_string   = $objeto->getOrderString($filtro);
   $obj_mysql  = $objeto->getAll('',$o_string,$filtro_sql,TRUE);

@@ -136,7 +136,7 @@ class Revision extends Objectbase
     }
     leerClase($clase);
     $obj = new $clase($revisor_id);
-    return $obj->getNombreCompleto();
+     return $obj->getNombreCompleto();
 
   }
   function getRevisorTipoNom($tipo=false) 

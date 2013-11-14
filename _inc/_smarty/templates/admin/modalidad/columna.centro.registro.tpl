@@ -14,7 +14,7 @@
             </p>
             <p>
               {html_radios name="datos_adicionales" options=$datos_adicionales selected=$modalidad->datos_adicionales separator="<br>"}
-              <label for="datos_adicionales"><small>Requiere Institucion y Responsable (*) {getHelpTip('datos')}</small></label>
+              <label for="datos_adicionales"><small>Requiere Instituci&oacute;n y Responsable (*) {getHelpTip('datos')}</small></label>
             </p>
             
             <h2 class="title">Grabar Modalidad</h2>

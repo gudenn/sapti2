@@ -107,6 +107,20 @@ try {
   //Objetivos especicicos
   $smarty->assign('base'      , '2'); // cuantos se muestran mas 1
   $smarty->assign('TOTAL'     , '20');// cuantos se van a guardas
+  
+  //numero
+  $sqlr="select max( p.numero_asignado) as num
+         from proyecto p";
+ $resultado = mysql_query($sqlr);
+ $num= array();
+
+ while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+   { 
+        $num[]=$fila;;
+   }
+   
+  $numero=$num[0]['num']+1;
+  $smarty->assign('numero'  , $numero);
 
   //carrera
   $carrera         = new Carrera();
@@ -130,7 +144,7 @@ try {
   //Tutores
   $tutores = $proyecto->getTutores();
   $smarty->assign('tutores', $tutores);
-  $registro_tutor[] = '-- Selecione --';
+  $registro_tutor[] = '-- Seleccione --';
   foreach ($tutores as $tutor) {
     $registro_tutor[] = $tutor->getNombreCompleto();    
   }

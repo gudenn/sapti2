@@ -61,8 +61,8 @@
     </table>  
      
          <center> 
- <a href="proceso-pdf.php?id_p={$semestre->id}" target="_blank" >{icono('filepd.png','descargar')}</a>
-      <a href="procesoexcel.php?id_p={$semestre->id}" target="_blank" >{icono('boton_excel.png','descargar')}</a>
+ <a href="proceso-pdf.php?id_p={$semestre->id}" target="_blank" >{icono('filepd.png','descargar')}descargar pdf</a>
+      <a href="procesoexcel.php?id_p={$semestre->id}" target="_blank" >{icono('boton_excel.png','descargar')}descargar excel</a>
 </center>
 </div> 
 </body>

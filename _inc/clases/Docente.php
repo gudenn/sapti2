@@ -46,7 +46,16 @@ class Docente extends Objectbase{
   * configuracion horario docente
   * @var BOOLEAN
   */
+  
+  
   var $configuracion_horario;
+  
+   /**
+  * (Arreglo de objetos)  que pertenecen a un tribunal
+  * @var object|null 
+  */
+  var $tribunal_objs;  
+  
     /**
    * Constructor del Docente
    * @param type $id id de la tabla

@@ -33,7 +33,7 @@
     <th><a href='?order=especialidad'         class="tajax"   title='Ordenar por Especialidad'        >T&Iacute;TULO</a></th>
     <th><a href='?order=id'                class="tajax"   title='Ordenar por Id'               >GESTI&Oacute;N</a></th>
     <th>ESTADO</th> 
-     <th>CANBIOS LEVES</th>
+     <th>CAMBIOS LEVES</th>
       <th>CAMBIOS TOTALES</th>
   </tr>
   </thead>
@@ -61,8 +61,8 @@
     
 </table>
         <center> 
-      <a href="cambio-pdf.php?id_p={$semestre->id}" target="_blank" >{icono('filepd.png','descargar')}</a>
-        <a href="cambiosexcel.php?id_p={$semestre->id}" target="_blank" >{icono('boton_excel.png','descargar')}</a>
+      <a href="cambio-pdf.php?id_p={$semestre->id}" target="_blank" >{icono('filepd.png','descargar')}descargar pdf</a>
+        <a href="cambiosexcel.php?id_p={$semestre->id}" target="_blank" >{icono('boton_excel.png','descargar')}descargar excel</a>
    </center>
 </div> 
 </body>

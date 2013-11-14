@@ -56,6 +56,7 @@ class Tribunal extends Objectbase
      var $fecha_vistobueno;
      
 
+ 
   /**
    * Retorna el nombre completo del usuario
    * @param boolean $echo si muestra o solo devuelve
@@ -66,8 +67,8 @@ class Tribunal extends Objectbase
     leerClase('Docente');
     if (!$this->docente_id)
       return false;
-    $docente = new Docente($this->docente_id);
-    return $docente->getNombreCompleto($echo);
+    $usuario = new Docente($this->docente_id);
+    return $usuario->getNombreCompleto($echo);
   }
    
 }
