@@ -56,7 +56,7 @@ ORDER BY id DESC
    if(mysql_num_rows($sql)>0){
        echo mysql_num_rows($sql);
    }  else {
-        echo '0';       
+        echo '';       
    }
 }
 catch(Exception $e) 
