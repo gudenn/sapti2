@@ -354,6 +354,99 @@ class Menu
       leerClase('Docente');
       leerClase('Usuario');
       leerClase('Notificacion');
+      $notificacion = new Notificacion();
+      if (getSessionDocente()){
+  $docmaterias = "SELECT di.id as iddicta, ma.id as idmat, ma.nombre as materia, cg.nombre as grupo, ma.tipo as tipo
+FROM dicta di, semestre se, materia ma, codigo_grupo cg
+WHERE di.materia_id=ma.id
+AND di.semestre_id=se.id
+AND di.codigo_grupo_id=cg.id
+AND se.activo=1
+AND di.docente_id=".$docente->id."
+ORDER BY ma.id";
+  $resultmate = mysql_query($docmaterias);
+
+  if(mysql_num_rows($resultmate)>0)
+      {
+          $thises = array();
+        $thise = new Menu('Men&uacute; de Materias');
+        $link = Docente::URL."index.materias.php";
+        $thise->agregarItem('Gesti&oacute;n de Materias','Gesti&oacute;n de Materias Asignadas para el Semestre.','basicset/materias.png',$link);
+         $thises[] = $thise;
+  };
+  $doctutor = "SELECT *
+FROM usuario us, tutor tu, proyecto_tutor pu, docente dc, proyecto pr
+WHERE pu.tutor_id=tu.id
+AND pu.proyecto_id=pr.id
+AND tu.usuario_id=us.id
+AND us.id=dc.usuario_id
+AND pr.es_actual=1
+AND dc.id=".$docente->id."
+";
+  $resultutor = mysql_query($doctutor);
+
+  if(mysql_num_rows($resultutor)>0)
+      {
+  $thise = new Menu('Tutor');
+  $link = Docente::URL."tutor/index.php";
+  $thise->agregarItem('Tutor','Lista De Estudiante','basicset/tutor.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+  $thises[] = $thise;      
+  }
+  $doctribunal = "SELECT *
+FROM tribunal tr, proyecto pr
+WHERE tr.proyecto_id=pr.id
+AND pr.es_actual=1
+AND tr.docente_id=".$docente->id."
+";
+  $resultribunal = mysql_query($doctribunal);
+
+  if(mysql_num_rows($resultribunal)>0)
+      {
+     $thise = new Menu('Tribunal');
+  $link = Docente::URL."tribunal/index.php";
+  $thise->agregarItem('Tribunal','Lista de Estudiantes','basicset/user3.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+  $thises[] = $thise;   
+  }
+  }
+    $thise = new Menu('Tiempo');
+  $link = Docente::URL."configuracion/generar.horario.php";
+  $thise->agregarItem('Disponibilidad','Disponibilidad de Tiempo','basicset/clock.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+  $thises[] = $thise;
+  
+  $thise = new Menu('Agregar &Aacute;reas');
+  $link = Docente::URL."configuracion/configuracion.php";
+  $thise->agregarItem('Configuraci&oacute;n','Agregar &Aacute;reas de Disponibilidad','basicset/add.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+   $thises[] = $thise;
+   
+   // Notificaciones 
+  $usuario      = getSessionUser();
+  $notificacion = new Notificacion();
+
+   $thise = new Menu('Notificaciones y Mensajes');
+   $link = Docente::URL."notificacion/";
+   $thise->agregarItem('Notificaciones','Gesti&oacute;n de Notificaciones','basicset/message-archived.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+   $link = Docente::URL."notificacion/notificacion.gestion.php?estado_notificacion=SV";
+   $counter = $notificacion->getTodasNotificaciones($usuario->id, '', '', ' AND estado_notificacion="SV" ');
+   $thise->agregarItem('Notificaciones Pendientes','Todas las notificaciones no leidas','basicset/message-not-read.png',$link,$counter[1]);
+   $thises[] = $thise;
+   
+   $thise = new Menu('Reportes del Sistema');
+   $link = Docente::URL."reportes.sistema.php";
+   $thise->agregarItem('Reportes de Usuario','Gesti&oacute;n de reportes del sistema.','basicset/diagram_48.png',$link);
+   $thises[] = $thise;
+  
+    return $thises;
+  }
+  /**
+   * Menu de Materias del Docente
+   * @param Docente $docente
+   * @return Menu
+   */
+  function getDocenteIndexMaterias($docente) {
+      leerClase('Docente');
+      leerClase('Usuario');
+      leerClase('Notificacion');
+      $notificacion = new Notificacion();
       if (getSessionDocente()){
     $materias = "SELECT DISTINCT ma.id as idmat, ma.nombre as nombre
 FROM dicta di, semestre se, materia ma
@@ -397,46 +490,8 @@ ORDER BY ma.id";
          };
          $thises[] = $thise;
   };
-      }  
       }
-  $notificacion = new Notificacion();
-  $thise = new Menu('Tutor');
-  $link = Docente::URL."tutor/index.php";
-  $thise->agregarItem('Tutor','Lista De Estudiante','basicset/tutor.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
-  $thises[] = $thise;
-  
-  $thise = new Menu('Tribunal');
-  $link = Docente::URL."tribunal/index.php";
-  $thise->agregarItem('Tribunal','Lista de Estudiantes','basicset/user3.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
-  $thises[] = $thise;
-  
-  $thise = new Menu('Tiempo');
-  $link = Docente::URL."configuracion/generar.horario.php";
-  $thise->agregarItem('Disponibilidad','Disponibilidad de Tiempo','basicset/clock.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
-  $thises[] = $thise;
-  
-  $thise = new Menu('Agregar &Aacute;reas');
-  $link = Docente::URL."configuracion/configuracion.php";
-  $thise->agregarItem('Configuraci&oacute;n','Agregar &Aacute;reas de Disponibilidad','basicset/add.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
-   $thises[] = $thise;
-   
-   // Notificaciones 
-  $usuario      = getSessionUser();
-  $notificacion = new Notificacion();
-
-   $thise = new Menu('Notificaciones y Mensajes');
-   $link = Docente::URL."notificacion/";
-   $thise->agregarItem('Notificaciones','Gesti&oacute;n de Notificaciones','basicset/message-archived.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
-   $link = Docente::URL."notificacion/notificacion.gestion.php?estado_notificacion=SV";
-   $counter = $notificacion->getTodasNotificaciones($usuario->id, '', '', ' AND estado_notificacion="SV" ');
-   $thise->agregarItem('Notificaciones Pendientes','Todas las notificaciones no leidas','basicset/message-not-read.png',$link,$counter[1]);
-   $thises[] = $thise;
-   
-   $thise = new Menu('Reportes del Sistema');
-   $link = Docente::URL."reportes.sistema.php";
-   $thise->agregarItem('Reportes de Usuario','Gesti&oacute;n de reportes del sistema.','basicset/diagram_48.png',$link);
-   $thises[] = $thise;
-  
+  }
     return $thises;
   }
   

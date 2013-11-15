@@ -50,7 +50,8 @@ try {
   /**
    * Menu superior
    */
-  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
+  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Asignaturas');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.materias.php','name'=>'Materias');
   $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php?iddicta='.$iddicta,'name'=>$dicta->getNombreMateria());
   $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/estudiante.lista.php?iddicta='.$iddicta,'name'=>'Estudiantes Inscritos');
   $menuList[]     = array('url'=>URL.Docente::URL.'evaluacion/proyecto.evaluacion.php?iddicta='.$iddicta.'&estudiente_id='.$id_estudiante,'name'=>'Evaluaci&oacute;n al Proyecto');

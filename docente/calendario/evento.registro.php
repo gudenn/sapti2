@@ -45,7 +45,8 @@ try {
   /**
    * Menu superior
    */
-  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
+  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Asignaturas');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.materias.php','name'=>'Materias');
   $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php?iddicta='.$iddicta,'name'=>$dicta->getNombreMateria());
   $menuList[]     = array('url'=>URL.Docente::URL.'calendario/evento.registro.php?iddicta='.$iddicta,'name'=>'Registro de Eventos');
   $smarty->assign("menuList", $menuList);

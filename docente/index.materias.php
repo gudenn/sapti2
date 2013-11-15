@@ -39,6 +39,7 @@ try {
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Asignaturas');
+  $menuList[]     = array('url'=>URL.Docente::URL.'index.materias.php','name'=>'Materias');
   $smarty->assign("menuList", $menuList);
 
     /**
@@ -47,7 +48,7 @@ try {
   $docente = getSessionDocente(); 
   leerClase('Menu');
   $menu = new Menu('');
-  $menus = $menu->getDocenteIndex($docente);
+  $menus = $menu->getDocenteIndexMaterias($docente);
   $smarty->assign("menus", $menus);
   $smarty->assign("docente", $docente);
   $smarty->assign("ERROR", $ERROR);
