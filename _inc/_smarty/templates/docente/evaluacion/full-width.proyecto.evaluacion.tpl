@@ -54,11 +54,11 @@
            </thead>
         <tbody>
         {section name=ic1 loop=$objs[ic][4]}
-     <tr>
+     <tr class="{cycle values="light,dark"}">
     <td>{$objs[ic][4][ic1]['id']}</td> 
     <td>{$revision->getEstadoRevision($objs[ic][4][ic1]['estado'])}</td> 
     <td>{$objs[ic][4][ic1]['fecha_re']}</td>
-    <td>{icono($objs[ic][4][ic1]['revisor']|cat:'_48.png','Revisor')}</td>
+    <td>{icono($objs[ic][4][ic1]['revisor']|cat:'_48.png','Revisor')}{$revision->getRevisorTipoNom($objs[ic][4][ic1]['revisor'])}</td>
     <td>{$revision->getRevisor($objs[ic][4][ic1]['idrev'],$objs[ic][4][ic1]['revisor'])}</td>
     <td>{$objs[ic][4][ic1]['fecha_co']}</td>
     <td><a href='#' class='observaciondetalle' id="{$objs[ic][4][ic1]['id']}" style="cursor:pointer">Ver {icono('basicset/search_48.png','Detalle')}</a></td>
