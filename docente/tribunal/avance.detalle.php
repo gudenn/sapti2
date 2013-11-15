@@ -73,7 +73,7 @@ try {
     /**
       Menu superior
     */
-    $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
+  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Asignaturas');
     $menuList[]     = array('url'=>URL.Docente::URL.'tribunal','name'=>'Tribunal');
     $menuList[]     = array('url'=>URL.Docente::URL.'tribunal/seguimiento.lista.php','name'=>'Lista Estudiantes');
     $menuList[]     = array('url'=>URL.Docente::URL.'tribunal/revision.lista.php?estudiente_id='.$estuid,'name'=>'Seguimiento Estudiante');

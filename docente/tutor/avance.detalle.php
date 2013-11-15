@@ -71,7 +71,7 @@ try {
      /**
    * Menu superior
    */
-    $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
+  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Asignaturas');
     $menuList[]     = array('url'=>URL.Docente::URL.'tutor','name'=>'Tutor');
     if($proyecto->tipo_proyecto==Proyecto::TIPO_PERFIL){
     $menuList[]     = array('url'=>URL.Docente::URL.'tutor/perfil.seguimiento.lista.php','name'=>'Lista Estudiantes de Perfil');
