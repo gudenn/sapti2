@@ -41,8 +41,8 @@ if(!isDocenteSession())
   
   
   $notificacion = new Notificacion();
-   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
-  $menuList[]     = array('url'=>URL.Docente::URL.'/tribunal','name'=>'Tribunal');
+  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Asignaturas');
+  $menuList[]     = array('url'=>URL.Docente::URL.'tribunal','name'=>'Tribunal');
   $smarty->assign("menuList", $menuList);
 
   $menu = new Menu('Lista de Estudiantes');
