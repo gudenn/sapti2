@@ -3,7 +3,7 @@
   <div class="rnd">
     <div id="container" class="clear">
         <div class="holder">
-          <h2 class="title">Ingreso de Docentes</h2>
+          <h2 class="title">Ingreso de Usuario</h2>
         </div>
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
