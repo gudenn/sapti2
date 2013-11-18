@@ -89,12 +89,12 @@ try {
      
      $docente                       =       getSessionDocente();
      $sql="SELECT v.*
-from  visto_bueno  v
-where   v.proyecto_id=11 and v.visto_bueno_id=4 and v.visto_bueno_tipo='DO'";
-    $resultado = mysql_query($sql);
+      from  visto_bueno  v
+      where   v.proyecto_id=11 and v.visto_bueno_id=4 and v.visto_bueno_tipo='DO'";
+      $resultado = mysql_query($sql);
   
      
-     $visto= $proyecto->getVistoDocentePE($docente->id);
+      $visto= $proyecto->getVistoDocentePE($docente->id);
    
   
     // echo $visto->proyecto_id;

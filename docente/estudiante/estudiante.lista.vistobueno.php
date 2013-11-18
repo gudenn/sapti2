@@ -22,7 +22,7 @@ try {
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
   $JS[]  = URL_JS . "tablaeditable/editablegrid-2.0.1.js";
-  $JS[]  = URL_JS . "tablaeditable/estudainte.vistobueno.js";
+  $JS[]  = URL_JS . "tablaeditable/estudiante.lista.vistobueno.js";
   $smarty->assign('JS',$JS);
   $docente     = getSessionDocente();
   if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) && $docente->getDictaverifica($_GET['iddicta']))
@@ -42,6 +42,7 @@ try {
   $smarty->assign("menuList", $menuList);
 
   $smarty->assign("iddicta", $iddicta);
+  $smarty->assign("docente", $docente);
 
   //No hay ERROR
   $smarty->assign("ERROR",$ERROR);
@@ -50,5 +51,5 @@ catch(Exception $e)
 {
   $smarty->assign("ERROR", handleError($e));
 }
-  $smarty->display('docente/estudiante/full-width.estudiante.lista.tpl');
+  $smarty->display('docente/estudiante/estudiante.lista.vistobueno.tpl');
 ?>
