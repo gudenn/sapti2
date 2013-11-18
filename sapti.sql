@@ -127,6 +127,7 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`lugar` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `nombre` VARCHAR(100) NULL ,
   `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
+  `descripcion` VARCHAR(100) NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
@@ -964,6 +965,39 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`nota` (
   `nota_proyecto` INT NULL COMMENT 'nota del proyecto final' ,
   `nota_defensa` VARCHAR(45) NULL COMMENT 'nota del defensa del proyecto' ,
   `nota_final` TINYINT(1) NULL COMMENT 'nota final del proyecto' ,
+  `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `sapti`.`modelo_carta`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `sapti`.`modelo_carta` ;
+
+CREATE  TABLE IF NOT EXISTS `sapti`.`modelo_carta` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `codigo` VARCHAR(100) NULL ,
+  `titulo` VARCHAR(300) NULL ,
+  `descripcion` VARCHAR(500) NULL ,
+  `tipo_proyecto` VARCHAR(2) NULL COMMENT 'TIPO_PERFIL =  PE, TIPO_PROYECTO =  PR' ,
+  `estado_proyecto` VARCHAR(2) NULL COMMENT 'Iniciado (IN), Form Perfil Pendiente (PD), Form Perfil Confirmaddo (CO), Visto Bueno de Docente Tutores y Revisores (VB), Estado de proyecto con tribunal (TA), Tribunales Visto Bueno (TV), Con defensa Asignada(LD), Estado Proyecto  finalizado (PF)' ,
+  `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `sapti`.`carta`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `sapti`.`carta` ;
+
+CREATE  TABLE IF NOT EXISTS `sapti`.`carta` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `proyecto_id` INT NULL ,
+  `modelo_carta_id` INT NULL ,
+  `estado_impresion` VARCHAR(2) NULL COMMENT 'Pendiente (PE), Impreso (IP)' ,
+  `fecha_impresion` DATE NULL ,
   `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;

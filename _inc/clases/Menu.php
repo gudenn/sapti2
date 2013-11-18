@@ -144,12 +144,16 @@ class Menu
       $link = Administrador::URL."configuracion/";
       $thise->agregarItem('Configuraciones','Configuraciones para el sistema SAPTI.','basicset/gear_48.png',$link,0,25);
       $thises[] = $thise;
-      $thise = new Menu('Notificaciones y Mensajes');
-      $link = Administrador::URL."notificacion/";
-      $thise->agregarItem('Gesti&oacute;n de Notificaciones','Gestionar Mis notificaciones','basicset/megaphone.png',$link,0,12);
-      $link = Administrador::URL."mensajes/";
-      $thise->agregarItem('Gesti&oacute;n de Mesajes','Mi correo de Mensajes','basicset/mail.png',$link,14);
-      
+      $thise = new Menu('Gesti&oacute;n de Cartas SAPTI');
+      $link = Administrador::URL."carta/carta.gestion.php?todos=1";
+      $thise->agregarItem('Gesti&oacute;n de Cartas','Archivo de Todas las Cartas','basicset/message-archived.png',$link);
+      leerClase('Carta');
+      $carta      = new Carta();
+      $pendientes = $carta->contar(" estado_impresion = 'PE' ");
+      $link = Administrador::URL."carta/carta.gestion.php?estado_impresion=PE";
+      $thise->agregarItem('Cartas Pendientes','Cartas pendientes de impresi&oacute;n','basicset/message-not-read.png',$link,$pendientes);
+      $thises[] = $thise;
+
      
     }
     // Menu de AUTORIDADES
@@ -195,6 +199,16 @@ class Menu
       $link = Administrador::URL."reportes/reportemodalidad.php";
       $thise->agregarItem('Reportes Modalidad','Reportes Correspondientes Modalidad','basicset/graph.png',$link);
       $thises[] = $thise;
+      $thise = new Menu('Gesti&oacute;n de Cartas SAPTI');
+      $link = Administrador::URL."carta/carta.gestion.php?todos=1";
+      $thise->agregarItem('Gesti&oacute;n de Cartas','Archivo de Todas las Cartas','basicset/message-archived.png',$link);
+      leerClase('Carta');
+      $carta      = new Carta();
+      $pendientes = $carta->contar(" estado_impresion = 'PE' ");
+      $link = Administrador::URL."carta/carta.gestion.php?estado_impresion=PE";
+      $thise->agregarItem('Cartas Pendientes','Cartas pendientes de impresi&oacute;n','basicset/message-not-read.png',$link,$pendientes);
+      $thises[] = $thise;
+      
       
     }
     // Menu de CONSEJO
@@ -235,13 +249,14 @@ class Menu
     leerClase('Grupo');
     leerClase('Estudiante');
    
-    
+    if (!isEstudianteSession())
+      return array();
    
     $thises = array();
     $thise = new Menu('Proyecto');
     $link = Estudiante::URL."proyecto-final/";
     $thise->agregarItem('Proyecto','Registro de avances y correcciones para el Proyecto Final','basicset/briefcase_48.png',$link);
-    if( $proyecto->estado_proyecto==Proyecto::EST2_BUE)
+    if( is_object( $proyecto) && $proyecto->estado_proyecto==Proyecto::EST2_BUE)
     {
       $link = Estudiante::URL."proyecto/proyecto.registro.php";
       $thise->agregarItem('Registro de Formulario','Registro de Formulario de Proyecto Final del Estudiante','basicset/survey.png',$link,1);

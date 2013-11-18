@@ -85,15 +85,13 @@ try {
      $ERROR = $html->getMessageBox ($mensaje);
     
     $_SESSION['estado']=0;
-  $smarty->assign("ERROR",$ERROR);   
-  
    }
   
   
   $smarty->assign("menus", $menus);
 
   
-  //$smarty->assign("ERROR", $ERROR);
+  $smarty->assign("ERROR", $ERROR);
   
 
 } 

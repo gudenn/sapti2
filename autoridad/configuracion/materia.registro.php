@@ -45,7 +45,6 @@ try {
   $smarty->assign("ERROR", '');
   leerClase('Materia');
 
-  // Rehice esta opcion porque no se podia editar!!! MUY MAL
   $smarty->assign("tipo_values", array( ''                 , Materia::MATERIA_PE, Materia::MATERIA_PR));
   $smarty->assign("tipo_output", array( '-- Seleccione --' , 'TIPO PERFIL'      , 'TIPO PROYECTO FINAL'));
   
