@@ -1,6 +1,6 @@
       <div id="left_column">
         <div class="holder">
-          <h2 class="title">Busqueda</h2>
+          <h2 class="title">B&uacute;squeda</h2>
           <ul class="nostart">
 
          <h2><a href="{$URL}buscarperfil/buscajax.php">{icono('Search.png','Buscador')} Buscar Proyectos</a></h2>   

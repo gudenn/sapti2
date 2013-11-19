@@ -44,7 +44,7 @@ try {
   $link = Administrador::URL."estudiante/estudiante.asignarproyecto.php";
   $menu->agregarItem('Registro de Perfil','Grabar el perfil de un Estudiante.','basicset/briefcase_48.png',$link);
   $link = Administrador::URL."estudiante/estudiante.cambiotema.php";
-  $menu->agregarItem('Cambios de Tema','Registro de Cambios de Tema; Cambios Leves y Cambios Totales.','basicset/reload.png',$link);
+  $menu->agregarItem('Cambios de Tema','Registro de Cambios de Tema, Cambios Leves y Cambios Totales.','basicset/reload.png',$link);
   $menus[] = $menu;
   $menu = new Menu('Reportes');
   $link = Administrador::URL."estudiante/reporte";
