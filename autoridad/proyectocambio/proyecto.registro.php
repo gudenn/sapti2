@@ -108,19 +108,7 @@ try {
   $smarty->assign('base'      , '2'); // cuantos se muestran mas 1
   $smarty->assign('TOTAL'     , '20');// cuantos se van a guardas
   
-  //numero
-  $sqlr="select max( p.numero_asignado) as num
-         from proyecto p";
- $resultado = mysql_query($sqlr);
- $num= array();
 
- while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
-   { 
-        $num[]=$fila;;
-   }
-   
-  $numero=$num[0]['num']+1;
-  $smarty->assign('numero'  , $numero);
 
   //carrera
   $carrera         = new Carrera();
@@ -306,7 +294,7 @@ try {
     }
     $proyecto->validar();
     $proyecto->tipo_proyecto = TIPO;
-    $proyecto->estado_proyecto= Proyecto::EST5_P;
+    $proyecto->estado_proyecto= Proyecto::EST6_C;
     $proyecto->save();
     $proyecto->saveAllSonObjects(TRUE);
     $estudiante->marcarComoProyectoActual($proyecto->id);
@@ -330,7 +318,7 @@ try {
     {      
        leerClase('Semestre');
        $semestre             = new Semestre('',1);
-       echo $maximo_cambios_leves = $semestre->getValor('maximo cambios leves', 3);
+       $maximo_cambios_leves = $semestre->getValor('maximo cambios leves', 3);
        $cambio               = new Cambio();
        $cambio->estado       = Objectbase::STATUS_AC;
        $cambio->fecha_cambio = date('d/m/Y');

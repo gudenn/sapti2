@@ -6,9 +6,9 @@
       <th><a href='?order=apellido_paterno'    class="tajax"  title='Ordenar por Apellidos'     >Ap. Paterno  {$filtros->iconOrder('apellido_paterno')}</a></th>
        <th><a href='?order=apellido_materno'   class="tajax"  title='Ordenar por Apellidos'     >Ap. Materno  {$filtros->iconOrder('apellido_materno')}</a></th>
       <th><a href='?order=login'               class="tajax"  title='Ordenar por Login'         >Login        {$filtros->iconOrder('login')}</a></th>
-      <th><a href='?order=Codigo Sis'               class="tajax"  title='Ordenar por Sis'         >C&oacute;digo Sis        {$filtros->iconOrder('codigo_sis')}</a></th>
+    
       <th><a href='?order=email'               class="tajax"  title='Ordenar por Email'         >Email        {$filtros->iconOrder('email')}</a></th>
-     
+       <th><a href='?order=Codigo Sis'               class="tajax"  title='Ordenar por Sis'         >C&oacute;digo Sis        {$filtros->iconOrder('codigo_sis')}</a></th>
       <th>Opciones</th>
      
     </tr>
@@ -21,8 +21,8 @@
       <td>{$objs[ic]['usuario_apellido_paterno']}</td>
       <td>{$objs[ic]['usuario_apellido_materno']}</td>
       <td>{$objs[ic]['usuario_login']}</td>
-       <td>{$objs[ic]['codigo_sis']}</td>
       <td>{$objs[ic]['usuario_email']}</td>
+      <td>{$objs[ic]['codigo_sis']}</td>
      
       <td>
         <a href="docente.detalle.php?docente_id={$objs[ic]['id']}" target="_blank" >{icono('detalle.png','Detalle')}</a>
