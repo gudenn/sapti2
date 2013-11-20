@@ -68,7 +68,7 @@ EditableGrid.prototype.initializeGrid = function(dicta)
                 
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
 		cell.innerHTML = "<a onclick=document.location.href='../revision/revision.lista.php?iddicta="+ dicta +"&estudiente_id=" + getRowId(cell.rowIndex) + "' style=\"cursor:pointer\">" +
-				"<img src=\"" + image("seguimiento.png") + "\" border=\"0\" alt=\"seguimiento\" title=\"Seguimiento de Proyecto\" width='30px' height='30px' />Seguimiento</a>";
+				"<span class='nopendientes' id='sna"+getRowId(cell.rowIndex)+"'>"+nuevoavance(getRowId(cell.rowIndex),dicta)+"</span>"+"<img src=\"" + image("seguimiento.png") + "\" border=\"0\" alt=\"seguimiento\" title=\"Seguimiento de Proyecto\" width='30px' height='30px' />Seguimiento</a>";
                 cell.innerHTML += "<br><a onclick=document.location.href='../revision/revision.corregido.lista.php?iddicta="+ dicta +"&estudiente_id=" + getRowId(cell.rowIndex) + "' style=\"cursor:pointer\">" +
 				"<span class='pendientes' id='sp"+getRowId(cell.rowIndex)+"'>"+pendientes(getRowId(cell.rowIndex),dicta)+"</span>"+"<img src=\"" + image("editar.png") + "\" border=\"0\" alt=\"revisar\" title=\"Correcciones Pendientes\" />Correcci&oacute;n</a>";
                 cell.innerHTML += "<br><a onclick=document.location.href='../evaluacion/proyecto.evaluacion.php?iddicta="+ dicta +"&estudiente_id=" + getRowId(cell.rowIndex) + "' style=\"cursor:pointer\">" +
@@ -162,6 +162,26 @@ function pendientes(estid, dicta) {
                         spa.style.display = "none";
                     }else{
                       $('#sp'+estid+'').html(response);                       
+                    }
+		}
+	});
+};
+function nuevoavance(estid, dicta) {
+	$.ajax({ 
+		url: '../variable.nuevoavance.php',
+		type: 'POST',
+		dataType: "html",
+		data: { 
+			estudiante_id : estid,
+                        iddicta       : dicta
+		},
+		success: function (response) 
+		{ 
+                    if(response==0){
+                        var sna = document.getElementById('sna'+estid);
+                        sna.style.display = "none";
+                    }else{
+                      $('#sna'+estid+'').html(response);                       
                     }
 		}
 	});

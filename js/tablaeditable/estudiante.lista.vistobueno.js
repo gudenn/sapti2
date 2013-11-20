@@ -18,6 +18,7 @@ var editableGrid = new EditableGrid("listaestudiantes"+time, {
 	pageSize: 10
 });
 
+
 // helper function to display a message
 function displayMessage(text, style) { 
 	_$("message").innerHTML = "<p class='" + (style || "ok") + "'>" + text + "</p>"; 
@@ -67,13 +68,13 @@ EditableGrid.prototype.initializeGrid = function(dicta)
 		};
                 
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
-		cell.innerHTML = "<a onclick=document.location.href='revision.lista.php?id_estudiante=" + getRowId(cell.rowIndex) + "' style=\"cursor:pointer\">" +
+		cell.innerHTML = "<a onclick=document.location.href='../revision/revision.lista.php?iddicta="+ dicta +"&estudiente_id=" + getRowId(cell.rowIndex) + "' style=\"cursor:pointer\">" +
 				"<img src=\"" + image("seguimiento.png") + "\" border=\"0\" alt=\"seguimiento\" title=\"Seguimiento de Proyecto\" width='30px' height='30px' />Seguimiento</a>";
-                        cell.innerHTML += "<br>&nbsp;<a onclick=document.location.href='proyecto.vistobueno.php?id_estudiante="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("basicset/tick_48.png") + "\" border=\"0\" alt=\"delete\" title=\"Dar Visto Bueno\"/> Visto Bueno</a>";
-	
+            
                   }}));
 		
+    
+    
 		// render the grid (parameters will be ignored if we have attached to an existing HTML table)
 		renderGrid("tablecontent", "testgrid", "tableid");
                 		
@@ -93,7 +94,7 @@ EditableGrid.prototype.onloadXML = function(url, dicta)
 {
 	// register the function that will be called when the XML has been fully loaded
 	this.tableLoaded = function() { 
-		displayMessage("Numero de Estudiantes Inscritos " + this.getRowCount()); 
+		displayMessage("N&uacute;mero de Estudiantes Inscritos " + this.getRowCount()); 
 		this.initializeGrid(dicta);
 	};
 
