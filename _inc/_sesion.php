@@ -93,7 +93,10 @@ function getSessionEsTipo($grupo_codigo,$usuario_aux = false) {
     leerClase("Usuario");
     if (!$usuario_aux)
       $usuario_aux = getSessionUser();
-    $usuario   = new Usuario($usuario_aux->id);
+    $id = '';
+    if (is_object($usuario_aux))
+      $id = $usuario_aux->id;
+    $usuario   = new Usuario($id);
     return $usuario->perteneceGrupo($grupo_codigo);
 }
 

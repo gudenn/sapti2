@@ -608,6 +608,7 @@ class Notificacion extends Objectbase
    
     $sql = "select t.* from " . $this->getTableName('Tribunal') . " as t , " . $this->getTableName('Notificacion_tribunal') . " as nt , " . $this->getTableName('Docente') . " as d  where d.id=t.docente_id  and t.id=nt.tribunal_id and t.docente_id= d.id and nt.notificacion_id='$this->id' and  d.usuario_id='$usuario_id' and t.estado = '$activo' and  nt.estado = '$activo'  and d.estado = '$activo'";
     $resultado = mysql_query($sql);
+    $tribunal  = new Tribunal();
 
     // var_dump($resultado);
     if (!$resultado) 

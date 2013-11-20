@@ -37,7 +37,7 @@ class Estudiante extends Objectbase {
 
  /**
   * (Objeto simple) Todas las materias en la que esta inscrito este estudiante
-  * @var object|null 
+  * @var Inscrito|null 
   */
   var $inscrito_objs;
   

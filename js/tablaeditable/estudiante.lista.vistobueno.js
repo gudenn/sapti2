@@ -18,6 +18,7 @@ var editableGrid = new EditableGrid("listaestudiantes"+time, {
 	pageSize: 10
 });
 
+
 // helper function to display a message
 function displayMessage(text, style) { 
 	_$("message").innerHTML = "<p class='" + (style || "ok") + "'>" + text + "</p>"; 

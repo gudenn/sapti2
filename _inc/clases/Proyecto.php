@@ -1,13 +1,12 @@
 <?php
 
 /**
- * Esta clase es para guardar los datos tipo Estudiante
+ * Esta clase es para guardar los datos de los Proyectos
  *
  * @author Guyen Campero <guyencu@gmail.com>
  */
 class Proyecto extends Objectbase {
   /** constant to add in the begin of the key to find the date values   */
-
   const URL = "proyecto-final/";
   /** constant to add in the begin of the key to find the date values   */
   const ARCHIVO_PATH = "archivo";
@@ -45,8 +44,6 @@ class Proyecto extends Objectbase {
    */
   const EST2_TA = "TA";
   
-   
-
   /**
    * Estado Proyecto 
    * tribunales Visto Bueno (TV)
@@ -60,21 +57,22 @@ class Proyecto extends Objectbase {
   const EST4_DEF = "LD";
   /**
    * Estado Proyecto 
-   * Frormulario Perfil Pendiente
+   * Formulario Perfil Pendiente (PD)
    */
   const EST5_P = "PD";
+
+  /**
+   * Estado Proyecto 
+   * Formulario Perfil Confirmaddo (CO)
+   */
+  const EST6_C = "CO";
   
   /**
-   * Estado Proyecto  finalizado 
-   * 
+   * Estado Proyecto 
+   * Estado Proyecto  finalizado (PF)
    */
   const EST5_F = "PF";
   
-   /**
-   * Estado Proyecto 
-   * Frormulario Perfil Confirmaddo
-   */
-  const EST6_C = "CO";
 
   /**
    * Codigo iden de la modalidad
@@ -190,7 +188,7 @@ class Proyecto extends Objectbase {
 
   /**
    * (Objeto simple) Todos los proyecto_estudiante que tiene este proyecto
-   * @var object|null 
+   * @var Proyecto_estudiante|null 
    */
   var $proyecto_estudiante_objs;
 
@@ -226,16 +224,38 @@ class Proyecto extends Objectbase {
   
   /**
    * (Objeto simple) Todas las areas asignadas a este proyecto
-   * @var object|null 
+   * @var Proyecto_area|null 
    */
   var $proyecto_area_objs;
 
   /**
    * (Objeto simple) Todas las subareas asignadas a este proyecto
-   * @var object|null 
+   * @var Proyecto_sub_area|null 
    */
   var $proyecto_sub_area_objs;
 
+  /**
+   * (Objeto simple) Todas las cartas que tiene este proyecto
+   * @var Carta|null 
+   */
+  var $carta_objs;
+
+  /**
+   * Sobreescribimos la funcion de grabar, para despues crear las 
+   * cartas correspondientes cartas
+   * @param string $table puede recivir el valor de la tabla
+   * @param int $father_id_value el id del padre  por ejemplo al grabar los hijos de una compania aca se dara el id de la compania
+   * @param string $base  asociado a $father_id_value traera la clase del padre para guardar el dato
+   * @return boolean
+   * @throws Exception 
+   */
+  public function save($table = false, $father_id_value = false, $base = 'compania') {
+    parent::save($table, $father_id_value, $base);
+    leerClase('Carta');
+    $cartas = new Carta();
+    $cartas->crearCartasParaProyecto($this);
+  }
+  
   /**
    * 
    * @param string $codigo_sis el codigo_sis
@@ -998,36 +1018,10 @@ where   v.proyecto_id='$this->id' and v.visto_bueno_id='$iddocente' and v.visto_
 
 
   /**
-   * 
    * retorna el total de proyectos con defensa privada
    */
-  
-  
-  function  getNumeroProyectosDefensaPrivada()
-  {
-    
-  }
-  /**
-   * 
-   * @return boolean|\Carrera
-   * la carrera
-   */
-  /* ESTO ESTA DEMAS!!
-  function getCarrera1() {
+  function  getNumeroProyectosDefensaPrivada(){}
 
-    //@TODO revisar
-    leerClase('Carrera');
-
-    $activo = Objectbase::STATUS_AC;
-    $sql = "select c.* from " . $this->getTableName('Carrera') . " as c ,where c.id= '$this->carrera_id' and c.estado = '$activo' ";
-    $resultados = mysql_query($sql);
-    if (!$resultados)
-      return false;
-    $carreras = mysql_fetch_array($resultados);
-   $carrera = new Carrera($carreras);
-    return $carrera;
-  }
-  */
   function getCarrera() {
     //@TODO revisar
     //  leerClase('Proyecto_area');

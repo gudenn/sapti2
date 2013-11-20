@@ -52,7 +52,6 @@ if (isset($_GET['salirconsejo']) || isset($_POST['salirconsejo'])) {
   exit();
 }
 conectar_db();
-session_start();
 mysql_query('SET NAMES \'utf8\'');
 
 

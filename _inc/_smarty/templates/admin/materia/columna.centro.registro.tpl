@@ -8,7 +8,7 @@
               <select name="tipo" id="tipo"  data-validation-engine="validate[required]" >
                {html_options values=$tipo_values output=$tipo_output selected=$materia->tipo}
               </select>
-              <label for="accion"><small>Tipo (*) {getHelpTip('tipo')}</small></label>
+              <label for="tipo"><small>Tipo (*) {getHelpTip('tipo')}</small></label>
             </p>
               <p>
               <input type="text" name="sigla" id="sigla" value="{$materia->sigla}"  data-validation-engine="validate[required]">

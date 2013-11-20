@@ -56,6 +56,12 @@ try {
   $link = Administrador::URL."configuracion/ordenarsemestre.php";
   $menu->agregarItem('Ordenar Semestres','Lista de todas las variables que el sistema usa','basicset/lock.png',$link);
   $menus[] = $menu;
+  $menu = new Menu('Cartas Modelo');
+  $link = Administrador::URL."configuracion/modelo_carta.gestion.php?todos";
+  $menu->agregarItem('Gesti&oacute;n de Modelos de Carta','Gesti&oacute;n de los modelos de carta para el sistema SAPTI.','basicset/message-archived.png',$link);
+  $link = Administrador::URL."configuracion/modelo_carta.registro.php";
+  $menu->agregarItem('Registro Modelo de Carta','Regsitro de un nuevo modelos de carta para el sistema SAPTI.','basicset/message-already-read.png',$link);
+  $menus[] = $menu;
   $menu = new Menu('&Aacute;rea');
   $link = Administrador::URL."configuracion/area.gestion.php";
   $menu->agregarItem('Gesti&oacute;n de &Aacute;rea','Lista de todos las &Aacute;rea configuradas para el sistema','basicset/database.png',$link);
