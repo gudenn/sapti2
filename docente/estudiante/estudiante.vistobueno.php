@@ -32,6 +32,7 @@ try {
        header("Location: ../index.php");
   }
   $dicta=new Dicta($iddicta);
+  
    /**
    * Menu superior
    */
@@ -40,8 +41,11 @@ try {
   $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php?iddicta='.$iddicta,'name'=>$dicta->getNombreMateria());
   $menuList[]     = array('url'=>URL.Docente::URL.'estudiante/estudiante.lista.php?iddicta='.$iddicta,'name'=>'Estudiantes Inscritos');
   $smarty->assign("menuList", $menuList);
+ $docente     = getSessionDocente();
 
   $smarty->assign("iddicta", $iddicta);
+  $smarty->assign("docente", $docente);
+  
 
   //No hay ERROR
   $smarty->assign("ERROR",$ERROR);
@@ -50,5 +54,5 @@ catch(Exception $e)
 {
   $smarty->assign("ERROR", handleError($e));
 }
-  $smarty->display('docente/estudiante/full-width.estudiante.lista.tpl');
+  $smarty->display('docente/estudiante/estudiante.vistobueno.tpl');
 ?>

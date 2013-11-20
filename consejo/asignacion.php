@@ -93,7 +93,7 @@ try {
        echo "<script>alert('El Estudiante no Tiene Proyecto');</script>";
       
     }
-      
+  $defensa=  $proyecto->getDefensa();
    $usuariobuscado= new Usuario($estudiante->usuario_id);
    $smarty->assign('usuariobuscado',  $usuariobuscado);
    $smarty->assign('estudiantebuscado', $estudiante);
@@ -125,6 +125,10 @@ WHERE  u.id= d.usuario_id and   d.id= t.docente_id and   t.estado='AC' and u.est
   
   
   
+   $id = '';
+  if (isset($_GET['area_id']) && is_numeric($_GET['area_id']))
+    $id = $_GET['area_id'];
+  $area = new Area($id);
   
         
          if( isset($_POST['proyecto_id'])  && isset($_POST['tarea']) && $_POST['tarea'] =='Guardar')

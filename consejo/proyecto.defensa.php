@@ -33,7 +33,7 @@ try {
    * Menu superior
    */
    $menuList[]     = array('url'=>URL.Consejo::URL,'name'=>'Consejo');
-   $menuList[]     = array('url'=>URL . Consejo::URL.'listadefensa.php' ,'name'=>'Defensa');
+   $menuList[]     = array('url'=>URL . Consejo::URL.'proyecto.defensa.php' ,'name'=>'Defensa');
    $smarty->assign("menuList", $menuList);
  
 $ERROR = ''; 

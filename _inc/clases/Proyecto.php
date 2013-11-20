@@ -954,12 +954,37 @@ where   v.proyecto_id='$this->id' and v.visto_bueno_id='$iddocente' and v.visto_
       }
        return  $tribunales;
     }
-  /**
+    /**
+     * retorna la defensa del proyecto
+     */
+    
+    function  getDefensa()
+    {
+      
+     leerClase('Defensa');
+   
+    $activo = Objectbase::STATUS_AC;
+   $sql = "select d.* from " . $this->getTableName('Defensa') . " as d ,where d.defensa_id= '$this->id' and d.estado = '$activo' ";
+    $resultado = mysql_query($sql);
+    if (!$resultado)
+      return false;
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC))
+    {
+      $defensa = new Defensa($fila);
+    }
+    return $defensa;
+      
+    }
+
+
+    /**
    * 
    * @return 
    * retorna la cantidad de tribunales
    */
   
+    
+    
    function getTribunales()
    {
     
