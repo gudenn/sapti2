@@ -63,7 +63,7 @@ class Modelo_carta extends Objectbase
       //buscamos 
       $activo = Objectbase::STATUS_AC;
       $sql = "select * from " . $this->getTableName('Modelo_carta') . " where tipo_proyecto = '$tipo_proyecto' AND  estado_proyecto = '$estado_proyecto' AND estado = '$activo' ";
-      echo $sql;
+      //echo $sql;
       $result = mysql_query($sql);
       if ($result === false)
         throw new Exception("?" . $this->getTableName('Modelo_carta') . "&m=Cant Get Modelo <br />$sql<br /> " . $this->getTableName('Modelo_carta') . ' -> ' . mysql_error());
