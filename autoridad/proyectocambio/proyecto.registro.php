@@ -248,7 +248,7 @@ try {
     
     
     //Objetivos especificos
-    $contador = 0;
+    $contador=0;
     foreach ($_POST['objetivo_especifico'] as $post_especifico) {
       $contador ++;
       if ( trim($post_especifico) == '' )
