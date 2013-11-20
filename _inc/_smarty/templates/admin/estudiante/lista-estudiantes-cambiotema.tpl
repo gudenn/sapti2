@@ -1,14 +1,14 @@
 <table class="tbl_lista">
   <thead>
     <tr>
-      <th><a href='?order=codigo_sis'          class="tajax"  title='Ordenar por C&oacute;digo Sis'       >C&oacute;digo Sis   {$filtros->iconOrder('codigo_sis')}</a></th>
-      <th></th>
+      <th><a href='?order=codigo_sis'          class="tajax"  title='Ordenar por C&oacute;digo Sis'>C&oacute;digo Sis{$filtros->iconOrder('codigo_sis')}</a></th>
       <th><a href='?order=nombre'              class="tajax"  title='Ordenar por Nombre'           >Nombre       {$filtros->iconOrder('nombre')}</a></th>
       <th><a href='?order=apellido_paterno'    class="tajax"  title='Ordenar por Apellido Paterno' >Ap. Paterno  {$filtros->iconOrder('apellido_paterno')}</a></th>
       <th><a href='?order=apellido_materno'    class="tajax"  title='Ordenar por Apellido Materno' >Ap. Materno  {$filtros->iconOrder('apellido_materno')}</a></th>
       <th><a href='?order=login'               class="tajax"  title='Ordenar por Login'            >Login        {$filtros->iconOrder('login')}</a></th>
       <th><a href='?order=email'               class="tajax"  title='Ordenar por Email'            >Email        {$filtros->iconOrder('email')}</a></th>
-      <th>Opciones</th>
+      <th>Cambio Leve</th>
+      <th>Cambio Total</th>
     </tr>
   </thead>
   {section name=ic loop=$objs}

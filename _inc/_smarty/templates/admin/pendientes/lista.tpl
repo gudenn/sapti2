@@ -5,7 +5,7 @@
     <table class="tbl_lista" id="docentes"  mane="docentes">
        <thead>
       <tr>
-    <th><a>NUMERO</a></th>
+    <th><a>N&Uacute;MERO</a></th>
     <th><a>NOMBRE</a></th>
     <th><a>APELLIDOS</a></th>
     <th><a>T&Iacute;TULO</a></th>
