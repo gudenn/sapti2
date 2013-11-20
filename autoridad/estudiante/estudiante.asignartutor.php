@@ -17,7 +17,7 @@ try {
 
   /** HEADER */
   $smarty->assign('title','Gestionar Tutores');
-  $smarty->assign('description','Pagina para asignar tutores');
+  $smarty->assign('description','P&aacute;gina  para asignar tutores');
   $smarty->assign('keywords','Docentes');
   /**
    * Menu superior
