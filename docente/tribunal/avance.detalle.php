@@ -90,7 +90,7 @@ WHERE re.avance_id=av.id
 AND av.id='".$avance->id."'
 AND re.revisor_tipo='TR'
 AND re.revisor='".$tribunal->id."'
-AND re.estado_revision='".$rev1::E3_RESPONDIDO."'
+AND re.estado_revision='".  Revision::E3_RESPONDIDO."'
 ";
    $sqlrev = mysql_query($resulrev);
 while ($fila1rev = mysql_fetch_array($sqlrev, MYSQL_ASSOC)) {

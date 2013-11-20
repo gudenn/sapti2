@@ -91,10 +91,10 @@ try {
   $avance->asignarDirectorio();
   $avance->cambiarEstadoVisto();
   function getRevisortipo($tipo,$rev){
-      if($tipo==$rev::T1_PROYECTOFINAL){
-          $tipo1=$rev::T1_DOCENTE;
-      }elseif ($tipo==$rev::T2_PERFIL) {
-            $tipo1=$rev::T2_DOCENTEPERFIL;
+      if($tipo==Revision::T1_PROYECTOFINAL){
+          $tipo1=Revision::T1_DOCENTE;
+      }elseif ($tipo==Revision::T2_PERFIL) {
+            $tipo1=Revision::T2_DOCENTEPERFIL;
         }
         return $tipo1;
   }
@@ -104,7 +104,7 @@ WHERE re.avance_id=av.id
 AND av.id='".$avance->id."'
 AND re.revisor_tipo='".getRevisortipo($dicta->getTipoMateria(), $rev1)."'
 AND re.revisor='".$docente->id."'
-AND re.estado_revision='".$rev1::E3_RESPONDIDO."'
+AND re.estado_revision='".  Revision::E3_RESPONDIDO . "'
 ";
    $sqlrev = mysql_query($resulrev);
 while ($fila1rev = mysql_fetch_array($sqlrev, MYSQL_ASSOC)) {
