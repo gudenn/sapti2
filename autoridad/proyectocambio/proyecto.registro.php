@@ -94,8 +94,24 @@ try {
   $proyecto = $estudiante->getProyecto();
   if(isset($_GET['cambio_total'])){
   $proyecto=new Proyecto();
+  
+  //numero proyecto
+   $sqlr="select max( p.numero_asignado) as num
+         from proyecto p";
+ $resultado = mysql_query($sqlr);
+ $num= array();
+
+ while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+   { 
+        $num[]=$fila;;
+   }
+   
+  $numero=$num[0]['num']+1;
+  $smarty->assign('numero'  , $numero);
   }
   $proyecto->getAllObjects();
+  
+  
   
 
   $smarty->assign('usuario'   , $usuario);
@@ -295,6 +311,9 @@ try {
     $proyecto->validar();
     $proyecto->tipo_proyecto = TIPO;
     $proyecto->estado_proyecto= Proyecto::EST6_C;
+    if(isset($_GET['cambio_total'])){
+      $proyecto->numero_asignado=$numero;
+    }
     $proyecto->save();
     $proyecto->saveAllSonObjects(TRUE);
     $estudiante->marcarComoProyectoActual($proyecto->id);

@@ -123,16 +123,16 @@ function DesplegarTabla($a,$b)
         
         switch ($nom){
      case "NOMBRE":
-             $tam='20%';
+             $tam='15%';
              break;
      case "APELLIDO":
-             $tam='25%';
+             $tam='15%';
              break;
      case "PROYECTO":
-             $tam='40%';
+             $tam='30%';
              break;      
      case "MATERIA":
-             $tam='20%';
+             $tam='15%';
              break;
      case "INSCRITOS":
              $tam='20%';

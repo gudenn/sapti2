@@ -1,10 +1,23 @@
 <?php
-try {
+
  define ("MODULO", "ESTUDIANTE");
    require('../_start.php');
   if(!isEstudianteSession())
-    header("Location: ../login.php"); 
+    header("Location: ../login.php");
+  
+  $estudiante= getSessionEstudiante();
+  $estudiante->getAllObjects();
+  $proyecto   = $estudiante->getProyecto();
+  if($proyecto->estado_proyecto==Proyecto::EST6_C){
+  
+ echo " 
+                <script language='JavaScript'> 
+                alert('Lo siento usted no tiene acseso al registro Perfil'); 
+                </script>";
  
+  header("Location:../login.php");
+ }else{
+try {
   /** HEADER */
   $smarty->assign('title','SAPTI - Registro de Proyecto');
   $smarty->assign('description','Formulario de registro de Proyecto');
@@ -98,7 +111,9 @@ try {
   
   $proyecto->getAllObjects();
   
-
+  
+  
+    
   $smarty->assign('usuario'   , $usuario);
   $smarty->assign('estudiante', $estudiante);
   $smarty->assign('proyecto'  , $proyecto);
@@ -360,5 +375,5 @@ $smarty->assign('token',$token);
 
 $TEMPLATE_TOSHOW = 'estudiante/proyecto/registro.tpl';
 $smarty->display($TEMPLATE_TOSHOW);
-
+}
 ?>
