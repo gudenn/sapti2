@@ -89,10 +89,11 @@ try {
       $notificacion->getAllObjects();
       $tribunal     = $notificacion->getNotificacionTribunal(getSessionUser()->id);
       $proyecto     = new Proyecto($notificacion->proyecto_id);
+     // var_dump($tribunal);
+      echo $tribunal->id;
      
       //Solo para tribunales
-      if($tribunal){
-
+      if($tribunal->id!=0){
         $tribunal->visto   = Tribunal::VISTO;
         $tribunal->accion  = ( $_POST['accion']==Tribunal::ACCION_AC)?Tribunal::ACCION_AC:Tribunal::ACCION_RE;
         $tribunal->detalle = $_POST['detalle'];
@@ -115,14 +116,14 @@ try {
   
         
       }else{ // notificaiones para asignar tutor
-       
-        leerClase('Proyecto_tutor');
+         leerClase('Proyecto_tutor');
         $id = '';
         if (isset($notificacion->notificacion_tutor_objs[0]))
           $id = $notificacion->notificacion_tutor_objs[0]->proyecto_tutor_id;
+        
         // Aceptamos o rechasamos la tutoria
         $proyectotutor = new Proyecto_tutor($id);
-        $proyectotutor->estado_tutoria = ( $_POST['accion'] == Tribunal::ACCION_AC )?Proyecto_tutor::ACEPTADO:Proyecto_tutor::RECHADO;
+         $proyectotutor->estado_tutoria = ( $_POST['accion'] == Tribunal::ACCION_AC )?Proyecto_tutor::ACEPTADO:Proyecto_tutor::RECHADO;
         $proyectotutor->fecha_acepta   = date("j/n/Y");
         $proyectotutor->save();
 
@@ -143,11 +144,11 @@ try {
 
       }
     }
-    
+  
           $_SESSION['accion']=$_POST['accion'];
           $_SESSION['estado']=1;
           header("Location:  ../../docente/notificacion");
-  
+
   }
   $token = sha1(URL . time());
   $_SESSION['register'] = $token;
