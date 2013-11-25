@@ -64,17 +64,17 @@ try {
    * Menu central
    */
    //reporte de Vigencia de proyecto
+  
     $vigencia=$proyecto->getVigencia();
     $fecha=$vigencia[0]->fecha_fin;
     $fechafin=  date("d-m-Y", strtotime("$fecha"));
     $date1 =  date('d-m-Y')  ;
     $date2 = $fechafin;
-
     $diff = abs(strtotime($date2) - strtotime($date1));
     $years = floor($diff / (365*60*60*24));
     $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
     $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
-
+    
    
   leerClase('Menu');
   $menu = new Menu('');
@@ -87,6 +87,7 @@ try {
   $smarty->assign("usuario", $usuario);
   
   $smarty->assign("proyecto", $proyecto);
+  $smarty->assign("vigencia", $vigencia);
   $smarty->assign("anio", $years);
   $smarty->assign("mes", $months);
   $smarty->assign("dia", $days);

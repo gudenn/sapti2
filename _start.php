@@ -5,7 +5,7 @@
   require(DIR_LIB.'/smarty/Smarty.class.php');
   Smarty::muteExpectedErrors();
   $nombre = '';
-  if(getSessionUser()){
+  if(isUserSession()){
     leerClase('Usuario');
     $usuario =  getSessionUser();
     $nombre = $usuario->getNombreCompleto();

@@ -49,10 +49,7 @@ class Carta extends Objectbase
     // para el tipo de proyecto (PE,PR) y 
     // para el estado del proyecto
     leerClase('Modelo_carta');
-    var_dump($proyecto);
     $modelos = Modelo_carta::buscarModelos($proyecto->tipo_proyecto,$proyecto->estado_proyecto);
-    echo "Modelos<br>"; 
-    var_dump($modelos);
     //vereficamos que para cada modelo exista o se cree una carta
     foreach ($modelos as $modelo) {
       $this->crearCartaModelo($proyecto,$modelo);

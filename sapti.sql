@@ -98,7 +98,7 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`proyecto` (
   `carrera_id` INT NULL ,
   `institucion_id` INT NULL ,
   `nombre` VARCHAR(1500) NULL DEFAULT 'Sin Titulo' ,
-  `numero_asignado` VARCHAR(45) NULL ,
+  `numero_asignado` INT NULL  ,
   `objetivo_general` TEXT NULL ,
   `descripcion` TEXT NULL ,
   `director_carrera` VARCHAR(300) NULL ,

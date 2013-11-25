@@ -24,6 +24,7 @@
                   <input type="text" name="nombre" value="{$usuario->nombre}"  readonly="readonly" >
                 </td>
                 <td>
+                  {$numero}
                   {$proyecto->numero_asignado}
                 </td>
               </tr>
