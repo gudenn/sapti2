@@ -1,8 +1,12 @@
 <?php
 define ("MODULO", "DOCENTE");
   require('../_start.php');
+  leerClase('Evaluacion');
  
 $ideve1=$_GET['idev'];
+  $evaset = new Evaluacion($ideve1);
+  $evaset->setPromedio();
+
   $resul = "
       SELECT se.codigo as semestre, CONCAT(us.apellido_paterno,' ',us.apellido_materno,' ',us.nombre) as docente, ma.nombre as materia, ev.promedio as promedio
 FROM inscrito it, evaluacion ev, semestre se, materia ma, docente dc, usuario us, dicta di

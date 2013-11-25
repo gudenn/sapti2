@@ -47,19 +47,6 @@ try {
   $menuList[]     = array('url'=>URL.Docente::URL.'evaluacion/estudiante.evaluacion-editar.php?iddicta='.$iddicta,'name'=>'Evaluaci&oacute;n de Estudiantes');
   $smarty->assign("menuList", $menuList);
   
-  function promedio($promedio){
-    $est='';
-    if($promedio >='51'){
-        $est='APRO';
-    }else{
-        if($promedio =='0'){
-        $est='ABA';    
-        }  else {
-            $est='REPRO';
-        }
-    }
-    return $est;
-        };
   function array_envia($url_array) 
            {
                $tmp = serialize($url_array);
@@ -85,14 +72,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
  }
      foreach ($idevaluacion as $idevaluacion_array) {
      $evaluacion = new Evaluacion($idevaluacion_array['id']);
-     $evaluacion->objBuidFromPost();
-     $eva1=$evaluacion->evaluacion_1;
-     $eva2=$evaluacion->evaluacion_2;
-     $eva3=$evaluacion->evaluacion_3;
-     $promedio=  round((($eva1+$eva2+$eva3)/3));
-     $evaluacion->promedio=$promedio;
-     $evaluacion->rfinal=  promedio($promedio);
-     $evaluacion->save();
+     $evaluacion->setPromedio();
      $nota= new Nota();
      $nota->proyecto_id     =  $evaluacion->getProyecto();
      $nota->nota_proyecto   =  0.3*($evaluacion->promedio);

@@ -14,7 +14,29 @@
             return $tmp; 
         };
         $consulta=  array_recibe($consulta); 
-
+if($_GET['eva']==1){
+     $resul = "
+      SELECT ev.id as id
+FROM dicta di, estudiante es, usuario us, inscrito it, proyecto pr, proyecto_estudiante pe, evaluacion ev
+WHERE di.id=it.dicta_id
+AND it.estudiante_id=es.id
+AND es.usuario_id=us.id
+AND pe.estudiante_id=es.id
+AND pe.proyecto_id=pr.id
+AND it.evaluacion_id=ev.id
+AND di.id='".$iddicta."' 
+          ";
+   $sql1 = mysql_query($resul);
+   if(mysql_num_rows($sql1)>0){
+while ($fila1 = mysql_fetch_array($sql1, MYSQL_ASSOC)) {
+   $idevaluacion[]=$fila1;
+ }
+     foreach ($idevaluacion as $idevaluacion_array) {
+     $evaluacion = new Evaluacion($idevaluacion_array['id']);
+     $evaluacion->setPromedio();     
+   }
+ };
+ };
 	$resultado =mysql_query($consulta); 
 	
 		date_default_timezone_set('America/La_Paz');

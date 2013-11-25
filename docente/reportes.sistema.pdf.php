@@ -20,10 +20,36 @@ $b=1;
 
     return $tmp; 
   };
- $sql=  array_recibe($sql); 
+ $sql=  array_recibe($sql);
+ if($_GET['eva']==1){
+     $resul = "
+      SELECT ev.id as id
+FROM dicta di, estudiante es, usuario us, inscrito it, proyecto pr, proyecto_estudiante pe, evaluacion ev
+WHERE di.id=it.dicta_id
+AND it.estudiante_id=es.id
+AND es.usuario_id=us.id
+AND pe.estudiante_id=es.id
+AND pe.proyecto_id=pr.id
+AND it.evaluacion_id=ev.id
+AND di.id='".$iddicta."' 
+          ";
+   $sql1 = mysql_query($resul);
+   if(mysql_num_rows($sql1)>0){
+while ($fila1 = mysql_fetch_array($sql1, MYSQL_ASSOC)) {
+   $idevaluacion[]=$fila1;
+ }
+     foreach ($idevaluacion as $idevaluacion_array) {
+     $evaluacion = new Evaluacion($idevaluacion_array['id']);
+     $evaluacion->setPromedio();     
+   }
+ };
+ };
+   
 function DesplegarTabla($a,$b)
      {
+    if(isset($a)){
         $query =  mysql_query($a);
+        
         if(mysql_num_rows($query)>0){
         $html= '<table border="0.5" cellspacing="0" cellpadding="5" ><thead><tr>';
         $html.=
@@ -53,6 +79,9 @@ function DesplegarTabla($a,$b)
         $html.=
                 '</table>';
         return $html;
+        }
+        }  else {
+            return "No tiene datos para mostrar.";
         }
     }
     //configurar tamanio columnas para las tablas

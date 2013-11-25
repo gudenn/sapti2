@@ -48,6 +48,28 @@ AND it.evaluacion_id='$this->id'";
     }
     return $idpro;
   }
+  function setPromedio(){
+     $eva1=$this->evaluacion_1;
+     $eva2=$this->evaluacion_2;
+     $eva3=$this->evaluacion_3;
+     $promedio=  round((($eva1+$eva2+$eva3)/3));
+     $this->promedio=$promedio;
+     $this->rfinal=  promedio($promedio);
+     $this->save();
+  }
 }
+  function promedio($promedio){
+    $est='';
+    if($promedio >='51'){
+        $est='APRO';
+    }else{
+        if($promedio =='0'){
+        $est='ABA';    
+        }  else {
+            $est='REPRO';
+        }
+    }
+    return $est;
+        };
 
 ?>
