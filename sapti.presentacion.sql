@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 3.1.3.1
+-- version 4.0.4
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 06-11-2013 a las 10:15:58
--- Versión del servidor: 5.1.33
--- Versión de PHP: 5.2.9
+-- Tiempo de generación: 29-11-2013 a las 10:54:16
+-- Versión del servidor: 5.6.12-log
+-- Versión de PHP: 5.4.12
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -20,6 +21,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 
 -- --------------------------------------------------------
+
 --
 -- Estructura de tabla para la tabla `administrador`
 --
@@ -29,10 +31,10 @@ CREATE TABLE IF NOT EXISTS `administrador` (
   `usuario_id` int(11) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- Volcar la base de datos para la tabla `administrador`
+-- Volcado de datos para la tabla `administrador`
 --
 
 INSERT INTO `administrador` (`id`, `usuario_id`, `estado`) VALUES
@@ -50,12 +52,7 @@ CREATE TABLE IF NOT EXISTS `apoyo` (
   `docente_id` int(11) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Volcar la base de datos para la tabla `apoyo`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -69,10 +66,10 @@ CREATE TABLE IF NOT EXISTS `area` (
   `descripcion` varchar(45) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- Volcar la base de datos para la tabla `area`
+-- Volcado de datos para la tabla `area`
 --
 
 INSERT INTO `area` (`id`, `nombre`, `descripcion`, `estado`) VALUES
@@ -92,12 +89,7 @@ CREATE TABLE IF NOT EXISTS `automatico` (
   `numero_aceptados` int(11) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Volcar la base de datos para la tabla `automatico`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -115,12 +107,7 @@ CREATE TABLE IF NOT EXISTS `avance` (
   `estado_avance` varchar(2) DEFAULT NULL COMMENT 'estado 1 creado (CR), estado 2 visto (VI), estado 3 aprobado (AP)',
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Volcar la base de datos para la tabla `avance`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -135,10 +122,10 @@ CREATE TABLE IF NOT EXISTS `cambio` (
   `fecha_cambio` date DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
--- Volcar la base de datos para la tabla `cambio`
+-- Volcado de datos para la tabla `cambio`
 --
 
 INSERT INTO `cambio` (`id`, `proyecto_id`, `tipo`, `fecha_cambio`, `estado`) VALUES
@@ -157,14 +144,30 @@ CREATE TABLE IF NOT EXISTS `carrera` (
   `nombre` varchar(200) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- Volcar la base de datos para la tabla `carrera`
+-- Volcado de datos para la tabla `carrera`
 --
 
 INSERT INTO `carrera` (`id`, `nombre`, `estado`) VALUES
 (1, 'Ingenieria de Sistemas', 'AC');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `carta`
+--
+
+CREATE TABLE IF NOT EXISTS `carta` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `proyecto_id` int(11) DEFAULT NULL,
+  `modelo_carta_id` int(11) DEFAULT NULL,
+  `estado_impresion` varchar(2) DEFAULT NULL COMMENT 'Pendiente (PE), Impreso (IP)',
+  `fecha_impresion` date DEFAULT NULL,
+  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -177,10 +180,10 @@ CREATE TABLE IF NOT EXISTS `codigo_grupo` (
   `nombre` varchar(200) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- Volcar la base de datos para la tabla `codigo_grupo`
+-- Volcado de datos para la tabla `codigo_grupo`
 --
 
 INSERT INTO `codigo_grupo` (`id`, `nombre`, `estado`) VALUES
@@ -199,10 +202,10 @@ CREATE TABLE IF NOT EXISTS `configuracion_semestral` (
   `valor` varchar(300) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
--- Volcar la base de datos para la tabla `configuracion_semestral`
+-- Volcado de datos para la tabla `configuracion_semestral`
 --
 
 INSERT INTO `configuracion_semestral` (`id`, `semestre_id`, `nombre`, `valor`, `estado`) VALUES
@@ -225,12 +228,7 @@ CREATE TABLE IF NOT EXISTS `consejo` (
   `activo` varchar(10) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Volcar la base de datos para la tabla `consejo`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -243,12 +241,7 @@ CREATE TABLE IF NOT EXISTS `consejo_estudiante` (
   `codigo` varchar(100) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Volcar la base de datos para la tabla `consejo_estudiante`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -264,12 +257,7 @@ CREATE TABLE IF NOT EXISTS `cronograma` (
   `fecha_evento` date DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Volcar la base de datos para la tabla `cronograma`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -290,12 +278,7 @@ CREATE TABLE IF NOT EXISTS `defensa` (
   `semestre` varchar(45) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Volcar la base de datos para la tabla `defensa`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -310,12 +293,7 @@ CREATE TABLE IF NOT EXISTS `departamento` (
   `descripcion` varchar(45) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Volcar la base de datos para la tabla `departamento`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -330,12 +308,7 @@ CREATE TABLE IF NOT EXISTS `dia` (
   `orden` smallint(6) DEFAULT NULL COMMENT 'el orden de los dias',
   `estado` varchar(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Volcar la base de datos para la tabla `dia`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -351,10 +324,10 @@ CREATE TABLE IF NOT EXISTS `dicta` (
   `codigo_grupo_id` int(11) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- Volcar la base de datos para la tabla `dicta`
+-- Volcado de datos para la tabla `dicta`
 --
 
 INSERT INTO `dicta` (`id`, `docente_id`, `materia_id`, `semestre_id`, `codigo_grupo_id`, `estado`) VALUES
@@ -375,10 +348,10 @@ CREATE TABLE IF NOT EXISTS `docente` (
   `configuracion_horario` tinyint(1) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=74 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=74 ;
 
 --
--- Volcar la base de datos para la tabla `docente`
+-- Volcado de datos para la tabla `docente`
 --
 
 INSERT INTO `docente` (`id`, `usuario_id`, `codigo_sis`, `numero_horas`, `configuracion_area`, `configuracion_horario`, `estado`) VALUES
@@ -470,10 +443,10 @@ CREATE TABLE IF NOT EXISTS `estudiante` (
   `numero_cambio_total` tinyint(4) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
 
 --
--- Volcar la base de datos para la tabla `estudiante`
+-- Volcado de datos para la tabla `estudiante`
 --
 
 INSERT INTO `estudiante` (`id`, `usuario_id`, `codigo_sis`, `numero_cambio_leve`, `numero_cambio_total`, `estado`) VALUES
@@ -512,10 +485,10 @@ CREATE TABLE IF NOT EXISTS `evaluacion` (
   `rfinal` varchar(45) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
 
 --
--- Volcar la base de datos para la tabla `evaluacion`
+-- Volcado de datos para la tabla `evaluacion`
 --
 
 INSERT INTO `evaluacion` (`id`, `evaluacion_1`, `evaluacion_2`, `evaluacion_3`, `promedio`, `rfinal`, `estado`) VALUES
@@ -553,12 +526,7 @@ CREATE TABLE IF NOT EXISTS `evento` (
   `fecha_evento` date DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Volcar la base de datos para la tabla `evento`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -572,10 +540,10 @@ CREATE TABLE IF NOT EXISTS `grupo` (
   `descripcion` varchar(300) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
--- Volcar la base de datos para la tabla `grupo`
+-- Volcado de datos para la tabla `grupo`
 --
 
 INSERT INTO `grupo` (`id`, `codigo`, `descripcion`, `estado`) VALUES
@@ -604,10 +572,10 @@ CREATE TABLE IF NOT EXISTS `helpdesk` (
   `estado_helpdesk` varchar(2) DEFAULT NULL COMMENT 'Recien creado RC , Editado ED, Aprobado AP',
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
 
 --
--- Volcar la base de datos para la tabla `helpdesk`
+-- Volcado de datos para la tabla `helpdesk`
 --
 
 INSERT INTO `helpdesk` (`id`, `modulo_id`, `codigo`, `directorio`, `titulo`, `descripcion`, `keywords`, `estado_helpdesk`, `estado`) VALUES
@@ -633,7 +601,9 @@ INSERT INTO `helpdesk` (`id`, `modulo_id`, `codigo`, `directorio`, `titulo`, `de
 (20, 10, 'be338c4c764c2cd99a86c6c67d1be688ffcf00b4', '/sapti/estudiante/index.php', '/sapti/estudiante/index.php', '/sapti/estudiante/index.php', 'sapti,estudiante,index,ayuda', 'RC', 'AC'),
 (21, 9, 'ed3009188a30541ba48728e15783a3295af679e6', '/sapti/estudiante/login.php', '/sapti/estudiante/login.php', '/sapti/estudiante/login.php', 'sapti,estudiante,login,ayuda', 'RC', 'AC'),
 (22, 17, 'fccce8e01d31e9e23121828c23294c2d3077ce97', '/sapti/estudiante/notificacion/index.php', '/sapti/estudiante/notificacion/index.php', '/sapti/estudiante/notificacion/index.php', 'sapti,estudiante,notificacion,index,ayuda', 'RC', 'AC'),
-(23, 17, '4bc7f449d19377fcaefc81f2bdba07ad06a301af', '/sapti/autoridad/notificacion/index.php', '/sapti/autoridad/notificacion/index.php', '/sapti/autoridad/notificacion/index.php', 'sapti,autoridad,notificacion,index,ayuda', 'RC', 'AC');
+(23, 17, '4bc7f449d19377fcaefc81f2bdba07ad06a301af', '/sapti/autoridad/notificacion/index.php', '/sapti/autoridad/notificacion/index.php', '/sapti/autoridad/notificacion/index.php', 'sapti,autoridad,notificacion,index,ayuda', 'RC', 'AC'),
+(24, 18, 'a7a022b301dc837370d564c2b7a33784b5acfa25', '/sapti/autoridad/configuracion/modelo_carta.gestion.php', '/sapti/autoridad/configuracion/modelo_carta.gestion.php', '/sapti/autoridad/configuracion/modelo_carta.gestion.php', 'sapti,autoridad,configuracion,modelo_carta,gestion,ayuda', 'RC', 'AC'),
+(25, 18, '57dc89f01d1a8fb70a70bebe649c107427c6bd64', '/sapti/autoridad/configuracion/modelo_carta.registro.php', '/sapti/autoridad/configuracion/modelo_carta.registro.php', '/sapti/autoridad/configuracion/modelo_carta.registro.php', 'sapti,autoridad,configuracion,modelo_carta,registro,ayuda', 'RC', 'AC');
 
 -- --------------------------------------------------------
 
@@ -648,12 +618,7 @@ CREATE TABLE IF NOT EXISTS `hora` (
   `hora_fin` varchar(45) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Volcar la base de datos para la tabla `hora`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -667,12 +632,7 @@ CREATE TABLE IF NOT EXISTS `horario_docente` (
   `hora_id` int(11) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Volcar la base de datos para la tabla `horario_docente`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -689,10 +649,10 @@ CREATE TABLE IF NOT EXISTS `inscrito` (
   `estado_inscrito` varchar(2) DEFAULT NULL COMMENT 'cerrado si paso(CR), activo si es que es la activa (AC)',
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
 
 --
--- Volcar la base de datos para la tabla `inscrito`
+-- Volcado de datos para la tabla `inscrito`
 --
 
 INSERT INTO `inscrito` (`id`, `evaluacion_id`, `dicta_id`, `estudiante_id`, `semestre_id`, `estado_inscrito`, `estado`) VALUES
@@ -728,10 +688,10 @@ CREATE TABLE IF NOT EXISTS `institucion` (
   `descripcion` varchar(45) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- Volcar la base de datos para la tabla `institucion`
+-- Volcado de datos para la tabla `institucion`
 --
 
 INSERT INTO `institucion` (`id`, `nombre`, `descripcion`, `estado`) VALUES
@@ -746,15 +706,10 @@ INSERT INTO `institucion` (`id`, `nombre`, `descripcion`, `estado`) VALUES
 CREATE TABLE IF NOT EXISTS `lugar` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) DEFAULT NULL,
-  `descripcion` varchar(100) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
+  `descripcion` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Volcar la base de datos para la tabla `lugar`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -769,10 +724,10 @@ CREATE TABLE IF NOT EXISTS `materia` (
   `sigla` varchar(20) DEFAULT NULL,
   `tipo` varchar(4) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- Volcar la base de datos para la tabla `materia`
+-- Volcado de datos para la tabla `materia`
 --
 
 INSERT INTO `materia` (`id`, `nombre`, `estado`, `sigla`, `tipo`) VALUES
@@ -791,16 +746,41 @@ CREATE TABLE IF NOT EXISTS `modalidad` (
   `datos_adicionales` tinyint(1) DEFAULT NULL COMMENT 'si es que un proyecto en esta modalidad requiere institucion y responsable',
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
--- Volcar la base de datos para la tabla `modalidad`
+-- Volcado de datos para la tabla `modalidad`
 --
 
 INSERT INTO `modalidad` (`id`, `nombre`, `descripcion`, `datos_adicionales`, `estado`) VALUES
 (1, 'Proyecto de Grado', 'modalidad en proyecto de grado', 0, 'AC'),
 (2, 'Adcripcion', 'proyectos para la Universidad', 1, 'AC'),
 (3, 'Trabajo Dirijido', 'proyectos para instituciones', 0, 'AC');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `modelo_carta`
+--
+
+CREATE TABLE IF NOT EXISTS `modelo_carta` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `codigo` varchar(100) DEFAULT NULL,
+  `titulo` varchar(300) DEFAULT NULL,
+  `descripcion` varchar(500) DEFAULT NULL,
+  `tipo_proyecto` varchar(2) DEFAULT NULL COMMENT 'TIPO_PERFIL =  PE, TIPO_PROYECTO =  PR',
+  `estado_proyecto` varchar(2) DEFAULT NULL COMMENT 'Iniciado (IN), Form Perfil Pendiente (PD), Form Perfil Confirmaddo (CO), Visto Bueno de Docente Tutores y Revisores (VB), Estado de proyecto con tribunal (TA), Tribunales Visto Bueno (TV), Con defensa Asignada(LD), Estado Proyecto  finalizado (PF)',
+  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Volcado de datos para la tabla `modelo_carta`
+--
+
+INSERT INTO `modelo_carta` (`id`, `codigo`, `titulo`, `descripcion`, `tipo_proyecto`, `estado_proyecto`, `estado`) VALUES
+(1, 'f0c7ab609df8a213956b8a78d5c6e354413876a1', 'Aprobación Proyecto de Grado para nombramiento de tribunales', 'Aprobación Proyecto de Grado para nombramiento de tribunales', 'PR', 'VB', 'AC'),
+(2, '10affa5539072c7d8cab3a580c946ecec0ab673a', 'Aprobación Proyecto de Grado', 'Aprobación Proyecto de Grado', 'PR', 'PF', 'AC');
 
 -- --------------------------------------------------------
 
@@ -814,10 +794,10 @@ CREATE TABLE IF NOT EXISTS `modulo` (
   `descripcion` varchar(300) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
 
 --
--- Volcar la base de datos para la tabla `modulo`
+-- Volcado de datos para la tabla `modulo`
 --
 
 INSERT INTO `modulo` (`id`, `codigo`, `descripcion`, `estado`) VALUES
@@ -837,7 +817,8 @@ INSERT INTO `modulo` (`id`, `codigo`, `descripcion`, `estado`) VALUES
 (14, 'REPORTE', 'Modulo: REPORTE', 'AC'),
 (15, 'DOCENTE', 'Modulo: DOCENTE', 'AC'),
 (16, 'CONSEJO', 'Modulo: CONSEJO', 'AC'),
-(17, 'NOTIFICACION', 'Modulo: NOTIFICACION', 'AC');
+(17, 'NOTIFICACION', 'Modulo: NOTIFICACION', 'AC'),
+(18, 'ADMIN-CARTAS', 'Modulo: ADMIN-CARTAS', 'AC');
 
 -- --------------------------------------------------------
 
@@ -853,12 +834,7 @@ CREATE TABLE IF NOT EXISTS `nota` (
   `nota_final` tinyint(1) DEFAULT NULL COMMENT 'nota final del proyecto',
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Volcar la base de datos para la tabla `nota`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -876,12 +852,7 @@ CREATE TABLE IF NOT EXISTS `notificacion` (
   `prioridad` tinyint(4) DEFAULT NULL COMMENT 'prioridad: 1 baja, 5 media, 10 maxima',
   `estado` varchar(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Volcar la base de datos para la tabla `notificacion`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -898,12 +869,7 @@ CREATE TABLE IF NOT EXISTS `notificacion_consejo` (
   `estado_notificacion` varchar(2) DEFAULT NULL COMMENT 'Sin ver (SV), Visto (VI) , archivado (AR)',
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Volcar la base de datos para la tabla `notificacion_consejo`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -919,12 +885,7 @@ CREATE TABLE IF NOT EXISTS `notificacion_dicta` (
   `estado_notificacion` varchar(2) DEFAULT NULL COMMENT 'Sin ver (SV), Visto (VI) , archivado (AR)',
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Volcar la base de datos para la tabla `notificacion_dicta`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -940,12 +901,7 @@ CREATE TABLE IF NOT EXISTS `notificacion_estudiante` (
   `estado_notificacion` varchar(2) DEFAULT NULL COMMENT 'Sin ver (SV), Visto (VI) , archivado (AR)',
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Volcar la base de datos para la tabla `notificacion_estudiante`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -962,12 +918,7 @@ CREATE TABLE IF NOT EXISTS `notificacion_revisor` (
   `estado_notificacion` varchar(2) DEFAULT NULL COMMENT 'Sin ver (SV), Visto (VI) , archivado (AR)',
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Volcar la base de datos para la tabla `notificacion_revisor`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -984,12 +935,7 @@ CREATE TABLE IF NOT EXISTS `notificacion_tribunal` (
   `estado_notificacion` varchar(2) DEFAULT NULL COMMENT 'Sin ver (SV), Visto (VI) , archivado (AR)',
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Volcar la base de datos para la tabla `notificacion_tribunal`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1006,12 +952,7 @@ CREATE TABLE IF NOT EXISTS `notificacion_tutor` (
   `estado_notificacion` varchar(2) DEFAULT NULL COMMENT 'Sin ver (SV), Visto (VI) , archivado (AR)',
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Volcar la base de datos para la tabla `notificacion_tutor`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1025,10 +966,10 @@ CREATE TABLE IF NOT EXISTS `objetivo_especifico` (
   `descripcion` text,
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
--- Volcar la base de datos para la tabla `objetivo_especifico`
+-- Volcado de datos para la tabla `objetivo_especifico`
 --
 
 INSERT INTO `objetivo_especifico` (`id`, `proyecto_id`, `descripcion`, `estado`) VALUES
@@ -1057,12 +998,7 @@ CREATE TABLE IF NOT EXISTS `observacion` (
   `estado_observacion` varchar(2) DEFAULT NULL COMMENT 'estado 1 creado (CR), etado 2 corregido (CO), estado 4  aprobado (AP)',
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Volcar la base de datos para la tabla `observacion`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1081,10 +1017,10 @@ CREATE TABLE IF NOT EXISTS `permiso` (
   `eliminar` tinyint(1) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=120 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=121 ;
 
 --
--- Volcar la base de datos para la tabla `permiso`
+-- Volcado de datos para la tabla `permiso`
 --
 
 INSERT INTO `permiso` (`id`, `grupo_id`, `modulo_id`, `helpdesk_id`, `ver`, `crear`, `editar`, `eliminar`, `estado`) VALUES
@@ -1206,7 +1142,8 @@ INSERT INTO `permiso` (`id`, `grupo_id`, `modulo_id`, `helpdesk_id`, `ver`, `cre
 (116, 5, 17, 0, 1, 0, 0, 0, 'AC'),
 (117, 4, 17, 0, 1, 0, 0, 0, 'AC'),
 (118, 3, 17, 0, 1, 0, 0, 0, 'AC'),
-(119, 2, 17, 0, 1, 0, 0, 0, 'AC');
+(119, 2, 17, 0, 1, 0, 0, 0, 'AC'),
+(120, 1, 18, 0, 1, 1, 1, 1, 'AC');
 
 -- --------------------------------------------------------
 
@@ -1220,10 +1157,10 @@ CREATE TABLE IF NOT EXISTS `pertenece` (
   `grupo_id` int(11) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=95 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=95 ;
 
 --
--- Volcar la base de datos para la tabla `pertenece`
+-- Volcado de datos para la tabla `pertenece`
 --
 
 INSERT INTO `pertenece` (`id`, `usuario_id`, `grupo_id`, `estado`) VALUES
@@ -1351,10 +1288,10 @@ CREATE TABLE IF NOT EXISTS `proyecto` (
   `estado_proyecto` varchar(2) DEFAULT NULL COMMENT 'Iniciado (IN), Visto Bueno de Docente, Tutores y Revisores (VB) , TRibunales asignados (TA), tribunales Visto Bueno (TV), con defensa (LD)',
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=39 ;
 
 --
--- Volcar la base de datos para la tabla `proyecto`
+-- Volcado de datos para la tabla `proyecto`
 --
 
 INSERT INTO `proyecto` (`id`, `modalidad_id`, `carrera_id`, `institucion_id`, `nombre`, `numero_asignado`, `objetivo_general`, `descripcion`, `director_carrera`, `docente_materia`, `registro_tutor`, `fecha_registro`, `registrado_por`, `responsable`, `trabajo_conjunto`, `asignacion_tribunal`, `asignacion_defensa`, `es_actual`, `tipo_proyecto`, `estado_proyecto`, `estado`) VALUES
@@ -1409,10 +1346,10 @@ CREATE TABLE IF NOT EXISTS `proyecto_area` (
   `proyecto_id` int(11) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- Volcar la base de datos para la tabla `proyecto_area`
+-- Volcado de datos para la tabla `proyecto_area`
 --
 
 INSERT INTO `proyecto_area` (`id`, `area_id`, `proyecto_id`, `estado`) VALUES
@@ -1431,10 +1368,10 @@ CREATE TABLE IF NOT EXISTS `proyecto_dicta` (
   `dicta_id` int(11) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
 
 --
--- Volcar la base de datos para la tabla `proyecto_dicta`
+-- Volcado de datos para la tabla `proyecto_dicta`
 --
 
 INSERT INTO `proyecto_dicta` (`id`, `proyecto_id`, `dicta_id`, `estado`) VALUES
@@ -1471,10 +1408,10 @@ CREATE TABLE IF NOT EXISTS `proyecto_estudiante` (
   `fecha_asignacion` date DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=39 ;
 
 --
--- Volcar la base de datos para la tabla `proyecto_estudiante`
+-- Volcado de datos para la tabla `proyecto_estudiante`
 --
 
 INSERT INTO `proyecto_estudiante` (`id`, `proyecto_id`, `estudiante_id`, `fecha_asignacion`, `estado`) VALUES
@@ -1529,12 +1466,7 @@ CREATE TABLE IF NOT EXISTS `proyecto_revisor` (
   `revisor_id` int(11) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Volcar la base de datos para la tabla `proyecto_revisor`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1548,10 +1480,10 @@ CREATE TABLE IF NOT EXISTS `proyecto_sub_area` (
   `proyecto_id` int(11) NOT NULL,
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
--- Volcar la base de datos para la tabla `proyecto_sub_area`
+-- Volcado de datos para la tabla `proyecto_sub_area`
 --
 
 INSERT INTO `proyecto_sub_area` (`id`, `sub_area_id`, `proyecto_id`, `estado`) VALUES
@@ -1578,12 +1510,7 @@ CREATE TABLE IF NOT EXISTS `proyecto_tutor` (
   `estado_tutoria` varchar(2) DEFAULT NULL COMMENT 'Pendiente (PE), Aceptado (AC) , Rechado (RE), finallizado (FI)',
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Volcar la base de datos para la tabla `proyecto_tutor`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1603,12 +1530,7 @@ CREATE TABLE IF NOT EXISTS `revision` (
   `estado_revision` varchar(2) DEFAULT NULL COMMENT 'estado 1 creado (CR), estado 2 visto (VI), estado 3 respondido  (RE), estado 4 aprobado (AP)',
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Volcar la base de datos para la tabla `revision`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1621,12 +1543,7 @@ CREATE TABLE IF NOT EXISTS `revisor` (
   `usuario_id` int(11) NOT NULL,
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Volcar la base de datos para la tabla `revisor`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1641,10 +1558,10 @@ CREATE TABLE IF NOT EXISTS `semestre` (
   `valor` int(11) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- Volcar la base de datos para la tabla `semestre`
+-- Volcado de datos para la tabla `semestre`
 --
 
 INSERT INTO `semestre` (`id`, `codigo`, `activo`, `valor`, `estado`) VALUES
@@ -1663,10 +1580,10 @@ CREATE TABLE IF NOT EXISTS `sub_area` (
   `descripcion` varchar(45) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
--- Volcar la base de datos para la tabla `sub_area`
+-- Volcado de datos para la tabla `sub_area`
 --
 
 INSERT INTO `sub_area` (`id`, `area_id`, `nombre`, `descripcion`, `estado`) VALUES
@@ -1686,10 +1603,10 @@ CREATE TABLE IF NOT EXISTS `titulo_honorifico` (
   `descripcion` varchar(300) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
--- Volcar la base de datos para la tabla `titulo_honorifico`
+-- Volcado de datos para la tabla `titulo_honorifico`
 --
 
 INSERT INTO `titulo_honorifico` (`id`, `nombre`, `descripcion`, `estado`) VALUES
@@ -1718,10 +1635,10 @@ CREATE TABLE IF NOT EXISTS `tooltip` (
   `estado_tooltip` varchar(2) DEFAULT NULL COMMENT 'Recien creado RC, Clonados (CL) , Aprobado AP',
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=85 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=93 ;
 
 --
--- Volcar la base de datos para la tabla `tooltip`
+-- Volcado de datos para la tabla `tooltip`
 --
 
 INSERT INTO `tooltip` (`id`, `helpdesk_id`, `titulo`, `codigo`, `descripcion`, `mostrar`, `estado_tooltip`, `estado`) VALUES
@@ -1808,7 +1725,15 @@ INSERT INTO `tooltip` (`id`, `helpdesk_id`, `titulo`, `codigo`, `descripcion`, `
 (81, 17, 'login', 'login', 'login', 1, 'RC', 'AC'),
 (82, 17, 'clave', 'clave', 'clave', 1, 'RC', 'AC'),
 (83, 21, 'login', 'login', 'login', 1, 'RC', 'AC'),
-(84, 21, 'clave', 'clave', 'clave', 1, 'RC', 'AC');
+(84, 21, 'clave', 'clave', 'clave', 1, 'RC', 'AC'),
+(85, 24, 'tipo_proyecto', 'tipo_proyecto', 'tipo_proyecto', 1, 'RC', 'AC'),
+(86, 24, 'estado_proyecto', 'estado_proyecto', 'estado_proyecto', 1, 'RC', 'AC'),
+(87, 24, 'titulo', 'titulo', 'titulo', 1, 'RC', 'AC'),
+(88, 24, 'descripcion', 'descripcion', 'descripcion', 1, 'RC', 'AC'),
+(89, 25, 'tipo_proyecto', 'tipo_proyecto', 'tipo_proyecto', 1, 'RC', 'AC'),
+(90, 25, 'estado_proyecto', 'estado_proyecto', 'estado_proyecto', 1, 'RC', 'AC'),
+(91, 25, 'titulo', 'titulo', 'titulo', 1, 'RC', 'AC'),
+(92, 25, 'descripcion', 'descripcion', 'descripcion', 1, 'RC', 'AC');
 
 -- --------------------------------------------------------
 
@@ -1831,12 +1756,7 @@ CREATE TABLE IF NOT EXISTS `tribunal` (
   `nota_tribunal` int(11) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Volcar la base de datos para la tabla `tribunal`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1849,12 +1769,7 @@ CREATE TABLE IF NOT EXISTS `tutor` (
   `usuario_id` int(11) NOT NULL,
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Volcar la base de datos para la tabla `tutor`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1878,10 +1793,10 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `puede_ser_tutor` tinyint(1) DEFAULT '0' COMMENT '1 si puede, 0 si no puede',
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=94 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=94 ;
 
 --
--- Volcar la base de datos para la tabla `usuario`
+-- Volcado de datos para la tabla `usuario`
 --
 
 INSERT INTO `usuario` (`id`, `nombre`, `titulo_honorifico`, `apellido_paterno`, `apellido_materno`, `telefono`, `email`, `fecha_nacimiento`, `login`, `clave`, `ci`, `sexo`, `puede_ser_tutor`, `estado`) VALUES
@@ -1994,10 +1909,10 @@ CREATE TABLE IF NOT EXISTS `vigencia` (
   `estado_vigencia` varchar(45) DEFAULT NULL COMMENT 'Normal 4 semestres (NO), Prorroga 6 meses  (PR), Postergado 1 nio   (PO)',
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=45 ;
 
 --
--- Volcar la base de datos para la tabla `vigencia`
+-- Volcado de datos para la tabla `vigencia`
 --
 
 INSERT INTO `vigencia` (`id`, `proyecto_id`, `fecha_inicio`, `fecha_fin`, `fecha_actualizado`, `estado_vigencia`, `estado`) VALUES
@@ -2060,9 +1975,8 @@ CREATE TABLE IF NOT EXISTS `visto_bueno` (
   `visto_bueno_id` varchar(45) DEFAULT NULL COMMENT 'id del docente, tutor o tribunal ',
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
---
--- Volcar la base de datos para la tabla `visto_bueno`
---
-
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
