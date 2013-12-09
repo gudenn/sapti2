@@ -92,12 +92,14 @@ try {
   $noestudiante=array();
   $sql="
 SELECT ev.id as id, es.codigo_sis as codigo, pe.proyecto_id idproy
-FROM docente dt, dicta di, estudiante es, inscrito it, evaluacion ev, proyecto_estudiante pe
+FROM docente dt, dicta di, estudiante es, inscrito it, evaluacion ev, proyecto_estudiante pe, proyecto pr
 WHERE di.docente_id=dt.id
 AND di.id=it.dicta_id
 AND it.estudiante_id=es.id
 AND it.evaluacion_id=ev.id
 AND pe.estudiante_id=es.id
+AND pe.proyecto_id=pr.id
+AND pr.es_actual=1
 AND dt.id=$docenteid->id
 AND di.id=$iddicta
         ";

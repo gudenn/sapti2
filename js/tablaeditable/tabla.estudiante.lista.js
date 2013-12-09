@@ -165,6 +165,7 @@ function pendientes(estid, dicta) {
                     }
 		}
 	});
+        return 0;
 };
 function nuevoavance(estid, dicta) {
 	$.ajax({ 
@@ -185,4 +186,5 @@ function nuevoavance(estid, dicta) {
                     }
 		}
 	});
+        return 0;
 };

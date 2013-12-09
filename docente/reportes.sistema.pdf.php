@@ -5,6 +5,7 @@ require('_start.php');
     header("Location: ../login.php");
  leerClase('Dicta');
  leerClase('Usuario');
+ leerClase('Evaluacion');
 require_once(DIR_LIB.'/tcpdf/config/lang/eng.php');
 require_once(DIR_LIB.'/tcpdf/tcpdf.php');
 

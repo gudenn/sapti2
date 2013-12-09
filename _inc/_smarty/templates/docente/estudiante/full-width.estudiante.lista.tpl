@@ -29,8 +29,6 @@
         
         	<div id="paginator"></div>
         </div>
-
-        <a href="../revision/observacion.estudiante-cvs.php?iddicta={$iddicta}" class="sendme">Cargar Observación(es) Por CSV</a>
         <script type="text/javascript">
                 editableGrid.onloadXML("loaddata.estudiante.lista.php?iddicta={$iddicta}", {$iddicta});
         </script>

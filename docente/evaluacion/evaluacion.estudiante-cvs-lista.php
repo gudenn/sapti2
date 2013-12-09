@@ -33,9 +33,10 @@ try {
    /**
    * Menu superior
    */
-  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Asignaturas');
+    $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Asignaturas');
   $menuList[]     = array('url'=>URL.Docente::URL.'index.materias.php','name'=>'Materias');
   $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php?iddicta='.$iddicta,'name'=>$dicta->getNombreMateria());
+  $menuList[]     = array('url'=>URL.Docente::URL.'evaluacion/estudiante.evaluacion-editar.php?iddicta='.$iddicta,'name'=>'Evaluacion de Estudiantes');
   $menuList[]     = array('url'=>URL.Docente::URL.'evaluacion/estudiante.evaluacion-editar.php?iddicta='.$iddicta,'name'=>'Evaluacion de Estudiantes');
   $smarty->assign("menuList", $menuList);
 
@@ -56,7 +57,7 @@ try {
     $smarty->assign("inscritos"  ,$inscritos);
     $smarty->assign("noestudiante"  ,$noestudiante);
     
-  $columnacentro = 'docente/columna.centro.evaluacion.estudiante-cvs-lista.tpl';
+  $columnacentro = 'docente/evaluacion/columna.centro.evaluacion.estudiante-cvs-lista.tpl';
   $smarty->assign('columnacentro',$columnacentro);
   //No hay ERROR
   $smarty->assign("ERROR",'');
@@ -65,6 +66,6 @@ catch(Exception $e)
 {
   $smarty->assign("ERROR", handleError($e));
 }
-$TEMPLATE_TOSHOW = 'docente/evaluacion/docente.3columnas.tpl';
+$TEMPLATE_TOSHOW = 'docente/docente.3columnas.tpl';
 $smarty->display($TEMPLATE_TOSHOW);
 ?>

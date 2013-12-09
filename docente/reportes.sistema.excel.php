@@ -3,6 +3,7 @@
    require('../_start.php');
    leerClase('Usuario');
    leerClase('Dicta');
+   leerClase('Evaluacion');
 	if(isset($_GET['sql']))
         $consulta = $_GET['sql'];
         $iddicta  = $_GET['iddicta'];
