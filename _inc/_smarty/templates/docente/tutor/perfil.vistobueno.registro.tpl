@@ -19,14 +19,10 @@
                <label for="nombre de proyecto"><small>Descripcion:</small></label>
                <span>{$proyecto->nombre}</span><br/>
                
-               
-               </p>
-            <br/>
-             
-              <input type="text" name="fecha_revision" id="fecha_revision" value="{$revision->fecha_revision}" size="22"/>
-              <label for="fecha_revision"><small>FECHA</small></label>
+              <p>
+              <input type="text" name="fecha_visto_bueno" id="fecha_visto_bueno" value="{$vistobueno->fecha_visto_buena}" size="22"/>
+              <label for="fecha_revision"><small>Fecha De Visto Bueno</small></label>
             </p>
-
             <h2 class="title">Grabar </h2>
             <p>
               <input type="hidden" name="proyecto_id" value="{$proyecto->id}">
@@ -46,7 +42,7 @@
         <script type="text/javascript">
         {literal} 
           $(function(){
-            $('#fecha_revision').datepicker({
+            $('#fecha_visto_bueno').datepicker({
               dateFormat:'dd/mm/yy',
               changeMonth: true,
               changeYear: true,

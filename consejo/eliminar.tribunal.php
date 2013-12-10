@@ -8,6 +8,7 @@ try {
   leerClase("Proyecto");
    leerClase("Estudiante");
     leerClase("Notificacion");
+    leerClase('Defensa');
     
     
     if(isset($_GET['eliminar']) && isset($_GET['tribunaleliminar_id']) && is_numeric($_GET['tribunaleliminar_id']) )
@@ -42,6 +43,39 @@ try {
    }
      
    }
+   
+   
+if(isset($_GET['eliminar']) && isset($_GET['eliminardefensa_id']) && is_numeric($_GET['eliminardefensa_id']) )
+  {
+ 
+  $defensa= new Defensa($_GET['eliminardefensa_id']);
+  $proyecto = new Proyecto($defensa->proyecto_id);
+   $proyecto->estado_proyecto=  Proyecto::EST3_TRI;
+   $proyecto ->save();
+   
+   $defensa->delete();
+   $notificacion= new Notificacion();
+    $notificacion->objBuidFromPost();
+  // $notificacion->enviarNotificaion($usuarios);
+    $notificacion->proyecto_id= $proyecto->id; 
+    $notificacion->tipo=  Notificacion::TIPO_MENSAJE;
+    $notificacion->fecha_envio= date("j/n/Y");
+    $notificacion->asunto= "Ha sido eliminado La defensa";
+    $notificacion->detalle="Asignación de Fechas de Defensa";
+    $notificacion->prioridad=5;
+    $notificacion->estado = Objectbase::STATUS_AC;
+
+    $noticaciones= array('estudiantes'=>array( $proyecto->getEstudiante()->id));
+    $notificacion->enviarNotificaion( $noticaciones);
+   
+      
+   
+     
+   }
+   
+   
+   
+   
   
 }
 catch(Exception $e) 

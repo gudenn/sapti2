@@ -1,9 +1,3 @@
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 /*
  * examples/full/javascript/demo.js
  * 
@@ -16,7 +10,7 @@
  */
 
 // create our editable grid
-var editableGrid = new EditableGrid("listaestudiantesdefenza", {
+var editableGrid = new EditableGrid("listaestudiantes", {
 	enableSort: true, // true is the default, set it to false if you don't want sorting to be enabled
 	editmode: "absolute", // change this to "fixed" to test out editorzone, and to "static" to get the old-school mode
 	editorzoneid: "edition", // will be used only if editmode is set to "fixed"
@@ -30,6 +24,7 @@ function displayMessage(text, style) {
 
 // helper function to get path of a demo image
 function image(relativePath) {
+  
 	return "../images/icons/" + relativePath;
 };
 
@@ -54,7 +49,7 @@ InfoHeaderRenderer.prototype.render = function(cell, value)
 };
 
 // this function will initialize our editable grid
-EditableGrid.prototype.initializeGrid = function() 
+EditableGrid.prototype.initializeGrid = function(iddicta) 
 {
 	with (this) {
 
@@ -67,20 +62,19 @@ EditableGrid.prototype.initializeGrid = function()
 
 
 		rowSelected = function(oldRowIndex, newRowIndex) {
-			if (oldRowIndex < 0) displayMessage("Selecionada Fila '" + this.getRowId(newRowIndex) + "'");
-			else displayMessage("Selecionada Fila y Cambiada por '" + this.getRowId(oldRowIndex) + "' to '" + this.getRowId(newRowIndex) + "'");
+			if (oldRowIndex < 0) displayMessage("Fila Selecionada '" + this.getRowId(newRowIndex) + "'");
+			else displayMessage("Fila Selecionada y Cambiada por '" + this.getRowId(oldRowIndex) + "' to '" + this.getRowId(newRowIndex) + "'");
 		};
                 
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
 		     cell.innerHTML = "<a onclick=document.location.href='mostrartribunal.php?proyecto_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("ver.png") + "\" border=\"0\" alt=\"seguimiento\" title=\"Ver Tribunales\" width='30px' height='30px' />Ver Tribunales</a>";
-                     cell.innerHTML += "<br><a onclick=document.location.href='asignacion.php?editar=1&estudiante_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
+						 "<img src=\"" + image("ver.png") + "\" border=\"0\" alt=\"Ver Tribunales\" title=\"Ver Tribunales\" width='30px' height='30px' />Tribunales</a>";
+                cell.innerHTML += "<br><a onclick=document.location.href='editartribunal.php?editar&proyecto_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
 						 "<img src=\"" +image("editar.png") + "\" border=\"0\" alt=\"revisar\" title=\"Editar Tribunales\"/>Editar</a>";
            	cell.innerHTML += " <br><a onclick=\"if (confirm('Esta seguro de eliminar esta? ')) {deletete(" + getRowId(cell.rowIndex) + "); updatetable("+cell.rowIndex+");} \" style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("borrar.png") + "\" border=\"0\" alt=\"delete\" title=\"Eliminar Tribunal\"/></a>";
 
-         
-                  
+          
                   }}));
 		
 		// render the grid (parameters will be ignored if we have attached to an existing HTML table)
@@ -98,12 +92,22 @@ EditableGrid.prototype.initializeGrid = function()
 	}
 };
 
-EditableGrid.prototype.onloadXML = function(url) 
+function deletete(obser){
+   ajax=objetoAjax();
+   ajax.open("POST", "eliminar.tribunal.php?eliminar&eliminardefensa_id="+obser);
+   ajax.send(null);
+};
+function updatetable(rowIndex)
+{
+    editableGrid.remove(rowIndex);
+};
+
+EditableGrid.prototype.onloadXML = function(url, iddicta) 
 {
 	// register the function that will be called when the XML has been fully loaded
 	this.tableLoaded = function() { 
-		displayMessage("N&uacute;mero de Estudiantes " + this.getRowCount()); 
-		this.initializeGrid();
+		displayMessage("N&uacute;mero de Estudiantes Inscritos " + this.getRowCount()); 
+		this.initializeGrid(iddicta);
 	};
 
 	// load XML URL
@@ -152,4 +156,22 @@ EditableGrid.prototype.updatePaginator = function()
 	if (!this.canGoForward()) link.css({ opacity : 0.4, filter: "alpha(opacity=40)" });
 	else link.css("cursor", "pointer").click(function(event) { editableGrid.lastPage(); });
 	paginator.append(link);
+};
+
+
+function objetoAjax(){
+	var xmlhttp=false;
+	try {
+		xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+	} catch (e) {
+	try {
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	} catch (E) {
+		xmlhttp = false;
+	}
+}
+if (!xmlhttp && typeof XMLHttpRequest!='undefined') {
+	  xmlhttp = new XMLHttpRequest();
+	}
+	return xmlhttp;
 };

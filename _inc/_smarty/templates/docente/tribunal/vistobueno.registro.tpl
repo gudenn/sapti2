@@ -1,4 +1,5 @@
       <div id="content">
+        <div  class="notacontenido">
         <h1 class="title">Registro De Visto Bueno</h1>
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
@@ -12,10 +13,15 @@
            
            
             <p>
-              <input type="text" name="fecha_revision" id="fecha_revision" value="{$revision->fecha_revision}" size="22"/>
+              <input type="text" name="fecha_visto_bueno" id="fecha_visto_bueno" value="{$vistobueno->fecha_visto_buena}" size="22"/>
               <label for="fecha_revision"><small>Fecha De Visto Bueno</small></label>
             </p>
+                
+             <p>
+            
+             </p>
 
+            
             <h2 class="title">Grabar </h2>
             <p>
               <input type="hidden" name="proyecto_id" value="{$proyecto->id}">
@@ -53,5 +59,6 @@
           });
         {/literal} 
         </script>
+        </div>
       </div>
         

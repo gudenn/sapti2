@@ -21,6 +21,7 @@ try {
   $JS[]  = URL_JS . "jquery.min.js";
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
+  $JS[]  = URL_JS . "validate/jquery.validate.min.js";
 
     
    $CSS[]  = URL_JS . "box/box.css";

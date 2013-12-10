@@ -59,7 +59,7 @@ try {
   if (isset($_GET['notificacion_id']) && is_numeric($_GET['notificacion_id']))
   {
     
-     $smarty->assign('accion', array(
+        $smarty->assign('accion', array(
         Tribunal::ACCION_AC =>  Tribunal::ACCION_AC,
         Tribunal::ACCION_RE =>  Tribunal::ACCION_RE
      ));
@@ -81,7 +81,8 @@ try {
   
 
   if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
-    { 
+    {
+    $stado=0;
     
       if(isset($_POST['id_notificacion'])){
       
@@ -90,7 +91,7 @@ try {
       $tribunal     = $notificacion->getNotificacionTribunal(getSessionUser()->id);
       $proyecto     = new Proyecto($notificacion->proyecto_id);
      // var_dump($tribunal);
-      echo $tribunal->id;
+    //  echo $tribunal->id;
      
       //Solo para tribunales
       if($tribunal->id!=0){
@@ -144,12 +145,35 @@ try {
 
       }
     }
-  
-          $_SESSION['accion']=$_POST['accion'];
-          $_SESSION['estado']=1;
-          header("Location:  ../../docente/notificacion");
+    
+    
 
+      $stado=1;
+   
   }
+  
+      $ERROR = ''; 
+  leerClase('Html');
+  $html  = new Html();
+  //$moderador=0;
+  if(isset($stado))
+  {
+  if($stado==1){
+   echo "hola detalle";
+    
+       $_SESSION['estado']=$stado;
+      //    header("Location: docente/notificacion");
+          echo "<script>window.location.href='index.php'</script>";
+          
+
+  }  else {
+          $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Area','titulo'=>'Registro de Area' ,'icono'=> 'warning_48.png');
+          $ERROR = $html->getMessageBox ($mensaje);
+  }
+  }
+  
+ 
+  
   $token = sha1(URL . time());
   $_SESSION['register'] = $token;
   $smarty->assign('token',$token);

@@ -84,7 +84,7 @@
 </table>
    </div>          
 <div style="width: 100%;float: left; padding-left:0px"> 
- <form action="" method="post" id="pedido_form" >
+ <form action="" method="post" id="consejo" >
    <Hi> Lista de Docentes Asignados</Hi>
      <table  multiple id="asignados" >
         <thead>
@@ -158,10 +158,6 @@ Se le Asigno los Tribunales  correspondientes al proyecto:{$proyectobuscado->nom
  </div>
     </div>
 
-
- 
-
-    
 <script type="text/javascript">
 
   jQuery(function(){

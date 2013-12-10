@@ -35,9 +35,7 @@ try {
   leerClase('Consejo');
   leerClase('Tutor');
   leerClase('Notificacion');
-  
-
-      /**
+        /**
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Asignaturas');
@@ -46,7 +44,7 @@ try {
   $notificaciones= new Notificacion();
   leerClase('Menu');
   leerClase('Tutor');
-  $menu = new Menu('Lista de Estudiantes  de Perfil');
+  $menu = new Menu('Lista de Estudiantes de  METODOL. Y PLANIF. de proyecto de Grado');
   
   $link = Tutor::URL."perfil.seguimiento.lista.php";
   $menu->agregarItem('Estudiantes Tutorados','Lista de Estudiantes Tutorados','basicset/user4.png',$link);
