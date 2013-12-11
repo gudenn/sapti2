@@ -1,5 +1,5 @@
 {include file="modelo_carta/header.tpl"}
-<form action="carta.imprimir.php" method="POST" name="imprimir">
+<form action="carta.imprimir.pdf.php" method="POST" name="imprimir">
   <div class="wrapper row3">
     <div class="rnd">
       <div id="container">
