@@ -4,7 +4,7 @@
         $p=$_GET['id_p'];
 	$consulta = "SELECT p.id,s.codigo as gestion,p.nombre as titulo,CONCAT(u.nombre,' ',apellido_paterno,apellido_materno) as nombre ,p.estado as estadop
         FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,dicta d
-        WHERE u.id=e.usuario_id AND e.id=i.estudiante_id and d.semestre_id=s.id and i.dicta_id=d.id and p.estado_proyecto='CO' and p.tipo_proyecto='PR' AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado='AC' and s.id='".$p."'";
+        WHERE u.id=e.usuario_id AND e.id=i.estudiante_id and d.semestre_id=s.id and i.dicta_id=d.id and p.estado_proyecto='IN' and p.tipo_proyecto='PR' AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado='AC' and s.id='".$p."'";
 	$resultado =mysql_query($consulta); 
 	
 						

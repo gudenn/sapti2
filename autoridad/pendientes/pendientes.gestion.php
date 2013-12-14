@@ -88,7 +88,7 @@ try {
      $actualproyecto->trabajo_conjunto=$proyecto_aux->trabajo_conjunto;
      $actualproyecto->responsable=$proyecto_aux->responsable;
      $actualproyecto->tipo_proyecto=  Proyecto::TIPO_PROYECTO;
-     $actualproyecto->estado_proyecto=  Proyecto::EST6_C;
+     $actualproyecto->estado_proyecto= Proyecto::EST1_INI;
      $actualproyecto->save();
     //copiar Proyecto estudiante
     leerClase('Proyecto_estudiante');

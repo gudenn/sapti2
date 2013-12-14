@@ -5,7 +5,7 @@
         $fechahoy=  date('Y-m-d');
 	$consulta = 'SELECT p.id,s.codigo,CONCAT(u.nombre," ",apellido_paterno," ",apellido_materno) as nombre ,p.nombre as titulo 
         FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
-        WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id and p.tipo_proyecto="PR" and p.estado_proyecto="CO" AND p.estado="AC" AND p.id=v.proyecto_id AND ("'.$fechahoy.'">=v.fecha_fin)';
+        WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id and p.tipo_proyecto="PR" and p.estado_proyecto="IN" AND p.estado="AC" AND p.id=v.proyecto_id AND ("'.$fechahoy.'">=v.fecha_fin)';
 	$resultado =mysql_query($consulta); 
 	
 						

@@ -79,7 +79,7 @@ try {
   
  $sqlr="SELECT count(*) as c
 FROM proyecto p
-WHERE p.tipo_proyecto='PR' AND p.estado_proyecto='CO'";
+WHERE p.tipo_proyecto='PR' AND p.estado_proyecto='IN'";
  $resultado = mysql_query($sqlr);
  $areglo= array();
   
@@ -97,7 +97,7 @@ WHERE p.tipo_proyecto='PR' AND p.estado_proyecto='CO'";
  //proyecots postergados
  $sqlr="SELECT count(*) as p
  FROM vigencia v ,proyecto p
- WHERE v.estado_vigencia='PO'and p.id=v.proyecto_id and p.estado_proyecto='CO'";
+ WHERE v.estado_vigencia='PO'and p.id=v.proyecto_id and p.estado_proyecto='IN'";
  $resultado = mysql_query($sqlr);
  $arraytribunal= array();
   
@@ -118,7 +118,7 @@ WHERE p.tipo_proyecto='PR' AND p.estado_proyecto='CO'";
  //proyecots con prorroga
  $sqlr="SELECT count(*) as pr
  FROM vigencia v ,proyecto p
- WHERE v.estado_vigencia='PR'and p.id=v.proyecto_id and p.estado_proyecto='CO'";
+ WHERE v.estado_vigencia='PR'and p.id=v.proyecto_id and p.estado_proyecto='IN'";
  $resultado = mysql_query($sqlr);
  $arraytribunal= array();
   
@@ -138,7 +138,7 @@ WHERE p.tipo_proyecto='PR' AND p.estado_proyecto='CO'";
  //proyecots con cambio
   $sqlr=" SELECT count(*) as cam
  FROM proyecto p,cambio c
- WHERE p.id=c.proyecto_id and p.estado_proyecto='CO'";
+ WHERE p.id=c.proyecto_id and p.estado_proyecto='IN'";
  $resultado = mysql_query($sqlr);
  $arraytribunal= array();
   
@@ -157,7 +157,7 @@ WHERE p.tipo_proyecto='PR' AND p.estado_proyecto='CO'";
  $fechahoy=  date('Y-m-d');
   $sqlr="SELECT count(*) as vencido
  FROM vigencia v ,proyecto p
- WHERE  p.id=v.proyecto_id and p.estado_proyecto='CO' AND ('".$fechahoy."'>=v.fecha_fin)";
+ WHERE  p.id=v.proyecto_id and p.estado_proyecto='IN' AND ('".$fechahoy."'>=v.fecha_fin)";
  $resultado = mysql_query($sqlr);
  $arraytribunal= array();
   
