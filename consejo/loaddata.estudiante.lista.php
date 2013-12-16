@@ -21,7 +21,7 @@ $grid->addColumn('action', 'Opciones', 'html', NULL, false);
 
 
 $result = $mysqli->query('
-  select DISTINCT (es.id), es.codigo_sis as codigosis , u.nombre as nombre, CONCAT(u.apellido_paterno, "  ",  u.apellido_materno) apellidos, p.nombre as nombrep
+  select DISTINCT (es.id), es.codigo_sis as codigosis , u.nombre as nombre, CONCAT(u.apellido_paterno,"  ",  u.apellido_materno) apellidos, p.nombre as nombrep
   from proyecto p , usuario u, estudiante es , proyecto_estudiante pe, tribunal t
   where  u.id=es.usuario_id and  es.id=pe.estudiante_id and  pe.proyecto_id=p.id and p.id=t.proyecto_id');
 $mysqli->close();
