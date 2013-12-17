@@ -121,7 +121,16 @@ try {
                     
                   } 
                   }
+                  
+                  
+                  if($contador==3)
+                  {
+                     $proyecto->estado_proyecto=  Proyecto::EST5_F;
+                     $proyecto->save();
+                    
+                  }
            
+                  
               $stado=1;
          }
 

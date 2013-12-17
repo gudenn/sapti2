@@ -79,8 +79,8 @@ try {
 }
 catch(Exception $e) 
 {
-  echo handleError($e);
-  exit('ACAAA');
+ // echo handleError($e);
+//  exit('ACAAA');
   $smarty->assign("ERROR", handleError($e));
 }
 
