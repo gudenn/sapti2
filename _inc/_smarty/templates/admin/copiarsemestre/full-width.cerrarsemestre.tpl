@@ -3,7 +3,7 @@
   <div class="rnd">
     <div id="container">
         <form action="#" method="post" id="registro" name="registro" >
-      <h1 class="title">Copiar Configuracion de Semestre</h1>
+            <h1 class="title">Copiar Configuraci&oacuten de Semestre</h1>
       <table class="tbl_lista">
            <tr class="dark">
                <th>
@@ -24,19 +24,19 @@
                <th>
             <p>
               <label><input type="checkbox" name=seleccion[] value="mate" class="checkbox" >Copiar Materias</label>
-              <label><input type="checkbox" name=seleccion[] value="conf" class="checkbox" >Copiar Configuracion</label>
+              <label><input type="checkbox" name=seleccion[] value="conf" class="checkbox" >Copiar Configuraci&oacuten</label>
               <br><br><label for=""><small>Seleccione Minimamente Una Opcion(*)</small></label>
             </p>
             </th>
             <th>
             <p>
-              <input type="button" href="javascript:;" onclick="realizaProceso({$semestre->id});return false;" value="Ver Configuracion Actual"/>
+              <input type="button" href="javascript:;" onclick="realizaProceso({$semestre->id});return false;" value="Ver Configuración Actual"/>
             </p>
             </th>
            </tr>
             </table>
             <p>Todos los campos con (*) son obligatorios.</p>
-            <h2 class="title">Cerrar Semestre y Grabar Configuracion</h2>
+            <h2 class="title">Cerrar Semestre y Grabar Configuraci&oacuten</h2>
             <p>
               <input type="hidden" name="tarea" value="registrar">
               <input type="hidden" name="token" value="{$token}">

@@ -68,7 +68,7 @@ EditableGrid.prototype.initializeGrid = function(dicta)
                 
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
 		cell.innerHTML = "<a onclick=document.location.href='../revision/revision.lista.php?iddicta="+ dicta +"&estudiente_id=" + getRowId(cell.rowIndex) + "' style=\"cursor:pointer\">" +
-				"<span class='nopendientes' id='sna"+getRowId(cell.rowIndex)+"'>"+nuevoavance(getRowId(cell.rowIndex),dicta)+"</span>"+"<img src=\"" + image("seguimiento.png") + "\" border=\"0\" alt=\"seguimiento\" title=\"Seguimiento de Proyecto\" width='30px' height='30px' />Seguimiento</a>";
+				"<img src=\"" + image("seguimiento.png") + "\" border=\"0\" alt=\"seguimiento\" title=\"Seguimiento de Proyecto\" width='30px' height='30px' />Seguimiento</a>";
                 cell.innerHTML += "<br><a onclick=document.location.href='../revision/revision.corregido.lista.php?iddicta="+ dicta +"&estudiente_id=" + getRowId(cell.rowIndex) + "' style=\"cursor:pointer\">" +
 				"<span class='pendientes' id='sp"+getRowId(cell.rowIndex)+"'>"+pendientes(getRowId(cell.rowIndex),dicta)+"</span>"+"<img src=\"" + image("editar.png") + "\" border=\"0\" alt=\"revisar\" title=\"Correcciones Pendientes\" />Correcci&oacute;n</a>";
                 cell.innerHTML += "<br><a onclick=document.location.href='../evaluacion/proyecto.evaluacion.php?iddicta="+ dicta +"&estudiente_id=" + getRowId(cell.rowIndex) + "' style=\"cursor:pointer\">" +

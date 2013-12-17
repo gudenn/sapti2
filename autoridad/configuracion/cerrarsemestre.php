@@ -152,10 +152,10 @@ try {
                 foreach ($inscritos as $arraycerrar){
                     $inscrito=new Inscrito($arraycerrar['insid']);
                     $evaluacion=new Evaluacion($arraycerrar['evaid']);
-                    $inscrito->objBuidFromPost();
+                    //$inscrito->objBuidFromPost();
                     $inscrito->estado_inscrito=  Inscrito::E_CERRADO;
                     $inscrito->save();
-                    $evaluacion->objBuidFromPost();
+                    //$evaluacion->objBuidFromPost();
                     $evaluacion->estado=  Inscrito::E_CERRADO;
                     $evaluacion->save();
                     }                
