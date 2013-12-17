@@ -72,7 +72,7 @@ class Observacion extends Objectbase
     //Usuario::iniciarFiltro($filtro);
     $filtro->nombres[] = 'Fecha';
     $filtro->valores[] = array ('input' ,'fecha',$filtro->filtro('fecha'));
-    $filtro->nombres[] = 'Observacion';
+    $filtro->nombres[] = 'Observaci&oacuten';
     $filtro->valores[] = array ('input' ,'observacion',$filtro->filtro('observacion'));
   }
   

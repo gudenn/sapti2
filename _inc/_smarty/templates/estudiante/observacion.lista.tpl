@@ -1,7 +1,7 @@
 <table class="tbl_lista">
   <thead>
     <tr>
-      <th><a href='?order=estado_observacion'   class="tajax"  title='Ordenar por Estado'       >Observaciones  {$filtros->iconOrder('estado_observacion')}</a></th>
+      <th><a href='?order=estado_observacion'   class="tajax"  title='Ordenar por Estado'       >Estado         {$filtros->iconOrder('estado_observacion')}</a></th>
       <th><a href='?order=observacion'          class="tajax"  title='Ordenar por Observacion'  >Observaciones  {$filtros->iconOrder('observacion')}</a></th>
       <th>Opciones</th>
     </tr>

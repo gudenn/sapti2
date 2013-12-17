@@ -10,7 +10,7 @@
         <div id="left_column">
          
          <h2><a href="{$URL}buscarperfil/buscajax.php">{icono('Search.png','Buscador')} Buscar Proyectos</a></h2>   
-         
+         <h2><a href="{$URL}cronograma/">{icono('basicset/calendar_48.png','Cronograma')} Cronograma</a></h2>   
         </div>
         <!-- ###### -->
         {if isset($sinpermiso)}

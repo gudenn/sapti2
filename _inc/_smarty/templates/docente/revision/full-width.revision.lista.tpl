@@ -44,7 +44,7 @@
     <tr>
       <th>Id                         </th>
       <th>Estado                     </th>
-      <th>Fecha Revision            </th>
+      <th>Fecha Revisi&oacuten            </th>
       <th>Tipo Revisor              </th>
       <th>Nombre Revisor            </th>
       <th>Fecha Correcci&oacuten    </th>

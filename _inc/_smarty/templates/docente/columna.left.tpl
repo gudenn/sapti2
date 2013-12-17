@@ -19,6 +19,12 @@
     {/section}
     </ul>
   </div>
+  <div class="holder"></div>
+  <div class="">
+    <h2>Cronograma de eventos</h2>
+
+    {include file="cronograma/cronograma.tpl"}
+  </div>
 </div>
 {else}
   <div id="column">

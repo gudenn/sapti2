@@ -17,7 +17,7 @@ $mysqli->real_connect(DBHOST,DBUSER,BDPASS,BDNAME);
 $grid = new EditableGrid();
 
 $grid->addColumn('id', 'ID', 'integer', NULL, false); 
-$grid->addColumn('observacion', 'Observacion', 'string');
+$grid->addColumn('observacion', 'Observación', 'string');
 $grid->addColumn('action', 'Borrar', 'html', NULL, false);
 
 $result = $mysqli->query('

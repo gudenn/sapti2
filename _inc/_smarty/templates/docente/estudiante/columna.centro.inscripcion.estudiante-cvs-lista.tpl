@@ -38,7 +38,7 @@
             <table class="tbl_lista_noestu">
               <thead>
                 <tr>
-                  <th><a>CODIGO SIS      </a></th>
+                  <th><a>C&Oacute;DIGO SIS      </a></th>
                   <th><a>APELLIDOS Y NOMBRES          </a></th>
                 </tr>
               </thead>
