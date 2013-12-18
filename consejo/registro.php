@@ -123,7 +123,7 @@ try {
      
  }
    
- $sqlr="SELECT  DISTINCT(d.id), u.nombre, CONCAT (u.apellido_paterno,u.apellido_materno) as apellidos
+ $sqlr="SELECT  DISTINCT(d.id), u.nombre, CONCAT (u.apellido_paterno,' ',u.apellido_materno) as apellidos
   FROM  usuario u ,docente d, automatico a
   WHERE  u.id=d.usuario_id and  a.`docente_id`=d.`id` and u.estado='AC'
   ORDER BY  a.valor  DESC;";
@@ -181,7 +181,7 @@ try {
         $smarty->assign('proyectoarea', $proyecto->getArea());
         $smarty->assign('tutores', $arraytutores);
    
-    $sqlr="SELECT  DISTINCT(d.id), u.nombre, CONCAT (u.apellido_paterno,u.apellido_materno) as apellidos
+    $sqlr="SELECT  DISTINCT(d.id), u.nombre, CONCAT (u.apellido_paterno,' ', u.apellido_materno) as apellidos
     FROM  usuario u ,docente d, automatico a
     WHERE  u.id=d.usuario_id and  a.docente_id=d.id and u.estado='AC'
     ORDER BY  a.valor  DESC;";
@@ -252,7 +252,7 @@ if(isset($_POST['automatico']))
         $smarty->assign('proyectoarea', $proyecto->getArea());
         $smarty->assign('tutores', $arraytutores);
 
-  $sqlr="SELECT  DISTINCT(d.id), u.nombre, CONCAT (u.apellido_paterno,u.apellido_materno) as apellidos
+  $sqlr="SELECT  DISTINCT(d.id), u.nombre, CONCAT (u.apellido_paterno,' ', u.apellido_materno) as apellidos
          FROM  usuario u ,docente d, automatico a
          WHERE  u.id=d.usuario_id and  a.`docente_id`=d.`id` and u.estado='AC'
          ORDER BY  a.valor  DESC;";

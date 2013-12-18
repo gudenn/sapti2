@@ -159,8 +159,7 @@ try {
   if(isset($stado))
   {
   if($stado==1){
-   echo "hola detalle";
-    
+     
        $_SESSION['estado']=$stado;
       //    header("Location: docente/notificacion");
           echo "<script>window.location.href='index.php'</script>";

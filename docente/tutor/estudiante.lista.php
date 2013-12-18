@@ -41,6 +41,8 @@ try {
   $docente=  getSessionDocente();
   $docenteid=$docente->id;
   $tutor= getSessionUser()->getTutor();
+  //var_dump($tutor);
+  
   
   $smarty->assign("docente_ids",$docente->usuario_id);
   $smarty->assign("tutor",$tutor);

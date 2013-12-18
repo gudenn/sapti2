@@ -78,10 +78,10 @@ try {
     
     //  $docen
       
-      echo "------------------------------------------------------<br>";
+    //  echo "------------------------------------------------------<br>";
   
     $proyecto =    new Proyecto($_POST['proyecto_id']);
-          var_dump( $proyecto);
+    //      var_dump( $proyecto);
     $listavistobueno= $proyecto->getVbTutor();
     $listatutores=$proyecto->getTutores();
   
@@ -143,7 +143,7 @@ try {
      if($totalvistobuenotutor!=FALSE)
        {
        // $proyecto = new Proyecto($vistobueno->proyecto_id);
-         echo "--------------------------------perfil----------------------<br>";
+       //  echo "--------------------------------perfil----------------------<br>";
         $proyecto->estado_proyecto="VB";
         $proyecto->save();
      //   var_dump( $proyecto);
@@ -163,7 +163,7 @@ try {
         
        }
      }  else {
-      echo "-----------------proyecto final-------------------------------------<br>";
+     // echo "-----------------proyecto final-------------------------------------<br>";
     $vistobuenotutores= $proyecto->getVbTutorProyectoIds();
    // $visto= $proyecto->getVistoDocentePE($docente->id);
   //   var_dump($proyecto->getVistoDocentePE($docente->id));
@@ -213,10 +213,10 @@ try {
      if( $totalvistobuenotutor!=FALSE)
        {
        // $proyecto = new Proyecto($vistobueno->proyecto_id);
-       echo "--------------------------------ptfasdnfklasdfnaslk----------------------<br>";
+     //  echo "--------------------------------ptfasdnfklasdfnaslk----------------------<br>";
         $proyecto->estado_proyecto='VA';
         $proyecto->save();
-    var_dump( $proyecto);
+    //var_dump( $proyecto);
                    $notificacions= new Notificacion();
                     $notificacions->objBuidFromPost();
                     $notificacions->proyecto_id = $proyecto->id; 
@@ -243,7 +243,7 @@ try {
   {
   if($stado==1){
        $_SESSION['estado']=$stado;
-       //   header("Location: ../../docente");
+          header("Location: ../../docente");
   
   }  else {
           $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente','titulo'=>'Visto Bueno' ,'icono'=> 'warning_48.png');
