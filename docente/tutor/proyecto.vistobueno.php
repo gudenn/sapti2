@@ -39,7 +39,7 @@ try {
   
  
   if (isset($_POST['observaciones'])) 
-  $observaciones=$_POST['observaciones'];
+     $observaciones=$_POST['observaciones'];
     if (isset($_GET['id_estudiante'])) 
   $id_estudiante=$_GET['id_estudiante'];
     
@@ -74,6 +74,8 @@ try {
         
          $estudiante= new Estudiante($_POST['estudiante_id']);/// crando el estudiante
         $proyectoestudiante= $estudiante->getProyecto();  // obtien e el proyecto del estudioante
+        
+        var_dump($proyectoestudiante);
         $usuario= getSessionUser();
         $usuario->getAllObjects();
 
@@ -104,7 +106,8 @@ try {
        
        
           $listatutores=$proyectoestudiante->getTutores();  ///  retorna lista de los tutores de un estudiante
-         //   var_dump($listatutores);
+          echo "Hola eli"; 
+          var_dump($listatutores);
             $listatotaltutores=        $proyectoestudiante->getVbTutorProyectoIds();
              $vistobuenotutores=array();  
               foreach ( $listatotaltutores as $v)
@@ -144,11 +147,14 @@ try {
                   
                   $vistobuenodocente=$proyectoestudiante->getVbDocenteProyecto($docentestudiante->id);
                  
-                  if((sizeof($vistobuenodocente)!=0)  && $totalvistobuenotutor)
+                  if((sizeof($vistobuenodocente)>0)  && $totalvistobuenotutor)
                   {
-                    
-                   $proyectoestudiante->estado_proyecto="VB";
+                    echo "visto bueno por par te tutor";
+                $proyectoestudiante->estado_proyecto='VA';
                 $proyectoestudiante->save();
+                var_dump($proyectoestudiante);
+                
+                
                    
                    
                    

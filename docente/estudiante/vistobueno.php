@@ -59,6 +59,7 @@ try {
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();
   
+
   $smarty->assign("estudiante",  $estudiante);
   $smarty->assign("usuario", $usuario);
   $smarty->assign("proyecto", $proyecto);
@@ -76,28 +77,21 @@ try {
       $stado=1;
     
     //  $docen
+      
+      echo "------------------------------------------------------<br>";
+  
     $proyecto =    new Proyecto($_POST['proyecto_id']);
+          var_dump( $proyecto);
     $listavistobueno= $proyecto->getVbTutor();
     $listatutores=$proyecto->getTutores();
-    //echo $proyecto->estado_proyecto;
-   ///////////////////////////////////////////////////perfil///////////////////////
+  
     if($proyecto->tipo_proyecto==Proyecto::TIPO_PERFIL)
     {
+      
+  //    echo "  Entro a persfil".  $proyecto->tipo_proyecto." ".Proyecto::TIPO_PERFIL;
     $vistobuenotutores= $proyecto->getVbTutorPerfilIds();
-    
-    //$vistobuenotutores= $proyecto->getVbTutor();
-   
-    
-    
-     
-     $docente                       =       getSessionDocente();
-     $sql="SELECT v.*
-      from  visto_bueno  v
-      where   v.proyecto_id=11 and v.visto_bueno_id=4 and v.visto_bueno_tipo='DO'";
-      $resultado = mysql_query($sql);
-  
-     
-      $visto= $proyecto->getVistoDocentePE($docente->id);
+    $docente                       =       getSessionDocente();
+    $visto= $proyecto->getVistoDocentePE($docente->id);
    
   
     // echo $visto->proyecto_id;
@@ -137,7 +131,8 @@ try {
         
       }
      }
-    }  else {
+    }  else 
+      {
        $totalvistobuenotutor=FALSE;
     }
      
@@ -145,11 +140,13 @@ try {
    //  $vistobuenodocente= $proyecto->getVbDocentePerfil(getSessionDocente()->id);
      
      
-     if( $totalvistobuenotutor)
+     if($totalvistobuenotutor!=FALSE)
        {
        // $proyecto = new Proyecto($vistobueno->proyecto_id);
+         echo "--------------------------------perfil----------------------<br>";
         $proyecto->estado_proyecto="VB";
         $proyecto->save();
+     //   var_dump( $proyecto);
         
                    $notificacions= new Notificacion();
                     $notificacions->objBuidFromPost();
@@ -166,14 +163,11 @@ try {
         
        }
      }  else {
-         
-     
-       
-        $vistobuenotutores= $proyecto->getVbTutorProyectoIds();
-    
-    //$vistobuenotutores= $proyecto->getVbTutor();
-    $visto= $proyecto->getVistoDocentePE($docente->id);
-     $vistobueno                    =       new Visto_bueno( $visto->id);
+      echo "-----------------proyecto final-------------------------------------<br>";
+    $vistobuenotutores= $proyecto->getVbTutorProyectoIds();
+   // $visto= $proyecto->getVistoDocentePE($docente->id);
+  //   var_dump($proyecto->getVistoDocentePE($docente->id));
+     $vistobueno                    =       new Visto_bueno();
      $docente                       =       getSessionDocente();
      $vistobueno->objBuidFromPost();
      $vistobueno->proyecto_id       =        $proyecto->id;
@@ -216,12 +210,13 @@ try {
    //  $vistobuenodocente= $proyecto->getVbDocentePerfil(getSessionDocente()->id);
      
      
-     if( $totalvistobuenotutor)
+     if( $totalvistobuenotutor!=FALSE)
        {
        // $proyecto = new Proyecto($vistobueno->proyecto_id);
-        $proyecto->estado_proyecto="VB";
+       echo "--------------------------------ptfasdnfklasdfnaslk----------------------<br>";
+        $proyecto->estado_proyecto='VA';
         $proyecto->save();
-        
+    var_dump( $proyecto);
                    $notificacions= new Notificacion();
                     $notificacions->objBuidFromPost();
                     $notificacions->proyecto_id = $proyecto->id; 
@@ -248,7 +243,7 @@ try {
   {
   if($stado==1){
        $_SESSION['estado']=$stado;
-          header("Location: ../../docente");
+       //   header("Location: ../../docente");
   
   }  else {
           $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente','titulo'=>'Visto Bueno' ,'icono'=> 'warning_48.png');

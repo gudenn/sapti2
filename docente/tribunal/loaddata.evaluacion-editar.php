@@ -27,7 +27,7 @@
           $grid->addColumn('rfinal', 'Aprobacion', 'string', NULL, false);
 
           $result = $mysqli->query('
-          SELECT ev.id as id, us.nombre as nombre, CONCAT(us.apellido_paterno,us.apellido_materno) as apellidos, pr.nombre as nombrep, pr.id as id_pr, ev.evaluacion_1, ev.evaluacion_2, ev.evaluacion_3, ev.promedio as pro, ev.rfinal as apro
+          SELECT ev.id as id, us.nombre as nombre, CONCAT(us.apellido_paterno," ",us.apellido_materno) as apellidos, pr.nombre as nombrep, pr.id as id_pr, ev.evaluacion_1, ev.evaluacion_2, ev.evaluacion_3, ev.promedio as pro, ev.rfinal as apro
           FROM dicta di, estudiante es, usuario us, inscrito it, proyecto pr, proyecto_estudiante pe, evaluacion ev
           WHERE di.id=it.dicta_id
           AND it.estudiante_id=es.id

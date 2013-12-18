@@ -572,7 +572,7 @@ class Proyecto extends Objectbase {
   }
   
     /**
-   *  retorna el objeto nota del proyecto
+   *  retorna el objeto nota del proyectoget
    * @return
    * retorna el proyecto tutor
    */
@@ -740,7 +740,7 @@ class Proyecto extends Objectbase {
         leerClase('Proyecto_tutor');
 
     $activo = Objectbase::STATUS_AC;
-     $vb= Visto_bueno::E2_TUTOR; 
+    $vb= Visto_bueno::E2_TUTOR; 
 
    $sql = "select v.* from " . $this->getTableName('Visto_bueno') . " as v    where v.proyecto_id = '$this->id' and v.visto_bueno_tipo='$vb' and  '$this->tipo_proyecto'='PR'  and v.estado = '$activo'";
     //echo $sql;
