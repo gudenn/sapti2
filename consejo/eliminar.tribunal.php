@@ -11,6 +11,35 @@ try {
     leerClase('Defensa');
     
     
+    if(isset($_GET['eliminar']) && isset($_GET['defensaeliminar_id']) && is_numeric($_GET['defensaeliminar_id']) )
+  {
+       $defensa= new Defensa($_GET['defensaeliminar_id']);
+       $proyecto= new Proyecto($defensa->proyecto_id);
+       $proyecto->estado_proyecto=  Proyecto::EST3_TRI;
+       $proyecto->save();
+       
+       $defensa->delete();
+  
+    $estudiante   = new Estudiante($proyecto->getEstudiante()->id);
+    $notificacion= new Notificacion();
+    $notificacion->objBuidFromPost();
+  // $notificacion->enviarNotificaion($usuarios);
+    $notificacion->proyecto_id= $proyecto->id; 
+    $notificacion->tipo=  Notificacion::TIPO_MENSAJE;
+    $notificacion->fecha_envio= date("j/n/Y");
+    $notificacion->asunto= "Ha sido eliminado su fecha de defensa";
+    $notificacion->detalle="La fecha de defensa fue eliminado";
+    $notificacion->prioridad=5;
+    $notificacion->estado = Objectbase::STATUS_AC;
+
+    $noticaciones= array('estudiantes'=>array( $proyecto->getEstudiante()->id));
+    $notificacion->enviarNotificaion( $noticaciones);
+   
+   
+     
+   }
+   
+   
     if(isset($_GET['eliminar']) && isset($_GET['tribunaleliminar_id']) && is_numeric($_GET['tribunaleliminar_id']) )
   {
        
@@ -21,7 +50,7 @@ try {
    if( mysql_query( $sqlss))
    {
   
-   $proyecto->estado_proyecto=  Proyecto::EST2_BUE;
+   $proyecto->estado_proyecto='VA';
    $proyecto->save();
    
     
@@ -43,38 +72,6 @@ try {
    }
      
    }
-   
-   
-if(isset($_GET['eliminar']) && isset($_GET['eliminardefensa_id']) && is_numeric($_GET['eliminardefensa_id']) )
-  {
- 
-  $defensa= new Defensa($_GET['eliminardefensa_id']);
-  $proyecto = new Proyecto($defensa->proyecto_id);
-   $proyecto->estado_proyecto=  Proyecto::EST3_TRI;
-   $proyecto ->save();
-   
-   $defensa->delete();
-   $notificacion= new Notificacion();
-    $notificacion->objBuidFromPost();
-  // $notificacion->enviarNotificaion($usuarios);
-    $notificacion->proyecto_id= $proyecto->id; 
-    $notificacion->tipo=  Notificacion::TIPO_MENSAJE;
-    $notificacion->fecha_envio= date("j/n/Y");
-    $notificacion->asunto= "Ha sido eliminado La defensa";
-    $notificacion->detalle="Asignación de Fechas de Defensa";
-    $notificacion->prioridad=5;
-    $notificacion->estado = Objectbase::STATUS_AC;
-
-    $noticaciones= array('estudiantes'=>array( $proyecto->getEstudiante()->id));
-    $notificacion->enviarNotificaion( $noticaciones);
-   
-      
-   
-     
-   }
-   
-   
-   
    
   
 }

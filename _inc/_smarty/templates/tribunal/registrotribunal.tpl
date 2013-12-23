@@ -44,6 +44,7 @@
     <th><a >ID          </a></th>
     <th><a >NOMBRE      </a></th>
     <th><a  >APELLIDOS     </a></th>
+    <th><a  >Nro. Tribunal    </a></th>
     <th><a >&Aacute;REA</a></th>
         </tr>
   </thead>
@@ -61,11 +62,12 @@
         {$listadocentes[ic][1]}
       </td>
       <td>{$listadocentes[ic][2]}</td>
+      <td>{$listadocentes[ic][3]}</td>
   <td>     <a  class="tooltip"> VER
   <span>
   <b>
  </b>
-{foreach name=outer item=contact from=$listadocentes[ic][3]}
+{foreach name=outer item=contact from=$listadocentes[ic][4]}
   <hr />
   {foreach key=key item=item from=$contact}
   {$key}{$item}<br />
@@ -92,6 +94,7 @@
             <th>ID          </th>
             <th>NOMBRE       </th>
             <th>APELLIDOS   </th>
+            <th><a  >Nro. Tribunal</a></th>
              <th>&Aacute;REA</th>
             
           </tr>
@@ -109,11 +112,12 @@
         {$asignados[ic][1]}
       </td>
       <td>{$asignados[ic][2]}</td>
+       <td>{$asignados[ic][3]}</td>
   <td>     <a  class="tooltip"> VER
   <span>
   <b>
  </b>
-{foreach name=outer item=contact from=$asignados[ic][3]}
+{foreach name=outer item=contact from=$asignados[ic][4]}
   <hr />
   {foreach key=key item=item from=$contact}
   {$item}<br />

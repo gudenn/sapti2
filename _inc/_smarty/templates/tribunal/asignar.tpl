@@ -10,7 +10,7 @@
                                    {/foreach}</label><br />
        <p>
          
-              <Hi> Lista De Docentes</Hi>
+              <Hi> Tribunales</Hi>
 <table class="tbl_lista" id="docentes"  mane="docentes">
   <thead>
     <tr>
@@ -37,7 +37,7 @@
 
 <td>     <a  class="tooltip"> Dis
   <span>
- <div id="content"  style="width:685px;min-height: 450px;">
+ <div id="content"  style="width:685px;min-height: 300px;">
     <div id="verhorario">
     {$diass->llemartabla($listadocentes[ic][0])}
     </div>
@@ -69,7 +69,7 @@
        
 
              <p>
-               <input type="text" name="fecha_defensa" id="fecha_defensa" value="" size="22" required>
+               <input type="text" name="fecha_defensa" id="fecha_defensa" value="{$defensa->fecha_defensa}" size="22" required>
               <label for="fecha_cumple"><small>Fecha Defensa</small></label>
             </p>
             

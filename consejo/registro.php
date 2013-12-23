@@ -69,7 +69,19 @@ try {
     $diass= new Dia();
     $smarty->assign("diass", $diass);
     $html = new Html();
+    
+     $semestre = new Semestre('',1);
+    
+    $valorh = $semestre->getValor('Numero maximo de tribunal',10);
+    if ($valorh)
+    {
+       $semestre->setValor('Numero maximo de tribunal',10);
+    }
+    
+    
 
+    
+    echo $valor;
   if(isset($_GET['estudiante_id']))
   {
      $estudiante   = new Estudiante($_GET['estudiante_id']);
@@ -96,6 +108,20 @@ try {
    
           $automatico= new Automatico();
           $automatico->getListaParaProyecto($proyecto->id);
+          
+          
+          $automatico->getAll();
+          foreach ( $automatico as $valork)
+          {
+            $docentesa= new Docente($valork->docente_id);
+            
+            if(($docentesa->getNumeroTribunales())==$valorh)
+            {
+              $valork->valor=0;
+              $valork->save();
+            }
+           }
+          
 
      foreach ($tutores as $valor)
         {
@@ -132,12 +158,25 @@ try {
 
  while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
    { 
+       $doc= new Docente($fila["id"]);
         $listaareas=array();
         $lista_areas=array();
         $lista_areas[] = $fila["id"];
         $lista_areas[] =  $fila["nombre"];
         $lista_areas[] =  $fila["apellidos"];
- 
+        $lista_areas[] =  $doc->getNumeroTribunales();
+   $sqla="select  a.`nombre`
+   from `docente` d , `apoyo` ap , `area` a
+   where  d.`id`=ap.`docente_id` and a.`id`=ap.`area_id` and d.`estado`='AC' and ap.`estado`='AC' and a.`estado`='AC'and d.`id`=".$fila["id"];
+   $resultadoa = mysql_query($sqla);
+//if(mysql_fetch_array($resultadoa, MYSQL_ASSOC)){
+  while ($filas = mysql_fetch_array($resultadoa, MYSQL_ASSOC)) 
+  {
+     $listaareas[]=$filas;
+  }
+
+  $lista_areas[]=$listaareas;
+          
   $arraytribunal[]= $lista_areas;
   
  }
@@ -190,11 +229,13 @@ try {
     $arraytribunal= array();
  while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
    { 
+     $doc= new Docente($fila["id"]);
         $listaareas=array();
         $lista_areas=array();
         $lista_areas[] = $fila["id"];
         $lista_areas[] =  $fila["nombre"];
         $lista_areas[] =  $fila["apellidos"];
+         $lista_areas[] =  $doc->getNumeroTribunales();
  
  
    $sqla="select  a.`nombre`
@@ -252,7 +293,7 @@ if(isset($_POST['automatico']))
         $smarty->assign('proyectoarea', $proyecto->getArea());
         $smarty->assign('tutores', $arraytutores);
 
-  $sqlr="SELECT  DISTINCT(d.id), u.nombre, CONCAT (u.apellido_paterno,' ', u.apellido_materno) as apellidos
+       $sqlr="SELECT  DISTINCT(d.id), u.nombre, CONCAT (u.apellido_paterno,' ', u.apellido_materno) as apellidos
          FROM  usuario u ,docente d, automatico a
          WHERE  u.id=d.usuario_id and  a.`docente_id`=d.`id` and u.estado='AC'
          ORDER BY  a.valor  DESC;";
@@ -264,12 +305,13 @@ if(isset($_POST['automatico']))
          { 
            if($contador<3)
              {
-              
+              $doc= new Docente($fila["id"]);
               $listaareas=array();
               $lista_areas=array();
               $lista_areas[] = $fila["id"];
               $lista_areas[] =  $fila["nombre"];
               $lista_areas[] =  $fila["apellidos"];
+              $lista_areas[] =  $doc->getNumeroTribunales();
 
               $sqla="select  a.`nombre`
                      from `docente` d , `apoyo` ap , `area` a
@@ -289,6 +331,7 @@ if(isset($_POST['automatico']))
                                 $lista_areas[] = $fila["id"];
                                 $lista_areas[] =  $fila["nombre"];
                                 $lista_areas[] =  $fila["apellidos"];
+                                  $lista_areas[] =  $doc->getNumeroTribunales();
   
                             $sqla="select  a.`nombre`
                                    from `docente` d , `apoyo` ap , `area` a
@@ -299,7 +342,7 @@ if(isset($_POST['automatico']))
                                        $listaareas[]=$filas;
                                        }
                                        $lista_areas[]=$listaareas;
-                                       $listatiempo=array();
+                                  
                                        $arraytribunal[]= $lista_areas;
                                     }
                                   $contador++;
@@ -317,15 +360,23 @@ if (isset($_POST['proyecto_id']))
  {
   if(isset($_POST['ids'])  && sizeof($_POST['ids'])==3)
   {
+   
+    
+    
+    
+   
+     
   
-    $EXITO = false;
+     $EXITO = false;
     $stado=0;
     mysql_query("BEGIN");
+    
     $idproyecto=$_POST['proyecto_id'];
      $proyectos   = new Proyecto($idproyecto);
      $proyectos->estado_proyecto= Proyecto::EST2_TA;
      $proyectos->save();
     
+     
     $estudiante   = new Estudiante($proyectos->getEstudiante()->id);
     $notificacion = new Notificacion();
     $notificacion->objBuidFromPost();
@@ -340,6 +391,8 @@ if (isset($_POST['proyecto_id']))
     $notificacion->enviarNotificaion( $noticaciones);
     foreach ($_POST['ids'] as $id)
      {
+     
+              
                 $tribunal                    = new Tribunal();
                 $tribunal->objBuidFromPost();  
                 $tribunal->docente_id        =$id;
@@ -383,7 +436,7 @@ if (isset($_POST['proyecto_id']))
       }else
         
         {
-          $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Area','titulo'=>'Registro de Area' ,'icono'=> 'warning_48.png');
+          $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente la asignacion de tribunales','titulo'=>'Registro De Asignaci&oacute; de Tribunales' ,'icono'=> 'warning_48.png');
           $ERROR = $html->getMessageBox ($mensaje);
        }
     }

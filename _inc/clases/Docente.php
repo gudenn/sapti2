@@ -226,10 +226,29 @@ class Docente extends Objectbase{
     $usuario = new Usuario($this->usuario_id);
     return $usuario;
   }
-  
- 
-  
-   /**
+  /**
+   * retorna el total de los proyectos que esta como tribunal el docente
+   */
+  function  getNumeroTribunales()
+  {
+    
+     $contador= 0;
+    $activo = Objectbase::STATUS_AC;
+    $sql = "select t.* from " . $this->getTableName('Tribunal') . " as t   where t.docente_id ='$this->id' and t.accion='AC' and  t.estado = '$activo'";
+    $resultado = mysql_query($sql);
+  //var_dump($resultado);
+     if ($resultado)
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+      { 
+        $contador=$contador+1;
+      }
+         
+       return   $contador; 
+    
+  }
+
+
+  /**
    * Get usuario de un docente
    * @TODO hay que arreglar esta funcion
    * @return boolean|\Usuario

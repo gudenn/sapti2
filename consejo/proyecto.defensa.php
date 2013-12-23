@@ -42,18 +42,19 @@ try {
 $ERROR = ''; 
 
 
-/**
- *     if(isset($_GET['eliminar']) && isset($_GET['tribunaleliminar_id']) && is_numeric($_GET['tribunaleliminar_id']) )
+
+  if(isset($_GET['eliminar']) && isset($_GET['eliminardefensa_id']) && is_numeric($_GET['eliminardefensa_id']) )
   {
-       
+     
       $estudiante= new Estudiante($_GET['tribunaleliminar_id']);
+     
      $proyecto= $estudiante->getProyecto();
      
-    $sqlss= "DELETE FROM tribunal WHERE proyecto_id=".$proyecto->id;
+    $sqlss= "DELETE FROM defensa WHERE proyecto_id=".$proyecto->id;
    if( mysql_query( $sqlss))
    {
   
-   $proyecto->estado_proyecto=  Proyecto::EST2_BUE;
+   $proyecto->estado_proyecto=  Proyecto::EST3_TRI;
    $proyecto->save();
    
     
@@ -71,12 +72,12 @@ $ERROR = '';
 
     $noticaciones= array('estudiantes'=>array( $proyecto->getEstudiante()->id));
     $notificacion->enviarNotificaion( $noticaciones);
-   
+      
+    
    }
-     
+    
    }
- */
-
+ 
 
 
 if(isset($_SESSION['estado']) && $_SESSION['estado']==1)

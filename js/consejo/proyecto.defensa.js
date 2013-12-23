@@ -67,9 +67,14 @@ EditableGrid.prototype.initializeGrid = function(iddicta)
 		};
                 
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
-		     cell.innerHTML = "<a onclick=document.location.href='mostrartribunal.php?proyecto_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
+		     cell.innerHTML = "<a onclick=document.location.href='mostrartribunal.php?defensa_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("ver.png") + "\" border=\"0\" alt=\"Ver Tribunales\" title=\"Ver Tribunales\" width='30px' height='30px' />Tribunales</a>";
-               
+                cell.innerHTML += "<br><a onclick=document.location.href='asignacion.php?defensa_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
+						 "<img src=\"" +image("editar.png") + "\" border=\"0\" alt=\"revisar\" title=\"Editar Tribunales\"/>Editar</a>";
+           	cell.innerHTML += " <br><a onclick=\"if (confirm('Esta seguro de eliminar esta? ')) {deletete(" + getRowId(cell.rowIndex) + "); updatetable("+cell.rowIndex+");} \" style=\"cursor:pointer\">" +
+						 "<img src=\"" + image("borrar.png") + "\" border=\"0\" alt=\"delete\" title=\"Eliminar\"/></a>";
+
+          
                   }}));
 		
 		// render the grid (parameters will be ignored if we have attached to an existing HTML table)
@@ -89,7 +94,7 @@ EditableGrid.prototype.initializeGrid = function(iddicta)
 
 function deletete(obser){
    ajax=objetoAjax();
-   ajax.open("POST", "eliminar.tribunal.php?eliminar&eliminardefensa_id="+obser);
+   ajax.open("POST", "eliminar.tribunal.php?eliminar&defensaeliminar_id="+obser);
    ajax.send(null);
 };
 function updatetable(rowIndex)

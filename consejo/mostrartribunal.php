@@ -41,6 +41,7 @@ try {
   leerClase("Proyecto_estudiante");
   leerClase("Modalidad");
   leerClase("Consejo");
+  leerClase('Defensa');
   
    $menuList[]     = array('url'=>URL.Consejo::URL,'name'=>'Consejo');
    $menuList[]     = array('url'=>URL . Consejo::URL.'listatribunal.php' ,'name'=>'Tribunal');
@@ -77,6 +78,42 @@ try {
     $smarty->assign('proyecto_id',$proyecto_id);
     $smarty->assign('proyecto_nombre',$proyecto_nombre);
 
+   
+      if(isset($_GET['defensa_id']))
+      {
+      $defensa= new Defensa($_GET['defensa_id']);
+      $proyec= new Proyecto($defensa->proyecto_id);
+     // $estudiante=  new Estudiante($_GET['proyecto_id']) ;
+     // $proyec= $estudiante->getProyecto();
+    $sql="
+    SELECT d.id, u.nombre , CONCAT (u.apellido_paterno ,'  ', u.apellido_materno) as apellidos
+    FROM  usuario u, docente d, tribunal t, proyecto p
+    WHERE  u.id=d.usuario_id  and d.id=t.docente_id  and t.proyecto_id=p.id  and u.estado='AC'  and d.estado='AC'
+    and t.estado='AC'  and p.estado='AC' and p.id=".$proyec->id;
+     $resultado = mysql_query($sql);
+     $arraytribunal= array();
+
+     while ($fila = mysql_fetch_array($resultado)) 
+                    {
+        $arraytribunal[]=$fila;
+     }
+    $smarty->assign('arraytribunal'  , $arraytribunal);
+
+
+                 $estudiante= $proyec->getEstudiante();
+                $usuario =  new Usuario($estudiante->usuario_id);
+                $modalidad=  new Modalidad( $proyec->modalidad_id);
+                $areaproyecto= $proyec->getArea();
+
+            $smarty->assign('proyecto'  , $proyec);
+            $smarty->assign('modalidad'  , $modalidad);
+            $smarty->assign('usuario'  , $usuario);
+            $smarty->assign('estudiante'  ,$estudiante); 
+            $smarty->assign('area', $areaproyecto);
+
+      }
+    
+    
       if(isset($_GET['proyecto_id']))
       {
 
@@ -97,11 +134,10 @@ try {
     $smarty->assign('arraytribunal'  , $arraytribunal);
 
 
-               $proyectos =  new Proyecto($_GET['proyecto_id']);
-                $estudiante= $proyectos->getEstudiante();
-                $usuario =  new Usuario($estudiante->usuario_id);
-                $modalidad=  new Modalidad( $proyectos->modalidad_id);
-                $areaproyecto= $proyectos->getArea();
+               $proyectos =  $estudiante->getProyecto();
+               $usuario =  new Usuario($estudiante->usuario_id);
+               $modalidad=  new Modalidad( $proyectos->modalidad_id);
+               $areaproyecto= $proyectos->getArea();
 
             $smarty->assign('proyecto'  , $proyectos);
             $smarty->assign('modalidad'  , $modalidad);

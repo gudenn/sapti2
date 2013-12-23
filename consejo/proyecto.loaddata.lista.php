@@ -22,7 +22,7 @@ $grid->addColumn('nombrep', 'Nombre Proyecto', 'string', NULL, false);
 $grid->addColumn('action', 'Opciones', 'html', NULL, false);
 
 $result = $mysqli->query('
-SELECT DISTINCT (es.id) as id ,es.codigo_sis  as codigosis, u.nombre ,CONCAT(u.apellido_paterno,"  " ,u.apellido_materno) as apellidos, p.nombre as nombrep
+SELECT DISTINCT (d.id) as id ,es.codigo_sis  as codigosis, u.nombre ,CONCAT(u.apellido_paterno,"  " ,u.apellido_materno) as apellidos, p.nombre as nombrep
 FROM  usuario u, estudiante es , proyecto_estudiante pe, proyecto p , tribunal t,defensa d
 WHERE d.proyecto_id=p.id and  u.id=es.usuario_id and  es.id=pe.estudiante_id and  pe.proyecto_id=p.id and p.id=t.proyecto_id
 and p.estado_proyecto="LD" and p.tipo_proyecto="PR" and d.estado="AC"

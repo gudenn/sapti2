@@ -1,4 +1,6 @@
 <?php
+
+
 try {
     define ("MODULO", "CONSEJO");
   
@@ -44,9 +46,9 @@ try {
   leerClase("Tipo_defensa");
   leerClase("Defensa");
   leerClase("Semestre");
-   leerClase("Consejo");
-    leerClase("Notificacion");
-    leerClase("Dia");
+  leerClase("Consejo");
+  leerClase("Notificacion");
+  leerClase("Dia");
   leerClase('Html');
     
   
@@ -54,7 +56,8 @@ try {
  $menuList[]     = array('url'=>URL.Consejo::URL,'name'=>'Consejo');
    $menuList[]     = array('url'=>URL . Consejo::URL.'listadefensa.php' ,'name'=>'Defensa');
    $smarty->assign("menuList", $menuList);
-
+     
+   
       $lugar= new Lugar();
       $lugar_sql= $lugar->getAll();
 
@@ -65,7 +68,8 @@ try {
          $lugar_id[]     = $ro['id'];
          $lugar_nombre[] = $ro['nombre'];
        }
-       $diass= new Dia();
+        $diass= new Dia();
+      //  $diass ->iniciarHorario();
     $smarty->assign("diass", $diass);
 
       $smarty->assign('lugar_id',$lugar_id);
@@ -78,6 +82,41 @@ try {
             Defensa::DEFENSA_PUBLICA =>  "PUBLICA",
             Defensa::DEFENSA_PRIVADA =>  "PRIVADA"
                                    ));
+        
+        if($_GET['defensa_id'])
+        {
+            $defensa= new Defensa($_GET['defensa_id']);
+           $proyecto =  new Proyecto($defensa->proyecto_id);
+          $estudiante= $proyecto->getEstudiante();
+          $usuariobuscado= new Usuario($estudiante->usuario_id);
+          $smarty->assign('usuariobuscado',  $usuariobuscado);
+          $smarty->assign('estudiantebuscado', $estudiante);
+          $smarty->assign('proyectobuscado', $proyecto);
+          $smarty->assign('defensa',  $defensa);
+          $smarty->assign('proyectoarea', $proyecto->getArea());
+
+
+          $sqlr="SELECT  DISTINCT(d.id), u.nombre, CONCAT (u.apellido_paterno,' ',u.apellido_materno) as apellidos
+          FROM  usuario u ,docente d ,  tribunal  t
+          WHERE  u.id= d.usuario_id and   d.id= t.docente_id and   t.estado='AC' and u.estado='AC'  and d.estado='AC' and t.proyecto_id= $proyecto->id;";
+          $resultado = mysql_query($sqlr);
+          $arraytribunal= array();
+
+ while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+{ 
+       
+        $lista_areas=array();
+        $lista_areas[] = $fila["id"];
+        $lista_areas[] =  $fila["nombre"];
+        $lista_areas[] =  $fila["apellidos"];
+ 
+      
+  $arraytribunal[]= $lista_areas;
+  
+ }
+  $smarty->assign('listadocentes'  , $arraytribunal);
+          
+ }
 
   if(isset($_GET['estudiante_id']))
   {
@@ -101,7 +140,7 @@ try {
    $smarty->assign('proyectoarea', $proyecto->getArea());
 
 
- $sqlr="SELECT  DISTINCT(d.id), u.nombre, CONCAT (u.apellido_paterno,u.apellido_materno) as apellidos
+ $sqlr="SELECT  DISTINCT(d.id), u.nombre, CONCAT (u.apellido_paterno,' ',u.apellido_materno) as apellidos
 FROM  usuario u ,docente d ,  tribunal  t
 WHERE  u.id= d.usuario_id and   d.id= t.docente_id and   t.estado='AC' and u.estado='AC'  and d.estado='AC' and t.proyecto_id= $proyecto->id;";
  $resultado = mysql_query($sqlr);
@@ -120,15 +159,8 @@ WHERE  u.id= d.usuario_id and   d.id= t.docente_id and   t.estado='AC' and u.est
   
  }
   $smarty->assign('listadocentes'  , $arraytribunal);
-      
-  }
+    }
   
-  
-  
-   $id = '';
-  if (isset($_GET['area_id']) && is_numeric($_GET['area_id']))
-    $id = $_GET['area_id'];
-  $area = new Area($id);
   
         
          if( isset($_POST['proyecto_id'])  && isset($_POST['tarea']) && $_POST['tarea'] =='Guardar')
@@ -153,7 +185,7 @@ WHERE  u.id= d.usuario_id and   d.id= t.docente_id and   t.estado='AC' and u.est
            $listatribunales= array();
            
          $listatribunales=  $proyecto->getIdTribunles();
-             echo  $actual;
+         //    echo  $actual;
           foreach ($listatribunales  as $valor)
          {
            
@@ -194,14 +226,19 @@ WHERE  u.id= d.usuario_id and   d.id= t.docente_id and   t.estado='AC' and u.est
               $defensa->fecha_defensa=$fecha;
               $defensa->hora_inicio=$horaini;
               $defensa->hora_final= $varfin;
-              $defensa->tipo_defensa=$_POST['accion'];;
+              $defensa->tipo_defensa=$_POST['accion'];
            
               $defensa->semestre= $semestreactual->codigo;
               $defensa->estado = Objectbase::STATUS_AC;
              $defensa->save();
-             
-        $query = "UPDATE proyecto p SET p.estado_proyecto='LD'  WHERE p.id=$idproyecto";
-         mysql_query($query);
+            
+             if($_POST['accion']==Defensa::DEFENSA_PUBLICA)
+             {
+        
+                 $query = "UPDATE proyecto p SET p.estado_proyecto='LD'  WHERE p.id=$idproyecto";
+               mysql_query($query);
+       
+             }
             
     $proyectos   = new Proyecto($idproyecto);
     $estudiante   = new Estudiante($proyectos->getEstudiante()->id);
@@ -234,7 +271,7 @@ WHERE  u.id= d.usuario_id and   d.id= t.docente_id and   t.estado='AC' and u.est
   {
   if($stado==1){
        $_SESSION['estado']=$stado;
-          header("Location: proyecto.defensa.php");
+        header("Location: proyecto.defensa.php");
           
 
   }  else {
@@ -245,12 +282,11 @@ WHERE  u.id= d.usuario_id and   d.id= t.docente_id and   t.estado='AC' and u.est
      
   
   $smarty->assign("ERROR",$ERROR);
-     
 
-  
 } 
 catch(Exception $e) 
 {
+ 
   $smarty->assign("ERROR", handleError($e));
 }
 
@@ -261,5 +297,7 @@ $contenido = 'tribunal/asignar.tpl';
 
 $TEMPLATE_TOSHOW = 'tribunal/tribunal.3columnas.tpl';
 $smarty->display($TEMPLATE_TOSHOW);
+
+
 
 ?>

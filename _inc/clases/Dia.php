@@ -35,12 +35,13 @@ class Dia extends Objectbase {
    * funcion para iniciar horario
    */
   function iniciarHorario() {
+   
     $arryDias = array();
-    $arryDias[] = 'Lunes';
-    $arryDias[] = 'Martes';
-    $arryDias[] = 'Miercoles';
-    $arryDias[] = 'Jueves';
-    $arryDias[] = 'Viernes';
+    $arryDias[] = 'L';
+    $arryDias[] = 'M';
+    $arryDias[] = 'Mi';
+    $arryDias[] = 'J';
+    $arryDias[] = 'V';
 
     $arrahorario = array();
     $arrahorario[] = '08:15';
@@ -63,6 +64,7 @@ class Dia extends Objectbase {
 
       for ($valor = 0; $valor < (sizeof($arrahorario) - 1); $valor++) {
         $hora = new Hora();
+        $hora ->dia_id= $dia->id;
         $hora->hora_inicio = $arrahorario[$valor];
         $hora->hora_fin = $arrahorario[$valor + 1];
         $hora->estado = Objectbase::STATUS_AC;
@@ -70,7 +72,7 @@ class Dia extends Objectbase {
       }
 
       $dia->save();
-      $dia->saveAllSonObjects(1);
+     $dia->saveAllSonObjects(1);
     }
   }
 
@@ -98,7 +100,7 @@ class Dia extends Objectbase {
       
       $dia  = new Dia($row);
       $hora = new Hora();
-      if ($dia->nombre == 'Lunes')
+      if ($dia->nombre == 'L')
         
         $tdiaextra =  "<div class='horariodia'> <div class='headhorario'> Horas</div>";
       $tdia .=  "<div class='horariodia'> <div class='headhorario'>{$dia->nombre}</div>";
@@ -111,11 +113,11 @@ class Dia extends Objectbase {
                 <input type=\"checkbox\" name=\"hora_id[]\" value=\"{$hora->id}\" $check />
    
                   </div>";
-        if ($dia->nombre == 'Lunes')
+        if ($dia->nombre == 'L')
           $tdiaextra .= "<div class='horariohora'> {$hora->hora_inicio} - {$hora->hora_fin}</div>";
       }
       $tdia .= "</div>";
-      if ($dia->nombre == 'Lunes')
+      if ($dia->nombre == 'L')
         $tdiaextra .=  "</div>";
     }
     echo $tdiaextra.$tdia;
