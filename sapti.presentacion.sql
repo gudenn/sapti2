@@ -1874,13 +1874,13 @@ INSERT INTO `usuario` (`id`, `nombre`, `titulo_honorifico`, `apellido_paterno`, 
 (83, 'Angélica', 'Est.', 'Caballero', 'Delgadillo', '456123', 'sis_jian@yahoo.es', '2013-11-06', '20008109', '20008109', '20008109', 'F', 0, 'AC'),
 (84, 'Eliana', 'Est.', 'Bazoalto', 'Lopez', '', 'eliamia@gmail.com', '2013-11-06', '20008110', '20008110', '20008110', 'F', 0, 'AC'),
 (85, 'Urvy Dianet', 'Est.', 'Calle', 'Marca', '78965412', 'dianetcita@hotmail.com', '2013-11-06', '20008111', '20008111', '20008111', 'F', 0, 'AC'),
-(86, 'LIONEL', 'Est.', 'AYAVIRI', 'SEJAS', '4654654', 'layosis@gmail.com', '2013-11-06', '20008112', '20008112', '20008112', 'M', 0, 'AC'),
+(86, 'Lionel', 'Est.', 'Ayaviri', 'Sejas', '4654654', 'layosis@gmail.com', '2013-11-06', '20008112', '20008112', '20008112', 'M', 0, 'AC'),
 (87, 'Griselda Annel', 'Est.', 'Paca', 'Meneses', '4563214', 'griss.anel@gmail.com', '2013-11-06', '20008114', '20008114', '20008114', 'F', 0, 'AC'),
 (88, 'Angela Eliana', 'Est.', 'Borda', 'Davila', '', 'a.naile@hotmail.es', '2013-11-06', '20008115', '20008115', '20008115', 'F', 0, 'AC'),
-(89, 'CARLOS ANDRÉS', 'Est.', 'BURGOS', 'UREY', '456987123', 'carlitos_cbu@hotmail.com', '2013-11-06', '20008116', '20008116', '20008116', 'M', 0, 'AC'),
-(90, 'SHIRLEY JHOVANA', 'Est.', '', 'PINTO', '', 'jhoshi_1820@hotmail.com', '2013-11-06', '20008117', '20008117', '20008117', 'F', 0, 'AC'),
-(91, 'GARY RICHARD', 'Est.', 'VERA', 'TERRAZAS', '4567834', 'garyver@hotmail.com', '2013-11-06', '20008118', '20008118', '20008118', 'M', 0, 'AC'),
-(92, 'SEGUNDINO GASTÓN', 'Est.', 'FERNANDEZ', 'FLORES', '46554654', 'gasfer_fl_sis@hotmail.com', '2013-11-06', '20008119', '20008119', '20008119', 'M', 0, 'AC'),
+(89, 'Carlos Andrés', 'Est.', 'Burgos', 'Urey', '456987123', 'carlitos_cbu@hotmail.com', '2013-11-06', '20008116', '20008116', '20008116', 'M', 0, 'AC'),
+(90, 'Shirley Jhovana', 'Est.', '', 'Pinto', '', 'jhoshi_1820@hotmail.com', '2013-11-06', '20008117', '20008117', '20008117', 'F', 0, 'AC'),
+(91, 'Gary Richard', 'Est.', 'Vera', 'Terrazas', '4567834', 'garyver@hotmail.com', '2013-11-06', '20008118', '20008118', '20008118', 'M', 0, 'AC'),
+(92, 'Segundino Gastón', 'Est.', 'Fernandez', 'Flores', '46554654', 'gasfer_fl_sis@hotmail.com', '2013-11-06', '20008119', '20008119', '20008119', 'M', 0, 'AC'),
 (93, 'Marcelo Marcos', 'Est.', 'Vargas', 'Chavez', '478965231', 'mashelo.vargas@gmail.com', '2013-11-06', '20008120', '20008120', '20008120', 'M', 0, 'AC');
 
 -- --------------------------------------------------------

@@ -137,9 +137,9 @@ class Usuario  extends Objectbase
    */
   public function save($table = false, $father_id_value = false, $base = 'compania') {
     // ponemos los nombres y los apellidos con mayuscula
-    $this->nombre = ucfirst(strtolower($this->nombre));
-    $this->apellido_paterno = ucfirst(strtolower($this->apellido_paterno));
-    $this->apellido_materno = ucfirst(strtolower($this->apellido_materno));
+    $this->nombre = ucwords(strtolower($this->nombre));
+    $this->apellido_paterno = ucwords(strtolower($this->apellido_paterno));
+    $this->apellido_materno = ucwords(strtolower($this->apellido_materno));
     parent::save($table, $father_id_value, $base);
   }
   
