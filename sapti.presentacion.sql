@@ -204,17 +204,6 @@ CREATE TABLE IF NOT EXISTS `configuracion_semestral` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
---
--- Volcado de datos para la tabla `configuracion_semestral`
---
-
-INSERT INTO `configuracion_semestral` (`id`, `semestre_id`, `nombre`, `valor`, `estado`) VALUES
-(1, 1, 'Director carrera Sistemas', 'Director Sistemas', 'AC'),
-(2, 1, 'Minimo numero de areas asignadas al proyecto', '1', 'AC'),
-(3, 1, 'Minimo numero de sub areas', '1', 'AC'),
-(4, 1, 'Minimo de objetivos especificos', '2', 'AC');
-
--- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `consejo`
@@ -801,24 +790,24 @@ CREATE TABLE IF NOT EXISTS `modulo` (
 --
 
 INSERT INTO `modulo` (`id`, `codigo`, `descripcion`, `estado`) VALUES
-(1, 'ADMIN-INDEX', 'Modulo: ADMIN-INDEX', 'AC'),
-(2, 'ADMIN-CONFIGURACION', 'Modulo: ADMIN-CONFIGURACION', 'AC'),
-(3, 'ADMIN-HELPDESK', 'Modulo: ADMIN-HELPDESK', 'AC'),
-(4, 'ADMIN-DOCENTE', 'Modulo: ADMIN-DOCENTE', 'AC'),
-(5, 'ADMIN-ESTUDIANTE-INDEX', 'Modulo: ADMIN-ESTUDIANTE-INDEX', 'AC'),
-(6, 'ADMIN-PROYECTO', 'Modulo: ADMIN-PROYECTO', 'AC'),
-(7, 'ADMIN-ESTUDIANTE', 'Modulo: ADMIN-ESTUDIANTE', 'AC'),
-(8, 'ADMIN-ESTUDIANTE-GESTION', 'Modulo: ADMIN-ESTUDIANTE-GESTION', 'AC'),
-(9, 'VISITA', 'Modulo: VISITA', 'AC'),
-(10, 'ESTUDIANTE', 'Modulo: ESTUDIANTE', 'AC'),
-(11, 'ADMIN-SEGURIDAD', 'Modulo: ADMIN-SEGURIDAD', 'AC'),
-(12, 'ADMIN-AUTORIDADES', 'Modulo: ADMIN-AUTORIDADES', 'AC'),
-(13, 'ADMIN-AUTORIDAD', 'Modulo: ADMIN-AUTORIDAD', 'AC'),
-(14, 'REPORTE', 'Modulo: REPORTE', 'AC'),
-(15, 'DOCENTE', 'Modulo: DOCENTE', 'AC'),
-(16, 'CONSEJO', 'Modulo: CONSEJO', 'AC'),
-(17, 'NOTIFICACION', 'Modulo: NOTIFICACION', 'AC'),
-(18, 'ADMIN-CARTAS', 'Modulo: ADMIN-CARTAS', 'AC');
+(1, 'ADMIN-INDEX', 'M&oacute;dulo: ADMIN-INDEX', 'AC'),
+(2, 'ADMIN-CONFIGURACION', 'M&oacute;dulo: ADMIN-CONFIGURACION', 'AC'),
+(3, 'ADMIN-HELPDESK', 'M&oacute;dulo: ADMIN-HELPDESK', 'AC'),
+(4, 'ADMIN-DOCENTE', 'M&oacute;dulo: ADMIN-DOCENTE', 'AC'),
+(5, 'ADMIN-ESTUDIANTE-INDEX', 'M&oacute;dulo: ADMIN-ESTUDIANTE-INDEX', 'AC'),
+(6, 'ADMIN-PROYECTO', 'M&oacute;dulo: ADMIN-PROYECTO', 'AC'),
+(7, 'ADMIN-ESTUDIANTE', 'M&oacute;dulo: ADMIN-ESTUDIANTE', 'AC'),
+(8, 'ADMIN-ESTUDIANTE-GESTION', 'M&oacute;dulo: ADMIN-ESTUDIANTE-GESTION', 'AC'),
+(9, 'VISITA', 'M&oacute;dulo: VISITA', 'AC'),
+(10, 'ESTUDIANTE', 'M&oacute;dulo: ESTUDIANTE', 'AC'),
+(11, 'ADMIN-SEGURIDAD', 'M&oacute;dulo: ADMIN-SEGURIDAD', 'AC'),
+(12, 'ADMIN-AUTORIDADES', 'M&oacute;dulo: ADMIN-AUTORIDADES', 'AC'),
+(13, 'ADMIN-AUTORIDAD', 'M&oacute;dulo: ADMIN-AUTORIDAD', 'AC'),
+(14, 'REPORTE', 'M&oacute;dulo: REPORTE', 'AC'),
+(15, 'DOCENTE', 'M&oacute;dulo: DOCENTE', 'AC'),
+(16, 'CONSEJO', 'M&oacute;dulo: CONSEJO', 'AC'),
+(17, 'NOTIFICACION', 'M&oacute;dulo: NOTIFICACION', 'AC'),
+(18, 'ADMIN-CARTAS', 'M&oacute;dulo: ADMIN-CARTAS', 'AC');
 
 -- --------------------------------------------------------
 

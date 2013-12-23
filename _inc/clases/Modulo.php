@@ -68,7 +68,7 @@ class Modulo extends Objectbase
   function crear($codigo)
   {
     $this->codigo      = $codigo;
-    $this->descripcion = "Modulo: $codigo";
+    $this->descripcion = "M&oacute;dulo: $codigo";
     $this->estado      = Objectbase::STATUS_AC;
     $this->save();
     $this->iniciarPermisos();

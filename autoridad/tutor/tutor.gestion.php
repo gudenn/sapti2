@@ -81,7 +81,7 @@ try {
   {
     $filtro_mis_tutores = '-1,';
     $proyecto->proyecto_tutor_objs = $proyecto->getThisObjects('proyecto_tutor' , get_class($proyecto));
-    $maximo_tutores  =  $semestre->getValor('Maximo Tutores Activos' , Tutor::MAXIMO);
+    $maximo_tutores  =  $semestre->getValor('M&aacute;ximo Tutores Activos' , Tutor::MAXIMO);
     $total_asignados = 0;
     foreach ($proyecto->proyecto_tutor_objs as $proyecto_tutor)
     {

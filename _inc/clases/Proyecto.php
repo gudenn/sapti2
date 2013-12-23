@@ -495,11 +495,11 @@ class Proyecto extends Objectbase {
     leerClase('Semestre');
     $semestre = new Semestre('', TRUE);
     // Por lo menos un area y una sub area
-    if (sizeof($this->proyecto_area_objs) < $semestre->getValor('Minimo numero de areas asignadas al proyecto', 1))
+    if (sizeof($this->proyecto_area_objs) < $semestre->getValor('M&iacute;nimo n&uacute;mero de &aacute;reas asignadas al proyecto', 1))
       throw new Exception("?proyecto_area_id_1&m=No Asigno el <b>m&iacute;nimo n&uacute;mero de &Aacute;rea(s)</b> requerido para un Proyecto.");
-    if (sizeof($this->proyecto_sub_area_objs) < $semestre->getValor('Minimo numero de sub areas', 1))
+    if (sizeof($this->proyecto_sub_area_objs) < $semestre->getValor('M&iacute;nimo n&uacute;mero de sub &Aacute;reas', 1))
       throw new Exception("?proyecto_subarea_id_1&m=No Asigno el <b>m&iacute;nimo n&uacute;mero de sub &Aacute;rea</b> requerido para un Proyecto.");
-    if (sizeof($this->objetivo_especifico_objs) < $semestre->getValor('Minimo de objetivos especificos', 2))
+    if (sizeof($this->objetivo_especifico_objs) < $semestre->getValor('M&iacute;nimo de objetivos especificos', 2))
       throw new Exception("?objetivo_especifico_1&m=No cumple la cantidad de Objetivos Espec&iacute;ficos M&iacute;nimo para un Proyecto.");
     //
   }
