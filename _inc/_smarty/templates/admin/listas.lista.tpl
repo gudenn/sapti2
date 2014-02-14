@@ -5,6 +5,7 @@
 <script type="text/javascript">
   {literal}
     $(document).ready(function() {
+      $("#filtro_clear").unbind("submit");
       $("#filtro_clear").submit(function(event) {
         $('#filtro').each(function(){
           this.reset();
@@ -21,6 +22,7 @@
           }
         });
       });
+      $("#filtro").unbind("submit");
       $("#filtro").submit(function(event) {
         event.preventDefault(); 
         var $form = $( this ),
