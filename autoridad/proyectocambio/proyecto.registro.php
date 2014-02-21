@@ -337,7 +337,7 @@ try {
     {      
        leerClase('Semestre');
        $semestre             = new Semestre('',1);
-       $maximo_cambios_leves = $semestre->getValor('maximo cambios leves', 3);
+       $maximo_cambios_leves = $semestre->getValor('m&aacute;ximo cambios leves', 3);
        $cambio               = new Cambio();
        $cambio->estado       = Objectbase::STATUS_AC;
        $cambio->fecha_cambio = date('d/m/Y');
@@ -357,7 +357,7 @@ try {
     {
        leerClase('Semestre');
        $semestre             = new Semestre(' ',1);
-       $maximo_cambios_total = $semestre->getValor('maximo cambios totales', 2);
+       $maximo_cambios_total = $semestre->getValor('m&aacute;ximo cambios totales', 2);
        $cambio               = new Cambio();
        $cambio->estado       = Objectbase::STATUS_AC;
        $cambio->fecha_cambio = date('d/m/Y');

@@ -27,7 +27,7 @@
     <tr>
       <th><a href='?order=id'            class="tajax"  title='Ordenar por Id'      >Id      {$filtros->iconOrder('id')}</a></th>
       <th><a href='?order=nombre'        class="tajax"  title='Ordenar por Nombre'  >Nombre  {$filtros->iconOrder('nombre')}</a></th>
-      <th><a href='?order=valor'         class="tajax"  title='Ordenar por Valor'   >VAlor   {$filtros->iconOrder('valor')}</a></th>
+      <th><a href='?order=valor'         class="tajax"  title='Ordenar por Valor'   >Valor   {$filtros->iconOrder('valor')}</a></th>
       <th>Opciones</th>
     </tr>
   </thead>

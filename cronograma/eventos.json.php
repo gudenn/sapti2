@@ -71,8 +71,7 @@ ______SALIDAS;
   // Si es estudiante para todas las materias que tiene inscrito
   if(isEstudianteSession())
   {
-    $estudiante_aux = getSessionEstudiante();
-    $estudiante     = new Estudiante($estudiante_aux->estudiante_id);
+    $estudiante = getSessionEstudiante();
     $estudiante->getAllObjects();
     $evento = new Evento();
     $evento->estado = 'AC';

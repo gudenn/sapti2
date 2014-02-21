@@ -5,7 +5,7 @@
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
             <p>
-              <input type="text" name="nombre"  id="nombre" value="{$configuracion_semestral->nombre}"  data-validation-engine="validate[required]">
+              <input type="text" name="nombre"  id="nombre" value="{$configuracion_semestral->nombre}" {if ($configuracion_semestral->id)}readonly="readonly"{/if} data-validation-engine="validate[required]">
               <label for="nombre"><small>Nombre del Campo (*){getHelpTip('nombre')}</small></label>
             </p>
             <p>

@@ -80,7 +80,7 @@ class Automatico extends Objectbase
     //var_dump($proyecto);
     leerClase('Semestre');
     $semestre = new Semestre();
-    $puntos   = $semestre->getValor('Puntos por area', 100);
+    $puntos   = $semestre->getValor('Puntos por &aacute;rea', 100);
     //para cada area del proyecto agregamos un x puntos a los docentes
     foreach ($proyecto->proyecto_area_objs as $proyecto_area) {
       

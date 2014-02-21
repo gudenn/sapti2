@@ -126,6 +126,23 @@ class Usuario  extends Objectbase
   */
   var $consejo_objs;
 
+  /**
+   * Save Or Update the data of the object in the data base
+   * sobreescritura de la funcion save para poner los nombre y los apellidos con mayusculas
+   * @param string $table puede recivir el valor de la tabla
+   * @param int $father_id_value el id del padre  por ejemplo al grabar los hijos de una compania aca se dara el id de la compania
+   * @param string $base  asociado a $father_id_value traera la clase del padre para guardar el dato
+   * @return boolean
+   * @throws Exception 
+   */
+  public function save($table = false, $father_id_value = false, $base = 'compania') {
+    // ponemos los nombres y los apellidos con mayuscula
+    $this->nombre = ucwords(strtolower($this->nombre));
+    $this->apellido_paterno = ucwords(strtolower($this->apellido_paterno));
+    $this->apellido_materno = ucwords(strtolower($this->apellido_materno));
+    parent::save($table, $father_id_value, $base);
+  }
+  
   function getNombreCompleto($echo = false) 
   {
     $nombreCompleto = trim(strtoupper("{$this->titulo_honorifico} {$this->nombre} {$this->apellido_paterno} {$this->apellido_materno}"));
