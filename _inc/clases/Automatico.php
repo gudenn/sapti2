@@ -124,6 +124,46 @@ class Automatico extends Objectbase
   }
   
   /**
+   * Verificando el Nro. de tribunales  con lo establecido en el sistema
+   * @param Proyecto $proyecto
+   */
+  function verificarNumeroMaximoTribunales()
+  {
+    //var_dump($proyecto);
+    leerClase('Semestre');
+    leerClase('Docente');
+    $semestre = new Semestre();
+    $puntos   = $semestre->getValor('Numero Máximo de tribunal por docente', 20);
+    //para cada area del proyecto agregamos un x puntos a los docentes
+
+      
+      $sql  = "SELECT * FROM docente";
+      $resp = mysql_query($sql); 
+      if (!$resp)
+        return false;
+      
+      while ($row = mysql_fetch_array($resp)) 
+      {
+        $docente= new Docente($row['docente_id']);
+        if($docente->getNumeroTribunales()==$puntos)
+        {
+        
+        $this->estableceraCeroPuntosDocente($row['docente_id'], 0);
+        }
+      }
+    
+  }
+  /**
+   * Establecer a cero el valor 
+   * @param type $docente_id
+   * @param type $puntos
+   */
+  function estableceraCeroPuntosDocente($docente_id ,$puntos = 10) {
+    $automatico = new Automatico('',$docente_id);
+    $automatico->valor = $puntos;
+    $automatico->save();
+  }
+  /**
    * Damos valores por el veces asignado
    */
   function darPuntosPorAsignado()

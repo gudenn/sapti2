@@ -63,7 +63,7 @@ try {
   $smarty->assign("editores",$editores);
  
   if ( isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' )
-  {  
+  { 
    
      $stado=0;
     mysql_query("BEGIN");
@@ -137,8 +137,13 @@ try {
         if($stado==1)
         {
           $_SESSION['estado']=$stado;
+          if($_SESSION['iditando']=="editando")
+          {
+            header("Location:listatribunal.php");
+          }else
+          {
           header("Location:tribunales.rechazados.php");
-         
+          }
           
         }else  
           {
@@ -153,7 +158,8 @@ try {
 
    if(isset($_GET['editar']) && isset($_GET['proyecto_id']) && is_numeric($_GET['proyecto_id']) )
   {
-       $estudiante= new Estudiante($_GET['proyecto_id']);
+     $_SESSION['iditando']= $_GET['editar'];
+     $estudiante= new Estudiante($_GET['proyecto_id']);
        $proyectos =  $estudiante->getProyecto();
       
      // $estudiante= $proyectos->getEstudiante();
@@ -189,9 +195,9 @@ where     p.id=t.proyecto_id  and t.docente_id= dd.id  and p.estado='AC' and t.e
         $lista_areas[] =  $fila["apellidos"];
  
  
-$sqla="select  a.`nombre`
-from `docente` d , `apoyo` ap , `area` a
-where  d.`id`=ap.`docente_id` and a.`id`=ap.`area_id` and d.`estado`='AC' and ap.`estado`='AC' and a.`estado`='AC'and d.`id`=".$fila["id"];
+$sqla="select  a.nombre
+from docente d , apoyo ap , area a
+where  d.id=ap.docente_id and a.id=ap.area_id and d.estado='AC' and ap.estado='AC' and a.estado='AC'and d.id=".$fila["id"];
  $resultadoa = mysql_query($sqla);
  
   while ($filas = mysql_fetch_array($resultadoa, MYSQL_ASSOC)) 
@@ -226,9 +232,9 @@ where   p.id=t.proyecto_id and t.accion!='RE' and t.docente_id= dd.id and  p.est
         $lista_areas[] =  $filaselec["apellidos"];
  
  
-$sqla="select  a.`nombre`
-from `docente` d , `apoyo` ap , `area` a
-where  d.`id`=ap.`docente_id` and a.`id`=ap.`area_id` and d.`estado`='AC' and ap.`estado`='AC' and a.`estado`='AC'and d.`id`=".$filaselec["id"];
+$sqla="select  a.nombre
+from docente d , apoyo ap , area a
+where  d.id=ap.docente_id and a.id=ap.area_id and d.estado='AC' and ap.estado='AC' and a.estado='AC'and d.id=".$filaselec["id"];
  $resultadoa = mysql_query($sqla);
  
   while ($filas = mysql_fetch_array($resultadoa, MYSQL_ASSOC)) 

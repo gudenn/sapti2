@@ -165,9 +165,9 @@ try {
         $lista_areas[] =  $fila["nombre"];
         $lista_areas[] =  $fila["apellidos"];
         $lista_areas[] =  $doc->getNumeroTribunales();
-   $sqla="select  a.`nombre`
-   from `docente` d , `apoyo` ap , `area` a
-   where  d.`id`=ap.`docente_id` and a.`id`=ap.`area_id` and d.`estado`='AC' and ap.`estado`='AC' and a.`estado`='AC'and d.`id`=".$fila["id"];
+   $sqla="select  a.nombre
+   from docente d , apoyo ap , area a
+   where  d.id=ap.docente_id and a.id=ap.area_id and d.estado='AC' and ap.estado='AC' and a.estado='AC'and d.id=".$fila["id"];
    $resultadoa = mysql_query($sqla);
 //if(mysql_fetch_array($resultadoa, MYSQL_ASSOC)){
   while ($filas = mysql_fetch_array($resultadoa, MYSQL_ASSOC)) 
@@ -238,9 +238,9 @@ try {
          $lista_areas[] =  $doc->getNumeroTribunales();
  
  
-   $sqla="select  a.`nombre`
-   from `docente` d , `apoyo` ap , `area` a
-   where  d.`id`=ap.`docente_id` and a.`id`=ap.`area_id` and d.`estado`='AC' and ap.`estado`='AC' and a.`estado`='AC'and d.`id`=".$fila["id"];
+   $sqla="select  a.nombre
+   from docente d , apoyo ap , area a
+   where  d.id=ap.docente_id and a.id=ap.area_id and d.estado='AC' and ap.estado='AC' and a.estado='AC'and d.id=".$fila["id"];
    $resultadoa = mysql_query($sqla);
 //if(mysql_fetch_array($resultadoa, MYSQL_ASSOC)){
   while ($filas = mysql_fetch_array($resultadoa, MYSQL_ASSOC)) 
@@ -313,9 +313,9 @@ if(isset($_POST['automatico']))
               $lista_areas[] =  $fila["apellidos"];
               $lista_areas[] =  $doc->getNumeroTribunales();
 
-              $sqla="select  a.`nombre`
-                     from `docente` d , `apoyo` ap , `area` a
-                     where  d.`id`=ap.`docente_id` and a.`id`=ap.`area_id` and d.`estado`='AC' and ap.`estado`='AC' and a.`estado`='AC'and d.`id`=".$fila["id"];
+              $sqla="select  a.nombre
+                     from docente d , apoyo ap , area a
+                     where  d.id=ap.docente_id and a.id=ap.area_id and d.estado='AC' and ap.estado='AC' and a.estado='AC'and d.id=".$fila["id"];
                      $resultadoa = mysql_query($sqla);
                      while ($filas = mysql_fetch_array($resultadoa, MYSQL_ASSOC)) 
                        {
@@ -333,9 +333,9 @@ if(isset($_POST['automatico']))
                                 $lista_areas[] =  $fila["apellidos"];
                                   $lista_areas[] =  $doc->getNumeroTribunales();
   
-                            $sqla="select  a.`nombre`
-                                   from `docente` d , `apoyo` ap , `area` a
-                                   where  d.`id`=ap.`docente_id` and a.`id`=ap.`area_id` and d.`estado`='AC' and ap.`estado`='AC' and a.`estado`='AC'and d.`id`=".$fila["id"];
+                            $sqla="select  a.nombre
+                                   from docente d , apoyo ap , area a
+                                   where  d.id=ap.docente_id and a.id=ap.area_id and d.estado='AC' and ap.estado='AC' and a.estado='AC'and d.id=".$fila["id"];
                                    $resultadoa = mysql_query($sqla);
                                while ($filas = mysql_fetch_array($resultadoa, MYSQL_ASSOC)) 
                                       {
@@ -354,7 +354,7 @@ if(isset($_POST['automatico']))
    
  }
 
-if( isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' )
+if(isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
  {
 if (isset($_POST['proyecto_id']))
  {
@@ -464,6 +464,9 @@ catch(Exception $e)
 {
   $smarty->assign("ERROR", handleError($e));
 }
+$token = sha1(URL . time());
+$_SESSION['register'] = $token;
+$smarty->assign('token', $token);
 
 $TEMPLATE_TOSHOW = 'tribunal/tribunal.3columnas.tpl';
 $smarty->display($TEMPLATE_TOSHOW);

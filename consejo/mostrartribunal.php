@@ -94,7 +94,7 @@ try {
      $arraytribunal= array();
 
      while ($fila = mysql_fetch_array($resultado)) 
-                    {
+     {
         $arraytribunal[]=$fila;
      }
     $smarty->assign('arraytribunal'  , $arraytribunal);
@@ -114,10 +114,10 @@ try {
       }
     
     
-      if(isset($_GET['proyecto_id']))
+      if(isset($_GET['estudiante_id']))
       {
 
-   $estudiante=  new Estudiante($_GET['proyecto_id']) ;
+   $estudiante=  new Estudiante($_GET['estudiante_id']) ;
    $proyec= $estudiante->getProyecto();
     $sql="
     SELECT d.id, u.nombre , CONCAT (u.apellido_paterno ,'  ', u.apellido_materno) as apellidos
@@ -126,12 +126,17 @@ try {
     and t.estado='AC'  and p.estado='AC' and p.id=".$proyec->id;
      $resultado = mysql_query($sql);
      $arraytribunal= array();
-
+ 
      while ($fila = mysql_fetch_array($resultado)) 
-                    {
-        $arraytribunal[]=$fila;
+     {$arrayAux= array();
+       $arrayAux[]=$fila['id'];
+       $arrayAux[]=$fila['nombre'];
+       $arrayAux[]=$fila['apellidos'];
+       $arrayAux[]=$proyec->getTribunalEstado($fila['id']);
+      $arraytribunal[]= $arrayAux;
+      //  $arraytribunal[]=array("accion"=>"34");
      }
-    $smarty->assign('arraytribunal'  , $arraytribunal);
+       $smarty->assign('arraytribunal'  , $arraytribunal);
 
 
                $proyectos =  $estudiante->getProyecto();
@@ -150,10 +155,7 @@ try {
 
   $smarty->assign("ERROR", $ERROR);
   
-
-  //No hay ERROR
-  $smarty->assign("ERROR",'');
-  
+ 
 } 
 catch(Exception $e) 
 {

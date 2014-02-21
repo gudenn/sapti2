@@ -528,7 +528,7 @@ class Proyecto extends Objectbase {
    * @param type $docente
    * @param type $idproyecto
    * @return boolean|
-   * retorna un tribunal del proyecto dado el docente_id , proyecto_id 
+   * retorna un tribunal del proyecto dado el docente_id
    */
    function getTribunal($docente) 
   {
@@ -542,6 +542,42 @@ class Proyecto extends Objectbase {
     $estudiantes= mysql_fetch_array($resultados);
     $estudiante = new Tribunal($estudiantes);
     return $estudiante;
+  }
+  
+  
+  
+  /**
+   * 
+   * @param type $docente
+   * @param type $idproyecto
+   * @return boolean|
+   * retorna el estado de un  tribunal del proyecto dado el docente_id
+   */
+   function getTribunalEstado($docente) 
+  {
+    
+    leerClase('Tribunal');
+    $activo = Objectbase::STATUS_AC;
+    $sql = "select t.* from " . $this->getTableName('Tribunal') . " as t  where t.proyecto_id = '$this->id' and t.docente_id='$docente' and t.estado = '$activo'  and '$this->estado' = '$activo' ";
+    $resultados= mysql_query($sql);
+    if (!$resultados)
+      return false;
+    $estudiantes= mysql_fetch_array($resultados);
+    $estudiante = new Tribunal($estudiantes);
+   // var_dump($estudiante);
+    if($estudiante->accion==Tribunal::ACCION_AC)
+    {
+    return "Aceptado";
+    }else
+    {
+       if($estudiante->accion==Tribunal::ACCION_RE)
+       {
+      return  "Rechazado";
+       }else
+       {
+          return  "Pendiente";
+       }
+    }
   }
 
   /**

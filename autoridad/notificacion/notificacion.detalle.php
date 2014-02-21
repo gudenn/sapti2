@@ -60,8 +60,8 @@ try {
   {
     
         $smarty->assign('accion', array(
-        Tribunal::ACCION_AC =>  Tribunal::ACCION_AC,
-        Tribunal::ACCION_RE =>  Tribunal::ACCION_RE
+        Tribunal::ACCION_AC =>  "ACEPTAR",
+        Tribunal::ACCION_RE =>  "RECHAZAR"
      ));
     
     $notificacion  = new Notificacion($_GET['notificacion_id']);
@@ -76,6 +76,7 @@ try {
     $smarty->assign("proyecto", $proyecto);
     $smarty->assign("estudiante", $estudiante);
     $smarty->assign("notificacion", $notificacion);
+     $smarty->assign("estadonotificacion", $proyecto->getTribunalEstado(getSessionDocente()->id));
     $smarty->assign("tiponotificacion",$tipo);
   }
   

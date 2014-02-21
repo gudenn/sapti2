@@ -144,18 +144,20 @@
       <div>
         Detalle<br/>
         <textarea name="detalle" rows="5" style="width: 90%">
-Se le Asigno los Tribunales  correspondientes al proyecto:{$proyectobuscado->nombre}  del estudiante:{$usuariobuscado->getNombreCompleto()} para q usted realize las funciones como tribunal al proyecto ya mencionado esperamos su pronta respuesta 
+Se le Asigno los Tribunales  correspondientes al proyecto:{$proyectobuscado->nombre}  del estudiante:{$usuariobuscado->getNombreCompleto()} para que usted realize las funciones como tribunal al proyecto ya mencionado esperamos su pronta respuesta 
       </textarea>
         <script>
-          CKEDITOR.replace('detalle'{$editores})
+          CKEDITOR.replace('detalle'{$editores});
         </script>
       </div>
      
       
       <div style="text-align: center">
-        <input type="hidden" name="id" value="" />
-        <input type="hidden" name="salida_id" value="25" />
-        <input type="submit" value="grabar" name="tarea" class="sendme"  />
+              <input type="hidden" name="tarea" value="registrar">
+              <input type="hidden" name="token" value="{$token}">
+
+              <input name="submit" type="submit" id="submit" value="Guardar">
+        
      </div>
    </div>
  </form>

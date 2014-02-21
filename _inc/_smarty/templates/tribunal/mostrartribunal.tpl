@@ -20,21 +20,19 @@
       <th><a  >ID          </a></th>
       <th><a  >NOMBRE  </a></th>
       <th><a  >APELLIDOS    </a></th>
-         </tr>
+      <th><a  >ESTADO  </a></th>
+    </tr>
   </thead>
   
   
   <tbody>
   {section name=ic loop=$arraytribunal}
     <tr  class="selectable">
-     <td>{$arraytribunal[ic]['id']} </td>
-      <td>{$arraytribunal[ic]['nombre']} </td>
-       <td>{$arraytribunal[ic]['apellidos']}</td>
-      
-        </td>
-      
-        
-    </tr>
+     <td>{$arraytribunal[ic][0]} </td>
+     <td>{$arraytribunal[ic][1]} </td>
+     <td>{$arraytribunal[ic][2]}</td>
+     <td>{($arraytribunal[ic][3])}</td>
+         </tr>
   {/section}
     </tbody> 
 </table> 

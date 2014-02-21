@@ -67,7 +67,7 @@ EditableGrid.prototype.initializeGrid = function(iddicta)
 		};
                 
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
-		     cell.innerHTML = "<a onclick=document.location.href='editartribunal.php?editar&proyecto_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
+		     cell.innerHTML = "<a onclick=document.location.href='editartribunal.php?editar=editar&proyecto_id="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("editar.png") + "\" border=\"0\" alt=\"Ver Tribunales\" title=\"Editar Tribunales\" width='30px' height='30px' />Editar Tribunales</a>";
                         }}));
 		

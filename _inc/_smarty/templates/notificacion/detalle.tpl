@@ -11,7 +11,7 @@
 
     <p>Detalle</p>
     <p>{$notificacion->detalle}</p>
-
+{if ($estadonotificacion)=="Pendiente"}
 
     {if ($notificacion->tipo)==$tiponotificacion}
       <form action="" method="post" >
@@ -31,6 +31,7 @@
         </div>
 
       </form>
+    {/if}
     {/if}
   </div>
 </div>
