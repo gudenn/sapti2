@@ -33,7 +33,7 @@ $newClone.children("input").eq(1).attr("id",newID);
 $newClone.insertAfter($('#div_'+clickID));
 
 //Cambio el signo "+" por el signo "-" y le quito el evento addfield
-$("#"+clickID).val('Quitar Observacion').unbind("click",addField);
+$("#"+clickID).val('Quitar Observación').unbind("click",addField);
 
 //Ahora le asigno el evento delRow para que borre la fial en caso de hacer click
 $("#"+clickID).bind("click",delRow);					

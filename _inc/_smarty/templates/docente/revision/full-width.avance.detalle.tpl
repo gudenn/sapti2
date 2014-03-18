@@ -162,21 +162,21 @@ $('#theme-switcher').change(function () {
       <h3><b>Revisar Avance</b></h3>
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
-            <div id="div_1">
-            <label  accesskey="">OBSERVACION(ES):
+            <label  accesskey="">OBSERVACIÓN(ES):
             </label>
+            <div id="div_1">
             </p>
             <input  type="text"  name="observaciones[]" id="observaciones[]" style="width:500px;" data-validation-engine="validate[required]"/> 
-            <input class="bt_plus" id="1" type="button" value="Añadir Observacion" />
+            <input class="bt_plus" id="1" type="button" value="Añadir Observación" />
             <div class="error_form"></div>
             </div>
 
             <p>
               <input type="text" name="fecha_revision" id="fecha_revision" value="{$revision->fecha_revision}" size="22"/>
-              <label for="fecha_revision"><small>FECHA DE REVISION</small></label>
+              <label for="fecha_revision"><small>FECHA DE REVISIÓN</small></label>
             </p>
 
-            <h2 class="title">Grabar Revision</h2>
+            <h2 class="title">Grabar Revisión</h2>
             <p>
               <input type="hidden" name="id" value="{$revision->id}">
               <input type="hidden" name="id" value="{$observacion->id}">
