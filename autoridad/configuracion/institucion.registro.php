@@ -21,11 +21,7 @@ try {
   //CSS
   $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_JS  . "validate/validationEngine.jquery.css";
-  //BOX
-  $CSS[]  = URL_JS . "box/box.css";
-  
-  $smarty->assign('CSS',$CSS);
-
+ 
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
 
@@ -35,7 +31,15 @@ try {
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
 
   //BOX
+  $CSS[]  = URL_JS . "box/box.css";
   $JS[]  = URL_JS ."box/jquery.box.js";
+  //Datepicker & Tooltips $ Dialogs UI
+  $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
+  $JS[]   = URL_JS . "jquery-ui-1.10.3.custom.min.js";
+  $JS[]   = URL_JS . "ui/i18n/jquery.ui.datepicker-es.js";
+  $smarty->assign('header_ui','1');
+  $smarty->assign('CSS','');
+  $smarty->assign('CSS',$CSS);
   $smarty->assign('JS',$JS);
 
 

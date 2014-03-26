@@ -310,7 +310,7 @@ try {
     }
     $proyecto->validar();
     $proyecto->tipo_proyecto = TIPO;
-    $proyecto->estado_proyecto= Proyecto::EST6_C;
+    $proyecto->estado_proyecto=  Proyecto::EST1_INI;
     if(isset($_GET['cambio_total'])){
       $proyecto->numero_asignado=$numero;
     }

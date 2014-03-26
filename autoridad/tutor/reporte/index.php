@@ -7,8 +7,8 @@ try {
 
   /** HEADER */
   $smarty->assign('title','Gesti&oacute;n de Reprte');
-  $smarty->assign('description','Gesti&oacute;n de Reprte');
-  $smarty->assign('keywords','Gesti&oacute;n de Reprte');
+  $smarty->assign('description','Gesti&oacute;n de Reporte');
+  $smarty->assign('keywords','Gesti&oacute;n de Reporte');
 
   //CSS
   $CSS[]  = URL_CSS . "dashboard.css";
@@ -62,10 +62,10 @@ where u.id=t.usuario_id and pt.tutor_id=t.id  and pt.proyecto_id=p.id and pt.est
   leerClase('Menu');
   $menu = new Menu('Reporte Tutor Proyectos Aceptados Pdf');
   $link = Administrador::URL."reportesistema/reportes.sistema.pdf.php?sql=$sql";
-  $menu->agregarItem('Reporte Pdf','Reportes PDF de tutor Proyectos aceptados','basicset/filepd.png',$link);
+  $menu->agregarItem('Reporte Pdf','Reporte PDF de tutor Proyectos aceptados','basicset/filepd.png',$link);
   
   $link = Administrador::URL."reportesistema/reporte.sistema.excel.php?sql=$sql";
-  $menu->agregarItem('Reportes Excel','Reportes Excel de tutor Proyectos aceptados','basicset/boton_excel.png',$link);
+  $menu->agregarItem('Reporte Excel','Reporte Excel de tutor Proyectos aceptados','basicset/boton_excel.png',$link);
   $menus[] = $menu;
   $menu = new Menu('Reporte Tutor Proyectos Rechazados');
   $link = Administrador::URL."reportesistema/reportes.sistema.pdf.php?sql=$sql2";
@@ -73,9 +73,9 @@ where u.id=t.usuario_id and pt.tutor_id=t.id  and pt.proyecto_id=p.id and pt.est
   $link = Administrador::URL."reportesistema/reporte.sistema.excel.php?sql=$sql2";
   $menu->agregarItem('Reporte Tutor Proyectos Rechazados Excel','Reporte Tutor Proyectos Rechazados','basicset/boton_excel.png',$link);
   $menus[] = $menu;
-  $menu = new Menu('Reportes');
+  $menu = new Menu('Reporte');
   $link = Administrador::URL."tutor/reporte/reporte.php";
-  $menu->agregarItem('Reportes de Tutor','Reportes correspondientes a los Tutores','basicset/graph.png',$link);
+  $menu->agregarItem('Reporte de Tutor','Reportes correspondientes a los Tutores','basicset/graph.png',$link);
   $menus[] = $menu;
   //----------------------------------//
   

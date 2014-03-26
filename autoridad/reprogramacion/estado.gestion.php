@@ -25,7 +25,7 @@ try {
   leerClase('Semestre');
   /**
    * Menu superior
-   */
+  */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administrador');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'reprogramacion/','name'=>'Reprogramaci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'reprogramacion/'.basename(__FILE__),'name'=>'Gesti&oacute;n de Reprogramaci&oacute;n');
