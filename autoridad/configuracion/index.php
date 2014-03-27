@@ -102,7 +102,6 @@ try {
   $link = Administrador::URL."configuracion/titulo_honorifico.registro.php";
   $menu->agregarItem('Registro de T&iacute;tulos honor&iacute;ficos','Registro de una nuevos T&iacute;tulos honor&iacute;ficos.','basicset/plus_48.png',$link);
   $menus[] = $menu;
-  
   $menu = new Menu('Lugares De Defensa');
   $link = Administrador::URL."configuracion/lugar.gestion.php";
   $menu->agregarItem('Gesti&oacute;n de Lugares de Defensa','Los Lugares de Defensa','evaluar.png',$link);
