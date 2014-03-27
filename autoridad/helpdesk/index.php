@@ -86,7 +86,7 @@ try {
   $pendientes = Helpdesk::EST01_RECIEN;
   $pendientes = $helpdesk->contar(" estado_helpdesk = '{$pendientes}' ");
   // -CONTADOR //
-  $menu->agregarItem('Temas de Ayuda Pedientes','Temas de ayuda que estan pendientes.','basicset/tag.png',$link,$pendientes);
+  $menu->agregarItem('Temas de Ayuda Pendientes','Temas de ayuda que estan pendientes.','basicset/tag.png',$link,$pendientes);
   $link = Administrador::URL."helpdesk/helpdesk.tooltips.php?todos";
   // CONTADOR //
   leerClase('Tooltip');
@@ -94,7 +94,7 @@ try {
   $pendientes = Tooltip::EST02_APROBA;
   $pendientes = $tooltips->contar(" estado_tooltip != '{$pendientes}' ");
   // -CONTADOR //
-  $menu->agregarItem('Consejos Pedientes','Ventanas flotantes que ofrece el sistema, Ayudas pendientes.','basicset/tag.png',$link,$pendientes);
+  $menu->agregarItem('Consejos Pendientes','Ventanas flotantes que ofrece el sistema, Ayudas pendientes.','basicset/tag.png',$link,$pendientes);
   $menus[] = $menu;
 
   //----------------------------------//

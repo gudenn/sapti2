@@ -69,9 +69,7 @@ EditableGrid.prototype.initializeGrid = function()
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
 		       cell.innerHTML = "<a onclick=document.location.href='revision.lista.php?id_estudiante="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("detalle.png") + "\" border=\"0\" alt=\"delete\" title=\"Seguimiento\"/></a>";
-                cell.innerHTML += "&nbsp;<a onclick=document.location.href='observacion.registro.php?id_estudiante="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("editar.png") + "\" border=\"0\" alt=\"delete\" title=\"Registrar Observacion\"/></a>";
-                cell.innerHTML += "&nbsp;<a onclick=document.location.href='perfil.vistobueno.php?id_estudiante="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
+               cell.innerHTML += "&nbsp;<a onclick=document.location.href='perfil.vistobueno.php?id_estudiante="+getRowId(cell.rowIndex)+"' style=\"cursor:pointer\">" +
 						 "<img src=\"" + image("basicset/tick_48.png") + "\" border=\"0\" alt=\"delete\" title=\"Dar Visto Bueno\"/></a>";
 		}}));
 		
