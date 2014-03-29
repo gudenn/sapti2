@@ -14,6 +14,9 @@ try {
   $smarty->assign('description','P&aacute;gina de Lista de Incritos');
   $smarty->assign('keywords','Gestion,Estudiantes');
 
+  $smarty->assign('header_ui','1');
+
+  
   //CSS
   $CSS[]  = URL_CSS . "academic/tables.css";
   $CSS[]  = URL_CSS . "editablegrid.css";

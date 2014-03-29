@@ -1,0 +1,1 @@
+<p>En la parte superior tenemos opciones para el envi&oacute; del informe a ser revisado por el docente, luego hacemos una descripci&oacute;n sobre el proyecto y pasamos a evitar presionando en el bot&oacute;n grabar.</p>

@@ -1,0 +1,1 @@
+<p>Seleccione el semestre y la modalidad &nbsp;del cual se quiere generar el reporte presionamos Generar y nos muestra una lista de los proyectos seg&uacute;n la modalidad, los cuales se pueden exportar a Pdf o Excel presionando los iconos correspondientes.</p>

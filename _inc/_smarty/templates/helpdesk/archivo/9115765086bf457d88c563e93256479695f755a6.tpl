@@ -1,0 +1,1 @@
+<p>En este modulo vemos la lista de &nbsp;usuarios registrados en el sistema, en las cuales podemos a&ntilde;adir al usuario a un grupo determinado para que tenga acceso al modulo correspondiente.</p>

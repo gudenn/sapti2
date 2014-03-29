@@ -1,0 +1,1 @@
+<p>Aqu&iacute; tenemos una lista de las observaciones que hizo el docente en las cuales tenemos una opci&oacute;n resolver presionamos en resolver luego enviamos el documento corregido para su posterior revisi&oacute;n por parte del docente.</p>

@@ -17,6 +17,9 @@ try {
   
   $smarty->assign('CSS',$CSS);
 
+  $smarty->assign('header_ui','1');
+
+  
   //JS
  $JS[]  = URL_JS . "jquery.min.js";
 

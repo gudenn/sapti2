@@ -1,0 +1,3 @@
+<p><span style="font-family:arial,sans-serif; font-size:10pt">Se tiene un formulario de registro donde se debe llenar los datos correspondientes al&nbsp;Carrera como ser : Nombre de&nbsp;Carrera.</span></p>
+
+<p><span style="font-family:arial,sans-serif; font-size:10pt">Presionamos&nbsp;<input name="submit" style="border:1px solid rgb(112, 112, 112); margin:5px 5px 0px 0px; width:170px" type="submit" value="Grabar" /></span><span style="font-family:georgia,serif; font-size:10pt">&nbsp;&nbsp;</span><span style="font-family:arial,sans-serif; font-size:10pt">&nbsp;para terminar con el registro del Carrera.</span></p>

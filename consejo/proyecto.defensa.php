@@ -11,6 +11,8 @@ try {
   leerClase('Estudiante');
   $ERROR = '';
 
+  $smarty->assign('header_ui','1');
+
   /** HEADER */
   $smarty->assign('title','Lista de Estudiantes');
   $smarty->assign('description','P&aacute;gina de Lista de Incritos');
