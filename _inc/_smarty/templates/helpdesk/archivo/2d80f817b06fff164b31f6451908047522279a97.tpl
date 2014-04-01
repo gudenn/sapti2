@@ -1,1 +1,1 @@
-<p>Ord&eacute;nanos Los Semestres para seleccionar ordenadamente los semestre si lo necesitamos el cierre.</p>
+<p>Para seleccionar ordenadamente los semestre si lo necesitamos en el cierre.</p>
