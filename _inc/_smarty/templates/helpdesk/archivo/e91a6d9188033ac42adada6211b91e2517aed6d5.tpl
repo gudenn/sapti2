@@ -1,0 +1,1 @@
+<p>Para generar los reportes el docente seleccionara la materia que&nbsp;imparte y el tipo de reporte q quiere generar una vez seleccionado se le mostrara una lista la cual puede generarse en Pdf&nbsp;o Excel presionando en los respectivos botones.</p>

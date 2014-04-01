@@ -9,6 +9,7 @@ try {
   $smarty->assign('title','Configuraci&oacute;n de SAPTI');
   $smarty->assign('description','Configuraci&oacute;n de SAPTI');
   $smarty->assign('keywords','Configuraci&oacute;n de SAPTI');
+  $smarty->assign('header_ui','1');
 
   //CSS
   $CSS[]  = URL_CSS . "dashboard.css";

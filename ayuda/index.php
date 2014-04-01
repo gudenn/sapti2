@@ -20,7 +20,12 @@ try {
   $helpdesk = new Helpdesk();
   if ( isset($_GET['codigo']) )
     $helpdesk->getByCodigo ($_GET['codigo']);
-  $directorio = explode('/' , ltrim(dirname($helpdesk->directorio),'/'));
+  $strdir = ltrim(dirname($helpdesk->directorio),'/');
+  $busca    = array('configuracion'       ,'notificacion');
+  $remplaza = array('configuraci&oacute;n','notificaci&oacute;n');
+  $strdir   = str_replace($busca, $remplaza, $strdir);
+
+  $directorio = explode('/' , $strdir);
   //quitamos el primer elemento
   array_shift($directorio);
   $smarty->assign('topnav'   ,  $directorio);

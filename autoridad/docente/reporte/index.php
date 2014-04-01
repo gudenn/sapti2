@@ -9,6 +9,7 @@ try {
   $smarty->assign('title','Gesti&oacute;n de Proyectos Finales');
   $smarty->assign('description','Gesti&oacute;n de Proyectos Finales');
   $smarty->assign('keywords','Gesti&oacute;n de Proyectos Finales');
+  $smarty->assign('header_ui','1');
 
   //CSS
   $CSS[]  = URL_CSS . "dashboard.css";

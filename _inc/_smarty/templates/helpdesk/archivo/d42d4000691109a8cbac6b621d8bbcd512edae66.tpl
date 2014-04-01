@@ -1,0 +1,1 @@
+<p><span style="background-color:white; font-family:arial,sans-serif; font-size:10pt">El Registro de formulario del Perfil del estudiante se habilita una vez que tengan los vistos buenos del docente y del tutor en su proyecto</span></p>

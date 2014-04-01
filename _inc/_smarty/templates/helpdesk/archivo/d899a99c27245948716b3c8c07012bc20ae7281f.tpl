@@ -1,0 +1,1 @@
+<p><span style="background-color:rgb(249, 249, 249); color:rgb(151, 151, 151); font-family:georgia,times new roman,times,serif">&nbsp;</span>Presionamos Generar y nos muestra un grafico de los estados de los proyectos postergados, vencidos, prorroga y cambios.</p>

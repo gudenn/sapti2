@@ -1,0 +1,1 @@
+<p><span style="background-color:rgb(249, 249, 249); color:rgb(151, 151, 151); font-family:georgia,times new roman,times,serif">Se muestra la lista de Estudiantes a los cuales ya se les dio el visto bueno a su Proyecto.</span></p>

@@ -1,0 +1,1 @@
+<p>Tenemos una lista de cartas pendientes para confirmar en las cuales se puede imprimir, <span style="color:#0000FF">Ver </span>el cual nos permite ver la carta en detalle para poder generarlo llenando los datos que corresponda.</p>

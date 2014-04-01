@@ -1,0 +1,1 @@
+<p><span style="background-color:white; font-family:arial,sans-serif; font-size:10pt">Se tiene una lista de grupos de Usuarios seg&uacute;n sus roles en la cual se pueden editar el registro de los mismos</span></p>

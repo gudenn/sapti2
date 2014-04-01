@@ -1,0 +1,1 @@
+<p><span style="background-color:rgb(249, 249, 249); color:rgb(151, 151, 151); font-family:georgia,times new roman,times,serif">Seleccione el semestre del cual se quiere generar el reporte presionamos Generar y nos muestra un grafico de los Proyectos por modalidad.</span></p>
