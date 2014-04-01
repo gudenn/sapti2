@@ -168,6 +168,7 @@
         <input type="hidden" name="id" value="" />
         <input type="hidden" name="estudiante_id" value="{$estudiantebuscado->id}" />
          <input type="hidden" name="proyecto_id" value="{$proyectobuscado->id}" />
+          <input type="hidden" name="token" value="{$token}">
         <input type="hidden" name="salida_id" value="25" />
         <input type="submit"   name="tarea" value="Guardar"  class="sendme"  />
          </div>

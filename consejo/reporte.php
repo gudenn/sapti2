@@ -78,11 +78,12 @@ try {
   $p=$_POST['semestre_selec'];
   $semestre=new Semestre($p);
   $codigo=$semestre->codigo;
-   $codigo;
+   //echo   $codigo . ":";
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
-  if($_POST['semestre_selec']){
+  if($_POST['semestre_selec'])
+  {
   
   
  $sqlr="SELECT count(*) as c
@@ -94,18 +95,15 @@ WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
   
  while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
  {
-  // $arraytribunal=$fila;
-   
-   //array('name' => $fila["id"], 'home' => $fila["nombre"],'cell' => $fila["apellidos"], 'email' => 'john@myexample.com');
-   
-   $areglo[]=$fila;
+    $areglo[]=$fila;
  }
  
  echo $cont = $areglo[0]['c'];
 
- if ($cont!=0) {
+ if ($cont!=0)
+ {
     
- 
+ /**
   $sqlr="SELECT COUNT(*)as d
 FROM proyecto p,defensa d
 WHERE p.id=d.proyecto_id AND d.semestre='".$codigo."'";
@@ -113,11 +111,7 @@ WHERE p.id=d.proyecto_id AND d.semestre='".$codigo."'";
  $arraytribunal= array();
   
  while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
- {
-  // $arraytribunal=$fila;
-   
-   //array('name' => $fila["id"], 'home' => $fila["nombre"],'cell' => $fila["apellidos"], 'email' => 'john@myexample.com');
-   
+ {   
    $arraytribunal[]=$fila;
  }
  
@@ -127,8 +121,8 @@ WHERE p.id=d.proyecto_id AND d.semestre='".$codigo."'";
  // $objs_pg    = new Pagination($obj_mysql, 'g_cambios','',false,10);
  $smarty->assign('def'  , $def);
  
- 
- 
+ */
+ /**
  $sqlr="SELECT COUNT(*)as dp
 FROM proyecto p,defensa d
 WHERE p.id=d.proyecto_id and tipo_defensa='DPRI' AND d.semestre='".$codigo."'";
@@ -146,7 +140,7 @@ WHERE p.id=d.proyecto_id and tipo_defensa='DPRI' AND d.semestre='".$codigo."'";
  $dp=((double)$dp/(float)$cont)*100;
  // $objs_pg    = new Pagination($obj_mysql, 'g_cambios','',false,10);
  $smarty->assign('dp'  , $dp);
- 
+
  $sqlr="SELECT COUNT(*)as pu
 FROM proyecto p,defensa d
 WHERE p.id=d.proyecto_id and tipo_defensa='DPU'AND d.semestre='".$codigo."'";
@@ -155,10 +149,6 @@ WHERE p.id=d.proyecto_id and tipo_defensa='DPU'AND d.semestre='".$codigo."'";
   
  while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
  {
-  // $arraytribunal=$fila;
-   
-   //array('name' => $fila["id"], 'home' => $fila["nombre"],'cell' => $fila["apellidos"], 'email' => 'john@myexample.com');
-   
    $arraytribunal[]=$fila;
  }
  
@@ -167,7 +157,7 @@ WHERE p.id=d.proyecto_id and tipo_defensa='DPU'AND d.semestre='".$codigo."'";
  $pu=((double)$pu/(float)$cont)*100;
  // $objs_pg    = new Pagination($obj_mysql, 'g_cambios','',false,10);
  $smarty->assign('pu'  , $pu);
-
+*/
  // $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
  $sqlr="SELECT COUNT(DISTINCT p.id) as tri
 FROM proyecto p,tribunal t
@@ -199,11 +189,7 @@ WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
   
  while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
  {
-  // $arraytribunal=$fila;
-   
-   //array('name' => $fila["id"], 'home' => $fila["nombre"],'cell' => $fila["apellidos"], 'email' => 'john@myexample.com');
-   
-   $arraytribunal[]=$fila;
+    $arraytribunal[]=$fila;
  }
  
  $camb  = $arraytribunal[0]['cam'];
@@ -211,29 +197,7 @@ WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
  // $objs_pg    = new Pagination($obj_mysql, 'g_cambios','',false,10);
  $smarty->assign('cam'  , $cam); 
 
-//vencidos
-  $fechahoy=  date('Y-m-d');
-  $sqlr="SELECT count(*) as vencido
-FROM  usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe,vigencia v
-WHERE u.id=e.usuario_id AND e.id=i.estudiante_id AND i.semestre_id
-=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado='AC' AND p.id=v.proyecto_id AND ('".$fechahoy."'>=v.fecha_fin)and s.id='".$p."'";
- $resultado = mysql_query($sqlr);
- $arraytribunal= array();
-  
- while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
- {
-   
-   $arraytribunal[]=$fila;
- }
- 
-  $ve = $arraytribunal[0]['vencido'];
- // $objs_pg    = new Pagination($obj_mysql, 'g_cambios','',false,10);
 
-     $v=((double)$ve/(double)$cont)*100;
-     
- 
- 
- $smarty->assign('v'  , $v);
  }
 }
 

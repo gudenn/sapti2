@@ -89,6 +89,10 @@ class Menu
       $link = Administrador::URL."docente/reporte";
       $thise->agregarItem('Reportes de Docentes','Reportes correspondientes a los Docentes','basicset/graph.png',$link);
       $thises[] = $thise;
+       $thise = new Menu('Tribunal');
+      $link = Administrador::URL."tribunal/";
+      $thise->agregarItem('Gesti&oacute;n de Tribunal Externo','Registro y modificaciones para Docentes','basicset/user4.png',$link);
+       $thises[] = $thise;
       $thise = new Menu('Estudiantes');
       $link = Administrador::URL."estudiante/";
       $thise->agregarItem('Gesti&oacute;n de Estudiantes','Registro y modificaciones para estudiantes','basicset/user5.png',$link);
@@ -349,12 +353,12 @@ class Menu
    $menus[] = $menu;
   
    $notificacion= new Notificacion();
-       
+   /**    
      $menu = new Menu('Reportes');
      $link = Consejo::URL."reporte.php";
      $menu->agregarItem('Reportes','','basicset/graph.png',$link);
      $menus[] = $menu;
-  
+  */
   
        return $menus;
   }

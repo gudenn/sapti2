@@ -47,7 +47,7 @@ try {
   leerClase("Automatico");
   leerClase("Consejo");
   leerClase("Semestre");
-  leerClase("Semestre");
+  
   leerClase("Dia");
   leerClase('Html');
   
@@ -161,10 +161,11 @@ try {
        $doc= new Docente($fila["id"]);
         $listaareas=array();
         $lista_areas=array();
-        $lista_areas[] = $fila["id"];
+        $lista_areas[] =  $fila["id"];
         $lista_areas[] =  $fila["nombre"];
         $lista_areas[] =  $fila["apellidos"];
         $lista_areas[] =  $doc->getNumeroTribunales();
+       // echo  $doc->getNumeroTribunales();
    $sqla="select  a.nombre
    from docente d , apoyo ap , area a
    where  d.id=ap.docente_id and a.id=ap.area_id and d.estado='AC' and ap.estado='AC' and a.estado='AC'and d.id=".$fila["id"];
@@ -278,8 +279,8 @@ if(isset($_POST['automatico']))
       // echo "<script>alert('El Estudiante no Tiene Proyecto');</script>";
        }
    
-          $proyeareas=$proyecto->getArea();
-          $tutores=$proyecto->getTutores();
+       $proyeareas=$proyecto->getArea();
+       $tutores=$proyecto->getTutores();
        $arraytutores=array();
        foreach ($tutores  as $tuto)
        {
@@ -302,10 +303,10 @@ if(isset($_POST['automatico']))
          $arraytribunalasignados= array();
          $contador=0;
          while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
-         { 
+         { $doc= new Docente($fila["id"]);
            if($contador<3)
              {
-              $doc= new Docente($fila["id"]);
+              
               $listaareas=array();
               $lista_areas=array();
               $lista_areas[] = $fila["id"];
@@ -331,7 +332,7 @@ if(isset($_POST['automatico']))
                                 $lista_areas[] = $fila["id"];
                                 $lista_areas[] =  $fila["nombre"];
                                 $lista_areas[] =  $fila["apellidos"];
-                                  $lista_areas[] =  $doc->getNumeroTribunales();
+                                $lista_areas[] =  $doc->getNumeroTribunales();
   
                             $sqla="select  a.nombre
                                    from docente d , apoyo ap , area a
@@ -356,17 +357,14 @@ if(isset($_POST['automatico']))
 
 if(isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
  {
+     $poject= new Proyecto($_POST['proyecto_id']);
+ if(Proyecto::EST2_TA!=$poject->estado_proyecto)
+ {
 if (isset($_POST['proyecto_id']))
  {
   if(isset($_POST['ids'])  && sizeof($_POST['ids'])==3)
   {
    
-    
-    
-    
-   
-     
-  
      $EXITO = false;
     $stado=0;
     mysql_query("BEGIN");
@@ -391,7 +389,8 @@ if (isset($_POST['proyecto_id']))
     $notificacion->enviarNotificaion( $noticaciones);
     foreach ($_POST['ids'] as $id)
      {
-     
+  //  $actual= $semestre->getActivo();
+   // $actual->co
               
                 $tribunal                    = new Tribunal();
                 $tribunal->objBuidFromPost();  
@@ -402,6 +401,7 @@ if (isset($_POST['proyecto_id']))
                 $tribunal->accion="";
                 $tribunal->visto             =  Tribunal::VISTO_NV;
                 $tribunal->fecha_asignacion  = date("j/n/Y");
+              //  $tribunal->semestre          =  ;
                 $tribunal->estado            = Objectbase::STATUS_AC;
                 $tribunal->save();
                 
@@ -454,6 +454,7 @@ if (isset($_POST['proyecto_id']))
     $ERROR = $html->getMessageBox($mensaje);
  }
  }
+ }
  
 
 
@@ -462,6 +463,7 @@ if (isset($_POST['proyecto_id']))
 } 
 catch(Exception $e) 
 {
+   
   $smarty->assign("ERROR", handleError($e));
 }
 $token = sha1(URL . time());

@@ -51,11 +51,9 @@
                         type: 'pie',
                         name: 'Browser share',
                         data: [
-                            ['Tribunles', {$tri}],
-                            ['Defensa',    {$def}],
-                            ['Defensa Privada', {$dp}],
-                            ['Defensa Publica',    {$pu}],
-                            
+                            ['Sin Tribunles', {$tri}],
+                            ['Con Tribunales',    {42}],
+                          
                            
                         ]
                     }]

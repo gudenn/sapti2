@@ -163,7 +163,7 @@ WHERE  u.id= d.usuario_id and   d.id= t.docente_id and   t.estado='AC' and u.est
   
   
         
-         if( isset($_POST['proyecto_id'])  && isset($_POST['tarea']) && $_POST['tarea'] =='Guardar')
+         if( isset($_POST['proyecto_id'])  && isset($_POST['tarea']) && $_POST['tarea'] =='Guardar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
             {
           $semestre= new Semestre();
           $semestreactual=   $semestre->getActivo();
@@ -236,7 +236,7 @@ WHERE  u.id= d.usuario_id and   d.id= t.docente_id and   t.estado='AC' and u.est
              {
         
                  $query = "UPDATE proyecto p SET p.estado_proyecto='LD'  WHERE p.id=$idproyecto";
-               mysql_query($query);
+                 mysql_query($query);
        
              }
             
@@ -289,6 +289,9 @@ catch(Exception $e)
  
   $smarty->assign("ERROR", handleError($e));
 }
+$token = sha1(URL . time());
+$_SESSION['register'] = $token;
+$smarty->assign('token', $token);
 
 $contenido = 'tribunal/asignar.tpl';
   $smarty->assign('contenido',$contenido);

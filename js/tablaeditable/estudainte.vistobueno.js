@@ -68,9 +68,9 @@ EditableGrid.prototype.initializeGrid = function(dicta)
                 
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
 		cell.innerHTML = "<a onclick=document.location.href='../revision/revision.lista.php?iddicta="+ dicta +"&estudiente_id=" + getRowId(cell.rowIndex) + "' style=\"cursor:pointer\">" +
-				"<img src=\"" + image("seguimiento.png") + "\" border=\"0\" alt=\"seguimiento\" title=\"Seguimiento de Proyecto\" width='30px' height='30px' />Seguimiento</a>";
-                               cell.innerHTML += "<br><a onclick=document.location.href='vistobueno.php?id_estudiante="+getRowId(cell.rowIndex)+"&iddicta="+ dicta +"' style=\"cursor:pointer\">" +
-						 "<img src=\"" + image("basicset/ok.png") + "\" border=\"0\" alt=\"evaluar\" title=\"Evaluar Proyecto\" width='30px' height='30px' />Visto Bueno</a>";
+		"<img src=\"" + image("seguimiento.png") + "\" border=\"0\" alt=\"seguimiento\" title=\"Seguimiento de Proyecto\" width='30px' height='30px' />Seguimiento</a>";
+                 cell.innerHTML += "<br><a onclick=document.location.href='vistobueno.php?id_estudiante="+getRowId(cell.rowIndex)+"&iddicta="+ dicta +"' style=\"cursor:pointer\">" +
+		 "<img src=\"" + image("basicset/ok.png") + "\" border=\"0\" alt=\"evaluar\" title=\"Evaluar Proyecto\" width='30px' height='30px' />Visto Bueno</a>";
 
                   }}));
 		
