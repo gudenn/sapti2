@@ -1,1 +1,1 @@
-<p>Modulo de&nbsp;Reprogramaciones&nbsp;postergar o poner en prorroga al proyecto del estudiante&nbsp;en&nbsp;el sistema</p>
+<p><span style="background-color:white; font-family:arial,sans-serif; font-size:9pt">Ingrese haciendo clic sobre el modulo&nbsp;</span>de&nbsp;Reprogramaciones&nbsp;postergar o poner en prorroga al proyecto del estudiante&nbsp;en&nbsp;el sistema</p>

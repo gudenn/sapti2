@@ -1,1 +1,1 @@
-<p>Tenemos una lista de formularios registrados para la confirmaci&oacute;n por parte del Administrador.</p>
+<p>Ingrese haciendo clic sobre el modulo Gesti&oacute;n de Formularios Pendientes : Confirmar Formularios Pendientes&nbsp;<span style="background-color:white; font-family:arial,sans-serif; font-size:9pt">&nbsp;t</span>enemos una lista de formularios registrados para la confirmaci&oacute;n por parte del Administrador.</p>
