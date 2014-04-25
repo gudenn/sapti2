@@ -1,9 +1,9 @@
-<p style="text-align:left">Archivo: Tenemos &nbsp;el documento o informe enviado por el estudiante.</p>
+<p><span style="font-family:arial,sans-serif; font-size:10pt">Archivo: Tenemos &nbsp;el documento o informe enviado por el estudiante.</span></p>
 
-<p style="text-align:left">Descripcion: La descripcion Adjunta al avance realizado.</p>
+<p><span style="font-family:arial,sans-serif; font-size:10pt">Descripci&oacute;n: La descripci&oacute;n Adjunta al avance realizado.</span></p>
 
-<p style="text-align:left">Revisar Avance: En esta opcion el docente podra realizar sus observaciones para luego enviarlar al estudiante para su respectiva correccion.</p>
+<p><span style="font-family:arial,sans-serif; font-size:10pt">Revisar Avance: En esta opci&oacute;n el docente podr&aacute; realizar sus observaciones para luego enviarlas al estudiante para su respectiva correcci&oacute;n.</span></p>
 
-<p style="text-align:left">Una ver realizado las observaciones precionar grabar para su envio al estudiante.</p>
+<p><span style="font-family:arial,sans-serif; font-size:10pt">Una ver realizado las observaciones presionar grabar para su envi&oacute; al estudiante.</span></p>
 
-<p style="text-align:left">Podemos hacer una revicion o parovar la correccion realizada por el estudiante.</p>
+<p><span style="font-family:arial,sans-serif; font-size:10pt">Podemos hacer una revisi&oacute;n o aprobar la correcci&oacute;n realizada por el estudiante.</span></p>

@@ -1,3 +1,3 @@
-<p style="text-align:left">Se tiene un formulario de registro donde se debe llenar lso datos correspondientes al&nbsp;Sub-&Aacute;rea&nbsp;&nbsp;como ser :Nombre Del&nbsp;&Aacute;rea&nbsp;<span style="font-family:georgia,times new roman,times,serif">,</span>Descripci&oacute;n&nbsp;Sub-&Aacute;rea.</p>
+<p style="text-align:left">Se tiene un formulario de registro donde se debe llenar los datos correspondientes al&nbsp;Sub-&Aacute;rea&nbsp;&nbsp;como ser :Nombre Del&nbsp;&Aacute;rea&nbsp;<span style="font-family:georgia,times new roman,times,serif">,</span>Descripci&oacute;n&nbsp;Sub-&Aacute;rea.</p>
 
 <p style="text-align:left">Precionamos&nbsp;<input name="submit" style="border:1px solid rgb(112, 112, 112); margin:5px 5px 0px 0px; width:170px" type="submit" value="Grabar" /><span style="font-family:georgia,times new roman,times,serif">&nbsp;&nbsp;</span>&nbsp;para terminar con el registro del Sub-&Aacute;rea&nbsp;.</p>
