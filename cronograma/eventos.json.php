@@ -9,6 +9,7 @@ leerClase('Estudiante');
 leerClase('Dicta');
 leerClase('Docente');
 leerClase('Materia');
+leerClase('Fecha_registro');
 $semestre = new Semestre();
 $semestre->getActivo();
 
@@ -21,6 +22,11 @@ if ( isset($_GET['year']) && isset($_GET['month']) && isset($_GET['day']) )
           
   $evento = new Evento();
   $evento->estado = 'AC';
+  
+  $fecharegistro=new Fecha_registro();
+  $fecharegistro->semestre_id = $semestre->id;
+  
+  
   $filter = '';
   $order  = '';
   $limit  = '';
@@ -33,6 +39,7 @@ if ( isset($_GET['year']) && isset($_GET['month']) && isset($_GET['day']) )
     $month      = $_GET['month'] + 1;
     $cronograma->fecha_evento = "{$_GET['day']}/{$month}/{$_GET['year']}";
     $evento->fecha_evento     = "{$_GET['day']}/{$month}/{$_GET['year']}";
+  
   }
   // para un solo mes
   elseif ( $_GET['year'] && $_GET['month'] && !$_GET['day'] )
@@ -44,8 +51,11 @@ if ( isset($_GET['year']) && isset($_GET['month']) && isset($_GET['day']) )
     $date_start = Objectbase::dateHumanToSQl("{$day}/{$month}/{$year}");
     $date_end   = Objectbase::dateHumanToSQl("{$day_end}/{$month}/{$year}");
     $filter     = " AND #tabla#.fecha_evento  >=  '{$date_start}' AND #tabla#.fecha_evento  <=  '{$date_end}' ";
-
+    $filter2     = " AND #tabla#.fecha_inicio  >=  '{$date_start}' AND #tabla#.fecha_inicio  <=  '{$date_end}' ";
+    $filter1     = " AND #tabla#.fecha_fin  >=  '{$date_start}' AND #tabla#.fecha_fin  <=  '{$date_end}' ";
+   
     }
+    
   // para la primera carga de pagina
   else
   {
@@ -55,7 +65,10 @@ if ( isset($_GET['year']) && isset($_GET['month']) && isset($_GET['day']) )
     $day        = date('d',  mktime(0, 0, 0, $month, 1, $year));
     $date_start = Objectbase::dateHumanToSQl("{$day}/{$month}/{$year}");
     $filter     = " AND #tabla#.fecha_evento  >=  '{$date_start}' ";
+   
+    
   }
+ 
   // Para el cronograma general
   $limitCrono  = str_replace( '#tabla#',$cronograma->getTableName(), $limit);
   $orderCrono  = str_replace( '#tabla#',$cronograma->getTableName(), $order);
@@ -68,6 +81,38 @@ if ( isset($_GET['year']) && isset($_GET['month']) && isset($_GET['day']) )
       \n{ "date": "{$row['fecha_evento']} 08:00:00", "type": "Evento", "title": "{$row['nombre_evento']}", "description": "{$row['detalle_evento']}", "url": "" },
 ______SALIDAS;
   }
+  
+   //Para fechas de registro de Perfil Fecha inicio
+  $limitFormu1 = str_replace( '#tabla#',$fecharegistro->getTableName(), $limit2);
+  $orderFormu1   = str_replace( '#tabla#',$fecharegistro->getTableName(), $order2);
+  $filterFormu1  = str_replace( '#tabla#',$fecharegistro->getTableName(), $filter2);
+  $respFormu1    = $fecharegistro->getAll($limitFormu1, $orderFormu1, $filterFormu1);
+ 
+  if ($respFormu1[0])
+  while ($row = mysql_fetch_array($respFormu1[0])) 
+  {
+  	$rsal .= <<<______SALIDAS
+      \n{ "date": "{$row['fecha_inicio']} 08:00:00", "type": "Evento", "title": "Inicio Registro de Formulario Perfil", "description": "{$row['descripcion']}", "url": "" },
+______SALIDAS;
+  }
+  
+  //Para fechas de registro de Perfil Fecha Fin
+  $limitFormu = str_replace( '#tabla#',$fecharegistro->getTableName(), $limit);
+  $orderFormu   = str_replace( '#tabla#',$fecharegistro->getTableName(), $order1);
+  $filterFormu  = str_replace( '#tabla#',$fecharegistro->getTableName(), $filter1);
+  $respFormu    = $fecharegistro->getAll($limitFormu, $orderFormu, $filterFormu);
+ 
+  if ($respFormu[0])
+  while ($row = mysql_fetch_array($respFormu[0])) 
+  {
+  	$rsal .= <<<______SALIDAS
+      \n{ "date": "{$row['fecha_fin']} 08:00:00", "type": "Evento", "title": "Fecha Limite Registro de Formulario Perfil", "description": "{$row['descripcion']}", "url": "" },
+______SALIDAS;
+  }
+ 
+  
+  
+  
   // Si es estudiante para todas las materias que tiene inscrito
   if(isEstudianteSession())
   {

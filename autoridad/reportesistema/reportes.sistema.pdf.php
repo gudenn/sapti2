@@ -82,8 +82,12 @@ $b=1;
 
     return $tmp; 
   };
- $sql=  array_recibe($sql); 
-$b=1;
+  
+  $s='select ';
+ $sql= array_recibe($sql); 
+ $sql1=$s.$sql;
+
+ $b=1;
 
 function DesplegarTabla($a,$b)
      {
@@ -148,7 +152,7 @@ function DesplegarTabla($a,$b)
 
 // output the HTML content
 //$pdf->SetXY(20, 50);
-$pdf->writeHTML(DesplegarTabla($sql,$b), true, false, true, false, '');
+$pdf->writeHTML(DesplegarTabla($sql1,$b), true, false, true, false, '');
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

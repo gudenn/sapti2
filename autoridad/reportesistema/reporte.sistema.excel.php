@@ -16,8 +16,10 @@
 
             return $tmp; 
         };
-        $consulta=  array_recibe($consulta); 
-	  $resultado =mysql_query($consulta); 
+        $s='select ';
+        $consulta=  array_recibe($consulta);
+        $sql=$s.$consulta;
+	  $resultado =mysql_query($sql); 
 		date_default_timezone_set('America/Mexico_City');
 
 		if (PHP_SAPI == 'cli')

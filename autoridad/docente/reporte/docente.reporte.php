@@ -55,6 +55,10 @@ try {
    $semestre=new Semestre($p);
    $smarty->assign("semestre", $semestre);
    $confirmado=  Proyecto::EST6_C;
+   $sqle='u.nombre as NOMBRE ,CONCAT(u.apellido_paterno," ",u.apellido_materno) as APELLIDO ,m.nombre as MATERIA,COUNT(materia_id) as INSCRITOS
+   from usuario u, docente d ,dicta di,materia m ,inscrito i ,evaluacion ev ,semestre s
+   where u.id=d.usuario_id and di.docente_id=d.id and di.materia_id=m.id and i.dicta_id=di.id and ev.id=i.evaluacion_id and s.id=di.semestre_id and s.id="'.$p.'"
+   GROUP BY m.nombre';
   
    $sqlr='select u.nombre as NOMBRE ,CONCAT(u.apellido_paterno," ",u.apellido_materno) as APELLIDO ,m.nombre as MATERIA,COUNT(materia_id) as INSCRITOS
    from usuario u, docente d ,dicta di,materia m ,inscrito i ,evaluacion ev ,semestre s
@@ -71,7 +75,7 @@ try {
    //$sql=
  
    $smarty->assign('listadocentes'  , $docentes);
-   $smarty->assign('sqlr'  , array_envia($sqlr));
+   $smarty->assign('sqle'  , array_envia($sqle));
  
  
 }

@@ -141,6 +141,26 @@ class Semestre extends Objectbase
     if ($array)
       parent::__construct($array);
   }
+  /**
+   * Busca las fechas de registro de perfil del semestre actual
+   */
+  
+  function getFecha(){
+    
+     leerClase('Fecha_registro');
+
+    $objetivos= array();
+    $activo = Objectbase::STATUS_AC;
+    $sql = "select v.* from " . $this->getTableName('fecha_registro') . " as v    where v.semestre_id = '$this->id' and v.estado = '$activo'";
+    $resultado = mysql_query($sql);
+    if (!$resultado)
+      return false;
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) {
+      $objetivos[] = new Fecha_registro($fila);
+    }
+    return $objetivos;
+    
+  }
 
   
 /**

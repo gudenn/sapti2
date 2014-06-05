@@ -124,6 +124,7 @@ class Menu
       $link = Administrador::URL."reprogramacion/";
       $thise->agregarItem('Gesti&oacute;n de Reprogramaciones','Postergar y dar Prorroga a Proyectos','basicset/calendar.png',$link);
       $thises[] = $thise;
+     
       $thise = new Menu('Perfil');
       $link = Administrador::URL."pendientes/";
       $thise->agregarItem('Gesti&oacute;n de Perfiles','Gestionar los perfiles de tesis para los estudiantes','basicset/licence.png',$link);
@@ -249,9 +250,19 @@ class Menu
    * @param Proyecto $proyecto
    * @return Menu
    */
+   
+   
   function getestudianteIndex($proyecto) {
     leerClase('Grupo');
     leerClase('Estudiante');
+    leerClase('Semestre');
+    $semetre=new Semestre();
+    $semetre->getActivo();
+    $fecha=$semetre->getFecha();
+    $fechaactual=date("Y-m-d");
+    
+    $fechaini=$fecha[0]->fecha_inicio;
+    $fechafin=$fecha[0]->fecha_fin;
    
     if (!isEstudianteSession())
       return array();
@@ -260,7 +271,7 @@ class Menu
     $thise = new Menu('Proyecto');
     $link = Estudiante::URL."proyecto-final/";
     $thise->agregarItem('Proyecto','Registro de avances y correcciones para el Proyecto Final','basicset/briefcase_48.png',$link);
-    if( is_object( $proyecto) && $proyecto->estado_proyecto==Proyecto::EST2_BUE)
+    if( is_object( $proyecto) && $proyecto->estado_proyecto==Proyecto::EST2_BUE && $fechaini<=$fechaactual && $fechafin>=$fechaactual)
     {
       $link = Estudiante::URL."proyecto/proyecto.registro.php";
       $thise->agregarItem('Registro de Formulario','Registro de Formulario de Proyecto Final del Estudiante','basicset/survey.png',$link,1);

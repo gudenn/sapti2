@@ -103,6 +103,12 @@ try {
   $link = Administrador::URL."configuracion/titulo_honorifico.registro.php";
   $menu->agregarItem('Registro de T&iacute;tulos honor&iacute;ficos','Registro de una nuevos T&iacute;tulos honor&iacute;ficos.','basicset/plus_48.png',$link);
   $menus[] = $menu;
+  $menu = new Menu('Gesti&oacute;n Fechas de Registro del Formulario Perfil');
+  $link = Administrador::URL."configuracion/fechaperfil.gestion.php";
+  $menu->agregarItem('Gesti&oacute;n de Fechas de Registro del Formulario Perfil','Gestionar las Fechar Programadas para el Registro de Perfil','basicset/calendar.png',$link);
+  $link = Administrador::URL."configuracion/fechaperfil.registro.php";
+  $menu->agregarItem('Registro de Fechas de Registro del Formulario Perfil','Registro de un Nuevo Fechas de Registro del Formulario Perfil','basicset/plus_48.png',$link);
+  $menus[] = $menu;
   $menu = new Menu('Lugares De Defensa');
   $link = Administrador::URL."configuracion/lugar.gestion.php";
   $menu->agregarItem('Gesti&oacute;n de Lugares de Defensa','Los Lugares de Defensa','evaluar.png',$link);

@@ -783,7 +783,25 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`evento` (
   `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Estructura de tabla para la tabla `fecha_registro`
+--
+
+CREATE TABLE IF NOT EXISTS `fecha_registro` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `semestre_id` int(100) NOT NULL,
+  `fecha_inicio` date DEFAULT NULL,
+  `fecha_fin` date DEFAULT NULL,
+  `descripcion` varchar(100) DEFAULT NULL,
+  `estado` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+
+--
+-- Volcar la base de datos para la tabla `fecha_registro`
+--
 
 -- -----------------------------------------------------
 -- Table `sapti`.`cambio`

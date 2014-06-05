@@ -57,6 +57,10 @@ try {
    $smarty->assign("semestre", $semestre);
    $confirmado=  Proyecto::EST6_C;
   
+   $sqle='DISTINCT u.nombre AS NOMBRE,CONCAT(apellido_paterno," ",apellido_materno) as APELLIDO,p.nombre as PROYECTO,p.estado_proyecto as ESTADO,s.codigo as GESTION
+    FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe
+    WHERE u.id=e.usuario_id AND e.id=i.estudiante_id and p.tipo_proyecto="PR" and p.estado_proyecto="LD" AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado="AC" and s.id="'.$p.'"';
+   
    $sqlr='SELECT DISTINCT u.nombre AS NOMBRE,CONCAT(apellido_paterno," ",apellido_materno) as APELLIDO,p.nombre as PROYECTO,p.estado_proyecto as ESTADO,s.codigo as GESTION
     FROM usuario u,estudiante e,inscrito i ,semestre s,proyecto p,proyecto_estudiante pe
     WHERE u.id=e.usuario_id AND e.id=i.estudiante_id and p.tipo_proyecto="PR" and p.estado_proyecto="LD" AND i.semestre_id=s.id AND e.id=pe.estudiante_id AND pe.proyecto_id=p.id AND p.estado="AC" and s.id="'.$p.'"';
@@ -71,7 +75,7 @@ try {
  
  
    $smarty->assign('listaproyectos'  , $arraydefensa);
-   $smarty->assign('sqlr'  , array_envia($sqlr));
+   $smarty->assign('sqlr'  , array_envia($sqle));
  
  
 }

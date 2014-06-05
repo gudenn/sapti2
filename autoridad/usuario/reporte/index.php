@@ -45,7 +45,7 @@ try {
                return $tmp;
            };
            //Consulta Usuarios
-  $sqlr='select u.nombre as NOMBRE ,concat(u.apellido_paterno," ",u.apellido_materno) as APELLIDO ,u.email as CORREO,u.ci as CI ,u.login as LOGIN ,u.estado as ESTADO
+  $sqlr='u.nombre as NOMBRE ,concat(u.apellido_paterno," ",u.apellido_materno) as APELLIDO ,u.email as CORREO,u.ci as CI ,u.login as LOGIN ,u.estado as ESTADO
 from usuario u
 ';
   
