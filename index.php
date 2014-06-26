@@ -8,7 +8,6 @@ try {
   $smarty->assign('description','Bienvenido a SAPTI');
   $smarty->assign('keywords','Proyecto Final');
  $CSS[]  = URL_CSS . "dashboard.css";
- $CSS[]  = URL_CSS . "acordion.css";
   //CSS
   $CSS[]  = "css/style.css";
 
