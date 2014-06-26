@@ -53,7 +53,7 @@
     
   {section name=ic loop=$listadocentes}
     
-    <tr  class="selectable">
+    <tr  class="selectable" id="{$listadocentes[ic][0]}" >
    
       <td>{$listadocentes[ic][0]}
         <input type="hidden" name="ids[]" value="{$listadocentes[ic][0]}">
@@ -74,8 +74,7 @@
   {/foreach}
 {/foreach}
  </span> 
-        
-       </a>
+ </a>
 </td>
 
      
@@ -94,7 +93,7 @@
             <th>ID          </th>
             <th>NOMBRE       </th>
             <th>APELLIDOS   </th>
-            <th><a  >Nro. Tribunal</a></th>
+            <th><a >Nro. Tribunal</a></th>
              <th>&Aacute;REA</th>
             
           </tr>
@@ -103,7 +102,7 @@
    
   {section name=ic loop=$asignados}
     
-    <tr  class="selectable">
+    <tr  class="selectable" id="{$asignados[ic][0]}" >
    
       <td>{$asignados[ic][0]}
         <input type="hidden" name="ids[]" value="{$asignados[ic][0]}">
@@ -166,16 +165,40 @@ Se le Asigno los Tribunales  correspondientes al proyecto:{$proyectobuscado->nom
 
 <script type="text/javascript">
 
+
+
   jQuery(function(){
     $("#docentes tbody").on("click", "tr", function(event){
  if ($('#asignados > tbody >tr').length==3)
     {
-     alert ( "Solo se Permitern tres Tribunales!!" );
+     alert ( "Solo se Permiten tres Docentes como Tribunales!!" );
       } else
         {
-           $("#asignados").append('<tr>' + $(this).html() + '</tr>');
-         $(this).remove();
-          }
+      var  trid = $(this).attr('id'); // table row ID 
+      
+        var fila=     $(this).html()
+                                       
+                             $.ajax({
+				url: 'verificar.php',
+				type: "GET",
+				data: "id="+trid,
+				success: function(datos){
+                               
+                               if(datos=="1")
+                               {
+                                    $("#asignados").append('<tr>' +fila + '</tr>');
+                                        $("#"+trid).remove(); 
+                               }else
+                               {
+                                   alert(datos)
+                               }
+                                        
+           
+                             }
+			});              
+       
+        
+        }
         return false;
       
       

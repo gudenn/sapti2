@@ -72,12 +72,12 @@ try {
     
      $semestre = new Semestre('',1);
     
-    $valorh = $semestre->getValor('N&uacute;mero m&aacute;ximo de tribunal',10);
-    if ($valorh)
+    $valorh = $semestre->getValor('Número máximo de tribunal',10);
+    if (!$valorh)
     {
-       $semestre->setValor('N&uacute;mero m&aacute;ximo de tribunal',10);
+      //  echo $valorh;
+       $semestre->setValor('Número máximo de tribunal',10);
     }
-    
     
 
     

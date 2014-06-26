@@ -3,7 +3,7 @@ try {
   define ("MODULO", "CONSEJO");
   require('_start.php');
   if(!isConsejoSession())
-  header("Location: ../login.php"); 
+  header("Location: login.php"); 
   leerClase('Docente');
   leerClase('Consejo');
   $ERROR = '';
