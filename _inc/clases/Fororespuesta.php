@@ -1,11 +1,17 @@
 <?php
-class Sub_area extends Objectbase
+class Fororespuesta extends Objectbase
 {
  /**
-  * Id del Area
+  * Id del Forotema
   * @var INT(11)
   */
-  var $area_id;
+  var $forotema_id;
+
+ /**
+  * Id del usuario que publico
+  * @var INT(11)
+  */
+  var $usuario_id;
 
  /**
   * Codigo del Sub-Area

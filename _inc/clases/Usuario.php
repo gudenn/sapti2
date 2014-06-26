@@ -143,8 +143,11 @@ class Usuario  extends Objectbase
     parent::save($table, $father_id_value, $base);
   }
   
-  function getNombreCompleto($echo = false) 
+  function getNombreCompleto($echo = false , $id = false) 
   {
+    if ($id){
+      $this->__construct($id);
+    }
     $nombreCompleto = trim(strtoupper("{$this->titulo_honorifico} {$this->nombre} {$this->apellido_paterno} {$this->apellido_materno}"));
     if ($echo)
     {

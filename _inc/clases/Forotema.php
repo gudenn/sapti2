@@ -1,24 +1,40 @@
 <?php
-class Sub_area extends Objectbase
+class Forotema extends Objectbase
 {
- /**
-  * Id del Area
-  * @var INT(11)
-  */
-  var $area_id;
 
  /**
-  * Codigo del Sub-Area
-  * @var INT(45)
+  * Id del usuario que publico
+  * @var INT(11)
+  */
+  var $usuario_id;
+
+ /**
+  * Codigo del Tema
+  * @var VARCHAR(100)
   */
   var $nombre;
   
  /**
-  * Descripcion del Sub-Area
-  * @var INT(45)
+  * Descripcion del Tema
+  * @var TEXT
   */
   var $descripcion;
 
+ /**
+  * (Objeto simple)  Todos las respuestas de un tema
+  * @var Fororespuesta|null 
+  */
+  var $fororespuesta_objs;
+
+  /**
+   * Contamos el total de respuestas de un tema
+   * @param type $forotema_id
+   */
+  function contarRespuestas($forotema_id) {
+    leerClase('Fororespuesta');
+    $fororespuesta = new Fororespuesta();
+    return $fororespuesta->contar(" forotema_id = '{$forotema_id}' ");
+  }
 
   /**
    * Validamos que todos los datos enviados sean correctos
@@ -75,5 +91,4 @@ class Sub_area extends Objectbase
     return $filtro_sql;
   }
 }
-
 ?>

@@ -464,6 +464,11 @@ AND tr.docente_id=".$docente->id."
    $link = Docente::URL."reportes.sistema.php";
    $thise->agregarItem('Reportes de Usuario','Gesti&oacute;n de reportes del sistema.','basicset/diagram_48.png',$link);
    $thises[] = $thise;
+
+   $thise = new Menu('Foro SAPTI');
+   $link = Docente::URL."/foro/";
+   $thise->agregarItem('Foro del sistema','Gesti&oacute;n de temas y debates para docentes, tutores y tribunales.','basicset/chat.png',$link);
+   $thises[] = $thise;
   
     return $thises;
   }
