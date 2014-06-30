@@ -28,7 +28,8 @@
       <td>{$objs[ic]['usuario_login']}</td>
       <td>{$objs[ic]['usuario_email']}</td>
       <td>
-        <a href="proyecto.detalle.php?estudiante_id={$objs[ic]['id']}" target="_blank" >{icono('basicset/document.png','Detalle')}Ver Detalle Proyecto</a>
+        <a href="proyecto.detalle.php?estudiante_id={$objs[ic]['id']}" target="_blank" >{icono('basicset/document.png','Detalle')} Detalle</a>
+        <a href="proyecto.pdf.php?estudiante_id={$objs[ic]['id']}" target="_blank" >{icono('basicset/filepd.png','Descargar Pdf')} Pdf</a>
       </td>
     </tr>
   </tbody>
