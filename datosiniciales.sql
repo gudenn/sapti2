@@ -149,3 +149,10 @@ INSERT INTO `cambio` (`id`, `proyecto_id`, `tipo`, `fecha_cambio`, `estado`) VAL
 (1, 4, 'CAMBIO TEMA', '2013-09-19', 'AC');
 
 INSERT INTO `sapti`.`codigo_grupo` (`id`, `nombre`, `estado`) VALUES ('1', 'Grupo A', 'AC'), ('2', 'Grupo B', 'AC'), ('3', 'Grupo C', 'AC'), ('4', 'Grupo D', 'AC'), ('5', 'Grupo E', 'AC');
+
+--
+-- Volcar la base de datos para la tabla `fecha_registro`
+--
+
+INSERT INTO `fecha_registro` (`id`, `semestre_id`, `fecha_inicio`, `fecha_fin`, `descripcion`, `estado`) VALUES
+(7, 1, '2014-06-02', '2014-06-24', 'jhdskhkdfs', 'AC');

@@ -1,347 +1,23 @@
--- phpMyAdmin SQL Dump
--- version 4.0.4
--- http://www.phpmyadmin.net
---
--- Servidor: localhost
--- Tiempo de generación: 29-11-2013 a las 10:54:16
--- Versión del servidor: 5.6.12-log
--- Versión de PHP: 5.4.12
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
---
--- Base de datos: `sapti`
---
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `administrador`
---
-
-CREATE TABLE IF NOT EXISTS `administrador` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `usuario_id` int(11) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
---
--- Volcado de datos para la tabla `administrador`
---
 
 INSERT INTO `administrador` (`id`, `usuario_id`, `estado`) VALUES
 (1, 1, 'AC');
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `apoyo`
---
-
-CREATE TABLE IF NOT EXISTS `apoyo` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `area_id` int(11) DEFAULT NULL,
-  `docente_id` int(11) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `area`
---
-
-CREATE TABLE IF NOT EXISTS `area` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(45) DEFAULT NULL,
-  `descripcion` varchar(45) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
---
--- Volcado de datos para la tabla `area`
---
-
 INSERT INTO `area` (`id`, `nombre`, `descripcion`, `estado`) VALUES
 (1, 'Ingeniería de Software', 'Ingeniería de Software', 'AC');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `automatico`
---
-
-CREATE TABLE IF NOT EXISTS `automatico` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `docente_id` int(11) DEFAULT NULL,
-  `area_id` int(11) DEFAULT NULL,
-  `valor` int(11) DEFAULT NULL,
-  `numero_aceptados` int(11) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `avance`
---
-
-CREATE TABLE IF NOT EXISTS `avance` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `proyecto_id` int(11) DEFAULT NULL,
-  `fecha_avance` date DEFAULT NULL,
-  `detalle` varchar(1500) DEFAULT NULL,
-  `directorio` varchar(45) DEFAULT NULL,
-  `descripcion` text,
-  `estado_avance` varchar(2) DEFAULT NULL COMMENT 'estado 1 creado (CR), estado 2 visto (VI), estado 3 aprobado (AP)',
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `cambio`
---
-
-CREATE TABLE IF NOT EXISTS `cambio` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `proyecto_id` int(11) NOT NULL,
-  `tipo` varchar(45) DEFAULT NULL COMMENT 'Leve (LE), Total (TO), Proroga (PO)',
-  `fecha_cambio` date DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
-
---
--- Volcado de datos para la tabla `cambio`
---
 
 INSERT INTO `cambio` (`id`, `proyecto_id`, `tipo`, `fecha_cambio`, `estado`) VALUES
 (9, 32, 'LE', '2013-11-10', 'AC'),
 (11, 34, 'TO', '2013-11-10', 'AC'),
 (12, 40, 'LE', '2013-11-10', 'AC');
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `carrera`
---
-
-CREATE TABLE IF NOT EXISTS `carrera` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(200) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
---
--- Volcado de datos para la tabla `carrera`
---
-
 INSERT INTO `carrera` (`id`, `nombre`, `estado`) VALUES
 (1, 'Ingenieria de Sistemas', 'AC');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `carta`
---
-
-CREATE TABLE IF NOT EXISTS `carta` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `proyecto_id` int(11) DEFAULT NULL,
-  `modelo_carta_id` int(11) DEFAULT NULL,
-  `estado_impresion` varchar(2) DEFAULT NULL COMMENT 'Pendiente (PE), Impreso (IP)',
-  `fecha_impresion` date DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `codigo_grupo`
---
-
-CREATE TABLE IF NOT EXISTS `codigo_grupo` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(200) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
---
--- Volcado de datos para la tabla `codigo_grupo`
---
 
 INSERT INTO `codigo_grupo` (`id`, `nombre`, `estado`) VALUES
 (1, 'Grupo 01', 'AC');
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `configuracion_semestral`
---
-
-CREATE TABLE IF NOT EXISTS `configuracion_semestral` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `semestre_id` int(11) NOT NULL,
-  `nombre` varchar(100) DEFAULT NULL,
-  `valor` varchar(300) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
-
-
---
--- Estructura de tabla para la tabla `consejo`
---
-
-CREATE TABLE IF NOT EXISTS `consejo` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `usuario_id` int(11) NOT NULL,
-  `fecha_inicio` date DEFAULT NULL,
-  `fecha_fin` date DEFAULT NULL,
-  `activo` varchar(10) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `consejo_estudiante`
---
-
-CREATE TABLE IF NOT EXISTS `consejo_estudiante` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `codigo` varchar(100) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `cronograma`
---
-
-CREATE TABLE IF NOT EXISTS `cronograma` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `semestre_id` int(11) NOT NULL,
-  `nombre_evento` varchar(150) DEFAULT NULL,
-  `detalle_evento` varchar(300) DEFAULT NULL,
-  `fecha_evento` date DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `defensa`
---
-
-CREATE TABLE IF NOT EXISTS `defensa` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `lugar_id` int(11) NOT NULL,
-  `proyecto_id` int(11) NOT NULL,
-  `fecha_asignacion` date DEFAULT NULL,
-  `hora_asignacion` time DEFAULT NULL,
-  `fecha_defensa` date DEFAULT NULL,
-  `hora_inicio` varchar(50) DEFAULT NULL,
-  `hora_final` varchar(50) DEFAULT NULL,
-  `tipo_defensa` varchar(50) DEFAULT NULL,
-  `semestre` varchar(45) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `departamento`
---
-
-CREATE TABLE IF NOT EXISTS `departamento` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `institucion_id` int(11) NOT NULL,
-  `nombre` varchar(45) DEFAULT NULL,
-  `descripcion` varchar(45) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `dia`
---
-
-CREATE TABLE IF NOT EXISTS `dia` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(45) DEFAULT NULL,
-  `descripcion` varchar(45) DEFAULT NULL,
-  `orden` smallint(6) DEFAULT NULL COMMENT 'el orden de los dias',
-  `estado` varchar(2) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `dicta`
---
-
-CREATE TABLE IF NOT EXISTS `dicta` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `docente_id` int(11) DEFAULT NULL,
-  `materia_id` int(11) DEFAULT NULL,
-  `semestre_id` int(11) DEFAULT NULL,
-  `codigo_grupo_id` int(11) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
---
--- Volcado de datos para la tabla `dicta`
---
-
 INSERT INTO `dicta` (`id`, `docente_id`, `materia_id`, `semestre_id`, `codigo_grupo_id`, `estado`) VALUES
 (1, 2, 1, 1, 1, 'AC');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `docente`
---
-
-CREATE TABLE IF NOT EXISTS `docente` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `usuario_id` int(11) NOT NULL,
-  `codigo_sis` varchar(20) DEFAULT NULL,
-  `numero_horas` int(11) DEFAULT NULL,
-  `configuracion_area` tinyint(1) DEFAULT NULL,
-  `configuracion_horario` tinyint(1) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=74 ;
-
---
--- Volcado de datos para la tabla `docente`
---
 
 INSERT INTO `docente` (`id`, `usuario_id`, `codigo_sis`, `numero_horas`, `configuracion_area`, `configuracion_horario`, `estado`) VALUES
 (1, 2, '500001', 0, 0, 0, 'AC'),
@@ -418,26 +94,6 @@ INSERT INTO `docente` (`id`, `usuario_id`, `codigo_sis`, `numero_horas`, `config
 (72, 73, '500072', 0, 0, 0, 'AC'),
 (73, 74, '500073', 0, 0, 0, 'AC');
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `estudiante`
---
-
-CREATE TABLE IF NOT EXISTS `estudiante` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `usuario_id` int(11) NOT NULL,
-  `codigo_sis` varchar(20) DEFAULT NULL,
-  `numero_cambio_leve` tinyint(4) DEFAULT NULL,
-  `numero_cambio_total` tinyint(4) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
-
---
--- Volcado de datos para la tabla `estudiante`
---
-
 INSERT INTO `estudiante` (`id`, `usuario_id`, `codigo_sis`, `numero_cambio_leve`, `numero_cambio_total`, `estado`) VALUES
 (1, 75, '20008101', 0, 0, 'AC'),
 (2, 76, '20008102', 0, 0, 'AC'),
@@ -458,27 +114,6 @@ INSERT INTO `estudiante` (`id`, `usuario_id`, `codigo_sis`, `numero_cambio_leve`
 (17, 91, '20008118', 0, 0, 'AC'),
 (18, 92, '20008119', 0, 0, 'AC'),
 (19, 93, '20008120', 0, 0, 'AC');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `evaluacion`
---
-
-CREATE TABLE IF NOT EXISTS `evaluacion` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `evaluacion_1` int(11) DEFAULT NULL,
-  `evaluacion_2` int(11) DEFAULT NULL,
-  `evaluacion_3` int(11) DEFAULT NULL,
-  `promedio` int(11) DEFAULT NULL,
-  `rfinal` varchar(45) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
-
---
--- Volcado de datos para la tabla `evaluacion`
---
 
 INSERT INTO `evaluacion` (`id`, `evaluacion_1`, `evaluacion_2`, `evaluacion_3`, `promedio`, `rfinal`, `estado`) VALUES
 (1, 0, 0, 0, 0, '', 'AC'),
@@ -501,40 +136,6 @@ INSERT INTO `evaluacion` (`id`, `evaluacion_1`, `evaluacion_2`, `evaluacion_3`, 
 (18, 0, 0, 0, 0, '', 'AC'),
 (19, 0, 0, 0, 0, '', 'AC');
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `evento`
---
-
-CREATE TABLE IF NOT EXISTS `evento` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `dicta_id` int(11) NOT NULL,
-  `asunto` varchar(100) DEFAULT NULL,
-  `descripcion` varchar(1500) DEFAULT NULL,
-  `fecha_evento` date DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `grupo`
---
-
-CREATE TABLE IF NOT EXISTS `grupo` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `codigo` varchar(40) DEFAULT NULL,
-  `descripcion` varchar(300) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
-
---
--- Volcado de datos para la tabla `grupo`
---
-
 INSERT INTO `grupo` (`id`, `codigo`, `descripcion`, `estado`) VALUES
 (1, 'SUPER-ADMIN', 'grupo para el super administrador del sistema', 'AC'),
 (2, 'ESTUDIANTES', 'estudiantes', 'AC'),
@@ -543,30 +144,6 @@ INSERT INTO `grupo` (`id`, `codigo`, `descripcion`, `estado`) VALUES
 (5, 'TRIBUNALES', 'tribunales', 'AC'),
 (6, 'CONSEJOS', 'consejos', 'AC'),
 (7, 'AUTORIDADES', 'autoridades', 'AC');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `helpdesk`
---
-
-CREATE TABLE IF NOT EXISTS `helpdesk` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `modulo_id` int(11) DEFAULT NULL,
-  `codigo` varchar(100) DEFAULT NULL,
-  `directorio` varchar(300) DEFAULT NULL,
-  `titulo` varchar(300) DEFAULT NULL,
-  `descripcion` varchar(500) DEFAULT NULL,
-  `keywords` varchar(500) DEFAULT NULL,
-  `estado_helpdesk` varchar(2) DEFAULT NULL COMMENT 'Recien creado RC , Editado ED, Aprobado AP',
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
-
---
--- Volcado de datos para la tabla `helpdesk`
---
-
 
 INSERT INTO `helpdesk` (`id`, `modulo_id`, `codigo`, `directorio`, `titulo`, `descripcion`, `keywords`, `estado_helpdesk`, `estado`) VALUES
 (1, 9, 'f12888016bc7f09a23a45fddb7884724f8a903df', '/sapti/index.php', 'Inicio Sapti', 'ventana principal des sistema', 'sapti,index,ayuda,inicio', 'ED', 'AC'),
@@ -744,55 +321,6 @@ INSERT INTO `helpdesk` (`id`, `modulo_id`, `codigo`, `directorio`, `titulo`, `de
 (206, 15, 'ae0b52aac26b2a8cc1373d5f44e1476f608de695', '/sapti/docente/evaluacion/evaluacion.estudiante-cvs.php', '/sapti/docente/evaluacion/evaluacion.estudiante-cvs.php', '/sapti/docente/evaluacion/evaluacion.estudiante-cvs.php', 'sapti,docente,evaluacion,evaluacion,estudiante-cvs,ayuda', 'RC', 'AC'),
 (207, 3, '09629fd31578a08040e2871bdf3768ec1557ef2a', '/sapti/autoridad/helpdesk/tooltip.registro.php', '/sapti/autoridad/helpdesk/tooltip.registro.php', '/sapti/autoridad/helpdesk/tooltip.registro.php', 'sapti,autoridad,helpdesk,tooltip,registro,ayuda', 'RC', 'AC');
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `hora`
---
-
-CREATE TABLE IF NOT EXISTS `hora` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `dia_id` int(11) DEFAULT NULL,
-  `hora_inicio` varchar(45) DEFAULT NULL,
-  `hora_fin` varchar(45) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `horario_docente`
---
-
-CREATE TABLE IF NOT EXISTS `horario_docente` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `docente_id` int(11) DEFAULT NULL,
-  `hora_id` int(11) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `inscrito`
---
-
-CREATE TABLE IF NOT EXISTS `inscrito` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `evaluacion_id` int(11) DEFAULT NULL,
-  `dicta_id` int(11) DEFAULT NULL,
-  `estudiante_id` int(11) DEFAULT NULL,
-  `semestre_id` int(11) DEFAULT NULL,
-  `estado_inscrito` varchar(2) DEFAULT NULL COMMENT 'cerrado si paso(CR), activo si es que es la activa (AC)',
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
-
---
--- Volcado de datos para la tabla `inscrito`
---
 
 INSERT INTO `inscrito` (`id`, `evaluacion_id`, `dicta_id`, `estudiante_id`, `semestre_id`, `estado_inscrito`, `estado`) VALUES
 (1, 1, 1, 1, 1, 'AC', 'AC'),
@@ -815,129 +343,20 @@ INSERT INTO `inscrito` (`id`, `evaluacion_id`, `dicta_id`, `estudiante_id`, `sem
 (18, 18, 1, 18, 1, 'AC', 'AC'),
 (19, 19, 1, 19, 1, 'AC', 'AC');
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `institucion`
---
-
-CREATE TABLE IF NOT EXISTS `institucion` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(45) DEFAULT NULL,
-  `descripcion` varchar(45) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
---
--- Volcado de datos para la tabla `institucion`
---
-
 INSERT INTO `institucion` (`id`, `nombre`, `descripcion`, `estado`) VALUES
 (1, 'UNIVERSIDAD MAYOR DE SAN SIMON', 'universidad de cochabamba', 'AC');
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `lugar`
---
-
-CREATE TABLE IF NOT EXISTS `lugar` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(100) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  `descripcion` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `materia`
---
-
-CREATE TABLE IF NOT EXISTS `materia` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(200) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  `sigla` varchar(20) DEFAULT NULL,
-  `tipo` varchar(4) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
---
--- Volcado de datos para la tabla `materia`
---
-
 INSERT INTO `materia` (`id`, `nombre`, `estado`, `sigla`, `tipo`) VALUES
 (1, 'Proyecto Final', 'AC', 'Proyecto Final', 'PR');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `modalidad`
---
-
-CREATE TABLE IF NOT EXISTS `modalidad` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(45) DEFAULT NULL,
-  `descripcion` varchar(45) DEFAULT NULL,
-  `datos_adicionales` tinyint(1) DEFAULT NULL COMMENT 'si es que un proyecto en esta modalidad requiere institucion y responsable',
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
-
---
--- Volcado de datos para la tabla `modalidad`
---
 
 INSERT INTO `modalidad` (`id`, `nombre`, `descripcion`, `datos_adicionales`, `estado`) VALUES
 (1, 'Proyecto de Grado', 'modalidad en proyecto de grado', 0, 'AC'),
 (2, 'Adcripcion', 'proyectos para la Universidad', 1, 'AC'),
 (3, 'Trabajo Dirijido', 'proyectos para instituciones', 0, 'AC');
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `modelo_carta`
---
-
-CREATE TABLE IF NOT EXISTS `modelo_carta` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `codigo` varchar(100) DEFAULT NULL,
-  `titulo` varchar(300) DEFAULT NULL,
-  `descripcion` varchar(500) DEFAULT NULL,
-  `tipo_proyecto` varchar(2) DEFAULT NULL COMMENT 'TIPO_PERFIL =  PE, TIPO_PROYECTO =  PR',
-  `estado_proyecto` varchar(2) DEFAULT NULL COMMENT 'Iniciado (IN), Form Perfil Pendiente (PD), Form Perfil Confirmaddo (CO), Visto Bueno de Docente Tutores y Revisores (VB), Estado de proyecto con tribunal (TA), Tribunales Visto Bueno (TV), Con defensa Asignada(LD), Estado Proyecto  finalizado (PF)',
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
-
---
--- Volcado de datos para la tabla `modelo_carta`
---
-
 INSERT INTO `modelo_carta` (`id`, `codigo`, `titulo`, `descripcion`, `tipo_proyecto`, `estado_proyecto`, `estado`) VALUES
 (1, 'f0c7ab609df8a213956b8a78d5c6e354413876a1', 'Aprobación Proyecto de Grado para nombramiento de tribunales', 'Aprobación Proyecto de Grado para nombramiento de tribunales', 'PR', 'VB', 'AC'),
 (2, '10affa5539072c7d8cab3a580c946ecec0ab673a', 'Aprobación Proyecto de Grado', 'Aprobación Proyecto de Grado', 'PR', 'PF', 'AC');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `modulo`
---
-
-CREATE TABLE IF NOT EXISTS `modulo` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `codigo` varchar(100) DEFAULT NULL,
-  `descripcion` varchar(300) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
-
---
--- Volcado de datos para la tabla `modulo`
---
 
 INSERT INTO `modulo` (`id`, `codigo`, `descripcion`, `estado`) VALUES
 (1, 'ADMIN-INDEX', 'M&oacute;dulo: ADMIN-INDEX', 'AC'),
@@ -959,158 +378,6 @@ INSERT INTO `modulo` (`id`, `codigo`, `descripcion`, `estado`) VALUES
 (17, 'NOTIFICACION', 'M&oacute;dulo: NOTIFICACION', 'AC'),
 (18, 'ADMIN-CARTAS', 'M&oacute;dulo: ADMIN-CARTAS', 'AC');
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `nota`
---
-
-CREATE TABLE IF NOT EXISTS `nota` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `proyecto_id` int(11) NOT NULL,
-  `nota_proyecto` int(11) DEFAULT NULL COMMENT 'nota del proyecto final',
-  `nota_defensa` varchar(45) DEFAULT NULL COMMENT 'nota del defensa del proyecto',
-  `nota_final` tinyint(1) DEFAULT NULL COMMENT 'nota final del proyecto',
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `notificacion`
---
-
-CREATE TABLE IF NOT EXISTS `notificacion` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `proyecto_id` int(11) NOT NULL,
-  `tipo` varchar(3) DEFAULT NULL COMMENT 'Mensaje normal, Mensaje de tiempo se acaba,Solicitud  y otros ',
-  `fecha_envio` date DEFAULT NULL,
-  `asunto` varchar(200) DEFAULT NULL,
-  `detalle` text,
-  `prioridad` tinyint(4) DEFAULT NULL COMMENT 'prioridad: 1 baja, 5 media, 10 maxima',
-  `estado` varchar(2) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `notificacion_consejo`
---
-
-CREATE TABLE IF NOT EXISTS `notificacion_consejo` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `notificacion_id` int(11) NOT NULL,
-  `consejo_id` int(11) NOT NULL,
-  `accion` varchar(45) DEFAULT NULL COMMENT 'Aceptar , rechazar ',
-  `fecha_visto` date DEFAULT NULL,
-  `estado_notificacion` varchar(2) DEFAULT NULL COMMENT 'Sin ver (SV), Visto (VI) , archivado (AR)',
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `notificacion_dicta`
---
-
-CREATE TABLE IF NOT EXISTS `notificacion_dicta` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `notificacion_id` int(11) DEFAULT NULL,
-  `dicta_id` int(11) DEFAULT NULL,
-  `fecha_visto` date DEFAULT NULL,
-  `estado_notificacion` varchar(2) DEFAULT NULL COMMENT 'Sin ver (SV), Visto (VI) , archivado (AR)',
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `notificacion_estudiante`
---
-
-CREATE TABLE IF NOT EXISTS `notificacion_estudiante` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `notificacion_id` int(11) NOT NULL,
-  `estudiante_id` int(11) NOT NULL,
-  `fecha_visto` date DEFAULT NULL,
-  `estado_notificacion` varchar(2) DEFAULT NULL COMMENT 'Sin ver (SV), Visto (VI) , archivado (AR)',
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `notificacion_revisor`
---
-
-CREATE TABLE IF NOT EXISTS `notificacion_revisor` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `notificacion_id` int(11) NOT NULL,
-  `revisor_id` int(11) NOT NULL,
-  `accion` varchar(45) DEFAULT NULL COMMENT 'Aceptar , rechazar ',
-  `fecha_visto` date DEFAULT NULL,
-  `estado_notificacion` varchar(2) DEFAULT NULL COMMENT 'Sin ver (SV), Visto (VI) , archivado (AR)',
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `notificacion_tribunal`
---
-
-CREATE TABLE IF NOT EXISTS `notificacion_tribunal` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `notificacion_id` int(11) NOT NULL,
-  `tribunal_id` int(11) NOT NULL,
-  `accion` varchar(45) DEFAULT NULL COMMENT 'Aceptar , rechazar ',
-  `fecha_visto` date DEFAULT NULL,
-  `estado_notificacion` varchar(2) DEFAULT NULL COMMENT 'Sin ver (SV), Visto (VI) , archivado (AR)',
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `notificacion_tutor`
---
-
-CREATE TABLE IF NOT EXISTS `notificacion_tutor` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `notificacion_id` int(11) DEFAULT NULL,
-  `tutor_id` int(11) DEFAULT NULL,
-  `proyecto_tutor_id` int(11) DEFAULT NULL,
-  `fecha_visto` date DEFAULT NULL,
-  `estado_notificacion` varchar(2) DEFAULT NULL COMMENT 'Sin ver (SV), Visto (VI) , archivado (AR)',
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `objetivo_especifico`
---
-
-CREATE TABLE IF NOT EXISTS `objetivo_especifico` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `proyecto_id` int(11) NOT NULL,
-  `descripcion` text,
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
-
---
--- Volcado de datos para la tabla `objetivo_especifico`
---
-
 INSERT INTO `objetivo_especifico` (`id`, `proyecto_id`, `descripcion`, `estado`) VALUES
 (1, 19, 'Diseñar e implementar la Base de datos para la administración de usuarios, control del modulo ventas y para la administración del modulo libros.', 'AC'),
 (2, 19, 'Desarrollar la implementación de control del modulo de ventas y para la administración del modulo libros.', 'AC'),
@@ -1122,45 +389,6 @@ INSERT INTO `objetivo_especifico` (`id`, `proyecto_id`, `descripcion`, `estado`)
 (8, 38, 'Diseñar e implementar la Base de datos para la administración de usuarios, control del modulo ventas y para la administración del modulo libros.', 'AC'),
 (9, 38, 'Desarrollar la implementación de control del modulo de ventas y para la administración del modulo libros.', 'AC'),
 (10, 38, 'Integración del portal web con técnicas de posicionamiento web.', 'AC');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `observacion`
---
-
-CREATE TABLE IF NOT EXISTS `observacion` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `revision_id` int(11) NOT NULL,
-  `observacion` varchar(1500) DEFAULT NULL,
-  `respuesta` varchar(1500) DEFAULT NULL,
-  `estado_observacion` varchar(2) DEFAULT NULL COMMENT 'estado 1 creado (CR), etado 2 corregido (CO), estado 4  aprobado (AP)',
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `permiso`
---
-
-CREATE TABLE IF NOT EXISTS `permiso` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `grupo_id` int(11) DEFAULT NULL,
-  `modulo_id` int(11) DEFAULT NULL,
-  `helpdesk_id` int(11) DEFAULT NULL,
-  `ver` tinyint(1) DEFAULT NULL,
-  `crear` tinyint(1) DEFAULT NULL,
-  `editar` tinyint(1) DEFAULT NULL,
-  `eliminar` tinyint(1) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=121 ;
-
---
--- Volcado de datos para la tabla `permiso`
---
 
 INSERT INTO `permiso` (`id`, `grupo_id`, `modulo_id`, `helpdesk_id`, `ver`, `crear`, `editar`, `eliminar`, `estado`) VALUES
 (1, 1, 1, 0, 1, 1, 1, 1, 'AC'),
@@ -1284,24 +512,6 @@ INSERT INTO `permiso` (`id`, `grupo_id`, `modulo_id`, `helpdesk_id`, `ver`, `cre
 (119, 2, 17, 0, 1, 0, 0, 0, 'AC'),
 (120, 1, 18, 0, 1, 1, 1, 1, 'AC');
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pertenece`
---
-
-CREATE TABLE IF NOT EXISTS `pertenece` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `usuario_id` int(11) DEFAULT NULL,
-  `grupo_id` int(11) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=95 ;
-
---
--- Volcado de datos para la tabla `pertenece`
---
-
 INSERT INTO `pertenece` (`id`, `usuario_id`, `grupo_id`, `estado`) VALUES
 (1, 1, 1, 'AC'),
 (2, 2, 3, 'AC'),
@@ -1398,41 +608,6 @@ INSERT INTO `pertenece` (`id`, `usuario_id`, `grupo_id`, `estado`) VALUES
 (93, 93, 2, 'AC'),
 (94, 5, 7, 'AC');
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `proyecto`
---
-
-CREATE TABLE IF NOT EXISTS `proyecto` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `modalidad_id` int(11) DEFAULT NULL,
-  `carrera_id` int(11) DEFAULT NULL,
-  `institucion_id` int(11) DEFAULT NULL,
-  `nombre` varchar(1500) DEFAULT 'Sin Titulo',
-  `numero_asignado` varchar(45) DEFAULT NULL,
-  `objetivo_general` text,
-  `descripcion` text,
-  `director_carrera` varchar(300) DEFAULT NULL,
-  `docente_materia` varchar(300) DEFAULT NULL,
-  `registro_tutor` varchar(300) DEFAULT NULL,
-  `fecha_registro` date DEFAULT NULL,
-  `registrado_por` varchar(300) DEFAULT NULL,
-  `responsable` varchar(300) DEFAULT NULL,
-  `trabajo_conjunto` varchar(2) DEFAULT NULL COMMENT 'si es trabajo conjunto (TC) o si es trabajo solitario (TS)',
-  `asignacion_tribunal` varchar(45) DEFAULT NULL,
-  `asignacion_defensa` varchar(45) DEFAULT NULL,
-  `es_actual` tinyint(4) DEFAULT NULL COMMENT 'si es que este proyecto es el proyecto actual del estudiante o no',
-  `tipo_proyecto` varchar(2) DEFAULT 'PR' COMMENT 'Tipo perfil (PE), tipo Proyecto Final (PR)',
-  `estado_proyecto` varchar(2) DEFAULT NULL COMMENT 'Iniciado (IN), Visto Bueno de Docente, Tutores y Revisores (VB) , TRibunales asignados (TA), tribunales Visto Bueno (TV), con defensa (LD)',
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=39 ;
-
---
--- Volcar la base de datos para la tabla `proyecto`
---
-
 INSERT INTO `proyecto` (`id`, `modalidad_id`, `carrera_id`, `institucion_id`, `nombre`, `numero_asignado`, `objetivo_general`, `descripcion`, `director_carrera`, `docente_materia`, `registro_tutor`, `fecha_registro`, `registrado_por`, `responsable`, `trabajo_conjunto`, `asignacion_tribunal`, `asignacion_defensa`, `es_actual`, `tipo_proyecto`, `estado_proyecto`, `estado`) VALUES
 (1, 1, 1, 0, 'Evaluación de Calidad Automatizado del Sistema Integrado de Cobros del Consumo de Agua y Otros Cobros, para la Cooperativa de Servicios de Agua Potable Llauquinquiri', '1', 'Controlar la calidad del Sistema Integrado de Cobros del consumo de Agua y Otros cobros, para la Cooperativa de Servicios de Agua Potable Llauquinquiri mediante el Testeo, basados en metodologías y herramientas formales de la\r\nIngeniería de Calidad.', 'Cuando se habla de desarrollo de software hecho a medida implica el cumplir los requerimientos que\r\nsolicita el cliente, satisfacer sus necesidades y, de manera general, cumplir con estándares en su implementación. Como\r\nresultado de esta implementación hecha a medida implica que existan más errores, esto hace que sea irrelevante\r\nrealizar un control de calidad, que asegure que el software obtenido tenga la menor cantidad de errores.\r\nDebido a la falta de tiempo para la ejecución de pruebas más exhaustivas, falta de investigación de técnicas más\r\nformales relacionadas a la Ingeniería de Calidad, surge la necesidad de desarrollar un Control de Calidad formal al\r\nSistema Integrado de Cobros del consumo de Agua y Otros Cobros, para la Cooperativa de Servicios de Agua Potable\r\nLlauquinquiri  a la conclusión de su primera versión, con un Testeo formal con la aplicación de metodologías que nos\r\naseguren la calidad del mismo.', 'Director Sistemas', 'ING. JOSE RICHARD AYOROA CARDOZO', NULL, '2013-11-06', 'EST. ISMAEL NOEL FLORES GUTIéRREZ', '-- Seleccione --', 'TS', NULL, NULL, 0, 'PE', 'CO', 'AC'),
 (2, 1, 1, 0, 'Evaluación de Calidad Automatizado del Sistema Integrado de Cobros del Consumo de Agua y Otros Cobros, para la Cooperativa de Servicios de Agua Potable Llauquinquiri', '2', 'Controlar la calidad del Sistema Integrado de Cobros del consumo de Agua y Otros cobros, para la Cooperativa de\r\nServicios de Agua Potable Llauquinquiri mediante el Testeo, basados en metodologías y herramientas formales de la\r\nIngeniería de Calidad', 'Cuando se habla de desarrollo de software hecho a medida implica el cumplir los requerimientos que\r\nsolicita el cliente, satisfacer sus necesidades y, de manera general, cumplir con estándares en su implementación. Como\r\nresultado de esta implementación hecha a medida implica que existan más errores, esto hace que sea irrelevante\r\nrealizar un control de calidad, que asegure que el software obtenido tenga la menor cantidad de errores', 'Director Sistemas', 'ING. JOSE RICHARD AYOROA CARDOZO', NULL, '2013-11-06', 'EST. RICHARD FLORES VALLEJOS', '-- Seleccione --', 'TS', NULL, NULL, 0, 'PE', 'CO', 'AC'),
@@ -1473,45 +648,9 @@ INSERT INTO `proyecto` (`id`, `modalidad_id`, `carrera_id`, `institucion_id`, `n
 (37, 1, 1, 0, 'Sistema de Información para el control de ventas de una empresa de Sombreros', '', 'Desarrollar un Sistema de Información para el control de ventas de una empresa de Sombreros\r\nutilizando framework CodeIgniter.', 'Actualmente algunas Empresas de venta de Sombreros no realizan un control adecuado de sus\r\nproductos dentro el almacén, incurriendo de esta manera en la perdida de información, algunas de las causas principales\r\npara no realizar un control adecuado es la cantidad de ingreso y la cantidad de salida realizada, y además que realizar un\r\ncontrol manual es muy moroso, dificultoso y poco eficiente. lo cuan genera un problema a realizar la búsqueda de pedidos\r\nhecho por los cliente lo cual se registran en un libro de pedidos donde a veces no se hace la entrega total del pedido y esto\r\nno se registra como un falta de entrega lo cual perjudica al cliente porque tiene que realizar otro pedido y es para otra\r\nfecha.', 'Director Sistemas', 'ING. JOSE RICHARD AYOROA CARDOZO', NULL, '2013-11-06', 'EST. SEGUNDINO GASTÓN FERNANDEZ FLORES', '-- Seleccione --', 'TS', NULL, NULL, 1, 'PR', 'IN', 'AC'),
 (38, 3, 1, 0, 'Portal Web para la venta de libros On-Line, utilizando herramientas y técnicas de posicionamiento web', '', 'Desarrollar un Portal Web para la venta de libros On-Line, utilizando\r\nherramientas y técnicas de posicionamiento web', 'Actualmente las pequeñas y medianas empresas progresan a través de sus clientes, sino\r\nexisten clientelas por ende las empresas entran en desaparición. Es por este motivo la realización de\r\neste proyecto que está orientado para la venta de libros On-Line, el cual pueda realizar un control de la\r\nadministración de las ventas de libros y la administración existente de los libros para la venta directa\r\ncon el cliente, e integrando el portal web puesta en servidores en dominio gratuito; a este se aplicarán\r\ntécnicas y estrategias de posicionamiento web con el propósito de darnos a conocer para que tenga\r\néxito en la vitrina más grande del mundo La Red Global Mundial internet.', 'Director Sistemas', '-- Seleccione --', NULL, '2013-11-06', 'EST. MARCELO MARCOS VARGAS CHAVEZ', '-- Seleccione --', 'TS', NULL, NULL, 1, 'PR', 'IN', 'AC');
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `proyecto_area`
---
-
-CREATE TABLE IF NOT EXISTS `proyecto_area` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `area_id` int(11) DEFAULT NULL,
-  `proyecto_id` int(11) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
-
---
--- Volcado de datos para la tabla `proyecto_area`
---
-
 INSERT INTO `proyecto_area` (`id`, `area_id`, `proyecto_id`, `estado`) VALUES
 (1, 1, 19, 'AC'),
 (2, 1, 38, 'AC');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `proyecto_dicta`
---
-
-CREATE TABLE IF NOT EXISTS `proyecto_dicta` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `proyecto_id` int(11) DEFAULT NULL,
-  `dicta_id` int(11) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
-
---
--- Volcado de datos para la tabla `proyecto_dicta`
---
 
 INSERT INTO `proyecto_dicta` (`id`, `proyecto_id`, `dicta_id`, `estado`) VALUES
 (1, 1, 1, 'AC'),
@@ -1533,25 +672,6 @@ INSERT INTO `proyecto_dicta` (`id`, `proyecto_id`, `dicta_id`, `estado`) VALUES
 (17, 17, 1, 'AC'),
 (18, 18, 1, 'AC'),
 (19, 19, 1, 'AC');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `proyecto_estudiante`
---
-
-CREATE TABLE IF NOT EXISTS `proyecto_estudiante` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `proyecto_id` int(11) DEFAULT NULL,
-  `estudiante_id` int(11) DEFAULT NULL,
-  `fecha_asignacion` date DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=39 ;
-
---
--- Volcado de datos para la tabla `proyecto_estudiante`
---
 
 INSERT INTO `proyecto_estudiante` (`id`, `proyecto_id`, `estudiante_id`, `fecha_asignacion`, `estado`) VALUES
 (1, 1, 1, '2013-11-06', 'AC'),
@@ -1593,38 +713,6 @@ INSERT INTO `proyecto_estudiante` (`id`, `proyecto_id`, `estudiante_id`, `fecha_
 (37, 37, 18, '2013-11-06', 'AC'),
 (38, 38, 19, '2013-11-06', 'AC');
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `proyecto_revisor`
---
-
-CREATE TABLE IF NOT EXISTS `proyecto_revisor` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `proyecto_id` int(11) DEFAULT NULL,
-  `revisor_id` int(11) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `proyecto_sub_area`
---
-
-CREATE TABLE IF NOT EXISTS `proyecto_sub_area` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `sub_area_id` int(11) NOT NULL,
-  `proyecto_id` int(11) NOT NULL,
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
-
---
--- Volcado de datos para la tabla `proyecto_sub_area`
---
-
 INSERT INTO `proyecto_sub_area` (`id`, `sub_area_id`, `proyecto_id`, `estado`) VALUES
 (1, 1, 19, 'AC'),
 (2, 2, 16, 'AC'),
@@ -1633,120 +721,13 @@ INSERT INTO `proyecto_sub_area` (`id`, `sub_area_id`, `proyecto_id`, `estado`) V
 (5, 2, 35, 'AC'),
 (6, 1, 38, 'AC');
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `proyecto_tutor`
---
-
-CREATE TABLE IF NOT EXISTS `proyecto_tutor` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `proyecto_id` int(11) DEFAULT NULL,
-  `tutor_id` int(11) DEFAULT NULL,
-  `fecha_asignacion` date DEFAULT NULL COMMENT 'fecha que fue asignado como tutor',
-  `fecha_acepta` date DEFAULT NULL COMMENT 'fecha que acepta la tutoria',
-  `fecha_final` date DEFAULT NULL COMMENT 'Fecha en la que termina la tutoria',
-  `estado_tutoria` varchar(2) DEFAULT NULL COMMENT 'Pendiente (PE), Aceptado (AC) , Rechado (RE), finallizado (FI)',
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `revision`
---
-
-CREATE TABLE IF NOT EXISTS `revision` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `proyecto_id` int(11) DEFAULT NULL,
-  `avance_id` int(11) DEFAULT NULL,
-  `revisor` int(11) DEFAULT NULL COMMENT 'dependiendo de tipo docente_id',
-  `revisor_tipo` varchar(2) DEFAULT NULL COMMENT 'docente (DO), docente perfil(DP), tutor (TU), tribunal (TR)',
-  `fecha_revision` date DEFAULT NULL,
-  `fecha_correccion` date DEFAULT NULL,
-  `fecha_aprobacion` date DEFAULT NULL,
-  `estado_revision` varchar(2) DEFAULT NULL COMMENT 'estado 1 creado (CR), estado 2 visto (VI), estado 3 respondido  (RE), estado 4 aprobado (AP)',
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `revisor`
---
-
-CREATE TABLE IF NOT EXISTS `revisor` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `usuario_id` int(11) NOT NULL,
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `semestre`
---
-
-CREATE TABLE IF NOT EXISTS `semestre` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `codigo` varchar(45) DEFAULT NULL,
-  `activo` tinyint(1) DEFAULT NULL,
-  `valor` int(11) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
---
--- Volcado de datos para la tabla `semestre`
---
-
 INSERT INTO `semestre` (`id`, `codigo`, `activo`, `valor`, `estado`) VALUES
 (1, 'II-2013', 1, 1, 'AC');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `sub_area`
---
-
-CREATE TABLE IF NOT EXISTS `sub_area` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `area_id` int(11) DEFAULT NULL,
-  `nombre` varchar(45) DEFAULT NULL,
-  `descripcion` varchar(45) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
-
---
--- Volcado de datos para la tabla `sub_area`
---
 
 INSERT INTO `sub_area` (`id`, `area_id`, `nombre`, `descripcion`, `estado`) VALUES
 (1, 1, 'Sistema de Información', 'Subarea del area de Ingenieria de software', 'AC'),
 (2, 1, 'Reingeniería', 'Reingeniería', 'AC'),
 (3, 1, 'Programacion Web', 'programacion web de paginas', 'AC');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `titulo_honorifico`
---
-
-CREATE TABLE IF NOT EXISTS `titulo_honorifico` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(150) DEFAULT NULL,
-  `descripcion` varchar(300) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
-
---
--- Volcado de datos para la tabla `titulo_honorifico`
---
 
 INSERT INTO `titulo_honorifico` (`id`, `nombre`, `descripcion`, `estado`) VALUES
 (1, 'Est.', 'Est.', 'AC'),
@@ -1757,28 +738,6 @@ INSERT INTO `titulo_honorifico` (`id`, `nombre`, `descripcion`, `estado`) VALUES
 (6, 'Msc. Ing.', 'Msc. Ing.', 'AC'),
 (7, 'Dr.', 'Dr.', 'AC'),
 (8, 'Ph.D.', 'Ph.D.', 'AC');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tooltip`
---
-
-CREATE TABLE IF NOT EXISTS `tooltip` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `helpdesk_id` int(11) DEFAULT NULL,
-  `titulo` varchar(150) DEFAULT NULL,
-  `codigo` varchar(150) DEFAULT NULL,
-  `descripcion` varchar(1000) DEFAULT NULL,
-  `mostrar` tinyint(4) DEFAULT NULL COMMENT 'si se muestra el tool tip o no',
-  `estado_tooltip` varchar(2) DEFAULT NULL COMMENT 'Recien creado RC, Clonados (CL) , Aprobado AP',
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=93 ;
-
---
--- Volcado de datos para la tabla `tooltip`
---
 
 INSERT INTO `tooltip` (`id`, `helpdesk_id`, `titulo`, `codigo`, `descripcion`, `mostrar`, `estado_tooltip`, `estado`) VALUES
 (1, 0, 'Login', 'login', 'Búsqueda del usuario mediante su nombre de acceso,login registrado', 1, 'CL', 'AC'),
@@ -2238,70 +1197,6 @@ INSERT INTO `tooltip` (`id`, `helpdesk_id`, `titulo`, `codigo`, `descripcion`, `
 (455, 207, 'Titulo', 'titulo', 'Búsqueda de Cartas mediante la Titulo registrada', 1, 'CL', 'AC'),
 (456, 207, 'Descripcion', 'descripcion', 'Búsqueda del permiso segun la descripcion registrada', 1, 'CL', 'AC');
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tribunal`
---
-
-CREATE TABLE IF NOT EXISTS `tribunal` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `docente_id` int(11) NOT NULL,
-  `proyecto_id` int(11) NOT NULL,
-  `detalle` text,
-  `accion` varchar(2) DEFAULT NULL COMMENT 'aceptar , rechazar',
-  `visto` varchar(2) DEFAULT NULL COMMENT 'no visto (NV), Visto(V)',
-  `fecha_asignacion` date DEFAULT NULL,
-  `fecha_aceptacion` date DEFAULT NULL,
-  `semestre` varchar(45) DEFAULT NULL,
-  `visto_bueno` varchar(2) DEFAULT NULL,
-  `fecha_vistobueno` date DEFAULT NULL,
-  `nota_tribunal` int(11) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tutor`
---
-
-CREATE TABLE IF NOT EXISTS `tutor` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `usuario_id` int(11) NOT NULL,
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `usuario`
---
-
-CREATE TABLE IF NOT EXISTS `usuario` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(100) DEFAULT NULL,
-  `titulo_honorifico` varchar(100) DEFAULT NULL,
-  `apellido_paterno` varchar(45) DEFAULT NULL,
-  `apellido_materno` varchar(100) DEFAULT NULL,
-  `telefono` varchar(100) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL,
-  `fecha_nacimiento` date DEFAULT NULL,
-  `login` varchar(45) DEFAULT NULL,
-  `clave` varchar(45) DEFAULT NULL COMMENT 'La clave del usuario minimo 5 digitos',
-  `ci` varchar(45) DEFAULT NULL,
-  `sexo` varchar(1) DEFAULT NULL COMMENT 'Masculino (M) femenino (F)',
-  `puede_ser_tutor` tinyint(1) DEFAULT '0' COMMENT '1 si puede, 0 si no puede',
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=94 ;
-
---
--- Volcado de datos para la tabla `usuario`
---
-
 INSERT INTO `usuario` (`id`, `nombre`, `titulo_honorifico`, `apellido_paterno`, `apellido_materno`, `telefono`, `email`, `fecha_nacimiento`, `login`, `clave`, `ci`, `sexo`, `puede_ser_tutor`, `estado`) VALUES
 (1, 'Administrador', NULL, 'Super', ' ', NULL, 'superadmin@sapti.com', '1989-01-17', 'admin', '123123', '123123', 'M', 0, 'AC'),
 (2, 'Lucio', 'Dr.', 'Gonzales', 'Cartagena', '', '', '2013-11-06', '500001', '500001', '500001', '', 1, 'AC'),
@@ -2396,27 +1291,6 @@ INSERT INTO `usuario` (`id`, `nombre`, `titulo_honorifico`, `apellido_paterno`, 
 (92, 'Segundino Gastón', 'Est.', 'Fernandez', 'Flores', '46554654', 'gasfer_fl_sis@hotmail.com', '2013-11-06', '20008119', '20008119', '20008119', 'M', 0, 'AC'),
 (93, 'Marcelo Marcos', 'Est.', 'Vargas', 'Chavez', '478965231', 'mashelo.vargas@gmail.com', '2013-11-06', '20008120', '20008120', '20008120', 'M', 0, 'AC');
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `vigencia`
---
-
-CREATE TABLE IF NOT EXISTS `vigencia` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `proyecto_id` int(11) NOT NULL,
-  `fecha_inicio` date DEFAULT NULL,
-  `fecha_fin` date DEFAULT NULL,
-  `fecha_actualizado` date DEFAULT NULL,
-  `estado_vigencia` varchar(45) DEFAULT NULL COMMENT 'Normal 4 semestres (NO), Prorroga 6 meses  (PR), Postergado 1 nio   (PO)',
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=45 ;
-
---
--- Volcado de datos para la tabla `vigencia`
---
-
 INSERT INTO `vigencia` (`id`, `proyecto_id`, `fecha_inicio`, `fecha_fin`, `fecha_actualizado`, `estado_vigencia`, `estado`) VALUES
 (1, 1, '2013-11-06', '2015-11-06', '0000-00-00', 'NO', 'AC'),
 (2, 2, '2013-11-06', '2015-11-06', '0000-00-00', 'NO', 'AC'),
@@ -2462,76 +1336,3 @@ INSERT INTO `vigencia` (`id`, `proyecto_id`, `fecha_inicio`, `fecha_fin`, `fecha
 (42, 42, '2013-11-06', '2015-11-06', '0000-00-00', 'NO', 'AC'),
 (43, 43, '2013-11-08', '2015-11-08', '0000-00-00', 'NO', 'AC'),
 (44, 44, '2013-11-08', '2015-11-08', '0000-00-00', 'NO', 'AC');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `visto_bueno`
---
-
-CREATE TABLE IF NOT EXISTS `visto_bueno` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `proyecto_id` int(11) NOT NULL,
-  `fecha_visto_bueno` date DEFAULT NULL,
-  `visto_bueno_tipo` varchar(2) DEFAULT NULL COMMENT 'docente (DO), tutor (TU), tribunal (TR)',
-  `visto_bueno_id` varchar(45) DEFAULT NULL COMMENT 'id del docente, tutor o tribunal ',
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
-
-
--- -----------------------------------------------------
--- Table `forotema`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `forotema` ;
-
-CREATE TABLE IF NOT EXISTS `sapti`.`forotema` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `usuario_id` INT NULL,
-  `nombre` VARCHAR(100) NULL,
-  `descripcion` TEXT NULL,
-  `estado` VARCHAR(2) NULL COMMENT 'AB abierto, CE cerrado, NP no publicado',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
-
--- -----------------------------------------------------
--- Table `fororespuesta`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `fororespuesta` ;
-
-CREATE TABLE IF NOT EXISTS `sapti`.`fororespuesta` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `forotema_id` INT NULL,
-  `usuario_id` INT NULL,
-  `nombre` VARCHAR(100) NULL,
-  `descripcion` TEXT NULL,
-  `estado` VARCHAR(2) NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- Estructura de tabla para la tabla `fecha_registro`
---
-
-CREATE TABLE IF NOT EXISTS `fecha_registro` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `semestre_id` int(100) NOT NULL,
-  `fecha_inicio` date DEFAULT NULL,
-  `fecha_fin` date DEFAULT NULL,
-  `descripcion` varchar(100) DEFAULT NULL,
-  `estado` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
-
---
--- Volcar la base de datos para la tabla `fecha_registro`
---
-
-INSERT INTO `fecha_registro` (`id`, `semestre_id`, `fecha_inicio`, `fecha_fin`, `descripcion`, `estado`) VALUES
-(7, 1, '2014-06-02', '2014-06-24', 'jhdskhkdfs', 'AC');
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
