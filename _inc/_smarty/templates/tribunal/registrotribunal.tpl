@@ -37,15 +37,16 @@
          
 <div>
  <div style='height: 200px; width: 100%; font-size: 12px; overflow: auto;'>
- <Hi> Lista de Docentes</Hi>
+     <Hi> <B>Lista de Docentes </B></Hi>
 <table class="tbl_lista" id="docentes"  mane="docentes">
   <thead>
     <tr>
     <th><a >ID          </a></th>
     <th><a >NOMBRE      </a></th>
     <th><a  >APELLIDOS     </a></th>
-    <th><a  >Nro. Tribunal    </a></th>
+    <th><a  >CANTIDAD DE TRIBUNALES ASIGNADOS ACTIVOS    </a></th>
     <th><a >&Aacute;REA</a></th>
+    <th><a >AGREGAR</a></th>
         </tr>
   </thead>
   <tbody>
@@ -63,7 +64,7 @@
       </td>
       <td>{$listadocentes[ic][2]}</td>
       <td>{$listadocentes[ic][3]}</td>
-  <td>     <a  class="tooltip"> VER
+  <td> <a  class="tooltip"> VER
   <span>
   <b>
  </b>
@@ -76,7 +77,7 @@
  </span> 
  </a>
 </td>
-
+ <td><img src="{$URL}images/click.png" border="1" alt="Agregar" width="30"></td>
      
     </tr>
     
@@ -93,8 +94,9 @@
             <th>ID          </th>
             <th>NOMBRE       </th>
             <th>APELLIDOS   </th>
-            <th><a >Nro. Tribunal</a></th>
+            <th><a >CANTIDAD DE TRIBUNALES ASIGNADOS ACTIVOS</a></th>
              <th>&Aacute;REA</th>
+              <th>QUITAR</th>
             
           </tr>
         </thead>
@@ -127,7 +129,8 @@
        </a>
 </td>
 
-     
+     <td><img src="{$URL}images/click.png" border="1" alt="Agregar" width="30"></td>
+
     </tr>
     
   {/section}
