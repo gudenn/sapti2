@@ -259,9 +259,11 @@ class Menu
     $semetre=new Semestre();
     $semetre->getActivo();
     $fecha=$semetre->getFecha();
+    
     $fechaactual=date("Y-m-d");
     
     $fechaini=$fecha[0]->fecha_inicio;
+    
     $fechafin=$fecha[0]->fecha_fin;
    
     if (!isEstudianteSession())
@@ -272,7 +274,7 @@ class Menu
     $link = Estudiante::URL."proyecto-final/";
     $thise->agregarItem('Proyecto','Registro de avances y correcciones para el Proyecto Final','basicset/briefcase_48.png',$link);
     //revisar la esta linea la comparacion e fechas no sirve de esa manera
-    if( is_object( $proyecto) && $proyecto->estado_proyecto==Proyecto::EST2_BUE /*&& $fechaini<=$fechaactual && $fechafin>=$fechaactual*/)
+    if( is_object( $proyecto) && $proyecto->estado_proyecto==Proyecto::EST2_BUE && strtotime($fechaini)<=strtotime($fechaactual) && strtotime($fechafin)>=strtotime($fechaactual))
     {
       $link = Estudiante::URL."proyecto/proyecto.registro.php";
       $thise->agregarItem('Registro de Formulario','Registro de Formulario de Proyecto Final del Estudiante','basicset/survey.png',$link,1);

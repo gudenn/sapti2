@@ -46,7 +46,7 @@ try {
                return $tmp;
            };
            //Consulta Aceptados
-  $sqlr='u.nombre as NOMBRE,CONCAT(u.apellido_paterno," ",u.apellido_materno) as APELLIDO   ,pt.fecha_acepta FECHA,p.nombre as PROYECTO
+  $sqlr='u.nombre as NOMBRE,CONCAT(u.apellido_paterno," ",u.apellido_materno) as APELLIDO   ,pt.fecha_acepta FECHA,p.nombre as PROYECTO,pt.estado_tutoria as ESTADO_TUTORIA
 from usuario u,tutor t ,proyecto_tutor pt,proyecto p 
 where u.id=t.usuario_id and pt.tutor_id=t.id  and pt.proyecto_id=p.id and pt.estado_tutoria="AC"
 ';
