@@ -6,6 +6,7 @@
   
   leerClase('Administrador');
   leerClase('Estudiante');
+  leerClase('Html');
   
   $menuList[]     = array('url'=>URL . Estudiante::URL , 'name'=>'Estudiante');
   $menuList[]     = array('url'=>URL . Estudiante::URL . 'notificacion/','name'=>'Notificaciones');

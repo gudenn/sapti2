@@ -4,7 +4,6 @@ require('../_start.php');
 
 require_once(DIR_LIB . '/tcpdf/config/lang/eng.php');
 require_once(DIR_LIB . '/tcpdf/tcpdf.php');
-
 //cabecera pdf
 class MYPDF extends TCPDF {
 
@@ -69,6 +68,7 @@ function desplegar() {
   leerClase('Area');
   leerClase('Sub_area');
   leerClase('Usuario');
+  leerClase('Tutor');
   leerClase('Semestre');
   leerClase('Modalidad');
   leerClase('Proyecto');
@@ -82,10 +82,12 @@ function desplegar() {
   $proyecto->getAllObjects();
   $usuario    = new Usuario($estudiante->usuario_id);
 
+
   // TUTORES
   $tutores              = '';
   $tutor_responsable    = '';
   foreach ($proyecto->proyecto_tutor_objs as $proyecto_tutor) {
+      if (! isset($proyecto_tutor->tutor_id) || !$proyecto_tutor->tutor_id ) continue;
     $tutor = new Tutor($proyecto_tutor->tutor_id);
     $tutores .= $tutor->getNombreCompleto().'<br>';
     if ($tutor_responsable == ''){
@@ -93,6 +95,7 @@ function desplegar() {
     }
   }
 
+  //exit('todo bien');
   //CARRERA
   $carrera = 'Licenciatura en Ingeniería de Sistemas ';
   $proyecto->trabajo_conjunto = ($proyecto->trabajo_conjunto==Proyecto::TRABAJO_CONJUNTO_SI)?'SI':'NO';
