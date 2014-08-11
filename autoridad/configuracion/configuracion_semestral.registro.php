@@ -73,6 +73,7 @@ try {
     $EXITO = false;
     $stado=0;
     mysql_query("BEGIN");
+    $_POST['tarea'] = htmlspecialchars($_POST['tarea']);
     $configuracion_semestral->objBuidFromPost();
     $configuracion_semestral->estado = Objectbase::STATUS_AC;
     $configuracion_semestral->validar();

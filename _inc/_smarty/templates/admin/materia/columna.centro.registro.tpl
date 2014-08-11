@@ -10,13 +10,17 @@
               </select>
               <label for="tipo"><small>Tipo (*) {getHelpTip('tipo')}</small></label>
             </p>
-              <p>
-              <input type="text" name="sigla" id="sigla" value="{$materia->sigla}"  data-validation-engine="validate[required]">
-              <label for="sigla"><small>Materia Sigla(*) {getHelpTip('sigla')}</small></label>
-            </p>
             <p>
               <input type="text" name="nombre" id="nombre" value="{$materia->nombre}"  data-validation-engine="validate[required]">
               <label for="nombre"><small>Nombre del Materia (*) {getHelpTip('nombre')}</small></label>
+            </p>
+            <p>
+              <input type="text" name="sigla" id="sigla" value="{$materia->sigla}"  data-validation-engine="">
+              <label for="sigla"><small>Materia Sigla {getHelpTip('sigla')}</small></label>
+            </p>
+            <p>
+              <input type="text" name="codigo" id="codigo" value="{$materia->codigo}"  data-validation-engine="validate[custom[integer]]">
+              <label for="sigla"><small>Materia C&oacute;digo {getHelpTip('codigo')}</small></label>
             </p>
             <h2 class="title">Grabar Materia</h2>
             <p>
@@ -42,6 +46,8 @@
             jQuery('textarea').data('promptPosition',wo);
             jQuery('select').attr('data-prompt-position',wo);
             jQuery('select').data('promptPosition',wo);
+            $('#sigla').mask("AAA-###", {placeholder: "___-___"});
+            $('#codigo').mask("#######", {placeholder: "______"});
           });
         {/literal} 
         </script>

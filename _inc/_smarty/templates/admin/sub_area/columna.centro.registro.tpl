@@ -5,7 +5,7 @@
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
             <p>
-              <input type="text" name="nombre" id="nombre" value="{$subarea->nombre}"  data-validation-engine="validate[required]">
+              <input type="text" name="nombre" id="nombre" value="{$subarea->nombre}"  data-validation-engine="validate[required,funcCall[checkSubArea]]">
               <label for="nombre"><small>Nombre del Sub-&Aacuterea; (*) {getHelpTip('nombre')}</small></label>
             </p>
             <p>
@@ -37,6 +37,16 @@
             jQuery('select').attr('data-prompt-position',wo);
             jQuery('select').data('promptPosition',wo);
           });
+          function checkSubArea(field, rules, i, options){
+        {/literal} 
+              if (field.val() === "{$area->nombre}")
+        {literal} 
+              {
+                  // this allows to use i18 for the error msgs
+                  return "Por favor el nombre de la Sub-&Aacute;rea no puede ser igual que el &Aacute;rea";
+              }
+          }
+
         {/literal} 
         </script>
       </div>

@@ -19,8 +19,29 @@ try {
   $smarty->assign("menuList", $menuList);
 
   $smarty->assign('header_ui','1');
-  $smarty->assign('CSS','');
-  $smarty->assign('JS','');
+  //Datepicker & Tooltips $ Dialogs UI
+  $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
+  $JS[]   = URL_JS . "jquery-ui-1.10.3.custom.min.js";
+  $JS[]   = URL_JS . "ui/i18n/jquery.ui.datepicker-es.js";
+
+  //Validation
+  $CSS[] = URL_JS . "/validate/validationEngine.jquery.css";
+  $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
+  $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
+  $JS[]  = URL_JS . "calendar/js/jquery.eventCalendar.js";
+   // Agregan el css
+  $CSS[]  = URL_JS . "calendar/css/eventCalendar.css";
+  $CSS[]  = URL_JS . "calendar/css/eventCalendar_theme.css";
+  $CSS[]  = URL_CSS . "dashboard.css";
+
+  //BOX
+  $CSS[] = URL_JS . "box/box.css";
+  $JS[]  = URL_JS . "box/jquery.box.js";
+
+  
+  $smarty->assign('CSS',$CSS);
+  $smarty->assign('JS',$JS);
+  $smarty->assign('JS',$JS);
 
 
   $smarty->assign("ERROR", '');

@@ -145,7 +145,7 @@ function DesplegarTabla($a,$b)
              $tam='15%';
              break;
          default :
-             $tam='10%';
+             $tam='15%';
         }
         return $tam;         
     }

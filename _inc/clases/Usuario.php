@@ -140,6 +140,14 @@ class Usuario  extends Objectbase
     $this->nombre = ucwords(strtolower($this->nombre));
     $this->apellido_paterno = ucwords(strtolower($this->apellido_paterno));
     $this->apellido_materno = ucwords(strtolower($this->apellido_materno));
+    /**
+     * Activar Md5() en usuarios
+     **/
+     if (!$this->id){
+       $this->clave = md5($this->clave);
+     }
+     /**/
+    
     parent::save($table, $father_id_value, $base);
   }
   
@@ -167,6 +175,7 @@ class Usuario  extends Objectbase
     if ($login == "" || $clave == "")
       return false;
     $activo = Objectbase::STATUS_AC;
+    $clave  = md5($clave);
     $sql = "select * , u.id as usuario_id  from " . $this->getTableName('usuario') . " as u   where u.login = '$login' and u.clave = '$clave'  and u.estado = '$activo'  ";
     //echo $sql; 
     $resultado = mysql_query($sql);
@@ -448,7 +457,8 @@ class Usuario  extends Objectbase
     elseif ( isset($_POST['clave1']) && isset($_POST['clave2']) && isset($_POST['clave3']) && trim($_POST['clave1'])!='' && trim($_POST['clave2'])!='' && trim($_POST['clave3'])!='' )
     {
       Formulario::validarCambioPassword('cambiar',$this->clave,$_POST['clave1'],$_POST['clave2'],$_POST['clave3'],true,'texto','La Clave de acceso',FALSE);
-      $this->clave = $_POST['clave2'];
+      // activamos el md5 en el sistema
+      $this->clave = md5($_POST['clave2']);
     }
     Formulario::validar_fecha('fecha_nacimiento',$this->fecha_nacimiento,TRUE);
   }

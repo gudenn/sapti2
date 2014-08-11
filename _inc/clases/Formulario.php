@@ -108,7 +108,7 @@ class Formulario {
    */
   public function validarCambioPassword($id,$actual,$old,$new = false, $new2 = false ,$vallarge = false,$tipo = 'texto',$nombre = 'La Clave de acceso',$vacio = FALSE ,$mensaje = 'contiene caracteres no permitidos.',$mensaje_vacio ='no puede quedar vac&iacute;a.', $mensaje_noaceptado = 'Por favor no use los siguientes caracteres:')
   {
-    if ($actual != $old)
+    if ( $actual != md5($old) )
       throw new Exception("?".$id."&m=La Clave no corresponde a un usuario");
     //que no este vacio
     Formulario::validar($id,$old,$tipo,$nombre,$vacio,$mensaje,$mensaje_vacio, $mensaje_noaceptado);

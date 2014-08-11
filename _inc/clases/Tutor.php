@@ -21,6 +21,33 @@ class Tutor extends Objectbase
   */
   var $proyecto_tutor_objs;
   
+  /**
+   * Constructor por defecto
+   * @param type $id
+   */
+  public function __construct($id = '',$usuario_id = false) {
+    if ($usuario_id){
+      $sql = "SELECT * FROM ".$this->getTableName()." WHERE usuario_id = '$usuario_id'";
+      //echo $sql;
+      $result = mysql_query($sql);
+      if (!$result)
+        return false;
+      $row = mysql_fetch_array($result, MYSQL_ASSOC);
+      foreach($this as $key => $value)
+      {
+        /**  if the $key refer to an object continue */
+        if ($this->isKeyObject($key))
+          continue;
+        if (isset($row[strtolower($key)]))
+          $this->$key   = $row[strtolower($key)];
+      }
+      /** solo para los leidos desde la base de datos */
+      $this->datesSTH();
+    }
+    else { //accedemos al constructor por defecto
+      parent::__construct($id);
+    }
+  }
  /**
   * Get usuario de un docente
   * @return boolean|\Usuario
@@ -113,6 +140,24 @@ class Tutor extends Objectbase
       }
     }
     return false;
+  }
+
+  /**
+   * Buscamos el total de tutorias que tiene este tutor
+   * @param INT|BOOLEAN $usuario_id el id del usuario que es o deberia ser el tutor
+   * @return Proyecto_tutor
+   */
+  function getTotalTutorias($usuario_id=false) 
+  {
+    $totalTutorias = 0;
+    $tutor = new Tutor(false, $usuario_id);
+    $tutor->getAllObjects();
+    foreach ($tutor->proyecto_tutor_objs as $proyecto_tutor) {
+        if ($proyecto_tutor->estado_tutoria == Proyecto_tutor::ACEPTADO ){//Solo se tomaran encuante los activos
+          $totalTutorias++;
+        }
+    }
+    return $totalTutorias;
   }
   
   

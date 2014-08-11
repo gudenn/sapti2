@@ -35,7 +35,11 @@ try {
   $CSS[] = URL_JS . "/validate/validationEngine.jquery.css";
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
-
+  $JS[]  = URL_JS . "calendar/js/jquery.eventCalendar.js";
+   // Agregan el css
+  $CSS[]  = URL_JS . "calendar/css/eventCalendar.css";
+  $CSS[]  = URL_JS . "calendar/css/eventCalendar_theme.css";
+  $CSS[]  = URL_CSS . "dashboard.css";
   //BOX
   $CSS[] = URL_JS . "box/box.css";
   $JS[]  = URL_JS . "box/jquery.box.js";
