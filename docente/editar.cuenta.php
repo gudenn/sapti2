@@ -35,6 +35,11 @@ try {
   $CSS[] = URL_JS . "/validate/validationEngine.jquery.css";
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
+  $JS[]  = URL_JS . "calendar/js/jquery.eventCalendar.js";
+   // Agregan el css
+  $CSS[]  = URL_JS . "calendar/css/eventCalendar.css";
+  $CSS[]  = URL_JS . "calendar/css/eventCalendar_theme.css";
+  $CSS[]  = URL_CSS . "dashboard.css";
 
   //BOX
   $CSS[] = URL_JS . "box/box.css";
@@ -112,9 +117,9 @@ try {
   {
     $html = new Html();
     if ($EXITO)
-      $mensaje = array('mensaje'=>'Se actualiz&oacute; correctamente la informaci&oacute;n del Estudiante','titulo'=>'Registro de Estudiante' ,'icono'=> 'tick_48.png');
+      $mensaje = array('mensaje'=>'Se actualiz&oacute; correctamente la informaci&oacute;n del Usuario','titulo'=>'Registro de Usuario' ,'icono'=> 'tick_48.png');
     else
-      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Estudiante','titulo'=>'Registro de Estudiante' ,'icono'=> 'warning_48.png');
+      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Usuario','titulo'=>'Registro de Usuario' ,'icono'=> 'warning_48.png');
    $ERROR = $html->getMessageBox ($mensaje);
   }
   $smarty->assign("ERROR",$ERROR);

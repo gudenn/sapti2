@@ -2532,6 +2532,8 @@ CREATE TABLE IF NOT EXISTS `fecha_registro` (
 INSERT INTO `fecha_registro` (`id`, `semestre_id`, `fecha_inicio`, `fecha_fin`, `descripcion`, `estado`) VALUES
 (7, 1, '2014-06-02', '2014-06-24', 'Fecha de registro de Perfil', 'AC');
 
+UPDATE  `usuario` SET  `clave` = MD5(  `clave` ) WHERE 1;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
