@@ -33,9 +33,11 @@ try {
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
 
+  //MASK
+  $JS[]   = URL_JS . "jQuery-Mask/jquery.mask.min.js";
   //BOX
   $CSS[]  = URL_JS . "box/box.css";
-  $JS[]  = URL_JS ."box/jquery.box.js";
+  $JS[]   = URL_JS ."box/jquery.box.js";
   //Datepicker & Tooltips $ Dialogs UI
   $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
   $JS[]   = URL_JS . "jquery-ui-1.10.3.custom.min.js";

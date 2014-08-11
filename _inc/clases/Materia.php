@@ -20,6 +20,12 @@ class Materia extends Objectbase
      var $sigla;
      
  /**
+  * El codigo de la materia
+  * @var VARCHAR(10)
+  */
+     var $codigo;
+     
+ /**
   * nombre de la materia
   * @var INT(11)
   */    
@@ -46,7 +52,8 @@ class Materia extends Objectbase
   function validar() {
     leerClase('Formulario');
     Formulario::validar('nombre'     , $this->nombre     , 'texto', 'El Nombre');
-  Formulario::validar('sigla'     , $this->nombre     , 'texto', 'la sigla');
+    Formulario::validar('codigo'     , $this->codigo     , 'numero', 'El C&oacute;digo', true);
+    Formulario::validar('sigla'      , $this->nombre     , 'texto', 'la sigla', true);
     
   }
 

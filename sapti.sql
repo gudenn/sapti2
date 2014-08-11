@@ -227,11 +227,12 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `sapti`.`materia` ;
 
 CREATE  TABLE IF NOT EXISTS `sapti`.`materia` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `nombre` VARCHAR(200) NULL ,
-  `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
-  `sigla` VARCHAR(20) NULL ,
-  `tipo` VARCHAR(4) NULL ,
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(200) NULL,
+  `sigla` VARCHAR(20) NULL,
+  `codigo` VARCHAR(10) NULL,
+  `tipo` VARCHAR(4) NULL,
+  `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
