@@ -47,6 +47,8 @@ try {
   leerClase('Proyecto');
   leerClase('Tribunal');
    leerClase('html');
+   leerClase("Semestre");
+   leerClase('Docente');
    //no hay error
   $ERROR='';
 
@@ -58,6 +60,14 @@ try {
 
   if (isset($_GET['notificacion_id']) && is_numeric($_GET['notificacion_id']))
   {
+      
+       $semestre = new Semestre('',1);
+   $valorh = $semestre->getValor('Horas para rechazar como tribunal',24);
+    if (!$valorh)
+    {
+      //  echo $valorh;
+       $semestre->setValor('Horas para rechazar como tribunal',10);
+    }
     
         $smarty->assign('accion', array(
         Tribunal::ACCION_AC =>  "ACEPTAR",
@@ -68,6 +78,27 @@ try {
     $notificacion->marcarVisto();
     $proyecto      =  new Proyecto($notificacion->proyecto_id);
     $estudiante    =  $proyecto->getEstudiante();
+   //if()
+    $tribunal=$proyecto->getTribunal(getSessionDocente()->id);
+   
+    $fechainicio=  date("d-m-Y", strtotime($tribunal->fecha_asignacion));
+   //echo $fechainicio;
+    $fechafin =  date('d-m-Y')  ;
+   // echo $fechafin;
+    
+     //$difm=date("d-m-Y", strtotime("00:00:00") + strtotime($fechafin) - strtotime($fechainicio));
+         
+    $diff = abs(strtotime($fechafin) - strtotime($fechainicio));
+    $years = floor($diff / (365*60*60*24));
+    $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
+   $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
+    
+     echo   $days*24; 
+   // $desglose=split(":", $difm);
+    // $dec=$desglose[0]+$desglose[1]/60;
+   //  echo $dec;
+        
+
     
     //echo $_GET['notificacion_id'];
     //$notificacion
