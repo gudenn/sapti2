@@ -7,12 +7,13 @@ try {
 
 
   /** HEADER */
-   leerClase("Tutor");
-   leerClase("Usuario");
-   leerClase("Estudiante");
-   leerClase("Formulario");
-   leerClase("Pagination");
-   leerClase("Filtro");
+  leerClase("Tutor");
+  leerClase("Usuario");
+  leerClase("Estudiante");
+  leerClase("Formulario");
+  leerClase("Pagination");
+  leerClase("Filtro");
+  leerClase('Semestre');
 
 
   $ERROR ='';
@@ -132,6 +133,13 @@ try {
   $obj_mysql  = $usuario->getAll('',$o_string,$filtro_sql,TRUE);
   $objs_pg    = new Pagination($obj_mysql, 'listaposiblestutores','',false);
 
+  $semestre                = new Semestre(' ',1);
+  $maximo_tutorias_activas = $semestre->getValor('M&aacute;ximo Tutor&iacute;as Activas', 5);
+  $smarty->assign("max_tutorias"    ,$maximo_tutorias_activas);
+
+  
+  $tutor                     = new Tutor();
+  $smarty->assign("tutor"    ,$tutor);
   $smarty->assign("filtros"  ,$filtro);
   $smarty->assign("objs"     ,$objs_pg->objs);
   $smarty->assign("pages"    ,$objs_pg->p_pages);
