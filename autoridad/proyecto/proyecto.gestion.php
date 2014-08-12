@@ -5,70 +5,74 @@ try {
   if(!isAdminSession())
     header("Location: ../login.php");  
 
-  leerClase("Semestre");
+  leerClase("Usuario");
+  leerClase("Estudiante");
   leerClase("Formulario");
   leerClase("Pagination");
   leerClase("Filtro");
-
+  leerClase("Proyecto_estudiante");
 
   $ERROR = '';
 
   /** HEADER */
-  $smarty->assign('title','Gesti&oacute;n de Semestres');
-  $smarty->assign('description','P&aacute;gina de gestion de Semestres');
-  $smarty->assign('keywords','Gestion,Semestre');
-  leerClase('Administrador');
+  $smarty->assign('title','Gesti&oacute;n de Proyectos Finales');
+  $smarty->assign('description','P&aacute;gina de Gesti&oacute;n de Proyectos Finales');
+  $smarty->assign('keywords','Gesti&oacute;n,Proyectos Finales');
   /**
    * Menu superior
    */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/','name'=>'Configuraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'configuracion/'.basename(__FILE__),'name'=>'Registro de Semestre');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'proyecto/','name'=>'Gesti&oacute;n Proyectos Finales');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'estudiante/'.basename(__FILE__),'name'=>'Gesti&oacute;n de Proyectos Finales');
   $smarty->assign("menuList", $menuList);
-
-  $smarty->assign('header_ui','1');
-  $smarty->assign('CSS','');
-  $smarty->assign('JS','');
-
+//CSS
+  $CSS[]  = URL_CSS . "academic/tables.css";
   
-  //////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////
-  if (isset($_GET['activar']) && isset($_GET['semestre_id']) && is_numeric($_GET['semestre_id']) )
-  {
-    $semestre = new Semestre($_GET['semestre_id']);
-    $semestre->activar();
-    $semestre->save();
-  }
+   $JS[]  = URL_JS . "jquery.min.js";
+
+
+  //Validation
+  $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
+  $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
+
+  //BOX
+  $CSS[]  = URL_JS . "box/box.css";
+  $JS[]  = URL_JS ."box/jquery.box.js";
+  //Datepicker & Tooltips $ Dialogs UI
+  $CSS[]  = URL_JS . "ui/cafe-theme/jquery-ui-1.10.2.custom.min.css";
+  $JS[]   = URL_JS . "jquery-ui-1.10.3.custom.min.js";
+  $JS[]   = URL_JS . "ui/i18n/jquery.ui.datepicker-es.js";
+  $smarty->assign('CSS',$CSS);
+  $smarty->assign('JS',$JS);
+
 
   $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
-  $smarty->assign('lista'       ,'admin/semestre/lista.tpl');
+  $smarty->assign('lista'       ,'admin/proyecto_estudiante/proyecto.lista.tpl');
+
 
   //Filtro
-  $filtro   = new Filtro('g_semestre',__FILE__);
-  $semestre = new Semestre();
-  $semestre->iniciarFiltro($filtro);
-  $filtro_sql = $semestre->filtrar($filtro);
+  $filtro     = new Filtro('g_proyectogestion',__FILE__);
+  $proyecto   = new Proyecto_estudiante();
+  $proyecto->iniciarFiltro($filtro);
+  $filtro_sql = $proyecto->filtrar($filtro);
 
+  $proyecto->estudiante_id = '%';
+  $proyecto->proyecto_id   = '%';
   
-  $o_string   = $semestre->getOrderString($filtro);
-  $obj_mysql  = $semestre->getAll('',$o_string,$filtro_sql,TRUE);
-  $objs_pg    = new Pagination($obj_mysql, 'g_semestre','',false);
+  
+  $o_string   = $proyecto->getOrderString($filtro);
+  $obj_mysql  = $proyecto->getAll('',$o_string,$filtro_sql,FALSE,TRUE);
+  $objs_pg    = new Pagination($obj_mysql[0], 'g_proyectogestion','',false);
 
   $smarty->assign("filtros"  ,$filtro);
   $smarty->assign("objs"     ,$objs_pg->objs);
   $smarty->assign("pages"    ,$objs_pg->p_pages);
 
-
-
-
-  //No hay ERROR
-  $smarty->assign("ERROR",'');
   $smarty->assign("URL",URL);  
+  $smarty->assign("ERROR", $ERROR);
 
 }
-catch(Exception $e) 
-{
+catch(Exception $e) {
   $smarty->assign("ERROR", handleError($e));
 }
 

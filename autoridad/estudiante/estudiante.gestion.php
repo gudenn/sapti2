@@ -71,6 +71,7 @@ try {
 
   $estudiante->usuario_id = '%';
   
+  
   $o_string   = $estudiante->getOrderString($filtro);
   $obj_mysql  = $estudiante->getAll('',$o_string,$filtro_sql,TRUE,TRUE);
   $objs_pg    = new Pagination($obj_mysql, 'g_estudiantetod','',false);
@@ -78,31 +79,20 @@ try {
   $smarty->assign("filtros"  ,$filtro);
   $smarty->assign("objs"     ,$objs_pg->objs);
   $smarty->assign("pages"    ,$objs_pg->p_pages);
- $smarty->assign("crear_nuevo"  ,"estudiante.registro.php");
- $ERROR = ''; 
-if(isset($_SESSION['estado']) && $_SESSION['estado']==1)
-{
-  
-  
-  leerClase('Html');
-  $html  = new Html();
- 
- 
-    $html = new Html();
-      
-      $mensaje = array('mensaje'=>'Se grabo correctamente el Estudiante','titulo'=>'Registro de Estudiante' ,'icono'=> 'tick_48.png');
-  
-      $ERROR = $html->getMessageBox ($mensaje);
-   
-   $_SESSION['estado']=0;
-$smarty->assign("ERROR",$ERROR);
-     
-}
+  $smarty->assign("crear_nuevo"  ,"estudiante.registro.php");
+
+  if (isset($_SESSION['estado']) && $_SESSION['estado'] == 1) {
+    leerClase('Html');
+    $html    = new Html();
+    $mensaje = array('mensaje' => 'Se grabo correctamente el Estudiante', 'titulo' => 'Registro de Estudiante', 'icono' => 'tick_48.png');
+    $ERROR   = $html->getMessageBox($mensaje);
+    $_SESSION['estado'] = 0;
+  }
   $smarty->assign("URL",URL);  
+  $smarty->assign("ERROR", $ERROR);
 
 }
-catch(Exception $e) 
-{
+catch(Exception $e) {
   $smarty->assign("ERROR", handleError($e));
 }
 

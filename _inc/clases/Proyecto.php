@@ -40,6 +40,19 @@ class Proyecto extends Objectbase {
   
   /**
    * Estado Proyecto 
+   * Formulario Perfil Pendiente (PD)
+   */
+  const EST5_P = "PD";
+
+  /**
+   * Estado Proyecto 
+   * Formulario Perfil Confirmaddo (CO)
+   */
+  const EST6_C = "CO";
+
+  
+  /**
+   * Estado Proyecto 
    * Estado de proyecto con tribunal (TA)
    */
   const EST2_TA = "TA";
@@ -55,17 +68,6 @@ class Proyecto extends Objectbase {
    * con defensa (LD)
    */
   const EST4_DEF = "LD";
-  /**
-   * Estado Proyecto 
-   * Formulario Perfil Pendiente (PD)
-   */
-  const EST5_P = "PD";
-
-  /**
-   * Estado Proyecto 
-   * Formulario Perfil Confirmaddo (CO)
-   */
-  const EST6_C = "CO";
   
   /**
    * Estado Proyecto 
@@ -747,8 +749,8 @@ class Proyecto extends Objectbase {
   */
  function getVbTutorPerfilIds() 
  {
-        leerClase('Tutor');
-        leerClase('Proyecto_tutor');
+    leerClase('Tutor');
+    leerClase('Proyecto_tutor');
 
     $activo = Objectbase::STATUS_AC;
      $vb= Visto_bueno::E2_TUTOR; 
@@ -772,8 +774,8 @@ class Proyecto extends Objectbase {
   */
  function getVbTutorProyectoIds() 
  {
-        leerClase('Tutor');
-        leerClase('Proyecto_tutor');
+    leerClase('Tutor');
+    leerClase('Proyecto_tutor');
 
     $activo = Objectbase::STATUS_AC;
     $vb= Visto_bueno::E2_TUTOR; 
@@ -827,8 +829,8 @@ class Proyecto extends Objectbase {
     $activo = Objectbase::STATUS_AC;
    // $sql = "select v.* from " . $this->getTableName('Visto_bueno') . " as v    where v.proyecto_id = '$this->id' and v.visto_bueno_id='$iddocente' and  '$this->tipo_proyecto'='$tipo' and v.visto_bueno_tipo='$d' and v.estado='$activo'";
     $sql="select  v.*
-from  visto_bueno  v 
-where   v.proyecto_id='$this->id' and v.visto_bueno_id='$iddocente' and v.visto_bueno_tipo='DO'";
+          from  visto_bueno  v 
+          where   v.proyecto_id='$this->id' and v.visto_bueno_id='$iddocente' and v.visto_bueno_tipo='DO'";
     $resultado = mysql_query($sql);
     if (!$resultado)
       return false;
@@ -1099,6 +1101,63 @@ where   v.proyecto_id='$this->id' and v.visto_bueno_id='$iddocente' and v.visto_
       $carreras[] = new Carrera($fila);
     }
     return $carreras;
+  }
+  
+/**
+   * Inicia el filtro para el admin
+   * @param Filtro $filtro el fitro que se usara en el admin
+   */
+  function iniciarFiltro(&$filtro) 
+  {
+    
+    if (isset($_GET['order']))
+      $filtro->order($_GET['order']);
+
+    $filtro->nombres[] = 'Tipo';
+    $filtro->valores[] = array ('select','tipo_proyecto'  ,$filtro->filtro('tipo_proyecto'),
+        array(''      ,'PE'         , 'PR'             ),
+        array('Todos' ,'Tipo Perfil', 'Proyecto Final' ));
+
+    $filtro->nombres[] = 'Estado';
+    $filtro->valores[] = array ('select','estado_proyecto'  ,$filtro->filtro('estado_proyecto'),
+        array(''      ,'Tipo Perfil'            ,'Tipo Proyecto Final' ),
+        array('Todos' 
+          //TIPO PERFIL
+          ,array(
+            'IN' => 'Iniciado',
+            'VB' => 'Visto Bueno',
+            'PD' => 'Registro Pendiente',
+            'CO' => 'Registro Confirmado',
+          )
+          //TIPO PERFIL
+          ,array(
+            'IN' => 'Proyecto Iniciado',
+            'VB' => 'Visto Bueno',
+            'TA' => 'Tribunal Asignado',
+            'TV' => 'Vo.Bo. Tribunal',
+            'LD' => 'Defesa Asignada',
+            'PF' => 'Finalizado',
+          ) 
+        )
+    );
+    $filtro->nombres[] = 'N&uacute;mero';
+    $filtro->valores[] = array ('input' ,'numero_asignado',$filtro->filtro('numero_asignado'));
+
+
+    $filtro->nombres[] = 'Activo';
+    $filtro->valores[] = array ('select','es_actual'  ,$filtro->filtro('es_actual'),
+        array(''      ,'1'         , '0'         ),
+        array('Todos' ,'Activo'    , 'Inactivo' ));
+
+    /*
+    $filtro->nombres[] = 'Registro';
+    $filtro->valores[] = array ('input' ,'fecha_registro_inicio',$filtro->filtro('fecha_registro_inicio'));
+    $filtro->nombres[] = 'Fin';
+    $filtro->valores[] = array ('input' ,'fecha_registro_fin',$filtro->filtro('fecha_registro_fin'));
+    */
+    
+    $filtro->nombres[] = 'T&iacute;tulo';
+    $filtro->valores[] = array ('input' ,'nombre',$filtro->filtro('nombre'));
   }
 }
 

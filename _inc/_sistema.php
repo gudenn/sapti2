@@ -216,7 +216,7 @@ function getBasePath() {
 // tiny words (length 3 by default) are included on the result.
 // "..." is added if result do not reach original string length
 
-function cortar($str, $length = 25, $end = '...') {
+function cortar($str, $length = 25, $end = '&#8230;') {
   if (strlen($str) < $length)
     return $str;
   return substr($str, 0, $length) . $end;

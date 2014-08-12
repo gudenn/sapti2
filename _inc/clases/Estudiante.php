@@ -163,7 +163,18 @@ class Estudiante extends Objectbase {
   }
 
   /**
-   * Obtiene el proyecto del estudiante
+   * Obtiene el estado del proyecto actual del estudiante
+   */
+  function getEstadoProyecto($estudiante_id = false) {
+    if ($estudiante_id){
+      self::___construct($estudiante_id);
+    }
+    $proyecto = $this->getProyecto();
+    $proyecto->estado_proyecto;
+  }
+
+  /**
+   * Obtiene el proyecto actual del estudiante
    * @return boolean|Proyecto si no encuentra su proyecto retorna false
    * @todo verificar que el proyecto sea el actual
    */

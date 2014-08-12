@@ -50,6 +50,8 @@ try {
   $obj_mysql  = $estudiante->getAll('',$o_string,$filtro_sql,TRUE,TRUE);
   $objs_pg    = new Pagination($obj_mysql, 'g_estudianteas','',false);
 
+  $smarty->assign("estudiante"   ,$estudiante);//cualquier estudiante solo por cargar el estado de los demas
+
   $smarty->assign("filtros"  ,$filtro);
   $smarty->assign("objs"     ,$objs_pg->objs);
   $smarty->assign("pages"    ,$objs_pg->p_pages);
