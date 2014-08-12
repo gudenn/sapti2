@@ -373,14 +373,15 @@ if (isset($_POST['proyecto_id']))
      $proyectos   = new Proyecto($idproyecto);
      $proyectos->estado_proyecto= Proyecto::EST2_TA;
      $proyectos->save();
-    
+    $time = time();
+$fechaasignaciones= date("j/n/ H:i:s", $time);
      
     $estudiante   = new Estudiante($proyectos->getEstudiante()->id);
     $notificacion = new Notificacion();
     $notificacion->objBuidFromPost();
     $notificacion->proyecto_id=$_POST['proyecto_id']; 
     $notificacion->tipo=  Notificacion::TIPO_MENSAJE;
-    $notificacion->fecha_envio= date("j/n/Y");
+    $notificacion->fecha_envio=date("j/n/Y");
     $notificacion->asunto="Asignacion de Tribunales";
      $notificacion->detalle="Se le Asigno Tribunales";
     $notificacion->prioridad=5;
@@ -400,7 +401,7 @@ if (isset($_POST['proyecto_id']))
                 $tribunal->visto_bueno       =  Tribunal::VISTO_BUENOPENDIENTE;
                 $tribunal->accion="";
                 $tribunal->visto             =  Tribunal::VISTO_NV;
-                $tribunal->fecha_asignacion  = date("j/n/Y");
+                $tribunal->fecha_asignacion  =  date("j/n/Y H:i:s");
               //  $tribunal->semestre          =  ;
                 $tribunal->estado            = Objectbase::STATUS_AC;
                 $tribunal->save();

@@ -472,6 +472,10 @@ AND tr.docente_id=".$docente->id."
    $link = Docente::URL."/foro/";
    $thise->agregarItem('Foro del sistema','Gesti&oacute;n de temas y debates para docentes, tutores y tribunales.','basicset/chat.png',$link);
    $thises[] = $thise;
+    $thise = new Menu('Envio a Email');
+   $link = Docente::URL."email/";
+   $thise->agregarItem('Envio de Email','Envio de Email masivos','basicset/chat.png',$link);
+   $thises[] = $thise;
   
     return $thises;
   }
