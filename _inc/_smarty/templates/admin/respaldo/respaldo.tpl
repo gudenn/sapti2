@@ -21,7 +21,7 @@
 <div style='height:auto; width: 100%; font-size: 12px; overflow: auto;'>
    
  <form action="#" method="post" id="aprobado" name="aprobado" >
-
+<div style='height:50%; width: 100%; font-size: 12px; overflow: auto;'>
    <table class="tbl_lista" id="docentes"  mane="docentes">
   <thead>
     <tr>
@@ -53,6 +53,7 @@
     </tbody> 
 </table>
      </div>
+    </div>
         <div style ="clear"></div>
        <div>
        

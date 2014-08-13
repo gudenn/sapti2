@@ -10,13 +10,11 @@
    <center> <strong> <h1>Formulario De Envio de Email </h1></strong></td></center>
       
 <div>
-    
- <form action="" method="post" id="consejo" >
-               
-<div style='height:auto; width: 100%; font-size: 12px; overflow: auto;'>
-   
+     
  <form action="#" method="post" id="aprobado" name="aprobado" >
-
+            
+<div style='height:auto; width: 100%; font-size: 12px; overflow: auto;'>
+ 
    <table class="tbl_lista" id="docentes"  mane="docentes">
   <thead>
     <tr>

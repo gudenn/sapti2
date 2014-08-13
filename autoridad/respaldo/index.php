@@ -59,8 +59,8 @@ try {
     /**
    * Menu superior
    */
-  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Asignaturas');
-  $menuList[]     = array('url'=>URL . Docente::URL.'respaldo' ,'name'=>'Backup');
+  $menuList[]     = array('url'=>URL.  Administrador::URL,'name'=>'ADMINISTRACI&Oacute;N');
+  $menuList[]     = array('url'=>URL . Administrador::URL.'respaldo' ,'name'=>'BACKUP');
   $smarty->assign("menuList", $menuList);
  
    $editores = ",
@@ -97,26 +97,7 @@ try {
 
     
  //  $respaldos= new Respaldo();
-   
- $sqlr='SELECT r.* FROM  respaldo r ORDER BY r.fecha_respaldo DESC';
- $resultado = mysql_query($sqlr);
- $arraytribunal= array();
 
- while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
-   { 
-        
-        $lista_areas=array();
-        $lista_areas[] =  $fila["id"];
-        $lista_areas[] =  $fila["fecha_respaldo"];
-        $lista_areas[] =  $fila["archivo"];
-            
-  $arraytribunal[]= $lista_areas;
-  
- }
-  $smarty->assign('listadocentes'  , $arraytribunal);
-  $contenido = 'tribunal/registrotribunal.tpl';
-  $smarty->assign('contenido',$contenido);
-  
 
 
 if(isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
@@ -185,18 +166,48 @@ fclose($handle);
     $stado=1;
     mysql_query("COMMIT");
     
-  if(isset($stado))
-   {
-   
-          $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente la asignacion de tribunales','titulo'=>'Registro De Asignaci&oacute; de Tribunales' ,'icono'=> 'warning_48.png');
-          $ERROR = $html->getMessageBox ($mensaje);
-       
-    }
-    
+
+     $ERROR = '';
+  leerClase('Html');
+  $html  = new Html();
+  if (isset($stado) &&$stado==1)
+  {
+      
+    $html = new Html();
+    $mensaje = array('mensaje'=>'No tiene permiso de acceder a este M&oacute;dulo','titulo'=>'No Tiene Permiso' ,'icono'=> 'warning_48.png');
+    $ERROR = $html->getMessageBox ($mensaje);
+   // sleep(50);
+  }  else {
+       $html = new Html();
+    $mensaje = array('mensaje'=>'No tiene permiso de acceder a este M&oacute;dulo','titulo'=>'No Tiene Permiso' ,'icono'=> 'warning_48.png');
+    $ERROR = $html->getMessageBox ($mensaje);
+      
+  }
+  $smarty->assign("ERROR",$ERROR);
     
  
  
  }
+    
+ $sqlr='SELECT r.* FROM  respaldo r ORDER BY r.fecha_respaldo DESC';
+ $resultado = mysql_query($sqlr);
+ $arraytribunal= array();
+
+ while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+   { 
+        
+        $lista_areas=array();
+        $lista_areas[] =  $fila["id"];
+        $lista_areas[] =  $fila["fecha_respaldo"];
+        $lista_areas[] =  $fila["archivo"];
+            
+  $arraytribunal[]= $lista_areas;
+  
+ }
+  $smarty->assign('listadocentes'  , $arraytribunal);
+  $contenido = 'tribunal/registrotribunal.tpl';
+  $smarty->assign('contenido',$contenido);
+  
    
  
   
@@ -207,8 +218,7 @@ fclose($handle);
 } 
 catch(Exception $e) 
 {
-    echo $e;
-   
+    
   $smarty->assign("ERROR", handleError($e));
 }
 $token = sha1(URL . time());
