@@ -5,7 +5,12 @@
       <!-- ############ -->
       {include file="docente/columna.left.tpl"}
       <!-- ############ -->
-    
+   
+      
+      
+      
+      
+      
 <div id="content">
    <center> <strong> <h1>Lista de Respaldos</h1></strong></td></center>
       
