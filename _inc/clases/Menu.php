@@ -242,6 +242,11 @@ class Menu
     $counter = $notificacion->getTodasNotificaciones($usuario->id, '', '', ' AND estado_notificacion="SV" ');
     $thise->agregarItem('Notificaciones Pendientes','Todas las notificaciones no leidas','basicset/message-not-read.png',$link,$counter[1]);
     $thises[] = $thise;
+    
+     $thise = new Menu('Backup de la Bases de Datos');
+    $link = Administrador::URL."respaldo/";
+    $thise->agregarItem('Respaldo','Gesti&oacute;n de Respaldo','basicset/backup.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+  $thises[] = $thise;
     return $thises;
   }
   
@@ -474,7 +479,7 @@ AND tr.docente_id=".$docente->id."
    $thises[] = $thise;
     $thise = new Menu('Envio a Email');
    $link = Docente::URL."email/";
-   $thise->agregarItem('Envio de Email','Envio de Email masivos','basicset/chat.png',$link);
+   $thise->agregarItem('Envio de Email','Envio de Email masivos','basicset/email.png',$link);
    $thises[] = $thise;
   
     return $thises;

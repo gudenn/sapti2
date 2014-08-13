@@ -1,10 +1,10 @@
 
 <?php
 try {
-    define ("MODULO", "DOCENTE");
-  
+     define ("MODULO", "ADMIN-INDEX");
   require('../_start.php');
-  if(!isDocenteSession())
+  //require '../../../..';
+  if(!isAdminSession())
   header("Location: login.php"); 
   /** HEADER */
   $smarty->assign('title','Proyecto Final');
@@ -51,6 +51,7 @@ try {
   leerClase("Mail_enviar");
   leerClase("Dia");
   leerClase('Html');
+  leerClase("Respaldo");
   
  //  no hay error
   
@@ -59,7 +60,7 @@ try {
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Asignaturas');
-  $menuList[]     = array('url'=>URL . Docente::URL.'email' ,'name'=>'Envio de Email');
+  $menuList[]     = array('url'=>URL . Docente::URL.'respaldo' ,'name'=>'Backup');
   $smarty->assign("menuList", $menuList);
  
    $editores = ",
@@ -80,10 +81,11 @@ try {
   $docente = getSessionDocente(); 
   leerClase('Menu');
   $menu = new Menu('');
-  $menus = $menu->getDocenteIndex($docente);
+   leerClase('Menu');
+  $menu = new Menu('');
+  $menus = $menu->getAdminIndex();
   $smarty->assign("menus", $menus);
-  $smarty->assign("docente", $docente);
-  $smarty->assign("ERROR", $ERROR);
+    $smarty->assign("ERROR", $ERROR);
      
      
     $valorh = $semestre->getValor('Número máximo de tribunal',10);
@@ -94,27 +96,19 @@ try {
     }
 
     
+ //  $respaldos= new Respaldo();
    
- $sqlr='SELECT es.id as id, es.codigo_sis as codigosis, us.nombre as nombre, CONCAT(us.apellido_paterno," ",us.apellido_materno) as apellidos, pr.nombre as nombrep
-FROM dicta di, estudiante es, usuario us, inscrito it, proyecto pr, proyecto_estudiante pe
-WHERE di.id=it.dicta_id
-AND it.estudiante_id=es.id
-AND es.usuario_id=us.id
-AND pe.estudiante_id=es.id
-AND pe.proyecto_id=pr.id
-AND pr.es_actual=1
-AND di.docente_id="'.$docente->id.'"';
+ $sqlr='SELECT r.* FROM  respaldo r ORDER BY r.fecha_respaldo DESC';
  $resultado = mysql_query($sqlr);
  $arraytribunal= array();
 
  while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
    { 
-       $doc= new Docente($fila["id"]);
-        $listaareas=array();
+        
         $lista_areas=array();
         $lista_areas[] =  $fila["id"];
-        $lista_areas[] =  $fila["nombre"];
-        $lista_areas[] =  $fila["apellidos"];
+        $lista_areas[] =  $fila["fecha_respaldo"];
+        $lista_areas[] =  $fila["archivo"];
             
   $arraytribunal[]= $lista_areas;
   
@@ -127,25 +121,63 @@ AND di.docente_id="'.$docente->id.'"';
 
 if(isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
  {
-    
-       $array=array();
-        if (isset($_POST['seleccion'])) 
-           {
-            $seleccion=$_POST['seleccion'];
-           if(count($seleccion)>0){
-           foreach ($seleccion as $id){
-              $array[]= new Estudiante($id); 
-               
-           }
-           
-               
-          $enviar= new Mail_enviar();
-          $enviar->enviar($array, "jaaaaaa","Hola mundo", $_POST['detalle']);
       
-   
      $EXITO = false;
     $stado=0;
     mysql_query("BEGIN");
+        /* Store All Table name in an Array */
+$allTables = array();
+$result = mysql_query('SHOW TABLES');
+while($row = mysql_fetch_row($result)){
+     $allTables[] = $row[0];
+}
+
+foreach($allTables as $table){
+$result = mysql_query('SELECT * FROM '.$table);
+$num_fields = mysql_num_fields($result);
+
+$return.= 'DROP TABLE IF EXISTS '.$table.';';
+$row2 = mysql_fetch_row(mysql_query('SHOW CREATE TABLE '.$table));
+$return.= "\n\n".$row2[1].";\n\n";
+
+for ($i = 0; $i < $num_fields; $i++) {
+while($row = mysql_fetch_row($result)){
+   $return.= 'INSERT INTO '.$table.' VALUES(';
+     for($j=0; $j<$num_fields; $j++){
+       $row[$j] = addslashes($row[$j]);
+       $row[$j] = str_replace("\n","\\n",$row[$j]);
+       if (isset($row[$j])) { $return.= '"'.$row[$j].'"' ; } 
+       else { $return.= '""'; }
+       if ($j<($num_fields-1)) { $return.= ','; }
+     }
+   $return.= ");\n";
+}
+}
+$return.="\n\n";
+}
+
+// Create Backup Folder
+$folder = 'respaldo/';
+if (!is_dir($folder))
+mkdir($folder, 0777, true);
+chmod($folder, 0777);
+
+$date = date('m-d-Y-H-i-s', time()); 
+$filename = $folder."db-backup-".$date; 
+
+$handle = fopen($filename.'.sql','w+');
+fwrite($handle,$return);
+fclose($handle);
+  
+
+    $respaldo= new Respaldo();
+    $respaldo->fecha_respaldo=  date("j/n/Y H:i:s");
+    $respaldo->archivo=$filename.'.sql';
+   $respaldo->save();
+    
+     
+      
+ 
     
     
      
@@ -162,20 +194,12 @@ if(isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['tok
     }
     
     
-        
-     }else
- {
-   $mensaje = array('mensaje' => 'Error,La Cantidad minima de Tribunales debe Ser 3', 'titulo' => 'Numero De Tribunales', 'icono' => 'warning_48.png');
-    $ERROR = $html->getMessageBox($mensaje);;
- }
- }else
- {
-     $mensaje = array('mensaje' => 'Hubo un problema, No se grabo correctamente la Asignacion de Tribunales', 'titulo' => 'Registro de Tribunales', 'icono' => 'warning_48.png');
-    $ERROR = $html->getMessageBox($mensaje);
- }
+ 
  
  }
+   
  
+  
 
 
   $smarty->assign("ERROR",  $ERROR);
@@ -183,19 +207,16 @@ if(isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['tok
 } 
 catch(Exception $e) 
 {
+    echo $e;
    
   $smarty->assign("ERROR", handleError($e));
 }
-
-
-
-
-
 $token = sha1(URL . time());
 $_SESSION['register'] = $token;
 $smarty->assign('token', $token);
 
-$TEMPLATE_TOSHOW = 'docente/email/email.tpl';
+$TEMPLATE_TOSHOW = 'admin/respaldo/respaldo.tpl';
 $smarty->display($TEMPLATE_TOSHOW);
+
 
 ?>
