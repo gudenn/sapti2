@@ -265,11 +265,17 @@ class Menu
     $semetre->getActivo();
     $fecha=$semetre->getFecha();
     
-    $fechaactual=date("Y-m-d");
+    //$fechaactual=date("Y-m-d");
     
     $fechaini=$fecha[0]->fecha_inicio;
-    
+    list($dia, $mes, $anio)=explode("-", $fechaini);
+    $fechaini=mktime(0, 0, 0, $mes, $dia, $anio);
     $fechafin=$fecha[0]->fecha_fin;
+    list($dia, $mes, $anio)=explode("-", $fechafin);
+    $fechafin=mktime(0, 0, 0, $mes, $dia, $anio);
+   
+    $fechaactual=mktime(0, 30, 0, date("m"), date("d"), date("Y"));
+   
    
     if (!isEstudianteSession())
       return array();
@@ -279,7 +285,7 @@ class Menu
     $link = Estudiante::URL."proyecto-final/";
     $thise->agregarItem('Proyecto','Registro de avances y correcciones para el Proyecto Final','basicset/briefcase_48.png',$link);
     //revisar la esta linea la comparacion e fechas no sirve de esa manera
-    if( is_object( $proyecto) && $proyecto->estado_proyecto==Proyecto::EST2_BUE && strtotime($fechaini)<=strtotime($fechaactual) && strtotime($fechafin)>=strtotime($fechaactual))
+    if( is_object( $proyecto) && $proyecto->estado_proyecto==Proyecto::EST2_BUE && $fechaini<=$fechaactual && $fechafin>=$fechaactual)
     {
       $link = Estudiante::URL."proyecto/proyecto.registro.php";
       $thise->agregarItem('Registro de Formulario','Registro de Formulario de Proyecto Final del Estudiante','basicset/survey.png',$link,1);
