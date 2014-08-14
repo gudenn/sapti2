@@ -68,7 +68,7 @@ try {
   $smarty->assign("materia_selected", ""); 
   
 //lista de estudiantes inscritos
-   echo $p=$_POST['semestre_selec'];
+   $p=$_POST['semestre_selec'];
    $semestre=new Semestre($p);
    $smarty->assign("semestre", $semestre);
    $confirmado=  Proyecto::EST6_C;
@@ -91,7 +91,7 @@ try {
  
  
    $smarty->assign('estudiante'  , $estudiante);
-   $smarty->assign('sqlr'  , array_envia($sqle));
+   $smarty->assign('sqle'  , array_envia($sqle));
  
  
 }

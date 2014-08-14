@@ -83,10 +83,10 @@ $b=1;
     return $tmp; 
   };
   
-  $s='select ';
+ $s='select ';
  $sql= array_recibe($sql); 
  $sql1=$s.$sql;
-
+ 
  $b=1;
 
 function DesplegarTabla($a,$b)
