@@ -1068,8 +1068,8 @@ CREATE TABLE IF NOT EXISTS `bitacora` (
   `host` varchar(30) NOT NULL,
   `modificado` datetime DEFAULT NULL,
   `tabla` varchar(40) NOT NULL,
-  `tupla_antes` varchar(1000) NOT NULL,
-  `tupla_despues` varchar(1000) NOT NULL,
+  `tupla_antes` varchar(1000) DEFAULT NULL,
+  `tupla_despues` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 

@@ -1,10 +1,10 @@
 
 <?php
 try {
-    define ("MODULO", "DOCENTE");
+ define ("MODULO", "ADMIN-INDEX");
   
   require('../_start.php');
-  if(!isDocenteSession())
+  if(!isAdminSession())
   header("Location: ../login.php"); 
   /** HEADER */
   $smarty->assign('title','Proyecto Final');
