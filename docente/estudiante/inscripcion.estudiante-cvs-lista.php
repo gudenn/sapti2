@@ -13,6 +13,8 @@ try {
   //CSS
   $CSS[]  = URL_CSS . "academic/3_column.css";
   $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
+    $CSS[]  = URL_JS . "calendar/css/eventCalendar.css";
+  $CSS[]  = URL_JS . "calendar/css/eventCalendar_theme.css";
   $smarty->assign('CSS',$CSS);
 
   //JS
@@ -21,7 +23,8 @@ try {
   //Validation
   $JS[]  = URL_JS . "validate/idiomas/jquery.validationEngine-es.js";
   $JS[]  = URL_JS . "validate/jquery.validationEngine.js";
-  $smarty->assign('JS',$JS);
+    $JS[]  = URL_JS . "calendar/js/jquery.eventCalendar.js";
+    $smarty->assign('JS',$JS);
   $smarty->assign("ERROR", '');
   leerClase('Docente');
   leerClase('Dicta');
