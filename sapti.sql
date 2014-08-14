@@ -1053,6 +1053,25 @@ CREATE TABLE IF NOT EXISTS `sapti`.`fororespuesta` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+CREATE TABLE IF NOT EXISTS `respaldo` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `fecha_respaldo` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `archivo` varchar(50) NOT NULL,
+  UNIQUE KEY `id` (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+
+
+
+CREATE TABLE IF NOT EXISTS `bitacora` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `operacion` varchar(10) DEFAULT NULL,
+  `host` varchar(30) NOT NULL,
+  `modificado` datetime DEFAULT NULL,
+  `tabla` varchar(40) NOT NULL,
+  `tupla_antes` varchar(1000) NOT NULL,
+  `tupla_despues` varchar(1000) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 USE `sapti` ;
 

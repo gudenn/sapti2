@@ -95,7 +95,7 @@ try {
 
     
    
- $sqlr='SELECT es.id as id, es.codigo_sis as codigosis, us.nombre as nombre, CONCAT(us.apellido_paterno," ",us.apellido_materno) as apellidos, pr.nombre as nombrep
+ $sqlr='SELECT us.id as id, es.codigo_sis as codigosis, us.nombre as nombre, CONCAT(us.apellido_paterno," ",us.apellido_materno) as apellidos, pr.nombre as nombrep, us.email as mail
 FROM dicta di, estudiante es, usuario us, inscrito it, proyecto pr, proyecto_estudiante pe
 WHERE di.id=it.dicta_id
 AND it.estudiante_id=es.id
@@ -115,6 +115,7 @@ AND di.docente_id="'.$docente->id.'"';
         $lista_areas[] =  $fila["id"];
         $lista_areas[] =  $fila["nombre"];
         $lista_areas[] =  $fila["apellidos"];
+        $lista_areas[] =  $fila["mail"];
             
   $arraytribunal[]= $lista_areas;
   
@@ -134,7 +135,7 @@ if(isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['tok
             $seleccion=$_POST['seleccion'];
            if(count($seleccion)>0){
            foreach ($seleccion as $id){
-              $array[]= new Estudiante($id); 
+              $array[]= new Usuario($id); 
                
            }
            

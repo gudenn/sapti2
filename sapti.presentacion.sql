@@ -2531,8 +2531,134 @@ CREATE TABLE IF NOT EXISTS `fecha_registro` (
 
 INSERT INTO `fecha_registro` (`id`, `semestre_id`, `fecha_inicio`, `fecha_fin`, `descripcion`, `estado`) VALUES
 (7, 1, '2014-06-02', '2014-06-24', 'Fecha de registro de Perfil', 'AC');
+UPDATE  `usuario` SET  `clave` = MD5(123123) WHERE 1;
+UPDATE  `usuario` SET  `clave` = MD5(500001) WHERE 2;
+UPDATE  `usuario` SET  `clave` = MD5(500002) WHERE 3;
+UPDATE  `usuario` SET  `clave` = MD5(500003) WHERE 4;
+UPDATE  `usuario` SET  `clave` = MD5(500004) WHERE 5;
+UPDATE  `usuario` SET  `clave` = MD5(500005) WHERE 6;
+UPDATE  `usuario` SET  `clave` = MD5(500006) WHERE 7;
+UPDATE  `usuario` SET  `clave` = MD5(500007) WHERE 8;
+UPDATE  `usuario` SET  `clave` = MD5(500008) WHERE 9;
+UPDATE  `usuario` SET  `clave` = MD5(500009) WHERE 10;
+UPDATE  `usuario` SET  `clave` = MD5(5000010) WHERE 11;
+UPDATE  `usuario` SET  `clave` = MD5(5000011) WHERE 12;
+UPDATE  `usuario` SET  `clave` = MD5(5000012) WHERE 13;
+UPDATE  `usuario` SET  `clave` = MD5(5000013) WHERE 14;
+UPDATE  `usuario` SET  `clave` = MD5(5000014) WHERE 15;
+UPDATE  `usuario` SET  `clave` = MD5(5000015) WHERE 16;
+UPDATE  `usuario` SET  `clave` = MD5(5000016) WHERE 17;
+UPDATE  `usuario` SET  `clave` = MD5(5000017) WHERE 18;
+UPDATE  `usuario` SET  `clave` = MD5(5000018) WHERE 19;
+UPDATE  `usuario` SET  `clave` = MD5(5000019) WHERE 20;
+UPDATE  `usuario` SET  `clave` = MD5(5000020) WHERE 21;
+UPDATE  `usuario` SET  `clave` = MD5(5000021) WHERE 22;
+UPDATE  `usuario` SET  `clave` = MD5(5000022) WHERE 23;
+UPDATE  `usuario` SET  `clave` = MD5(5000023) WHERE 24;
+UPDATE  `usuario` SET  `clave` = MD5(5000024) WHERE 25;
+UPDATE  `usuario` SET  `clave` = MD5(5000025) WHERE 26;
+UPDATE  `usuario` SET  `clave` = MD5(5000026) WHERE 27;
+UPDATE  `usuario` SET  `clave` = MD5(5000027) WHERE 28;
+UPDATE  `usuario` SET  `clave` = MD5(5000028) WHERE 29;
+UPDATE  `usuario` SET  `clave` = MD5(5000029) WHERE 30;
+UPDATE  `usuario` SET  `clave` = MD5(5000030) WHERE 31;
+UPDATE  `usuario` SET  `clave` = MD5(5000031) WHERE 32;
+UPDATE  `usuario` SET  `clave` = MD5(5000032) WHERE 33;
+UPDATE  `usuario` SET  `clave` = MD5(5000033) WHERE 34;
+UPDATE  `usuario` SET  `clave` = MD5(5000034) WHERE 35;
+UPDATE  `usuario` SET  `clave` = MD5(5000035) WHERE 36;
+UPDATE  `usuario` SET  `clave` = MD5(5000036) WHERE 37;
+UPDATE  `usuario` SET  `clave` = MD5(5000037) WHERE 38;
+UPDATE  `usuario` SET  `clave` = MD5(5000038) WHERE 39;
+UPDATE  `usuario` SET  `clave` = MD5(5000039) WHERE 40;
+UPDATE  `usuario` SET  `clave` = MD5(5000040) WHERE 41;
+UPDATE  `usuario` SET  `clave` = MD5(5000041) WHERE 42;
+UPDATE  `usuario` SET  `clave` = MD5(5000042) WHERE 43;
+UPDATE  `usuario` SET  `clave` = MD5(5000043) WHERE 44;
+UPDATE  `usuario` SET  `clave` = MD5(5000044) WHERE 45;
+UPDATE  `usuario` SET  `clave` = MD5(5000045) WHERE 46;
+UPDATE  `usuario` SET  `clave` = MD5(5000046) WHERE 47;
+UPDATE  `usuario` SET  `clave` = MD5(5000047) WHERE 48;
+UPDATE  `usuario` SET  `clave` = MD5(5000048) WHERE 49;
+UPDATE  `usuario` SET  `clave` = MD5(5000049) WHERE 50;
+UPDATE  `usuario` SET  `clave` = MD5(5000050) WHERE 51;
+UPDATE  `usuario` SET  `clave` = MD5(5000051) WHERE 52;
+UPDATE  `usuario` SET  `clave` = MD5(5000052) WHERE 53;
+UPDATE  `usuario` SET  `clave` = MD5(5000053) WHERE 54;
+UPDATE  `usuario` SET  `clave` = MD5(5000054) WHERE 55;
+UPDATE  `usuario` SET  `clave` = MD5(5000055) WHERE 56;
+UPDATE  `usuario` SET  `clave` = MD5(5000056) WHERE 57;
+UPDATE  `usuario` SET  `clave` = MD5(5000057) WHERE 58;
+UPDATE  `usuario` SET  `clave` = MD5(5000058) WHERE 59;
+UPDATE  `usuario` SET  `clave` = MD5(5000059) WHERE 60;
+UPDATE  `usuario` SET  `clave` = MD5(5000060) WHERE 61;
+UPDATE  `usuario` SET  `clave` = MD5(5000061) WHERE 62;
+UPDATE  `usuario` SET  `clave` = MD5(5000062) WHERE 63;
+UPDATE  `usuario` SET  `clave` = MD5(5000063) WHERE 64;
+UPDATE  `usuario` SET  `clave` = MD5(5000064) WHERE 65;
+UPDATE  `usuario` SET  `clave` = MD5(5000065) WHERE 66;
+UPDATE  `usuario` SET  `clave` = MD5(5000066) WHERE 67;
+UPDATE  `usuario` SET  `clave` = MD5(5000067) WHERE 68;
+UPDATE  `usuario` SET  `clave` = MD5(5000068) WHERE 69;
+UPDATE  `usuario` SET  `clave` = MD5(5000069) WHERE 70;
+UPDATE  `usuario` SET  `clave` = MD5(5000070) WHERE 71;
+UPDATE  `usuario` SET  `clave` = MD5(5000071) WHERE 72;
+UPDATE  `usuario` SET  `clave` = MD5(5000072) WHERE 73;
+UPDATE  `usuario` SET  `clave` = MD5(5000073) WHERE 74;
+UPDATE  `usuario` SET  `clave` = MD5(5000074) WHERE 75;
+UPDATE  `usuario` SET  `clave` = MD5(5000075) WHERE 76;
+UPDATE  `usuario` SET  `clave` = MD5(5000076) WHERE 77;
+UPDATE  `usuario` SET  `clave` = MD5(5000077) WHERE 78;
+UPDATE  `usuario` SET  `clave` = MD5(5000078) WHERE 79;
+UPDATE  `usuario` SET  `clave` = MD5(5000079) WHERE 80;
+UPDATE  `usuario` SET  `clave` = MD5(5000080) WHERE 81;
+UPDATE  `usuario` SET  `clave` = MD5(5000081) WHERE 82;
+UPDATE  `usuario` SET  `clave` = MD5(5000082) WHERE 83;
+UPDATE  `usuario` SET  `clave` = MD5(5000083) WHERE 84;
+UPDATE  `usuario` SET  `clave` = MD5(5000084) WHERE 85;
+UPDATE  `usuario` SET  `clave` = MD5(5000085) WHERE 86;
+UPDATE  `usuario` SET  `clave` = MD5(5000086) WHERE 87;
+UPDATE  `usuario` SET  `clave` = MD5(5000087) WHERE 88;
+UPDATE  `usuario` SET  `clave` = MD5(5000088) WHERE 89;
+UPDATE  `usuario` SET  `clave` = MD5(5000089) WHERE 90;
 
-UPDATE  `usuario` SET  `clave` = MD5(  `clave` ) WHERE 1;
+
+
+DROP TRIGGER IF EXISTS `biusernew`;
+
+
+
+CREATE TRIGGER `biusernew` AFTER INSERT ON `usuario`
+FOR EACH ROW INSERT INTO bitacora(host, operacion, modificado, tabla, tupla_antes, tupla_despues) 
+VALUES (SUBSTRING(USER(), (INSTR(USER(),"@")+1)),"INSERTAR", NOW(), "USUARIO","",CONCAT(NEW.ID,' ', NEW.nombre,' ',NEW.apellido_paterno,' ',NEW.apellido_materno,' ',NEW.telefono, ' ', NEW.email,' ',NEW.fecha_nacimiento,' ',NEW.login))
+
+
+DROP TRIGGER IF EXISTS `biuserdelete`;
+CREATE TRIGGER `biuserdelete` AFTER DELETE ON `usuario`
+FOR EACH ROW INSERT INTO bitacora(host, operacion, modificado, tabla, tupla_antes, tupla_despues) 
+VALUES (SUBSTRING(USER(), (INSTR(USER(),"@")+1)),"ELIMINAR", NOW(), "USUARIO",CONCAT(OlD.ID,' ', OlD.nombre,' ',OlD.apellido_paterno,' ',OlD.apellido_materno,' ',OlD.telefono, ' ', OlD.email,' ',OlD.fecha_nacimiento,' ',OlD.login),' ')
+
+DROP TRIGGER IF EXISTS `biuserupdate`;
+CREATE TRIGGER `biuserupdate` AFTER UPDATE ON `usuario`
+FOR EACH ROW INSERT INTO bitacora(host, operacion, modificado, tabla, tupla_antes, tupla_despues) 
+VALUES (SUBSTRING(USER(), (INSTR(USER(),"@")+1)),"MODIFICAR", NOW(), "USUARIO",CONCAT(OlD.ID,' ', OlD.nombre,' ',OlD.apellido_paterno,' ',OlD.apellido_materno,' ',OlD.telefono, ' ', OlD.email,' ',OlD.fecha_nacimiento,' ',OlD.login),CONCAT(NEW.ID,' ', NEW.nombre,' ',NEW.apellido_paterno,' ',NEW.apellido_materno,' ',NEW.telefono, ' ', NEW.email,' ',NEW.fecha_nacimiento,' ',NEW.login))
+
+
+DROP TRIGGER IF EXISTS `biproyecinsert`;
+CREATE TRIGGER `biproyecinsert` AFTER INSERT ON `proyecto`
+FOR EACH ROW INSERT INTO bitacora(host, operacion, modificado, tabla, tupla_antes, tupla_despues) 
+VALUES (SUBSTRING(USER(), (INSTR(USER(),"@")+1)),"INSERTAR", NOW(), "PROYECTO","",CONCAT(NEW.ID,' ', NEW.nombre,' ',NEW.objetivo_general,' ',NEW.descripcion,' ',NEW.fecha_registro,' ',NEW.tipo_proyecto,' ',NEW.estado_proyecto))
+
+
+DROP TRIGGER IF EXISTS `biproydelet`;
+CREATE TRIGGER `biproydelet` AFTER DELETE ON `proyecto`
+FOR EACH ROW INSERT INTO bitacora(host, operacion, modificado, tabla, tupla_antes, tupla_despues) 
+VALUES (SUBSTRING(USER(), (INSTR(USER(),"@")+1)),"ELIMINAR", NOW(), "PROYECTO",CONCAT(OlD.ID,' ',OlD.nombre,' ',OlD.objetivo_general,' ',OlD.descripcion,' ',OlD.fecha_registro,' ',OlD.tipo_proyecto,' ',OlD.estado_proyecto),' ')
+
+DROP TRIGGER IF EXISTS `biproyeupdate`;
+CREATE TRIGGER `biproyeupdate` AFTER UPDATE ON `proyecto`
+FOR EACH ROW INSERT INTO bitacora(host, operacion, modificado, tabla, tupla_antes, tupla_despues) 
+VALUES (SUBSTRING(USER(), (INSTR(USER(),"@")+1)),"MODIFICAR", NOW(), "PROYECTO",CONCAT(OlD.ID,' ',OlD.nombre,' ',OlD.objetivo_general,' ',OlD.descripcion,' ',OlD.fecha_registro,' ',OlD.tipo_proyecto,' ',OlD.estado_proyecto),CONCAT(NEW.ID,' ', NEW.nombre,' ',NEW.objetivo_general,' ',NEW.descripcion,' ',NEW.fecha_registro,' ',NEW.tipo_proyecto,' ',NEW.estado_proyecto))
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

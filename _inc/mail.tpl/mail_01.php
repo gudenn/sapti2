@@ -44,7 +44,7 @@ ___MAIL;
     Fecha:  \t  {$date}";
 
   /** Cuerpo del Email */
-  require_once("mail_01.php");
+ // require_once("mail_01.php");
 
   /** destinatarios */
   $url_name = $MATERIA->getTheUrlNAME(1);

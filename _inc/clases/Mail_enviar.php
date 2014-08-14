@@ -66,6 +66,7 @@ ___MAIL;
     
    
   $Subject = $asunto;
+  /**
 if (ENDESARROLLO)
   {
     echo "<pre>";
@@ -82,7 +83,7 @@ if (ENDESARROLLO)
     echo "<hr>";
     echo "<pre>".$body_txt."</pre>";
   }else
-
+*/
   {
     require_once(DIR_LIB.'/Mail/mime.php');
     

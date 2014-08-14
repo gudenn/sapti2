@@ -99,6 +99,7 @@ try {
  //  $respaldos= new Respaldo();
 
 
+//mysql --password=tuclave --user=tuusuario -h 192.168.1.134 basedatos < respaldo.sql
 
 if(isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
  {

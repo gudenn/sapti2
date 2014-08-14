@@ -21,7 +21,9 @@
     <th><a >ID          </a></th>
     <th><a >NOMBRE      </a></th>
     <th><a  >APELLIDOS     </a></th>
+     <th><a >EMAIL</a></th>
     <th><a >SELECCIONAR</a></th>
+    
      </tr>
   </thead>
   <tbody>
@@ -43,9 +45,10 @@
         {$listadocentes[ic][1]}
       </td>
       <td>{$listadocentes[ic][2]}</td>
+      <td>{$listadocentes[ic][3]}</td>
         <td> 
             <input type="checkbox" name=seleccion[] value={$listadocentes[ic][0]} class="checkbox" ></td> 
- 
+   
     </tr>
    {/section}
 
