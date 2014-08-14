@@ -245,7 +245,12 @@ class Menu
     
      $thise = new Menu('Backup de la Bases de Datos');
     $link = Administrador::URL."respaldo/";
-    $thise->agregarItem('Respaldo','Gesti&oacute;n de Respaldo','basicset/backup.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+    $thise->agregarItem('Respaldo','Gesti&oacute;n de Respaldo','basicset/backup.png',$link,0,  '');
+  $thises[] = $thise;
+  
+   $thise = new Menu('Envio a Email');
+    $link = Administrador::URL."email/";
+    $thise->agregarItem('Email','Gesti&oacute;n de envio de Email','basicset/email.png',$link,0,  '');
   $thises[] = $thise;
     return $thises;
   }
@@ -487,6 +492,7 @@ AND tr.docente_id=".$docente->id."
    $link = Docente::URL."email/";
    $thise->agregarItem('Envio de Email','Envio de Email masivos','basicset/email.png',$link);
    $thises[] = $thise;
+   
   
     return $thises;
   }
