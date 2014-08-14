@@ -7,6 +7,8 @@
 -- Versión del servidor: 5.6.12-log
 -- Versión de PHP: 5.4.12
 
+-- Msc. Lic. Erika Patricia Rodriguez Bilbao
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 

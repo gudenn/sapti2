@@ -247,6 +247,11 @@ class Menu
     $link = Administrador::URL."respaldo/";
     $thise->agregarItem('Respaldo','Gesti&oacute;n de Respaldo','basicset/backup.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
   $thises[] = $thise;
+    //bitacoras
+   $thise = new Menu('Bitacoras Sistema');
+   $link = Administrador::URL."bitacora/";
+   $thise->agregarItem('Bitacoras','Gesti&oacute;n de Bitacoras','basicset/bitacora.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+   $thises[] = $thise;
     return $thises;
   }
   

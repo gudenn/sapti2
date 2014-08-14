@@ -91,10 +91,10 @@ try {
   // CONTADOR //
   leerClase('Tooltip');
   $tooltips   = new Tooltip();
-  $pendientes = Tooltip::EST02_APROBA;
-  $pendientes = $tooltips->contar(" estado_tooltip != '{$pendientes}' ");
+  $pendientes = Tooltip::EST01_RECIEN;
+  $pendientes = $tooltips->contar(" estado_tooltip = '$pendientes' ");
   // -CONTADOR //
-  $menu->agregarItem('Consejos Pedientes','Ventanas flotantes que ofrece el sistema, Ayudas pendientes.','basicset/tag.png',$link,$pendientes);
+  $menu->agregarItem('Consejos Pedientes','Ventanas flotantes que ofrece el sistema, Ayudas pendientes.','basicset/tag.png',$link,'',$pendientes);
   $menus[] = $menu;
 
   //----------------------------------//
