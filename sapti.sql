@@ -195,7 +195,7 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`tribunal` (
   `detalle` TEXT NULL ,
   `accion` VARCHAR(2) NULL COMMENT 'aceptar , rechazar' ,
   `visto` VARCHAR(2) NULL COMMENT 'no visto (NV), Visto(V)' ,
-  `fecha_asignacion` DATE NULL ,
+  `fecha_asignacion` timestamp NULL DEFAULT NULL,
   `fecha_aceptacion` DATE NULL ,
   `semestre` VARCHAR(45) NULL ,
   `visto_bueno` VARCHAR(2) NULL ,
@@ -1062,6 +1062,7 @@ CREATE TABLE IF NOT EXISTS `respaldo` (
 
 
 
+
 CREATE TABLE IF NOT EXISTS `bitacora` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `operacion` varchar(10) DEFAULT NULL,
@@ -1072,7 +1073,6 @@ CREATE TABLE IF NOT EXISTS `bitacora` (
   `tupla_despues` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
 USE `sapti` ;
 
 

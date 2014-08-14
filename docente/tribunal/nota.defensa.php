@@ -127,6 +127,20 @@ try {
                   {
                      $proyecto->estado_proyecto=  Proyecto::EST5_F;
                      $proyecto->save();
+                     
+                     
+                     
+                      $notificacion = new Notificacion();
+                        $notificacion->objBuidFromPost();
+                        $notificacion->proyecto_id=$_POST['proyecto_id']; 
+                        $notificacion->tipo=  Notificacion::TIPO_MENSAJE;
+                        $notificacion->fecha_envio=date("j/n/Y");
+                        $notificacion->asunto="Acta de Defensa"; 
+                         $notificacion->detalle="Debe apersonarse a la secretaria  para recoger su acta de defensa.";
+                        $notificacion->prioridad=5;
+                        $notificacion->estado = Objectbase::STATUS_AC;
+                        $noticaciones= array('estudiantes'=>array($proyectos->getEstudiante()->id));
+                        $notificacion->enviarNotificaion($noticaciones);
                     
                   }
            

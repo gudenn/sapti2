@@ -62,43 +62,37 @@ try {
   {
       
        $semestre = new Semestre('',1);
-   $valorh = $semestre->getValor('Horas para rechazar como tribunal',24);
+   $valorh = $semestre->getValor('Horas para rechazar como tribunal',72);
     if (!$valorh)
     {
       //  echo $valorh;
-       $semestre->setValor('Horas para rechazar como tribunal',10);
+       $semestre->setValor('Horas para rechazar como tribunal',72);
     }
     
         $smarty->assign('accion', array(
         Tribunal::ACCION_AC =>  "ACEPTAR",
         Tribunal::ACCION_RE =>  "RECHAZAR"
      ));
-    
-    $notificacion  = new Notificacion($_GET['notificacion_id']);
+     $notificacion  = new Notificacion($_GET['notificacion_id']);
     $notificacion->marcarVisto();
     $proyecto      =  new Proyecto($notificacion->proyecto_id);
     $estudiante    =  $proyecto->getEstudiante();
    //if()
     $tribunal=$proyecto->getTribunal(getSessionDocente()->id);
    
-    $fechainicio=  date("d-m-Y", strtotime($tribunal->fecha_asignacion));
-   //echo $fechainicio;
-    $fechafin =  date('d-m-Y')  ;
-   // echo $fechafin;
+    //$fechainicio=  date("d-m-Y", strtotime($tribunal->fecha_asignacion));
+   $temp1=strtotime("$tribunal->fecha_asignacion"); //segs desde fecha unix
+   $temp2=strtotime(date("Y-m-d H:i:s")); 
+  ; //segs desde la fecha unix
+$diferencia= abs($temp1-$temp2); //abs=valor absoluto :D
+$horas=floor($diferencia/60/60); //floor=redondea hacia arriba :D
+if($horas>=$valorh)
+{
     
-     //$difm=date("d-m-Y", strtotime("00:00:00") + strtotime($fechafin) - strtotime($fechainicio));
+}
          
-    $diff = abs(strtotime($fechafin) - strtotime($fechainicio));
-    $years = floor($diff / (365*60*60*24));
-    $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
-   $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
-    
-     echo   $days*24; 
-   // $desglose=split(":", $difm);
-    // $dec=$desglose[0]+$desglose[1]/60;
-   //  echo $dec;
-        
 
+//echo $horas;
     
     //echo $_GET['notificacion_id'];
     //$notificacion
@@ -109,7 +103,10 @@ try {
     $smarty->assign("notificacion", $notificacion);
      $smarty->assign("estadonotificacion", $proyecto->getTribunalEstado(getSessionDocente()->id));
     $smarty->assign("tiponotificacion",$tipo);
-  }
+  
+    
+    
+    }
   
 
   if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
