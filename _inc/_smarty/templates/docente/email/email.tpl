@@ -31,7 +31,8 @@
       <td></td>
       <td></td>
       <td></td>
-      <td>Marcar/Desmarcar Todo<input type="checkbox" id="marcar" value="" onclick="marcar_desmarcar();" /></td> 
+      <td></td>
+         <td>Marcar/Desmarcar Todo<input type="checkbox" id="marcar" value="" onclick="marcar_desmarcar();" /></td> 
     </tr>
     
   {section name=ic loop=$listadocentes}

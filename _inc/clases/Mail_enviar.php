@@ -1,7 +1,6 @@
-
 <?php
 //require_once("../_sistema.php");
-require_once "Mail.php";
+//require_once "Mail.php";
 class Mail_enviar
 {
 
@@ -93,7 +92,7 @@ if (ENDESARROLLO)
       $message->setHTMLBody($body_html);
       $body = $message->get();
       $extraheaders = array(
-          'From'    => "\"$url_name\"<alavifuentes@$url_mail>",
+          'From'    => "\"$url_name\"<infosis@cs.umss.edu.bo>",
           'Subject' => $Subject
       );
       $headers = $message->headers($extraheaders);

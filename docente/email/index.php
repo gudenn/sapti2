@@ -107,20 +107,18 @@ AND di.docente_id="'.$docente->id.'"';
  $resultado = mysql_query($sqlr);
  $arraytribunal= array();
 
- while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
-   { 
-       $doc= new Docente($fila["id"]);
-        $listaareas=array();
-        $lista_areas=array();
-        $lista_areas[] =  $fila["id"];
-        $lista_areas[] =  $fila["nombre"];
-        $lista_areas[] =  $fila["apellidos"];
-        $lista_areas[] =  $fila["mail"];
-            
-  $arraytribunal[]= $lista_areas;
-  
- }
-  $smarty->assign('listadocentes'  , $arraytribunal);
+ while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) {
+        $doc = new Docente($fila["id"]);
+        $listaareas = array();
+        $lista_areas = array();
+        $lista_areas[] = $fila["id"];
+        $lista_areas[] = $fila["nombre"];
+        $lista_areas[] = $fila["apellidos"];
+        $lista_areas[] = $fila["mail"];
+
+        $arraytribunal[] = $lista_areas;
+    }
+    $smarty->assign('listadocentes'  , $arraytribunal);
   $contenido = 'tribunal/registrotribunal.tpl';
   $smarty->assign('contenido',$contenido);
   
@@ -138,11 +136,12 @@ if(isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['tok
               $array[]= new Usuario($id); 
                
            }
-           
+                  
                
-          $enviar= new Mail_enviar();
-          $enviar->enviar($array, "jaaaaaa","Hola mundo", $_POST['detalle']);
-      
+        //  $enviar= new Mail_enviar();
+         // $enviar->enviar($array, "jaaaaaa","Hola mundo", $_POST['detalle']);
+            require_once(DIR_MAILTPL.'mail_02.php');
+            $usuarios=$array;
    
      $EXITO = false;
     $stado=0;

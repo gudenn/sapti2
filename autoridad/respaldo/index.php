@@ -4,8 +4,8 @@ try {
      define ("MODULO", "ADMIN-INDEX");
   require('../_start.php');
   //require '../../../..';
-  if(!isAdminSession())
-  header("Location: ../login.php"); 
+  //if(!isAdminSession())
+  //header("Location: ../login.php"); 
   /** HEADER */
   $smarty->assign('title','Proyecto Final');
   $smarty->assign('description','Proyecto Final');
