@@ -62,7 +62,7 @@ try {
   {
       
        $semestre = new Semestre('',1);
-   $valorh = $semestre->getValor('Horas para rechazar como tribunal',72);
+   $valorh = $semestre->getValor('Lapso de tiempo  para el rechazo a ser tribunal',72);
     if (!$valorh)
     {
       //  echo $valorh;
@@ -81,14 +81,21 @@ try {
     $tribunal=$proyecto->getTribunal(getSessionDocente()->id);
    
     //$fechainicio=  date("d-m-Y", strtotime($tribunal->fecha_asignacion));
-   $temp1=strtotime("$tribunal->fecha_asignacion"); //segs desde fecha unix
+   // echo $tribunal->fecha_asignacion;
+   $temp1=strtotime($tribunal->fecha_asignacion); //segs desde fecha unix
    $temp2=strtotime(date("Y-m-d H:i:s")); 
-  ; //segs desde la fecha unix
+  // echo $temp1.' '.$temp2;
+   
+   
+  //; //segs desde la fecha unix
 $diferencia= abs($temp1-$temp2); //abs=valor absoluto :D
 $horas=floor($diferencia/60/60); //floor=redondea hacia arriba :D
+//echo $horas;
+//
 if($horas>=$valorh)
 {
-    
+    $tribunal->accion=  Tribunal::ACCION_AC;
+    $tribunal->save();  
 }
          
 
