@@ -79,7 +79,7 @@
      </div>
    </div>
  </form>
-
+   <p>{$ERROR}</p>
     </div>
 <script type="text/javascript">
 
@@ -146,7 +146,7 @@ cb[i].checked = false;
 
 
       </div>     
-        <p>{$ERROR}</p>
+     
   
 
     </div>

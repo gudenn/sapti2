@@ -26,7 +26,7 @@ try {
 
     
    $CSS[]  = URL_JS . "box/box.css";
-   $JS[]  = URL_JS ."box/jquery.box.js";
+  $JS[]  = URL_JS ."box/jquery.box.js";
   //CK Editor
   $JS[]  = URL_JS . "ckeditor/ckeditor.js";
   //BOX
@@ -156,33 +156,22 @@ if(isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['tok
     $stado=1;
     mysql_query("COMMIT");
     
-  if(isset($stado))
-   {
-   
-          $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente la asignacion de tribunales','titulo'=>'Registro De Asignaci&oacute; de Tribunales' ,'icono'=> 'warning_48.png');
-          $ERROR = $html->getMessageBox ($mensaje);
-       
-    }
-    
-    
+  
         
      }else
  {
-   $mensaje = array('mensaje' => 'Error,La Cantidad minima de Tribunales debe Ser 3', 'titulo' => 'Numero De Tribunales', 'icono' => 'warning_48.png');
+   $mensaje = array('mensaje' => 'Error,', 'titulo' => 'Numero De Tribunales', 'icono' => 'warning_48.png');
     $ERROR = $html->getMessageBox($mensaje);;
  }
  }else
  {
-     $mensaje = array('mensaje' => 'Hubo un problema, No se grabo correctamente la Asignacion de Tribunales', 'titulo' => 'Registro de Tribunales', 'icono' => 'warning_48.png');
+     $mensaje = array('mensaje' => 'Hubo un problema,', 'titulo' => 'Registro de Tribunales', 'icono' => 'warning_48.png');
     $ERROR = $html->getMessageBox($mensaje);
  }
 
  }
  
-
-
-  $smarty->assign("ERROR",  $ERROR);
-   
+     
 } 
 catch(Exception $e) 
 {
