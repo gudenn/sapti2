@@ -51,6 +51,7 @@ try {
   leerClase("Mail_enviar");
   leerClase("Dia");
   leerClase('Html');
+  leerClase("Email");
   
  //  no hay error
   
@@ -136,12 +137,14 @@ if(isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['tok
               $array[]= new Usuario($id); 
                
            }
-                  
-               
+                       $usuarios=$array;
+                       $asunto= Email::tipo_avance;
+                       $mensaje= $_POST['detalle'];
+                    
         //  $enviar= new Mail_enviar();
          // $enviar->enviar($array, "jaaaaaa","Hola mundo", $_POST['detalle']);
             require_once(DIR_MAILTPL.'mail_02.php');
-            $usuarios=$array;
+          
    
      $EXITO = false;
     $stado=0;
@@ -173,7 +176,7 @@ if(isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['tok
      $mensaje = array('mensaje' => 'Hubo un problema, No se grabo correctamente la Asignacion de Tribunales', 'titulo' => 'Registro de Tribunales', 'icono' => 'warning_48.png');
     $ERROR = $html->getMessageBox($mensaje);
  }
- 
+
  }
  
 

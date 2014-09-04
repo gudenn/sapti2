@@ -1,12 +1,11 @@
 <?php
-  require_once("../_sistema.php");
+ 
   leerClase('Usuario');
   leerClase('Notificacion');
   leerClase("Docente");
-  echo "Error";
-  //leerClase('Mail');
-//$usuarios = array();
-  global  $docente,$usuarios,$mensaje,$asunto,$notificacion;
+  leerClase("Email");
+
+  global  $docente,$usuarios,$asunto,$mensaje,$notificacion;
   $docente  = getSessionDocente();
   if (!isset($docente) || !isset($docente->id) || !($docente->id))
     
@@ -32,10 +31,38 @@
  //   if ( trim($administrador->email) != '' )
    //   $to_addrs[]    = $administrador->email;
  //}
-// foreach ($usuarios as $user)
+  
+  $mensajes_envio=array();
+ foreach ($usuarios as $user)
      
-  {
-   //    $to_addrs[] = $user->email;
+  { 
+    $email= new Email();
+    $email->para=$user->email;
+    $email->boddy_html =<<<___MAIL
+    <div style="$style">
+    Hola Estimado/a <b>$user->nombre $user->apellido_paterno</b>:<br>
+    <br><br>
+   Asunto : {$asunto}
+      <br><br>
+    {$mensaje}
+    Fecha: {$date}<br>
+    </div>
+___MAIL;
+    
+    $email->boddy_txt= "    
+   Hola  Estimado/a $user->nombre $user->apellido_paterno:
+    
+    Detalle:
+    ------------------------------
+    Detalle:\t\t{$asunto}
+    Comentario:\t{$mensaje}
+    ------------------------------
+    Fecha:  \t  {$date}";
+    
+
+    $mensajes_envio[]= $email;
+    
+  //$to_addrs[] = $user->email;
   
   }
   
@@ -43,43 +70,32 @@
   
   //$Subject = "$url_name ingreso de mercaderia ";
   
-  $body_html = <<<___MAIL
-    <div style="$style">
-    Estimado/a <b>  estudiante </b>:<br>
-    <br><br>
-   {$notificacion->detalle}
-
-    Fecha: {$date}<br>
-    </div>
-___MAIL;
+ 
 
   $detalleTXT = strip_tags($notificacion->detalle);
   $body_txt  = "    
     Estimado/a 
     Hemos registrado correccion {}
-    
-
-   
-
+  
     Fecha:  \t  {$date}";
-
+   $url_name="";
+ $Subject = "$url_name ingreso de mercaderia ";
 
 
   if (ENDESARROLLO)
   {
     echo "<pre>";
-    print_r($almacenes);
     echo "</pre>";
     echo "<hr>";
     echo "Subject:$Subject";
     echo "<hr>";
     echo "<pre>";
-    print_r($to_addrs);
+    print_r($mensajes_envio);
     echo "</pre>";
     echo "<hr>";
-    echo $body_html;
+  //  echo $body_html;
     echo "<hr>";
-    echo "<pre>".$body_txt."</pre>";
+   // echo "<pre>".$body_txt."</pre>";
   }
   else /** Enviamos el email */
   {
@@ -87,19 +103,21 @@ ___MAIL;
     
 
       $message = new Mail_mime();
-      $message->setTXTBody($body_txt);
-      $message->setHTMLBody($body_html);
-      $body = $message->get();
+
       $extraheaders = array(
-          'From'    => "\"$url_name\"<envios@$url_mail>",
+          'From'    => "\"$url_name\"<info@$url_mail>",
           'Subject' => $Subject
       );
       $headers = $message->headers($extraheaders);
       $mail    = Mail::factory('sendmail');//, $smtpinfo);
 
-      foreach ($to_addrs as $to_addr)
+      foreach ($mensajes_envio as $enviar)
       {
-          $rv1 = $mail->send($to_addr, $headers, $body);
+       $message->setTXTBody($enviar->boddy_txt);
+      $message->setHTMLBody($enviar->boddy_html);
+      $body = $message->get();
+      
+          $rv1 = $mail->send($enviar->para, $headers,$body);
       }
 
   }
