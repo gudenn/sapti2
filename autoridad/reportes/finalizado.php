@@ -18,8 +18,8 @@ try {
   $menuList[]     = array('url'=>URL . Administrador::URL . 'reportes/'.basename(__FILE__),'name'=>'Reportes Proyectos Tribunal');
   $smarty->assign("menuList", $menuList);
   //CSS
-  $CSS[]  = "css/style.css";
-  $smarty->assign('CSS','');
+  $JS[]  = URL_JS . "jquery.min.js";
+   $smarty->assign('JS',$JS);
 
   //JS
   leerClase('Semestre');

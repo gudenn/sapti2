@@ -15,10 +15,11 @@ try {
   $CSS[]  = URL_CSS . "academic/3_column.css";
 
   //JS
-  $JS[]  = "js/jquery.min.js";
+ 
   $smarty->assign('JS','');
   $smarty->assign('CSS',$CSS);
-
+$JS[]  = URL_JS . "jquery.min.js";
+  $smarty->assign('JS',$JS);
  /**
   * Clases
   */

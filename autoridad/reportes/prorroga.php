@@ -24,8 +24,8 @@ try {
   //JS
    leerClase('Semestre');
   
-   $JS[]  = "js/ajaxbuscarperfil.js";
-   $smarty->assign('JS','');
+   $JS[]  = URL_JS . "jquery.min.js";
+   $smarty->assign('JS',$JS);
    
    $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
    $smarty->assign('lista'       ,'admin/reportes/lista_pro.tpl');

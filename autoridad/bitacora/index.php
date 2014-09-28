@@ -22,9 +22,10 @@ try {
   //CK Editor
   $JS[]  = URL_JS . "ckeditor/ckeditor.js";
   //BOX
-  $smarty->assign('CSS',$CSS);
+  $JS[]  = URL_JS . "jquery.min.js";
   $smarty->assign('JS',$JS);
-
+  $smarty->assign('CSS',$CSS);
+ 
   
   
   
