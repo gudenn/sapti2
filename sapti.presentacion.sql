@@ -750,7 +750,7 @@ INSERT INTO `helpdesk` (`id`, `modulo_id`, `codigo`, `directorio`, `titulo`, `de
 (235, 22, 'a60677a906a3c4d70ab315ff6e3b8dbe20431a69', '/sapti/autoridad/bitacora/bitacora.php', '/sapti/autoridad/bitacora/bitacora.php', '/sapti/autoridad/bitacora/bitacora.php', 'sapti,autoridad,bitacora,bitacora,ayuda', 'RC', 'AC'),
 (236, 12, '86179e03d9bfab91b3b0259163a6a0a036265206', '/sapti/autoridad/bitacora/bitacora.php', '/sapti/autoridad/bitacora/bitacora.php', '/sapti/autoridad/bitacora/bitacora.php', 'sapti,autoridad,bitacora,bitacora,ayuda', 'RC', 'AC'),
 (237, 4, 'a3390ef6bf7aec44b94c8094e4340ecd95ef019b', '/sapti/autoridad/bitacora/bitacora.php', '/sapti/autoridad/bitacora/bitacora.php', '/sapti/autoridad/bitacora/bitacora.php', 'sapti,autoridad,bitacora,bitacora,ayuda', 'RC', 'AC'),
-(238, 4, 'a67389ed46e075f1d8bfb10b71fdb1e5f37997e4', '/sapti/autoridad/bitacora/index.php', '/sapti/autoridad/bitacora/index.php', '/sapti/autoridad/bitacora/index.php', 'sapti,autoridad,bitacora,index,ayuda', 'RC', 'AC'),
+(238, 4, 'a67389ed46e075f1d8bfb10b71fdb1e5f37997e4', '/sapti/autoridad/bitacora/index.php', 'Bitacora', 'Lista de Bitácoras del Sistema', 'sapti,autoridad,bitacora,index,ayuda', 'ED', 'AC'),
 (239, 15, 'a09d8cb48c30c2e223fed97df4618b87591c41d5', '/sapti/docente//foro/tema.registro.php', 'Tema Registro', 'Registro de temas para el Foro docente', 'sapti,docente,,foro,tema,registro,ayuda', 'ED', 'AC');
 
 -- --------------------------------------------------------
