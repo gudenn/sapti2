@@ -1,27 +1,14 @@
-
 <?php
 try {
-     define ("MODULO", "ADMIN-BITACORA");
+  define ("MODULO", "ADMIN-DOCENTE");
   require('../_start.php');
-  if(!isUserSession())
-    header("Location: ../login.php");
-  /** HEADER */
-   /** HEADER */
- 
-/**
-   * Menu superior
-   */
-  
+  if(!isAdminSession())
+    header("Location: ../login.php");  
+
   
   $CSS[]  = "css/style.css";
   $smarty->assign('CSS','');
 
-    
-   $CSS[]  = URL_JS . "box/box.css";
-   $JS[]  = URL_JS ."box/jquery.box.js";
-  //CK Editor
-  $JS[]  = URL_JS . "ckeditor/ckeditor.js";
-  //BOX
   $JS[]  = URL_JS . "jquery.min.js";
   $smarty->assign('JS',$JS);
   $smarty->assign('CSS',$CSS);
@@ -97,20 +84,19 @@ try {
    
  
   
+ $smarty->assign("ERROR", $ERROR);
+  
 
-
-  $smarty->assign("ERROR",  $ERROR);
-   
+  //No hay ERROR
+  $smarty->assign("ERROR",'');
+  
 } 
 catch(Exception $e) 
 {
-    
   $smarty->assign("ERROR", handleError($e));
 }
 
-
 $TEMPLATE_TOSHOW = 'admin/bitacora/bitacora.tpl';
 $smarty->display($TEMPLATE_TOSHOW);
-
 
 ?>

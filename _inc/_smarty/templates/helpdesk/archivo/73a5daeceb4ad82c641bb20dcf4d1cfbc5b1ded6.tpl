@@ -8,6 +8,10 @@
 
 <p>Ingrese haciendo clic al sobre el men&uacute; Configuraci&oacute;n docente deber&aacute; configurar las a&eacute;reas en las que se especializa para la asignaci&oacute;n de tribunales.</p>
 
+<p>Ingrese haciendo clic al sobre el men&uacute; Foros del Sistema donde el docente podr&aacute;&nbsp;crear foros</p>
+
+<p>Ingrese haciendo clic al sobre el men&uacute; Envio de email donde se enviara mensajes por correo electr&oacute;nico</p>
+
 <p>Ingrese haciendo clic al sobre el men&uacute;&nbsp; Notificaciones y mensajes: El docente recibir&aacute; varios tipos de notificaciones y mensajes.</p>
 
 <p>Ingrese haciendo clic al sobre el men&uacute; Reportes del sistema: El docente podr&aacute; generar reportes en Excel y pdf.</p>

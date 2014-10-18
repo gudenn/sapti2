@@ -563,12 +563,11 @@ CREATE TABLE IF NOT EXISTS `helpdesk` (
   `estado_helpdesk` varchar(2) DEFAULT NULL COMMENT 'Recien creado RC , Editado ED, Aprobado AP',
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=240 ;
 
 --
--- Volcado de datos para la tabla `helpdesk`
+-- Volcar la base de datos para la tabla `helpdesk`
 --
-
 
 INSERT INTO `helpdesk` (`id`, `modulo_id`, `codigo`, `directorio`, `titulo`, `descripcion`, `keywords`, `estado_helpdesk`, `estado`) VALUES
 (1, 9, 'f12888016bc7f09a23a45fddb7884724f8a903df', '/sapti/index.php', 'Inicio Sapti', 'ventana principal des sistema', 'sapti,index,ayuda,inicio', 'ED', 'AC'),
@@ -741,7 +740,18 @@ INSERT INTO `helpdesk` (`id`, `modulo_id`, `codigo`, `directorio`, `titulo`, `de
 (220, 15, 'efabfa90acaf7d128409e91ec7e8c5becfc247e4', '/sapti/docente/email/index.php', 'Envió de e-mail', 'Envió de correos electronicos', 'sapti,docente,email,index,ayuda', 'ED', 'AC'),
 (223, 1, '7f44b48495f29066515e1a60a4055c918e6028a0', '/sapti/autoridad/respaldo/index.php', 'Respaldo del Sistema', 'Bakup del Sistema Sapti', 'sapti,autoridad,respaldo,index,ayuda', 'ED', 'AC'),
 (227, 22, '1bdb2af557fb5046d9f0a713ff95a20f9c0d0c11', '/sapti/autoridad/bitacora/index.php', 'Bitácoras', 'Bitácoras de Usuario del Sistema sapti', 'sapti,autoridad,bitacora,index,ayuda', 'ED', 'AC'),
-(228, 4, 'c13e531cb94687648d1886b73c1061331d624212', '/sapti/autoridad/Tribunal/docente.gestion.php', 'Gestión tribunales', 'Registrar un tribunal mediante formualrio', 'sapti,autoridad,Tribunal,docente,gestion,ayuda', 'ED', 'AC');
+(228, 4, 'c13e531cb94687648d1886b73c1061331d624212', '/sapti/autoridad/Tribunal/docente.gestion.php', 'Gestión tribunales', 'Registrar un tribunal mediante formualrio', 'sapti,autoridad,Tribunal,docente,gestion,ayuda', 'ED', 'AC'),
+(229, 16, 'f354557b8e44a680a7d420359dd6936d6be2851e', '/sapti/consejo/listatribunal.php', '/sapti/consejo/listatribunal.php', '/sapti/consejo/listatribunal.php', 'sapti,consejo,listatribunal,ayuda', 'RC', 'AC'),
+(230, 16, 'd161a61e51246aff20bfc6f606609af7fb91c897', '/sapti/consejo/listadefensa.php', '/sapti/consejo/listadefensa.php', '/sapti/consejo/listadefensa.php', 'sapti,consejo,listadefensa,ayuda', 'RC', 'AC'),
+(231, 16, 'ab94f2b7a0069f6342ef308664cdd3fd438f0a95', '/sapti/consejo/proyecto.defensa.php', '/sapti/consejo/proyecto.defensa.php', '/sapti/consejo/proyecto.defensa.php', 'sapti,consejo,proyecto,defensa,ayuda', 'RC', 'AC'),
+(232, 15, 'c9279c83c5c1080940874ce85ce78126c11c3c1a', '/sapti/docente//foro/respuesta.registro.php', 'Respuesta al Foro', 'Responder al foro del tema planteado', 'sapti,docente,,foro,respuesta,registro,ayuda', 'ED', 'AC'),
+(233, 14, '598fb5a900712da496078baa4b35098e9d2df83d', '/sapti/autoridad/bitacora/index.php', '/sapti/autoridad/bitacora/index.php', '/sapti/autoridad/bitacora/index.php', 'sapti,autoridad,bitacora,index,ayuda', 'RC', 'AC'),
+(234, 14, 'b142fc4b149a2bdbdbb28853de5f31056bac0617', '/sapti/autoridad//bitacora/index.php', '/sapti/autoridad//bitacora/index.php', '/sapti/autoridad//bitacora/index.php', 'sapti,autoridad,,bitacora,index,ayuda', 'RC', 'AC'),
+(235, 22, 'a60677a906a3c4d70ab315ff6e3b8dbe20431a69', '/sapti/autoridad/bitacora/bitacora.php', '/sapti/autoridad/bitacora/bitacora.php', '/sapti/autoridad/bitacora/bitacora.php', 'sapti,autoridad,bitacora,bitacora,ayuda', 'RC', 'AC'),
+(236, 12, '86179e03d9bfab91b3b0259163a6a0a036265206', '/sapti/autoridad/bitacora/bitacora.php', '/sapti/autoridad/bitacora/bitacora.php', '/sapti/autoridad/bitacora/bitacora.php', 'sapti,autoridad,bitacora,bitacora,ayuda', 'RC', 'AC'),
+(237, 4, 'a3390ef6bf7aec44b94c8094e4340ecd95ef019b', '/sapti/autoridad/bitacora/bitacora.php', '/sapti/autoridad/bitacora/bitacora.php', '/sapti/autoridad/bitacora/bitacora.php', 'sapti,autoridad,bitacora,bitacora,ayuda', 'RC', 'AC'),
+(238, 4, 'a67389ed46e075f1d8bfb10b71fdb1e5f37997e4', '/sapti/autoridad/bitacora/index.php', '/sapti/autoridad/bitacora/index.php', '/sapti/autoridad/bitacora/index.php', 'sapti,autoridad,bitacora,index,ayuda', 'RC', 'AC'),
+(239, 15, 'a09d8cb48c30c2e223fed97df4618b87591c41d5', '/sapti/docente//foro/tema.registro.php', 'Tema Registro', 'Registro de temas para el Foro docente', 'sapti,docente,,foro,tema,registro,ayuda', 'ED', 'AC');
 
 -- --------------------------------------------------------
 
