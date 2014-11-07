@@ -870,6 +870,7 @@ CREATE TABLE IF NOT EXISTS `materia` (
   `nombre` varchar(200) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   `sigla` varchar(20) DEFAULT NULL,
+  `codigo` varchar(20) DEFAULT NULL,
   `tipo` varchar(4) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
