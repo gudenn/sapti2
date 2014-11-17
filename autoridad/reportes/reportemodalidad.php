@@ -38,11 +38,8 @@ try {
   
   $JS[]  = URL_JS . "reporte/modules/exporting.js";
      
-  $smarty->assign('JS',$JS);
-  
-  
-  
-  $smarty->assign('JS',$JS);
+  $JS[]  = URL_JS . "jquery.min.js";
+   $smarty->assign('JS',$JS);
   $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
    
    

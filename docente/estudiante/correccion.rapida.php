@@ -107,7 +107,7 @@ while ($fila1ob = mysql_fetch_array($sqlob, MYSQL_ASSOC)) {
    $obser.=
            $fila1ob['observacion'].': '.htmlspecialchars_decode($fila1ob['respuesta']);
  }
- $correcciones[]=array('id'=>$fila1co['revid'],'fecha'=>$fila1co['fecha'],'descripcion'=>htmlspecialchars_decode($fila1co['descripcion']),'obser'=>$obser);
+ $correcciones[]=array('id'=>$fila1co['revid'],'fecha'=>$fila1co['fecha'],'descripcion'=>htmlspecialchars_decode($fila1co['descripcion']),'obser'=>$obser,'idava'=>$fila1co['id']);
  }
 if(count($avan_new)>0){
     $estu_ava[]=$fila['id'];

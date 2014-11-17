@@ -563,12 +563,11 @@ CREATE TABLE IF NOT EXISTS `helpdesk` (
   `estado_helpdesk` varchar(2) DEFAULT NULL COMMENT 'Recien creado RC , Editado ED, Aprobado AP',
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=240 ;
 
 --
--- Volcado de datos para la tabla `helpdesk`
+-- Volcar la base de datos para la tabla `helpdesk`
 --
-
 
 INSERT INTO `helpdesk` (`id`, `modulo_id`, `codigo`, `directorio`, `titulo`, `descripcion`, `keywords`, `estado_helpdesk`, `estado`) VALUES
 (1, 9, 'f12888016bc7f09a23a45fddb7884724f8a903df', '/sapti/index.php', 'Inicio Sapti', 'ventana principal des sistema', 'sapti,index,ayuda,inicio', 'ED', 'AC'),
@@ -645,7 +644,6 @@ INSERT INTO `helpdesk` (`id`, `modulo_id`, `codigo`, `directorio`, `titulo`, `de
 (77, 2, '0660bb0bbfe01fa0345acf132b42d818159d83b1', '/sapti/autoridad/configuracion/semestre.registro.php', 'Registro de Semestre', 'Registro mediante formulario de Semestre.', 'sapti,autoridad,configuracion,semestre,registro,ayuda', 'ED', 'AC'),
 (78, 2, '9e94e3f1cf047e7e45ebb192901f67e31911c9b6', '/sapti/autoridad/configuracion/semestre.gestion.php', 'Gestión de Semestre', 'Lista de Semestres', 'sapti,autoridad,configuracion,semestre,gestion,ayuda', 'ED', 'AC'),
 (79, 15, '36991d9934a0dfbc5229453fe4b3ca9659e463f8', '/sapti/docente/estudiante/inscripcion.estudiante-cvs.php', 'Inscripción del Estudiante Mediante Cvs', 'Registro mediante Cvs', 'sapti,docente,estudiante,inscripcion,estudiante-cvs,ayuda', 'ED', 'AC'),
-(80, 15, '04fa517b6c39b6bb3af3c00bbef073bed578192b', '/sapti/docente/estudiante/inscripcion.estudiante-cvs-lista.php', '/sapti/docente/estudiante/inscripcion.estudiante-cvs-lista.php', '/sapti/docente/estudiante/inscripcion.estudiante-cvs-lista.php', 'sapti,docente,estudiante,inscripcion,estudiante-cvs-lista,ayuda', 'RC', 'AC'),
 (81, 15, 'a0df4c7ee7aca12593389776c3f940894ddf60c7', '/sapti/docente/estudiante/estudiante.lista.vistobueno.php', 'Lista con Visto bueno', 'Se muestra la lista de Estudiantes.', 'sapti,docente,estudiante,estudiante,lista,vistobueno,ayuda', 'ED', 'AC'),
 (82, 15, 'f1f37ba3cf7a2ac577a0571e493754c256b83636', '/sapti/docente/tutor/seguimiento.lista.php', 'Seguimiento', 'Seguimiento de avance', 'sapti,docente,tutor,seguimiento,lista,ayuda', 'ED', 'AC'),
 (83, 15, 'fef82da7247b04df6a462b642cc12eb6e8c38eef', '/sapti/docente/tutor/estudiante.lista.php', 'Visto Bueno', 'lista de estudiantes a los cuales se les dara visto bueno', 'sapti,docente,tutor,estudiante,lista,ayuda', 'ED', 'AC'),
@@ -655,7 +653,6 @@ INSERT INTO `helpdesk` (`id`, `modulo_id`, `codigo`, `directorio`, `titulo`, `de
 (87, 13, 'd8e4e546ceea46b74a5368d1b4b1d9955369c834', '/sapti/autoridad/autoridad/consejo.gestion.php', 'Gestión Consejo', 'Agregar a Usuarios como concejo de la Universidad.', 'sapti,autoridad,autoridad,consejo,gestion,ayuda', 'ED', 'AC'),
 (88, 13, 'e26de4ab76b0ca73c72b6f83c8618f616b1f87d4', '/sapti/autoridad/autoridad/consejo.registro.php', 'Agregar Consejero', 'Designar a un Usuario como consejo.', 'sapti,autoridad,autoridad,consejo,registro,ayuda', 'ED', 'AC'),
 (89, 16, '5a5999fb9b6ce18c2800465cdd92f239627210ed', '/sapti/consejo/lista.estudiante.php', 'Asignar Tribunales', 'Lista de Estudiantes para asignar tribunales', 'sapti,consejo,lista,estudiante,ayuda', 'ED', 'AC'),
-(90, 15, 'ab6a8ae0980f6e03521c83e3b50941a9c6f251b4', '/sapti/docente/tutor/proyecto.vistobueno.lista.php', '/sapti/docente/tutor/proyecto.vistobueno.lista.php', '/sapti/docente/tutor/proyecto.vistobueno.lista.php', 'sapti,docente,tutor,proyecto,vistobueno,lista,ayuda', 'RC', 'AC'),
 (91, 7, 'c6a562953bc0d21f012f58f83ed9fc9e13bf02c4', '/sapti/autoridad/estudiante/estudiante.asignarproyecto.php', 'Registro Perfil.', 'Registro de formulario de perfil.', 'sapti,autoridad,estudiante,estudiante,asignarproyecto,ayuda', 'ED', 'AC'),
 (92, 15, 'a8ba05343b19aa9fd8df4818e76905b02faf5396', '/sapti/docente/tutor/perfil.seguimiento.lista.php', 'Modulo De seguimiento de Tutor', 'Este modulo permite al tutor hacer seguimiento respecto al proyecto de tesis del estudiante.', 'sapti,docente,tutor,perfil,seguimiento,lista,ayuda', 'ED', 'AC'),
 (93, 10, '49f186e6d45ba12e681c34dd33718e233727bd9b', '/sapti/estudiante/proyecto-final/index.php', 'Proyecto', 'Entorno de trabajo del estudiante', 'sapti,estudiante,proyecto-final,index,ayuda', 'ED', 'AC'),
@@ -685,10 +682,7 @@ INSERT INTO `helpdesk` (`id`, `modulo_id`, `codigo`, `directorio`, `titulo`, `de
 (122, 6, 'eac07a6bd1577f6043fa2ca355cb768de22b5547', '/sapti/autoridad/detalle/proyecto.detalle.php', 'Detalle del Proyecto', 'Datos Registrados del Perfil', 'sapti,autoridad,detalle,proyecto,detalle,ayuda', 'ED', 'AC'),
 (123, 7, 'f72f6f5267488116a6d1f7c3027c6dc187bc1ccf', '/sapti/autoridad/estudiante/estudiante.cambiotema.php', 'Lista de Estudiantes', 'Buscamos al estudiante para realizar el camio de tema.', 'sapti,autoridad,estudiante,estudiante,cambiotema,ayuda', 'ED', 'AC'),
 (124, 22, '331e22d63bd3f399d0988a060161361fe19641d7', '/sapti/autoridad/proyectocambio/proyecto.registro.php', 'Cambio Leve', 'Realizamos los cambios que corresponda.', 'sapti,autoridad,proyectocambio,proyecto,registro,ayuda', 'ED', 'AC'),
-(125, 17, 'f26c3f8ec14a3cc4c4eedb150488c23b033a0e64', '/sapti/estudiante/notificacion/notificacion.detalle.php', '/sapti/estudiante/notificacion/notificacion.detalle.php', '/sapti/estudiante/notificacion/notificacion.detalle.php', 'sapti,estudiante,notificacion,notificacion,detalle,ayuda', 'RC', 'AC'),
-(126, 7, '9986bbbdf521017715169dd7cb747283877083cc', '/sapti/autoridad/estudiante/estudiante.editar.php', '/sapti/autoridad/estudiante/estudiante.editar.php', '/sapti/autoridad/estudiante/estudiante.editar.php', 'sapti,autoridad,estudiante,estudiante,editar,ayuda', 'RC', 'AC'),
 (127, 15, 'b38e494bbd34d9ff37291b786104e875a906b3f2', '/sapti/docente/tribunal/estudiante.lista.php', 'Tribunal Visto bueno', 'Dar visto bueno Tribunal', 'sapti,docente,tribunal,estudiante,lista,ayuda', 'ED', 'AC'),
-(128, 15, 'ad5ce92af45fa310487db2990184c83e9fcc9a37', '/sapti/docente/tribunal/proyecto.vistobueno.php', '/sapti/docente/tribunal/proyecto.vistobueno.php', '/sapti/docente/tribunal/proyecto.vistobueno.php', 'sapti,docente,tribunal,proyecto,vistobueno,ayuda', 'RC', 'AC'),
 (129, 15, 'e77d96d2c8d765e90a24b3cc0c99eecb324e20ff', '/sapti/docente/tribunal/privada.estudiante.lista.php', 'Revicion y Observaciones', 'Observaciones al la Defensa.', 'sapti,docente,tribunal,privada,estudiante,lista,ayuda', 'ED', 'AC'),
 (130, 2, '1d815d9b115c777dbd832591c347c1a357713499', '/sapti/autoridad/configuracion/lugar.registro.php', 'Registro  Lugar de Defensa de Proyecto Final', 'Formulario de Registro  Lugar de Defensa de Proyecto Final', 'sapti,autoridad,configuracion,lugar,registro,ayuda', 'ED', 'AC'),
 (131, 2, '7674c92aec22fac7be4bc597146f8870e9dfa3a8', '/sapti/autoridad/configuracion/lugar.gestion.php', 'Gestión de Lugar de defensa de proyecto', 'Lista de Lugar de defensa de proyecto', 'sapti,autoridad,configuracion,lugar,gestion,ayuda', 'ED', 'AC'),
@@ -736,15 +730,28 @@ INSERT INTO `helpdesk` (`id`, `modulo_id`, `codigo`, `directorio`, `titulo`, `de
 (196, 14, '82bf519bf3b3015ec282845b427e40d5b8b323db', '/sapti/autoridad/reportes/tribunales.php', 'Reporte de Tribunales', 'Generar reportes en Pdf y Excel', 'sapti,autoridad,reportes,tribunales,ayuda', 'ED', 'AC'),
 (197, 2, '1685f7e0e979c080c8f0c51d296597817e3a45c1', '/sapti/autoridad/configuracion/subarea.gestion.php', 'Gestión de Sub-Áreas', 'Lista de Sub-Áreas', 'sapti,autoridad,configuracion,subarea,gestion,ayuda', 'ED', 'AC'),
 (198, 2, '68ab8e0e89c0a4490d2d246bb71d860f5f5483e3', '/sapti/autoridad/configuracion/subarea.registro.php', 'Registro Sub-Área', 'Formulario de Registro Sub-Área', 'sapti,autoridad,configuracion,subarea,registro,ayuda', 'ED', 'AC'),
-(199, 15, '7261e7f6f11f5246177e5400c20472eff63d51c3', '/sapti/docente/revision/observacion.editar.revision.php', '/sapti/docente/revision/observacion.editar.revision.php', '/sapti/docente/revision/observacion.editar.revision.php', 'sapti,docente,revision,observacion,editar,revision,ayuda', 'RC', 'AC'),
 (200, 2, 'd6b3c51b1206020ba48c9e5b207ffe0d1c74b106', '/sapti/autoridad/configuracion/cronograma.crear.deleted.php', 'Editar cronograma', 'Modificar datos de Cornograma', 'sapti,autoridad,configuracion,cronograma,crear,deleted,ayuda', 'ED', 'AC'),
-(201, 15, 'd31b1a9897747bc52404ad42178df096c6a6af88', '/sapti/docente/tribunal/avance.detalle.php', '/sapti/docente/tribunal/avance.detalle.php', '/sapti/docente/tribunal/avance.detalle.php', 'sapti,docente,tribunal,avance,detalle,ayuda', 'ED', 'AC'),
 (202, 4, '72a035a9eb8388500bc0c492b9fac264261520ad', '/sapti/autoridad/docente/docente.detalle.php', 'Docente detalle', 'Descripción de los datos', 'sapti,autoridad,docente,docente,detalle,ayuda', 'ED', 'AC'),
 (203, 7, '269783c003c56bef077184ceee8e805729a5a8f2', '/sapti/autoridad/estudiante/estudiante.detalle.php', 'Detalle Estudiante', 'Ver en Estudiante', 'sapti,autoridad,estudiante,estudiante,detalle,ayuda', 'ED', 'AC'),
 (204, 17, '320bc2d1acf39aaeac398ee1c46f07e385105371', '/sapti/autoridad/notificacion/notificacion.detalle.php', 'Gestión notificación', 'Aceptar o rechazar la notificación.', 'sapti,autoridad,notificacion,notificacion,detalle,ayuda', 'ED', 'AC'),
-(205, 3, '7f159d03bd08c34418973f597aea4ea9ff4a1443', '/sapti/autoridad/helpdesk/tooltip.gestion.php', '/sapti/autoridad/helpdesk/tooltip.gestion.php', '/sapti/autoridad/helpdesk/tooltip.gestion.php', 'sapti,autoridad,helpdesk,tooltip,gestion,ayuda', 'RC', 'AC'),
-(206, 15, 'ae0b52aac26b2a8cc1373d5f44e1476f608de695', '/sapti/docente/evaluacion/evaluacion.estudiante-cvs.php', '/sapti/docente/evaluacion/evaluacion.estudiante-cvs.php', '/sapti/docente/evaluacion/evaluacion.estudiante-cvs.php', 'sapti,docente,evaluacion,evaluacion,estudiante-cvs,ayuda', 'RC', 'AC'),
-(207, 3, '09629fd31578a08040e2871bdf3768ec1557ef2a', '/sapti/autoridad/helpdesk/tooltip.registro.php', '/sapti/autoridad/helpdesk/tooltip.registro.php', '/sapti/autoridad/helpdesk/tooltip.registro.php', 'sapti,autoridad,helpdesk,tooltip,registro,ayuda', 'RC', 'AC');
+(211, 4, '454cab883c0569ae1ec3c0945cbb30ba30a7526f', '/sapti/autoridad/tribunal/index.php', 'Gestión Tribunales', 'Gestionar Tribunales', 'sapti,autoridad,tribunal,index,ayuda', 'ED', 'AC'),
+(213, 15, '55bf5a347e0dd8c8e04f248ee50939d81808e4bb', '/sapti/docente//foro/index.php', 'Foro Docentes', 'Foro de docentes', 'sapti,docente,,foro,index,ayuda', 'ED', 'AC'),
+(215, 15, 'd1fa54748682c767645e42256196cef67942d94c', '/sapti/docente//foro/respuesta.gestion.php', 'Respuesta a Temas de los Foros', 'Foros', 'sapti,docente,,foro,respuesta,gestion,ayuda', 'ED', 'AC'),
+(220, 15, 'efabfa90acaf7d128409e91ec7e8c5becfc247e4', '/sapti/docente/email/index.php', 'Envió de e-mail', 'Envió de correos electronicos', 'sapti,docente,email,index,ayuda', 'ED', 'AC'),
+(223, 1, '7f44b48495f29066515e1a60a4055c918e6028a0', '/sapti/autoridad/respaldo/index.php', 'Respaldo del Sistema', 'Bakup del Sistema Sapti', 'sapti,autoridad,respaldo,index,ayuda', 'ED', 'AC'),
+(227, 22, '1bdb2af557fb5046d9f0a713ff95a20f9c0d0c11', '/sapti/autoridad/bitacora/index.php', 'Bitácoras', 'Bitácoras de Usuario del Sistema sapti', 'sapti,autoridad,bitacora,index,ayuda', 'ED', 'AC'),
+(228, 4, 'c13e531cb94687648d1886b73c1061331d624212', '/sapti/autoridad/Tribunal/docente.gestion.php', 'Gestión tribunales', 'Registrar un tribunal mediante formualrio', 'sapti,autoridad,Tribunal,docente,gestion,ayuda', 'ED', 'AC'),
+(229, 16, 'f354557b8e44a680a7d420359dd6936d6be2851e', '/sapti/consejo/listatribunal.php', '/sapti/consejo/listatribunal.php', '/sapti/consejo/listatribunal.php', 'sapti,consejo,listatribunal,ayuda', 'RC', 'AC'),
+(230, 16, 'd161a61e51246aff20bfc6f606609af7fb91c897', '/sapti/consejo/listadefensa.php', '/sapti/consejo/listadefensa.php', '/sapti/consejo/listadefensa.php', 'sapti,consejo,listadefensa,ayuda', 'RC', 'AC'),
+(231, 16, 'ab94f2b7a0069f6342ef308664cdd3fd438f0a95', '/sapti/consejo/proyecto.defensa.php', '/sapti/consejo/proyecto.defensa.php', '/sapti/consejo/proyecto.defensa.php', 'sapti,consejo,proyecto,defensa,ayuda', 'RC', 'AC'),
+(232, 15, 'c9279c83c5c1080940874ce85ce78126c11c3c1a', '/sapti/docente//foro/respuesta.registro.php', 'Respuesta al Foro', 'Responder al foro del tema planteado', 'sapti,docente,,foro,respuesta,registro,ayuda', 'ED', 'AC'),
+(233, 14, '598fb5a900712da496078baa4b35098e9d2df83d', '/sapti/autoridad/bitacora/index.php', '/sapti/autoridad/bitacora/index.php', '/sapti/autoridad/bitacora/index.php', 'sapti,autoridad,bitacora,index,ayuda', 'RC', 'AC'),
+(234, 14, 'b142fc4b149a2bdbdbb28853de5f31056bac0617', '/sapti/autoridad//bitacora/index.php', '/sapti/autoridad//bitacora/index.php', '/sapti/autoridad//bitacora/index.php', 'sapti,autoridad,,bitacora,index,ayuda', 'RC', 'AC'),
+(235, 22, 'a60677a906a3c4d70ab315ff6e3b8dbe20431a69', '/sapti/autoridad/bitacora/bitacora.php', '/sapti/autoridad/bitacora/bitacora.php', '/sapti/autoridad/bitacora/bitacora.php', 'sapti,autoridad,bitacora,bitacora,ayuda', 'RC', 'AC'),
+(236, 12, '86179e03d9bfab91b3b0259163a6a0a036265206', '/sapti/autoridad/bitacora/bitacora.php', '/sapti/autoridad/bitacora/bitacora.php', '/sapti/autoridad/bitacora/bitacora.php', 'sapti,autoridad,bitacora,bitacora,ayuda', 'RC', 'AC'),
+(237, 4, 'a3390ef6bf7aec44b94c8094e4340ecd95ef019b', '/sapti/autoridad/bitacora/bitacora.php', '/sapti/autoridad/bitacora/bitacora.php', '/sapti/autoridad/bitacora/bitacora.php', 'sapti,autoridad,bitacora,bitacora,ayuda', 'RC', 'AC'),
+(238, 4, 'a67389ed46e075f1d8bfb10b71fdb1e5f37997e4', '/sapti/autoridad/bitacora/index.php', 'Bitacora', 'Lista de Bitácoras del Sistema', 'sapti,autoridad,bitacora,index,ayuda', 'ED', 'AC'),
+(239, 15, 'a09d8cb48c30c2e223fed97df4618b87591c41d5', '/sapti/docente//foro/tema.registro.php', 'Tema Registro', 'Registro de temas para el Foro docente', 'sapti,docente,,foro,tema,registro,ayuda', 'ED', 'AC');
 
 -- --------------------------------------------------------
 
@@ -863,6 +870,7 @@ CREATE TABLE IF NOT EXISTS `materia` (
   `nombre` varchar(200) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   `sigla` varchar(20) DEFAULT NULL,
+  `codigo` varchar(20) DEFAULT NULL,
   `tipo` varchar(4) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;

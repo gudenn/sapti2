@@ -21,7 +21,8 @@ try {
   $JS[]  = URL_JS . "jquery.min.js";
   $JS[]  = URL_JS . "tablaeditable/editablegrid-2.0.1.js";
   $JS[]  = URL_JS . "tablaeditable/tabla.vencido.lista.js";
-  $smarty->assign('JS',$JS);
+  $JS[]  = URL_JS . "jquery.min.js";
+   $smarty->assign('JS',$JS);
   
    /**
    * Menu superior
