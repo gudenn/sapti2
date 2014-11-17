@@ -1,7 +1,8 @@
 <?php
 /**
- * Clase de apoyo para generar html
- */
+* @author          Guyen Campero<guyencu@gmail.com>
+* @version         0.14.0.10
+*/
 class Html
 { 
   
@@ -93,5 +94,3 @@ class Html
     return $template;
   }
 }
-
-?>

@@ -132,7 +132,7 @@ $('#theme-switcher').change(function () {
           </p>
         {/section}
         {/if}
-
+        <h3><b>Avance del Proyecto</b> {$avance->porcentaje} %</h3>
         <h3><b>Descripci&oacute;n del Avance</b></h3>
         <p>
           {$avance->getDescripcion()}

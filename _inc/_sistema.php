@@ -117,7 +117,7 @@ function leerClase($clase) {
   if (file_exists(DIR_CLASES . "/$clase.php"))
     require_once(DIR_CLASES . "/$clase.php");
   else {
-    if (isset($_GET['test'])) {
+    if (ENDESARROLLO) {
       echo PATH;
       echo "<br />";
       echo DIR_CLASES;
@@ -127,6 +127,25 @@ function leerClase($clase) {
   }
   return true;
 }
+
+/**
+ * Implementamos una funcion que auto cargue las Clases
+ * por alguna razon no esta funcionando con la Clase Html
+ * @param String $clase
+ * @author Guyen Campero <guyencu@gmail.com>
+ */
+  function __autoload($clase) {
+    try {
+      leerClase($clase);
+    } catch (Exception $exc) {
+      if (ENDESARROLLO){
+        echo $exc->getTraceAsString();
+      }
+      else {
+        exit('Revise la configuracion del SISTEMA');
+      }
+    }
+  }
 
 /**
  * Inicia una conexion a la DB
