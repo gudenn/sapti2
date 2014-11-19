@@ -278,10 +278,9 @@ class Menu
     $fechafin=$fecha[0]->fecha_fin;
     list($dia, $mes, $anio)=explode("-", $fechafin);
     $fechafin=mktime(0, 0, 0, $mes, $dia, $anio);
-   
+    $fechaactual=date("m-d-Y");
+    list($dia, $mes, $anio)=explode("-", $fechaactual);
     $fechaactual=mktime(0, 30, 0, date("m"), date("d"), date("Y"));
-   
-   
     if (!isEstudianteSession())
       return array();
    
@@ -290,7 +289,7 @@ class Menu
     $link = Estudiante::URL."proyecto-final/";
     $thise->agregarItem('Proyecto','Registro de avances y correcciones para el Proyecto Final','basicset/briefcase_48.png',$link);
     //revisar la esta linea la comparacion e fechas no sirve de esa manera
-    if( is_object( $proyecto) && $proyecto->estado_proyecto==Proyecto::EST2_BUE && $fechaini<=$fechaactual && $fechafin>=$fechaactual)
+    if( is_object( $proyecto) && $proyecto->estado_proyecto==Proyecto::EST2_BUE /* && $fechaini<=$fechaactual && $fechafin>=$fechaactual*/)
     {
       $link = Estudiante::URL."proyecto/proyecto.registro.php";
       $thise->agregarItem('Registro de Formulario','Registro de Formulario de Proyecto Final del Estudiante','basicset/survey.png',$link,1);
@@ -476,7 +475,7 @@ AND tr.docente_id=".$docente->id."
    $thise->agregarItem('Notificaciones','Gesti&oacute;n de Notificaciones','basicset/message-archived.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
    $link = Docente::URL."notificacion/notificacion.gestion.php?estado_notificacion=SV";
    $counter = $notificacion->getTodasNotificaciones($usuario->id, '', '', ' AND estado_notificacion="SV" ');
-   $thise->agregarItem('Notificaciones Pendientes','Todas las notificaciones no leidas','basicset/message-not-read.png',$link,$counter[1]);
+   $thise->agregarItem('Notificaciones Pendientes','Todas las notificaciones no le&iacute;das','basicset/message-not-read.png',$link,$counter[1]);
    $thises[] = $thise;
    
    $thise = new Menu('Reportes del Sistema');
@@ -488,9 +487,9 @@ AND tr.docente_id=".$docente->id."
    $link = Docente::URL."/foro/";
    $thise->agregarItem('Foro del sistema','Gesti&oacute;n de temas y debates para docentes, tutores y tribunales.','basicset/chat.png',$link);
    $thises[] = $thise;
-    $thise = new Menu('Envio a Email');
+    $thise = new Menu('Env&iacute;o a Email');
    $link = Docente::URL."email/";
-   $thise->agregarItem('Envio de Email','Envio de Email masivos','basicset/email.png',$link);
+   $thise->agregarItem('Env&iacute;o de Email','Env&iacute;o de Email masivos','basicset/email.png',$link);
    $thises[] = $thise;
   
     return $thises;

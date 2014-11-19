@@ -7,7 +7,7 @@
       <!-- ############ -->
     
 <div id="content">
-   <center> <strong> <h1>Formulario De Envio de Email </h1></strong></td></center>
+   <center> <strong> <h1>Formulario De Env&iacute;o de Email </h1></strong></td></center>
       
 <div>
      

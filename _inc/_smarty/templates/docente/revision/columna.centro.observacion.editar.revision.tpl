@@ -22,7 +22,7 @@
 			<div id="tablecontent"></div>
 
 	    <form name="nueva_observacion" id="nueva_observacion" action="" onsubmit="enviarDatosObservacion(); return false">
-		<h1>Nueva Observación</h1>
+		<h1>Nueva Observaci&oacute;n</h1>
             <table>
                 <tr>
                 <td>

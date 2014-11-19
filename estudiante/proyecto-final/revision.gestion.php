@@ -18,9 +18,9 @@ try {
   $ERROR = '';
 
   /** HEADER */
-  $smarty->assign('title','Gesti&oacute;n de Correciones');
-  $smarty->assign('description','P&aacute;gina de gestion de Correciones');
-  $smarty->assign('keywords','Gesti&oacute;n,Correciones');
+  $smarty->assign('title','Gesti&oacute;n de Correcciones');
+  $smarty->assign('description','P&aacute;gina de gesti&oacute;n de Correcciones');
+  $smarty->assign('keywords','Gesti&oacute;n,Correcciones');
 
   $smarty->assign('header_ui','1');
   $smarty->assign('CSS','');

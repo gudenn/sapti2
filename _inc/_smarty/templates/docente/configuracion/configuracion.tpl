@@ -17,8 +17,8 @@
   </form>
   <script>
     $('#custom-headers').multiSelect({
-      selectableHeader: "<div class='custom-header'>SELECCIONE AREA</div>",
-      selectionHeader: "<div class='custom-header'>AREAS SELECCIONADAS</div>"
+      selectableHeader: "<div class='custom-header'>SELECCIONE &Aacute;REAS</div>",
+      selectionHeader: "<div class='custom-header'>&Aacute;REAS SELECCIONADAS</div>"
     });
   </script>
 </div>

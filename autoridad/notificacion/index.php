@@ -61,7 +61,7 @@ try {
     $menu->agregarItem('Archivo de Notificaciones','Archivo de Todas las notificaciones y mensajes','basicset/message-archived.png',$link,'',$counter[1]);
     $counter = $notificacion->getTodasNotificaciones($usuario->id, '', '', " AND estado_notificacion='VI' ");
     $link = $url_base."notificacion/notificacion.gestion.php?estado_notificacion=VI";
-    $menu->agregarItem('Notificaciones Leidas','Todas las notificaciones leidas','basicset/message-already-read.png',$link,'',$counter[1]);
+    $menu->agregarItem('Notificaciones Le&iacute;das','Todas las notificaciones le&iacute;das','basicset/message-already-read.png',$link,'',$counter[1]);
     $counter = $notificacion->getTodasNotificaciones($usuario->id, '', '', " AND estado_notificacion='AR' ");
     $link = $url_base."notificacion/notificacion.gestion.php?estado_notificacion=AR";
     $menu->agregarItem('Notificaciones Archivadas','Notificaciones archivadas','basicset/message-archived.png',$link,'',$counter[1]);
@@ -70,7 +70,7 @@ try {
     // CONTADOR
     $counter = $notificacion->getTodasNotificaciones($usuario->id, '', '', ' AND estado_notificacion="SV" ');
     $link    = $url_base."notificacion/notificacion.gestion.php?estado_notificacion=SV";
-    $menu->agregarItem('Notificaciones Pendientes','Todas las notificaciones no leidas','basicset/message-not-read.png',$link,$counter[1]);
+    $menu->agregarItem('Notificaciones Pendientes','Todas las notificaciones no le&iacute;das','basicset/message-not-read.png',$link,$counter[1]);
     $menus[] = $menu;
   }
   //----------------------------------//

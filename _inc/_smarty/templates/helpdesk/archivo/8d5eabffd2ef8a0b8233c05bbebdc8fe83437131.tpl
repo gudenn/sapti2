@@ -1,1 +1,1 @@
-<p>En este modulo se ven todas las observaciones realizadas por el docente al proyecto del estudiante las cuales el estudiante deber&aacute; corregirlas y enviarlas al docente para su aprobaci&oacute;n.</p>
+<p>En este m&oacute;dulo se ven todas las observaciones realizadas por el docente al proyecto del estudiante las cuales el estudiante deber&aacute; corregirlas y enviarlas al docente para su aprobaci&oacute;n.</p>

@@ -3,7 +3,7 @@
   <div class="rnd">
     <div id="container">
       {if (isset($revision))}
-        <h1 class="title">Registro de Correciones</h1>
+        <h1 class="title">Registro de Correcciones</h1>
       {else}
         <h1 class="title">Registro de Avance</h1>
       {/if}
@@ -142,10 +142,10 @@
         
         <form action="" method="post" id="registro" name="registro" >
           {if (isset($revision))}
-          <h3><b>Correciones</b></h3>
+          <h3><b>Correcciones</b></h3>
           {assign var="objs" value=$revision->observacion_objs}
           {section name=ic loop=$objs}
-            <p><b>Observasion:</b> {$objs[ic]->observacion}</p>
+            <p><b>Observaci&oacute;n:</b> {$objs[ic]->observacion}</p>
             <p>
               <textarea name="observacion_id_{$objs[ic]->id}" id="observacion_id_{$objs[ic]->id}" rows="4" cols="60" style="width: 431px;height: 305px;" data-validation-engine="validate[required]">{$objs[ic]->respuesta}</textarea>
             </p>

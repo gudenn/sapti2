@@ -3,7 +3,7 @@
 <div class="wrapper row3">
   <div class="rnd">
     <div id="container" class="clear">
-        <h1 class="title">Registró De Observación(es)</h1>
+        <h1 class="title">Registro De Observación(es)</h1>
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
             <p>
@@ -26,10 +26,10 @@
 
             <p>
               <input type="text" name="fecha_revision" id="fecha_revision" value="{$revision->fecha_revision}" size="22"/>
-              <label for="fecha_revision"><small>FECHA DE REVISION</small></label>
+              <label for="fecha_revision"><small>FECHA DE REVISI&Oacute;N</small></label>
             </p>
 
-            <h2 class="title">Grabar Revision</h2>
+            <h2 class="title">Grabar Revisi&oacute;n</h2>
             <p>
               <input type="hidden" name="id" value="{$revision->id}">
               <input type="hidden" name="id" value="{$observacion->id}">

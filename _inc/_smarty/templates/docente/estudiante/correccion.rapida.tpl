@@ -7,7 +7,7 @@
 <table class="tbl_lista">
   <thead>
     <tr>
-      <th>Codigo SIS   </th>
+      <th>C&oacute;digo SIS   </th>
       <th>Estudiante   </th>
       <th>Proyecto     </th>
 
@@ -27,7 +27,7 @@
     <tr>
       <th>Id                         </th>
       <th>Fecha Avance            </th>
-      <th>Descripcion             </th>
+      <th>Descripci&oacute;n             </th>
       <th>Opciones                  </th>
 
     </tr>
@@ -54,7 +54,7 @@
 <table class="tbl_lista">
   <thead>
     <tr>
-      <th>Codigo SIS   </th>
+      <th>C&oacute;digo SIS   </th>
       <th>Estudiante   </th>
       <th>Proyecto     </th>
 
@@ -75,7 +75,7 @@
       <th>Id                      </th>
       <th>Fecha Avance            </th>
       <th>Avance                  </th>
-      <th>Observacion y Respuesta </th>
+      <th>Observaci&oacute;n y Respuesta </th>
       <th>Opciones                </th>
 
     </tr>
