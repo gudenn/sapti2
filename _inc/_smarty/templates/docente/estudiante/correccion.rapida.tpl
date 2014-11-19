@@ -87,8 +87,8 @@
     <td>{$objs1[ic][4][ic1]['fecha']}</td>
     <td>{$objs1[ic][4][ic1]['descripcion']}</td>
     <td>{$objs1[ic][4][ic1]['obser']}</td>
-    <td>Aprobar:<input type="checkbox" name='apro' value={$objs1[ic][4][ic1]['id']} class="checkbox" onclick="aprobacionCorreccion({$objs1[ic][4][ic1]['id']},{$objs1[ic][0]});">
-        No Aprobar:<input type="checkbox" name='desapro' value={$objs1[ic][4][ic1]['id']} class="checkbox" onclick="noaprobacionCorreccion({$objs1[ic][4][ic1]['id']},{$objs1[ic][0]});">
+    <td>Aprobar:<input type="checkbox" name='apro' value={$objs1[ic][4][ic1]['id']} class="checkbox" onclick="aprobacionCorreccion({$objs1[ic][4][ic1]['id']},{$objs1[ic][0]},{$objs1[ic][4][ic1]['idava']});">
+        No Aprobar:<input type="checkbox" name='desapro' value={$objs1[ic][4][ic1]['id']} class="checkbox" onclick="noaprobacionCorreccion({$objs1[ic][4][ic1]['id']},{$objs1[ic][0]},{$objs1[ic][4][ic1]['idava']});">
     </td>
      </tr>
         {/section}
@@ -136,7 +136,7 @@ function registroRevicion(obser,idava,idest){
 		async: true
 	}); 
 };
-function aprobacionCorreccion(idrev,idest){    
+function aprobacionCorreccion(idrev,idest,idava){    
 	$.ajax({
 		url: 'correccion.rapida.registro.php',
 		type: 'POST',
@@ -145,6 +145,7 @@ function aprobacionCorreccion(idrev,idest){
 			iddicta :  iddicta,
                         idrev :  idrev,
                         idest :  idest,
+                        idava :  idava,
 			registro:   'aprobar'
 		},
 		success: function (response) 
@@ -159,7 +160,7 @@ function aprobacionCorreccion(idrev,idest){
 		async: true
 	}); 
 };
-function noaprobacionCorreccion(idrev,idest){    
+function noaprobacionCorreccion(idrev,idest,idava){    
 	$.ajax({
 		url: 'correccion.rapida.registro.php',
 		type: 'POST',
@@ -169,6 +170,7 @@ function noaprobacionCorreccion(idrev,idest){
                         iddoc :  iddoc,
                         idrev :  idrev,
                         idest :  idest,
+                        idava :  idava,
 			registro:   'noaprobar'
 		},
 		success: function (response) 

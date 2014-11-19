@@ -170,8 +170,24 @@
           {/if}
           <input type="hidden" name="tarea" value="registrar_avance">
           <input type="hidden" name="token" value="{$token}">
+            <div>
+                <h3><b>Registre el Avance del Proyecto {getHelpTip('Avance')}</b></h3>
+                <input type="range" id="range" name="range" min="1" max="100" value="1" style="width: 400px;">
+                <output for="range" id="output">0</output> %
+            </div>
+            <script>
+                {literal}
+                (function () {
+                    var registro = document.getElementById("registro");
+                    if ("oninput" in registro) {
+                        registro.addEventListener("input", function () {
+                            output.value = range.value;
+                        }, false);
+                    }
+                })();
+                {/literal}
+            </script>
           <button type="submit" class="delete ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button" aria-disabled="false"><span class="ui-button-icon-primary ui-icon ui-icon-disk"></span><span class="ui-button-text">Grabar</span></button>
-          
         </form>
         <hr>
     {$ERROR}

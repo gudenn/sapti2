@@ -15,9 +15,10 @@ try {
   $smarty->assign('JS','');
   
  /**
-  * Clases
+  * Clases 
+  * Ahora Se utiliza la lectura automatica de clases
   */
-  leerClase('Administrador');
+  //leerClase('Administrador');
 
   /**
    * Menu superior
@@ -28,7 +29,7 @@ try {
   /**
    * Menu central
    */
-  leerClase('Menu');
+  //leerClase('Menu');
   $menu = new Menu('');
   $menus = $menu->getAdminIndex();
   $smarty->assign("menus", $menus);
@@ -36,6 +37,7 @@ try {
   $ERROR = '';
   leerClase('Html');
   $html  = new Html();
+  //exit('Error');
   if (isset($_GET['notienepermiso']))
   {
     $html = new Html();

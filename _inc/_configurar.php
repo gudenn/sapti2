@@ -74,15 +74,11 @@ else
   ////////////////////////////////////////////////////////
   if (ENDESARROLLO)
   {
-    error_reporting(E_ERROR | E_WARNING | E_PARSE);  
-
-    //error_reporting(E_ALL);  
-    error_reporting(0);  
-
-    error_reporting(E_ALL);  
+    //error_reporting(E_ERROR | E_WARNING | E_PARSE);
+    error_reporting(E_ERROR | E_PARSE);  
+    //error_reporting(E_ALL);
+    ini_set('display_errors','On');
     //error_reporting(0);  
-
-    ini_set('display_errors','Off');
 
     define ("DBHOST"        , "localhost");
     define ("BDNAME"        , "sapti");

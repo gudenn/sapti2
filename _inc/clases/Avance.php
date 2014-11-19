@@ -44,6 +44,12 @@ class Avance extends Objectbase
   var $descripcion;
 
  /**
+  * Porcentaje de avance
+  * @var TEXT
+  */
+  var $porcentaje;
+
+ /**
   * Estado de avance con respecto de
   * estado 1 creado (CR), estado 2 visto por el tutor (VI), estado 3 aprobado por el tutor (AP)
   * @var TEXT

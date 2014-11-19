@@ -148,7 +148,7 @@ try {
                   if((sizeof($vistobuenodocente)>0)  && $totalvistobuenotutor)
                   {
                   //  echo "visto bueno por par te tutor";
-                $proyectoestudiante->estado_proyecto='VA'; //deberia ser //Proyecto::EST2_BUE
+                $proyectoestudiante->estado_proyecto=Proyecto::EST2_BUE; //deberia ser //Proyecto::EST2_BUE
                 
                 $proyectoestudiante->save();
               //  var_dump($proyectoestudiante);
