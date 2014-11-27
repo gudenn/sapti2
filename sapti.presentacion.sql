@@ -2545,7 +2545,7 @@ CREATE TABLE IF NOT EXISTS `visto_bueno` (
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `forotema` ;
 
-CREATE TABLE IF NOT EXISTS `sapti`.`forotema` (
+CREATE TABLE IF NOT EXISTS `forotema` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `usuario_id` INT NULL,
   `nombre` VARCHAR(100) NULL,
@@ -2560,7 +2560,7 @@ CREATE TABLE IF NOT EXISTS `sapti`.`forotema` (
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `fororespuesta` ;
 
-CREATE TABLE IF NOT EXISTS `sapti`.`fororespuesta` (
+CREATE TABLE IF NOT EXISTS `fororespuesta` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `forotema_id` INT NULL,
   `usuario_id` INT NULL,
