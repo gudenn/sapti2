@@ -455,6 +455,7 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`avance` (
   `proyecto_id` INT NULL ,
   `fecha_avance` DATE NULL ,
   `detalle` VARCHAR(1500) NULL ,
+  `porcentaje` INT NULL,
   `directorio` VARCHAR(45) NULL ,
   `descripcion` TEXT NULL ,
   `estado_avance` VARCHAR(2) NULL COMMENT 'estado 1 creado (CR), estado 2 visto (VI), estado 3 aprobado (AP)' ,
@@ -1073,6 +1074,8 @@ CREATE TABLE IF NOT EXISTS `bitacora` (
   `tupla_despues` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+
 USE `sapti` ;
 
 

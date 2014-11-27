@@ -87,10 +87,14 @@ if (empty($action)&&$avance->revision_id==0) {
                       </tbody>
             </table>
             <p>
-            <label for='descripcion'>Descripción del Avance:</label>
+            <label for='descripcion'>Descripci&oacute;n del Avance:</label>
             <span><i>".getRespuesta($avance->descripcion)."</i></span>
             </p>
-	</form>
+            <p>
+            <label>Porcentaje de Avance:</label>
+            <span><i>".getRespuesta($avance->porcentaje)." %</i></span>
+            </p>
+</form>
         </div>
         <button type='submit' class='contact-cancel contact-button simplemodal-close' tabindex='1006'>Cerrar</button>
         </div>

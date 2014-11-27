@@ -30,7 +30,7 @@
 <!-- ####################################################################################################### -->
 <div class="wrapper">
   <div id="copyright" class="clear">
-    <p class="fl_left">Derechos de autor &copy; 2013 - Todos los derechos reservados - Equipo SAPTI</p>
+    <p class="fl_left">Derechos de autor &copy; {date('Y')} - Todos los derechos reservados - Equipo SAPTI</p>
   </div>
 </div>
 </body>

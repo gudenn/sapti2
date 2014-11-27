@@ -87,8 +87,12 @@ if (empty($action)&&$avance->revision_id==0) {
                       </tbody>
             </table>
             <p>
-            <label for='descripcion'>Descripción del Avance:</label>
+            <label for='descripcion'>Descripci&oacute;n del Avance:</label>
             <span><i>".getRespuesta($avance->descripcion)."</i></span>
+            </p>
+            <p>
+            <label>Porcentaje de Avance:</label>
+            <span><i>".getRespuesta($avance->porcentaje)." %</i></span>
             </p>
 	</form>
         </div>

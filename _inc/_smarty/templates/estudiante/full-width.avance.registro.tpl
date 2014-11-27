@@ -172,7 +172,7 @@
           <input type="hidden" name="token" value="{$token}">
             <div>
                 <h3><b>Registre el Avance del Proyecto {getHelpTip('Avance')}</b></h3>
-                <input type="range" id="range" name="range" min="1" max="100" value="1" style="width: 400px;">
+                <input type="range" id="porcentaje" name="porcentaje" min="1" max="100" value="1" style="width: 400px;">
                 <output for="range" id="output">0</output> %
             </div>
             <script>
@@ -181,7 +181,7 @@
                     var registro = document.getElementById("registro");
                     if ("oninput" in registro) {
                         registro.addEventListener("input", function () {
-                            output.value = range.value;
+                            output.value = porcentaje.value;
                         }, false);
                     }
                 })();

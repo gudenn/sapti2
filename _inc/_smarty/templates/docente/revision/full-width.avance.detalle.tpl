@@ -115,9 +115,13 @@ $('#theme-switcher').change(function () {
 <![endif]-->
 {/literal}
         
-        <h3><b>Descripci&oacuten</b></h3>
+        <h3><b>Descripci&oacute;n</b></h3>
         <p>
           {$avance->getDescripcion()}
+        </p>
+        <h3><b>Porcentaje de Avance</b></h3>
+        <p>
+          {$avance->porcentaje} %
         </p>
         {if $obsertabla=='si'}
         <h3><b>Observaciones Corregidas</b></h3>
@@ -125,7 +129,7 @@ $('#theme-switcher').change(function () {
  <table class="tbl_lista">
   <thead>
     <tr>
-      <th>Observaci&oacuten    </th>
+      <th>Observaci&oacute;n    </th>
       <th>Respuesta      </th>
       <th>Estado         </th>
       <th>Opciones       </th>

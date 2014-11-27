@@ -176,11 +176,15 @@ if(count($correcciones)>0){
     $countCorrecciones++;
 }
  }
-  if(isset($_SESSION['mensaje']) && $_SESSION['mensaje']>=1)
+  if(isset($_SESSION['mensaje']) && $_SESSION['mensaje']>=1 && ($counter[1] + $countAvances + $countCorrecciones ) > 0 )
   {
     leerClase('Html');
     $html    = new Html();
-      $mensaje = array('mensaje'=>"Tiene ".$counter[1]." Notificaciones Pendientes. </br>Tiene ".$countAvances." Avances De Proyectos Pendientes. </br>Tiene ".$countCorrecciones." Correcciones De Proyectos Pendientes",'titulo'=>'Notificaciones Pendientes' ,'icono'=> 'warning_48.png');
+      $mensaje = array('mensaje'=>
+        "Tiene ".
+        $counter[1]." Notificaciones Pendientes. </br>Tiene ".
+        $countAvances." Avances De Proyectos Pendientes. </br>Tiene ".
+        $countCorrecciones." Correcciones De Proyectos Pendientes",'titulo'=>'Notificaciones Pendientes' ,'icono'=> 'warning_48.png');
 
     $ERROR   = $html->getMessageBox ($mensaje);
     $_SESSION['mensaje']=0;

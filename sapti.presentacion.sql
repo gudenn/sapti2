@@ -104,6 +104,7 @@ CREATE TABLE IF NOT EXISTS `avance` (
   `proyecto_id` int(11) DEFAULT NULL,
   `fecha_avance` date DEFAULT NULL,
   `detalle` varchar(1500) DEFAULT NULL,
+  `porcentaje` INT NULL,
   `directorio` varchar(45) DEFAULT NULL,
   `descripcion` text,
   `estado_avance` varchar(2) DEFAULT NULL COMMENT 'estado 1 creado (CR), estado 2 visto (VI), estado 3 aprobado (AP)',
@@ -1714,7 +1715,7 @@ CREATE TABLE IF NOT EXISTS `semestre` (
 --
 
 INSERT INTO `semestre` (`id`, `codigo`, `activo`, `valor`, `estado`) VALUES
-(1, 'I-2014', 1, 1, 'AC');
+(1, 'II-2014', 1, 1, 'AC');
 
 -- --------------------------------------------------------
 
@@ -2682,7 +2683,22 @@ UPDATE  `usuario` SET  `clave` = MD5(500089) WHERE id=90;
 
 
 
+
+CREATE TABLE IF NOT EXISTS `bitacora` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `operacion` varchar(10) DEFAULT NULL,
+  `host` varchar(30) NOT NULL,
+  `modificado` datetime DEFAULT NULL,
+  `tabla` varchar(40) NOT NULL,
+  `tupla_antes` varchar(1000) DEFAULT NULL,
+  `tupla_despues` varchar(1000) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+
+
 DROP TRIGGER IF EXISTS `biusernew`;
+
 
 
 
