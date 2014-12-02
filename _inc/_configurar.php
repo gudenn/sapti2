@@ -70,15 +70,22 @@ else
   define('SMARTY_CACHEDIR'  , DIR_SMARTY_INC   . 'cache/');
   
   ////////////////////////////////////////////////////////
+  //CONFIGURACION DE TEMAS DE AYUDAS
+  ////////////////////////////////////////////////////////
+  
+  define('HELP_INSTALED_DIR'  , basename(PATH));
+  
+  
+  ////////////////////////////////////////////////////////
   //BD->MySQL
   ////////////////////////////////////////////////////////
   if (ENDESARROLLO)
   {
     //error_reporting(E_ERROR | E_WARNING | E_PARSE);
-    //error_reporting(E_ERROR | E_PARSE);  
-    //error_reporting(E_ALL);
-    ini_set('display_errors','Off');
-    error_reporting(0);
+    error_reporting(E_ERROR | E_PARSE);  
+    error_reporting(E_ALL);
+    //ini_set('display_errors','Off');
+    //error_reporting(0);
 
     define ("DBHOST"        , "localhost");
     define ("BDNAME"        , "sapti");

@@ -30,3 +30,7 @@ WHERE titulo LIKE '%titulo%';
 UPDATE tooltip SET titulo = 
 REPLACe(titulo,'Titulo','T&iacute;tulo')
 WHERE titulo LIKE '%titulo%';
+
+-- Configuracion De Ayudas
+SET @directorio = '/sapti_test/';
+UPDATE helpdesk SET directorio = REPLACE(directorio,'/sapti/',@directorio) WHERE 1;

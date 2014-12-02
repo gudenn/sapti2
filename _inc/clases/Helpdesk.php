@@ -76,7 +76,7 @@ class Helpdesk extends Objectbase
     if ('' == $id && $autogenerar)
     {
       $script       = $_SERVER['SCRIPT_NAME'];
-      $this->codigo = sha1($script);
+      $script       = str_replace(HELP_INSTALED_DIR . '/', 'sapti/', $script);
       if (defined('MODULO'))
         $this->codigo = sha1(MODULO.$script);
       $this->getByCodigo($this->codigo);
