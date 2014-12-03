@@ -82,10 +82,10 @@ else
   if (ENDESARROLLO)
   {
     //error_reporting(E_ERROR | E_WARNING | E_PARSE);
-    error_reporting(E_ERROR | E_PARSE);  
+    //error_reporting(E_ERROR | E_PARSE);  
     //error_reporting(E_ALL);
-    ini_set('display_errors','On');
-    //error_reporting(0);
+    ini_set('display_errors','Off');
+    error_reporting(0);
 
     define ("DBHOST"        , "172.16.1.1");
     define ("BDNAME"        , "sapti");
