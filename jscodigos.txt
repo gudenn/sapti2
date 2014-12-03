@@ -1,2 +1,0 @@
-http://www.itechies.net/tutorials/jscript/jsexample.php-pid-check-invert.htm
-http://www.webdeveloperjuice.com/2010/03/15/check-all-uncheck-all-and-invert-checkboxes-using-jquery/

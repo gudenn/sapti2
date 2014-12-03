@@ -73,12 +73,25 @@ class Helpdesk extends Objectbase
    */
   public function __construct($id = '' ,$modulo_base = '' , $autogenerar = false) 
   {
+    $dir_sep = '/';
     if ('' == $id && $autogenerar)
     {
-      $script       = $_SERVER['SCRIPT_NAME'];
-      $script       = str_replace(HELP_INSTALED_DIR . '/', 'sapti/', $script);
-      if (defined('MODULO'))
-        $this->codigo = sha1(MODULO.$script);
+      /**
+       * No tomaremos encuenta la carpeta instalada asi sera mas portatil  y mucho
+       * mas compatible, haremos un desarrollo especial para servidores
+       */
+      if (ENDESARROLLO) { // en local
+        $dir        = explode($dir_sep, ltrim($_SERVER['SCRIPT_NAME'] , $dir_sep));
+        array_shift($dir);
+        $script     = $dir_sep.ltrim(implode($dir_sep, $dir), $dir_sep);
+     
+      }
+      else { //para servidores
+        $script     = $dir_sep . ltrim($_SERVER['SCRIPT_NAME'] , $dir_sep);
+      }
+      // ya no usaremos el codigo  del modulo
+      $this->codigo = sha1($script);
+
       $this->getByCodigo($this->codigo);
       if (!$this->id)
       {
@@ -96,6 +109,57 @@ class Helpdesk extends Objectbase
     }
     else
       parent::__construct($id);
+  }
+
+  public function rectificarnombredearchivo() {
+      $ayudas  = new Helpdesk();
+      $recurso = $ayudas->getAll();
+      echo "<table><tr><th>id</th><th>dir</th><th>Codigo Actual</th><th>Codigo nuevo</th><th>Son iguales</th><th>Existe el archivo Original</th><th>Existe el archivo nuevo</th><th>Archivo copiado</th><th>Obj save</th><th>Estado</th></tr>";
+      while ($row = mysql_fetch_assoc($recurso[0])) {
+        $existe = 'Si';
+        $template = TEMPLATES_DIR."helpdesk/archivo/{$row['codigo']}.tpl";
+        if (!file_exists($template) || !($row['codigo']) )
+          $existe = 'No';
+        $codnuevo = sha1($row['directorio']);
+        $iguales = $codnuevo == $row['codigo'] ? 'Si' : 'No';
+        $rectificacion = new Helpdesk($row);
+        /*
+        if ($row['id'] == '238'){
+            var_dump($rectificacion);
+            $rectificacion->titulo = $rectificacion->titulo . ' modificado';
+            $rectificacion->save();
+        }
+        */
+        $renombrado  = 'No';
+        $existenuevo = 'No';
+        $guardado    = 'No';
+        if ($iguales == 'No' && $existe == 'Si'){
+            echo 'renombrando!!! ' . TEMPLATES_DIR."helpdesk/archivo/{$row['codigo']}.tpl";
+            //rename
+            $renombrado = copy(TEMPLATES_DIR."helpdesk/archivo/{$row['codigo']}.tpl", TEMPLATES_DIR."helpdesk/archivonuevo/{$codnuevo}.tpl");
+            if (!$renombrado){
+                echo "no se pudo copiar!!!" ;
+            }
+            $renombrado = $renombrado?'Si':'No';
+            //guardar
+            if ($renombrado == 'Si') {
+                $rectificacion->codigo = $codnuevo;
+                if($rectificacion->save()) {$guardado    = 'Si';}
+            }
+        }
+        if (file_exists(TEMPLATES_DIR."helpdesk/archivonuevo/{$codnuevo}.tpl"))
+          $existenuevo = 'Si';
+        /*
+        if ($row['directorio'][0] != '/'){
+            echo "porsible error por acaa!!";
+        }
+         * 
+         */
+
+        echo "<tr><td>$row[id]</td><td>$row[directorio]</td><td>$row[codigo]</td><td>$codnuevo</td><td>$iguales</td><td>$existe</td><td>$existenuevo</td><td>$renombrado</td><td>$guardado</td><td>$row[estado]</td></tr>";
+        break;
+      }
+      echo "</table>";
   }
 
   /**

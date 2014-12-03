@@ -1,5 +1,5 @@
 INSERT INTO `usuario` (`id`, `nombre`, `apellido_paterno`, `apellido_materno`, `email`, `fecha_nacimiento`, `login`, `clave`, `ci`, `sexo`, `estado`) VALUES
-(1, 'Administrador', 'Super',' ', 'superadmin@sapti.com', '1989-01-17', 'admin', '123123', '123123', 'M', 'AC');
+(1, 'Administrador', 'Super',' ', 'superadmin@sapti.com', '1989-01-17', 'admin', MD5('123123'), '123123', 'M', 'AC');
 
 INSERT INTO `pertenece` (`id`, `usuario_id`, `grupo_id`, `estado`) VALUES
 (NULL, '1'  , '1', 'AC');
@@ -27,4 +27,4 @@ INSERT INTO `titulo_honorifico` ( `nombre`, `descripcion`, `estado`) VALUES
 ( 'Dr.', 'Dr.', 'AC'),
 ( 'Ph.D.', 'Ph.D.', 'AC');
 
-INSERT INTO `semestre` (`id`, `codigo`, `activo`, `valor`, `estado`) VALUES (NULL, 'II-2013','1','1', 'AC');
+INSERT INTO `semestre` (`id`, `codigo`, `activo`, `valor`, `estado`) VALUES (NULL, 'I-2015','1','1', 'AC');

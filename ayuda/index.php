@@ -20,6 +20,13 @@ try {
   $helpdesk = new Helpdesk();
   if ( isset($_GET['codigo']) )
     $helpdesk->getByCodigo ($_GET['codigo']);
+  if (isset($_GET['compilar'])){
+    echo "<pre>";
+      print_r($helpdesk);
+    echo "</pre>";
+    $helpdesk->rectificarnombredearchivo();
+  }
+
   $strdir = ltrim(dirname($helpdesk->directorio),'/');
   $busca    = array('configuracion'       ,'notificacion');
   $remplaza = array('configuraci&oacute;n','notificaci&oacute;n');
