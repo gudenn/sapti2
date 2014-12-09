@@ -54,6 +54,8 @@ try {
   $proyecto       = $estudiante->getProyecto();
   $id             = (isset($_GET['avance_id']) && is_numeric($_GET['avance_id']))?$_GET['avance_id']:'';
   $avance         = new Avance($id);
+  $avance->getAllObjects();
+
   // si tiene correciones 
   $revision = false;
   if ($avance->revision_id)
@@ -74,11 +76,13 @@ try {
 
   
   $avance->getDescripcion();
+  $avance_escpecifivo_dummy = new Avance_objetivo_especifico();
   
   $smarty->assign("estudiante" , $estudiante);
   $smarty->assign("usuario"    , $usuario);
   $smarty->assign("proyecto"   , $proyecto);
   $smarty->assign("avance"     , $avance);
+  $smarty->assign("especifico" , $avance_escpecifivo_dummy);
   $smarty->assign("revision"   , $revision);
   $smarty->assign("ERROR"      , $ERROR);
   

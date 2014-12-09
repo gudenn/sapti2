@@ -119,6 +119,20 @@ $('#theme-switcher').change(function () {
         <p>
           {$avance->getDescripcion()}
         </p>
+        <h3><b>Porcentaje de Avance</b></h3>
+        <p>
+          {$avance->porcentaje} %
+        </p>
+        {if (count($avance->avance_objetivo_especifico_objs))}
+            <h4><b>Avance en los Objetivos espec&iacute;ficos</b></h4>
+            {assign var='especificos' value=$avance->avance_objetivo_especifico_objs }
+            <ul>
+            {section name=oe loop=$especificos}
+                <li>{$especificos[oe]->getDescripcion()} <b>{$especificos[oe]->porcentaje_avance} %</b></li>
+            {/section}
+            </ul>
+
+        {/if}
         {if $obsertabla=='si'}
         <h3><b>Observaciones Corregidas</b></h3>
         <form action="#" method="post" id="aprobado" name="aprobado" >

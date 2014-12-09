@@ -81,6 +81,7 @@ try {
     $smarty->assign("menuList", $menuList);
   $rev1=new Revision();
   $avance         = new Avance($id);
+  $avance->getAllObjects();
   $avance->asignarDirectorio();
   $avance->cambiarEstadoVisto();
 

@@ -62,6 +62,12 @@ class Avance extends Objectbase
   * @var Revision|null 
   */
   var $revision_objs;  
+
+ /**
+  * (Objeto simple) Si esta ligado con algun objetivo especifico
+  * @var Avance_objetivo_especifico|null 
+  */
+  var $avance_objetivo_especifico_objs;  
   
   
   function asignarDirectorio() 

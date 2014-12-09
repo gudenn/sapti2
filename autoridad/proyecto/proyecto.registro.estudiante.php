@@ -379,6 +379,8 @@ catch(Exception $e)
     echo $e;
   }
 }
+//asignamos el numero 
+$smarty->assign('numero'  , $numero);
 
 $token                = sha1(URL . time());
 $_SESSION['register'] = $token;

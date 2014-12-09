@@ -25,7 +25,6 @@
                 </td>
                 <td>
                   {$numero}
-                  {$proyecto->numero_asignado}
                 </td>
               </tr>
               <tr>

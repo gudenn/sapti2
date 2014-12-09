@@ -7,6 +7,7 @@ define ("MODULO", "DOCENTE");
   $ideve1=$_GET['idev'];
   
 $avance   = new Avance($ideve1);
+$avance->getAllObjects();
 if($avance->revision_id==0){
       $resul = "
       SELECT pr.nombre as nombrep, av.fecha_avance as fecha
@@ -54,6 +55,21 @@ if (empty($action)&&$avance->revision_id==0) {
             <span>{$arrayobser[0]['fecha']}.</span>            
           </p>
           <div style='height: 200px; width: 650px; font-size: 12px; overflow: auto;'>
+          <p>
+            <label>Porcentaje de Avance:</label>
+            <span><i>".getRespuesta($avance->porcentaje)." %</i></span>
+              </p>
+            ";
+            
+            if (count($avance->avance_objetivo_especifico_objs)){
+              $output .="<p style='padding-left:20px;'><b>Avance en los Objetivos Espec&iacute;ficos</b></p>
+                <p><ul>";
+              foreach ($avance->avance_objetivo_especifico_objs as $especifico) {
+                $output .=" <li>{$especifico->getDescripcion()} {$especifico->porcentaje_avance} %</li>";
+                }
+                $output .="</ul></p>";
+              }
+            $output .="
             <table class='tbl_lista'>
             <thead>
               <tr>
@@ -90,10 +106,7 @@ if (empty($action)&&$avance->revision_id==0) {
             <label for='descripcion'>Descripci&oacute;n del Avance:</label>
             <span><i>".getRespuesta($avance->descripcion)."</i></span>
             </p>
-            <p>
-            <label>Porcentaje de Avance:</label>
-            <span><i>".getRespuesta($avance->porcentaje)." %</i></span>
-            </p>
+            
 	</form>
         </div>
         <button type='submit' class='contact-cancel contact-button simplemodal-close' tabindex='1006'>Cerrar</button>

@@ -88,6 +88,7 @@ try {
   $proyecto       = $estudiante->getProyecto();
   $rev1=new Revision();
   $avance         = new Avance($id);
+  $avance->getAllObjects();
   $avance->asignarDirectorio();
   $avance->cambiarEstadoVisto();
   function getRevisortipo($tipo,$rev){

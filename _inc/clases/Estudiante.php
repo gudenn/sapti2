@@ -419,6 +419,19 @@ and es.id='$this->id'";
     else
       $avance->descripcion = htmlspecialchars( (string)$avance->descripcion);
 
+    $proyecto->getAllObjects();
+    //verificamos si hay avance en los objetivos especificos
+    foreach ($proyecto->objetivo_especifico_objs as $especifico) {
+      if ( $especifico->id && isset($_POST['objetivo_avance_'.$especifico->id])){
+        $avance_especifico = new Avance_objetivo_especifico();
+        $avance_especifico->porcentaje_avance = isset($_POST['porcentaje_avance_'.$especifico->id])?$_POST['porcentaje_avance_'.$especifico->id]:0;
+        $avance_especifico->objetivo_especifico_id = $especifico->id;
+        $avance_especifico->estado_avance          = Avance_objetivo_especifico::E1_CREADO;
+        $avance_especifico->estado                 = Objectbase::STATUS_AC;
+        $avance->avance_objetivo_especifico_objs[] = $avance_especifico;
+      }
+    }
+
     $avance->proyecto_id  = $proyecto->id;
     $avance->fecha_avance = date('d/m/Y');
     $avance->estado       = Objectbase::STATUS_AC;
@@ -428,6 +441,8 @@ and es.id='$this->id'";
     }
     $avance->estado_avance = Avance::E1_CREADO;
     $avance->save();
+    $avance->saveAllSonObjects(TRUE);
+
     $this->notificarAvance($proyecto);
     return $avance;
   }

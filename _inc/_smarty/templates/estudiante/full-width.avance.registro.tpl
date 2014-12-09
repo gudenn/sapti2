@@ -171,7 +171,8 @@
           <input type="hidden" name="tarea" value="registrar_avance">
           <input type="hidden" name="token" value="{$token}">
             <div>
-                <h3><b>Registre el Avance del Proyecto {getHelpTip('Avance')}</b></h3>
+                <br>
+                <h3><b>Registre el porcentaje de avance de su Proyecto {getHelpTip('Avance')}</b></h3>
                 <input type="range" id="porcentaje" name="porcentaje" min="1" max="100" value="1" style="width: 400px;">
                 <output for="range" id="output">0</output> %
             </div>
@@ -187,7 +188,49 @@
                 })();
                 {/literal}
             </script>
-          <button type="submit" class="delete ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button" aria-disabled="false"><span class="ui-button-icon-primary ui-icon ui-icon-disk"></span><span class="ui-button-text">Grabar</span></button>
+
+        {if (count($proyecto->objetivo_especifico_objs))}
+            <div>
+                <br>
+                <br>
+                <h3><b>Registre el porcentaje avance de los objetivos espec&iacute;ficos de su proyecto {getHelpTip('Avance_especifico')}</b></h3>
+            </div>
+            {assign var='oesps' value=$proyecto->objetivo_especifico_objs}
+            {section name=ic loop=$oesps}
+              <div>
+                  <table>
+                      <tr>
+                          <td style="width: 75%">
+                            <input type="checkbox" name="objetivo_avance_{$oesps[ic]->id}" id="objetivo_avance_{$oesps[ic]->id}" value="1" /> 
+                            <label for="objetivo_avance_{$oesps[ic]->id}">{$oesps[ic]->descripcion}</label>
+                          </td>
+                          <td style="width: 25%" class="center">
+                            <input type="range" id="porcentaje_avance_{$oesps[ic]->id}" name="porcentaje_avance_{$oesps[ic]->id}" min="1" max="100" value="1" style="width: 150px;">
+                            <output for="range" id="output_avance_{$oesps[ic]->id}">0</output> %
+                          </td>
+                      </tr>
+                  </table>
+              </div>
+              <script>
+                  {literal}
+                  (function () {
+                      var registro = document.getElementById("registro");
+                      if ("oninput" in registro) {
+                          registro.addEventListener("input", function () {
+                  {/literal}
+                              output_avance_{$oesps[ic]->id}.value = porcentaje_avance_{$oesps[ic]->id}.value;
+                  {literal}
+                          }, false);
+                      }
+                  })();
+                  {/literal}
+              </script>
+            {/section}
+        {/if}
+
+            <div class="center">
+              <button type="submit" class="delete ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button" aria-disabled="false"><span class="ui-button-icon-primary ui-icon ui-icon-disk"></span><span class="ui-button-text">Grabar</span></button>
+            </div>
         </form>
         <hr>
     {$ERROR}

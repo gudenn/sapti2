@@ -374,7 +374,7 @@ class Objectbase
     foreach($this as $key => $value)
     {
       /** if the $key refer to an object continue */
-      if (!$this->isKeyObject($key))
+      if (!$this->isKeyObject($key) || $key == 'historial_objs' )
         continue;
 
       $table     = $this->getTableName($this->getClassNameOfKey($key));
@@ -393,28 +393,23 @@ class Objectbase
   /**
   * Delete all the objects in the key_to_delete
   *
-  * @param array $keys_to_delete the key of the objecs to save
+  * @param array $array_keys_to_delete the key of the objecs to delete
   *
   */
-  public function deleteThisSonObjects($keys_to_delete)
-  {
-    foreach($this as $key => $value)
-    {
-      if ($key != $key_to_delete)
-        continue;
+  public function deleteThisSonObjects($array_keys_to_delete) {
+    foreach ($this as $key => $value) {
+      if (!in_array($key, $array_keys_to_delete)) {continue;}
       /** if the $key refer to an object continue */
-      if (!$this->isKeyObject($key))
-        continue;
-      foreach($this->$key as $obj)
-      {
-        if (is_object($obj))
-          $obj->save();
+      if (!$this->isKeyObject($key)){continue;}
+      foreach ($this->$key as $obj) {
+        if (is_object($obj)) {$obj->delete();}
+        break;
       }
     }
     return true;
   }
 
- /**
+  /**
   * Public Funcion:  getAll
   *
   * usa los atributos del acual objeto para buscar
@@ -1046,6 +1041,8 @@ class Objectbase
       $dateArray = explode($h_sep,$date);
     if ( $s_format == 'YYYY/MM/DD')
       $date = $dateArray[2].$s_sep.$dateArray[1].$s_sep.$dateArray[0];
+    if ( $s_format == 'MM/DD/YYYY')
+      $date = $dateArray[1].$s_sep.$dateArray[0].$s_sep.$dateArray[2];
     return $date;
   }
 

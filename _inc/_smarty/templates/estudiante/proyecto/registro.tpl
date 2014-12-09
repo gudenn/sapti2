@@ -24,7 +24,7 @@
                   <input type="text" name="nombre" value="{$usuario->nombre}"  readonly="readonly" >
                 </td>
                 <td>
-                {$numero}
+                  {$numero}
                 </td>
               </tr>
               <tr>

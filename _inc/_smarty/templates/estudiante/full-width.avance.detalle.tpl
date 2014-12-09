@@ -133,6 +133,16 @@ $('#theme-switcher').change(function () {
         {/section}
         {/if}
         <h3><b>Avance del Proyecto</b> {$avance->porcentaje} %</h3>
+        {if (count($avance->avance_objetivo_especifico_objs))}
+            <h4><b>Avance en los Objetivos espec&iacute;ficos</b></h4>
+            {assign var='especificos' value=$avance->avance_objetivo_especifico_objs }
+            <ul>
+            {section name=oe loop=$especificos}
+                <li>{$especifico->getDescripcion($especificos[oe]->objetivo_especifico_id)} <span class="Bold">{$especificos[oe]->porcentaje_avance} %</span></li>
+            {/section}
+            </ul>
+
+        {/if}
         <h3><b>Descripci&oacute;n del Avance</b></h3>
         <p>
           {$avance->getDescripcion()}

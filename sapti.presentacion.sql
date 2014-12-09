@@ -114,6 +114,21 @@ CREATE TABLE IF NOT EXISTS `avance` (
 
 -- --------------------------------------------------------
 
+
+-- -----------------------------------------------------
+-- Table `avance_objetivo_especifico`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `avance_objetivo_especifico` ;
+
+CREATE TABLE IF NOT EXISTS `avance_objetivo_especifico` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `avance_id` INT NOT NULL,
+  `objetivo_especifico_id` INT NOT NULL,
+  `porcentaje_avance` INT NULL,
+  `estado_avance` VARCHAR(2) NULL,
+  `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
 --
 -- Estructura de tabla para la tabla `cambio`
 --
@@ -2117,6 +2132,19 @@ CREATE TABLE IF NOT EXISTS `tribunal` (
 
 -- --------------------------------------------------------
 
+-- -----------------------------------------------------
+-- Table `nota_tribunal`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `nota_tribunal` ;
+
+CREATE TABLE IF NOT EXISTS `nota_tribunal` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `tribunal_id` INT NULL,
+  `proyecto_id` INT NULL,
+  `estado` VARCHAR(2) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
 --
 -- Estructura de tabla para la tabla `tutor`
 --
@@ -2385,6 +2413,7 @@ CREATE TABLE IF NOT EXISTS `fecha_registro` (
 
 INSERT INTO `fecha_registro` (`id`, `semestre_id`, `fecha_inicio`, `fecha_fin`, `descripcion`, `estado`) VALUES
 (7, 1, '2014-06-02', '2014-06-24', 'Fecha de registro de Perfil', 'AC');
+
 
 
 -- Actualizamos las claves en MD5

@@ -206,6 +206,21 @@ CREATE  TABLE IF NOT EXISTS `tribunal` (
 ENGINE = InnoDB;
 
 
+
+
+-- -----------------------------------------------------
+-- Table `nota_tribunal`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `nota_tribunal` ;
+
+CREATE TABLE IF NOT EXISTS `nota_tribunal` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `tribunal_id` INT NULL,
+  `proyecto_id` INT NULL,
+  `estado` VARCHAR(2) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
 -- -----------------------------------------------------
 -- Table `proyecto_estudiante`
 -- -----------------------------------------------------
@@ -463,6 +478,22 @@ CREATE  TABLE IF NOT EXISTS `avance` (
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
+
+
+-- -----------------------------------------------------
+-- Table `avance_objetivo_especifico`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `avance_objetivo_especifico` ;
+
+CREATE TABLE IF NOT EXISTS `avance_objetivo_especifico` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `avance_id` INT NOT NULL,
+  `objetivo_especifico_id` INT NOT NULL,
+  `porcentaje_avance` INT NULL,
+  `estado_avance` VARCHAR(2) NULL,
+  `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `revision`

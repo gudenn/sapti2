@@ -63,12 +63,12 @@ try {
   $estudiante     = getSessionEstudiante();
   $usuario        = $estudiante->getUsuario();
   $proyecto       = $estudiante->getProyecto();
+  $proyecto->getAllObjects();
   $id             = (isset($_GET['avance_id']) && is_numeric($_GET['avance_id']))?$_GET['avance_id']:'';
   $avance         = new Avance($id);
   $avance->asignarDirectorio();
 
-  if ( isset($_POST['tarea']) && $_POST['tarea'] == 'registrar_avance' && isset($_SESSION['registrar_avance']) && isset($_POST['token']) && $_SESSION['registrar_avance'] == $_POST['token']  )
-  {
+  if ( isset($_POST['tarea']) && $_POST['tarea'] == 'registrar_avance' && isset($_SESSION['registrar_avance']) && isset($_POST['token']) && $_SESSION['registrar_avance'] == $_POST['token'] ){
     $EXITO = false;
     if ($proyecto->id)
       $avance = $estudiante->grabarAvance();

@@ -227,13 +227,21 @@ try {
   {
     $EXITO = false;
     mysql_query("BEGIN");
+    // para no re escribir los Objetivos 
+    // eliminaremos toos los objetivos previa mente grabados
+    if ($proyecto->id){
+      $proyecto->deleteAllSonObjects();
+    }
+
     
     // SOLO PARA CAMBIOS DE TEMA
     //$proyecto = new Proyecto();
     $proyecto->objBuidFromPost('proyecto_');
     $proyecto->estado         = Objectbase::STATUS_AC;
+  
     $proyecto->fecha_registro = date('d/m/Y');
     $smarty->assign('proyecto'  , $proyecto);
+
 
     //proyecto_institucion_nueva
     if ( isset($_POST['proyecto_institucion_nueva']) && trim($_POST['proyecto_institucion_nueva'])!= '' )
@@ -243,14 +251,13 @@ try {
       $proyecto->institucion_id = $nuevainstitucion->id;
     }
     
-    
     //Objetivos especificos
     $contador = 0;
     foreach ($_POST['objetivo_especifico'] as $post_especifico) {
       $contador ++;
       if ( trim($post_especifico) == '' )
         continue;
-      $especifico = new Objetivo_especifico($contador);
+      $especifico = new Objetivo_especifico();
       $especifico->descripcion = $post_especifico;
       $especifico->estado      = Objectbase::STATUS_AC;
       $especifico->validar();
@@ -277,8 +284,6 @@ try {
         $subarea_id = $subarea->id;
       }
       $proyecto->asignarAreaSubArea($area_id,$subarea_id);
-    
-     
       $contador ++;
 
       
@@ -288,9 +293,16 @@ try {
       $modalidad    = new Modalidad($proyecto->modalidad_id);
       $smarty->assign('tipo_moda',($modalidad->datos_adicionales)?'':'tipo_moda');
     }
+    
     $proyecto->validar();
     $proyecto->tipo_proyecto = TIPO;
     $proyecto->estado_proyecto= Proyecto::EST5_P;
+    if (!$proyecto->numero_asignado){
+      $proyecto->numero_asignado=$numero;
+    }
+    else{
+      $numero = $proyecto->numero_asignado;
+    }
     $proyecto->save();
     $proyecto->saveAllSonObjects(TRUE);
     $estudiante->marcarComoProyectoActual($proyecto->id);
@@ -339,6 +351,8 @@ catch(Exception $e)
   mysql_query("ROLLBACK");
   $smarty->assign("ERROR", handleError($e));
 }
+//asignamos el numero 
+$smarty->assign('numero'  , $numero);
 
 $token                = sha1(URL . time());
 $_SESSION['register'] = $token;
