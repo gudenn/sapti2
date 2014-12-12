@@ -42,11 +42,53 @@
               <label for="login"><small>Nombre de usuario (*){getHelpTip('login')}</small></label>
             </p>
             {/if}
+            <div class="password-container">
             <p>
-              <input type="password" name="clave" id="clave" value="" data-validation-engine="validate[required]"  size="22">
+              <input class="strong-password" type="password" name="clave" id="clave" value="" data-validation-engine="validate[required]"  size="22">
               <label for="clave"><small>Clave de Ingreso (*){getHelpTip('clave')}</small></label>
             </p>
             <p>
-              <input type="password" name="clave2" id="clave2" value="" data-validation-engine="validate[equals[clave]]"   size="22">
+              <input class="strong-password" type="password" name="clave2" id="clave2" value="" data-validation-engine="validate[equals[clave]]"   size="22">
               <label for="clave2"><small>Verifique Clave (*){getHelpTip('clave2')}</small></label>
+           
+                <div class="meter">
+                </div>
+              
             </p>
+            </div>
+    <link href="{$URL_CSS}stylesegu.css" rel="stylesheet" type="text/css" />
+    <script src="{$URL_JS}pschecker.js" type="text/javascript"></script>
+            
+    <script type="text/javascript">
+        $(document).ready(function () {
+           
+            //Demo code
+            $('.password-container').pschecker({ onPasswordValidate: validatePassword, onPasswordMatch: matchPassword });
+
+            var submitbutton = $('.submit-button');
+            var errorBox = $('.error');
+            errorBox.css('visibility', 'hidden');
+            submitbutton.attr("disabled", "disabled");
+
+            //this function will handle onPasswordValidate callback, which mererly checks the password against minimum length
+            function validatePassword(isValid) {
+                if (!isValid)
+                    errorBox.css('visibility', 'visible');
+                else
+                    errorBox.css('visibility', 'hidden');
+            }
+            //this function will be called when both passwords match
+            function matchPassword(isMatched) {
+                if (isMatched) {
+                    submitbutton.addClass('unlocked').removeClass('locked');
+                    submitbutton.removeAttr("disabled", "disabled");
+                }
+                else {
+                    submitbutton.attr("disabled", "disabled");
+                    submitbutton.addClass('locked').removeClass('unlocked');
+                }
+            }
+        });
+    </script>
+    
+    
