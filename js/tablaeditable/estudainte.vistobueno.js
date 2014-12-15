@@ -69,9 +69,11 @@ EditableGrid.prototype.initializeGrid = function(dicta)
                 setCellRenderer("action", new CellRenderer({render: function(cell, value) {
 		cell.innerHTML = "<a onclick=document.location.href='../revision/revision.lista.php?iddicta="+ dicta +"&estudiente_id=" + getRowId(cell.rowIndex) + "' style=\"cursor:pointer\">" +
 		"<img src=\"" + image("seguimiento.png") + "\" border=\"0\" alt=\"seguimiento\" title=\"Seguimiento de Proyecto\" width='30px' height='30px' />Seguimiento</a>";
-                 cell.innerHTML += "<br><a onclick=document.location.href='vistobueno.php?id_estudiante="+getRowId(cell.rowIndex)+"&iddicta="+ dicta +"' style=\"cursor:pointer\">" +
-		 "<img src=\"" + image("basicset/ok.png") + "\" border=\"0\" alt=\"evaluar\" title=\"Evaluar Proyecto\" width='30px' height='30px' />Visto Bueno</a>";
-
+             //    alert();
+              // if( pendiente(getRowId(cell.rowIndex),dicta)==1)
+                {
+                  cell.innerHTML += "<br> <div  id='clave"+getRowId(cell.rowIndex)+"'>"+pendiente(getRowId(cell.rowIndex),dicta)+"</div>";
+                }
                   }}));
 		
 		// render the grid (parameters will be ignored if we have attached to an existing HTML table)
@@ -184,6 +186,32 @@ function sessionCorreccion(seccion) {
 		error: function() { alert("Ajax failure\n"); },
 		async: true
 	});
+};
+
+function pendiente(estid, dicta) {
+    var retorno=0;
+	$.ajax({ 
+		url: '../pendiente.php',
+		type: 'POST',
+		dataType: "html",
+		data: { 
+			estudiante_id : estid,
+                        iddicta       : dicta
+		},
+		success: function (response) 
+		{ 
+                   // alert(response);
+               if(response==1)
+             {
+                  $('#clave'+estid).html("<a   onclick=document.location.href='vistobueno.php?id_estudiante="+estid+"&iddicta="+ dicta +"' style=\"cursor:pointer\">" +"<img src=\"" + image("basicset/ok.png") + "\" border=\"0\" alt=\"evaluar\" title=\"Visto Bueno\" width='30px' height='30px' />Dar Visto Bueno</a>");    
+             }else
+             {
+                  $('#clave'+estid).html("<a    style=\"cursor:pointer\">" +"<img src=\"" + image("basicset/menos.png") + "\" border=\"0\" alt=\"evaluar\" title=\"Visto Bueno\" width='30px' height='30px' />Falta Visto Bueno del Tutor(s)</a>");  
+             }
+		}
+	});
+       // alert(retorno);
+        return retorno;
 };
 function sessionEvaluacion(seccion) {
 	$.ajax({ 
