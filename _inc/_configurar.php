@@ -23,6 +23,7 @@ else
   // error_reporting(E_ERROR | E_WARNING | E_PARSE);
   ////////////////////////////////////////////////////////
 
+  define('DEBUGMODE', false);
 
   ////////////////////////////////////////////////////////
   // Directorios
@@ -75,6 +76,17 @@ else
   
   define('HELP_INSTALED_DIR'  , basename(PATH));
   
+  ////////////////////////////////////////////////////////
+  //EMAIL PRINCIPAL PARA EL SISTEMA
+  ////////////////////////////////////////////////////////
+
+
+  //El Email con el cual el sistema enviara emails
+  define('EMAIL_SISTEMA_EMAIL'               , 'sapti@umss.edu.bo');
+  define('EMAIL_SISTEMA_NOMBRE'              , 'Sistema SAPTI');
+  //Mostramos el email en pantalla por motivos solo de testing
+  define('IMPRIMIR_EMAIL_EN_PANTALLA'  , TRUE); 
+  
   
   ////////////////////////////////////////////////////////
   //BD->MySQL
@@ -82,12 +94,16 @@ else
   if (ENDESARROLLO)
   {
     //error_reporting(E_ERROR | E_WARNING | E_PARSE);
-    //error_reporting(E_ERROR | E_PARSE);  
-    //error_reporting(E_ALL);
-    ini_set('display_errors','Off');
-    error_reporting(0);
+    if (DEBUGMODE){
+      error_reporting(E_ALL);
+      //error_reporting(E_ERROR | E_PARSE);  
+      ini_set('display_errors','On');
+    }else {
+      error_reporting(0);  
+      ini_set('display_errors','Off');
+    }
 
-    define ("DBHOST"        , "172.16.1.1");
+    define ("DBHOST"        , "localhost");
     define ("BDNAME"        , "sapti");
     define ("DBUSER"        , "sapti");
     define ("BDPASS"        , "sapti");

@@ -168,8 +168,9 @@ class Tutor extends Objectbase
    * @param Proyecto $proyecto
    * @param Proyecto_tutor $asignado
    */
-  function notificarAsignacionTutor($estudiante,$proyecto,$asignado) 
+  function notificarAsignacionTutor($estudiante,$proyecto,$asignado,$enviar_email = true) 
   {
+    global $tutor,$notificacion;
     leerClase('Notificacion');
     leerClase('Notificacion_tutor');
     $notificacion              = new Notificacion();
@@ -185,7 +186,11 @@ class Tutor extends Objectbase
     //$estudiantes[] = $estudiante->id;
     $usuarios      = array('tutores'=>$tutores/*,'estudiantes'=>$estudiantes*/);
     $notificacion->enviarNotificaion($usuarios,$asignado);
-    
+
+    $tutor = $this;
+    //enviamos un email al tutor
+    if ($enviar_email){include_once DIR_MAILTPL.'mail_asignar_tutor.php';}
+
   }
   
   /**
