@@ -59,8 +59,8 @@ try {
     /**
    * Menu superior
    */
-  $menuList[]     = array('url'=>URL.  Administrador::URL,'name'=>'ADMINISTRACI&Oacute;N');
-  $menuList[]     = array('url'=>URL . Administrador::URL.'respaldo' ,'name'=>'BACKUP');
+  $menuList[]     = array('url'=>URL.  Administrador::URL,'name'=>'Administraci&oacute;n >');
+  $menuList[]     = array('url'=>URL . Administrador::URL.'respaldo' ,'name'=>'Respaldo');
   $smarty->assign("menuList", $menuList);
  
    $editores = ",
