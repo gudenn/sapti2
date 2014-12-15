@@ -243,6 +243,12 @@ class Proyecto extends Objectbase {
   var $carta_objs;
 
   /**
+   * (Objeto simple) Todos los avances que el estudiante hizo en este proyecto
+   * @var Avance|null 
+   */
+  var $avance_objs;
+
+  /**
    * Sobreescribimos la funcion de grabar, para despues crear las 
    * cartas correspondientes cartas
    * @param string $table puede recivir el valor de la tabla
