@@ -54,7 +54,7 @@ try {
  //  no hay error
   
   $smarty->assign("ERROR", '');
-  $menuList[]     = array('url'=>URL.Consejo::URL,'name'=>'Consejo');
+  $menuList[]     = array('url'=>URL.Consejo::URL,'name'=>'Consejo >');
    $menuList[]     = array('url'=>URL . Consejo::URL.'lista.estudiante.php' ,'name'=>'Asignación');
  // $menuList[]     = array('url'=>URL . Consejo::URL.'registro.php' ,'name'=>'Asignaci&oacute;n');
   $smarty->assign("menuList", $menuList);

@@ -40,99 +40,43 @@ if (!isDocenteSession())
   leerClase("Usuario");
   leerClase("Docente");
   
-  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
-  $menuList[] = array('url' => URL . Docente::URL.'configuracion/' . basename(__FILE__), 'name' => 'Tiempo');
+  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Asignaturas >');
+  $menuList[] = array('url' => URL . Docente::URL.'configuracion/' . basename(__FILE__), 'name' => '&Aacute;reas');
   $smarty->assign("menuList", $menuList);
-
-    
-     
-   if ( isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' )
-  {
-    $docentes     = getSessionUser();
-    $docente_idss =  $docentes->id;
- 
-    $sqla="select a.id, ap.`id` as idapoyo
-from usuario u, docente d ,area a , apoyo ap
-where u.id=d.`usuario_id` and d.`id`=ap.`docente_id` and ap.`area_id`=a.id and u.`estado`='AC' and d.`estado`='AC' and u.`id`=".$docente_idss.";";
-    $resultad   =  mysql_query($sqla);
-   
- 
- while ($filass = mysql_fetch_array($resultad)) 
- {
-    $apoyo= new Apoyo($filass['idapoyo']);
-    $apoyo->delete();
- }
-  
-     
-    $sql="select d.id from usuario u, docente d
-    where u.id=d.`usuario_id` and u.`estado`='AC' and d.`estado`='AC' and u.`id`=".$docente_idss.";";
-    $resultado   =  mysql_query($sql);
-    $iddocente   =  0;
- 
- while ($fila = mysql_fetch_array($resultado)) 
- {
-    $iddocente=$fila['id'];
- }
-  
-   
-     if (isset($_POST['myselect']))
-     foreach ($_POST['myselect'] as $id)
+$idapoyo='';
+     if(isset($_GET['action']) && $_GET['action']='eliminar' && isset($_GET['idapoyo']) && is_numeric($_GET['idapoyo']))
      {
-   // echo $id;
-          $apoyo = new Apoyo();
-                $apoyo->objBuidFromPost();
-                $apoyo->estado = Objectbase::STATUS_AC;
-                $apoyo->area_id=$id;
-                $apoyo->docente_id = getSessionDocente()->id;
-                $apoyo->save();
-          
+         $apo= new Apoyo($_GET['idapoyo']);
+         $apo->delete();
      }
+  if(isset($_GET['id_apoyo']) & is_numeric($_GET['id_apoyo']))
+    {
+        $idapoyo=$_GET['id_apoyo'];
+    }
+    $apoyo = new Apoyo($idapoyo);
      
-      if (isset($_POST['horario']))
-     foreach ($_POST['horario'] as $ids)
-     {
-        echo $_POST['dia'];
-        echo $ids[0];
-        
-   
-           
-     }
- 
- }
-    
-    
-  $area = new Area();
-  $area_sql = $area->getAll();
-  $area_id = array();
 
   $docente = getSessionDocente();
-
-  if (isset($_POST['tarea']) && $_POST['tarea'] == 'grabar') {
-    $apoyo = new Apoyo();
-    // borramos 
-    $apoyo->borrarMisApoyos($docente->id);
-    // guardamos
-    if (isset($_POST['myselect']))
-    {
-      foreach ($_POST['myselect'] as $id) {
-        // echo $id;
-        $apoyo             = new Apoyo();
-        $apoyo->area_id    = $id;
-        $apoyo->docente_id = $docente->id;
-        $apoyo->estado  = Objectbase::STATUS_AC;
-        $apoyo->save();
-      }
-    }
+    $docentes     = getSessionUser();
+    $docente_idss =  $docentes->id;
+  if (isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token']) {
+    
+ echo 'fsd';
+    
+    $apoyo->objBuidFromPost();
+    $apoyo->estado=  Objectbase::STATUS_AC;
+    $apoyo->docente_id=$docente_idss;
+    $apoyo->save();
   }
-  // actualizamos el docente
-  $docente->getAllObjects();
-
+ 
   $area     = new Area();
   $area_sql = $area->getAll();
   
   //llenamos el select inicial
   $area_id     = array();
   $area_nombre = array();
+   $area_id []    ='';
+  $area_nombre[] = '----Seleccione el &Aacute;rea -----';
   while ($area_sql && $rows = mysql_fetch_array($area_sql[0])) {
     $area_id[] = $rows['id'];
     $area_nombre[] = $rows['nombre'];
@@ -142,14 +86,27 @@ where u.id=d.`usuario_id` and d.`id`=ap.`docente_id` and ap.`area_id`=a.id and u
 
   
   
-  // samos los que tenemos guardados
-  $areaselec_id = array();
-  foreach ($docente->apoyo_objs as $apoyo) {
-    $areaselec_id[] = $apoyo->area_id;
-  }
-  $smarty->assign('areaselec_id', $areaselec_id);
-
-
+   $sqlr='SELECT a.*
+FROM apoyo a
+WHERE a.docente_id='.$docente_idss;
+ $resultado = mysql_query($sqlr);
+ $arraytribunal= array();
+$contado=1;
+ while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+   { 
+     $apoyo= new Apoyo($fila["id"]);
+        
+        $lista_areas=array();
+        $lista_areas[] =   $contado;
+        $lista_areas[] =  $apoyo->getArea()->nombre;
+        $lista_areas[] =  $apoyo->getSubArea()->nombre;
+        $lista_areas[] =  $apoyo->id;
+            
+  $arraytribunal[]= $lista_areas;
+  $contado++;
+ }
+ $smarty->assign('apoyo'  , $apoyo);
+  $smarty->assign('listadocentes'  , $arraytribunal);
 
   $columnacentro = 'docente/configuracion/configuracion.tpl';
   $smarty->assign('columnacentro', $columnacentro);

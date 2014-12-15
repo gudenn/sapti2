@@ -28,7 +28,7 @@ try {
    /**
    * Menu superior
    */
-   $menuList[]     = array('url'=>URL.Consejo::URL,'name'=>'Consejo');
+   $menuList[]     = array('url'=>URL.Consejo::URL,'name'=>'Consejo >');
    $menuList[]     = array('url'=>URL . Consejo::URL.'lista.estudiante.php' ,'name'=>'Asignación');
    $smarty->assign("menuList", $menuList);
  
