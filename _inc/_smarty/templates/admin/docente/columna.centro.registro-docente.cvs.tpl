@@ -5,7 +5,7 @@
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
             <p>
-              <textarea name="cvs" id="cvs" rows="4" cols="60" style="width: 431px;height: 305px;" data-validation-engine="validate[required]" placeholder="CODIGOSIS;Lic.; Nombre; Apellido Paterno; Apellido Materno"></textarea>
+              <textarea name="cvs" id="cvs" rows="4" cols="60" style="width: 481px;height: 305px;" data-validation-engine="validate[required]" placeholder="C&oacute;digo SIS; Lic.; Nombre; Apellido Paterno; Apellido Materno; Correo electr&oacute;nico"></textarea>
             </p>
             <p>
               <label for="cvs"><small>Ingrese Contenido CSV (*)</small></label>
