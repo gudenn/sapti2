@@ -41,50 +41,77 @@ try {
     $EXITO    = false;
     $aux      = str_replace(array("\r\n", "\r", "\n"), '#CODIGOX#', trim($_POST['cvs'])); 
     $docentes = explode('#CODIGOX#', $aux);
-    $cotador  = 0;
-    if (count($docentes)>=1)
+    // Contadores para el reporte
+    $indice_cotador  = 0;
+    $cotador_nuevos  = 0;
+    $cotador_update  = 0;
+    $cotador_error   = 0;
+    $cotador_ingres  = 0;
+    $cotador_total   = count($docentes);
+    $detalle_error   = '';
+    if ($cotador_total>=1){
       foreach ($docentes as $docente_array) {
-        $docente_array = explode(';', $docente_array);
-        if (count($docente_array)>=3 && is_numeric($docente_array[0]) )
-        {
+        $indice_cotador++;
+        $docente_array = explode(',', $docente_array);
+        if (count($docente_array)>=3 && is_numeric($docente_array[0]) ){
           mysql_query("BEGIN");
-          //si ya esta puesto el docente continuamos
+          //si ya esta puesto el docente actualizamos el email
           $neo_docente = new Docente('', trim ($docente_array[0]) );
-          if ($neo_docente->id)
-            continue;
-          $cotador++;
-          $usuario                    = new Usuario();
-          $usuario->titulo_honorifico = trim($docente_array[1]);
-          $usuario->apellido_paterno  = trim($docente_array[2]);
-          $usuario->apellido_materno  = trim($docente_array[3]);
-          $usuario->nombre            = trim($docente_array[4]);
-          $usuario->ci                = trim($docente_array[0]);
-          $usuario->login             = trim($docente_array[0]);
-          $usuario->clave             = trim($docente_array[0]);
-          $usuario->fecha_nacimiento  = date('j/m/Y');
-          $usuario->estado            = Objectbase::STATUS_AC;
-          $usuario->puede_ser_tutor   = 1;
-          $usuario->validar(1);
-          $usuario->save();
-          //asignamos grupo docente
-          $usuario->asignarGrupo(Grupo::GR_DO);
-          //creamos el docente
-          $docente_neo                        = new Docente();
-          $docente_neo->codigo_sis            = trim($docente_array[0]);
-          $docente_neo->estado                = Objectbase::STATUS_AC;
-          $docente_neo->usuario_id            = $usuario->id;
-          $docente_neo->configuracion_area    = 0;
-          $docente_neo->configuracion_horario = 0;
-          $docente_neo->save();
-
-          
-          
+          if ($neo_docente->id) { //Actualizamos
+            $usuario                    = new Usuario($neo_docente->usuario_id);
+            $usuario->titulo_honorifico = trim($docente_array[1]);
+            $usuario->apellido_paterno  = trim($docente_array[2]);
+            $usuario->apellido_materno  = trim($docente_array[3]);
+            $usuario->nombre            = trim($docente_array[4]);
+            $usuario->email             = isset($docente_array[5])?trim($docente_array[4]):'';
+            $usuario->save();
+            $cotador_update++;
+          }
+          else { // Guardamos nuevos
+            $usuario                    = new Usuario();
+            $usuario->titulo_honorifico = trim($docente_array[1]);
+            $usuario->apellido_paterno  = trim($docente_array[2]);
+            $usuario->apellido_materno  = trim($docente_array[3]);
+            $usuario->nombre            = trim($docente_array[4]);
+            $usuario->email             = isset($docente_array[5])?trim($docente_array[4]):'';
+            $usuario->ci                = trim($docente_array[0]);
+            $usuario->login             = trim($docente_array[0]);
+            $usuario->clave             = trim($docente_array[0]);
+            $usuario->fecha_nacimiento  = date('j/m/Y');
+            $usuario->estado            = Objectbase::STATUS_AC;
+            $usuario->puede_ser_tutor   = 1;
+            $usuario->validar(1);
+            $usuario->save();
+            //asignamos grupo docente
+            $usuario->asignarGrupo(Grupo::GR_DO);
+            //creamos el docente
+            $docente_neo                        = new Docente();
+            $docente_neo->codigo_sis            = trim($docente_array[0]);
+            $docente_neo->estado                = Objectbase::STATUS_AC;
+            $docente_neo->usuario_id            = $usuario->id;
+            $docente_neo->configuracion_area    = 0;
+            $docente_neo->configuracion_horario = 0;
+            $docente_neo->save();
+            $cotador_nuevos++;
+          }
+          //Guardamos datos
           mysql_query("COMMIT");
-          
+          $cotador_ingres ++;
+        }
+        else {
+          $cotador_error ++;
+          $detalle_error .= "$indice_cotador, ";
         }
       }
+    }
+
       //No hay ERROR
-      $_SESSION['estado'] = $cotador;
+      $_SESSION['estado'] = array(
+        'cotador_nuevos' => $cotador_nuevos , 
+        'cotador_update' => $cotador_update , 
+        'cotador_error'  => $cotador_error , 
+        'detalle_error'  => rtrim($detalle_error,', ' ) , 
+        'cotador_total'  => $cotador_total );
       header("Location: docente.gestion.php");
   }
   $smarty->assign("ERROR",$ERROR);

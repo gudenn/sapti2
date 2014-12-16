@@ -42,7 +42,7 @@ try {
 
   $usuario= getSessionUser();
   $usuarioid= $usuario->id;
-  
+ 
   $smarty->assign("usuarioid_ids", $usuarioid);
    $smarty->assign("tutor",  $usuario->getTutor());
 

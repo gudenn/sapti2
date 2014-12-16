@@ -95,7 +95,7 @@ try {
     leerClase('Html');
     $html    = new Html();
     if ($_SESSION['estado']=1)
-      $mensaje = array('mensaje'=>"Se graboron correctamente los {$_SESSION['estado']} El Tribunal",'titulo'=>'Registro de Tribunal' ,'icono'=> 'tick_48.png');
+      $mensaje = array('mensaje'=>"Se grabaron correctamente los {$_SESSION['estado']} El Tribunal",'titulo'=>'Registro de Tribunal' ,'icono'=> 'tick_48.png');
     else
       $mensaje = array('mensaje'=>'Se grabo correctamente el Tribunal','titulo'=>'Registro de Tribunal' ,'icono'=> 'tick_48.png');
     $ERROR   = $html->getMessageBox ($mensaje);

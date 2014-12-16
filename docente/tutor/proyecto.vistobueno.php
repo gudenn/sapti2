@@ -5,6 +5,7 @@ try {
   if(!isDocenteSession())
   header("Location: ../login.php");
   leerClase('Visto_bueno');
+  leerClase('visto_bueno_tutor');
   leerClase('Docente');
  
   leerClase('Estudiante');
@@ -123,7 +124,6 @@ try {
                           }
    
                  }
-               // var_dump($vistobuenotutores);
                  $totalvistobuenotutor=true;
                  if(sizeof($listatutores)>0)
                  {
@@ -178,6 +178,10 @@ try {
         
     }
 
+    
+    
+    
+    
   //No hay ERROR
   $smarty->assign("ERROR",'');
 } 

@@ -71,7 +71,7 @@ try {
   $smarty->assign('lista'       ,'admin/docente/docente.lista.tpl');
 
   //Filtro
-  $filtro     = new Filtro('g_docente',__FILE__);
+  $filtro  = new Filtro('g_docente',__FILE__);
   $docente = new Docente();
   $docente->iniciarFiltro($filtro);
   $filtro_sql = $docente->filtrar($filtro);
@@ -90,16 +90,44 @@ try {
  $smarty->assign("crear_nuevo"  ,"docente.registro.php");
  $ERROR = ''; 
  
-  if(isset($_SESSION['estado']) && $_SESSION['estado']>=1)
-  {
+  if(isset($_SESSION['estado']) && ($_SESSION['estado']>=1 || is_array($_SESSION['estado']) ) ){
     leerClase('Html');
     $html    = new Html();
-    if ($_SESSION['estado']>1)
-      $mensaje = array('mensaje'=>"Se graboron correctamente los {$_SESSION['estado']} Docentes",'titulo'=>'Registro de Docentes' ,'icono'=> 'tick_48.png');
-    else
+    if (is_array($_SESSION['estado'])){
+      $reporte = $_SESSION['estado'];
+      $reporte['detalle_error'] = ($reporte['detalle_error']=='')?'Ninguna':$reporte['detalle_error'];
+      $stylo = ' style="text-align:right" ';
+      $reporte_html = "
+        <table class='tbl_filtro' >
+          <tr>
+            <th><b>Detalle</b></th>
+            <th><b>Registros</b></th>
+          </tr>
+          <tr class='dark' >
+            <td>Nuevos Registros</td><td{$stylo}>{$reporte['cotador_nuevos']}</td>
+          </tr>
+          <tr>
+            <td>Registros Actualizados</td><td{$stylo}>{$reporte['cotador_update']}</td>
+          </tr>
+          <tr class='dark' >
+            <td>Registros Con Error</td><td{$stylo}>{$reporte['cotador_error']}</td>
+          </tr>
+          <tr>
+            <td>Lineas Con Error</td><td>{$reporte['detalle_error']}</td>
+          </tr>
+          <tr class='dark' >
+            <td><b>Total Registros Procesados</b></td><td{$stylo}>{$reporte['cotador_total']}</td>
+          </tr>
+        </table>
+            ";
+      $mensaje = array('mensaje'=>"Se registraron correctamente los Docentes <br> {$reporte_html} ",'titulo'=>'Registro de Docentes' ,'icono'=> 'tick_48.png');
+    } elseif ($_SESSION['estado']>1){
+      $mensaje = array('mensaje'=>"Se grabaron correctamente los {$_SESSION['estado']} Docentes",'titulo'=>'Registro de Docentes' ,'icono'=> 'tick_48.png');
+    } else {
       $mensaje = array('mensaje'=>'Se grabo correctamente el Docente','titulo'=>'Registro de Docente' ,'icono'=> 'tick_48.png');
+    }
     $ERROR   = $html->getMessageBox ($mensaje);
-    $_SESSION['estado']=0;
+    $_SESSION['estado'] = 0;
     $smarty->assign("ERROR",$ERROR);
 
   }
