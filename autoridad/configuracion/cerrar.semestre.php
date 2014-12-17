@@ -59,10 +59,15 @@ try {
     if (isset($_POST['seleccion'])) 
   $seleccion=$_POST['seleccion'];
   $smarty->assign("seleccion", $seleccion);
+  date_default_timezone_set('America/La_Paz');
+  $fecha_actual=date("Y-m-d");
+  $fechafin = str_replace ( "/" ,  "-" , $semestre->fecha_fin); 
+  $fechasql = date('Y-m-d', strtotime($fechafin));
 
     if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
   {
     $EXITO = false;
+        if($fecha_actual>$fechasql){
     mysql_query("BEGIN");
     $semestre_id=$_POST['semestre_id'];
     if(count($seleccion)>0 && $semestre_id >0){
@@ -93,16 +98,33 @@ try {
                 foreach ($arrayobser as $array2){
                     $dicta_aux = new Dicta($array2['id']);
                     $dicta = new Dicta();
-                    $dicta->objBuidFromPost();
                     $dicta->docente_id=$dicta_aux->docente_id;
                     $dicta->estado=$dicta_aux->estado;
                     $dicta->materia_id=$dicta_aux->materia_id;
                     $dicta->codigo_grupo_id=$dicta_aux->codigo_grupo_id;
                     $dicta->semestre_id=$semestre_id;
                     $dicta->save();
+                    $dicta_aux->estado=  Inscrito::E_CERRADO;
+                    $dicta_aux->save();
                     }                
             }
 
+        }else{
+           $resul = "SELECT di.id
+            FROM dicta di, semestre se
+            WHERE di.semestre_id=se.id
+            AND se.id='".$semestre->id."'";
+            $sql = mysql_query($resul);
+            while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
+                    $arrayobser[]=$fila1;
+            }
+            if(count($arrayobser)>0){
+                foreach ($arrayobser as $array2){
+                    $dicta_aux = new Dicta($array2['id']);
+                    $dicta_aux->estado=  Inscrito::E_CERRADO;
+                    $dicta_aux->save();
+                    }                
+            }
         }
         if($seleccion[0]=='conf'|| $seleccion[1]=='conf'){
                 $resul11 = "SELECT cs.id
@@ -131,12 +153,29 @@ try {
                 foreach ($arrayconf as $array3){
                     $conf_aux = new Configuracion_semestral($array3['id']);
                     $conf = new Configuracion_semestral();
-                    $conf->objBuidFromPost();
                     $conf->nombre=$conf_aux->nombre;
                     $conf->valor=$conf_aux->valor;
                     $conf->estado=$conf_aux->estado;
                     $conf->semestre_id=$semestre_id;
                     $conf->save();
+                    $conf_aux->estado=  Inscrito::E_CERRADO;
+                    $conf_aux->save();
+                    }                
+            }
+        }else{
+                $resul1 = "SELECT cs.id
+                FROM configuracion_semestral cs, semestre se
+                WHERE cs.semestre_id=se.id
+                AND se.id='".$semestre->id."'";
+            $sql1 = mysql_query($resul1);
+            while ($fila2 = mysql_fetch_array($sql1, MYSQL_ASSOC)) {
+                    $arrayconf[]=$fila2;
+            }
+            if(count($arrayconf)>0){
+                foreach ($arrayconf as $array3){
+                    $conf_aux = new Configuracion_semestral($array3['id']);
+                    $conf_aux->estado=  Inscrito::E_CERRADO;
+                    $conf_aux->save();
                     }                
             }
         }
@@ -152,10 +191,8 @@ try {
                 foreach ($inscritos as $arraycerrar){
                     $inscrito=new Inscrito($arraycerrar['insid']);
                     $evaluacion=new Evaluacion($arraycerrar['evaid']);
-                    //$inscrito->objBuidFromPost();
                     $inscrito->estado_inscrito=  Inscrito::E_CERRADO;
                     $inscrito->save();
-                    //$evaluacion->objBuidFromPost();
                     $evaluacion->estado=  Inscrito::E_CERRADO;
                     $evaluacion->save();
                     }                
@@ -165,7 +202,7 @@ try {
            $semestreactivar->save();
            $EXITO = TRUE;
            mysql_query("COMMIT");     
-    }
+  }}
 
   }
 
@@ -192,5 +229,5 @@ catch(Exception $e)
 $token                = sha1(URL . time());
 $_SESSION['register'] = $token;
 $smarty->assign('token',$token);
-  $smarty->display('admin/copiarsemestre/full-width.cerrarsemestre.tpl');
+  $smarty->display('admin/copiarsemestre/full-width.cerrar.semestre.tpl');
 ?>

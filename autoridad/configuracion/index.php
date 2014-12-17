@@ -52,8 +52,10 @@ try {
   $menu = new Menu('Variables de Semestre');
   $link = Administrador::URL."configuracion/configuracion_semestral.gestion.php";
   $menu->agregarItem('Variables de Semestre','Lista de todas las variables que el sistema usa','basicset/lock.png',$link);
-  $link = Administrador::URL."configuracion/cerrarsemestre.php";
+  $link = Administrador::URL."configuracion/cerrar.semestre.php";
   $menu->agregarItem('Cerrar Semestre','Copiar Variables de Semestres pasados y Materias Dictadas','basicset/warning_48.png',$link);
+  $link = Administrador::URL."configuracion/abrir.semestre.php";
+  $menu->agregarItem('Abrir Semestre','Abrir Semestres pasados y Materias Dictadas','basicset/warning_48.png',$link);  
   $link = Administrador::URL."configuracion/ordenarsemestre.php";
   $menu->agregarItem('Ordenar Semestres','Lista de todas las variables que el sistema usa','basicset/lock.png',$link);
   $menus[] = $menu;

@@ -34,7 +34,16 @@ class Semestre extends Objectbase
   * @var object|null 
   */
   var $configuracion_semestral_objs;
-
+ /**
+  * Fecha de inicio del semestre
+  * @var DATE
+  */
+  var $fecha_inicio;
+   /**
+  * Fecha de inicio del semestre
+  * @var DATE
+  */
+  var $fecha_fin;
  /**
   * Object return the object with some id
   *
@@ -210,7 +219,11 @@ class Semestre extends Objectbase
       $filtro->order($_GET['order']);
     $filtro->nombres[] = 'C&oacute;digo';
     $filtro->valores[] = array('input', 'codigo', $filtro->filtro('codigo'));
-  }
+    $filtro->nombres[] = 'Fecha Inicio';
+    $filtro->valores[] = array('input', 'fecha_inicio', $filtro->filtro('fecha_inicio'));
+    $filtro->nombres[] = 'Fecha Fin';
+    $filtro->valores[] = array('input', 'fecha_fin', $filtro->filtro('fecha_fin'));
+    }
 
   /**
    * Devuelve el order para el SQL
@@ -221,6 +234,8 @@ class Semestre extends Objectbase
     $order_array = array();
     $order_array['id']     = " {$this->getTableName()}.id ";
     $order_array['codigo'] = " {$this->getTableName()}.codigo ";
+    $order_array['fecha_inicio'] = " {$this->getTableName()}.fecha_inicio ";
+    $order_array['fecha_fin'] = " {$this->getTableName()}.fecha_fin ";
     $order_array['activo'] = " {$this->getTableName()}.activo ";
     $order_array['estado'] = " {$this->getTableName()}.estado ";
     return $filtro->getOrderString($order_array);
@@ -238,7 +253,11 @@ class Semestre extends Objectbase
       $filtro_sql .= " AND {$this->getTableName()}.id like '%{$filtro->filtro('id')}%' ";
     if ($filtro->filtro('codigo'))
       $filtro_sql .= " AND {$this->getTableName()}.codigo like '%{$filtro->filtro('codigo')}%' ";
-    if ($filtro->filtro('activo'))
+    if ($filtro->filtro('fecha_inicio'))
+      $filtro_sql .= " AND {$this->getTableName()}.fecha_inicio like '%{$filtro->filtro('fecha_inicio')}%' ";
+    if ($filtro->filtro('fecha_fin'))
+      $filtro_sql .= " AND {$this->getTableName()}.fecha_fin like '%{$filtro->filtro('fecha_fin')}%' ";
+      if ($filtro->filtro('activo'))
       $filtro_sql .= " AND {$this->getTableName()}.activo like '%{$filtro->filtro('activo')}%' ";
     return $filtro_sql;
   }

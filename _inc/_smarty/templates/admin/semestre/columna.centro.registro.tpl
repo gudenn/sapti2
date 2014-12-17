@@ -8,6 +8,16 @@
               <input type="text" name="codigo" id="codigo" value="{$semestre->codigo}"  data-validation-engine="validate[required]">
               <label for="codigo"><small>C&oacute;digo de Semestre (*) {getHelpTip('codigo')}</small></label>
             </p>
+        <table>
+            <td>
+              <label for="fecha_inicio"><small>{getHelpTip('fecha_inicio')}(*) Fecha de Inicio:</small></label>
+              <input type="text" name="fecha_inicio" id="fecha_inicio" value="{$semestre->fecha_inicio}" size="15" class="datepicker"/>            
+            </td>
+            <td>              
+              <label for="fecha_fin"><small>{getHelpTip('fecha_fin')}(*) Fecha de Fin:</small></label>
+              <input type="text" name="fecha_fin" id="fecha_fin" value="{$semestre->fecha_fin}" size="15" class="datepicker"/>
+            </td>
+        </table>
             {* No se usa mas
             <!--
             <p>
@@ -45,6 +55,16 @@
             jQuery('textarea').data('promptPosition',wo);
             jQuery('select').attr('data-prompt-position',wo);
             jQuery('select').data('promptPosition',wo);
+          });
+                    $(function(){
+            $('input').filter('.datepicker').datepicker({
+              dateFormat:'dd/mm/yy',
+              changeMonth: true,
+              changeYear: true,
+              {/literal}
+              yearRange: "2013:{date('Y')+3}"
+              {literal} 
+            });
           });
         {/literal} 
         </script>
