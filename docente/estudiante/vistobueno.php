@@ -148,15 +148,13 @@ try {
        }
      }  else {
      // echo "-----------------proyecto final-------------------------------------<br>";
-    $vistobuenotutores= $proyecto->getVbTutorProyectoIds();
-   // $visto= $proyecto->getVistoDocentePE($docente->id);
-  //   var_dump($proyecto->getVistoDocentePE($docente->id));
-     $vistobueno                    =       new Visto_bueno();
      $docente                       =       getSessionDocente();
+     $vistobueno                    =       new Visto_bueno_docente();
      $vistobueno->objBuidFromPost();
      $vistobueno->proyecto_id       =        $proyecto->id;
-     $vistobueno->visto_bueno_tipo  =        Visto_bueno::E1_DOCENTE;
-     $vistobueno->visto_bueno_id    =        $docente->id;
+     $vistobueno->tipo_proyecto     = $proyecto->tipo_proyecto;
+     $vistobueno->visto_bueno  =        Visto_bueno::E1_DOCENTE;
+     $vistobueno->docente_id    =        $docente->id;
      $vistobueno->estado            =        Objectbase::STATUS_AC;
      $vistobueno->save();
      
@@ -178,7 +176,7 @@ try {
    //  $vistobuenodocente= $proyecto->getVbDocentePerfil(getSessionDocente()->id);
      
      
-     if( true)
+     if( $proyecto->getVistosBuenosTutores())
        {
        // $proyecto = new Proyecto($vistobueno->proyecto_id);
      //  echo "--------------------------------ptfasdnfklasdfnaslk----------------------<br>";
