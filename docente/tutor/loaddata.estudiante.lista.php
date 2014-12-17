@@ -35,8 +35,8 @@ where   u.id=e.usuario_id and e.id=pe.estudiante_id and  pe.proyecto_id=p.id and
 and pt.tutor_id=t.id  and pt.estado_tutoria="AC" and  p.tipo_proyecto="PR"  and t.id="'.$idtutor.'"  and p.id
 NOT IN  (
 select  v.proyecto_id
-from visto_bueno  v
-where  v.visto_bueno_tipo="TU" and v.visto_bueno_id="'.$idtutor.'"
+from visto_bueno_tutor  v
+where   v.tutor_id="'.$idtutor.'"
 )');
 
 

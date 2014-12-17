@@ -20,7 +20,7 @@
                <span>{$proyecto->nombre}</span><br/>
                
               <p>
-              <input type="text" name="fecha_visto_bueno" id="fecha_visto_bueno" value="{$vistobueno->fecha_visto_buena}" size="22"/>
+              <input type="text" name="fecha" id="fecha" value="{$vistobueno->fecha}" size="22"/>
               <label for="fecha_revision"><small>Fecha De Visto Bueno</small></label>
             </p>
             <h2 class="title">Grabar </h2>
@@ -42,7 +42,7 @@
         <script type="text/javascript">
         {literal} 
           $(function(){
-            $('#fecha_visto_bueno').datepicker({
+            $('#fecha').datepicker({
               dateFormat:'dd/mm/yy',
               changeMonth: true,
               changeYear: true,

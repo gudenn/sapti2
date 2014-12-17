@@ -793,14 +793,86 @@ class Proyecto extends Objectbase {
       return false;
     $tutores = array();
     while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC))
-                    {
+      {
       $tutores[] = $fila['visto_bueno_id'];
     }
     return $tutores;
  }
-  
-  
-  
+  /**
+   * retorna los tutores  que dieron visto buenos
+   */
+  function getVistoBuenoTutores() {
+
+    leerClase('Tutor');
+    leerClase('visto_bueno_tutor');
+    $activo = Objectbase::STATUS_AC;
+  //  SELECT v.* FROM visto_bueno_tutor v WHERE v.proyecto_id=1 and v.estado='AC'
+    $sql = "select v.* from " . $this->getTableName('visto_bueno_tutor') . " as v    where v.proyecto_id = '$this->id'    and v.estado = '$activo'";
+    //echo $sql;
+    $resultado = mysql_query($sql);
+    if (!$resultado)
+      return false;
+    $tutores = array();
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC))
+      {
+      $tutores[] = new Visto_bueno_tutor($fila['id']);
+      }
+    return $tutores;
+}
+    
+ 
+   /**
+   * 
+   * @return reto0rna true en el caso de  que le dan todos los vistos bueneo los tutores
+    * y en el caso contrario false
+   * Retorna la Vistos  buenos total de  los tutores
+   */
+ function getVistosBuenosTutores() {
+    //@TODO revisar
+    //  leerClase('Proyecto_area');
+     $valor=true;
+     $activo = Objectbase::STATUS_AC;
+     
+     $tutores= $this->getTutores();
+     $tutoresvisto= $this->getVistoBuenoTutores();
+     $idtutorvistosvuenos=array();
+     foreach ($tutoresvisto as $tutorvisto)
+     {
+         $idtutorvistosvuenos[]=$tutorvisto->tutor_id;
+     }
+     
+     if($tutores)
+     {
+         if($tutoresvisto)
+         {
+          
+             foreach ($tutores as $tutor)
+             {
+                 
+                 if(!in_array($tutor->id, $idtutorvistosvuenos))
+                 {
+                     return FALSE; 
+                 }
+                 
+             }
+            
+             
+         } else
+         {
+           $valor=FALSE;  
+         }
+         
+     }else
+     {
+         $valor=FALSE;
+     }
+     
+     
+
+    
+      return $valor;
+  } 
+ 
   /**
    * 
    * @return
@@ -953,8 +1025,8 @@ class Proyecto extends Objectbase {
         $tutores[] =$fila['id'];
       }
        return $tutores;
-  }
-  /**
+   }
+   /**
    * 
    * @return 
    * retorna la lista de los tribunales aceptados

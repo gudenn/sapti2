@@ -13,7 +13,7 @@ try {
   leerClase('Notificacion');
   leerClase('Docente');
   leerClase('Dicta');
-  leerClase('Visto_bueno');
+  leerClase('Visto_bueno_docente');
   /** HEADER */
   $smarty->assign('title','Proyecto Final');
   $smarty->assign('description','Proyecto Final');
@@ -65,10 +65,10 @@ try {
   $smarty->assign("proyecto", $proyecto);
   
    }
-    $vistobueno= new Visto_bueno();
-    date_default_timezone_set('America/La_Paz');
+    $vistobueno= new Visto_bueno_docente();
+      date_default_timezone_set('America/La_Paz');
       date_default_timezone_set('UTC');
-     $vistobueno->fecha_visto_buena=date("d/m/Y");
+     $vistobueno->fecha=date("d/m/Y");
       $smarty->assign("vistobueno", $vistobueno);
      
     
@@ -95,11 +95,12 @@ try {
    
   
     // echo $visto->proyecto_id;
-      $vistobueno                    =       new Visto_bueno($visto->id);
+     $vistobueno                    =       new Visto_bueno_docente();
      $vistobueno->objBuidFromPost();
      $vistobueno->proyecto_id       =        $proyecto->id;
-     $vistobueno->visto_bueno_tipo  =        Visto_bueno::E1_DOCENTE;
-     $vistobueno->visto_bueno_id    =        $docente->id;
+     $vistobueno->tipo_proyecto     = $proyecto->tipo_proyecto;
+     $vistobueno->visto_bueno  =        Visto_bueno::E1_DOCENTE;
+     $vistobueno->docente_id    =        $docente->id;
      $vistobueno->estado            =        Objectbase::STATUS_AC;
      $vistobueno->save();
      
@@ -119,29 +120,12 @@ try {
     
     $totalvistobuenotutor=true;
     
-    if(sizeof($listatutores)>0)
-    {
-    foreach ($listatutores as $value) 
-      {
-      
-      if(!in_array($value->id, $vistobuenotutores))
-      {
-        $totalvistobuenotutor=FALSE;
-        break;;
-        
-      }
-     }
-    }  else 
-      {
-       $totalvistobuenotutor=FALSE;
-    }
-     
+  
      
    //  $vistobuenodocente= $proyecto->getVbDocentePerfil(getSessionDocente()->id);
      
-     
-     if($totalvistobuenotutor!=FALSE)
-       {
+    if($proyecto->getVistosBuenosTutores())
+    {
        // $proyecto = new Proyecto($vistobueno->proyecto_id);
        //  echo "--------------------------------perfil----------------------<br>";
         $proyecto->estado_proyecto="VB";
@@ -189,28 +173,12 @@ try {
                     $notificacions->enviarNotificaion( $noticaciones);
     
   
-    
-    $totalvistobuenotutor=true;
-    if(sizeof($listatutores)>0)
-    {
-    foreach ($listatutores as $value) 
-      {
-      
-      if(!in_array($value->id, $vistobuenotutores))
-      {
-        $totalvistobuenotutor=FALSE;
-        break;;
-        
-      }
-     }
-    }  else {
-        $totalvistobuenotutor=FALSE;
-    }
+
      
    //  $vistobuenodocente= $proyecto->getVbDocentePerfil(getSessionDocente()->id);
      
      
-     if( $totalvistobuenotutor!=FALSE)
+     if( true)
        {
        // $proyecto = new Proyecto($vistobueno->proyecto_id);
      //  echo "--------------------------------ptfasdnfklasdfnaslk----------------------<br>";
@@ -257,6 +225,7 @@ try {
 } 
 catch(Exception $e) 
 {
+    echo $e;
   $smarty->assign("ERROR", handleError($e));
 }
   $token = sha1(URL . time());

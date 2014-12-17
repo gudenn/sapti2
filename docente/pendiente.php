@@ -21,9 +21,9 @@ try {
 
   $listavistobueno= $proyecto->getVbTutor();
     $listatutores=$proyecto->getTutores();
-    if((sizeof($listatutores)==sizeof($listavistobueno)) &&(sizeof($listavistobueno)!=0) && (sizeof($listatutores)!=0))
+    if($proyecto->getVistosBuenosTutores())
     {
-        echo sizeof($listavistobueno);
+        echo 1;
     }  else {
         echo 0;
     }

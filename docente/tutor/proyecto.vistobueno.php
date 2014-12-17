@@ -60,7 +60,7 @@ try {
   $smarty->assign("proyecto", $proyecto);
     $smarty->assign("estudiante",  $estudiante );
    
-      $vistobueno= new Visto_bueno();
+      $vistobueno= new Visto_bueno_tutor();
       date_default_timezone_set('America/La_Paz');
       date_default_timezone_set('UTC');
      $vistobueno->fecha_visto_buena=date("d/m/Y");
@@ -69,11 +69,11 @@ try {
     if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
     {
       
-        $vistobueno                    =       new Visto_bueno();
+        $vistobueno                    =       new Visto_bueno_tutor();
         $docente                       =       getSessionDocente();
-
-        
-         $estudiante= new Estudiante($_POST['estudiante_id']);/// crando el estudiante
+        $tutoractual                   = getSessionTutor();
+   
+        $estudiante= new Estudiante($_POST['estudiante_id']);/// crando el estudiante
         $proyectoestudiante= $estudiante->getProyecto();  // obtien e el proyecto del estudioante
         
       //  var_dump($proyectoestudiante);
@@ -86,8 +86,9 @@ try {
         {
               $vistobueno->objBuidFromPost();
               $vistobueno->proyecto_id       =       $proyectoestudiante->id;
-              $vistobueno->visto_bueno_tipo  =        Visto_bueno::E2_TUTOR;
-              $vistobueno->visto_bueno_id    =        $tutor_id->id;    
+              $vistobueno->visto_bueno  =        Visto_bueno::STATUS_AC;
+              $vistobueno->tutor_id   =        $tutor_id->id;    
+              $vistobueno-> tipo_proyecto   =       $proyectoestudiante->tipo_proyecto;    
               $vistobueno->estado            =        Objectbase::STATUS_AC;
               $vistobueno->save();
               
@@ -103,73 +104,9 @@ try {
 
                     $noticaciones = array('estudiantes'=>array($estudiante->id));
                     $notificacions->enviarNotificaion( $noticaciones);
-       }
-       
-       
-          $listatutores=$proyectoestudiante->getTutores();  ///  retorna lista de los tutores de un estudiante
-                $listatotaltutores=        $proyectoestudiante->getVbTutorProyectoIds();
-             $vistobuenotutores=array();  
-              foreach ( $listatotaltutores as $v)
-                {
-                          $tutor= new Tutor($v);
-                           $tutor->getAllObjects();
-    //Consejo
-                          foreach ( $tutor->proyecto_tutor_objs as $proyecttutor)
-                          {
-                            if (  $proyecttutor->estado_tutoria!='FI'  && $proyecttutor->proyecto_id==$proyectoestudiante->id)
-                            {
-                            $vistobuenotutores[]=$v;
-                            }
-
-                          }
-   
-                 }
-                 $totalvistobuenotutor=true;
-                 if(sizeof($listatutores)>0)
-                 {
-                 
-                foreach ($listatutores as $value) 
-                  {
-
-                  if(!in_array($value->id, $vistobuenotutores))
-                  {
-                    $totalvistobuenotutor=FALSE;
-                    break;;
-
-                  }
-                  }
-                 }  else {
-                    $totalvistobuenotutor=FALSE;
-                 }
+        }
                   
-                  
-                  $vistobuenodocente=$proyectoestudiante->getVbDocenteProyecto($docentestudiante->id);
                  
-                  if((sizeof($vistobuenodocente)>0)  && $totalvistobuenotutor)
-                  {
-                  //  echo "visto bueno por par te tutor";
-                $proyectoestudiante->estado_proyecto=Proyecto::EST2_BUE; //deberia ser //Proyecto::EST2_BUE
-                
-                $proyectoestudiante->save();
-              //  var_dump($proyectoestudiante);
-                
-                
-                   
-                   
-                   
-                    $notificacions= new Notificacion();
-                    $notificacions->objBuidFromPost();
-                    $notificacions->proyecto_id = $proyecto->id; 
-                    $notificacions->tipo        =  Notificacion::TIPO_MENSAJE;
-                    $notificacions->fecha_envio = date("j/n/Y");
-                    $notificacions->asunto      = "Estas Habilitado Para tus Defensas";
-                    $notificacions->prioridad   = 7;
-                    $notificacions->estado      = Objectbase::STATUS_AC;
-
-                    $noticaciones = array('estudiantes'=>array($estudiante->id));
-                    $notificacions->enviarNotificaion( $noticaciones);
-
-                  }
 
     $ir = "Location: estudiante.lista.php";
     header($ir);
