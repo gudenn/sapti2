@@ -61,11 +61,10 @@ $idapoyo='';
     $docente_idss =  $docentes->id;
   if (isset($_POST['tarea']) && $_POST['tarea'] == 'grabar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token']) {
     
- echo 'fsd';
     
     $apoyo->objBuidFromPost();
     $apoyo->estado=  Objectbase::STATUS_AC;
-    $apoyo->docente_id=$docente_idss;
+    $apoyo->docente_id=$docente ->id;
     $apoyo->save();
   }
  
@@ -88,7 +87,7 @@ $idapoyo='';
   
    $sqlr='SELECT a.*
 FROM apoyo a
-WHERE a.docente_id='.$docente_idss;
+WHERE a.docente_id='.$docente ->id;
  $resultado = mysql_query($sqlr);
  $arraytribunal= array();
 $contado=1;
