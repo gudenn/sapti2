@@ -1,13 +1,13 @@
-DROP TABLE IF EXISTS `sapti`.`apoyo` ;
+DROP TABLE IF EXISTS `apoyo` ;
 
-CREATE TABLE IF NOT EXISTS `sapti`.`apoyo` (
+CREATE TABLE IF NOT EXISTS `apoyo` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `area_id` INT NULL,
   `sub_area_id` INT NOT NULL,
   `docente_id` INT NULL,
   `estado` VARCHAR(2) NULL,
   
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`));
 
 
 CREATE TABLE IF NOT EXISTS `visto_bueno_tutor` (
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `visto_bueno_tutor` (
   `fecha` VARCHAR(45) NULL,
   `descripcion` VARCHAR(100) NULL,
   `estado` VARCHAR(10) NULL,
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`));
   
   
 CREATE TABLE IF NOT EXISTS `visto_bueno_docente` (
@@ -31,4 +31,4 @@ CREATE TABLE IF NOT EXISTS `visto_bueno_docente` (
   `fecha` DATE NULL,
   `descripcion` VARCHAR(100) NULL,
   `estado` VARCHAR(10) NULL,
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`));

@@ -83,9 +83,7 @@ $idapoyo='';
   $smarty->assign('area_id', $area_id);
   $smarty->assign('area_nombre', $area_nombre);
 
-  
-  
-   $sqlr='SELECT a.*
+$sqlr='SELECT a.*
 FROM apoyo a
 WHERE a.docente_id='.$docente ->id;
  $resultado = mysql_query($sqlr);

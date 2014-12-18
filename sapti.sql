@@ -1085,12 +1085,59 @@ CREATE TABLE IF NOT EXISTS `fororespuesta` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+
+-- Vistos buenos
+
+DROP TABLE IF EXISTS `apoyo` ;
+
+CREATE TABLE IF NOT EXISTS `apoyo` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `area_id` INT NULL,
+  `sub_area_id` INT NOT NULL,
+  `docente_id` INT NULL,
+  `estado` VARCHAR(2) NULL,
+  
+  PRIMARY KEY (`id`));
+
+
+CREATE TABLE IF NOT EXISTS `visto_bueno_tutor` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `tutor_id` INT NULL,
+  `proyecto_id` INT NULL,
+  `visto_bueno` VARCHAR(45) NULL,
+  `tipo_proyecto` VARCHAR(45) NULL,
+  `fecha` VARCHAR(45) NULL,
+  `descripcion` VARCHAR(100) NULL,
+  `estado` VARCHAR(10) NULL,
+  PRIMARY KEY (`id`));
+  
+  
+CREATE TABLE IF NOT EXISTS `visto_bueno_docente` (
+  `id` INT NULL AUTO_INCREMENT,
+  `proyecto_id` INT NULL,
+  `docente_id` INT NULL,
+  `visto_bueno` VARCHAR(45) NULL,
+  `tipo_proyecto` VARCHAR(10) NULL,
+  `fecha` DATE NULL,
+  `descripcion` VARCHAR(100) NULL,
+  `estado` VARCHAR(10) NULL,
+  PRIMARY KEY (`id`));
+
+  
+-- backups 
+
+--
+-- Table structure for table `respaldo`
+--
+
 CREATE TABLE IF NOT EXISTS `respaldo` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `fecha_respaldo` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `archivo` varchar(50) NOT NULL,
-  UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `fecha_respaldo` date DEFAULT NULL,
+  `archivo` varchar(200) DEFAULT NULL,
+  `estado` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
 
 
 
