@@ -77,11 +77,16 @@ try {
     $EXITO = true;
   }
 
-  
+  if($id>0){
+      $porcentaje=$avance->porcentaje;
+  }else{
+      $porcentaje=0;
+  }
   $smarty->assign("estudiante", $estudiante);
   $smarty->assign("usuario", $usuario);
   $smarty->assign("proyecto", $proyecto);
   $smarty->assign("avance", $avance);
+  $smarty->assign("porcentaje", $porcentaje);
   $smarty->assign("ERROR", $ERROR);
   
 

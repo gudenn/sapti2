@@ -11,13 +11,13 @@
               {section name=ic loop=$inscritos}
               <tbody>
                 <tr  class="{cycle values="light,dark"}">
-                  <td>{$inscritos[ic]['1']}</td>
-                  <td>{$inscritos[ic]['2']}</td>
+                  <td>{$inscritos[ic]['codigosis']}</td>
+                  <td>{$inscritos[ic]['nombre']}</td>
                 </tr>
               </tbody>
               {/section}
             </table>
-            <h2 class="title">Estudiantes Ya Registrados</h2>
+            <h2 class="title">Estudiantes Actualizados</h2>
             <table class="tbl_lista_yainscrito">
               <thead>
                 <tr>
@@ -28,13 +28,13 @@
               {section name=ic loop=$yainscritos}
               <tbody>
                 <tr  class="{cycle values="light,dark"}">
-                  <td>{$yainscritos[ic]['1']}</td>
-                  <td>{$yainscritos[ic]['2']}</td>
+                  <td>{$yainscritos[ic]['codigosis']}</td>
+                  <td>{$yainscritos[ic]['nombre']}</td>
                 </tr>
               </tbody>
               {/section}
             </table>
-            <h3 class="title">Estudiantes Registrados Al Sistema</h3>
+            <h3 class="title">Estudiantes Nuevos Al Sistema</h3>
             <table class="tbl_lista_noestu">
               <thead>
                 <tr>
@@ -45,12 +45,47 @@
               {section name=ic loop=$noestudiante}
               <tbody>
                 <tr  class="{cycle values="light,dark"}">
-                  <td>{$noestudiante[ic]['1']}</td>
-                  <td>{$noestudiante[ic]['2']}</td>
+                  <td>{$noestudiante[ic]['codigosis']}</td>
+                  <td>{$noestudiante[ic]['nombre']}</td>
                 </tr>
               </tbody>
               {/section}
             </table>
+            <h3 class="title">Estudiantes Borrados</h3>
+            <table class="tbl_lista_noestu">
+              <thead>
+                <tr>
+                  <th><a>C&Oacute;DIGO SIS      </a></th>
+                  <th><a>APELLIDOS Y NOMBRES          </a></th>
+                </tr>
+              </thead>
+              {section name=ic loop=$borradoestudiante}
+              <tbody>
+                <tr  class="{cycle values="light,dark"}">
+                  <td>{$borradoestudiante[ic]['codigosis']}</td>
+                  <td>{$borradoestudiante[ic]['nombre']}</td>
+                </tr>
+              </tbody>
+              {/section}
+            </table>
+            <h3 class="title">Lineas Con Error</h3>
+            <table class="tbl_lista_noestu">
+              <thead>
+                <tr>
+                  <th><a>Linea      </a></th>
+
+                </tr>
+              </thead>
+              {section name=ic loop=$errorestudiante}
+              <tbody>
+                <tr  class="{cycle values="light,dark"}">
+                  <td>{$errorestudiante[ic]['linea']}</td>
+
+                </tr>
+              </tbody>
+              {/section}
+            </table>
+            <h3 class="title">Total de Registros Procesados:{$total}</h3>
         </div>
         <p>{$ERROR}</p>
       </div>

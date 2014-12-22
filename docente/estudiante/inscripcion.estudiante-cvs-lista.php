@@ -62,9 +62,20 @@ try {
     $noestudiante=$_GET['noestudiante']; 
     $noestudiante=array_recibe($noestudiante); 
     
+    $errorestudiante=$_GET['errorestudiante']; 
+    $errorestudiante=array_recibe($errorestudiante);
+    
+    $borradoestudiante=$_GET['borradoestudiante']; 
+    $borradoestudiante=array_recibe($borradoestudiante);
+    
+    $total=$_GET['total'];
+    
     $smarty->assign("yainscritos"  ,$yainscritos);
     $smarty->assign("inscritos"  ,$inscritos);
     $smarty->assign("noestudiante"  ,$noestudiante);
+    $smarty->assign("errorestudiante"  ,$errorestudiante);
+    $smarty->assign("borradoestudiante"  ,$borradoestudiante);
+    $smarty->assign("total"  ,$total);
     
   $columnacentro = 'docente/estudiante/columna.centro.inscripcion.estudiante-cvs-lista.tpl';
   $smarty->assign('columnacentro',$columnacentro);
