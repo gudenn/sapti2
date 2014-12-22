@@ -47,12 +47,14 @@ try {
   $smarty->assign('vigencia'     ,$vigencia);
   $smarty->assign('estudiante'     ,$estudiante);
 
-  
+  $fecha=$vigencia->fecha_fin;
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
-
- 
+ $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
+     $smarty->assign('lista'       ,'admin/estado/lista.tpl');
+  if ($fechah>fecha)
+  {
  
 
   if (isset($_GET['postergar'])&$vigencia->estado_vigencia!='PO' )
@@ -78,8 +80,12 @@ try {
      $vigencia->estado_vigencia='NO';
      $vigencia->save();
  }
-     $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
-     $smarty->assign('lista'       ,'admin/estado/lista.tpl');
+  }else
+    {
+         echo "<script>alert('El Estudiante no Tiene Proyecto');</script>";
+    }
+ 
+    
 
  
 
