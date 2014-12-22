@@ -45,6 +45,7 @@ try {
   leerClase("Modalidad");
   leerClase("Consejo");
   leerClase('Defensa');
+  leerClase("Semestre");
   
    $menuList[]     = array('url'=>URL.Consejo::URL,'name'=>'Consejo');
    $menuList[]     = array('url'=>URL . Consejo::URL.'listatribunal.php' ,'name'=>'Tribunal');
@@ -129,13 +130,31 @@ try {
     and t.estado='AC'  and p.estado='AC' and p.id=".$proyec->id;
      $resultado = mysql_query($sql);
      $arraytribunal= array();
- 
+      $semestre = new Semestre('',1);
+    
+    
+  $valorh = $semestre->getValor('Tiempo de espera para el rechazo tribunales hras.',73);
+    if (!$valorh)
+    {
+      //  echo $valorh;
+  $semestre->setValor('Tiempo de espera para el rechazo tribunales hras.',73);
+    }
      while ($fila = mysql_fetch_array($resultado)) 
      {$arrayAux= array();
        $arrayAux[]=$fila['id'];
        $arrayAux[]=$fila['nombre'];
        $arrayAux[]=$fila['apellidos'];
        $arrayAux[]=$proyec->getTribunalEstado($fila['id']);
+        $tribunal= $proyec->getTribunal($fila['id']);
+       $trasncurridos=$proyec->getTotalhorasTranscurridas($tribunal->fecha_asignacion);
+       if($valorh<$trasncurridos )
+       {
+         $tribunal->accion=  Objectbase::STATUS_AC;
+         $tribunal->save();
+           
+       }
+    
+       $arrayAux[]=($valorh-$trasncurridos);
       $arraytribunal[]= $arrayAux;
       //  $arraytribunal[]=array("accion"=>"34");
      }
@@ -146,7 +165,7 @@ try {
                $usuario =  new Usuario($estudiante->usuario_id);
                $modalidad=  new Modalidad( $proyectos->modalidad_id);
                $areaproyecto= $proyectos->getArea();
-
+               
             $smarty->assign('proyecto'  , $proyectos);
             $smarty->assign('modalidad'  , $modalidad);
             $smarty->assign('usuario'  , $usuario);
@@ -162,6 +181,7 @@ try {
 } 
 catch(Exception $e) 
 {
+
   $smarty->assign("ERROR", handleError($e));
 }
 

@@ -7,6 +7,15 @@ try {
   leerClase('Dicta');
   leerClase('Estudiante');
   leerClase('Proyecto');
+  leerClase('Semestre');
+   $semestre = new Semestre('',1);
+    
+    $valorh = $semestre->getValor('Número mínimo de avances',3);
+    if (!$valorh)
+    {
+      //  echo $valorh;
+       $semestre->setValor('Número mínimo de avances',3);
+    }
   $docente     = getSessionDocente();
   if ( isset($_POST['iddicta']) && is_numeric($_POST['iddicta']))
   {
@@ -23,7 +32,15 @@ try {
     $listatutores=$proyecto->getTutores();
     if($proyecto->getVistosBuenosTutores())
     {
+        if(($proyecto->getAvnces())>= $valorh)
+        {
+        
         echo 1;
+        } else
+        {
+            echo 2;
+        }
+        
     }  else {
         echo 0;
     }

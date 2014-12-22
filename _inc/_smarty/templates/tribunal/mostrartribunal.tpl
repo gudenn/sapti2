@@ -19,10 +19,11 @@
         <table class="tbl_lista">
   <thead>
     <tr>
-      <th><a  >ID          </a></th>
-      <th><a  >NOMBRE  </a></th>
-      <th><a  >APELLIDOS    </a></th>
-      <th><a  >ESTADO  </a></th>
+      <th><a  >Nro.        </a></th>
+      <th><a  >Nombre  </a></th>
+      <th><a  >Apellidos    </a></th>
+      <th><a  >Estado  </a></th>
+       <th><a  >Tiempo restante  </a></th>
     </tr>
   </thead>
   
@@ -34,6 +35,7 @@
      <td>{$arraytribunal[ic][1]} </td>
      <td>{$arraytribunal[ic][2]}</td>
      <td>{($arraytribunal[ic][3])}</td>
+      <td>{($arraytribunal[ic][4])}</td>
          </tr>
   {/section}
     </tbody> 

@@ -40,8 +40,8 @@ AND pr.es_actual=1
 AND di.id="'.$iddicta.'"'.' and pr.id
  IN  (
 select  v.proyecto_id
-from visto_bueno  v
-where v.visto_bueno_tipo="DO" and v.visto_bueno_id="'.$iddocente.'"
+from visto_bueno_docente v
+where v.docente_id="'.$iddocente.'"
 )'
 );
 

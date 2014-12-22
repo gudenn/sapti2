@@ -1136,13 +1136,27 @@ class Proyecto extends Objectbase {
       }
        return  $totalvb;
   }
+ /*
+  * retorna cantidad de horas 
+  * dada una fecha datetime
+  * en formato (Y-n-j H:i:s)
+  *
+  */
+    public function getTotalhorasTranscurridas($datetime=''){
+        //date_default_timezone_set('America/La_Paz');
+        $segundos= strtotime(date("Y-n-j H:i:s"))-strtotime($datetime);
+        $diferencia_horas=  abs(intval($segundos/60/60));
+        return  $diferencia_horas ;        
+      
+  }
+         
   /**
    * cantidad de notas dde un proyecto en los tribunales
    * select  COUNT(*)  as cantida
       from  proyecto p  , `nota_tribunal`  nt
        where  p.`id`  =nt.`proyecto_id`  and nt.`proyecto_id`=1
    */
-  
+ 
   function  getCantidadNotas()
   {
     $contidad=0;   
@@ -1156,7 +1170,24 @@ class Proyecto extends Objectbase {
     return $contidad;
     
   }
-
+  /*
+   * funcion que retorna  los avances
+   */
+  public function getAvnces() {
+      leerClase('Avance');
+      $array= array();
+          $resul = "SELECT id, estado_avance, fecha_avance, descripcion
+            FROM avance av
+            WHERE av.proyecto_id='".$this->id."'
+            ORDER BY id DESC";
+          
+        $resultado = mysql_query( $resul );
+    if ($resultado)
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) {
+      $array[]= new Avance($fila['id']);
+    }
+return $array;
+  }
 
   /**
    * retorna el total de proyectos con defensa privada

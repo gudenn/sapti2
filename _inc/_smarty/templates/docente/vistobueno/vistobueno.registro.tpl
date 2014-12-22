@@ -12,8 +12,8 @@
             <br/>
                    
             <p>
-              <input type="text" name="fecha_visto_bueno" id="fecha_visto_bueno" value="{$vistobueno->fecha_visto_buena}" size="22"/>
-              <label for="fecha_revision"><small>Fecha De Visto Bueno</small></label>
+              <input type="text" name="fecha" id="fecha" value="{$vistobueno->fecha}" size="22"/>
+              <label for="fecha"><small>Fecha De Visto Bueno</small></label>
             </p>
             <h2 class="title">Grabar</h2>
             <p>

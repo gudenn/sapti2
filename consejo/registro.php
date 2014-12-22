@@ -79,9 +79,19 @@ try {
        $semestre->setValor('Número máximo de tribunal',10);
     }
     
+ $valorh = $semestre->getValor('Tiempo de espera para el rechazo tribunales hras.',73);
+    if (!$valorh)
+    {
+      //  echo $valorh;
+  $semestre->setValor('Tiempo de espera para el rechazo tribunales hras.',73);
+    }
+    $valorh = $semestre->getValor('Tiempo de espera de revisión de tribunal  (Semanas).',3);
+    if (!$valorh)
+    {
+      //  echo $valorh;
+  $semestre->setValor('Tiempo de espera de revisión de tribunal  (Semanas).',3);
+    }
 
-    
-    echo $valor;
   if(isset($_GET['estudiante_id']))
   {
      $estudiante   = new Estudiante($_GET['estudiante_id']);
