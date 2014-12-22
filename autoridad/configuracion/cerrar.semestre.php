@@ -16,6 +16,7 @@ try {
   $smarty->assign('keywords','Gestion,Estudiantes');
 
   //CSS
+  $CSS[]  = URL_CSS . "dashboard.css";
   $CSS[]  = URL_CSS . "academic/tables.css";
   $CSS[]  = URL_JS . "box/box.css";  
   $smarty->assign('CSS',$CSS);
@@ -61,13 +62,14 @@ try {
   $smarty->assign("seleccion", $seleccion);
   date_default_timezone_set('America/La_Paz');
   $fecha_actual=date("Y-m-d");
-  $fechafin = str_replace ( "/" ,  "-" , $semestre->fecha_fin); 
+  $fechafin = str_replace ( "/", "-", $semestre->fecha_fin); 
   $fechasql = date('Y-m-d', strtotime($fechafin));
 
     if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
   {
-    $EXITO = false;
+    $EXITO = 'fecha';
         if($fecha_actual>$fechasql){
+            $EXITO = 'NO';
     mysql_query("BEGIN");
     $semestre_id=$_POST['semestre_id'];
     if(count($seleccion)>0 && $semestre_id >0){
@@ -200,7 +202,7 @@ try {
            $semestreactivar=new Semestre($semestre_id);
            $semestreactivar->activar();
            $semestreactivar->save();
-           $EXITO = TRUE;
+           $EXITO = 'SI';
            mysql_query("COMMIT");     
   }}
 
@@ -213,10 +215,14 @@ try {
   if (isset($EXITO))
   {
     $html = new Html();
-    if ($EXITO)
-      $mensaje = array('mensaje'=>'Se grabo correctamente la Configuracion','titulo'=>'Registro de Configuracion' ,'icono'=> 'tick_48.png');
-    else
+    if ($EXITO=='SI'){
+      $mensaje = array('mensaje'=>'Se grabo correctamente la Configuracion','titulo'=>'Registro de Configuracion' ,'icono'=> 'tick_48.png');  
+    }else{
+     if ($EXITO=='fecha'){
+      $mensaje = array('mensaje'=>'Hubo un problema, El semestre tiene Vigencia hasta la Fecha: '.$fechasql.'</br> Fecha Actual: '.$fecha_actual,'titulo'=>'Registro de Configuracion' ,'icono'=> 'warning_48.png');  
+    }else{
       $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente la Configuracion Seleccione los Campos Obligatorios.','titulo'=>'Registro de Configuracion' ,'icono'=> 'warning_48.png');
+    }    }
    $ERROR = $html->getMessageBox ($mensaje);
   }
   $smarty->assign("ERROR",$ERROR);

@@ -3,18 +3,21 @@
             <h1 class="title">Formulario De Inscripción De Estudiantes A <b>{$materiagrupo[0]['materia']}</b></h1>
             <p>
                <label for="nombre de materia"><small>Nombre De Materia: </small></label>
-               <span><b>{$materiagrupo[0]['materia']} </b><br />Grupo: <b>{$materiagrupo[0]['grupo']}</b></span><br/>
+               <span><b>{$materiagrupo[0]['materia']} </b><br/>Grupo: <b>{$materiagrupo[0]['grupo']}</b></span><br/>
             </p>
           <form action="#" method="post" id="registro" name="registro" enctype="multipart/form-data">
             <fieldset>
-                    <legend>Importar CSV/Excel file</legend>
                     <div class="control-group">
                             <div class="control-label">
-                                    <label>CSV/Excel File:</label>
+                                    <label><b>Importar Archivo CSV: </b></label><br>
+                        <label><b>Formato:</b>
+                            <br> Nº; Código SIS; Apellido Paterno Apellido Materno Nombre; Correo electrónico</label>
+                    <br>
                             </div>
                             <div class="controls">
                                        <input type="file" name="file" id="file" class="input-large" style="width: 250pt">
                             </div>
+                    <br>
                     </div>
             </fieldset>
             <h2 class="title">Grabar Estudiantes</h2>

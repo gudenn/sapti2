@@ -63,7 +63,7 @@ class Dicta extends Objectbase
     leerClase('Codigo_grupo');
     $materia    = new Materia($this->materia_id);
     $grupo      = new Codigo_grupo($this->codigo_grupo_id);
-    $mat_grupo= trim(strtoupper("{$materia->nombre} {$grupo->nombre}"));
+    $mat_grupo= trim(ucwords("{$materia->nombre} {$grupo->nombre}"));
     return $mat_grupo;
   }
       /**

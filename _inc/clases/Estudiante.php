@@ -11,7 +11,8 @@ class Estudiante extends Objectbase {
   const URL                  = "estudiante/";
   /** constant to add in the begin of the key to find the date values   */
   const ARCHIVO_PATH         = "estudiante/";
-
+  /** constant to add in the begin of the key to find the date values   */
+  const TITULOHONORIFICO         = "Est.";
   /**
    * Codigo identificador del Objeto Usuario
    * @var INT(11)

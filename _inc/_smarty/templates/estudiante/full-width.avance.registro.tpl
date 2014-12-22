@@ -173,8 +173,8 @@
             <div>
                 <br>
                 <h3><b>Registre el porcentaje de avance de su Proyecto {getHelpTip('Avance')}</b></h3>
-                <input type="range" id="porcentaje" name="porcentaje" min="1" max="100" value="1" style="width: 400px;">
-                <output for="range" id="output">0</output> %
+                <input type="range" id="porcentaje" name="porcentaje" min="1" max="100" value="{$porcentaje}" style="width: 400px;">
+                <output for="range" id="output">{$porcentaje}</output> %
             </div>
             <script>
                 {literal}
