@@ -325,7 +325,7 @@ where  hd.dia_id=d.id and hd.turno_id=t.id  and hd.docente_id=1 and d.id=1;
     $dias=array();
     $sql = "DISTINCT (d.id) as iddia from  horario_doc hd, dia  d , turno t where hd.dia_id=d.id and hd.turno_id=t.id and hd.docente_id=1";
     $resultado = mysql_query($sql);
-    var_dump($resultado);
+   // var_dump($resultado);
      if (!$resultado)
       return false;
     while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
@@ -346,7 +346,24 @@ where  hd.dia_id=d.id and hd.turno_id=t.id  and hd.docente_id=1 and d.id=1;
       return $res;
   }
   
-  
+  public function getAreaapoyo() {
+    leerClase('Apoyo');
+
+    $activo = Objectbase::STATUS_AC;
+    
+    $numeroareas=0;
+    $sql = "SELECT a.*
+FROM apoyo a
+WHERE a.docente_id=$this->id";
+    $resultado = mysql_query($sql);
+       if (!$resultado)
+      return    $numeroareas;
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+         { 
+           $numeroareas++;
+          }
+       return    $numeroareas;    
+  }
   
 }
 ?>

@@ -14,7 +14,7 @@
       </p>
       <p>
       <label for="rol"><small>Sub &aacute;rea :</small></label>
-      <select  class="select-style gender" name="sub_area_id" id="sub_area_id"  poblacioattri='' lang="10">
+      <select  class="select-style gender" name="sub_area_id" id="sub_area_id"  poblacioattri='' lang="10" required="true">
                     </select>&nbsp;<span id='subarea'></span>
                   
              </select>

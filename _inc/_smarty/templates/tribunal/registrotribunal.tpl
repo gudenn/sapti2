@@ -12,7 +12,8 @@
                                    {/foreach}</label>
      
 </div>   
-          <div style ="clear:both;"></div>
+<div style ="clear:both;"></div>
+       <a href="../autoridad/detalle/proyecto.pdf.php?estudiante_id={$estudiantebuscado->id}" target="_blank" >{icono('basicset/filepd.png','Descargar Pdf')} Pdf ver Tema</a>
   <hr>
 <div >
   <h1 style="text-align: center" > Modo De Asignaci&oacute;n</h1>

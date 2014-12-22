@@ -10,6 +10,8 @@
           <label for="nombre">Proyecto:  {$proyecto->nombre}</label><br />
     
  </form>
+               <a href="../autoridad/detalle/proyecto.pdf.php?estudiante_id={$estudiante->id}" target="_blank" >{icono('basicset/filepd.png','Descargar Pdf')} Pdf ver Tema</a>
+
   <div style="width: 50%;float: left;" class="tbl_filtro">  </div>
    <h1> Tribunales </h1>
 </div>  

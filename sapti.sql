@@ -252,19 +252,20 @@ CREATE  TABLE IF NOT EXISTS `materia` (
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
--- Table `semestre`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `semestre` ;
 
-CREATE  TABLE IF NOT EXISTS `semestre` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `codigo` VARCHAR(45) NULL ,
-  `activo` TINYINT(1) NULL ,
-  `valor` INT NULL ,
-  `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
+--
+-- Estructura de tabla para la tabla `semestre`
+--
+
+CREATE TABLE IF NOT EXISTS `semestre` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `codigo` varchar(45) DEFAULT NULL,
+  `activo` tinyint(1) DEFAULT NULL,
+  `valor` int(11) DEFAULT NULL,
+  `fecha_inicio` date DEFAULT NULL,
+  `fecha_fin` date DEFAULT NULL,
+  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
+  PRIMARY KEY (`id`));
 
 
 -- -----------------------------------------------------
@@ -1138,7 +1139,7 @@ CREATE TABLE IF NOT EXISTS `respaldo` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
-
+	
 
 
 
