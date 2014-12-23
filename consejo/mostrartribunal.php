@@ -133,11 +133,11 @@ try {
       $semestre = new Semestre('',1);
     
     
-  $valorh = $semestre->getValor('Tiempo de espera para el rechazo tribunales hras.',73);
+  $valorh = $semestre->getValor('Lapso de tiempo para el rechazo a ser tribunal hras.',73);
     if (!$valorh)
     {
       //  echo $valorh;
-  $semestre->setValor('Tiempo de espera para el rechazo tribunales hras.',73);
+  $semestre->setValor('Lapso de tiempo para el rechazo a ser tribunal hras.',73);
     }
      while ($fila = mysql_fetch_array($resultado)) 
      {$arrayAux= array();

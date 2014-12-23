@@ -615,7 +615,7 @@ class Notificacion extends Objectbase
       return false;
     while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
     {
-      $tribunal = new Tribunal($fila);
+      $tribunal = new Tribunal($fila['id']);
     }
     
     return  $tribunal;

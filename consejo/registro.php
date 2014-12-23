@@ -72,18 +72,18 @@ try {
     
      $semestre = new Semestre('',1);
     
-    $valorh = $semestre->getValor('Número máximo de tribunal',10);
+    $valorh = $semestre->getValor('Cantidad máximo de asignación de tribunales a docentes',10);
     if (!$valorh)
     {
       //  echo $valorh;
-       $semestre->setValor('Número máximo de tribunal',10);
+       $semestre->setValor('Cantidad máximo de asignación de tribunales a docentes',10);
     }
     
- $valorh = $semestre->getValor('Tiempo de espera para el rechazo tribunales hras.',73);
+ $valorh = $semestre->getValor('Lapso de tiempo para el rechazo a ser tribunal hras.',73);
     if (!$valorh)
     {
       //  echo $valorh;
-  $semestre->setValor('Tiempo de espera para el rechazo tribunales hras.',73);
+  $semestre->setValor('Lapso de tiempo para el rechazo a ser tribunal hras.',73);
     }
     $valorh = $semestre->getValor('Tiempo de espera de revisión de tribunal  (Semanas).',3);
     if (!$valorh)

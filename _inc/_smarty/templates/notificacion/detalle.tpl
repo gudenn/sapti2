@@ -12,8 +12,11 @@
     <p>Detalle</p>
     <p>{$notificacion->detalle}</p>
 {if ($estadonotificacion)=="Pendiente"}
-
     {if ($notificacion->tipo)==$tiponotificacion}
+        {if $proyecto->tipo_proyecto=="PR"}
+                          <a href="../../autoridad/detalle/proyecto.pdf.php?estudiante_id={$estudiante->id}" target="_blank" >{icono('basicset/filepd.png','Descargar Pdf')} Pdf ver Tema</a>
+
+             {/if}
       <form action="" method="post" >
         <select name=accion>
           {html_options options=$accion}

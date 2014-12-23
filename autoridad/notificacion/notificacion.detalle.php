@@ -62,11 +62,11 @@ try {
   {
       
        $semestre = new Semestre('',1);
-   $valorh = $semestre->getValor('Lapso de tiempo  para el rechazo a ser tribunal',72);
+   $valorh = $semestre->getValor('Lapso de tiempo para el rechazo a ser tribunal hras.',72);
     if (!$valorh)
     {
       //  echo $valorh;
-       $semestre->setValor('Horas para rechazar como tribunal',72);
+       $semestre->setValor('Lapso de tiempo para el rechazo a ser tribunal hras.',72);
     }
     
         $smarty->assign('accion', array(
@@ -126,14 +126,12 @@ if($horas>=$valorh)
       $notificacion->getAllObjects();
       $tribunal     = $notificacion->getNotificacionTribunal(getSessionUser()->id);
       $proyecto     = new Proyecto($notificacion->proyecto_id);
-     // var_dump($tribunal);
-    //  echo $tribunal->id;
-     
-      //Solo para tribunales
+
       if($tribunal->id!=0){
         $tribunal->visto   = Tribunal::VISTO;
         $tribunal->accion  = ( $_POST['accion']==Tribunal::ACCION_AC)?Tribunal::ACCION_AC:Tribunal::ACCION_RE;
         $tribunal->detalle = $_POST['detalle'];
+        $tribunal->fecha_aceptacion= date("j/n/Y");
         $tribunal->save();
 
         //Enviar notificacion
