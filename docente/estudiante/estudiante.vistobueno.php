@@ -32,7 +32,7 @@ try {
        header("Location: ../index.php");
   }
   $dicta=new Dicta($iddicta);
-  
+   
    /**
    * Menu superior
    */

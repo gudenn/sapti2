@@ -146,11 +146,12 @@ try {
        $arrayAux[]=$fila['apellidos'];
        $arrayAux[]=$proyec->getTribunalEstado($fila['id']);
         $tribunal= $proyec->getTribunal($fila['id']);
-       $trasncurridos=$proyec->getTotalhorasTranscurridas($tribunal->fecha_asignacion);
-       if($valorh<$trasncurridos )
+   
+       $trasncurridos=$proyec->getTotalhorasTranscurridas($tribunal->dateHumanToSQl($tribunal->fecha_asignacion));
+            if($trasncurridos > $valorh)
        {
          $tribunal->accion=  Objectbase::STATUS_AC;
-         $tribunal->save();
+        $tribunal->save();
            
        }
     

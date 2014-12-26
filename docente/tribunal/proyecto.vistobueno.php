@@ -53,9 +53,9 @@ try {
   $smarty->assign("usuario", $usuario);
   $smarty->assign("proyecto", $proyecto);
    date_default_timezone_set('America/La_Paz');
-      date_default_timezone_set('UTC');
-     $vistobueno->fecha_visto_buena=date("d/m/Y");
-      $smarty->assign("vistobueno", $vistobueno);
+     // date_default_timezone_set('UTC');
+    // $vistobueno->fecha_visto_buena=date("d/m/Y");
+    //  $smarty->assign("vistobueno", $vistobueno);
   
     if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
     {
