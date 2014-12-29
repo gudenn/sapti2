@@ -98,5 +98,75 @@ class Consejo extends Objectbase
       $filtro_sql .= " AND {$this->getTableName()}.descripcion like '%{$filtro->filtro('descripcion')}%' ";
     return $filtro_sql;
   }
+  public function getListaParaAsignarTribunales() {
+      $sql='
+SELECT DISTINCT (es.id) as id ,es.codigo_sis as codigosis , u.nombre ,CONCAT(u.apellido_paterno,"  ",u.apellido_materno) as apellidos, p.nombre as nombrep
+FROM  usuario u, estudiante es , proyecto_estudiante pe, proyecto p
+WHERE  u.id=es.usuario_id and  es.id=pe.estudiante_id and  pe.proyecto_id=p.id 
+and p.estado_proyecto="VA" and p.tipo_proyecto="PR"
+and u.estado="AC" and es.estado="AC" and pe.estado="AC"  and p.estado="AC"
+and p.es_actual=1';
+      
+      $resultado = mysql_query($sql);
+    if (!$resultado)
+      return false;
+    $user = mysql_num_rows($resultado);
+    return $user;
+      
+  }
+  public function getListaconTribunales() {
+
+     $sql='select DISTINCT (es.id), es.codigo_sis as codigosis , u.nombre as nombre, CONCAT(u.apellido_paterno," ",  u.apellido_materno) apellidos, p.nombre as nombrep
+  from proyecto p , usuario u, estudiante es , proyecto_estudiante pe, tribunal t
+  where  u.id=es.usuario_id and  es.id=pe.estudiante_id and  pe.proyecto_id=p.id and p.id=t.proyecto_id';
+      
+      $resultado = mysql_query($sql);
+    if (!$resultado)
+      return false;
+    $user = mysql_num_rows($resultado);
+    return $user; 
+      
+  }
+  
+  public function getListaParaDefensa() {
+      $sql='SELECT DISTINCT (es.id) as id ,es.codigo_sis  as codigosis, u.nombre ,CONCAT(u.apellido_paterno,"  " ,u.apellido_materno) as apellidos, p.nombre as nombrep
+FROM  usuario u, estudiante es , proyecto_estudiante pe, proyecto p , tribunal t
+WHERE  u.id=es.usuario_id and  es.id=pe.estudiante_id and  pe.proyecto_id=p.id and p.id=t.proyecto_id
+and p.estado_proyecto="TV" and p.tipo_proyecto="PR"
+and u.estado="AC" and es.estado="AC" and pe.estado="AC"  and p.estado="AC" and t.estado="AC"
+and p.es_actual=1';
+       $resultado = mysql_query($sql);
+    if (!$resultado)
+      return false;
+    $user = mysql_num_rows($resultado);
+    return $user; 
+      
+  }
+  public function getListaDefensas() {
+        $sql='SELECT DISTINCT (d.id) as id ,es.codigo_sis  as codigosis, u.nombre ,CONCAT(u.apellido_paterno,"  " ,u.apellido_materno) as apellidos, p.nombre as nombrep
+FROM  usuario u, estudiante es , proyecto_estudiante pe, proyecto p , tribunal t,defensa d
+WHERE d.proyecto_id=p.id and  u.id=es.usuario_id and  es.id=pe.estudiante_id and  pe.proyecto_id=p.id and p.id=t.proyecto_id
+and p.estado_proyecto="LD" and p.tipo_proyecto="PR" and d.estado="AC"
+and u.estado="AC" and es.estado="AC" and pe.estado="AC"  and p.estado="AC" and t.estado="AC"
+and p.es_actual=1';
+       $resultado = mysql_query($sql);
+    if (!$resultado)
+      return false;
+    $user = mysql_num_rows($resultado);
+    return $user; 
+  }
+  public function getListaTribunalesNoAceptados() {
+
+       $sql='select   DISTINCT(e.id)  as id ,e.codigo_sis  as codigosis, "  ",u.nombre , CONCAT(u.apellido_paterno ,"  ", u.apellido_materno) apellidos, p.nombre as nombrep
+from  usuario  u,  estudiante e  , proyecto_estudiante  pe , proyecto  p , tribunal t
+where    u.id= e.usuario_id  and e.id= pe.estudiante_id  and pe.proyecto_id= p.id
+ and t.accion="RE"  and  t.estado="AC" and p.id= t.proyecto_id  and u.estado="AC"
+ and e.estado="AC" and pe.estado="AC" and p.estado="AC"';
+       $resultado = mysql_query($sql);
+    if (!$resultado)
+      return false;
+    $user = mysql_num_rows($resultado);
+    return $user; 
+  }
 }
 ?>

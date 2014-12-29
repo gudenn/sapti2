@@ -38,8 +38,7 @@ try {
         /**
    * Menu superior
    */
-  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Asignaturas');
-  $menuList[]     = array('url'=>URL.Tutor::URL,'name'=>'Tutor');
+   $menuList[]     = array('url'=>URL.Tutor::URL,'name'=>'Tutor');
   $smarty->assign("menuList", $menuList);
   $notificaciones= new Notificacion();
   leerClase('Menu');
@@ -47,9 +46,9 @@ try {
   $menu = new Menu('Lista de Estudiantes de  METODOL. Y PLANIF. de proyecto de Grado');
   
   $link = Tutor::URL."perfil.seguimiento.lista.php";
-  $menu->agregarItem('Estudiantes Tutorados','Lista de Estudiantes Tutorados','basicset/user4.png',$link);
+  $menu->agregarItem('Estudiantes Tutoriados','Lista de Estudiantes Tutoriados','basicset/user4.png',$link);
    $link = Tutor::URL."perfil.estudiante.lista.php";
-  $menu->agregarItem('Dar Visto Bueno ','Visto Bueno a los Proyectos de los Estudiantes Tutorados','basicset/ok.png',$link);
+  $menu->agregarItem('Dar Visto Bueno ','Visto Bueno a los Proyectos de los Estudiantes Tutoriados','basicset/ok.png',$link);
  $link = Tutor::URL."perfil.vistobueno.lista.php";
   $menu->agregarItem('Lista  de  Visto Bueno  ','Lista de Proyectos Aprobados','basicset/ok.png',$link);
 
@@ -57,9 +56,9 @@ try {
   
   $menu = new Menu('Lista de Estudiantes De Proyecto Final');
   $link = Tutor::URL."seguimiento.lista.php";
-  $menu->agregarItem('Estudiantes Tutorados','Lista de Estudiantes Tutorados','basicset/user4.png',$link);
+  $menu->agregarItem('Estudiantes Tutoriados','Lista de Estudiantes Tutorados','basicset/user4.png',$link);
   $link = Tutor::URL."estudiante.lista.php";
-  $menu->agregarItem(' Dar Visto Bueno ','Visto Bueno a los Proyectos de los Estudiantes Tutorados','basicset/ok.png',$link);
+  $menu->agregarItem(' Dar Visto Bueno ','Visto Bueno a los Proyectos de los Estudiantes Tutoriados','basicset/ok.png',$link);
    $link = Tutor::URL."proyecto.vistobueno.lista.php";
   $menu->agregarItem('Lista Visto Bueno ','Lista de Proyectos Aprobados','basicset/ok.png',$link);
 

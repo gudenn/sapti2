@@ -244,13 +244,18 @@ class Menu
     $thises[] = $thise;
     
      $thise = new Menu('Backup de la Bases de Datos');
-    $link = Administrador::URL."respaldo/";
-    $thise->agregarItem('Respaldo','Gesti&oacute;n de Respaldo','basicset/backup.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+     leerClase('Respaldo');
+       $respaldo= new Respaldo();
+    $resul   = $respaldo->getArray();
+    
+ 
+       $link = Administrador::URL."respaldo/";
+    $thise->agregarItem('Respaldo','Gesti&oacute;n de Respaldo','basicset/backup.png',$link,0,   sizeof($resul));
   $thises[] = $thise;
     //bitacoras
    $thise = new Menu('Bitacoras Sistema');
    $link = Administrador::URL."bitacora/";
-   $thise->agregarItem('Bitacoras','Gesti&oacute;n de Bitacoras','basicset/bitacora.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+   $thise->agregarItem('Bitacoras','Gesti&oacute;n de Bitacoras','basicset/bitacora.png',$link,0,  '');
    $thises[] = $thise;
     return $thises;
   }
@@ -307,6 +312,8 @@ class Menu
 
     $thise = new Menu('Notificaciones y Mensajes');
     $link = Estudiante::URL."notificacion/";
+  
+    
     $thise->agregarItem('Notificaciones','Gesti&oacute;n de Notificaciones','basicset/message-archived.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
     $link = Estudiante::URL."notificacion/notificacion.gestion.php?estado_notificacion=SV";
     $counter = $notificacion->getTodasNotificaciones($usuario->id, '', '', ' AND estado_notificacion="SV" ');
@@ -359,28 +366,30 @@ class Menu
   function getConsejoIndex() {
       leerClase('Consejo');
       leerClase('Notificacion');
-         $menus = array();
- 
+      
+      $consejo = new Consejo();
+     $menus = array();
+
   $menu = new Menu('Asignaci&oacute;n de Tribunales');
   $link = Consejo::URL."lista.estudiante.php";
-  $menu->agregarItem('Asignaci&oacute;n  de Tribunales','Se Asigna  Tribunales a un Estudiante','tribunal.png',$link);
+  $menu->agregarItem('Asignaci&oacute;n  de Tribunales','Se Asigna  Tribunales a un Estudiante','tribunal.png',$link, $consejo->getListaParaAsignarTribunales());
   $link = Consejo::URL."listatribunal.php";
-  $menu->agregarItem('Lista de Estudiantes','Lista de Estudiantes con Tribunales','tribunal.png',$link);
+  $menu->agregarItem('Lista de Estudiantes','Lista de Estudiantes con Tribunales','tribunal.png',$link,$consejo->getListaconTribunales());
 
   $menus[] = $menu;
   
   $menu = new Menu('Asignaci&oacute;n de Fechas  de Defensa');
   $link = Consejo::URL."listadefensa.php";
-  $menu->agregarItem('Gesti&oacute;n de Asignac&oacute;n de Fechas de Defensa','Registro de Fechas de Defensa','defensa.png',$link);
+  $menu->agregarItem('Gesti&oacute;n de Asignac&oacute;n de Fechas de Defensa','Registro de Fechas de Defensa','defensa.png',$link,$consejo->getListaParaDefensa());
   
   $link = Consejo::URL."proyecto.defensa.php";
-  $menu->agregarItem('Gesti&oacute;n de Defensa','Lista de Defensas','defensa.png',$link);
+  $menu->agregarItem('Gesti&oacute;n de Defensa','Lista de Defensas','defensa.png',$link,$consejo->getListaDefensas());
 
   $menus[] = $menu;
  
   $menu = new Menu('Tribunales no Aceptados');
   $link = Consejo::URL."tribunales.rechazados.php";
-  $menu->agregarItem('Gesti&oacute;n de Asignaci&oacute;n','Registro y Modificaci&oacute;n de Tribunales','denegar.png',$link);
+  $menu->agregarItem('Gesti&oacute;n de Asignaci&oacute;n','Registro y Modificaci&oacute;n de Tribunales','denegar.png',$link,$consejo->getListaTribunalesNoAceptados());
    $menus[] = $menu;
   
    $notificacion= new Notificacion();
