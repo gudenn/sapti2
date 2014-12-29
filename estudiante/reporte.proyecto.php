@@ -1,7 +1,10 @@
 <?php
 
   require('_start.php');
- 
+
+  leerClase('Tutor');
+  leerClase('Docente');
+
   require_once(DIR_LIB.'/tcpdf/config/lang/eng.php');
   require_once(DIR_LIB.'/tcpdf/tcpdf.php');
 
@@ -87,8 +90,9 @@ class MYPDF extends TCPDF {
   // create some HTML content
   $html .= <<<CERT
       <h1>Informe de avance</h1>
+      <p><strong>Universitario:</strong> {$estudiante->getNombreCompleto()}</p>
       <p><strong>Proyecto:</strong> $proyecto->nombre</p>
-      <h2>Objetivos espec&iacute;ficos</h2>
+      <p><strong>Objetivos espec&iacute;ficos:</strong></p>
       <ul>
 CERT;
   $especifico = new Objetivo_especifico();
@@ -100,7 +104,7 @@ CERT;
   $html .= <<<CERT
       </ul>
       <p><strong>Descripci&oacute;n:</strong> $proyecto->descripcion</p>
-      <h2>Detalle de Avances:</h2>
+      <h4>Detalle de Avances:</h4>
       
       <table style="width:100%;">
 CERT;
@@ -149,6 +153,120 @@ CERT;
   $html .= <<<CERT
     </table>
 CERT;
+
+    $tutores = array();
+    foreach ($proyecto->proyecto_tutor_objs as $proyecto_tutor){$tutores[] = new Tutor($proyecto_tutor->tutor_id);}
+
+  $html .= <<<CERT
+    &nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>
+    <table style="width:100%;">
+      <tr>
+CERT;
+  foreach ($tutores as $tutor) {
+    $html .= <<<CERT
+        <td style="text-align:center;">.........................</td>
+CERT;
+  }
+  $html .= <<<CERT
+      </tr>
+      <tr>
+CERT;
+
+  foreach ($tutores as $tutor) {
+    $html .= <<<CERT
+        <td style="text-align:center;">Tutor</td>
+CERT;
+  }
+
+  $html .= <<<CERT
+      </tr>
+      <tr>
+CERT;
+
+  foreach ($tutores as $tutor) {
+    $html .= <<<CERT
+        <td style="text-align:center;">{$tutor->getNombreCompleto()}</td>
+CERT;
+  }
+
+  $html .= <<<CERT
+      </tr>
+    </table>
+CERT;
+
+  //docente
+    $docente = new Docente($estudiante->inscrito_objs[0]->dicta_id);
+    $docentes[] = $docente;
+    
+  $html .= <<<CERT
+    &nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>
+    <table style="width:100%;">
+      <tr>
+CERT;
+  foreach ($docentes as $docente) {
+    $html .= <<<CERT
+        <td style="text-align:center;">.........................</td>
+CERT;
+  }
+  $html .= <<<CERT
+      </tr>
+      <tr>
+CERT;
+
+  foreach ($docentes as $docente) {
+    $html .= <<<CERT
+        <td style="text-align:center;">Docente</td>
+CERT;
+  }
+
+  $html .= <<<CERT
+      </tr>
+      <tr>
+CERT;
+
+  foreach ($docentes as $docente) {
+    $html .= <<<CERT
+        <td style="text-align:center;">{$docente->getNombreCompleto()}</td>
+CERT;
+  }
+
+  $html .= <<<CERT
+      </tr>
+    </table>
+CERT;
+
+if ($proyecto->responsable){
+    $html .= <<<CERT
+    &nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>
+    <table style="width:100%;">
+      <tr>
+CERT;
+    $html .= <<<CERT
+        <td style="text-align:center;">.........................</td>
+CERT;
+  $html .= <<<CERT
+      </tr>
+      <tr>
+CERT;
+
+    $html .= <<<CERT
+        <td style="text-align:center;">Responsable</td>
+CERT;
+
+  $html .= <<<CERT
+      </tr>
+      <tr>
+CERT;
+
+    $html .= <<<CERT
+        <td style="text-align:center;">{$proyecto->responsable}</td>
+CERT;
+
+  $html .= <<<CERT
+      </tr>
+    </table>
+CERT;
+}
 
   // output the HTML content
   //$pdf->SetXY(10, 50);

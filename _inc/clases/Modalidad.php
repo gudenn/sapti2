@@ -80,4 +80,3 @@ class Modalidad extends Objectbase
   }
 }
 
-?>

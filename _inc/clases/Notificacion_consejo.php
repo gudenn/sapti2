@@ -50,4 +50,3 @@ class Notificacion_consejo extends Objectbase
 }
 
 
-?>

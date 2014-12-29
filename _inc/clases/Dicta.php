@@ -79,4 +79,3 @@ class Dicta extends Objectbase
     return $tipo;
   }
 }
-?>

@@ -372,7 +372,6 @@
                   <select  name="proyecto_registro_tutor" id="proyecto_registro_tutor" data-validation-engine="validate[required]" >
                     {html_options values=$registro_tutor selected=$proyecto->registro_tutor output=$registro_tutor}
                   </select>
-
                 </td>
                 <td class="{$tipo_moda}">
                   <select  name="proyecto_responsable" id="proyecto_responsable" data-validation-engine="validate[required]" >
@@ -415,7 +414,7 @@
                   Registrado por:{getHelpTip('registrado_por')}
                 </td>
                 <td>
-                  <input type="text" name="proyecto_registrado_por" value="{$estudiante->getNombreCompleto()}"  data-validation-engine="validate[required]">
+                  <input type="text" name="proyecto_registrado_por" value="{$registrado_por}"  data-validation-engine="validate[required]">
                 </td>
                 <td>
                   Fecha:{getHelpTip('fecha_registro')}
@@ -453,7 +452,13 @@
   </div>
   <div class="clear"></div>
   <script type="text/javascript">
+      var mostrar_adicionales = '{$tipo_moda_mostrar}';
   {literal} 
+      $(function(){
+          if(mostrar_adicionales=='Si'){
+              $('.tipo_moda').show();
+          }
+      });
     function addmore(test,tipoarea)
     {
       jQuery("#tb_"+$(test).attr("xfile")).fadeIn('slow');

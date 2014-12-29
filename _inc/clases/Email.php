@@ -64,4 +64,3 @@ const tipo_avance   = "Proyecto";
   
 }
 
-?>

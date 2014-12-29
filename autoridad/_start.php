@@ -2,7 +2,7 @@
   require_once dirname(dirname(__FILE__))."/_inc/_sistema.php";
   
   /** Smarty */
-  require(DIR_LIB.'/smarty/Smarty.class.php');
+  require_once (DIR_LIB.'/smarty/Smarty.class.php');
   Smarty::muteExpectedErrors();
   $nombre='';
   if(isUserSession()){

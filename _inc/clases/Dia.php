@@ -201,4 +201,3 @@ class Dia extends Objectbase {
    */
 }
 
-?>

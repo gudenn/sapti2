@@ -28,4 +28,3 @@ class Nota_tribunal extends Objectbase
 }
 
 
-?>

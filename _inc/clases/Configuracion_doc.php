@@ -15,4 +15,3 @@ class Configuracion_doc extends Objectbase
   var $docente_id;
 }
 
-?>

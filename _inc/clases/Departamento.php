@@ -23,4 +23,3 @@ class Departamento extends Objectbase
   
   
 }
-?>

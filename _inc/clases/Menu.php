@@ -291,10 +291,14 @@ class Menu
     $link = Estudiante::URL."reporte.proyecto.php";
     $thise->agregarItem('Informe de Avance','Informe de avance para el Proyecto','basicset/project.png',$link);
     //revisar la esta linea la comparacion e fechas no sirve de esa manera
-    if( is_object( $proyecto) && $proyecto->estado_proyecto==Proyecto::EST2_BUE /* && $fechaini<=$fechaactual && $fechafin>=$fechaactual*/)
+    if( is_object( $proyecto) && $proyecto->estado_proyecto==Proyecto::EST2_BUE  && $fechaini<=$fechaactual && $fechafin>=$fechaactual)
     {
       $link = Estudiante::URL."proyecto/proyecto.registro.php";
       $thise->agregarItem('Registro de Formulario','Registro de Formulario de Proyecto Final del Estudiante','basicset/survey.png',$link,1);
+    }
+    if( is_object( $proyecto) && $proyecto->tipo_proyecto ==  Proyecto::TIPO_PROYECTO && trim($proyecto->nombre) != '' ){
+      $link = Estudiante::URL."proyecto/proyecto.pdf.php";
+      $thise->agregarItem('Perfil Registrado','Ver mi perfil registrado','basicset/pdf.png',$link , 0 ,0 ,'_blank');
     }
     $thises[] = $thise;
    
@@ -557,4 +561,3 @@ ORDER BY ma.id";
   
 }
 
-?>

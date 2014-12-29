@@ -27,4 +27,3 @@ class Materia_tiene extends Objectbase
 
 }
 
-?>

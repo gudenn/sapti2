@@ -368,4 +368,3 @@ class Modelo_carta extends Objectbase
   
 }
 
-?>

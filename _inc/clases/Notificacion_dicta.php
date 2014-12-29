@@ -52,4 +52,3 @@ class Notificacion_dicta extends Objectbase
 }
 
 
-?>

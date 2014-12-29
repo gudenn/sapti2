@@ -1,20 +1,20 @@
 <?php
 
- define ("MODULO", "ESTUDIANTE");
-   require('../_start.php');
-  if(!isEstudianteSession())
+  if (!defined('MODULO')) {
+    define ("MODULO", "ESTUDIANTE");
+  }
+  require_once('../_start.php');
+  if( MODULO == 'ESTUDIANTE' && !isEstudianteSession() || MODULO == 'ADMIN-PROYECTO' && !isAdminSession() ){
     header("Location: ../login.php");
-  
-  $estudiante= getSessionEstudiante();
-  $estudiante->getAllObjects();
-  $proyecto   = $estudiante->getProyecto();
+  }
 
-  if($proyecto->estado_proyecto==Proyecto::EST6_C){
+
+  if($proyecto->estado_proyecto==Proyecto::EST6_C && !isAdminSession()){
     ?>
-        <script language='JavaScript'> 
-          alert('Lo sentimos usted no tiene acseso al registro Perfil'); 
+        <script language='JavaScript'>
+          alert('Lo sentimos usted no tiene acseso al registro Perfil');
         </script>";
-    <?php 
+    <?php
     header("Location:../login.php");
     exit();//SALIMOS ASI EVITAMOS UN ELSE TAN LARGO
   }
@@ -25,15 +25,21 @@ try {
   $smarty->assign('description','Formulario de registro de Proyecto');
   $smarty->assign('keywords','SAPTI,Proyecto,Registro');
 
- 
-  
+
+  leerClase('Administrador');
   leerClase('Estudiante');
   /**
    * Menu superior
    */
-  $menuList[]     = array('url'=>URL . Estudiante::URL , 'name'=>'Estudiante');
-
-  $menuList[]     = array('url'=>URL . Estudiante::URL . 'proyecto/'.basename(__FILE__),'name'=>'Registro de Proyecto');
+  if (isAdminSession()){
+    $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Estudiante');
+    $menuList[]     = array('url'=>URL . Administrador::URL . 'proyecto/','name'=>'Proyecto');
+    $menuList[]     = array('url'=>URL . Administrador::URL . 'proyecto/'.basename(__FILE__),'name'=>'Registro de Proyecto');
+  }
+  else {
+    $menuList[]     = array('url'=>URL . Estudiante::URL , 'name'=>'Estudiante');
+    $menuList[]     = array('url'=>URL . Estudiante::URL . 'proyecto/'.basename(__FILE__),'name'=>'Registro de Proyecto');
+  }
   $smarty->assign("menuList", $menuList);
 
 
@@ -43,7 +49,7 @@ try {
   $CSS[]  = URL_JS  . "/validate/validationEngine.jquery.css";
   //BOX
   $CSS[]  = URL_JS . "box/box.css";
-  
+
 
   //JS
   $JS[]  = URL_JS . "jquery.min.js";
@@ -79,20 +85,11 @@ try {
   leerClase('Vigencia');
 
   leerClase('Objetivo_especifico');
-  
-  $sqlr="select max( p.numero_asignado) as num
-         from proyecto p";
- $resultado = mysql_query($sqlr);
- $num= array();
 
-  while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) { 
-        $num[]=$fila;
-  }
-   
-  $numero=$num[0]['num']+1;
-  $smarty->assign('numero'  , $numero);
+  $numero = $proyecto->asignarNumero();
+  $smarty->assign('numero'  ,$numero );
 
-  
+
   $semestre   = new Semestre(false,true);
   //si o si trabajamos aca con un estudiante asi que lo guardaremos en session
   $estudiante_id = false;
@@ -102,23 +99,32 @@ try {
     $_SESSION['estudiante_id'] = $_GET['estudiante_id'];
     $estudiante_id             = $_GET['estudiante_id'];
   }
-   
-  $estudiante= getSessionEstudiante();
+
+  if (isAdminSession()){
+      $estudiante = new Estudiante($estudiante_id);
+  }
+  else {
+      $estudiante= getSessionEstudiante();
+  }
+
   $estudiante->getAllObjects();
   $usuario    = $estudiante->getUsuario();
   $proyecto   = $estudiante->getProyecto();
 
-  
+
   $proyecto->getAllObjects();
-  
-  
-  
-    
+
+
   $smarty->assign('usuario'   , $usuario);
   $smarty->assign('estudiante', $estudiante);
   $smarty->assign('proyecto'  , $proyecto);
   $smarty->assign('semestre'  , $semestre);
+
   $smarty->assign('tipo_moda' , 'tipo_moda');
+  if ($proyecto->modalidad_id){
+    $modalidad    = new Modalidad($proyecto->modalidad_id);
+    $smarty->assign('tipo_moda_mostrar',($modalidad->datos_adicionales)?'Si':'No');
+  }
 
   //Objetivos especicicos
   $smarty->assign('base'      , '2'); // cuantos se muestran mas 1
@@ -148,11 +154,11 @@ try {
   $smarty->assign('tutores', $tutores);
   $registro_tutor[] = '-- Seleccione --';
   foreach ($tutores as $tutor) {
-    $registro_tutor[] = $tutor->getNombreCompleto();    
+    $registro_tutor[] = $tutor->getNombreCompleto();
   }
   $smarty->assign('registro_tutor'    ,  $registro_tutor);
-  
-  
+
+
   //area
   $area         = new Area();
   $area->estado = Objectbase::STATUS_AC;
@@ -171,7 +177,7 @@ try {
   //Muchas Areas
   $smarty->assign('baseareas'      , '0');// cuantos se muestran mas 1
   $smarty->assign('TOTALAREAS'     , '10');// cuantos se van a guardas
-  
+
   //modalidad
   $modalidad         = new Modalidad();
   $modalidad->estado = Objectbase::STATUS_AC;
@@ -207,24 +213,29 @@ try {
 
   //Docente de la materia
   $docentes[]      = '-- Seleccione --';
-  foreach ($estudiante->inscrito_objs as $inscrito) 
+  foreach ($estudiante->inscrito_objs as $inscrito)
   {
     $dicta = new Dicta($inscrito->dicta_id);
     $docentes[] = $dicta->getNombreCompretoDocente();
   }
   $smarty->assign('docentes_materia', $docentes);
-  
+
   //Registrado por
-  $administrador_aux = getSessionAdmin();
-  $administrador_user  = new Usuario($administrador_aux->usuario_id);
-  $smarty->assign('registrado_por', $administrador_user->getNombreCompleto());
-  
+  if (isAdminSession()){
+    $administrador_aux = getSessionAdmin();
+    $administrador_user  = new Usuario($administrador_aux->usuario_id);
+    $smarty->assign('registrado_por', $administrador_user->getNombreCompleto());
+  }
+  else {
+    $smarty->assign('registrado_por', $estudiante->getNombreCompleto());
+  }
+
   //fecha
   $smarty->assign('fecha', date('d/m/Y'));
-  
+
   //cambio de tema
   $smarty->assign('cambio_tema', 'No');
-  
+
   //Responsable Todos los Docentes
   $docentes_responsables = new Docente();
   $docentes_responsables->estado = Objectbase::STATUS_AC;
@@ -237,25 +248,24 @@ try {
   }
   $smarty->assign('docresp'    ,  $docresp);
   $smarty->assign('docresp_sel',  $proyecto->responsable);
-  
-  
-  
+
+
   if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token']  )
   {
     $EXITO = false;
     mysql_query("BEGIN");
-    // para no re escribir los Objetivos 
+    // para no re escribir los Objetivos
     // eliminaremos toos los objetivos previa mente grabados
     if ($proyecto->id){
-      $proyecto->deleteAllSonObjects();
+      $proyecto->prepararParaActualizar();
     }
 
-    
+
     // SOLO PARA CAMBIOS DE TEMA
     //$proyecto = new Proyecto();
     $proyecto->objBuidFromPost('proyecto_');
     $proyecto->estado         = Objectbase::STATUS_AC;
-  
+
     $proyecto->fecha_registro = date('d/m/Y');
     $smarty->assign('proyecto'  , $proyecto);
 
@@ -281,7 +291,7 @@ try {
       $proyecto->objetivo_especifico_objs[] = $especifico;
     }
     $proyecto->asignarEstudiante($estudiante->id);
-    
+
     //areas y subareas
     $contador = 0;
     foreach ($_POST['area_activa'] as $a_activa) {
@@ -303,31 +313,26 @@ try {
       $proyecto->asignarAreaSubArea($area_id,$subarea_id);
       $contador ++;
 
-      
+
     }
-    if ($proyecto->modalidad_id)
-    {
-      $modalidad    = new Modalidad($proyecto->modalidad_id);
-      $smarty->assign('tipo_moda',($modalidad->datos_adicionales)?'':'tipo_moda');
-    }
-    
+
     $proyecto->validar();
-    $proyecto->tipo_proyecto =  Proyecto::TIPO_PERFIL;
+
+    if (isAdminSession()){
+        $proyecto->tipo_proyecto =  Proyecto::TIPO_PROYECTO;
+    }
+    else {
+        $proyecto->tipo_proyecto =  Proyecto::TIPO_PERFIL;
+    }
+
     $proyecto->estado_proyecto= Proyecto::EST5_P;
-    $proyecto->numero_asignado=$numero;
-    
+
     $proyecto->save();
     $proyecto->saveAllSonObjects(TRUE);
     $estudiante->marcarComoProyectoActual($proyecto->id);
-    
-    //grabamos la vigencia del proyecto
-    $vigencia=new Vigencia();
-    $vigencia->estado=  Objectbase::STATUS_AC;
-    $vigencia->estado_vigencia=  Vigencia::ESTADO_NORMAL;
-    $vigencia->fecha_inicio=date('d/m/Y');
-    $vigencia->fecha_fin= date("d/m/Y",strtotime(" +2 year") );
-    $vigencia->proyecto_id=$proyecto->id;
-    $vigencia->save();
+
+    $proyecto->asignarVigencia();
+
     //guardamos datos extra
     if ( isset($_POST['telefono']) )
     {
@@ -342,20 +347,18 @@ try {
     if ( isset($_POST['email']) || isset($_POST['telefono']) )
       $usuario->save();
 
-    
+
     $EXITO = TRUE;
     mysql_query("COMMIT");
   }// FIN GRABAR PROYECTO
-  
 
-  
-  
+
+
+
   $smarty->assign("semestre",$semestre);
-  
-  //Registro de numero
 
   //No hay ERROR
-  $ERROR = ''; 
+  $ERROR = '';
   leerClase('Html');
   $html  = new Html();
   if (isset($EXITO))
@@ -368,17 +371,14 @@ try {
    $ERROR = $html->getMessageBox ($mensaje);
   }
   $smarty->assign("ERROR",$ERROR);
-  
-} 
-catch(Exception $e) 
-{
+
+}
+catch(Exception $e){
   mysql_query("ROLLBACK");
   $smarty->assign("ERROR", handleError($e));
-  if (ENDESARROLLO){
-    //echo "<hr><br>Se PRODUJO UN ERROR";
-    echo $e;
-  }
 }
+//asignamos el numero
+$smarty->assign('numero'  , $proyecto->numero_asignado);
 
 $token                = sha1(URL . time());
 $_SESSION['register'] = $token;

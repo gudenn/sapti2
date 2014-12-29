@@ -137,6 +137,12 @@ class Proyecto extends Objectbase {
   var $docente_materia;
 
   /**
+   * registro_tutor el tutor que aprobo el inicio del proyecto
+   * @var VARCHAR(300)
+   */
+  var $registro_tutor;
+
+  /**
    * Fecha que se aprobo el inicio del proyecto
    * @var VARCHAR(300)
    */
@@ -249,6 +255,12 @@ class Proyecto extends Objectbase {
   var $avance_objs;
 
   /**
+   * (Objeto simple) La vigencia de este proyecto
+   * @var Vigencia|null 
+   */
+  var $vigencia_objs;
+
+  /**
    * Sobreescribimos la funcion de grabar, para despues crear las 
    * cartas correspondientes cartas
    * @param string $table puede recivir el valor de la tabla
@@ -263,7 +275,23 @@ class Proyecto extends Objectbase {
     $cartas = new Carta();
     $cartas->crearCartasParaProyecto($this);
   }
-  
+
+  /**
+   * Preparamos el proyecto para actualizar los datos
+   */
+  function prepararParaActualizar() {
+    $no_eliminar[] = 'avance_objs';
+    $no_eliminar[] = 'vigencia_objs';
+    $no_eliminar[] = 'carta_objs';
+    $no_eliminar[] = 'nota_tribunal_objs';
+    $no_eliminar[] = 'tribunal_objs';
+    $no_eliminar[] = 'proyecto_tutor_objs';
+    $no_eliminar[] = 'proyecto_dicta_objs';
+    $no_eliminar[] = 'proyecto_estudiante_objs';
+    $no_eliminar[] = 'revision_objs';
+    $this->deleteAllSonObjects($no_eliminar);
+  }
+
   /**
    * 
    * @param string $codigo_sis el codigo_sis
@@ -435,6 +463,41 @@ class Proyecto extends Objectbase {
     $asignado->fecha_asignacion       = date('d/m/Y');
     $this->proyecto_estudiante_objs[] = $asignado;
   }
+
+  /**
+   * Asignamos El numero de proyecto
+   */
+  function asignarNumero() {
+    if ($this->numero_asignado >= 1){
+      return $this->numero_asignado;
+    }
+    $this->numero_asignado = 1;
+    $sql  = "SELECT MAX( p.numero_asignado) AS num from " . $this->getTableName('Proyecto') . " as p";
+    $resp = mysql_query($sql);
+    if (!$resp) {return 1;}
+    $fila = mysql_fetch_array($resp, MYSQL_ASSOC);
+    $this->numero_asignado = $fila['num'] + 1;
+    return $this->numero_asignado;
+  }
+
+  
+  /**
+   * Grabamos la vigencia del proyecto si es que no esta grabada ya
+   */
+  function asignarVigencia() {
+    if (!count($this->vigencia_objs)){
+      //grabamos la vigencia del proyecto
+      $vigencia = new Vigencia();
+      $vigencia->estado=  Objectbase::STATUS_AC;
+      $vigencia->estado_vigencia =  Vigencia::ESTADO_NORMAL;
+      $vigencia->fecha_inicio = date('d/m/Y');
+      $vigencia->fecha_fin = date("d/m/Y",strtotime(" +2 year") );
+      $vigencia->proyecto_id = $this->id;
+      $vigencia->save();
+    }
+  }
+
+
 
   /**
    * Asignamos A Dicta
@@ -1270,4 +1333,3 @@ return $array;
   }
 }
 
-?>

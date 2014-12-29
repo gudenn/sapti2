@@ -39,4 +39,3 @@ class Apoyo extends Objectbase
   }
 }
 
-?>

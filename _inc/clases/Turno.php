@@ -92,5 +92,3 @@ class Turno extends Objectbase
   
    */
 }
-
-?>

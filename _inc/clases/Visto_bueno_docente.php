@@ -45,4 +45,3 @@ class Visto_bueno_docente extends Objectbase
 }
 
 
-?>

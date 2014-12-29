@@ -34,4 +34,3 @@ class Visto_bueno extends Objectbase
 
 }
 
-?>

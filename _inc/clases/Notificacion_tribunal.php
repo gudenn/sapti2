@@ -51,4 +51,3 @@ class Notificacion_tribunal extends Objectbase
 }
 
 
-?>

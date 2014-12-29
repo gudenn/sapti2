@@ -27,4 +27,3 @@ class Objetivo_especifico extends Objectbase {
   }
 }
 
-?>

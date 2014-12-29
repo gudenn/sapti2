@@ -1,4 +1,3 @@
-
 <?php
 
 class Vigencia extends Objectbase 
@@ -40,4 +39,3 @@ class Vigencia extends Objectbase
     //put your code here
 }
 
-?>

@@ -29,4 +29,3 @@ class Nota extends Objectbase
 }
 
 
-?>

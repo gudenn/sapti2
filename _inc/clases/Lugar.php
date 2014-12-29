@@ -128,4 +128,3 @@ class Lugar extends Objectbase
   }
   
 }
-?>
