@@ -200,7 +200,7 @@ function pendiente(estid, dicta) {
 		},
 		success: function (response) 
 		{ 
-                   
+                 //   alert(response);
                if(response==0)
              {
                            $('#clave'+estid).html("<a    style=\"cursor:pointer\">" +"<img src=\"" + image("basicset/menos.png") + "\" border=\"0\" alt=\"evaluar\" title=\"Visto Bueno\" width='30px' height='30px' />Falta Visto Bueno del Tutor(s)</a>");  
@@ -208,11 +208,11 @@ function pendiente(estid, dicta) {
              {
                   if(response==1)
                   {
-                  
+                 
                   $('#clave'+estid).html("<a   onclick=document.location.href='vistobueno.php?id_estudiante="+estid+"&iddicta="+ dicta +"' style=\"cursor:pointer\">" +"<img src=\"" + image("basicset/ok.png") + "\" border=\"0\" alt=\"evaluar\" title=\"Visto Bueno\" width='30px' height='30px' />Dar Visto Bueno</a>");    
                   }else
                   {
-                       alert(response);
+                     //  
                                            $('#clave'+estid).html("<a    style=\"cursor:pointer\">" +"<img src=\"" + image("basicset/menos.png") + "\" border=\"0\" alt=\"evaluar\" title=\"Visto Bueno\" width='30px' height='30px' />No cumple la cantidad mínima de avances</a>");  
      
                   }

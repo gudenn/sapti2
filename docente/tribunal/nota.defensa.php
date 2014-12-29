@@ -14,6 +14,7 @@ try {
        leerClase('Nota');
        leerClase('Nota_tribunal');
        leerClase('Tribunal');
+       leerClase('Notificacion');
 
        /** HEADER */
        $smarty->assign('title','Proyecto Final');
@@ -45,26 +46,43 @@ try {
        $menuList[]     = array('url'=>URL.Docente::URL.'tribunal','name'=>'Tribunal');
        $menuList[]     = array('url'=>URL.Docente::URL.'tribunal/publica.estudiante.lista.php','name'=>'Lista Estudiante');
        $smarty->assign("menuList", $menuList);
+       $idestudiante='';
+       if(isset($_GET['id_estudiante']) && is_numeric($_GET['id_estudiante']))
+       {
+           $idestudiante=$_GET['id_estudiante'];
+           
+       }
+       $estudiante= new Estudiante($idestudiante);
 
-       
+         $proyecto      =  $estudiante ->getProyecto();
+         $tribunal= $proyecto->getTribunal($docente->id);
     if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
-         {
-             $stado=0;
+        {
+            $stado=0;
             $docente=  getSessionDocente();
-              
             
-            
-            if(isset($_POST['nota_tribunal']))
+              if(isset($_POST['nota_tribunal']))
                  {
                if($_POST['nota_tribunal']>0 && is_numeric($_POST['nota_tribunal']) && $_POST['nota_tribunal'] <=100)
                     {
                     $estudiantes   =  new Estudiante($_POST['estudiante_id']);
-                    $proyecto      =  $estudiantes ->getProyecto();
-                    $tribunal      =  $proyecto->getTribunal($docente->id);
+                     $proyecto      =  $estudiantes ->getProyecto();
+                            $tribunal      =  $proyecto->getTribunal($docente->id);
                     $tribunal->nota_tribunal=$_POST['nota_tribunal'];
                     $tribunal->save();
                     $nota= $proyecto->getNota();
-                   
+                    
+                           $notificacion = new Notificacion();
+                            $notificacion->objBuidFromPost();
+                            $notificacion->proyecto_id=$proyecto->id; 
+                            $notificacion->tipo=  Notificacion::TIPO_MENSAJE;
+                            $notificacion->fecha_envio=date("j/n/Y");
+                            $notificacion->asunto="Nota de la defensa";
+                             $notificacion->detalle="Su nota es : " . $tribunal->nota_tribunal;
+                            $notificacion->prioridad=5;
+                            $notificacion->estado = Objectbase::STATUS_AC;
+                            $noticaciones= array('estudiantes'=>array($proyecto->getEstudiante()->id));
+                            $notificacion->enviarNotificaion( $noticaciones);
                     
                     $notadefensaa= 0;
                     $contador=0;
@@ -128,48 +146,25 @@ try {
                      $proyecto->estado_proyecto=  Proyecto::EST5_F;
                      $proyecto->save();
                      
-                     
-                     
-                      $notificacion = new Notificacion();
-                        $notificacion->objBuidFromPost();
-                        $notificacion->proyecto_id=$proyecto->id; 
-                        $notificacion->tipo=  Notificacion::TIPO_MENSAJE;
-                        $notificacion->fecha_envio=date("j/n/Y");
-                        $notificacion->asunto="Acta de Defensa"; 
-                         $notificacion->detalle="Debe apersonarse a la secretaria de la carrera para recoger su acta de defensa.";
-                        $notificacion->prioridad=5;
-                        $notificacion->estado = Objectbase::STATUS_AC;
-                        $noticaciones= array('estudiantes'=>array($proyectos->getEstudiante()->id));
-                        $notificacion->enviarNotificaion($noticaciones);
+                             $notificacion = new Notificacion();
+                            $notificacion->objBuidFromPost();
+                            $notificacion->proyecto_id=$proyecto->id; 
+                            $notificacion->tipo=  Notificacion::TIPO_MENSAJE;
+                            $notificacion->fecha_envio=date("j/n/Y");
+                            $notificacion->asunto="Acta de Defensa";
+                             $notificacion->detalle="Debe apersonarse a la secretaria de la carrera para recoger su acta de defensa. nota final :".round($nota->nota_final,2);
+                            $notificacion->prioridad=5;
+                            $notificacion->estado = Objectbase::STATUS_AC;
+                            $noticaciones= array('estudiantes'=>array($proyecto->getEstudiante()->id));
+                            $notificacion->enviarNotificaion( $noticaciones);
                     
+       
                   }
            
                   
               $stado=1;
          }
 
-       
-       if (isset($_POST['observaciones'])) 
-            $observaciones=$_POST['observaciones'];
-           if (isset($_GET['id_estudiante'])) 
-               $id_estudiante=$_GET['id_estudiante'];
-           $docentes=  getSessionDocente();
-           
-           $estudiante     = new Estudiante($id_estudiante);
-           $usuario        = $estudiante->getUsuario();
-           $proyecto       = $estudiante->getProyecto();
-           $tribuanls       = $proyecto->getTribunal($docentes->id);
-            
-            $smarty->assign("usuario", $usuario);
-            $smarty->assign("estudiante", $estudiante);
-            $smarty->assign("proyecto", $proyecto);
-            $smarty->assign("tribunal",$tribuanls);
-
-            $urlpdf=".../ARCHIVO/proyecto.pdf";
-            $smarty->assign("urlpdf", $urlpdf);
-            $vistobueno= new Visto_bueno();
-            date_default_timezone_set('UTC');
-            $vistobueno->fecha_visto_buena=date("d/m/Y");
 
  
         leerClase('Html');
@@ -185,10 +180,15 @@ try {
           $ERROR = $html->getMessageBox ($mensaje);
                 }
            }
+        $smarty->assign("estudiante",$estudiante);
+          $smarty->assign("proyecto",$proyecto);
+           $smarty->assign("tribunal",$tribunal);
+          
        $smarty->assign("ERROR",$ERROR);
      } 
      catch(Exception $e) 
      {
+         echo $e;
        $smarty->assign("ERROR", handleError($e));
      }
        $token = sha1(URL . time());

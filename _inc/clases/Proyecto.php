@@ -610,9 +610,9 @@ class Proyecto extends Objectbase {
     $resultados= mysql_query($sql);
     if (!$resultados)
       return false;
-    $estudiantes= mysql_fetch_array($resultados);
-    $estudiante = new Tribunal($estudiantes);
-    return $estudiante;
+    $tribunal= mysql_fetch_array($resultados);
+    $tribuna = new Tribunal($tribunal['id']);
+    return $tribuna;
   }
   
   
@@ -1206,7 +1206,7 @@ class Proyecto extends Objectbase {
   *
   */
     public function getTotalhorasTranscurridas($datetime=''){
-        //date_default_timezone_set('America/La_Paz');
+        date_default_timezone_set('America/La_Paz');
         $segundos= strtotime(date("Y-n-j H:i:s"))-strtotime($datetime);
         $diferencia_horas=  abs(intval($segundos/60/60));
         return  $diferencia_horas ;        

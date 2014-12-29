@@ -194,8 +194,8 @@ WHERE  u.id= d.usuario_id and   d.id= t.docente_id and   t.estado='AC' and u.est
            
            //echo $valor;
                 $sql="select  d.id
-               from   tribunal t, proyecto  p,   defensa  d
-                  where   t.proyecto_id=p.id  and p.id= d.proyecto_id";
+                      from   tribunal t, proyecto  p,   defensa  d
+                      where   t.proyecto_id=p.id  and p.id= d.proyecto_id";
                 $resultado   =  mysql_query($sql);
           while ($filadoc = mysql_fetch_array( $resultado, MYSQL_ASSOC))
             {   
@@ -238,8 +238,14 @@ WHERE  u.id= d.usuario_id and   d.id= t.docente_id and   t.estado='AC' and u.est
              if($_POST['accion']==Defensa::DEFENSA_PUBLICA)
              {
         
-                 $query = "UPDATE proyecto p SET p.estado_proyecto='LD'  WHERE p.id=$idproyecto";
-                 mysql_query($query);
+                 //$query = "UPDATE proyecto p SET p.estado_proyecto='LD'  WHERE p.id=$idproyecto";
+                // mysql_query($query);
+                 
+               $proyectosestado= new Proyecto($idproyecto);
+               $proyectosestado->estado_proyecto=  Proyecto::EST4_DEF;
+               $proyectosestado->save();
+               
+                       
        
              }
             
