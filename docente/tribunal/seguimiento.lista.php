@@ -26,7 +26,8 @@ try {
   $JS[]  = URL_JS . "tablaeditabletribunal/tabla.seguimiento.lista.js";
   $smarty->assign('JS',$JS);
    
- $menuList[]     = array('url'=>URL.Docente::URL.'tribunal','name'=>'Tribunal >');
+  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Asignaturas');
+ $menuList[]     = array('url'=>URL.Docente::URL.'tribunal','name'=>'Tribunal');
  $menuList[]     = array('url'=>URL.Docente::URL.'tribunal/seguimiento.lista.php','name'=>'Lista Estudiantes');
  $smarty->assign("menuList", $menuList);
   

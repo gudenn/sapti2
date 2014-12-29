@@ -33,6 +33,7 @@ try {
    /**
    * Menu superior
    */
+  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Asignaturas >');
   $menuList[]     = array('url'=>URL.Docente::URL.'tutor','name'=>'Tutor >');
  $menuList[]     = array('url'=>URL.Docente::URL.'tutor/estudiante.lista.php','name'=>'Lista Estudiante de Proyectos');
  $smarty->assign("menuList", $menuList);

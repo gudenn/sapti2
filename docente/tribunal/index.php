@@ -40,22 +40,23 @@ if(!isDocenteSession())
   
   
   $notificacion = new Notificacion();
+  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Asignaturas');
   $menuList[]     = array('url'=>URL.Docente::URL.'tribunal','name'=>'Tribunal');
   $smarty->assign("menuList", $menuList);
 
   $menu = new Menu('Lista de Estudiantes');
   $link = Tribunal::URL."seguimiento.lista.php";
-  $menu->agregarItem('Gesti&oacute;n de Estudiantes','Revisión  a los Proyectos','basicset/user4.png',$link);
+  $menu->agregarItem('Gesti&oacute;n de Estudiantes','Revision y Vistos Buenos a los Proyectos','basicset/user4.png',$link);
   $link = Tribunal::URL."estudiante.lista.php";
-  $menu->agregarItem('Dar Visto Bueno','Habilitar los Proyectos Para la Asignación de Defensa','basicset/ok.png',$link);
+  $menu->agregarItem('Dar Visto Bueno','Habilitar los Proyectos Para la Asignacion de Defensa','basicset/ok.png',$link);
  $link = Tribunal::URL."visto.estudiante.lista.php";
-  $menu->agregarItem('Lista de Visto Bueno','Habilitar los Proyectos Para la Asignación de Defensa','basicset/ok.png',$link);
+  $menu->agregarItem('Lista de Visto Bueno','Habilitar los Proyectos Para la Asignacion de Defensa','basicset/ok.png',$link);
 
   $menus[] = $menu;
  
    $menu = new Menu('Defensas');
   $link = Tribunal::URL."privada.estudiante.lista.php";
-  $menu->agregarItem('Lista de Defensa  Privada','Revisión y modificación de Proyectos','tribunal.png',$link);
+  $menu->agregarItem('Lista de Defensa  Privada','Revision y modificacion de Proyectos','tribunal.png',$link);
   $link = Tribunal::URL."publica.estudiante.lista.php";
   $menu->agregarItem('Lista de Defensa Publica ','Evaluaci&oacute;n de Proyecto','tribunal.png',$link);
 
