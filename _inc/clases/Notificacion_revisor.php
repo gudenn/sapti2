@@ -54,4 +54,3 @@ class Notificacion_revisor extends Objectbase
 }
 
 
-?>

@@ -84,4 +84,3 @@ class Fecha_registro extends Objectbase
     return $filtro_sql;
   }
 }
-?>

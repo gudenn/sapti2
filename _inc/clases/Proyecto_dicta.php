@@ -19,4 +19,3 @@ class Proyecto_dicta extends Objectbase
 
 }
 
-?>

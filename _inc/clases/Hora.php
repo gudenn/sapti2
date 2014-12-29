@@ -41,4 +41,3 @@ class Hora extends Objectbase
   
  
 }
-?>

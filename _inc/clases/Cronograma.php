@@ -83,4 +83,3 @@ class Cronograma extends Objectbase
     return $filtro_sql;
   }
 }
-?>

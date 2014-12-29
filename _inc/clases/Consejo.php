@@ -99,4 +99,3 @@ class Consejo extends Objectbase
     return $filtro_sql;
   }
 }
-?>

@@ -16,4 +16,3 @@ class Tipo_defensa extends Objectbase
  
 
 }
-?>

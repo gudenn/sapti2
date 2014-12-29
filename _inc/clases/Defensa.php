@@ -47,4 +47,3 @@ class Defensa extends Objectbase
   
 }
 
-?>

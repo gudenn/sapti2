@@ -12,4 +12,3 @@ class Privilegio extends Objectbase
   var $nombre_privilegio;
 }
 
-?>

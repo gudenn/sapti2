@@ -14,4 +14,3 @@ class Respaldo extends Objectbase
   
   var $archivo;
 }
-?>

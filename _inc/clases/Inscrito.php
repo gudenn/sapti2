@@ -86,4 +86,3 @@ class Inscrito extends Objectbase
   }
   
 }
-?>

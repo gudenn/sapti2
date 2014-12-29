@@ -91,4 +91,3 @@ class Forotema extends Objectbase
     return $filtro_sql;
   }
 }
-?>

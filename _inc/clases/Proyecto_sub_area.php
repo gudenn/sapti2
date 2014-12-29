@@ -33,4 +33,3 @@ class Proyecto_sub_area extends Objectbase
   }
 }
 
-?>

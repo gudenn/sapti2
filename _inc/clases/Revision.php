@@ -333,4 +333,3 @@ while ($fila1b = mysql_fetch_array($sqlbus, MYSQL_ASSOC)) {
   }
 
 }
-?>

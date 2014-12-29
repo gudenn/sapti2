@@ -364,18 +364,21 @@ class Objectbase
    }
    
  /**
-  * delete all the objects, Se elimina a todos los objetos hijos que hacen referencia al padra
+  * delete all the objects, Se elimina a todos los objetos hijos que hacen referencia al padre
+  * se puede evitar borrar algunos si se los pasa por el array $dontDeleteThese
   *
-  * @param
-  *
+  * @param array|boolean $dontDeleteThese lista de los objetos que no queremos borrar
+  * @return boolean
+  * @throws Exception
   */
-  public function deleteAllSonObjects()
+  public function deleteAllSonObjects($dontDeleteThese = false)
   {
     foreach($this as $key => $value)
     {
       /** if the $key refer to an object continue */
-      if (!$this->isKeyObject($key) || $key == 'historial_objs' )
-        continue;
+      if (!$this->isKeyObject($key) || $key == 'historial_objs' ){continue;}
+      // evitamos borrar los que no queremos
+      if ($dontDeleteThese && in_array($key, $dontDeleteThese)){continue;}
 
       $table     = $this->getTableName($this->getClassNameOfKey($key));
       $id_label  = $this->getIdlabelBase(get_class($this) );

@@ -60,4 +60,3 @@ class Codigo_grupo extends Objectbase
   }
 }
 
-?>

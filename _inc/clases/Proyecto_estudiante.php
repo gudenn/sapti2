@@ -85,4 +85,3 @@ class Proyecto_estudiante extends Objectbase
   
 }
 
-?>

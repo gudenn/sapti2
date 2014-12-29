@@ -1,9 +1,13 @@
 <?php
 
-require('../_start.php');
+//if (!defined('START')){
+  require('../_start.php');
+//}
 
 require_once(DIR_LIB . '/tcpdf/config/lang/eng.php');
 require_once(DIR_LIB . '/tcpdf/tcpdf.php');
+
+
 //cabecera pdf
 class MYPDF extends TCPDF {
 
@@ -89,11 +93,12 @@ function desplegar() {
   foreach ($proyecto->proyecto_tutor_objs as $proyecto_tutor) {
       if (! isset($proyecto_tutor->tutor_id) || !$proyecto_tutor->tutor_id ) continue;
     $tutor = new Tutor($proyecto_tutor->tutor_id);
-    $tutores .= $tutor->getNombreCompleto().'<br>';
+    $tutores .= $tutor->getNombreCompleto().', ';
     if ($tutor_responsable == ''){
       $tutor_responsable = $tutor->getNombreCompleto();
     }
   }
+  $tutores = rtrim($tutores,', ');
 
   //exit('todo bien');
   //CARRERA
@@ -185,7 +190,7 @@ function desplegar() {
 		<td width="57%" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right:  1px solid #000000;"><b>E-mail:</b> {$usuario->email}</td>
 	</tr>
 	<tr valign="top">
-		<td width="100%" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000;"><b>Tutores:</b> {$tutores}</td>
+		<td width="100%" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000;"><b>Tutores:</b><span style="font-size:$font_esp;">{$tutores}</span></td>
 	</tr>
 	<tr valign="top">
 		<td width="60%" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none;"><b>Carrera:</b> {$carrera}</td>
@@ -230,7 +235,7 @@ FORMULARIO;
 		<td width="100%" style="border: 1px solid #000000;"><b>Objetivo general:</b> {$proyecto->objetivo_general}</td>
 	</tr>
 	<tr valign="top">
-		<td width="100%" style="border: 1px solid #000000;"><b>Objetivos específicos:</b><ul style="margin:0;padding:0;font-size:$font_esp;">
+		<td width="100%" style="border: 1px solid #000000;margin:0;padding:0;"><b>Objetivos específicos:</b><ul style="margin:0;padding:0;font-size:$font_esp;">
 FORMULARIO;
 
   // OBJETIVOS ESPECIFICOS
@@ -310,16 +315,14 @@ FORMULARIO;
 		<td width="100%" style="">&nbsp;</td>
 	</tr>
 	<tr valign="top">
-		<td width="40%" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none;"><b>Registrado por:</b>{$proyecto->registrado_por}</td>
-		<td width="30%" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none;"><b>Firma:</b></td>
-		<td width="30%" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right:  1px solid #000000;"><b>Fecha:</b>{$proyecto->fecha_registro}</td>
+		<td width="60%" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none;"><b>Registrado por:</b>{$proyecto->registrado_por}</td>
+		<td width="20%" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none;"><b>Firma:</b></td>
+		<td width="20%" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right:  1px solid #000000;"><b>Fecha:</b>{$proyecto->fecha_registro}</td>
 	</tr>
 
 </table>
 FORMULARIO;
   return $formulario;
-  var_dump($proyecto);
-  exit();
 }
 
 // output the HTML content

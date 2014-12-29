@@ -18,4 +18,3 @@ class Horario_docente extends Objectbase
     
 }
 
-?>

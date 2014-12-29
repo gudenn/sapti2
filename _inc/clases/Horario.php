@@ -8,4 +8,3 @@ class Horario extends Objectbase
 }
 
 
-?>

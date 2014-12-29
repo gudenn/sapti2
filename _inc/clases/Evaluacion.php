@@ -72,4 +72,3 @@ AND it.evaluacion_id='$this->id'";
     return $est;
         };
 
-?>

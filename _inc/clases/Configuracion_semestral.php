@@ -125,4 +125,3 @@ class Configuracion_semestral extends Objectbase
   }
 
 }
-?>

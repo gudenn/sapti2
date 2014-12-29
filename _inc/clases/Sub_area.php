@@ -76,4 +76,3 @@ class Sub_area extends Objectbase
   }
 }
 
-?>

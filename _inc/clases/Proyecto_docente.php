@@ -16,4 +16,3 @@ class Proyecto_docente extends Objectbase
 
 }
 
-?>

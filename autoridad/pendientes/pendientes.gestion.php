@@ -69,7 +69,7 @@ try {
      $subarea=$proyecto->getSubarea();
      $objetivos=$proyecto->getObjetivo();
  
-     if($proyecto_aux->estado_proyecto!='CO'){
+     if($proyecto_aux->estado_proyecto!= Proyecto::EST6_C){
     
      $actualproyecto=new Proyecto();
      $actualproyecto->carrera_id=$proyecto_aux->carrera_id;
@@ -87,6 +87,7 @@ try {
      $actualproyecto->objetivo_general=$proyecto_aux->objetivo_general;
      $actualproyecto->trabajo_conjunto=$proyecto_aux->trabajo_conjunto;
      $actualproyecto->responsable=$proyecto_aux->responsable;
+     $actualproyecto->registro_tutor=$proyecto_aux->registro_tutor;
      $actualproyecto->tipo_proyecto=  Proyecto::TIPO_PROYECTO;
      $actualproyecto->estado_proyecto= Proyecto::EST1_INI;
      $actualproyecto->save();
@@ -107,11 +108,11 @@ try {
     
     foreach ($areas as $nueva)
     { 
-    $parea=new Proyecto_area();
-    $parea->area_id =$nueva->id;
-    $parea->proyecto_id=$actualproyecto->id;
-    $parea->estado=  Objectbase::STATUS_AC;
-    $parea->save();
+      $parea=new Proyecto_area();
+      $parea->area_id =$nueva->id;
+      $parea->proyecto_id=$actualproyecto->id;
+      $parea->estado=  Objectbase::STATUS_AC;
+      $parea->save();
     }
     //copiar Subarea
     
@@ -120,30 +121,30 @@ try {
     
     foreach ($subarea as $nsub)
     { 
-    $psarea=new Proyecto_sub_area();
-    $psarea->sub_area_id=$nsub->id;
-    $psarea->proyecto_id=$actualproyecto->id;
-    $psarea->estado=  Objectbase::STATUS_AC;
-    $psarea->save();
+      $psarea=new Proyecto_sub_area();
+      $psarea->sub_area_id=$nsub->id;
+      $psarea->proyecto_id=$actualproyecto->id;
+      $psarea->estado=  Objectbase::STATUS_AC;
+      $psarea->save();
     }
     //copiar Objetivos
     leerClase('Objetivo_especifico');
     foreach ($objetivos as $especifico)
     { 
-    $objetivos=new Objetivo_especifico();
-    $objetivos->descripcion=$especifico->descripcion;
-    $objetivos->proyecto_id=$actualproyecto->id;
-    $objetivos->estado=  Objectbase::STATUS_AC;
-    $objetivos->save();
+      $objetivos=new Objetivo_especifico();
+      $objetivos->descripcion=$especifico->descripcion;
+      $objetivos->proyecto_id=$actualproyecto->id;
+      $objetivos->estado=  Objectbase::STATUS_AC;
+      $objetivos->save();
     }
    
     
      //copiar el tutor
      foreach ($tutores as $protut)
     { 
-    $proyectotutor=new Proyecto_tutor($protut->id);
-    $proyectotutor->proyecto_id=$actualproyecto->id;
-    $proyectotutor->save();
+      $proyectotutor=new Proyecto_tutor($protut->id);
+      $proyectotutor->proyecto_id=$actualproyecto->id;
+      $proyectotutor->save();
     }
      //grabamos la vigencia del proyecto
      $vigencia=new Vigencia();

@@ -71,4 +71,3 @@ class Cambio extends Objectbase
   }
 }
 
-?>

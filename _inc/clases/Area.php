@@ -74,4 +74,3 @@ class Area extends Objectbase
     return $filtro_sql;
   }
 }
-?>

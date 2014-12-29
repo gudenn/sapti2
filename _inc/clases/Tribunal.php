@@ -74,4 +74,3 @@ class Tribunal extends Objectbase
 }
 
 
-?>

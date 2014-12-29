@@ -38,4 +38,3 @@ class Evento extends Objectbase
   */
 
 }
-?>
