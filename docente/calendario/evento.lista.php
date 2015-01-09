@@ -52,7 +52,7 @@ try {
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Asignaturas');
   $menuList[]     = array('url'=>URL.Docente::URL.'index.materias.php','name'=>'Materias');
   $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php?iddicta='.$iddicta,'name'=>$dicta->getNombreMateria());
-  $menuList[]     = array('url'=>URL.Docente::URL.'calendario/evento.lista.php?iddicta='.$iddicta,'name'=>'Edicion de Eventos');
+  $menuList[]     = array('url'=>URL.Docente::URL.'calendario/evento.lista.php?iddicta='.$iddicta,'name'=>'Edici&oacute;n de Eventos');
   $smarty->assign("menuList", $menuList);
   
   if (isset($_GET['eliminar']) && isset($_GET['evento_id']) && is_numeric($_GET['evento_id']) )

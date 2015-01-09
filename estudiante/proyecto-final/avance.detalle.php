@@ -97,7 +97,7 @@ try {
     $html = new Html();
     if ($EXITO)
     {
-      $mensaje = array('mensaje'=>'Se grabo correctamente el Avance','titulo'=>'Registro de Avance' ,'icono'=> 'tick_48.png');
+      $mensaje = array('mensaje'=>'Se grab&oacute;correctamente el Avance','titulo'=>'Registro de Avance' ,'icono'=> 'tick_48.png');
       $ERROR = $html->getMessageBox ($mensaje);
     }
   }

@@ -132,7 +132,6 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
     $observaciones=$_POST['observaciones'];
     $revision->fecha_revision=date("d/m/Y");
     $avance->cambiarEstadoVisto();
-
     if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
     {
     $observacion = new Observacion();
@@ -141,6 +140,9 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
     $revision->objBuidFromPost();
     $revision->avance_id=$avance->id;
     $revision->save();
+   
+    $avance->porcentaje=trim($_POST['porcentaje']);
+    $avance->save();
     
     foreach ($observaciones as $obser_array){
     $observacion->objBuidFromPost();

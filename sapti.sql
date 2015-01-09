@@ -237,7 +237,7 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`materia` (
 ENGINE = InnoDB;
 
 
-<<<<<<< HEAD
+
 
 --
 -- Estructura de tabla para la tabla `semestre`
@@ -252,7 +252,7 @@ CREATE TABLE IF NOT EXISTS `semestre` (
   `fecha_fin` date DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   PRIMARY KEY (`id`));
-=======
+
 -- -----------------------------------------------------
 -- Table `sapti`.`semestre`
 -- -----------------------------------------------------
@@ -268,7 +268,7 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`semestre` (
   `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
->>>>>>> origin/master
+
 
 
 -- -----------------------------------------------------
@@ -1045,7 +1045,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `sapti`.`forotema`
 -- -----------------------------------------------------
-<<<<<<< HEAD
+
 DROP TABLE IF EXISTS `fororespuesta` ;
 
 CREATE TABLE IF NOT EXISTS `fororespuesta` (
@@ -1113,10 +1113,7 @@ CREATE TABLE IF NOT EXISTS `respaldo` (
 
 	
 
-=======
 DROP TABLE IF EXISTS `sapti`.`forotema` ;
->>>>>>> origin/master
-
 CREATE  TABLE IF NOT EXISTS `sapti`.`forotema` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `usuario_id` INT NULL ,

@@ -91,7 +91,7 @@ if(isset($_SESSION['estado']) && $_SESSION['estado']==1)
  
     $html = new Html();
       
-      $mensaje = array('mensaje'=>'Se grabo correctamente el Semestre','titulo'=>'Registro de Semestre' ,'icono'=> 'tick_48.png');
+      $mensaje = array('mensaje'=>'Se grab&oacute; correctamente el Semestre','titulo'=>'Registro de Semestre' ,'icono'=> 'tick_48.png');
   
       $ERROR = $html->getMessageBox ($mensaje);
    

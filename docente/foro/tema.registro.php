@@ -85,7 +85,7 @@ try {
     $_SESSION['estado'] = $stado;
     header("Location: index.php");
   } elseif (isset($stado)) {
-    $mensaje = array('mensaje' => 'Hubo un problema, No se grabo correctamente el Tema', 'titulo' => 'Registro de Tema', 'icono' => 'warning_48.png');
+    $mensaje = array('mensaje' => 'Hubo un problema, No se grab&oacute; correctamente el Tema', 'titulo' => 'Registro de Tema', 'icono' => 'warning_48.png');
     $ERROR = $html->getMessageBox($mensaje);
   }
 

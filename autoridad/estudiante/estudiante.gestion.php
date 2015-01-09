@@ -84,7 +84,7 @@ try {
   if (isset($_SESSION['estado']) && $_SESSION['estado'] == 1) {
     leerClase('Html');
     $html    = new Html();
-    $mensaje = array('mensaje' => 'Se grabo correctamente el Estudiante', 'titulo' => 'Registro de Estudiante', 'icono' => 'tick_48.png');
+    $mensaje = array('mensaje' => 'Se grab&oacute; correctamente el Estudiante', 'titulo' => 'Registro de Estudiante', 'icono' => 'tick_48.png');
     $ERROR   = $html->getMessageBox($mensaje);
     $_SESSION['estado'] = 0;
   }

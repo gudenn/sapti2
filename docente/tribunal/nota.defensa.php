@@ -173,10 +173,10 @@ try {
        if(isset($stado))
             {
          if($stado==1){
-           $mensaje = array('mensaje'=>'Se grabo correctamente  la Nota','titulo'=>'Registro de la Nota;' ,'icono'=> 'tick_48.png');
+           $mensaje = array('mensaje'=>'Se grab&oacute; correctamente  la Nota','titulo'=>'Registro de la Nota;' ,'icono'=> 'tick_48.png');
            $ERROR = $html->getMessageBox ($mensaje);
             }  else {
-          $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente','titulo'=>'Registro de Area' ,'icono'=> 'warning_48.png');
+          $mensaje = array('mensaje'=>'Hubo un problema, No se grab&oacute; correctamente','titulo'=>'Registro de Area' ,'icono'=> 'warning_48.png');
           $ERROR = $html->getMessageBox ($mensaje);
                 }
            }

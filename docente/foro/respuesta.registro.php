@@ -94,7 +94,7 @@ try {
     $_SESSION['estado'] = $stado;
     header("Location: respuesta.gestion.php");
   } elseif (isset($stado)) {
-    $mensaje = array('mensaje' => 'Hubo un problema, No se grabo correctamente la respuesta', 'titulo' => 'Registro de respuesta', 'icono' => 'warning_48.png');
+    $mensaje = array('mensaje' => 'Hubo un problema, No se grab&oacute; correctamente la respuesta', 'titulo' => 'Registro de respuesta', 'icono' => 'warning_48.png');
     $ERROR = $html->getMessageBox($mensaje);
   }
   $smarty->assign("ERROR",$ERROR);

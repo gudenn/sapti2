@@ -119,7 +119,7 @@ try {
     if ($EXITO)
       $mensaje = array('mensaje'=>'Se actualiz&oacute; correctamente la informaci&oacute;n del Usuario','titulo'=>'Registro de Usuario' ,'icono'=> 'tick_48.png');
     else
-      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Usuario','titulo'=>'Registro de Usuario' ,'icono'=> 'warning_48.png');
+      $mensaje = array('mensaje'=>'Hubo un problema, No se grab&oacute; correctamente el Usuario','titulo'=>'Registro de Usuario' ,'icono'=> 'warning_48.png');
    $ERROR = $html->getMessageBox ($mensaje);
   }
   $smarty->assign("ERROR",$ERROR);

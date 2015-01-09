@@ -12,26 +12,22 @@
       
       
 <div id="content">
-   <center> <strong> <h1>Lista de Bitacoras</h1></strong></td></center>
-      
+   <center> <strong> <h1>Lista de Bit&aacute;coras</h1></strong></td></center> 
 <div>
-    
- <form action="" method="post" id="consejo" >
-               
-<div style='height:auto; width: 100%; font-size: 12px; overflow: auto;'>
-   
+<form action="" method="post" id="consejo" >               
+<div style='height:auto; width: 100%; font-size: 12px; overflow: auto;'>   
  <form action="#" method="post" id="aprobado" name="aprobado" >
 <div style='height:50%; width: 100%; font-size: 12px; overflow: auto;'>
    <table class="tbl_lista" id="docentes"  mane="docentes">
   <thead>
     <tr>
     <th><a >ID          </a></th>
-    <th><a >OPERACION</a></th>
+    <th><a >OPERACI&Oacute;N</a></th>
     <th><a  >HOST    </a></th>
     <th><a  >MODIFICADO    </a></th>
      <th><a  >TABLA    </a></th>
       <th><a  >TUPLA ANTES    </a></th>
-       <th><a  >TUPLA DESPUES   </a></th>
+       <th><a >TUPLA DESPU&Eacute;S   </a></th>
       </tr>
   </thead>
   <tbody>

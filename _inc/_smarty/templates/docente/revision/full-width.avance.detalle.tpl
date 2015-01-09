@@ -116,8 +116,9 @@ $('#theme-switcher').change(function () {
 {/literal}
         
         <h3><b>Porcentaje de Avance</b></h3>
+        
         <p>
-          {$avance->porcentaje} %
+          {$avance->getPorcentaje()} %
         </p>
         {if (count($avance->avance_objetivo_especifico_objs))}
             <h4><b>Avance en los Objetivos espec&iacute;ficos</b></h4>
@@ -176,6 +177,24 @@ $('#theme-switcher').change(function () {
       <h3><b>Revisar Avance</b></h3>
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
+ <div>
+                <br>
+                <h3><b>Registre el porcentaje de avance del Proyecto {getHelpTip('Avance')}</b></h3>
+                <input type="range" id="porcentaje" name="porcentaje" min="1" max="100" value="{$avance->getPorcentaje()}" style="width: 400px;">
+                <output for="range" id="output">{$avance->getPorcentaje()}</output> %
+            </div>
+            <script>
+                {literal}
+                (function () {
+                    var registro = document.getElementById("registro");
+                    if ("oninput" in registro) {
+                        registro.addEventListener("input", function () {
+                            output.value = porcentaje.value;
+                        }, false);
+                    }
+                })();
+                {/literal}
+            </script>
             <label  accesskey="">OBSERVACIÓN(ES):
             </label>
             <div id="div_1">

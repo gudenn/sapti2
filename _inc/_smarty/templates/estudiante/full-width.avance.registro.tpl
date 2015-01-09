@@ -9,7 +9,112 @@
       {/if}
         
 
-  <h3>Subir Archivos Relacionados al Avance {getHelpTip('archivos')}</h3>
+  
+{literal}
+
+<!-- The XDomainRequest Transport is included for cross-domain file deletion for IE 8 and IE 9 -->
+<!--[if (gte IE 8)&(lt IE 10)]>
+<script src="js/cors/jquery.xdr-transport.js"></script>
+<![endif]-->
+{/literal}
+        
+        
+        <form action="" method="post" id="registro" name="registro" >
+          {if (isset($revision))}
+          <h3><b>Correcciones</b></h3>
+          {assign var="objs" value=$revision->observacion_objs}
+          {section name=ic loop=$objs}
+            <p><b>Observaci&oacute;n:</b> {$objs[ic]->observacion}</p>
+            <p>
+              <textarea name="observacion_id_{$objs[ic]->id}" id="observacion_id_{$objs[ic]->id}" rows="4" cols="60" style="width: 431px;height: 305px;" data-validation-engine="validate[required]">{$objs[ic]->respuesta}</textarea>
+            </p>
+            <script>
+              CKEDITOR.replace('observacion_id_{$objs[ic]->id}'{$editores});
+            </script>
+          {/section}
+          {/if}
+           <div>
+                <br>
+                <h3><b>Registre el porcentaje de avance de su Proyecto {getHelpTip('Avance')}</b></h3>
+                <input type="range" id="porcentaje" name="porcentaje" min="1" max="100" value="{$porcentaje}" style="width: 400px;">
+                <output for="range" id="output">{$porcentaje}</output> %
+            </div>
+            <script>
+                {literal}
+                (function () {
+                    var registro = document.getElementById("registro");
+                    if ("oninput" in registro) {
+                        registro.addEventListener("input", function () {
+                            output.value = porcentaje.value;
+                        }, false);
+                    }
+                })();
+                {/literal}
+            </script>
+
+          {if (count($proyecto->objetivo_especifico_objs))}
+            <div>
+                <br>
+                <br>
+                <h3><b>Registre el porcentaje avance de los objetivos espec&iacute;ficos de su proyecto {getHelpTip('Avance_especifico')}</b></h3>
+            </div>
+            {assign var='oesps' value=$proyecto->objetivo_especifico_objs}
+            {section name=ic loop=$oesps}
+              <div>
+                  <table>
+                      <tr>
+                          <td style="width: 75%">
+                            <input type="checkbox" name="objetivo_avance_{$oesps[ic]->id}" id="objetivo_avance_{$oesps[ic]->id}" value="1" /> 
+                            <label for="objetivo_avance_{$oesps[ic]->id}">{$oesps[ic]->descripcion}</label>
+                          </td>
+                          <td style="width: 25%" class="center">
+                            <input type="range" id="porcentaje_avance_{$oesps[ic]->id}" name="porcentaje_avance_{$oesps[ic]->id}" min="1" max="100" value="{if $num == 0}{0}{else}{$arrayPorce[ic]}{/if}" style="width: 150px;">
+                            <output for="range" id="output_avance_{$oesps[ic]->id}"> {if $num == 0}0{else}{$arrayPorce[ic]}{/if}</output> %
+                          </td>
+                      </tr>
+                  </table>
+              </div>
+              <script>
+                  {literal}
+                  (function () {
+                      var registro = document.getElementById("registro");
+                      if ("oninput" in registro) {
+                          registro.addEventListener("input", function () {
+                  {/literal}
+                              output_avance_{$oesps[ic]->id}.value = porcentaje_avance_{$oesps[ic]->id}.value;
+                  {literal}
+                          }, false);
+                      }
+                  })();
+                  {/literal}
+              </script>
+            {/section}
+        {/if}
+          <hr>
+          <h3><b>Descripci&oacute;n del Avance {getHelpTip('Descripcion')}</b></h3>
+          <p>
+            <textarea name="descripcion" id="descripcion" rows="4" cols="60" style="width: 431px;height: 305px;" data-validation-engine="validate[required]">{$avance->descripcion}</textarea>
+          </p>
+          <script>
+            CKEDITOR.replace('descripcion'{$editores});
+          </script>
+          <input type="hidden" name="id"            value="{$avance->id}">
+          <input type="hidden" name="directorio"    value="{$avance->directorio}">
+          {if (isset($revision))}
+          <input type="hidden" name="revision_id"   value="{$revision->id}">
+          {/if}
+          <input type="hidden" name="tarea" value="registrar_avance">
+          <input type="hidden" name="token" value="{$token}">
+           
+        
+        
+
+            <div class="center">
+              
+              <button type="submit" class="delete ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button" aria-disabled="false"><span class="ui-button-icon-primary ui-icon ui-icon-disk"></span><span class="ui-button-text">Grabar</span></button>
+            </div>
+        </form>
+        <h3>Subir Archivos Relacionados al Avance {getHelpTip('archivos')}</h3>
 {literal}
 <!-- The file upload form used as target for the file upload widget -->
 <form id="fileupload" action="../archivo/" method="POST" enctype="multipart/form-data">
@@ -131,107 +236,6 @@
 <script src="{$URL_JS}jQfu/js/jquery.fileupload-jquery-ui.js"></script>
 <!-- The main application script -->
 <script src="{$URL_JS}jQfu/js/main.js"></script>
-{literal}
-
-<!-- The XDomainRequest Transport is included for cross-domain file deletion for IE 8 and IE 9 -->
-<!--[if (gte IE 8)&(lt IE 10)]>
-<script src="js/cors/jquery.xdr-transport.js"></script>
-<![endif]-->
-{/literal}
-        
-        
-        <form action="" method="post" id="registro" name="registro" >
-          {if (isset($revision))}
-          <h3><b>Correcciones</b></h3>
-          {assign var="objs" value=$revision->observacion_objs}
-          {section name=ic loop=$objs}
-            <p><b>Observaci&oacute;n:</b> {$objs[ic]->observacion}</p>
-            <p>
-              <textarea name="observacion_id_{$objs[ic]->id}" id="observacion_id_{$objs[ic]->id}" rows="4" cols="60" style="width: 431px;height: 305px;" data-validation-engine="validate[required]">{$objs[ic]->respuesta}</textarea>
-            </p>
-            <script>
-              CKEDITOR.replace('observacion_id_{$objs[ic]->id}'{$editores});
-            </script>
-          {/section}
-          {/if}
-          
-          <hr>
-          <h3><b>Descripci&oacute;n del Avance {getHelpTip('Descripcion')}</b></h3>
-          <p>
-            <textarea name="descripcion" id="descripcion" rows="4" cols="60" style="width: 431px;height: 305px;" data-validation-engine="validate[required]">{$avance->descripcion}</textarea>
-          </p>
-          <script>
-            CKEDITOR.replace('descripcion'{$editores});
-          </script>
-          <input type="hidden" name="id"            value="{$avance->id}">
-          <input type="hidden" name="directorio"    value="{$avance->directorio}">
-          {if (isset($revision))}
-          <input type="hidden" name="revision_id"   value="{$revision->id}">
-          {/if}
-          <input type="hidden" name="tarea" value="registrar_avance">
-          <input type="hidden" name="token" value="{$token}">
-            <div>
-                <br>
-                <h3><b>Registre el porcentaje de avance de su Proyecto {getHelpTip('Avance')}</b></h3>
-                <input type="range" id="porcentaje" name="porcentaje" min="1" max="100" value="{$porcentaje}" style="width: 400px;">
-                <output for="range" id="output">{$porcentaje}</output> %
-            </div>
-            <script>
-                {literal}
-                (function () {
-                    var registro = document.getElementById("registro");
-                    if ("oninput" in registro) {
-                        registro.addEventListener("input", function () {
-                            output.value = porcentaje.value;
-                        }, false);
-                    }
-                })();
-                {/literal}
-            </script>
-
-        {if (count($proyecto->objetivo_especifico_objs))}
-            <div>
-                <br>
-                <br>
-                <h3><b>Registre el porcentaje avance de los objetivos espec&iacute;ficos de su proyecto {getHelpTip('Avance_especifico')}</b></h3>
-            </div>
-            {assign var='oesps' value=$proyecto->objetivo_especifico_objs}
-            {section name=ic loop=$oesps}
-              <div>
-                  <table>
-                      <tr>
-                          <td style="width: 75%">
-                            <input type="checkbox" name="objetivo_avance_{$oesps[ic]->id}" id="objetivo_avance_{$oesps[ic]->id}" value="1" /> 
-                            <label for="objetivo_avance_{$oesps[ic]->id}">{$oesps[ic]->descripcion}</label>
-                          </td>
-                          <td style="width: 25%" class="center">
-                            <input type="range" id="porcentaje_avance_{$oesps[ic]->id}" name="porcentaje_avance_{$oesps[ic]->id}" min="1" max="100" value="1" style="width: 150px;">
-                            <output for="range" id="output_avance_{$oesps[ic]->id}">0</output> %
-                          </td>
-                      </tr>
-                  </table>
-              </div>
-              <script>
-                  {literal}
-                  (function () {
-                      var registro = document.getElementById("registro");
-                      if ("oninput" in registro) {
-                          registro.addEventListener("input", function () {
-                  {/literal}
-                              output_avance_{$oesps[ic]->id}.value = porcentaje_avance_{$oesps[ic]->id}.value;
-                  {literal}
-                          }, false);
-                      }
-                  })();
-                  {/literal}
-              </script>
-            {/section}
-        {/if}
-
-            <div class="center">
-              <button type="submit" class="delete ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button" aria-disabled="false"><span class="ui-button-icon-primary ui-icon ui-icon-disk"></span><span class="ui-button-text">Grabar</span></button>
-            </div>
-        </form>
         <hr>
     {$ERROR}
     </div>

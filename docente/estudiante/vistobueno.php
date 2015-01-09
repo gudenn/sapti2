@@ -212,7 +212,7 @@ try {
           header("Location: ../../docente");
   
   }  else {
-          $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente','titulo'=>'Visto Bueno' ,'icono'=> 'warning_48.png');
+          $mensaje = array('mensaje'=>'Hubo un problema, No se grab&oacute; correctamente','titulo'=>'Visto Bueno' ,'icono'=> 'warning_48.png');
           $ERROR = $html->getMessageBox ($mensaje);
   }
   }

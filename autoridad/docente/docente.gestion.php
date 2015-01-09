@@ -124,7 +124,7 @@ try {
     } elseif ($_SESSION['estado']>1){
       $mensaje = array('mensaje'=>"Se grabaron correctamente los {$_SESSION['estado']} Docentes",'titulo'=>'Registro de Docentes' ,'icono'=> 'tick_48.png');
     } else {
-      $mensaje = array('mensaje'=>'Se grabo correctamente el Docente','titulo'=>'Registro de Docente' ,'icono'=> 'tick_48.png');
+      $mensaje = array('mensaje'=>'Se grab&oacute; correctamente el Docente','titulo'=>'Registro de Docente' ,'icono'=> 'tick_48.png');
     }
     $ERROR   = $html->getMessageBox ($mensaje);
     $_SESSION['estado'] = 0;

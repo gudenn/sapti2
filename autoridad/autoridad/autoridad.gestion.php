@@ -92,7 +92,7 @@ try {
   {
     leerClase('Html');
     $html               = new Html();
-    $mensaje            = array('mensaje'=>'Se asigno correctamente la nueva Autoridad','titulo'=>'Registro de Autoridad' ,'icono'=> 'tick_48.png');
+    $mensaje            = array('mensaje'=>'Se asign&oacute; correctamente la nueva Autoridad','titulo'=>'Registro de Autoridad' ,'icono'=> 'tick_48.png');
     $ERROR              = $html->getMessageBox ($mensaje);
     $_SESSION['estado'] = 0;
   }

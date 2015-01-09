@@ -133,9 +133,9 @@ while ($fila1 = mysql_fetch_array($sql2, MYSQL_ASSOC)) {
   {
     $html = new Html();
     if ($EXITO)
-      $mensaje = array('mensaje'=>'Se grabo correctamente la Evaluación','titulo'=>'Registro de Evaluación' ,'icono'=> 'tick_48.png');
+      $mensaje = array('mensaje'=>'Se grab&oacute; correctamente la Evaluación','titulo'=>'Registro de Evaluación' ,'icono'=> 'tick_48.png');
     else
-      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente la Evaluación','titulo'=>'Registro de Evaluación' ,'icono'=> 'warning_48.png');
+      $mensaje = array('mensaje'=>'Hubo un problema, No se grab&oacute; correctamente la Evaluación','titulo'=>'Registro de Evaluación' ,'icono'=> 'warning_48.png');
    $ERROR = $html->getMessageBox ($mensaje);
   }
   $smarty->assign("ERROR",$ERROR);

@@ -72,21 +72,28 @@ try {
     $EXITO = false;
     if ($proyecto->id)
       $avance = $estudiante->grabarAvance();
-    $_SESSION['estado'] = true;
-       header("Location: avance.gestion.php");
-    $EXITO = true;
+      $_SESSION['estado'] = true;
+      header("Location: avance.gestion.php");
+      $EXITO = true;
   }
-
-  if($id>0){
-      $porcentaje=$avance->porcentaje;
+  if($avance->getPorcentaje()==NULL){
+          $porcentaje=0;
   }else{
-      $porcentaje=0;
+          $porcentaje = Avance::getPorcentaje();
   }
+  $arrayPorce = array();
+   foreach ($proyecto->objetivo_especifico_objs as $especifico) {
+            $arrayPorce[]= Avance::getPorcentaje_Ob($especifico->id);
+   }
+   $num = $avance->contar();
+ 
   $smarty->assign("estudiante", $estudiante);
   $smarty->assign("usuario", $usuario);
   $smarty->assign("proyecto", $proyecto);
   $smarty->assign("avance", $avance);
   $smarty->assign("porcentaje", $porcentaje);
+  $smarty->assign("arrayPorce", $arrayPorce);
+  $smarty->assign("num", $num);
   $smarty->assign("ERROR", $ERROR);
   
 
