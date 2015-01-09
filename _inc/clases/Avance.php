@@ -211,7 +211,7 @@ while ($fila1b = mysql_fetch_array($sqlbus, MYSQL_ASSOC)) {
    Devuelve el ultimo porcentaje de avance registrado
    */
      public static function getPorcentaje() {
-                  $buscar = " select porcentaje from avance order by id desc limit 1";
+                  $buscar = " select porcentaje from avance order by porcentaje desc limit 1";
                   $sqlbus = mysql_query($buscar);
      while ($fila1b = mysql_fetch_array($sqlbus, MYSQL_ASSOC)) {
                      $arraybus=$fila1b['porcentaje'];
