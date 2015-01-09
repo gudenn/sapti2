@@ -85,7 +85,7 @@ try {
    foreach ($proyecto->objetivo_especifico_objs as $especifico) {
             $arrayPorce[]= Avance::getPorcentaje_Ob($especifico->id);
    }
-   $num = $avance->contar();
+ 
  
   $smarty->assign("estudiante", $estudiante);
   $smarty->assign("usuario", $usuario);
@@ -93,7 +93,6 @@ try {
   $smarty->assign("avance", $avance);
   $smarty->assign("porcentaje", $porcentaje);
   $smarty->assign("arrayPorce", $arrayPorce);
-  $smarty->assign("num", $num);
   $smarty->assign("ERROR", $ERROR);
   
 
