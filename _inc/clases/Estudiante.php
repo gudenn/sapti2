@@ -423,7 +423,7 @@ and es.id='$this->id'";
     $proyecto->getAllObjects();
     //verificamos si hay avance en los objetivos especificos
     foreach ($proyecto->objetivo_especifico_objs as $especifico) {
-      //no se cumple la condicion no regitra los el porcentaje de objetivos especif
+      //no se cumple la condicion no regitra los el porcentaje de objetivos especif tube q quitar el isset
       if ( $especifico->id && isset($_POST['objetivo_avance_'.$especifico->id])){
         $avance_especifico = new Avance_objetivo_especifico();
         $avance_especifico->porcentaje_avance = isset($_POST['porcentaje_avance_'.$especifico->id])?$_POST['porcentaje_avance_'.$especifico->id]:0;
