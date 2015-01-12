@@ -83,19 +83,17 @@ try {
   $ultimoreg=array_pop($avances);
   $porcentaje=$ultimoreg->porcentaje; 
   }
-
-  $arrayPorce = array();
-   foreach ($proyecto->objetivo_especifico_objs as $especifico) {
-            $arrayPorce[]= Avance::getPorcentaje_Ob($especifico->id);
-   }
+ $ulti_ava=  new Avance($ultimoreg->id);
+ $ulti_ava->getAllObjects();
+ $ultim_obj=$ulti_ava->avance_objetivo_especifico_objs;
+ 
  
  
   $smarty->assign("estudiante", $estudiante);
   $smarty->assign("usuario", $usuario);
   $smarty->assign("proyecto", $proyecto);
   $smarty->assign("avance", $avance);
-  $smarty->assign("porcentaje", $porcentaje);
-  $smarty->assign("arrayPorce", $arrayPorce);
+  $smarty->assign("ultim_obj", $ultim_obj);
   $smarty->assign("ERROR", $ERROR);
   
 

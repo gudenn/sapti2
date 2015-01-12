@@ -68,8 +68,8 @@
                             <label for="objetivo_avance_{$oesps[ic]->id}">{$oesps[ic]->descripcion}</label>
                           </td>
                           <td style="width: 25%" class="center">
-                            <input type="range" id="porcentaje_avance_{$oesps[ic]->id}" name="porcentaje_avance_{$oesps[ic]->id}" min="1" max="100" value="{if $arrayPorce[ic] == null}{0}{else}{$arrayPorce[ic]}{/if}" style="width: 150px;">
-                            <output for="range" id="output_avance_{$oesps[ic]->id}"> {if $arrayPorce[ic] == null}0{else}{$arrayPorce[ic]}{/if}</output> %
+                            <input type="range" id="porcentaje_avance_{$oesps[ic]->id}" name="porcentaje_avance_{$oesps[ic]->id}" min="1" max="100" value="{if $ultim_obj[ic]->porcentaje_avance == null}{0}{else}{$ultim_obj[ic]->porcentaje_avance}{/if}" style="width: 150px;">
+                            <output for="range" id="output_avance_{$oesps[ic]->id}"> {if $ultim_obj[ic]->porcentaje_avance == null}0{else}{$ultim_obj[ic]->porcentaje_avance}{/if}</output> %
                           </td>
                       </tr>
                   </table>
