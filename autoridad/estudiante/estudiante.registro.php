@@ -83,8 +83,8 @@ try {
   
   //Sexo del usuario
   $smarty->assign('sexo', array(
-      Usuario::FEMENINO  => 'Femenino',
-      Usuario::MASCULINO => 'Masculino'));
+  Usuario::FEMENINO  => 'Femenino',
+  Usuario::MASCULINO => 'Masculino'));
   $smarty->assign('sexo_selected', ($usuario->sexo==Usuario::FEMENINO)?Usuario::FEMENINO:Usuario::MASCULINO);
   
    
