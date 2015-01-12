@@ -8,7 +8,7 @@
     header("Location: ../login.php");
   }
 
-
+/**
   if($proyecto->estado_proyecto==Proyecto::EST6_C && !isAdminSession()){
     ?>
         <script language='JavaScript'>
@@ -18,7 +18,7 @@
     header("Location:../login.php");
     exit();//SALIMOS ASI EVITAMOS UN ELSE TAN LARGO
   }
-
+*/
 try {
   /** HEADER */
   $smarty->assign('title','SAPTI - Registro de Proyecto');
@@ -86,8 +86,7 @@ try {
 
   leerClase('Objetivo_especifico');
 
-  $numero = $proyecto->asignarNumero();
-  $smarty->assign('numero'  ,$numero );
+  
 
 
   $semestre   = new Semestre(false,true);
@@ -113,13 +112,24 @@ try {
 
 
   $proyecto->getAllObjects();
-
+  $numero = $proyecto->asignarNumero();
+  
+    if($proyecto->estado_proyecto==Proyecto::EST1_INI && !isAdminSession()){
+      echo 'holaaaaaaa';
+    ?>
+        <script language='JavaScript'>
+          alert('Lo sentimos usted no tiene acseso al registro Perfil');
+        </script>";
+    <?php
+    header("Location:../login.php");
+    exit();//SALIMOS ASI EVITAMOS UN ELSE TAN LARGO
+  }
 
   $smarty->assign('usuario'   , $usuario);
   $smarty->assign('estudiante', $estudiante);
   $smarty->assign('proyecto'  , $proyecto);
   $smarty->assign('semestre'  , $semestre);
-
+  $smarty->assign('numero'  ,$numero );
   $smarty->assign('tipo_moda' , 'tipo_moda');
   if ($proyecto->modalidad_id){
     $modalidad    = new Modalidad($proyecto->modalidad_id);
