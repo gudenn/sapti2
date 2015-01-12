@@ -76,6 +76,7 @@ try {
       header("Location: avance.gestion.php");
       $EXITO = true;
   }
+  //porcentaje de avance
   $avances=$proyecto->avance_objs;
   if(empty($avances)){
   $porcentaje=0;
@@ -83,6 +84,7 @@ try {
   $ultimoreg=array_pop($avances);
   $porcentaje=$ultimoreg->porcentaje; 
   }
+  //porcentaje de avance por objetivos especificos
  $ulti_ava=  new Avance($ultimoreg->id);
  $ulti_ava->getAllObjects();
  $ultim_obj=$ulti_ava->avance_objetivo_especifico_objs;
