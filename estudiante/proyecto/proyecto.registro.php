@@ -7,18 +7,6 @@
   if( MODULO == 'ESTUDIANTE' && !isEstudianteSession() || MODULO == 'ADMIN-PROYECTO' && !isAdminSession() ){
     header("Location: ../login.php");
   }
-
-/**
-  if($proyecto->estado_proyecto==Proyecto::EST6_C && !isAdminSession()){
-    ?>
-        <script language='JavaScript'>
-          alert('Lo sentimos usted no tiene acseso al registro Perfil');
-        </script>";
-    <?php
-    header("Location:../login.php");
-    exit();//SALIMOS ASI EVITAMOS UN ELSE TAN LARGO
-  }
-*/
 try {
   /** HEADER */
   $smarty->assign('title','SAPTI - Registro de Proyecto');
@@ -115,11 +103,10 @@ try {
   $numero = $proyecto->asignarNumero();
   
     if($proyecto->estado_proyecto==Proyecto::EST1_INI && !isAdminSession()){
-      echo 'holaaaaaaa';
     ?>
         <script language='JavaScript'>
           alert('Lo sentimos usted no tiene acseso al registro Perfil');
-        </script>";
+        </script>
     <?php
     header("Location:../login.php");
     exit();//SALIMOS ASI EVITAMOS UN ELSE TAN LARGO

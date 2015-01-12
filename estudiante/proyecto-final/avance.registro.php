@@ -76,11 +76,14 @@ try {
       header("Location: avance.gestion.php");
       $EXITO = true;
   }
-  if($avance->getPorcentaje()==NULL){
-          $porcentaje=0;
+  $avances=$proyecto->avance_objs;
+  if(empty($avances)){
+  $porcentaje=0;
   }else{
-          $porcentaje = Avance::getPorcentaje();
+  $ultimoreg=array_pop($avances);
+  $porcentaje=$ultimoreg->porcentaje; 
   }
+
   $arrayPorce = array();
    foreach ($proyecto->objetivo_especifico_objs as $especifico) {
             $arrayPorce[]= Avance::getPorcentaje_Ob($especifico->id);
