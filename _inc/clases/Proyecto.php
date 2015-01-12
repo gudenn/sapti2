@@ -341,38 +341,35 @@ class Proyecto extends Objectbase {
   /**
    * Creamos un proyecto inicial de tal manera que los estudiantes nunca estnen sin proyectos
    */
-  function crearProyectoInicial($estudiante_id , $dicta_id,$tipo, $grabar = true) {
-      
-    if($tipo!=Proyecto::TIPO_PROYECTO){
-    $this->estado_proyecto = Proyecto::EST1_INI;
-    $this->es_actual       = 1;
-    $this->tipo_proyecto   = $tipo;
-    $this->estado          = Objectbase::STATUS_AC;
-    if ($grabar)
-      $this->save();
-    $this->asignarEstudiante($estudiante_id);
-    $this->asignarDicta($dicta_id);
-    
-    if ($grabar)
-      $this->saveAllSonObjects(TRUE);
-    
-    
-   }else {
-        
-        $this->estado_proyecto = Proyecto::EST1_INI;
-    $this->es_actual       = 1;
-    $this->tipo_proyecto   = $tipo;
-    $this->estado          = Objectbase::STATUS_AC;
-    $this->estado_proyecto=  Proyecto::EST2_BUE;
-    if ($grabar)
-      $this->save();
-    $this->asignarEstudiante($estudiante_id);
-    $this->asignarDicta($dicta_id);
-    
-    if ($grabar)
-      $this->saveAllSonObjects(TRUE);
-            
-        }
+  function crearProyectoInicial($estudiante_id, $dicta_id, $tipo, $grabar = true) {
+
+    if ($tipo != Proyecto::TIPO_PROYECTO) {
+      $this->estado_proyecto = Proyecto::EST1_INI;
+      $this->es_actual = 1;
+      $this->tipo_proyecto = $tipo;
+      $this->estado = Objectbase::STATUS_AC;
+      if ($grabar)
+        $this->save();
+      $this->asignarEstudiante($estudiante_id);
+      $this->asignarDicta($dicta_id);
+
+      if ($grabar)
+        $this->saveAllSonObjects(TRUE);
+    }else {
+
+      $this->estado_proyecto = Proyecto::EST1_INI;
+      $this->es_actual = 1;
+      $this->tipo_proyecto = $tipo;
+      $this->estado = Objectbase::STATUS_AC;
+      $this->estado_proyecto = Proyecto::EST2_BUE;
+      if ($grabar)
+        $this->save();
+      $this->asignarEstudiante($estudiante_id);
+      $this->asignarDicta($dicta_id);
+
+      if ($grabar)
+        $this->saveAllSonObjects(TRUE);
+    }
   }
 
   function getArea() {

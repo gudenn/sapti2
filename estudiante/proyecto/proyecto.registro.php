@@ -7,6 +7,8 @@
   if( MODULO == 'ESTUDIANTE' && !isEstudianteSession() || MODULO == 'ADMIN-PROYECTO' && !isAdminSession() ){
     header("Location: ../login.php");
   }
+
+
 try {
   /** HEADER */
   $smarty->assign('title','SAPTI - Registro de Proyecto');
@@ -74,14 +76,12 @@ try {
 
   leerClase('Objetivo_especifico');
 
-  
-
-
   $semestre   = new Semestre(false,true);
   //si o si trabajamos aca con un estudiante asi que lo guardaremos en session
   $estudiante_id = false;
-  if (isset($_SESSION['estudiante_id']) && is_numeric($_SESSION['estudiante_id']))
+  if (isset($_SESSION['estudiante_id']) && is_numeric($_SESSION['estudiante_id'])){
     $estudiante_id = $_SESSION['estudiante_id'];
+  }
   if (isset($_GET['estudiante_id']) && is_numeric($_GET['estudiante_id'])){
     $_SESSION['estudiante_id'] = $_GET['estudiante_id'];
     $estudiante_id             = $_GET['estudiante_id'];
@@ -100,23 +100,25 @@ try {
 
 
   $proyecto->getAllObjects();
-  $numero = $proyecto->asignarNumero();
-  
-    if($proyecto->estado_proyecto==Proyecto::EST1_INI && !isAdminSession()){
+
+  if($proyecto->estado_proyecto==Proyecto::EST6_C && !isAdminSession()){
     ?>
         <script language='JavaScript'>
           alert('Lo sentimos usted no tiene acseso al registro Perfil');
-        </script>
+        </script>";
     <?php
     header("Location:../login.php");
     exit();//SALIMOS ASI EVITAMOS UN ELSE TAN LARGO
   }
 
+  $numero = $proyecto->asignarNumero();
+  $smarty->assign('numero'  ,$numero );
+
   $smarty->assign('usuario'   , $usuario);
   $smarty->assign('estudiante', $estudiante);
   $smarty->assign('proyecto'  , $proyecto);
   $smarty->assign('semestre'  , $semestre);
-  $smarty->assign('numero'  ,$numero );
+
   $smarty->assign('tipo_moda' , 'tipo_moda');
   if ($proyecto->modalidad_id){
     $modalidad    = new Modalidad($proyecto->modalidad_id);

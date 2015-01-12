@@ -70,8 +70,9 @@ try {
 
   if ( isset($_POST['tarea']) && $_POST['tarea'] == 'registrar_avance' && isset($_SESSION['registrar_avance']) && isset($_POST['token']) && $_SESSION['registrar_avance'] == $_POST['token'] ){
     $EXITO = false;
-    if ($proyecto->id)
+    if ($proyecto->id){
       $avance = $estudiante->grabarAvance();
+    }
       $_SESSION['estado'] = true;
       header("Location: avance.gestion.php");
       $EXITO = true;
