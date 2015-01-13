@@ -78,17 +78,18 @@ try {
       $EXITO = true;
   }
   //porcentaje de avance
-  $avances=$proyecto->avance_objs;
-  if(empty($avances)){
-  $porcentaje=0;
-  }else{
-  $ultimoreg=array_pop($avances);
-  $porcentaje=$ultimoreg->porcentaje; 
+  $avances = $proyecto->avance_objs;
+  if (count($avances)==0) {
+   
+    $porcentaje = 0;
+  } else {
+    $ultimoreg = array_pop($avances);
+    $porcentaje = $ultimoreg->porcentaje;
   }
   //porcentaje de avance por objetivos especificos
- $ulti_ava=  new Avance($ultimoreg->id);
- $ulti_ava->getAllObjects();
- $ultim_obj=$ulti_ava->avance_objetivo_especifico_objs;
+  $ulti_ava = new Avance($ultimoreg->id);
+  $ulti_ava->getAllObjects();
+  $ultim_obj = $ulti_ava->avance_objetivo_especifico_objs;
  
  
  
@@ -96,6 +97,7 @@ try {
   $smarty->assign("usuario", $usuario);
   $smarty->assign("proyecto", $proyecto);
   $smarty->assign("avance", $avance);
+  $smarty->assign("porcentaje", $porcentaje);
   $smarty->assign("ultim_obj", $ultim_obj);
   $smarty->assign("ERROR", $ERROR);
   

@@ -8,16 +8,16 @@
     </tr>
   </thead>
   {section name=ic loop=$objs}
-  <tbody>
-    <tr  class="{cycle values="light,dark"}">
-      <td>{$objs[ic]['id']}</td>
-      <td>{$objs[ic]['nombre']}</td>
-      <td>{$objs[ic]['sigla']}</td>
-      
-      <td>
-        <a href="materia.registro.php?materia_id={$objs[ic]['id']}" >{icono('basicset/pencil_48.png','Editar')} Editar</a>
-      </td>
-    </tr>
-  </tbody>
+    <tbody>
+      <tr  class="{cycle values="light,dark"}">
+        <td>{$objs[ic]['id']}</td>
+        <td>{$objs[ic]['nombre']}</td>
+        <td>{$objs[ic]['sigla']}</td>
+
+        <td>
+          <a href="materia.registro.php?materia_id={$objs[ic]['id']}" >{icono('basicset/pencil_48.png','Editar')} Editar</a>
+        </td>
+      </tr>
+    </tbody>
   {/section}
 </table>
