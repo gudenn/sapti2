@@ -207,29 +207,4 @@ while ($fila1b = mysql_fetch_array($sqlbus, MYSQL_ASSOC)) {
  }
   return $arraybus;
     }
-      /**
-   Devuelve el ultimo porcentaje de avance registrado
-   */
-     public static function getPorcentaje() {
-                  $buscar = " select porcentaje from avance order by porcentaje desc limit 1";
-                  $sqlbus = mysql_query($buscar);
-     while ($fila1b = mysql_fetch_array($sqlbus, MYSQL_ASSOC)) {
-                     $arraybus=$fila1b['porcentaje'];
-     }
-      return $arraybus;
-     }
-     /**
-   Devuelve los ultimos porcentajes de avance de los objetivos especificos
-   */
-     public static function getPorcentaje_Ob($idOb) {
-                  $buscar = " select a.porcentaje_avance 
-                    from avance_objetivo_especifico a
-                    where a.objetivo_especifico_id='$idOb' order by 
-                    id desc limit 1";
-                  $sqlbus = mysql_query($buscar);
-     while ($fila1b = mysql_fetch_array($sqlbus, MYSQL_ASSOC)) {
-                     $arraybus=$fila1b['porcentaje_avance'];
-     }
-      return $arraybus;
-     }
 }

@@ -144,15 +144,16 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
     $revision->objBuidFromPost();
     $revision->avance_id=$avance->id;
     $revision->save();
-    $avance->porcentaje=trim($_POST['porcentaje']);
+    //no utilice el $avance = $estudiante->grabarAvance($avance_escpecifico) no se en qe parte se crea otro avance 
+    $avance->porcentaje = trim($_POST['porcentaje']);
     $avance->save();
-    $i=0;
-    
-   $i=0;
+    $i = 0;
+
+    $i = 0;
     foreach ($proyecto->objetivo_especifico_objs as $especifico) {
-      if ( $especifico->id && isset($_POST['objetivo_avance_'.$especifico->id])){
+      if ($especifico->id && isset($_POST['objetivo_avance_' . $especifico->id])) {
         $avance_especifico = new Avance_objetivo_especifico($ultim_obj[$i]->id);
-        $avance_especifico->porcentaje_avance = isset($_POST['porcentaje_avance_'.$especifico->id])?$_POST['porcentaje_avance_'.$especifico->id]:0;
+        $avance_especifico->porcentaje_avance = isset($_POST['porcentaje_avance_' . $especifico->id]) ? $_POST['porcentaje_avance_' . $especifico->id] : 0;
         $avance_especifico->save();
         $i++;
       }
