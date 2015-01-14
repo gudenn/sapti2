@@ -118,7 +118,7 @@ $('#theme-switcher').change(function () {
         <h3><b>Porcentaje de Avance</b></h3>
         
         <p>
-          {$avance->getPorcentaje()} %
+          {$avance->porcentaje} %
         </p>
         {if (count($avance->avance_objetivo_especifico_objs))}
             <h4><b>Avance en los Objetivos espec&iacute;ficos</b></h4>
@@ -180,8 +180,8 @@ $('#theme-switcher').change(function () {
  <div>
                 <br>
                 <h3><b>Registre el porcentaje de avance del Proyecto {getHelpTip('Avance')}</b></h3>
-                <input type="range" id="porcentaje" name="porcentaje" min="1" max="100" value="{$avance->getPorcentaje()}" style="width: 400px;">
-                <output for="range" id="output">{$avance->getPorcentaje()}</output> %
+                <input type="range" id="porcentaje" name="porcentaje" min="1" max="100" value="{if $avance->porcentaje == null}{0}{else}{$avance->porcentaje}{/if}" style="width: 400px;">
+                <output for="range" id="output">{if $avance->porcentaje == null}0{else}{$avance->porcentaje}{/if}</output> %
             </div>
             <script>
                 {literal}
@@ -195,6 +195,44 @@ $('#theme-switcher').change(function () {
                 })();
                 {/literal}
             </script>
+{if (count($proyecto->objetivo_especifico_objs))}
+            <div>
+                <br>
+                <br>
+                <h3><b>Registre el porcentaje avance de los objetivos espec&iacute;ficos de su proyecto {getHelpTip('Avance_especifico')}</b></h3>
+            </div>
+            {assign var='oesps' value=$proyecto->objetivo_especifico_objs}
+            {section name=ic loop=$oesps}
+              <div>
+                  <table>
+                      <tr>
+                          <td style="width: 75%">
+                            <input type="checkbox" name="objetivo_avance_{$oesps[ic]->id}" id="objetivo_avance_{$oesps[ic]->id}" value="1" /> 
+                            <label for="objetivo_avance_{$oesps[ic]->id}">{$oesps[ic]->descripcion}</label>
+                          </td>
+                          <td style="width: 25%" class="center">
+                            <input type="range" id="porcentaje_avance_{$oesps[ic]->id}" name="porcentaje_avance_{$oesps[ic]->id}" min="1" max="100" value="{if $ultim_obj[ic]->porcentaje_avance == null}{0}{else}{$ultim_obj[ic]->porcentaje_avance}{/if}" style="width: 150px;">
+                            <output for="range" id="output_avance_{$oesps[ic]->id}"> {if $ultim_obj[ic]->porcentaje_avance == null}0{else}{$ultim_obj[ic]->porcentaje_avance}{/if}</output> %
+                          </td>
+                      </tr>
+                  </table>
+              </div>
+              <script>
+                  {literal}
+                  (function () {
+                      var registro = document.getElementById("registro");
+                      if ("oninput" in registro) {
+                          registro.addEventListener("input", function () {
+                  {/literal}
+                              output_avance_{$oesps[ic]->id}.value = porcentaje_avance_{$oesps[ic]->id}.value;
+                  {literal}
+                          }, false);
+                      }
+                  })();
+                  {/literal}
+              </script>
+            {/section}
+        {/if}
             <label  accesskey="">OBSERVACIÓN(ES):
             </label>
             <div id="div_1">

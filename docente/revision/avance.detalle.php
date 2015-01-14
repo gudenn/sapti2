@@ -51,6 +51,7 @@ try {
   leerClase('Observacion');
   leerClase('Docente');
   leerClase('Dicta');
+  leerClase('Avance_objetivo_especifico');
 
   $docente     = getSessionDocente();
   if ( isset($_GET['iddicta']) && is_numeric($_GET['iddicta']) && $docente->getDictaverifica($_GET['iddicta']))
@@ -89,6 +90,9 @@ try {
   $rev1=new Revision();
   $avance         = new Avance($id);
   $avance->getAllObjects();
+  $proyecto->getAllObjects();
+  $ultim_obj = $avance->avance_objetivo_especifico_objs;
+  
   $avance->asignarDirectorio();
   $avance->cambiarEstadoVisto();
   function getRevisortipo($tipo,$rev){
@@ -142,7 +146,17 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
     $revision->save();
     $avance->porcentaje=trim($_POST['porcentaje']);
     $avance->save();
+    $i=0;
     
+   $i=0;
+    foreach ($proyecto->objetivo_especifico_objs as $especifico) {
+      if ( $especifico->id && isset($_POST['objetivo_avance_'.$especifico->id])){
+        $avance_especifico = new Avance_objetivo_especifico($ultim_obj[$i]->id);
+        $avance_especifico->porcentaje_avance = isset($_POST['porcentaje_avance_'.$especifico->id])?$_POST['porcentaje_avance_'.$especifico->id]:0;
+        $avance_especifico->save();
+        $i++;
+      }
+    }
     foreach ($observaciones as $obser_array){
     $observacion->objBuidFromPost();
     $observacion->crearObservacion($obser_array, $revision->id);
@@ -225,6 +239,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
   $smarty->assign("proyecto", $proyecto);
   $smarty->assign("avance", $avance);
   $smarty->assign("iddicta", $iddicta);
+  $smarty->assign("ultim_obj", $ultim_obj);
   $smarty->assign("ERROR", $ERROR);
   
 } 
