@@ -75,7 +75,7 @@ try {
       $avance = $estudiante->grabarAvance($avance_escpecifico);
     }
       $_SESSION['estado'] = true;
-      //header("Location: avance.gestion.php");
+      header("Location: avance.gestion.php");
       $EXITO = true;
   }
   //porcentaje de avance

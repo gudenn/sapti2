@@ -415,7 +415,6 @@ and es.id='$this->id'";
       return false;
     $avance = new Avance();
     $avance->objBuidFromPost();
-    $avance_escpecifico;
     if ( get_magic_quotes_gpc() )
       $avance->descripcion = htmlspecialchars( stripslashes((string)$avance->descripcion) );
     else
