@@ -408,13 +408,14 @@ and es.id='$this->id'";
    * Grabamos el avance que realizo el estudiante en proyecto
    * @return boolean|\Avance
    */
-  function grabarAvance() 
+  function grabarAvance($avance_escpecifico= true) 
   {
     $proyecto    = $this->getProyecto();
     if (!$proyecto || !isset($proyecto->id))
       return false;
     $avance = new Avance();
     $avance->objBuidFromPost();
+    $avance_escpecifico;
     if ( get_magic_quotes_gpc() )
       $avance->descripcion = htmlspecialchars( stripslashes((string)$avance->descripcion) );
     else
@@ -422,14 +423,16 @@ and es.id='$this->id'";
 
     $proyecto->getAllObjects();
     //verificamos si hay avance en los objetivos especificos
+    $i=0;
     foreach ($proyecto->objetivo_especifico_objs as $especifico) {
       if ( $especifico->id && isset($_POST['objetivo_avance_'.$especifico->id])){
-        $avance_especifico = new Avance_objetivo_especifico();
+        $avance_especifico = new Avance_objetivo_especifico($avance_escpecifico[$i]->id);
         $avance_especifico->porcentaje_avance = isset($_POST['porcentaje_avance_'.$especifico->id])?$_POST['porcentaje_avance_'.$especifico->id]:0;
         $avance_especifico->objetivo_especifico_id = $especifico->id;
         $avance_especifico->estado_avance          = Avance_objetivo_especifico::E1_CREADO;
         $avance_especifico->estado                 = Objectbase::STATUS_AC;
         $avance->avance_objetivo_especifico_objs[] = $avance_especifico;
+        $i++;
       }
     }
 

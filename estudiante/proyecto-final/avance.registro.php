@@ -66,15 +66,16 @@ try {
   $proyecto->getAllObjects();
   $id             = (isset($_GET['avance_id']) && is_numeric($_GET['avance_id']))?$_GET['avance_id']:'';
   $avance         = new Avance($id);
+  $avance->getAllObjects();
+  $avance_escpecifico= $avance->avance_objetivo_especifico_objs;
   $avance->asignarDirectorio();
-
   if ( isset($_POST['tarea']) && $_POST['tarea'] == 'registrar_avance' && isset($_SESSION['registrar_avance']) && isset($_POST['token']) && $_SESSION['registrar_avance'] == $_POST['token'] ){
     $EXITO = false;
     if ($proyecto->id){
-      $avance = $estudiante->grabarAvance();
+      $avance = $estudiante->grabarAvance($avance_escpecifico);
     }
       $_SESSION['estado'] = true;
-      header("Location: avance.gestion.php");
+      //header("Location: avance.gestion.php");
       $EXITO = true;
   }
   //porcentaje de avance
@@ -99,6 +100,7 @@ try {
   $smarty->assign("avance", $avance);
   $smarty->assign("porcentaje", $porcentaje);
   $smarty->assign("ultim_obj", $ultim_obj);
+  $smarty->assign("avance_escpecifico", $avance_escpecifico);
   $smarty->assign("ERROR", $ERROR);
   
 

@@ -140,7 +140,6 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
     $revision->objBuidFromPost();
     $revision->avance_id=$avance->id;
     $revision->save();
-   
     $avance->porcentaje=trim($_POST['porcentaje']);
     $avance->save();
     
