@@ -85,6 +85,9 @@ try {
   $rev1=new Revision();
   $avance         = new Avance($id);
   $avance->getAllObjects();
+  $proyecto->getAllObjects();
+  $ultim_obj = $avance->avance_objetivo_especifico_objs;
+  
   $avance->asignarDirectorio();
   $avance->cambiarEstadoVisto();
 
@@ -130,7 +133,22 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
     $revision->objBuidFromPost();
     $revision->avance_id=$avance->id;
     $revision->save();
-    
+    //modificando el porcentaje de avance 
+    $i = 0;
+    foreach ($proyecto->objetivo_especifico_objs as $especifico) {
+      if ($especifico->id && isset($_POST['objetivo_avance_' . $especifico->id])) {
+        $avance_especifico = new Avance_objetivo_especifico($ultim_obj[$i]->id);
+        $avance_especifico->avance_id = $avance->id;
+        $avance_especifico->porcentaje_avance = isset($_POST['porcentaje_avance_' . $especifico->id]) ? $_POST['porcentaje_avance_' . $especifico->id] : 0;
+        $avance_especifico->objetivo_especifico_id = $especifico->id;
+        $avance_especifico->estado_avance          = Avance_objetivo_especifico::E1_CREADO;
+        $avance_especifico->estado                 = Objectbase::STATUS_AC;
+        $avance_especifico->save();
+        $i++;
+      }
+    }
+    $avance->porcentaje = trim($_POST['porcentaje']);
+    $avance->save();
     foreach ($observaciones as $obser_array){
     $observacion->objBuidFromPost();
     $observacion->crearObservacion($obser_array, $revision->id);
@@ -212,6 +230,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
   $smarty->assign("usuario", $usuario);
   $smarty->assign("proyecto", $proyecto);
   $smarty->assign("avance", $avance);
+  $smarty->assign("ultim_obj", $ultim_obj);
   $smarty->assign("ERROR", $ERROR);
   
 } 
