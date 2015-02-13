@@ -200,8 +200,8 @@ $('#theme-switcher').change(function () {
                 <br>
                 <h3><b>Registre el porcentaje avance de los objetivos espec&iacute;ficos de su proyecto {getHelpTip('Avance_especifico')}</b></h3>
             </div>
-            {assign var='oesps' value=$proyecto->objetivo_especifico_objs}
-            {section name=ic loop=$oesps}
+  {assign var='oesps' value=$proyecto->objetivo_especifico_objs}
+  {section name=ic loop=$oesps}
               <div>
                   <table>
                       <tr>
@@ -217,21 +217,21 @@ $('#theme-switcher').change(function () {
                   </table>
               </div>
               <script>
-                  {literal}
+    {literal}
                   (function () {
                       var registro = document.getElementById("registro");
                       if ("oninput" in registro) {
                           registro.addEventListener("input", function () {
-                  {/literal}
+    {/literal}
                               output_avance_{$oesps[ic]->id}.value = porcentaje_avance_{$oesps[ic]->id}.value;
-                  {literal}
+    {literal}
                           }, false);
                       }
                   })();
-                  {/literal}
+    {/literal}
               </script>
-            {/section}
-        {/if}
+  {/section}
+{/if}
             <label  accesskey="">OBSERVACION(ES):
             </label>
             </p>

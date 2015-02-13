@@ -152,8 +152,8 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
         $avance_especifico->avance_id = $avance->id;
         $avance_especifico->porcentaje_avance = isset($_POST['porcentaje_avance_' . $especifico->id]) ? $_POST['porcentaje_avance_' . $especifico->id] : 0;
         $avance_especifico->objetivo_especifico_id = $especifico->id;
-        $avance_especifico->estado_avance          = Avance_objetivo_especifico::E1_CREADO;
-        $avance_especifico->estado                 = Objectbase::STATUS_AC;
+        $avance_especifico->estado_avance = Avance_objetivo_especifico::E1_CREADO;
+        $avance_especifico->estado = Objectbase::STATUS_AC;
         $avance_especifico->save();
         $i++;
       }

@@ -68,20 +68,17 @@ try {
 
     if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
     {
-      
+     
         $vistobueno                    =       new Visto_bueno_tutor();
         $docente                       =       getSessionDocente();
         $tutoractual                   = getSessionTutor();
    
-        $estudiante= new Estudiante($_POST['estudiante_id']);/// crando el estudiante
-        $proyectoestudiante= $estudiante->getProyecto();  // obtien e el proyecto del estudioante
-        
-      //  var_dump($proyectoestudiante);
-        $usuario= getSessionUser();
-        $usuario->getAllObjects();
-
-       $docentestudiante= $estudiante->getDocente();//  retorna el docente del estudiante
-          
+    $estudiante = new Estudiante($_POST['estudiante_id']); /// crando el estudiante
+    $proyectoestudiante = $estudiante->getProyecto();  // obtien e el proyecto del estudioante
+    $usuario = getSessionUser();
+    $usuario->getAllObjects();
+    $tuores = $usuario->tutor_objs;
+    $docentestudiante = $estudiante->getDocente(); //  retorna el docente del estudiante
        foreach ($usuario->tutor_objs as $tutor_id)
         {
               $vistobueno->objBuidFromPost();
@@ -92,7 +89,6 @@ try {
               $vistobueno->estado            =        Objectbase::STATUS_AC;
               $vistobueno->save();
               
-              
                    $notificacions= new Notificacion();
                     $notificacions->objBuidFromPost();
                     $notificacions->proyecto_id = $proyecto->id; 
@@ -101,13 +97,12 @@ try {
                     $notificacions->asunto      =  "Visto bueno del Tutor";
                     $notificacions->prioridad   =  7;
                     $notificacions->estado      =   Objectbase::STATUS_AC;
-
                     $noticaciones = array('estudiantes'=>array($estudiante->id));
                     $notificacions->enviarNotificaion( $noticaciones);
         }
                   
                  
-
+  
     $ir = "Location: estudiante.lista.php";
     header($ir);
         
