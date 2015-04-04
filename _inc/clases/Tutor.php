@@ -297,7 +297,7 @@ class Tutor extends Objectbase
     $filtro->nombres[] = 'Estado';
     $filtro->valores[] = array ('select','estado'  ,$filtro->filtro('estado'),
         array(''      ,'AC'         ,'NC'           ,'IN'          ,'DE'        ),
-        array('Todos' ,'Confirmados','No Confirmado','Desctivado'  ,'Eliminado' ));
+        array('Todos' ,'Confirmados','No Confirmado','Desactivado'  ,'Eliminado' ));
     $filtro->nombres[] = 'Nombre';
     $filtro->valores[] = array ('input' ,'nombre',$filtro->filtro('nombre'));
     $filtro->nombres[] = 'Apellidos';

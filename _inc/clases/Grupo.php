@@ -211,9 +211,9 @@ class Grupo extends Objectbase
     $filtro->valores[] = array ('select','estado'  ,$filtro->filtro('estado'),
         array(''      ,'AC'         ,'NC'           ,'DE'        ),
         array('Todos' ,'Activo'     ,'No Activo'    ,'Eliminado' ));
-    $filtro->nombres[] = 'Codigo';
+    $filtro->nombres[] = 'C&oacute;digo';
     $filtro->valores[] = array ('input' ,'codigo',$filtro->filtro('codigo'));
-    $filtro->nombres[] = 'Descripcion';
+    $filtro->nombres[] = 'Descripci&oacute;n';
     $filtro->valores[] = array ('input' ,'descripcion',$filtro->filtro('descripcion'));
   }
 

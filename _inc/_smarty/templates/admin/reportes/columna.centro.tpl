@@ -10,8 +10,8 @@
           </a>
           <a href="{$URL}{Administrador::URL}reportes/prorroga.php">
             <img src="{$URL_IMG}note.png"   width="48px" height="48px" alt="Estudiantes">
-            <h3>Reportes Prorroga</h3>
-            <p>Lista  Prorroga Generar Reportes en pdf y excel </p>
+            <h3>Reportes Pr&oacute;rroga</h3>
+            <p>Lista  Pr&oacute;rroga Generar Reportes en pdf y excel </p>
       
             <a href="{$URL}{Administrador::URL}reportes/vencido.lista.php">
             <img src="{$URL_IMG}note.png"   width="48px" height="48px" alt="Estudiantes">

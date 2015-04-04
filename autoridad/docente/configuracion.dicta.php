@@ -110,9 +110,9 @@ ORDER BY us.apellido_paterno ASC
   {
     $html = new Html();
     if ($EXITO)
-      $mensaje = array('mensaje'=>'Se grabo correctamente el Grupo','titulo'=>'Grupo' ,'icono'=> 'tick_48.png');
+      $mensaje = array('mensaje'=>'Se grab&oacute correctamente el Grupo','titulo'=>'Grupo' ,'icono'=> 'tick_48.png');
     else
-      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Grupo','titulo'=>'Registro de Grupo' ,'icono'=> 'warning_48.png');
+      $mensaje = array('mensaje'=>'Hubo un problema, No se grab&oacute correctamente el Grupo','titulo'=>'Registro de Grupo' ,'icono'=> 'warning_48.png');
    $ERROR = $html->getMessageBox ($mensaje);
   }
 if (isset($_GET['eliminar']) && isset($_GET['dicta_id']) && is_numeric($_GET['dicta_id']) )

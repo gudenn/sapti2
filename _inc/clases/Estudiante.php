@@ -462,7 +462,7 @@ and es.id='$this->id'";
     $notificacion->tipo        = Notificacion::TIPO_MENSAJE;
     $notificacion->fecha_envio = date('d/m/Y');
     $notificacion->asunto      = "Avance: {$this->getNombreCompleto()}";
-    $notificacion->detalle     = "El estudiante {$this->getNombreCompleto()} realizo un avance en su proyecto {$proyecto->nombre}, en la fecha {$notificacion->fecha_envio} ";
+    $notificacion->detalle     = "El estudiante {$this->getNombreCompleto()} realizó un avance en su proyecto {$proyecto->nombre}, en la fecha {$notificacion->fecha_envio} ";
     $notificacion->prioridad   = 3;
     $notificacion->estado      = Objectbase::STATUS_AC;
     

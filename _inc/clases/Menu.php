@@ -122,7 +122,7 @@ class Menu
       $thises[] = $thise;  
       $thise = new Menu('Reprogramaciones');
       $link = Administrador::URL."reprogramacion/";
-      $thise->agregarItem('Gesti&oacute;n de Reprogramaciones','Postergar y dar Prorroga a Proyectos','basicset/calendar.png',$link);
+      $thise->agregarItem('Gesti&oacute;n de Reprogramaciones','Postergar y dar Pr&oacute;rroga a Proyectos','basicset/calendar.png',$link);
       $thises[] = $thise;
      
       $thise = new Menu('Perfil');

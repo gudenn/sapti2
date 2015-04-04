@@ -81,7 +81,7 @@ try {
      
      leerClase('Html');
      $html = new Html();
-     $mensaje = array('mensaje'=>'Se grabo correctamente','titulo'=>'Solicitud' ,'icono'=> 'tick_48.png');
+     $mensaje = array('mensaje'=>'Se grab&oacute; correctamente','titulo'=>'Solicitud' ,'icono'=> 'tick_48.png');
      $ERROR = $html->getMessageBox ($mensaje);
     
     $_SESSION['estado']=0;

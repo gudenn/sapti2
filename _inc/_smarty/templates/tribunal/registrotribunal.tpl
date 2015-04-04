@@ -147,7 +147,7 @@
       <div>
         Detalle<br/>
         <textarea name="detalle" rows="5" style="width: 90%">
-Se le Asigno los Tribunales  correspondientes al proyecto:{$proyectobuscado->nombre}  del estudiante:{$usuariobuscado->getNombreCompleto()} para que usted realize las funciones como tribunal al proyecto ya mencionado esperamos su pronta respuesta 
+Se le Asignó los Tribunales  correspondientes al proyecto:{$proyectobuscado->nombre}  del estudiante:{$usuariobuscado->getNombreCompleto()} para que usted realize las funciones como tribunal al proyecto ya mencionado esperamos su pronta respuesta 
       </textarea>
         <script>
           CKEDITOR.replace('detalle'{$editores});

@@ -271,7 +271,7 @@ try {
   $smarty->assign('contenido',$contenido);
   }  else {
       $html = new Html();
-    $mensaje = array('mensaje' => 'Hubo un problema, No se grabo correctamente la Asignacion de Tribunales', 'titulo' => 'Registro de Tribunales', 'icono' => 'warning_48.png');
+    $mensaje = array('mensaje' => 'Hubo un problema, No se grab&oacute correctamente la Asignacion de Tribunales', 'titulo' => 'Registro de Tribunales', 'icono' => 'warning_48.png');
     $ERROR = $html->getMessageBox($mensaje);
   }
   }

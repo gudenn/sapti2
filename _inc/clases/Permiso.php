@@ -125,9 +125,9 @@ class Permiso extends Objectbase
     if (isset($_GET['order']))
       $filtro->order($_GET['order']);
 
-    $filtro->nombres[] = 'Modulo';
+    $filtro->nombres[] = 'M&oacute;dulo';
     $filtro->valores[] = array ('input' ,'modulo_codigo',$filtro->filtro('modulo_codigo'));
-    $filtro->nombres[] = 'Descripcion';
+    $filtro->nombres[] = 'Descripci&oacute;n';
     $filtro->valores[] = array ('input' ,'modulo_descripcion',$filtro->filtro('modulo_descripcion'));
   }
 

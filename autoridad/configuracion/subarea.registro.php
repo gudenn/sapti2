@@ -90,9 +90,9 @@ try {
   {
     $html = new Html();
     if ($EXITO)
-      $mensaje = array('mensaje'=>'Se grabo correctamente el Sub-&Aacuterea;','titulo'=>'Registro de Sub-&Aacuterea;' ,'icono'=> 'tick_48.png');
+      $mensaje = array('mensaje'=>'Se grab&oacute; correctamente el Sub-&Aacuterea;','titulo'=>'Registro de Sub-&Aacuterea;' ,'icono'=> 'tick_48.png');
     else
-      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Sub-&Aacuterea;','titulo'=>'Registro de Sub-&Aacuterea;' ,'icono'=> 'warning_48.png');
+      $mensaje = array('mensaje'=>'Hubo un problema, No se grab&oacute; correctamente el Sub-&Aacuterea;','titulo'=>'Registro de Sub-&Aacuterea;' ,'icono'=> 'warning_48.png');
    $ERROR = $html->getMessageBox ($mensaje);
   }
   $smarty->assign("ERROR",$ERROR);

@@ -6,9 +6,9 @@
                 <tr>
                   <th><a>C&Oacute;DIGO SIS             </a></th>
                   <th><a>APELLIDOS Y NOMBRES     </a></th>
-                  <th><a>EVALUACIN 1           </a></th>
-                  <th><a>EVALUACION 2           </a></th>
-                  <th><a>EVALUACION 3           </a></th>
+                  <th><a>EVALUACI&Oacute;N 1           </a></th>
+                  <th><a>EVALUACI&Oacute;N 2           </a></th>
+                  <th><a>EVALUACI&Oacute;N 3           </a></th>
                 </tr>
               </thead>
               {section name=ic loop=$inscritos}

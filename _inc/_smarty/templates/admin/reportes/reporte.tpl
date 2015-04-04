@@ -45,7 +45,7 @@
                         name: 'Browser share',
                         data: [
                             ['Postergado', {$pos}],
-                            ['Prorroga',    {$pr}],
+                            ['Prórroga',    {$pr}],
                             
                             ['Cambios',   {$cam} ],
                             

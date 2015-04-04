@@ -12,7 +12,7 @@ try {
   /** HEADER */
   $smarty->assign('title','Gesti&oacute;n de Evaluaciones');
   $smarty->assign('description','Formulario de Gesti&oacute;n de Evaluaciones');
-  $smarty->assign('keywords','Gestion,Evaluacion,Estudiantes,Inscritos');
+  $smarty->assign('keywords','Gestion,Evaluaci&oacute;n,Estudiantes,Inscritos');
 
   //CSS
   $CSS[]  = URL_CSS . "academic/3_column.css";
@@ -40,8 +40,8 @@ try {
   $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Asignaturas');
   $menuList[]     = array('url'=>URL.Docente::URL.'index.materias.php','name'=>'Materias');
   $menuList[]     = array('url'=>URL.Docente::URL.'index.proyecto-final.php?iddicta='.$iddicta,'name'=>$dicta->getNombreMateria());
-  $menuList[]     = array('url'=>URL.Docente::URL.'evaluacion/estudiante.evaluacion-editar.php?iddicta='.$iddicta,'name'=>'Evaluacion de Estudiantes');
-  $menuList[]     = array('url'=>URL.Docente::URL.'evaluacion/evaluacion.estudiante-cvs.php?iddicta='.$iddicta,'name'=>'Evaluacion de Estudiantes por CSV');
+  $menuList[]     = array('url'=>URL.Docente::URL.'evaluacion/estudiante.evaluacion-editar.php?iddicta='.$iddicta,'name'=>'Evaluaci&oacute;n de Estudiantes');
+  $menuList[]     = array('url'=>URL.Docente::URL.'evaluacion/evaluacion.estudiante-cvs.php?iddicta='.$iddicta,'name'=>'Evaluaci&oacute;n de Estudiantes por CSV');
   $smarty->assign("menuList", $menuList);
 
     function estainscrito($sis) {

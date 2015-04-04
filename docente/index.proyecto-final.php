@@ -83,9 +83,9 @@ try {
 
   $menu = new Menu('Aprobaciones');
   $link = Docente::URL."estudiante/estudiante.vistobueno.php?iddicta=".$iddicta;
-  $menu->agregarItem('Lista de Estudiantes','Lista de Estudiantes en Espera de Revision y Visto Bueno de su proyecto','docente/calendar.png',$link);
+  $menu->agregarItem('Lista de Estudiantes','Lista de Estudiantes en Espera de Revisi&oacute;n y Visto Bueno de su proyecto','docente/calendar.png',$link);
   $link = Docente::URL."estudiante/estudiante.lista.vistobueno.php?iddicta=".$iddicta;
-  $menu->agregarItem('Lista de Estudiantes con Visto Bueno','Lista de Estudiantes en que Revision y aprobo con el Visto Bueno de su proyecto','docente/edicion.png',$link);
+  $menu->agregarItem('Lista de Estudiantes con Visto Bueno','Lista de Estudiantes en que Revisi&oacute;n y aprobo con el Visto Bueno de su proyecto','docente/edicion.png',$link);
   $menus[] = $menu;
   
   $menu = new Menu('Correcciones Rapidas');

@@ -147,7 +147,7 @@ try {
           
         }else  
           {
-          $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Area','titulo'=>'Registro de Area' ,'icono'=> 'warning_48.png');
+          $mensaje = array('mensaje'=>'Hubo un problema, No se grab&oacute correctamente el Area','titulo'=>'Registro de Area' ,'icono'=> 'warning_48.png');
           $ERROR = $html->getMessageBox ($mensaje);
           }
          }

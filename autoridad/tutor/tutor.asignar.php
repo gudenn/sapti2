@@ -155,7 +155,7 @@ try {
   {
     $html = new Html();
     if ($EXITO)
-      $mensaje = array('mensaje'=>'Se asigno correctamente '. $nuevotutor->getNombreCompleto() .' como Tutor','titulo'=>'Registro de Tutor' ,'icono'=> 'tick_48.png');
+      $mensaje = array('mensaje'=>'Se asign&oacute correctamente '. $nuevotutor->getNombreCompleto() .' como Tutor','titulo'=>'Registro de Tutor' ,'icono'=> 'tick_48.png');
     else
       $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Tutor','titulo'=>'Registro de Tutor' ,'icono'=> 'warning_48.png');
    $ERROR = $html->getMessageBox ($mensaje);

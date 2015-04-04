@@ -114,9 +114,9 @@ try {
   {
     $html = new Html();
     if ($EXITO)
-      $mensaje = array('mensaje'=>'Se grabo correctamente la Configuracion','titulo'=>'Registro de Configuracion' ,'icono'=> 'tick_48.png');
+      $mensaje = array('mensaje'=>'Se grab&oacute correctamente la Configuraci&oacuten','titulo'=>'Registro de Configuraci&oacuten' ,'icono'=> 'tick_48.png');
     else
-      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente la Configuracion Seleccione los Campos Obligatorios.','titulo'=>'Registro de Configuracion' ,'icono'=> 'warning_48.png');
+      $mensaje = array('mensaje'=>'Hubo un problema, No se grab&oacute correctamente la Configuraci&oacuten Seleccione los Campos Obligatorios.','titulo'=>'Registro de Configuraci&oacuten' ,'icono'=> 'warning_48.png');
    $ERROR = $html->getMessageBox ($mensaje);
   }
   $smarty->assign("ERROR",$ERROR);
