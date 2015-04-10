@@ -47,16 +47,16 @@ try {
   $smarty->assign('vigencia'     ,$vigencia);
   $smarty->assign('estudiante'     ,$estudiante);
 
-  $fecha=$vigencia->fecha_fin;
+  $fechafin=$vigencia->fecha_fin;
+  $fecha_entrada = strtotime($fechafin);
+  $fechahoy= strtotime(date("d-m-Y H:i:00"));
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////
- $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
-     $smarty->assign('lista'       ,'admin/estado/lista.tpl');
-  if ($fechah>fecha)
+  $smarty->assign('mascara', 'admin/listas.mascara.tpl');
+  $smarty->assign('lista', 'admin/estado/lista.tpl');
+  if ($fechahoy > $fecha_entrada)
   {
- 
-
   if (isset($_GET['postergar'])&$vigencia->estado_vigencia!='PO' )
   {
      $fechafin=$v[0]->fecha_fin;
@@ -82,7 +82,8 @@ try {
  }
   }else
     {
-         echo "<script>alert('El Estudiante no Tiene Proyecto');</script>";
+         echo "<script>alert('El proyecto Aun no cumplio el plazo de 2 años para la reprogramacion');</script>";
+         header("Location:lista.estudiantes.php"); 
     }
  
     
