@@ -78,8 +78,9 @@
  </span> 
  </a>
 </td>
- <td><img src="{$URL}images/click.png" border="1" alt="Agregar" width="30"></td>
-     
+<td><div id="1{$listadocentes[ic][0]}">
+     <img src="{$URL}images/add.png" border="1" alt="Agregar" width="30"></td>
+     </div>
     </tr>
     
   {/section}
@@ -130,7 +131,10 @@
        </a>
 </td>
 
-     <td><img src="{$URL}images/click.png" border="1" alt="Agregar" width="30"></td>
+   <td>
+       <div id="1{$asignados[ic][0]}">
+       <img src="{$URL}images/remove.png" border="1" alt="Agregar" width="30"></td>
+       </div>
 
     </tr>
     
@@ -178,11 +182,27 @@ Se le Asignó los Tribunales  correspondientes al proyecto:{$proyectobuscado->no
      alert ( "Solo se Permiten tres Docentes como Tribunales!!" );
       } else
         {
+            
+                                               var contenido='';
+        var conta=0;
+        var tamani=$(this).find('td').length-1;
+        $(this).find('td').each(function(){
+            if(conta < tamani)
+            {
+                contenido=contenido+'<td>'+$(this).text()+'</td>';
+
+            }
+             else{
+             contenido= contenido+'<td>'+'<img src="{$URL}images/remove.png" border="1" alt="Agregar" width="30">'+'</td>';
+            }
+  
+         conta++;
+        });
       var  trid = $(this).attr('id'); // table row ID 
       
-        var fila=     $(this).html()
-                                       
-                             $.ajax({
+        var fila=     $(this).html();
+        
+                                 $.ajax({
 				url: 'verificar.php',
 				type: "GET",
 				data: "id="+trid,
@@ -190,8 +210,12 @@ Se le Asignó los Tribunales  correspondientes al proyecto:{$proyectobuscado->no
                                
                                if(datos=="1")
                                {
-                                    $("#asignados").append('<tr>' +fila + '</tr>');
-                                        $("#"+trid).remove(); 
+                                   
+  
+                      
+                                    $("#asignados").append('<tr>' +contenido + '+</tr>');
+                                    $("#"+trid).remove(); 
+                                        
                                }else
                                {
                                    alert(datos)
@@ -218,8 +242,24 @@ Se le Asignó los Tribunales  correspondientes al proyecto:{$proyectobuscado->no
 
   jQuery(function(){
     $("#asignados tbody").on("click", "tr", function(event){
+        var contenido='';
+        var conta=0;
+        var tamani=$(this).find('td').length-1;
+        $(this).find('td').each(function(){
+            if(conta < tamani)
+            {
+                contenido=contenido+'<td>'+$(this).text()+'</td>';
+
+            }
+             else{
+             contenido= contenido+'<td>'+'<img src="{$URL}images/add.png" border="1" alt="Agregar" width="30">'+'</td>';
+            }
+  
+         conta++;
+        });
+      
+      $("#docentes tbody").append('<tr>' +contenido + '</tr>');
     
-      $("#docentes tbody").append('<tr>' + $(this).html() + '</tr>');
       $(this).remove();
       return false;
     });
