@@ -170,6 +170,7 @@ try {
 } 
 catch(Exception $e) 
 {
+
   mysql_query("ROLLBACK");
   $smarty->assign("ERROR", handleError($e));
 }

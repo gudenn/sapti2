@@ -28,6 +28,7 @@
     <th><a >ID          </a></th>
     <th><a >FECHA</a></th>
     <th><a  >ARCHIVO    </a></th>
+     <th><a  >RESTAURAR    </a></th>
       </tr>
   </thead>
   <tbody>
@@ -44,6 +45,7 @@
         {$listadocentes[ic][1]}
       </td>
       <td>    <a href='{$listadocentes[ic][2]}' title=''       >{icono('basicset/data.png','Editar')} Archivo</a>
+        <td>    <a href='{$URL}autoridad/respaldo/?id={$listadocentes[ic][0]}' title=''       >{icono('basicset/data.png','Editar')} Archivo</a>
    
      </td>
        

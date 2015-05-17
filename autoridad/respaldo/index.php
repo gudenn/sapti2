@@ -1,7 +1,7 @@
 
 <?php
 try {
-     define ("MODULO", "ADMIN-INDEX");
+  //   define ("MODULO", "ADMIN-INDEX");
   require('../_start.php');
   //require '../../../..';
   //if(!isAdminSession())
@@ -32,7 +32,45 @@ try {
   //BOX
   $smarty->assign('CSS',$CSS);
   $smarty->assign('JS',$JS);
+ if(isset($_GET['id']))
+    {
 
+  $respaldito= new Respaldo( $_GET['id']);
+
+$testfile = $respaldito->archivo ; 
+
+$filename = $testfile;
+$mysql_host = DBHOST;
+$mysql_username = DBUSER;
+$mysql_password = BDPASS;
+$mysql_database = BDNAME;
+ 
+
+// Temporary variable, used to store current query
+$templine = '';
+// Read in entire file
+$lines = file($filename);
+// Loop through each line
+foreach ($lines as $line)
+{
+    // Skip it if it's a comment
+    if (substr($line, 0, 2) == '--' || $line == '')
+        continue;
+ 
+    // Add this line to the current segment
+    $templine .= $line;
+    // If it has a semicolon at the end, it's the end of the query
+    if (substr(trim($line), -1, 1) == ';')
+    {
+        // Perform the query
+        mysql_query($templine) or print('Error performing query \'<strong>' . $templine . '\': ' . mysql_error() . '<br /><br />');
+        // Reset temp variable to empty
+        $templine = '';
+    }
+}
+
+ echo '<meta http-equiv="refresh" content="10;URL=index.php" >';
+ }
   //Leendo las clases para 
   leerClase('Tribunal');
   leerClase("Proyecto");
@@ -95,6 +133,7 @@ try {
        $semestre->setValor('Número máximo de tribunal',10);
     }
 
+   
     
  //  $respaldos= new Respaldo();
 
@@ -219,7 +258,7 @@ fclose($handle);
 } 
 catch(Exception $e) 
 {
-    
+   
   $smarty->assign("ERROR", handleError($e));
 }
 $token = sha1(URL . time());
