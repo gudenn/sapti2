@@ -195,7 +195,7 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`tribunal` (
   `detalle` TEXT NULL ,
   `accion` VARCHAR(2) NULL COMMENT 'aceptar , rechazar' ,
   `visto` VARCHAR(2) NULL COMMENT 'no visto (NV), Visto(V)' ,
-  `fecha_asignacion` DATE NULL ,
+  `fecha_asignacion` DATETIME NULL ,
   `fecha_aceptacion` DATE NULL ,
   `semestre` VARCHAR(45) NULL ,
   `visto_bueno` VARCHAR(2) NULL ,
@@ -232,26 +232,11 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`materia` (
   `sigla` VARCHAR(20) NULL ,
   `codigo` VARCHAR(10) NULL ,
   `tipo` VARCHAR(4) NULL ,
+  `carrera_id` INT NOT NULL ,
   `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
-
-
-
---
--- Estructura de tabla para la tabla `semestre`
---
-
-CREATE TABLE IF NOT EXISTS `semestre` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `codigo` varchar(45) DEFAULT NULL,
-  `activo` tinyint(1) DEFAULT NULL,
-  `valor` int(11) DEFAULT NULL,
-  `fecha_inicio` date DEFAULT NULL,
-  `fecha_fin` date DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
-  PRIMARY KEY (`id`));
 
 -- -----------------------------------------------------
 -- Table `sapti`.`semestre`
@@ -263,12 +248,9 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`semestre` (
   `codigo` VARCHAR(45) NULL ,
   `activo` TINYINT(1) NULL ,
   `valor` INT NULL ,
-  `fecha_inicio` DATE NULL ,
-  `fecha_fin` DATE NULL ,
   `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
-
 
 
 -- -----------------------------------------------------
@@ -1045,75 +1027,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `sapti`.`forotema`
 -- -----------------------------------------------------
-
-DROP TABLE IF EXISTS `fororespuesta` ;
-
-CREATE TABLE IF NOT EXISTS `fororespuesta` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `forotema_id` INT NULL,
-  `usuario_id` INT NULL,
-  `nombre` VARCHAR(100) NULL,
-  `descripcion` TEXT NULL,
-  `estado` VARCHAR(2) NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
-
--- Vistos buenos
-
-DROP TABLE IF EXISTS `apoyo` ;
-
-CREATE TABLE IF NOT EXISTS `apoyo` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `area_id` INT NULL,
-  `sub_area_id` INT NOT NULL,
-  `docente_id` INT NULL,
-  `estado` VARCHAR(2) NULL,
-  
-  PRIMARY KEY (`id`));
-
-
-CREATE TABLE IF NOT EXISTS `visto_bueno_tutor` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `tutor_id` INT NULL,
-  `proyecto_id` INT NULL,
-  `visto_bueno` VARCHAR(45) NULL,
-  `tipo_proyecto` VARCHAR(45) NULL,
-  `fecha` VARCHAR(45) NULL,
-  `descripcion` VARCHAR(100) NULL,
-  `estado` VARCHAR(10) NULL,
-  PRIMARY KEY (`id`));
-  
-  
-CREATE TABLE IF NOT EXISTS `visto_bueno_docente` (
-  `id` INT NULL AUTO_INCREMENT,
-  `proyecto_id` INT NULL,
-  `docente_id` INT NULL,
-  `visto_bueno` VARCHAR(45) NULL,
-  `tipo_proyecto` VARCHAR(10) NULL,
-  `fecha` DATE NULL,
-  `descripcion` VARCHAR(100) NULL,
-  `estado` VARCHAR(10) NULL,
-  PRIMARY KEY (`id`));
-
-  
--- backups 
-
---
--- Table structure for table `respaldo`
---
-
-CREATE TABLE IF NOT EXISTS `respaldo` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `fecha_respaldo` date DEFAULT NULL,
-  `archivo` varchar(200) DEFAULT NULL,
-  `estado` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
-	
-
 DROP TABLE IF EXISTS `sapti`.`forotema` ;
+
 CREATE  TABLE IF NOT EXISTS `sapti`.`forotema` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `usuario_id` INT NULL ,
