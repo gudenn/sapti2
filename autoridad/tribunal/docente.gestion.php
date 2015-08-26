@@ -68,18 +68,13 @@ try {
 
   $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
   
-  $smarty->assign('lista'       ,'admin/docente/docente.lista.tpl');
+  $smarty->assign('lista'       ,'admin/tribunal/docente.lista.tpl');
 
-  //Filtro
-  $filtro     = new Filtro('g_docente',__FILE__);
-  $docente = new Docente();
-  $docente->iniciarFiltro($filtro);
-  $filtro_sql = $docente->filtrar($filtro);
+  $filtro     = new Filtro('usuario',__FILE__);
+  $usuario = new Usuario();
+  $usuario->iniciarFiltro($filtro);
+  $filtro_sql = $usuario->filtrar($filtro);
  
- 
- 
-  $docente->usuario_id = '%';
-  
   $o_string   = $docente->getOrderString($filtro);
   $obj_mysql  = $docente->getAll('',$o_string,$filtro_sql,TRUE,TRUE);
   $objs_pg    = new Pagination($obj_mysql, 'g_docente','',false,10);

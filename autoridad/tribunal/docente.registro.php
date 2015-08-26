@@ -89,7 +89,9 @@ try {
     $usuario->puede_ser_tutor  = 1;
     $es_nuevo                  = (!isset($_POST['usuario_id']) || trim($_POST['usuario_id']) == '' ) ? TRUE : FALSE;
     $usuario->validar($es_nuevo);
+    $usuario->tribunal=  Usuario::TRIBUNAL;
     $usuario->save();
+   
 
     $usuario->asignarGrupo(Grupo::GR_DO);
 
@@ -97,6 +99,7 @@ try {
     $docente->estado     = Objectbase::STATUS_AC;
     $docente->usuario_id = $usuario->id;
     $docente->configuracion_area=0;
+    $docente->numero_horas=0;
     $docente->configuracion_horario=0;
     $docente->save();
 
@@ -144,6 +147,7 @@ try {
   $smarty->assign("ERROR",$ERROR);
 
 } catch (Exception $e) {
+    echo $e;
  mysql_query("ROLLBACK");
  $smarty->assign("ERROR", handleError($e));
 }

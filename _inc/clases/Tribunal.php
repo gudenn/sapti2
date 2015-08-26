@@ -33,8 +33,8 @@ class Tribunal extends Objectbase
    */
   const  VISTO_BUENOPENDIENTE  = "VP";
   
-  
-  
+
+
     /**
      *
      * @var type 

@@ -87,6 +87,7 @@ try {
     $tutor->objBuidFromPost();
     $tutor->usuario_id = $usuario->id;
     $tutor->estado     = Objectbase::STATUS_AC;
+    $tutor->tutor= Tutor::TUTOR;
     $tutor->save();
     
     if (isset($_POST['estudiante_id']) && is_numeric($_POST['estudiante_id']) )

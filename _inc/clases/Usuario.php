@@ -22,6 +22,10 @@ class Usuario  extends Objectbase
   /** Constantes para el sexo del usuario */
   const MASCULINO   = "M";
   const FEMENINO    = "F";
+/**
+   * define que es tribunal externo
+   */
+  const  TRIBUNAL ="EX";
 
  /**
   * Nombre del usuario
@@ -90,6 +94,11 @@ class Usuario  extends Objectbase
   */
   var $puede_ser_tutor;
   
+    /**
+   * define si es tribunal externo
+   */
+  
+  var $tribunal;
  /**
   * (Arreglo de objetos) El Tutor que esta asignado a este usuario
   * @var object|null 

@@ -122,6 +122,7 @@ try {
   $filtro_sql = $tutor->filtrar($filtro);
 
   $tutor->usuario_id   = '%';
+  
 
   if ($proyecto->id)
     $filtro_sql =  $filtro_mis_tutores . $filtro_sql;

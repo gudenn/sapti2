@@ -15,10 +15,6 @@ CREATE TABLE IF NOT EXISTS `bitacora` (
 
 
 DROP TRIGGER IF EXISTS `biusernew`;
-
-
-
-
 CREATE TRIGGER `biusernew` AFTER INSERT ON `usuario`
 FOR EACH ROW INSERT INTO bitacora(host, operacion, modificado, tabla, tupla_antes, tupla_despues) 
 VALUES (SUBSTRING(USER(), (INSTR(USER(),"@")+1)),"INSERTAR", NOW(), "USUARIO","",CONCAT(NEW.ID,' ', NEW.nombre,' ',NEW.apellido_paterno,' ',NEW.apellido_materno,' ',NEW.telefono, ' ', NEW.email,' ',NEW.fecha_nacimiento,' ',NEW.login));

@@ -6,6 +6,10 @@ class Tutor extends Objectbase
   const URL                  = "docente/tutor/";
   /** Numero maximo de tutores activos asignados a un estudiante */
   const MAXIMO   = "2";
+  /**
+   * define si es tutor externo
+   */
+  const  TUTOR="EX";
 
   
   /**
@@ -14,7 +18,10 @@ class Tutor extends Objectbase
    */
   var $usuario_id;
 
-
+ /**
+  * define si es tutor externo o docente
+  */
+  var $tutor;
  /**
   * (Objeto simple) Todos los proyecto_tutor que tiene este tutor
   * @var object|null 

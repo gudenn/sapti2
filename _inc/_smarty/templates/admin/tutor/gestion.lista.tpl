@@ -38,8 +38,11 @@
           
           <a href="tutor.asignar.php?estudiante_id={$estudiante->id}&cambiartutor_id={$objs[ic]['id']}">{icono('basicset/reload.png','Cambiar')} Cambiar</a>
         {else}
-          <a href="tutor.registro.php?tutor_id={$objs[ic]['id']}">{icono('basicset/pencil_48.png','Editar')} Editar</a>
-        {/if}
+             {if ({$objs[ic]['tutor']}=='EX')}
+             <a href="tutor.registro.php?tutor_id={$objs[ic]['id']}">{icono('basicset/pencil_48.png','Editar')} Editar</a>
+             {/if}
+             
+              {/if}
       </td>
     </tr>
   </tbody>
