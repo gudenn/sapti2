@@ -1,4 +1,7 @@
       <div id="content">
+          <div align="right">
+              <a href="../tutor/">{icono('close.png','Cerrar')}</a>
+          </div>
         {if (isset($estudiante))}
           <h1 class="title">Registro de Tutor para
             <br>Estudiante: <b>{$estudiante->getNombreCompleto()}</b>

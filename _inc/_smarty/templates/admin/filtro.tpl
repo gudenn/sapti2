@@ -1,3 +1,6 @@
+          <div align="right">
+              <a href="{$cerrar}">{icono('close.png','Cerrar')}</a>
+          </div>
 <form action="{$filtros->clearaction}" method="get" name="filtro" id="filtro" >
   <h2>Opciones de B&uacute;squeda R&aacute;pida: <b>{$description}</b></h2>
     

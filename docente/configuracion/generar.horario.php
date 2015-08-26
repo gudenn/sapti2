@@ -32,7 +32,7 @@ if(!isDocenteSession())
   /**
    * Menu superior
    */
- $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Materias');
+  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Asignaturas');
   $menuList[] = array('url' => URL . Docente::URL.'configuracion/' . basename(__FILE__), 'name' => 'Tiempo');
   $smarty->assign("menuList", $menuList);
 

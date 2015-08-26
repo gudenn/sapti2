@@ -13,7 +13,7 @@
               <label for="nombre"><small>Nombres (*){getHelpTip('nombre')}</small></label>
             </p>
             <p>
-              <input type="text" name="apellido_paterno" id="apellido_paterno" value="{$usuario->apellido_paterno}" size="200">
+              <input type="text" name="apellido_paterno" id="apellido_paterno" value="{$usuario->apellido_paterno}" size="200" data-validation-engine="validate[required]" >
               <label for="apellido_paterno"><small>Apellido Paterno{getHelpTip('apellido_paterno')}</small></label>
             </p>
             <p>

@@ -56,7 +56,8 @@ try {
 
   //No hay ERROR
   $smarty->assign("ERROR",'');
-  $smarty->assign("URL",URL);  
+  $smarty->assign("URL",URL); 
+  $smarty->assign("cerrar",'../estudiante/');
   
 } 
 catch(Exception $e) 

@@ -23,7 +23,7 @@ try {
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Administrador::URL,'name'=>'Administraci&oacute;n');
-  $menuList[]     = array('url'=>URL.Administrador::URL.'estudiante/','name'=>'Gesti&oacute;n Tutores');
+  $menuList[]     = array('url'=>URL.Administrador::URL.'tutor/','name'=>'Tutores');
   $smarty->assign("menuList", $menuList);
 
 
@@ -37,7 +37,7 @@ try {
   $menu->agregarItem('Gesti&oacute;n de Tutores','Registro y modificaciones para Tutores','basicset/user1.png',$link);
   $link = Administrador::URL."tutor/tutor.registro.php";
   $menu->agregarItem('Registro de Tutor','Registro de un nuevo Tutor','basicset/user1.png',$link);
-  $link = Administrador::URL."estudiante/estudiante.asignartutor.php";
+  $link = Administrador::URL."tutor/estudiante.asignartutor.php";
   $menu->agregarItem('Asignar Tutor a un Estudiante','Registro de un nuevo Tutor o seleccionar uno de la lista de tutores disponibles para un estudiante.','basicset/user1.png',$link);
   $menus[] = $menu;
   $menu = new Menu('Reportes');
