@@ -81,7 +81,7 @@ try {
   $docente->usuario_id = '%';
   
   $o_string   = $docente->getOrderString($filtro);
-  $obj_mysql  = $docente->getAll('',$o_string,$filtro_sql,TRUE,TRUE);
+  $obj_mysql  = $docente->getAll('',$o_string,$filtro_sql,TRUE,TRUE,' and usuario.tribunal="EX"');
   $objs_pg    = new Pagination($obj_mysql, 'g_docente','',false,10);
 
   $smarty->assign("filtros"  ,$filtro);

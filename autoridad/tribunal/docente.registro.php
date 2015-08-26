@@ -93,6 +93,7 @@ try {
     $usuario->puede_ser_tutor  = 1;
     $es_nuevo                  = (!isset($_POST['usuario_id']) || trim($_POST['usuario_id']) == '' ) ? TRUE : FALSE;
     $usuario->validar($es_nuevo);
+    $usuario->tribunal=  Usuario::TRIBUNAL;
     $usuario->save();
 
     $usuario->asignarGrupo(Grupo::GR_DO);

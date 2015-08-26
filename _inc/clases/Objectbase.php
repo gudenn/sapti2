@@ -429,7 +429,7 @@ class Objectbase
   * @return array array(the sql result,the number of afected rows) or (null,0)
   *
   */
-  function getAll ($limit = "",$orderby = "",$filter = "" , $just_mysql = false , $autojoin = false)
+  function getAll ($limit = "",$orderby = "",$filter = "" , $just_mysql = false , $autojoin = false, $condicional='')
   {
     /** fechas a SQL */
     $this->datesHTS();    
@@ -473,7 +473,7 @@ class Objectbase
     if ($autojoin && trim($joinwhere) != '')
       $where = " $joinwhere $where ";
     if ( '' != $where )
-      $where = " WHERE 1 $where ";
+      $where = " WHERE 1 $condicional  $where ";
 
     /** fechas a HUMAN */
     $this->datesSTH();    
