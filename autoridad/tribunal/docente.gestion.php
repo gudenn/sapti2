@@ -26,8 +26,8 @@ try {
    * Menu superior
    */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'docente/','name'=>' Docentes');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'docente/'.basename(__FILE__),'name'=>'Gesti&oacute;n de Docente');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'tribunal/','name'=>' Tribunal');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'tribunal/'.basename(__FILE__),'name'=>'Gesti&oacute;n de Tribunal');
   $smarty->assign("menuList", $menuList);
 
   
@@ -68,13 +68,18 @@ try {
 
   $smarty->assign('mascara'     ,'admin/listas.mascara.tpl');
   
-  $smarty->assign('lista'       ,'admin/tribunal/docente.lista.tpl');
+  $smarty->assign('lista'       ,'admin/docente/docente.lista.tpl');
 
-  $filtro     = new Filtro('usuario',__FILE__);
-  $usuario = new Usuario();
-  $usuario->iniciarFiltro($filtro);
-  $filtro_sql = $usuario->filtrar($filtro);
+  //Filtro
+  $filtro     = new Filtro('g_docente',__FILE__);
+  $docente = new Docente();
+  $docente->iniciarFiltro($filtro);
+  $filtro_sql = $docente->filtrar($filtro);
  
+ 
+ 
+  $docente->usuario_id = '%';
+  
   $o_string   = $docente->getOrderString($filtro);
   $obj_mysql  = $docente->getAll('',$o_string,$filtro_sql,TRUE,TRUE);
   $objs_pg    = new Pagination($obj_mysql, 'g_docente','',false,10);
@@ -98,7 +103,8 @@ try {
     $smarty->assign("ERROR",$ERROR);
 
   }
-  $smarty->assign("URL",URL);  
+  $smarty->assign("URL",URL);
+  $smarty->assign("cerrar",'../tribunal/');
 
 }
 catch(Exception $e) 

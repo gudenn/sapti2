@@ -37,8 +37,6 @@ try {
   $menu->agregarItem('Gesti&oacute;n de Estudiantes','Registro y modificaciones para Estudiantes','basicset/people.png',$link);
   $link = Administrador::URL."estudiante/estudiante.registro.php";
   $menu->agregarItem('Registro de Estudiante','Registro de un nuevo Estudiante','basicset/user5.png',$link);
-  $link = Administrador::URL."estudiante/estudiante.asignartutor.php";
-  $menu->agregarItem('Asignar Tutor a un Estudiante','Registro de un nuevo Tutor o seleccionar uno de la lista de tutores disponibles para un estudiante.','basicset/user1.png',$link);
   $menus[] = $menu;
   $menu = new Menu('Proyecto y Perfil');
   $link = Administrador::URL."estudiante/estudiante.asignarproyecto.php";

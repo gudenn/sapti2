@@ -23,8 +23,8 @@ try {
    * Menu superior
    */
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'estudiante/','name'=>' Estudiantes');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'estudiante/'.basename(__FILE__),'name'=>'VER Tutores');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'tutor/','name'=>'Tutor');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'tutor/'.basename(__FILE__),'name'=>'VER Tutores');
   $smarty->assign("menuList", $menuList);
   
 
@@ -57,7 +57,7 @@ try {
   //No hay ERROR
   $smarty->assign("ERROR",'');
   $smarty->assign("URL",URL);  
-  
+  $smarty->assign("cerrar",'../tutor/');
 } 
 catch(Exception $e) 
 {

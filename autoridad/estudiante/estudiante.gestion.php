@@ -88,7 +88,8 @@ try {
     $ERROR   = $html->getMessageBox($mensaje);
     $_SESSION['estado'] = 0;
   }
-  $smarty->assign("URL",URL);  
+  $smarty->assign("URL",URL); 
+  $smarty->assign("cerrar",'../estudiante/');
   $smarty->assign("ERROR", $ERROR);
 
 }

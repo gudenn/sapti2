@@ -12,9 +12,21 @@ try {
   /**
    * Menu superior
    */
+  $id     = '';
+  $editar = FALSE;
+  if ( isset($_GET['estudiante_id']) && is_numeric($_GET['estudiante_id']) )
+  {
+    $editar = TRUE;
+    $id     = $_GET['estudiante_id'];
+  }
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'estudiante/','name'=>' Estudiantes');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'estudiante/'.basename(__FILE__),'name'=>'Registro de estudiante');
+  if($editar == TRUE){
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'estudiante/estudiante.gestion.php','name'=>'Gesti&oacute;n de Estudiantes');
+  $menuList[] = array('url' => URL . Administrador::URL . 'estudiante/estudiante.registro.php?estudiante_id='.$id, 'name' => 'Edicion de estudiante');
+  }else{
+      $menuList[] = array('url' => URL . Administrador::URL . 'estudiante/'. basename(__FILE__) , 'name' => 'Registro de estudiante');
+  }
   $smarty->assign("menuList", $menuList);
 
   
@@ -34,14 +46,6 @@ try {
   leerClase('Materia');
   leerClase('Proyecto_dicta');
   leerClase('Proyecto_estudiante');
-
-  $id     = '';
-  $editar = FALSE;
-  if ( isset($_GET['estudiante_id']) && is_numeric($_GET['estudiante_id']) )
-  {
-    $editar = TRUE;
-    $id     = $_GET['estudiante_id'];
-  }
 
   $estudiante = new Estudiante($id);
   $usuario    = new Usuario($estudiante->usuario_id);

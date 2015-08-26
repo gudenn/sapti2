@@ -1,4 +1,7 @@
       <div id="content">
+          <div align="right">
+              <a href="docente.gestion.php">{icono('close.png','Cerrar')}</a>
+          </div>
         <h1 class="title">Edici&oacute;n del Usuario "<i>{$usuario->getNombreCompleto()}</i>"</h1>
         <p>Formulario de Edici&oacute;n de Usuario</p>
         <h2 class="title">Formulario de Edici&oacute;n</h2>

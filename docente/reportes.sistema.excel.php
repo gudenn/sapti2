@@ -4,17 +4,47 @@
    leerClase('Usuario');
    leerClase('Dicta');
    leerClase('Evaluacion');
-	if(isset($_GET['sql']))
-        $consulta = $_GET['sql'];
+if(isset($_GET['iddicta']))
+$tre = $_GET['tre'];
+$eva=0;
         $iddicta  = $_GET['iddicta'];
-          function array_recibe($url_array) { 
-                    $tmp = stripslashes($url_array); 
-                    $tmp = urldecode($tmp); 
-                    $tmp = unserialize($tmp); 
-
-            return $tmp; 
-        };
-        $consulta=  array_recibe($consulta); 
+function selectmuestra($mat,$eva){
+    $ab="";
+    if($mat!='')
+        $ab.="
+            es.codigo_sis as Codigo_Sis, CONCAT(us.nombre,' ',us.apellido_paterno,' ',us.apellido_materno) as Estudiante, pro.nombre as Nombre_Proyecto";
+    if($eva==1)
+        $ab.="
+            , eva.promedio as Promedio";
+    return $ab;
+}
+function wheremuestra($mat,$sem,$eva){
+    $ac="";
+    if($mat!='')
+    $ac.="
+        AND di.id=".$mat."";
+    if($sem=='2')
+    $ac.="
+        AND eva.promedio >='51'";
+    return $ac;
+}
+function consulta($mat,$sem,$eva){
+    $sql="SELECT ".selectmuestra($mat,$sem)."
+  FROM estudiante es, usuario us, materia ma, inscrito ins, dicta di, proyecto pro, proyecto_estudiante proes, evaluacion eva, semestre se
+ WHERE es.usuario_id=us.id
+ AND eva.id=ins.evaluacion_id
+ AND proes.estudiante_id=es.id
+ AND proes.proyecto_id=pro.id
+ AND ins.estudiante_id=es.id
+ AND ins.dicta_id=di.id
+ AND di.materia_id=ma.id 
+ AND di.semestre_id=se.id
+ AND se.activo=1
+".wheremuestra($mat,$sem,$eva)."";
+    return $sql;
+}
+ 
+        $consulta=  consulta($iddicta,$tre,$eva); 
 if($_GET['eva']==1){
      $resul = "
       SELECT ev.id as id

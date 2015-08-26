@@ -1,4 +1,7 @@
       <div id="content">
+          <div align="right">
+              <a href="docente.gestion.php">{icono('close.png','Cerrar')}</a>
+          </div>
         <h1 class="title">Detalle "<i>{$usuario->nombre} {$usuario->apellidos}</i>"</h1>
         <div id="respond">
   

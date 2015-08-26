@@ -9,12 +9,25 @@ try {
   $smarty->assign('title', 'Registro de Docentes');
   $smarty->assign('description', 'P&aacute;gina de Registro de Docente');
   $smarty->assign('keywords', 'Registro,Docentes');
+  
+  $id     = '';
+  $editar = FALSE;
+  if ( isset($_GET['docente_id']) && is_numeric($_GET['docente_id']) )
+  {
+    $editar = TRUE;
+    $id     = $_GET['docente_id'];
+  }
   /**
    * Menu superior
    */
   $menuList[] = array('url' => URL . Administrador::URL, 'name' => 'Administraci&oacute;n');
   $menuList[] = array('url' => URL . Administrador::URL . 'docente/', 'name' => ' Docentes');
-  $menuList[] = array('url' => URL . Administrador::URL . 'docente/' . basename(__FILE__), 'name' => 'Registro de Docente');
+  if($editar == TRUE){
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'docente/docente.gestion.php','name'=>'Gesti&oacute;n de Docente');
+  $menuList[] = array('url' => URL . Administrador::URL . 'docente/docente.registro.php?docente_id='.$id, 'name' => 'Edicion de Docente');
+  }else{
+      $menuList[] = array('url' => URL . Administrador::URL . 'docente/'. basename(__FILE__) , 'name' => 'Registro de Docente');
+  }
   $smarty->assign("menuList", $menuList);
 
   $smarty->assign('header_ui','1');
@@ -58,15 +71,6 @@ try {
   }
   $smarty->assign("titulo_h_values", $titulo_h_values);
   $smarty->assign("titulo_h_output", $titulo_h_output);
- 
- 
-  $id     = '';
-  $editar = FALSE;
-  if ( isset($_GET['docente_id']) && is_numeric($_GET['docente_id']) )
-  {
-    $editar = TRUE;
-    $id     = $_GET['docente_id'];
-  }
 
   $docente = new Docente($id);
   $usuario    = new Usuario($docente->usuario_id);

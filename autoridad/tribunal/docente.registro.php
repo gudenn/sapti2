@@ -12,9 +12,22 @@ try {
   /**
    * Menu superior
    */
+  $id     = '';
+  $editar = FALSE;
+  if ( isset($_GET['docente_id']) && is_numeric($_GET['docente_id']) )
+  {
+    $editar = TRUE;
+    $id     = $_GET['docente_id'];
+  }
+  
   $menuList[] = array('url' => URL . Administrador::URL, 'name' => 'Administraci&oacute;n');
   $menuList[] = array('url' => URL . Administrador::URL . 'tribunal/', 'name' => ' Tribunal');
-  $menuList[] = array('url' => URL . Administrador::URL . 'tribunal/' . basename(__FILE__), 'name' => 'Registro de Tribunal Externo');
+  if($editar == TRUE){
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'tribunal/docente.gestion.php','name'=>'Gesti&oacute;n de Tribunal');
+  $menuList[] = array('url' => URL . Administrador::URL . 'tribunal/docente.registro.php?docente_id='.$id, 'name' => 'Edicion de Tribunal Externo');
+  }else{
+      $menuList[] = array('url' => URL . Administrador::URL . 'tribunal/'. basename(__FILE__) , 'name' => 'Registro de Tribunal Externo');
+  }
   $smarty->assign("menuList", $menuList);
 
   $smarty->assign('header_ui','1');
@@ -59,15 +72,6 @@ try {
   $smarty->assign("titulo_h_values", $titulo_h_values);
   $smarty->assign("titulo_h_output", $titulo_h_output);
  
- 
-  $id     = '';
-  $editar = FALSE;
-  if ( isset($_GET['docente_id']) && is_numeric($_GET['docente_id']) )
-  {
-    $editar = TRUE;
-    $id     = $_GET['docente_id'];
-  }
-
   $docente = new Docente($id);
   $usuario    = new Usuario($docente->usuario_id);
   
@@ -89,9 +93,7 @@ try {
     $usuario->puede_ser_tutor  = 1;
     $es_nuevo                  = (!isset($_POST['usuario_id']) || trim($_POST['usuario_id']) == '' ) ? TRUE : FALSE;
     $usuario->validar($es_nuevo);
-    $usuario->tribunal=  Usuario::TRIBUNAL;
     $usuario->save();
-   
 
     $usuario->asignarGrupo(Grupo::GR_DO);
 
@@ -99,7 +101,6 @@ try {
     $docente->estado     = Objectbase::STATUS_AC;
     $docente->usuario_id = $usuario->id;
     $docente->configuracion_area=0;
-    $docente->numero_horas=0;
     $docente->configuracion_horario=0;
     $docente->save();
 

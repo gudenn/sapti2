@@ -122,7 +122,6 @@ try {
   $filtro_sql = $tutor->filtrar($filtro);
 
   $tutor->usuario_id   = '%';
-  
 
   if ($proyecto->id)
     $filtro_sql =  $filtro_mis_tutores . $filtro_sql;
@@ -161,7 +160,8 @@ if(isset($_SESSION['estado']) && $_SESSION['estado']==1)
 $smarty->assign("ERROR",$ERROR);
      
 }
-  $smarty->assign("URL",URL);  
+  $smarty->assign("URL",URL); 
+  $smarty->assign("cerrar",'../tutor/');
 
 }
 catch(Exception $e) 

@@ -29,8 +29,8 @@
       <td>{$objs[ic]['usuario_email']}</td>
       <td>
         <a href="{$URL}{Estudiante::URL}reporte.proyecto.php?estudiante_id={$objs[ic]['id']}" target="_blank" >{icono('basicset/project.png','Informe de avance')}</a>
-        <a href="estudiante.detalle.php?estudiante_id={$objs[ic]['id']}" target="_blank" >{icono('basicset/user_info.png','Detalle')}</a>
-        <a href="estudiante.editar.php?estudiante_id={$objs[ic]['id']}" target="_blank">{icono('basicset/pencil_48.png','Editar')}</a>
+        <a href="estudiante.detalle.php?estudiante_id={$objs[ic]['id']}" target="_self" >{icono('basicset/user_info.png','Detalle')}</a>
+        <a href="estudiante.registro.php?estudiante_id={$objs[ic]['id']}" target="_self">{icono('basicset/pencil_48.png','Editar')}</a>
         <a href="estudiante.gestion.php?eliminar=1&estudiante_id={$objs[ic]['id']}" onclick="return confirm('Eliminar este Estudiante?');"  >{icono('borrar.png','Eliminar')}</a>
       </td>
     </tr>

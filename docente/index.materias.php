@@ -38,8 +38,8 @@ try {
       /**
    * Menu superior
    */
-  $menuList[]     = array('url'=>URL.Docente::URL,'name'=>'Asignaturas');
-  $menuList[]     = array('url'=>URL.Docente::URL.'index.materias.php','name'=>'Materias');
+  $menuList[]     = array('url'=>URL . Docente::URL,'name'=>'Asignaturas');
+  $menuList[]     = array('url'=>URL . Docente::URL.'index.materias.php','name'=>'Materias');
   $smarty->assign("menuList", $menuList);
 
     /**

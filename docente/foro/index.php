@@ -27,7 +27,7 @@ try {
   /**
    * Menu superior
    */
-  $menuList[]     = array('url'=>URL . Docente::URL , 'name'=>'ASIGNATURAS');
+  $menuList[]     = array('url'=>URL . Docente::URL , 'name'=>'Asignaturas');
   $menuList[]     = array('url'=>URL . Docente::URL .'foro/' , 'name'=>'FORO');
   $smarty->assign("menuList", $menuList);
 

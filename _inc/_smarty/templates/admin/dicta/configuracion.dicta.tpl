@@ -2,6 +2,9 @@
 <div class="wrapper row3">
   <div class="rnd">
         <div id="container">
+          <div align="right">
+              <a href="../docente/">{icono('close.png','Cerrar')}</a>
+          </div>
         <h1 class="title">Materias Dictadas en el Semestre</h1>
         <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

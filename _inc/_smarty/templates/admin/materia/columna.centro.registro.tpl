@@ -5,6 +5,12 @@
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
             <p>
+              <select name="carrera" id="carrera"  data-validation-engine="validate[required]" >
+               {html_options values=$carrera_values output=$carrera_output selected=$materia->carrera_id}
+              </select>
+              <label for="tipo"><small>Tipo (*) {getHelpTip('tipo')}</small></label>
+            </p>
+            <p>
               <select name="tipo" id="tipo"  data-validation-engine="validate[required]" >
                {html_options values=$tipo_values output=$tipo_output selected=$materia->tipo}
               </select>

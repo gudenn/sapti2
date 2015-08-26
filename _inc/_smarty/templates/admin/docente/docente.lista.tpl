@@ -25,8 +25,8 @@
       <td>{$objs[ic]['codigo_sis']}</td>
      
       <td>
-        <a href="docente.detalle.php?docente_id={$objs[ic]['id']}" target="_blank" >{icono('detalle.png','Detalle')}</a>
-        <a href="docente.registro.php?docente_id={$objs[ic]['id']}" target="_blank">{icono('editar.png','Editar')}</a>
+        <a href="docente.detalle.php?docente_id={$objs[ic]['id']}" target="_self" >{icono('detalle.png','Detalle')}</a>
+        <a href="docente.registro.php?docente_id={$objs[ic]['id']}" target="_self">{icono('editar.png','Editar')}</a>
         <a href="docente.gestion.php?eliminar=1&docente_id={$objs[ic]['id']}" onclick="return confirm('Eliminar este Docente?');"  >{icono('borrar.png','Eliminar')}</a>
       </td>
      

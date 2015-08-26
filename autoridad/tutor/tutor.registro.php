@@ -12,9 +12,21 @@ try {
   /**
    * Menu superior
    */
+  $id     = '';
+  $editar = FALSE;
+  if (isset($_GET['tutor_id']) && is_numeric($_GET['tutor_id']) )
+  {
+    $editar = TRUE;
+    $id = $_GET['tutor_id'];
+  }
   $menuList[]     = array('url'=>URL . Administrador::URL , 'name'=>'Administraci&oacute;n');
   $menuList[]     = array('url'=>URL . Administrador::URL . 'tutor/','name'=>'Tutor');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'tutor/'.basename(__FILE__),'name'=>'Registrar Tutor');
+  if($editar == TRUE){
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'tutor/tutor.gestion.php','name'=>'Gesti&oacute;n de Tutor');
+  $menuList[] = array('url' => URL . Administrador::URL . 'tutor/tutor.registro.php?tutor_id='.$id, 'name' => 'Edicion de Tutor');
+  }else{
+      $menuList[] = array('url' => URL . Administrador::URL . 'tutor/'. basename(__FILE__) , 'name' => 'Registro de Tutor');
+  }
   $smarty->assign("menuList", $menuList);
 
   $smarty->assign('header_ui','1');
@@ -58,10 +70,6 @@ try {
   $smarty->assign("titulo_h_values", $titulo_h_values);
   $smarty->assign("titulo_h_output", $titulo_h_output);
 
-  //tutor
-  $id = '';
-  if (isset($_GET['tutor_id']) && is_numeric($_GET['tutor_id']) )
-    $id = $_GET['tutor_id'];
   $tutor   = new Tutor($id);
   $usuario = new Usuario($tutor->usuario_id);
 
@@ -87,7 +95,6 @@ try {
     $tutor->objBuidFromPost();
     $tutor->usuario_id = $usuario->id;
     $tutor->estado     = Objectbase::STATUS_AC;
-    $tutor->tutor= Tutor::TUTOR;
     $tutor->save();
     
     if (isset($_POST['estudiante_id']) && is_numeric($_POST['estudiante_id']) )

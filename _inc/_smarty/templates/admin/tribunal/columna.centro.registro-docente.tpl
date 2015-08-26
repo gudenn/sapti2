@@ -1,4 +1,7 @@
       <div id="content">
+          <div align="right">
+              <a href="../tribunal/">{icono('close.png','Cerrar')}</a>
+          </div>
         <h1 class="title">Registro de Tribunal</h1>
         <p>Formulario de registro de Tribunales</p>
         <h2 class="title">Formulario de Registro</h2>

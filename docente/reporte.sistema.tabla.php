@@ -53,7 +53,7 @@ function consulta($mat,$sem,$eva){
     return $sql;
 }
 if ($materia!=''&&$tiporeporte!='') {
-    MysqlFunciones::DesplegarTabla(consulta($materia,$tiporeporte,$evaluacion), $var, $materia);
+    MysqlFunciones::DesplegarTabla(consulta($materia,$tiporeporte,$evaluacion), $var, $materia,$tiporeporte);
 }else{
     echo 'Por favor Seleccione una Opcion para Generar el Reporte...';
 }
@@ -66,7 +66,7 @@ function classtabla($va){
 };
 
 class MysqlFunciones{
-    public static function DesplegarTabla($a,$b,$mat)
+    public static function DesplegarTabla($a,$b,$mat,$tre)
      {
         $query =  mysql_query($a);
         echo "<table class='tbl_lista'><thead><tr>";
@@ -88,8 +88,8 @@ class MysqlFunciones{
         }    
         echo "</table>";
     echo "<center> 
-    <a href='reportes.sistema.pdf.php?sql=".array_envia($a)."&iddicta=".$mat."' ><img src='../images/icons/filepd.png' border='0' alt='pdf' title='Descargar PDF'/>Descargar PDF</a>
-    <a href='reportes.sistema.excel.php?sql=".array_envia($a)."&iddicta=".$mat."' ><img src='../images/icons/excel.png' border='0' alt='exel' title='Descargar EXCEL'/>Descargar EXCEL</a>
+    <a href='reportes.sistema.pdf.php?tre=".$tre."&iddicta=".$mat."' target='_blank'><img src='../images/icons/filepd.png' border='0' alt='pdf' title='Descargar PDF'/>Descargar PDF</a>
+    <a href='reportes.sistema.excel.php?tre=".$tre."&iddicta=".$mat."' target='_blank'><img src='../images/icons/excel.png' border='0' alt='exel' title='Descargar EXCEL'/>Descargar EXCEL</a>
     </center>";
     }
 }

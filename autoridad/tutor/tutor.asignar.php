@@ -165,7 +165,8 @@ try {
 
   //No hay ERROR
   $smarty->assign("ERROR",$ERROR);
-  $smarty->assign("URL",URL);  
+  $smarty->assign("URL",URL); 
+  $smarty->assign("cerrar",'../tutor/');
   
 } 
 catch(Exception $e) 

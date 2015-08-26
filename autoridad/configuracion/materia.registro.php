@@ -50,7 +50,16 @@ try {
 
   $smarty->assign("ERROR", '');
   leerClase('Materia');
-
+$sqlcarrera = "SELECT *
+FROM carrera
+";
+    $ressuc = mysql_query($sqlcarrera);
+    while ($row = mysql_fetch_array($ressuc, MYSQL_ASSOC)) { 
+    $carrera_values[] = $row['id'];
+    $carrera_output[] = $row['nombre'];
+    }; 
+  $smarty->assign("carrera_values",$carrera_values);
+  $smarty->assign("carrera_output",$carrera_output);
   $smarty->assign("tipo_values", array( ''                 , Materia::MATERIA_PE, Materia::MATERIA_PR));
   $smarty->assign("tipo_output", array( '-- Seleccione --' , 'TIPO PERFIL'      , 'TIPO PROYECTO FINAL'));
   
@@ -67,6 +76,7 @@ try {
     
     $materia->objBuidFromPost();
     $materia->estado = Objectbase::STATUS_AC;
+    $materia->carrera_id=$_POST['carrera'];
     $materia->validar();
     $materia->save();
     $EXITO = TRUE;
