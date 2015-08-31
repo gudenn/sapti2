@@ -345,7 +345,12 @@ where  hd.dia_id=d.id and hd.turno_id=t.id  and hd.docente_id=1 and d.id=1;
 
       return $res;
   }
-  
+    /**
+   * 
+   * @param type $param
+   * @return \Apayo|boolean
+   *  retorna las areas de apoyo del docente
+   */
   public function getAreaapoyo() {
     leerClase('Apoyo');
 
@@ -354,7 +359,7 @@ where  hd.dia_id=d.id and hd.turno_id=t.id  and hd.docente_id=1 and d.id=1;
     $numeroareas=0;
     $sql = "SELECT a.*
 FROM apoyo a
-WHERE a.docente_id=$this->id";
+WHERE a.docente_id='$this->id'";
     $resultado = mysql_query($sql);
        if (!$resultado)
       return    $numeroareas;
@@ -363,6 +368,28 @@ WHERE a.docente_id=$this->id";
            $numeroareas++;
           }
        return    $numeroareas;    
+  }
+  /**
+   * 
+   * @param type $param
+   * @return \tiempo|boolean
+   *  retorna las horas  de disponibilidad de docente
+   */
+  public function getHorasDisponibilidad() {
+        leerClase('Horario_docente');
+    $dictas= array();
+    $activo = Objectbase::STATUS_AC;
+    $sql = "select d.* from " . $this->getTableName('Horario_docente') . " as d where d.docente_id = '$this->id'  and d.estado = '$activo'  ";
+   
+    $resultado = mysql_query($sql);
+    if (!$resultado)
+      return false;
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+         { 
+        $dictas[] =new Horario_docente($fila);
+          }
+       return $dictas;
+      
   }
   
 }
