@@ -559,7 +559,7 @@ class Proyecto extends Objectbase {
     Formulario::validar('proyecto_director_carrera', $this->director_carrera, 'texto', 'El Nombre de Director de Carrera');
     Formulario::validar('proyecto_docente_materia', $this->docente_materia, 'texto', 'El Nombre del Docente de la Materia');
     Formulario::validar('proyecto_responsable', $this->docente_materia, 'texto', 'El Nombre del Responsable del Proyecto', TRUE);
-
+    $this->getByNombre($this->nombre,true);
     leerClase('Semestre');
     $semestre = new Semestre('', TRUE);
     // Por lo menos un area y una sub area
@@ -612,7 +612,26 @@ class Proyecto extends Objectbase {
     return $tribuna;
   }
   
-  
+    /**
+   * Crear un proyecto y verificar si el titulo ya fue registrado
+   * 
+   * @param string $nombre el nombre
+   * @param type $verSifueRegistrado para solo verificar si es que se puede registrar el titulo
+   * @return boolean
+   * @throws Exception 
+   */
+  public function getByNombre ($nombre, $verSifueRegistrado = false ) {
+    $sql       = "select * from ".$this->getTableName()." where nombre = '$nombre'";
+    $result = mysql_query($sql);
+    if ($verSifueRegistrado)
+    {
+      if (mysql_num_rows($result)){
+        throw new Exception("?proyecto_nombre&m=Este Titulo del Proyecto Ya Fue Registrado");
+      }
+      return;
+    }
+    return true;
+  }
   
   /**
    * 

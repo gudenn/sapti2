@@ -58,10 +58,10 @@
                         type: 'pie',
                         name: 'Browser share',
                         data: [
-                            ['Estudiantes Aprobados', {$ap}],
+                            ['Estudiantes Aprobados {$ap}%', {$ap}],
                           
-                            ['Estudiantes Reprobados', {$rp}],
-                             ['Estudiantes que Abandonaron la Materia', {$aba}],
+                            ['Estudiantes Reprobados {$rp}%', {$rp}],
+                             ['Estudiantes que Abandonaron la Materia {$aba}%', {$aba}],
                             
                         ]
                     }]

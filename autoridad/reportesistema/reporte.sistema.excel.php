@@ -23,6 +23,7 @@
 		date_default_timezone_set('America/Mexico_City');
 
 		if (PHP_SAPI == 'cli')
+      
 			die('Este archivo solo se puede ver desde un navegador web');
 
 		/** Se agrega la libreria PHPExcel */

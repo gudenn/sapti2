@@ -44,12 +44,12 @@
                         type: 'pie',
                         name: 'Browser share',
                         data: [
-                            ['Postergado', {$pos}],
-                            ['Prórroga',    {$pr}],
+                            ['Postergado {$pos}%', {$pos}],
+                            ['Prórroga {$pr}%',    {$pr}],
                             
-                            ['Cambios',   {$cam} ],
+                            ['Cambios {$cam}%',   {$cam} ],
                             
-                            ['Vencidos',  {$v}],
+                            ['Vencidos {$v}%',  {$v}],
                             
                         ]
                     }]
