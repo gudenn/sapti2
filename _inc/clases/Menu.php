@@ -470,7 +470,7 @@ AND tr.docente_id=".$docente->id."
   $thise->agregarItem('Tribunal','Lista de Estudiantes','basicset/user3.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
   $thises[] = $thise;   
   }
-  }
+  
     $thise = new Menu('Disponibilidad de tiempo');
   $link = Docente::URL."configuracion/generar.horario.php";
   $thise->agregarItem('Agregar la disponibilidad  de tiempo','Agregar la disponibilidad  de tiempo  para la asignación como tribunal','basicset/clock.png',$link,0, sizeof($docente->getHorasDisponibilidad()));
@@ -480,7 +480,7 @@ AND tr.docente_id=".$docente->id."
   $link = Docente::URL."configuracion/configuracion.php";
   $thise->agregarItem('Agregar su especialidad en las  &Aacute;reas','Agregar  su especialidad en la  &Aacute;reas que tiene especialización ','basicset/add.png',$link,0, $docente->getAreaapoyo());
    $thises[] = $thise;
-   
+     }
    // Notificaciones 
   $usuario      = getSessionUser();
   $notificacion = new Notificacion();
