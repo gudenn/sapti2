@@ -81,6 +81,9 @@ try {
     $columnacentro = 'admin/docente/columna.centro.docente-registro-editar.tpl';
   $smarty->assign('columnacentro',$columnacentro);
 
+  $smarty->assign("docente", $docente);
+
+  $smarty->assign("usuario", $usuario);
 
   if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token']) {
 
@@ -93,6 +96,7 @@ try {
     $usuario->puede_ser_tutor  = 1;
     $es_nuevo                  = (!isset($_POST['usuario_id']) || trim($_POST['usuario_id']) == '' ) ? TRUE : FALSE;
     $usuario->validar($es_nuevo);
+    $usuario->tribunal='DO';
     $usuario->save();
 
     $usuario->asignarGrupo(Grupo::GR_DO);
@@ -123,9 +127,6 @@ try {
 
  
 
-  $smarty->assign("docente", $docente);
-
-  $smarty->assign("usuario", $usuario);
   //No hay ERROR
   $ERROR = ''; 
   leerClase('Html');

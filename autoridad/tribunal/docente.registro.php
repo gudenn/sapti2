@@ -81,7 +81,9 @@ try {
     $columnacentro = 'admin/tribunal/columna.centro.docente-registro-editar.tpl';
   $smarty->assign('columnacentro',$columnacentro);
 
+  $smarty->assign("docente", $docente);
 
+  $smarty->assign("usuario", $usuario);
   if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token']) {
 
 
@@ -124,9 +126,7 @@ try {
 
  
 
-  $smarty->assign("docente", $docente);
 
-  $smarty->assign("usuario", $usuario);
   //No hay ERROR
   $ERROR = ''; 
   leerClase('Html');
