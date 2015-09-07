@@ -248,6 +248,8 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`semestre` (
   `codigo` VARCHAR(45) NULL ,
   `activo` TINYINT(1) NULL ,
   `valor` INT NULL ,
+  `fecha_inicio` DATE NULL ,
+  `fecha_fin` DATE NULL ,
   `estado` VARCHAR(2) NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE' ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
@@ -1130,7 +1132,7 @@ CREATE  TABLE IF NOT EXISTS `sapti`.`visto_bueno_tutor` (
   `tipo_proyecto` VARCHAR(45) NULL ,
   `fecha` VARCHAR(45) NULL ,
   `descripcion` VARCHAR(250) NULL ,
-  `esado` VARCHAR(10) NULL ,
+  `estado` VARCHAR(10) NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
