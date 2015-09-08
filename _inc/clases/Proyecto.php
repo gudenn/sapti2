@@ -453,12 +453,22 @@ class Proyecto extends Objectbase {
     leerClase('Proyecto_estudiante');
     //$estudiante = new Estudiante($estudiante_id);
 
-    $asignado                         = new Proyecto_estudiante();
-    $asignado->proyecto_id            = $this->id;
-    $asignado->estudiante_id          = $estudiante_id;
-    $asignado->estado                 = Objectbase::STATUS_AC;
-    $asignado->fecha_asignacion       = date('d/m/Y');
-    $this->proyecto_estudiante_objs[] = $asignado;
+    $sql  = "SELECT * from " . $this->getTableName('Proyecto_estudiante') . "  WHERE proyecto_id = '$this->id' AND estudiante_id = '$estudiante_id' ";
+    $resp = mysql_query($sql);
+    //if (!$resp) {return 1;}
+    $fila = mysql_fetch_array($resp, MYSQL_ASSOC);
+	if (!$fila){
+		$asignado                         = new Proyecto_estudiante();
+		$asignado->proyecto_id            = $this->id;
+		$asignado->estudiante_id          = $estudiante_id;
+		$asignado->estado                 = Objectbase::STATUS_AC;
+		$asignado->fecha_asignacion       = date('d/m/Y');
+	}
+	else {
+		$asignado                         = new Proyecto_estudiante($fila);
+	}
+	$this->proyecto_estudiante_objs[] = $asignado;
+
   }
 
   /**
