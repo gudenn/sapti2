@@ -413,6 +413,9 @@ $fechaasignaciones= date("j/n/ H:i:s", $time);
                 $tribunal->accion="";
                 $tribunal->visto             =  Tribunal::VISTO_NV;
                 $tribunal->fecha_asignacion  =  date("j/n/Y H:i:s");
+                $tribunal->fecha_aceptacion  =  date("j/n/Y");
+                $tribunal->nota_tribunal=0;
+                $tribunal->fecha_vistobueno= date("j/n/Y");
               //  $tribunal->semestre          =  ;
                 $tribunal->estado            = Objectbase::STATUS_AC;
                 $tribunal->save();
@@ -428,7 +431,7 @@ $fechaasignaciones= date("j/n/ H:i:s", $time);
                 $notificacions->prioridad=5;
                 $notificacions->estado = Objectbase::STATUS_AC;
                 $noticaciones= array('tribunales'=>array( $tribunal->id));
-                $notificacions->enviarNotificaion( $noticaciones);
+              $notificacions->enviarNotificaion( $noticaciones);
         
      }
     
@@ -475,6 +478,7 @@ $fechaasignaciones= date("j/n/ H:i:s", $time);
 } 
 catch(Exception $e) 
 {
+    echo $e;
    
   $smarty->assign("ERROR", handleError($e));
 }
