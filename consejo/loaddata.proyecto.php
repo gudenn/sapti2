@@ -25,7 +25,7 @@ $result = $mysqli->query('
 SELECT DISTINCT (es.id) as id ,es.codigo_sis as codigosis , u.nombre ,CONCAT(u.apellido_paterno,"  ",u.apellido_materno) as apellidos, p.nombre as nombrep
 FROM  usuario u, estudiante es , proyecto_estudiante pe, proyecto p
 WHERE  u.id=es.usuario_id and  es.id=pe.estudiante_id and  pe.proyecto_id=p.id 
-and p.estado_proyecto="VB" and p.tipo_proyecto="PR"
+and p.estado_proyecto="VA" and p.tipo_proyecto="PR"
 and u.estado="AC" and es.estado="AC" and pe.estado="AC"  and p.estado="AC"
 and p.es_actual=1');
 
