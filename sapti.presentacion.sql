@@ -682,6 +682,7 @@ CREATE TABLE IF NOT EXISTS `materia` (
   `estado` varchar(2) DEFAULT NULL COMMENT 'Activo sera AC, No activo NC, Eliminado DE',
   `sigla` varchar(20) DEFAULT NULL,
   `codigo` varchar(20) DEFAULT NULL,
+  `carrera_id` INT NOT NULL ,
   `tipo` varchar(4) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
