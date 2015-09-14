@@ -478,7 +478,7 @@ $fechaasignaciones= date("j/n/ H:i:s", $time);
 } 
 catch(Exception $e) 
 {
-    echo $e;
+  
    
   $smarty->assign("ERROR", handleError($e));
 }

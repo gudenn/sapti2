@@ -6,9 +6,9 @@ try {
     header("Location: ../login.php");  
 
   /** HEADER */
-  $smarty->assign('title','Gesti&oacute;n de Docentes');
-  $smarty->assign('description','Gesti&oacute;n de Docentes');
-  $smarty->assign('keywords','Gesti&oacute;n de Docentes');
+  $smarty->assign('title','Gesti&oacute;n de Tribunales');
+  $smarty->assign('description','Gesti&oacute;n de Tribunales');
+  $smarty->assign('keywords','Gesti&oacute;n de Tribunales');
 
   //CSS
   $CSS[]  = URL_CSS . "dashboard.css";
@@ -41,7 +41,7 @@ try {
   leerClase('Menu');
   $menu = new Menu('Tribunal');
   $link = Administrador::URL."Tribunal/docente.gestion.php";
-  $menu->agregarItem('Gesti&oacute;n de Docentes','Registro y modificaciones para Docentes','basicset/people.png',$link);
+  $menu->agregarItem('Gesti&oacute;n de Tribunales','Registro y modificaciones para Tribunales','basicset/people.png',$link);
    $link = Administrador::URL."tribunal/docente.registro.php";
   $menu->agregarItem('Registro de Tribunal Externo','Registro de un  Tribunal Externo','basicset/user4.png',$link);
    $menus[] = $menu;

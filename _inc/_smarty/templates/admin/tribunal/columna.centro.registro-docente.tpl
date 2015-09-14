@@ -7,11 +7,7 @@
         <h2 class="title">Formulario de Registro</h2>
         <div id="respond">
           <form action="#" method="post" id="registro" name="registro" >
-           
-            <p>
-              <input type="text" name="codigo_sis" id="codigo_sis" value="{$docente->codigo_sis}" size="100" data-validation-engine="validate[required]">
-              <label for="codigo_sis"><small>C&oacute;digo SIS (*){getHelpTip('codigo_sis')}</small></label>
-            </p>
+
             <!-- ############ -->
             {include file="admin/usuario/registro.base.tpl"}
             <!-- ############ -->
