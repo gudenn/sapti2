@@ -53,8 +53,8 @@ ___MAIL;
     echo "<hr> EN TXT:<br> ";
     echo "<pre>".$body_txt."</pre>";
   }
-  else /** Enviamos el email */
-  {
+  /** Enviamos el email */
+  else if (defined('ENVIAR_EMAIL') && ENVIAR_EMAIL){
     require_once(DIR_LIB.'/Mail/mime.php');
     
 

@@ -23,7 +23,7 @@ else
   // error_reporting(E_ERROR | E_WARNING | E_PARSE);
   ////////////////////////////////////////////////////////
 
-  define('DEBUGMODE', false);
+  define('DEBUGMODE', FALSE);
 
   ////////////////////////////////////////////////////////
   // Directorios
@@ -84,8 +84,11 @@ else
   //El Email con el cual el sistema enviara emails
   define('EMAIL_SISTEMA_EMAIL'               , 'sapti@umss.edu.bo');
   define('EMAIL_SISTEMA_NOMBRE'              , 'Sistema SAPTI');
+
   //Mostramos el email en pantalla por motivos solo de testing
-  define('IMPRIMIR_EMAIL_EN_PANTALLA'  , TRUE); 
+  define('IMPRIMIR_EMAIL_EN_PANTALLA'  , FALSE); 
+  //Para enviar los email hay que habilitar esta variable
+  define('ENVIAR_EMAIL'  , FALSE); 
   
   
   ////////////////////////////////////////////////////////

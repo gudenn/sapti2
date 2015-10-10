@@ -82,8 +82,7 @@ ___MAIL;
  $Subject = "$url_name ingreso de mercaderia ";
 
 
-  if (ENDESARROLLO)
-  {
+  if (ENDESARROLLO && defined('IMPRIMIR_EMAIL_EN_PANTALLA') && IMPRIMIR_EMAIL_EN_PANTALLA){
     echo "<pre>";
     echo "</pre>";
     echo "<hr>";
@@ -97,8 +96,8 @@ ___MAIL;
     echo "<hr>";
    // echo "<pre>".$body_txt."</pre>";
   }
-  else /** Enviamos el email */
-  {
+  /** Enviamos el email */
+  else if (defined('ENVIAR_EMAIL') && ENVIAR_EMAIL){
     require_once(DIR_LIB.'/Mail/mime.php');
     
 

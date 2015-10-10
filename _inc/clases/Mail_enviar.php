@@ -65,9 +65,8 @@ ___MAIL;
     
    
   $Subject = $asunto;
-  /**
-if (ENDESARROLLO)
-  {
+  
+  if (ENDESARROLLO && defined('IMPRIMIR_EMAIL_EN_PANTALLA') && IMPRIMIR_EMAIL_EN_PANTALLA){
     echo "<pre>";
     print_r($usuario);
     echo "</pre>";
@@ -81,9 +80,9 @@ if (ENDESARROLLO)
     echo $body_html;
     echo "<hr>";
     echo "<pre>".$body_txt."</pre>";
-  }else
-*/
-  {
+  }
+  /** Enviamos el email */
+  else if (defined('ENVIAR_EMAIL') && ENVIAR_EMAIL){
     require_once(DIR_LIB.'/Mail/mime.php');
     
 
