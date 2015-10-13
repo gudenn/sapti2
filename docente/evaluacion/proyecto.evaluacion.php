@@ -19,7 +19,7 @@ try {
   $smarty->assign('keywords','Gestion,Evaluacion,Estudiante');
 
   $CSS[]  = URL_CSS . "academic/tables.css";
-  $CSS[]  = URL_CSS . "editablegrid.css";
+  //$CSS[]  = URL_CSS . "editablegrid.css";
   $CSS[]  = URL_JS . "ventanasmodales/simplemodaldetalle.css";
   $CSS[]  = URL_JS . "box/box.css";
   $smarty->assign('CSS',$CSS);

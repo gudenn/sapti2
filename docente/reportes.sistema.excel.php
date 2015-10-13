@@ -6,7 +6,7 @@
    leerClase('Evaluacion');
 if(isset($_GET['iddicta']))
 $tre = $_GET['tre'];
-$eva=0;
+$eva=$_GET['eva'];
         $iddicta  = $_GET['iddicta'];
 function selectmuestra($mat,$eva){
     $ab="";
@@ -29,6 +29,18 @@ function wheremuestra($mat,$sem,$eva){
     return $ac;
 }
 function consulta($mat,$sem,$eva){
+        if($eva==1){
+     $sql="SELECT es.codigo_sis as Codigo_Sis, CONCAT(us.apellido_paterno,' ', us.apellido_materno,' ', us.nombre) as Estudiante, pr.nombre as Nombre_Proyecto, ev.evaluacion_1 as E1, ev.evaluacion_2 as E2, ev.evaluacion_3 as E3, ev.promedio as Pro, ev.rfinal as Apro
+ FROM dicta di, estudiante es, usuario us, inscrito it, proyecto pr, proyecto_estudiante pe, evaluacion ev
+ WHERE di.id=it.dicta_id
+ AND it.estudiante_id=es.id
+ AND es.usuario_id=us.id
+ AND pe.estudiante_id=es.id
+ AND pe.proyecto_id=pr.id
+ AND it.evaluacion_id=ev.id
+ AND pr.es_actual=1
+ AND di.id='".$mat."'"; 
+    }else{
     $sql="SELECT ".selectmuestra($mat,$sem)."
   FROM estudiante es, usuario us, materia ma, inscrito ins, dicta di, proyecto pro, proyecto_estudiante proes, evaluacion eva, semestre se
  WHERE es.usuario_id=us.id
@@ -41,6 +53,7 @@ function consulta($mat,$sem,$eva){
  AND di.semestre_id=se.id
  AND se.activo=1
 ".wheremuestra($mat,$sem,$eva)."";
+    }
     return $sql;
 }
  

@@ -29,8 +29,8 @@
         
         	<div id="paginator"></div>
                 <center> 
-                    <a href="../reportes.sistema.pdf.php?sql={$sqlreporte}&iddicta={$iddicta}&eva=1" target="_blank" >{icono('filepd.png','descargar')}Descargar PDF</a>
-                    <a href="../reportes.sistema.excel.php?sql={$sqlreporte}&iddicta={$iddicta}&eva=1" target="_blank" >{icono('boton_excel.png','descargar')}Descargar EXCEL</a>
+                    <a href="../reportes.sistema.pdf.php?iddicta={$iddicta}&eva=1" target="_blank" >{icono('filepd.png','descargar')}Descargar PDF</a>
+                    <a href="../reportes.sistema.excel.php?iddicta={$iddicta}&eva=1" target="_blank" >{icono('boton_excel.png','descargar')}Descargar EXCEL</a>
                 </center>
         </div>
         <a href="evaluacion.estudiante-cvs.php?iddicta={$iddicta}" class="sendme">Cargar Notas Por CSV</a>
