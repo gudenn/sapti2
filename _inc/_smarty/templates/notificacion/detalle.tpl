@@ -11,10 +11,12 @@
 
     <p>Detalle</p>
     <p>{$mensaje}</p>
+    {if ($notificacion->tipo)!=$tiponotificacion}
     {if $secionUser=='ES'}
         <a href="../proyecto-final/avance.detalle.php?avance_id={$link1}" class="sendme">Enlace</a>
     {else}
         <a href="../revision/revision.lista.php?iddicta={$idicta}&estudiente_id={$estudiante->id}" class="sendme">Enlace</a>
+    {/if}
     {/if}
     
 {if ($estadonotificacion)=="Pendiente"}
