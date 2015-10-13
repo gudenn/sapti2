@@ -7,8 +7,9 @@
                <b>Proyecto:</b> {$proyecto->nombre}<br/>
                <b>Estudiante:</b> {$usuario->getNombreCompleto()|upper}
             </p>
+            <input id="array" name="array" value="{$array}" style="display: none"/>
         <div id="wrap">
-        <div style="height: 250px; width: 920px; font-size: 12px; overflow: auto;">
+        <div style="height: 250px; width: 920px; font-size: 12px; overflow: auto; border-width: 4px; border-style: solid">
 <table class="tbl_lista">
   <thead>
     <tr>
@@ -37,7 +38,7 @@
       {if $objs[ic][4]=='NO'}
           <td> <div align="center" style="font-weight:bold;" >Sin Revisiones</div></td>
           {else}
-          <td> <div align="center" id="best{$objs[ic][0]}" onClick="desplegar('tdesp{$objs[ic][0]}','best{$objs[ic][0]}')" style="cursor: pointer;" class="sendme">Mostrar Revisiones</div></td>
+          <td> <div align="center" id="best{$objs[ic][0]}" onClick="desplegar('tdesp{$objs[ic][0]}','best{$objs[ic][0]}')" style="cursor: pointer;" class="sendme">Revisiones</div></td>
               {/if}
  
     </tr>
@@ -88,23 +89,24 @@
 {include file="footer.tpl"}
 <script type="text/javascript"> 
     var visto = null;
-function desplegar(tabla_a_desplegar,estadoT) { 
-var tablA = document.getElementById(tabla_a_desplegar); 
-var estadOt = document.getElementById(estadoT);  
-
+function desplegar(tabla_a_desplegar,estadoT) {
+    var tablA = document.getElementById(tabla_a_desplegar); 
+    var estadOt = document.getElementById(estadoT);
 switch(tablA.style.display) { 
 case "none": 
 tablA.style.display = "block"; 
-estadOt.innerHTML = "Ocultar Revisiones"; 
+estadOt.innerHTML = "Revisiones"; 
 break; 
-default: 
+default:
 tablA.style.display = "none"; 
-estadOt.innerHTML = "Mostrar Revisiones" 
+estadOt.innerHTML = "Revisiones" 
 break; 
 }
+
 if (visto != null)
 visto.style.display = 'none';
 visto = (tablA==visto) ? null : tablA;
+
 } 
 </script> 
 
