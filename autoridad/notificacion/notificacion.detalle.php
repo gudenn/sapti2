@@ -42,7 +42,7 @@ try {
     leerClase('Usuario');
     leerClase('Estudiante');
     leerClase('Notificacion');
-    leerClase('Estudiante');
+    leerClase('Avance');
     leerClase('Proyecto');
     leerClase('Tribunal');
     leerClase('html');
@@ -92,7 +92,25 @@ try {
             $tribunal->save();
         }
 
+        $array=  explode(';SPT;', $notificacion->detalle);
+        $mensaje=$array[0];
+        $link1=$array[1];
 
+  if (getSessionEstudiante()){
+$user='ES';
+  }else{      $user='DO';
+    $resulrev = "SELECT di.id
+FROM proyecto_dicta pd, dicta di, semestre se
+WHERE pd.dicta_id=di.id
+AND di.semestre_id=se.id
+AND se.activo=1
+AND pd.proyecto_id=$proyecto->id
+";
+   $sqlrev = mysql_query($resulrev);
+while ($fila1rev = mysql_fetch_array($sqlrev, MYSQL_ASSOC)) {
+   $iddicta=$fila1rev['id'];
+ }}
+        
 //echo $horas;
         //echo $_GET['notificacion_id'];
         //$notificacion
@@ -101,6 +119,10 @@ try {
         $smarty->assign("proyecto", $proyecto);
         $smarty->assign("estudiante", $estudiante);
         $smarty->assign("notificacion", $notificacion);
+        $smarty->assign("mensaje", $mensaje);
+        $smarty->assign("link1", $link1);
+        $smarty->assign('secionUser', $user);
+        $smarty->assign('idicta', $iddicta);
         $smarty->assign("estadonotificacion", $proyecto->getTribunalEstado(getSessionDocente()->id));
         $smarty->assign("tiponotificacion", $tipo);
     }

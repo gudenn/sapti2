@@ -446,7 +446,7 @@ and es.id='$this->id'";
     $avance->save();
     $avance->saveAllSonObjects(TRUE);
 
-    $this->notificarAvance($proyecto);
+    $this->notificarAvance($proyecto,$avance->id);
     return $avance;
   }
 
@@ -454,7 +454,7 @@ and es.id='$this->id'";
    * Notificamos a todos los involucrados en el proyecto acerca del avance del proyecto
    * @param Proyecto $proyecto
    */
-  function notificarAvance($proyecto) 
+  function notificarAvance($proyecto,$id_mensaje) 
   {
     leerClase('Notificacion');
     $notificacion              = new Notificacion();
@@ -462,7 +462,7 @@ and es.id='$this->id'";
     $notificacion->tipo        = Notificacion::TIPO_MENSAJE;
     $notificacion->fecha_envio = date('d/m/Y');
     $notificacion->asunto      = "Avance: {$this->getNombreCompleto()}";
-    $notificacion->detalle     = "El estudiante {$this->getNombreCompleto()} realizó un avance en su proyecto {$proyecto->nombre}, en la fecha {$notificacion->fecha_envio} ";
+    $notificacion->detalle     = "El estudiante {$this->getNombreCompleto()} realizó un avance en su proyecto {$proyecto->nombre}, en la fecha {$notificacion->fecha_envio} ;SPT;".$id_mensaje;
     $notificacion->prioridad   = 3;
     $notificacion->estado      = Objectbase::STATUS_AC;
     
