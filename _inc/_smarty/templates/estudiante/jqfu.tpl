@@ -131,6 +131,9 @@
             <span class="size">{%=o.formatFileSize(file.size)%}</span>
         </td>
         <td>
+            <span class="size">{%=file.date%}</span>
+        </td>
+        <td>
             <button class="delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>Borrar</button>
             <input type="checkbox" name="delete" value="1" class="toggle">
         </td>

@@ -329,7 +329,7 @@ class Proyecto extends Objectbase {
     if (!$resultado)
       return false;
     $proyecto = mysql_fetch_array($resultado);
-    var_dump($proyecto);
+    //var_dump($proyecto);
     $proyecto = new Proyecto($proyecto);
     return $proyecto;
   }

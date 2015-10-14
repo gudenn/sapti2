@@ -490,7 +490,7 @@ class Notificacion extends Objectbase
     // Ordenamos por prioridad DESC fecha DESC
     if (trim($orderby) == '')
     {
-      $orderby = " ORDER BY notificacion.prioridad DESC, notificacion.fecha_envio DESC ";
+      $orderby = " ORDER BY notificacion.fecha_envio DESC ";
     }
     
 

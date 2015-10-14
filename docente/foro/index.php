@@ -2,8 +2,8 @@
 try {
   define ("MODULO", "DOCENTE");
   require('../_start.php');
-  if(!isDocenteSession())
-    header("Location: login.php");  
+  if(!isDocenteSession() && !isTutorSession() )
+    header("Location: ../login.php");  
 
 
   leerClase("Area");

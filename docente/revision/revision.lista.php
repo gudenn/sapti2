@@ -18,7 +18,7 @@ try {
   $smarty->assign('keywords','Gestion,Observaciones,revision,avance');
 
   $CSS[]  = URL_CSS . "academic/tables.css";
-  $CSS[]  = URL_CSS . "editablegrid.css";
+  //$CSS[]  = URL_CSS . "editablegrid.css";
   $CSS[]  = URL_JS . "ventanasmodales/simplemodaldetalle.css";
   $smarty->assign('CSS',$CSS);
 
@@ -64,9 +64,11 @@ WHERE av.proyecto_id='".$proyecto->id."'
 ORDER BY id DESC";
    $sql = mysql_query($resul);
    $objs2=array();
+   $arrelem='';
 while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
     $objs=array();
     $objs1=array();
+    $arrelem.=$fila1["id"].';';
    $objs[]=$fila1["id"];
    $objs[]=$fila1["estado_avance"];
    $objs[]=$fila1["fecha_avance"];
@@ -79,10 +81,13 @@ AND av.id='".$fila1['id']."'
 ORDER BY re.id DESC
 ";
    $sql1 = mysql_query($resul1);
-while ($fila11 = mysql_fetch_array($sql1, MYSQL_ASSOC)) {
+   if(mysql_num_rows($sql1)>0){
+       while ($fila11 = mysql_fetch_array($sql1, MYSQL_ASSOC)) {
    $objs1[]=$fila11; 
-   
  }
+   }else{
+      $objs1='NO'; 
+   }
     $objs[]=$objs1;
     $objs2[]=$objs;
  }
@@ -94,6 +99,7 @@ while ($fila11 = mysql_fetch_array($sql1, MYSQL_ASSOC)) {
   $smarty->assign("proyecto", $proyecto); 
   $smarty->assign("avance", $avance);
   $smarty->assign("revision", $revision);
+  $smarty->assign("array", $arrelem);
 
   //No hay ERROR
   $smarty->assign("ERROR",'');

@@ -4,6 +4,7 @@
 
   leerClase('Tutor');
   leerClase('Docente');
+  leerClase('Materia');
 
   require_once(DIR_LIB.'/tcpdf/config/lang/eng.php');
   require_once(DIR_LIB.'/tcpdf/tcpdf.php');
@@ -195,9 +196,11 @@ CERT;
 CERT;
 
   //docente
-    $docente = new Docente($estudiante->inscrito_objs[0]->dicta_id);
-    $docentes[] = $docente;
-    
+  $dicta          = $estudiante->getDicta();
+  $materia        = new Materia($dicta->materia_id);
+  $docente        = new Docente($dicta->docente_id);
+  $docentes[] = $docente;
+
   $html .= <<<CERT
     &nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>
     <table style="width:100%;">
