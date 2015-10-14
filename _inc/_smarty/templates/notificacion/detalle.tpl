@@ -3,7 +3,7 @@
 <div id="content">
   <div class="clear"></div>
   <div class='contenido'>
-    <a class="sendme" href="javascript:history.back()">Atras</a></br></br>
+    <a class="sendme" href="javascript:history.back()" >Atras</a></br></br>
     <h1> Fecha de Env&iacute;o</h1>
     <p>{$notificacion->fecha_envio}</p>
 
