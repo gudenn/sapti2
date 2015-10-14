@@ -3,6 +3,7 @@
 <div id="content">
   <div class="clear"></div>
   <div class='contenido'>
+    <a class="sendme" href="javascript:history.back()" >Atras</a></br></br>
     <h1> Fecha de Env&iacute;o</h1>
     <p>{$notificacion->fecha_envio}</p>
 
@@ -11,10 +12,12 @@
 
     <p>Detalle</p>
     <p>{$mensaje}</p>
+    {if ($notificacion->tipo)!=$tiponotificacion}
     {if $secionUser=='ES'}
         <a href="../proyecto-final/avance.detalle.php?avance_id={$link1}" class="sendme">Enlace</a>
     {else}
         <a href="../revision/revision.lista.php?iddicta={$idicta}&estudiente_id={$estudiante->id}" class="sendme">Enlace</a>
+    {/if}
     {/if}
     
 {if ($estadonotificacion)=="Pendiente"}

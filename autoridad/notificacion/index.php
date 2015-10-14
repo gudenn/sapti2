@@ -64,7 +64,7 @@ try {
     $menu->agregarItem('Notificaciones Le&iacute;das','Todas las notificaciones le&iacute;das','basicset/message-already-read.png',$link,'',$counter[1]);
     $counter = $notificacion->getTodasNotificaciones($usuario->id, '', '', " AND estado_notificacion='AR' ");
     $link = $url_base."notificacion/notificacion.gestion.php?estado_notificacion=AR";
-    $menu->agregarItem('Notificaciones Archivadas','Notificaciones archivadas','basicset/message-archived.png',$link,'',$counter[1]);
+    //$menu->agregarItem('Notificaciones Archivadas','Notificaciones archivadas','basicset/message-archived.png',$link,'',$counter[1]);
     $menus[] = $menu;
     $menu = new Menu('Notificaciones Pendientes');
     // CONTADOR

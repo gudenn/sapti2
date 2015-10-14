@@ -237,7 +237,7 @@ class Menu
 
     $thise = new Menu('Notificaciones y Mensajes');
     $link = Administrador::URL."notificacion/";
-    $thise->agregarItem('Notificaciones','Gesti&oacute;n de Notificaciones','basicset/message-archived.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+    $thise->agregarItem('Notificaciones','Gesti&oacute;n de Notificaciones','basicset/message-archived.png',$link);
     $link = Administrador::URL."notificacion/notificacion.gestion.php?estado_notificacion=SV";
     $counter = $notificacion->getTodasNotificaciones($usuario->id, '', '', ' AND estado_notificacion="SV" ');
     $thise->agregarItem('Notificaciones Pendientes','Todas las notificaciones no leidas','basicset/message-not-read.png',$link,$counter[1]);
@@ -318,7 +318,7 @@ class Menu
 
     $thise = new Menu('Notificaciones y Mensajes');
     $link = Estudiante::URL."notificacion/";
-    $thise->agregarItem('Notificaciones','Gesti&oacute;n de Notificaciones','basicset/message-archived.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+    $thise->agregarItem('Notificaciones','Gesti&oacute;n de Notificaciones','basicset/message-archived.png',$link);
     $link = Estudiante::URL."notificacion/notificacion.gestion.php?estado_notificacion=SV";
     $counter = $notificacion->getTodasNotificaciones($usuario->id, '', '', ' AND estado_notificacion="SV" ');
     $thise->agregarItem('Notificaciones Pendientes','Todas las notificaciones no leidas','basicset/message-not-read.png',$link,$counter[1]);
@@ -487,7 +487,7 @@ AND tr.docente_id=".$docente->id."
 
    $thise = new Menu('Notificaciones y Mensajes');
    $link = Docente::URL."notificacion/";
-   $thise->agregarItem('Notificaciones','Gesti&oacute;n de Notificaciones','basicset/message-archived.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+   $thise->agregarItem('Notificaciones','Gesti&oacute;n de Notificaciones','basicset/message-archived.png',$link);
    $link = Docente::URL."notificacion/notificacion.gestion.php?estado_notificacion=SV";
    $counter = $notificacion->getTodasNotificaciones($usuario->id, '', '', ' AND estado_notificacion="SV" ');
    $thise->agregarItem('Notificaciones Pendientes','Todas las notificaciones no le&iacute;das','basicset/message-not-read.png',$link,$counter[1]);
