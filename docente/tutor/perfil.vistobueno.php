@@ -90,7 +90,7 @@ try {
             $notificacions = new Notificacion();
             $notificacions->objBuidFromPost();
             $notificacions->proyecto_id = $proyecto->id;
-            $notificacions->tipo = Notificacion::TIPO_MENSAJE;
+            $notificacions->tipo = Notificacion::TIPO_NOTIFICACION;
             $notificacions->fecha_envio = date("j/n/Y");
 
             $tipo = $proyecto->tipo_proyecto == Proyecto::TIPO_PERFIL ? 'Perfil' : 'Proyecto';

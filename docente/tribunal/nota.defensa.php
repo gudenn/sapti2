@@ -75,7 +75,7 @@ try {
                            $notificacion = new Notificacion();
                             $notificacion->objBuidFromPost();
                             $notificacion->proyecto_id=$proyecto->id; 
-                            $notificacion->tipo=  Notificacion::TIPO_MENSAJE;
+                            $notificacion->tipo=  Notificacion::TIPO_NOTIFICACION;
                             $notificacion->fecha_envio=date("j/n/Y");
                             $notificacion->asunto="Nota de la defensa";
                              $notificacion->detalle="Su nota es : " . $tribunal->nota_tribunal;
@@ -149,7 +149,7 @@ try {
                              $notificacion = new Notificacion();
                             $notificacion->objBuidFromPost();
                             $notificacion->proyecto_id=$proyecto->id; 
-                            $notificacion->tipo=  Notificacion::TIPO_MENSAJE;
+                            $notificacion->tipo=  Notificacion::TIPO_NOTIFICACION;
                             $notificacion->fecha_envio=date("j/n/Y");
                             $notificacion->asunto="Acta de Defensa";
                              $notificacion->detalle="Debe apersonarse a la secretaria de la carrera para recoger su acta de defensa. nota final :".round($nota->nota_final,2);

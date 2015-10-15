@@ -26,6 +26,8 @@ class Notificacion extends Objectbase
   const TIPO_TIEMPO     = 'N02';
  /** TIPO_MENSAJE mensaje asignacion  */
   const TIPO_ASIGNACION = 'N03';
+   /** TIPO_NOTIFICACION mensaje asignacion  */
+  const TIPO_NOTIFICACION = 'N04';
 
   //ESTAS VARIABLES SE GUARDAN EN notificacion_XX
   /**
@@ -490,7 +492,7 @@ class Notificacion extends Objectbase
     // Ordenamos por prioridad DESC fecha DESC
     if (trim($orderby) == '')
     {
-      $orderby = " ORDER BY notificacion.fecha_envio DESC ";
+      $orderby = " ORDER BY notificacion.fecha_envio DESC ,notificacion.id DESC ";
     }
     
 

@@ -12,9 +12,13 @@
 
     <p>Detalle</p>
     <p>{$mensaje}</p>
-    {if ($notificacion->tipo)!=$tiponotificacion}
+    {if ($notificacion->tipo!=$tiponotificacion && $notificacion->tipo!=$tiponotificacion1)}
     {if $secionUser=='ES'}
-        <a href="../proyecto-final/avance.detalle.php?avance_id={$link1}" class="sendme">Enlace</a>
+        {if $tip=='CR'}
+            <a href="../proyecto-final/observacion.gestion.php?revision_id={$link1}" class="sendme">Enlace</a>
+        {else}
+            <a href="../proyecto-final/avance.detalle.php?avance_id={$link1}" class="sendme">Enlace</a>
+        {/if}
     {/if}
     {if $secionUserd=='DO'}
         <a href="../revision/revision.lista.php?iddicta={$idicta}&estudiente_id={$estudiante->id}" class="sendme">Enlace Docente</a>

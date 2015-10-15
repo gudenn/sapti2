@@ -95,14 +95,14 @@ try {
         $array=  explode(';SPT;', $notificacion->detalle);
         $mensaje=$array[0];
         $link1=$array[1];
-
+        $tip=$array[2];
   if (getSessionEstudiante()){
 $user='ES';
   }
   if (getSessionTutor()){
 $usert='TU';
   }
-  if ($proyecto->getTribunal(getSessionDocente()->id)>0){
+  if ($proyecto->getTribunal(getSessionDocente()->id)->id>0){
 $usertr='TR';
   }
   if(getSessionDocente()){      
@@ -126,18 +126,22 @@ while ($fila1rev = mysql_fetch_array($sqlrev, MYSQL_ASSOC)) {
         //echo $_GET['notificacion_id'];
         //$notificacion
         $tipo = Notificacion::TIPO_ASIGNACION;
+        $tipo1 = Notificacion::TIPO_NOTIFICACION;
         // echo $tipo;
         $smarty->assign("proyecto", $proyecto);
         $smarty->assign("estudiante", $estudiante);
         $smarty->assign("notificacion", $notificacion);
         $smarty->assign("mensaje", $mensaje);
         $smarty->assign("link1", $link1);
+        $smarty->assign('secionUser', $user);
         $smarty->assign('secionUserd', $userd);
         $smarty->assign('secionUsert', $usert);
         $smarty->assign('secionUsertr', $usertr);
         $smarty->assign('idicta', $iddicta);
         $smarty->assign("estadonotificacion", $proyecto->getTribunalEstado(getSessionDocente()->id));
         $smarty->assign("tiponotificacion", $tipo);
+        $smarty->assign("tiponotificacion1", $tipo1);
+        $smarty->assign("tip", $tip);
     }
 
 
