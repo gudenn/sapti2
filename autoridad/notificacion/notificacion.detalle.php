@@ -170,7 +170,7 @@ while ($fila1rev = mysql_fetch_array($sqlrev, MYSQL_ASSOC)) {
                 $notificacions->prioridad = 7;
                 $notificacions->asunto = "Asignacion de Tribunales";
                 //$notificacions->detalle     =   $_POST['accion'] ;
-                $notificacions->tipo = Notificacion::TIPO_MENSAJE;
+                $notificacions->tipo = Notificacion::TIPO_NOTIFICACION;
                 $notificacions->estado = Objectbase::STATUS_AC;
 
                 $noticaciones = array('estudiantes' => array($proyecto->getEstudiante()->id));
@@ -193,7 +193,7 @@ while ($fila1rev = mysql_fetch_array($sqlrev, MYSQL_ASSOC)) {
                 $notificacions = new Notificacion();
                 $notificacions->objBuidFromPost();
                 $notificacions->proyecto_id = $proyecto->id;
-                $notificacions->tipo = Notificacion::TIPO_MENSAJE;
+                $notificacions->tipo = Notificacion::TIPO_NOTIFICACION;
                 $notificacions->fecha_envio = date("j/n/Y");
 
                 $aceptado = $proyectotutor->estado_tutoria == Proyecto_tutor::ACEPTADO ? 'Acepto' : 'Rechaso';
