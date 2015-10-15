@@ -7,7 +7,7 @@
   leerClase('Administrador');
   leerClase('Docente');
   
-  $menuList[]     = array('url'=>URL . Docente::URL , 'name'=>'Docente');
+  $menuList[]     = array('url'=>URL . Docente::URL , 'name'=>'Asignaturas');
   $menuList[]     = array('url'=>URL . Docente::URL . 'notificacion/','name'=>'Notificaciones');
   $menuList[]     = array('url'=>URL . Docente::URL . 'notificacion/notificacion.gestion.php','name'=>'Archivo de Notificaciones');
   $url_base       = Docente::URL;

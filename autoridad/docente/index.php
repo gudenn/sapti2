@@ -29,7 +29,7 @@ try {
    * Menu superior
    */
   $menuList[]     = array('url'=>URL.Administrador::URL,'name'=>'Administraci&oacute;n');
-  $menuList[]     = array('url'=>URL . Administrador::URL . 'docente/','name'=>'Docente');
+  $menuList[]     = array('url'=>URL . Administrador::URL . 'docente/','name'=>'Asignaturas');
   $smarty->assign("menuList", $menuList);
 
   

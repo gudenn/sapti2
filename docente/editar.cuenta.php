@@ -14,7 +14,7 @@ try {
   /**
    * Menu superior
    */
-  $menuList[]     = array('url'=>URL . Docente::URL,'name'=>'Docente');
+  $menuList[]     = array('url'=>URL . Docente::URL,'name'=>'Asignaturas');
   $menuList[]     = array('url'=>URL . Docente::URL . basename(__FILE__),'name'=>'Editar mi cuenta');
   $smarty->assign("menuList", $menuList);
 

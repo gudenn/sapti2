@@ -98,7 +98,11 @@ try {
 
   if (getSessionEstudiante()){
 $user='ES';
-  }else{      $user='DO';
+  }
+  if (getSessionTutor()){
+$usert='TU';
+  }
+  if(getSessionDocente()){      
     $resulrev = "SELECT di.id
 FROM proyecto_dicta pd, dicta di, semestre se
 WHERE pd.dicta_id=di.id
@@ -109,7 +113,11 @@ AND pd.proyecto_id=$proyecto->id
    $sqlrev = mysql_query($resulrev);
 while ($fila1rev = mysql_fetch_array($sqlrev, MYSQL_ASSOC)) {
    $iddicta=$fila1rev['id'];
- }}
+ }
+ if($iddicta>0){
+     $userd='DO';
+ }
+}
         
 //echo $horas;
         //echo $_GET['notificacion_id'];
@@ -121,7 +129,8 @@ while ($fila1rev = mysql_fetch_array($sqlrev, MYSQL_ASSOC)) {
         $smarty->assign("notificacion", $notificacion);
         $smarty->assign("mensaje", $mensaje);
         $smarty->assign("link1", $link1);
-        $smarty->assign('secionUser', $user);
+        $smarty->assign('secionUserd', $userd);
+        $smarty->assign('secionUsert', $usert);
         $smarty->assign('idicta', $iddicta);
         $smarty->assign("estadonotificacion", $proyecto->getTribunalEstado(getSessionDocente()->id));
         $smarty->assign("tiponotificacion", $tipo);
