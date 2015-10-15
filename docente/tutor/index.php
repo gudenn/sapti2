@@ -44,10 +44,10 @@ try {
   $notificaciones= new Notificacion();
   leerClase('Menu');
   leerClase('Tutor');
-  $menu = new Menu('Lista de Estudiantes de  METODOL. Y PLANIF. de proyecto de Grado');
+  $menu = new Menu('Lista de Estudiantes Tutorados de  METODOL. Y PLANIF. de proyecto de Grado');
   
   $link = Tutor::URL."perfil.seguimiento.lista.php";
-  $menu->agregarItem('Estudiantes Tutoriados','Lista de Estudiantes Tutoriados','basicset/user4.png',$link);
+  $menu->agregarItem('Estudiantes Tutorados','Lista de Estudiantes Tutorados','basicset/user4.png',$link);
    $link = Tutor::URL."perfil.estudiante.lista.php";
   $menu->agregarItem('Dar Visto Bueno ','Visto Bueno a los Proyectos de los Estudiantes Tutorados','basicset/ok.png',$link);
  $link = Tutor::URL."perfil.vistobueno.lista.php";
@@ -55,9 +55,9 @@ try {
 
   $menus[] = $menu;
   
-  $menu = new Menu('Lista de Estudiantes De Proyecto Final');
+  $menu = new Menu('Lista de Estudiantes Tutorados De Proyecto Final');
   $link = Tutor::URL."seguimiento.lista.php";
-  $menu->agregarItem('Estudiantes Tutoriados','Lista de Estudiantes Tutoriados','basicset/user4.png',$link);
+  $menu->agregarItem('Estudiantes Tutoriados','Lista de Estudiantes Tutorados','basicset/user4.png',$link);
   $link = Tutor::URL."estudiante.lista.php";
   $menu->agregarItem(' Dar Visto Bueno ','Visto Bueno a los Proyectos de los Estudiantes Tutorados','basicset/ok.png',$link);
    $link = Tutor::URL."proyecto.vistobueno.lista.php";
