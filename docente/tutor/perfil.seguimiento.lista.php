@@ -35,7 +35,7 @@ try {
    */
 
  $menuList[]     = array('url'=>URL.Docente::URL.'tutor','name'=>'Tutor >');
-  $menuList[]     = array('url'=>URL.Docente::URL.'tutor/'.basename(__FILE__),'name'=>'Lista Estudiantes de Perfil');
+  $menuList[]     = array('url'=>URL.Docente::URL.'tutor/'.basename(__FILE__),'name'=>'Lista Estudiantes Tutorados de Perfil');
  $smarty->assign("menuList", $menuList);
   
  
