@@ -8,7 +8,7 @@
                <b>Estudiante:</b> {$usuario->getNombreCompleto()|upper}
             </p>
         <div id="wrap">
-        <div style="height: 250px; width: 920px; font-size: 12px; overflow: auto;">
+        <div style="height: 250px; width: 920px; font-size: 12px; overflow: auto; border-width: 4px; border-style: solid">
 <table class="tbl_lista">
   <thead>
     <tr>
@@ -34,21 +34,26 @@
           <a href='#' class='avancedetalle' id="{$objs[ic][0]}" style=\"cursor:pointer\">Ver {icono('basicset/search_48.png','Detalle')}</a>
         <br><a href="../tutor/avance.detalle.php?avance_id={$objs[ic][0]}&estudiente_id={$estudiante->id}" target="_blank" >Revisar {icono('basicset/document_pencil.png','Detalle')}</a>
       </td>
-      <td> <div align="center" id="best{$objs[ic][0]}" onClick="desplegar('tdesp{$objs[ic][0]}','best{$objs[ic][0]}')" style="cursor: pointer;" class="sendme">Mostrar Revisiones</div></td>
+      {if $objs[ic][4]=='NO'}
+          <td> <div align="center" style="font-weight:bold;" >Sin Revisiones</div></td>
+          {else}
+          <td> <div align="center" id="best{$objs[ic][0]}" onClick="desplegar('tdesp{$objs[ic][0]}','best{$objs[ic][0]}')" style="cursor: pointer;" class="sendme">Revisiones</div></td>
+              {/if}
  
     </tr>
-    <tr>
-        <td colspan="7"> 
+    <tr style="border:thick solid #969595">
+        <td colspan="2"></td>
+        <td colspan="5"> 
     <table id="tdesp{$objs[ic][0]}" style="display:none;">
           <thead>
     <tr>
-      <th>Id                         </th>
-      <th>Estado                     </th>
-      <th>Fecha Revision            </th>
-      <th>Tipo Revisor              </th>
-      <th>Nombre Revisor            </th>
-      <th>Fecha Correcci&oacuten    </th>
-      <th>Opciones                  </th>
+      <th class="dentro">Id                         </th>
+      <th class="dentro">Estado                     </th>
+      <th class="dentro">Fecha Revisi&oacuten       </th>
+      <th class="dentro">Tipo Revisor              </th>
+      <th class="dentro">Nombre Revisor            </th>
+      <th class="dentro">Fecha Correcci&oacuten    </th>
+      <th class="dentro">Opciones                  </th>
 
     </tr>
            </thead>
@@ -83,23 +88,24 @@
 {include file="footer.tpl"}
 <script type="text/javascript"> 
     var visto = null;
-function desplegar(tabla_a_desplegar,estadoT) { 
-var tablA = document.getElementById(tabla_a_desplegar); 
-var estadOt = document.getElementById(estadoT);  
-
+function desplegar(tabla_a_desplegar,estadoT) {
+    var tablA = document.getElementById(tabla_a_desplegar); 
+    var estadOt = document.getElementById(estadoT);
 switch(tablA.style.display) { 
 case "none": 
 tablA.style.display = "block"; 
-estadOt.innerHTML = "Ocultar Revisiones"; 
+estadOt.innerHTML = "Revisiones"; 
 break; 
-default: 
+default:
 tablA.style.display = "none"; 
-estadOt.innerHTML = "Mostrar Revisiones" 
+estadOt.innerHTML = "Revisiones" 
 break; 
 }
+
 if (visto != null)
 visto.style.display = 'none';
 visto = (tablA==visto) ? null : tablA;
+
 } 
 </script> 
 

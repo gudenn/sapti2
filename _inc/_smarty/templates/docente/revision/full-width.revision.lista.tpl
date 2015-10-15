@@ -7,7 +7,6 @@
                <b>Proyecto:</b> {$proyecto->nombre}<br/>
                <b>Estudiante:</b> {$usuario->getNombreCompleto()|upper}
             </p>
-            <input id="array" name="array" value="{$array}" style="display: none"/>
         <div id="wrap">
         <div style="height: 250px; width: 920px; font-size: 12px; overflow: auto; border-width: 4px; border-style: solid">
 <table class="tbl_lista">

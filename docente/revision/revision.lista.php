@@ -64,11 +64,9 @@ WHERE av.proyecto_id='".$proyecto->id."'
 ORDER BY id DESC";
    $sql = mysql_query($resul);
    $objs2=array();
-   $arrelem='';
 while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
     $objs=array();
     $objs1=array();
-    $arrelem.=$fila1["id"].';';
    $objs[]=$fila1["id"];
    $objs[]=$fila1["estado_avance"];
    $objs[]=$fila1["fecha_avance"];
@@ -99,7 +97,6 @@ ORDER BY re.id DESC
   $smarty->assign("proyecto", $proyecto); 
   $smarty->assign("avance", $avance);
   $smarty->assign("revision", $revision);
-  $smarty->assign("array", $arrelem);
 
   //No hay ERROR
   $smarty->assign("ERROR",'');

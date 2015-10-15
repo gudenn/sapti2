@@ -22,6 +22,9 @@
     {if $secionUsert=='TU'}
         <a href="../tutor/revision.lista.php?id_estudiante={$estudiante->id}" class="sendme">Enlace Tutor</a>
     {/if}
+    {if $secionUsertr=='TR'}
+        <a href="../tribunal/revision.lista.php?estudiente_id={$estudiante->id}" class="sendme">Enlace Tribunal</a>
+    {/if}
     {/if}
     
 {if ($estadonotificacion)=="Pendiente"}

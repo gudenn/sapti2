@@ -59,6 +59,9 @@ try {
   $smarty->assign("revision"  ,$revision);
   
   $o_string   = $revision->getOrderString($filtro);
+  if($o_string==''){
+      $o_string='ORDER BY revision.fecha_revision DESC';
+  }
   $obj_mysql  = $revision->getAll('',$o_string,$filtro_sql,TRUE,TRUE);
   
  

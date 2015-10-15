@@ -75,10 +75,13 @@ AND av.id='".$fila1['id']."'
 ORDER BY re.id DESC
 ";
    $sql1 = mysql_query($resul1);
-while ($fila11 = mysql_fetch_array($sql1, MYSQL_ASSOC)) {
+   if(mysql_num_rows($sql1)>0){
+       while ($fila11 = mysql_fetch_array($sql1, MYSQL_ASSOC)) {
    $objs1[]=$fila11; 
-   
  }
+   }else{
+      $objs1='NO'; 
+   }
     $objs[]=$objs1;
     $objs2[]=$objs;
  }
