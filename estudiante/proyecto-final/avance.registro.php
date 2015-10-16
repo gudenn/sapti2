@@ -33,31 +33,28 @@ try {
   leerClase('Revision');
   leerClase('Estudiante');
   leerClase('Avance');
-
-  /**
-   * Menu superior
-   */
-  $menuList[]     = array('url'=>URL.Estudiante::URL,'name'=>'Estudiante');
-  $menuList[]     = array('url'=>URL.Estudiante::URL.Proyecto::URL,'name'=>'Proyecto Final');
-  $menuList[]     = array('url'=>URL.Estudiante::URL.Proyecto::URL.basename(__FILE__),'name'=>'Registro de Avance');
-  $smarty->assign("menuList", $menuList);
-  $editores = '';
-          
-          
-          
+  $tipo='AV';
   if ( isset($_GET['revision_id']) && is_numeric($_GET['revision_id']) )
   {
     $revision = new Revision($_GET['revision_id']);
     $revision->getAllObjects();
     $smarty->assign("revision", $revision);
     $_GET['avance_id'] = $revision->avance_id;
-    
+    $tipo='CO';
     $editores = ",
                 {toolbar: [ 
                   [ 'Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],
                   [ 'FontSize', 'TextColor', 'BGColor' ]]}";
     
   }
+  /**
+   * Menu superior
+   */
+  $menuList[]     = array('url'=>URL.Estudiante::URL,'name'=>'Estudiante');
+  $menuList[]     = array('url'=>URL.Estudiante::URL.Proyecto::URL,'name'=>'Proyecto Final');
+$menuList[]     = array('url'=>URL.Estudiante::URL.Proyecto::URL.basename(__FILE__).'revision_id='.$_GET['revision_id'],'name'=>'Registro de Avance');
+  $smarty->assign("menuList", $menuList);
+  $editores = '';
   $smarty->assign("editores", $editores);
   
   $estudiante     = getSessionEstudiante();
@@ -72,7 +69,7 @@ try {
   if ( isset($_POST['tarea']) && $_POST['tarea'] == 'registrar_avance' && isset($_SESSION['registrar_avance']) && isset($_POST['token']) && $_SESSION['registrar_avance'] == $_POST['token'] ){
     $EXITO = false;
     if ($proyecto->id){
-      $avance = $estudiante->grabarAvance($avance_escpecifico);
+      $avance = $estudiante->grabarAvance($avance_escpecifico,$tipo);
     }
       $_SESSION['estado'] = true;
       header("Location: avance.gestion.php");

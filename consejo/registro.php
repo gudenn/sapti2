@@ -391,7 +391,7 @@ $fechaasignaciones= date("j/n/ H:i:s", $time);
     $notificacion = new Notificacion();
     $notificacion->objBuidFromPost();
     $notificacion->proyecto_id=$_POST['proyecto_id']; 
-    $notificacion->tipo=  Notificacion::TIPO_MENSAJE;
+    $notificacion->tipo=  Notificacion::TIPO_ASIGNACION;
     $notificacion->fecha_envio=date("j/n/Y");
     $notificacion->asunto="Asignacion de Tribunales";
      $notificacion->detalle="Se le Asigno Tribunales";

@@ -198,12 +198,13 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
            }
            $revision1->estadoAprobado();
            $avance->cambiarEstadoCorregido();
-           $revision1->notificacionRevision($estudiante->id, $proyecto->id, $docente->getNombreCompleto());
+           $revision1->notificacionRevision($estudiante->id, $proyecto->id, $docente->getNombreCompleto(), $revisionnuevo->id);
            $ir = "Location: ../revision/observacion.editar.revision.php?iddicta=".$iddicta."&revisiones_id=".$revisionnuevo->id."";
            header($ir);
            }else {
                    $revision1->estadoAprobado();
                    $avance->cambiarEstadoCorregido();
+                   $revision1->notificacionRevisionAP($estudiante->id, $proyecto->id, $docente->getNombreCompleto(), $revisionnuevo->id);
                    $ir = "Location: ../estudiante/estudiante.lista.php?iddicta=".$iddicta;
                    header($ir);
                 }

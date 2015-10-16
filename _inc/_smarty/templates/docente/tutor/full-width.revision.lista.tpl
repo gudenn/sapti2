@@ -32,7 +32,7 @@
       <td>Avance</td>
       <td>
           <a href='#' class='avancedetalle' id="{$objs[ic][0]}" style=\"cursor:pointer\">Ver {icono('basicset/search_48.png','Detalle')}</a>
-        <br><a href="../tutor/avance.detalle.php?avance_id={$objs[ic][0]}&estudiente_id={$estudiante->id}" target="_blank" >Revisar {icono('basicset/document_pencil.png','Detalle')}</a>
+        <br><a href="../tutor/avance.detalle.php?avance_id={$objs[ic][0]}&estudiente_id={$estudiante->id}" target="_self" >Revisar {icono('basicset/document_pencil.png','Detalle')}</a>
       </td>
       {if $objs[ic][4]=='NO'}
           <td> <div align="center" style="font-weight:bold;" >Sin Revisiones</div></td>

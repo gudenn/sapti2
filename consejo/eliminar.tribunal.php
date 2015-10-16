@@ -25,7 +25,7 @@ try {
     $notificacion->objBuidFromPost();
   // $notificacion->enviarNotificaion($usuarios);
     $notificacion->proyecto_id= $proyecto->id; 
-    $notificacion->tipo=  Notificacion::TIPO_MENSAJE;
+    $notificacion->tipo=  Notificacion::TIPO_ASIGNACION;
     $notificacion->fecha_envio= date("j/n/Y");
     $notificacion->asunto= "Ha sido eliminado su fecha de defensa";
     $notificacion->detalle="La fecha de defensa fue eliminado";
@@ -59,7 +59,7 @@ try {
     $notificacion->objBuidFromPost();
   // $notificacion->enviarNotificaion($usuarios);
     $notificacion->proyecto_id= $proyecto->id; 
-    $notificacion->tipo=  Notificacion::TIPO_MENSAJE;
+    $notificacion->tipo=  Notificacion::TIPO_ASIGNACION;
     $notificacion->fecha_envio= date("j/n/Y");
     $notificacion->asunto= "Ha sido eliminado Tus Tribunales";
     $notificacion->detalle="Asignación de Fechas de Defensa";

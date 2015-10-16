@@ -92,7 +92,7 @@ try {
                    $notificacions= new Notificacion();
                     $notificacions->objBuidFromPost();
                     $notificacions->proyecto_id = $proyecto->id; 
-                    $notificacions->tipo        =  Notificacion::TIPO_MENSAJE;
+                    $notificacions->tipo        =  Notificacion::TIPO_NOTIFICACION;
                     $notificacions->fecha_envio =  date("j/n/Y");
                     $notificacions->asunto      =  "Visto bueno del Tutor";
                     $notificacions->prioridad   =  7;

@@ -40,7 +40,9 @@
               dateFormat:'dd/mm/yy',
               changeMonth: true,
               changeYear: true,
-              yearRange: "2000:2050"
+               maxDate: new Date,
+               minDate: new Date,
+            //  yearRange: "2000:2050"
             });
           });
           jQuery(document).ready(function(){

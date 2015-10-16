@@ -133,7 +133,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
     $observacion->crearObservacion($obser_array, $revision->id);
     }
     $avance->cambiarEstadoCorregido();
-    $revision->notificacionRevision($estudiante->id, $proyecto->id, $tribunal->getNombreCompleto());
+    $revision->notificacionRevision($estudiante->id, $proyecto->id, $tribunal->getNombreCompleto(), $revision->id);
     $ir = "Location: ../tribunal/revision.lista.php?id_estudiente=".$estuid;
         header($ir);
     }
@@ -166,7 +166,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
            }
            $revision1->estadoAprobado();
            $avance->cambiarEstadoCorregido();
-           $revision1->notificacionRevision($estudiante->id, $proyecto->id, $tribunal->getNombreCompleto());
+           $revision1->notificacionRevision($estudiante->id, $proyecto->id, $tribunal->getNombreCompleto(), $revisionnuevo->id);
            $ir = "Location: ../tribunal/observacion.editar.revision.php?revisiones_id=".$revisionnuevo->id."&avance=".$id;
            header($ir);
            }else {
@@ -194,7 +194,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
                $obsermodes->cambiarEstadoRechazado();
            }}
            $revision1->estadoAprobado();
-           $revision1->notificacionRevision($estudiante->id, $proyecto->id, $tribunal->getNombreCompleto());
+           $revision1->notificacionRevision($estudiante->id, $proyecto->id, $tribunal->getNombreCompleto(), $revisionnuevo->id);
            $avance->cambiarEstadoCorregido();   
            $ir = "Location: ../tribunal/observacion.editar.revision.php?revisiones_id=".$revisionnuevo->id."&avance=".$id;
            header($ir);
