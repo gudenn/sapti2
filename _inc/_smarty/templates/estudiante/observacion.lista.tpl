@@ -19,7 +19,7 @@
       <td></td>
       <td></td>
       <td>
-        <a href="avance.registro.php?revision_id={$objs[0]['revision_id']}" target="_blank" >Resolver {icono('basicset/pencil_48.png','Detalle')}</a>
+        <a href="avance.registro.php?revision_id={$objs[0]['revision_id']}" target="_self" >Resolver {icono('basicset/pencil_48.png','Detalle')}</a>
       </td>
     </tr>
   </tbody>

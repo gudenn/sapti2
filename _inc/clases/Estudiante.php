@@ -408,7 +408,7 @@ and es.id='$this->id'";
    * Grabamos el avance que realizo el estudiante en proyecto
    * @return boolean|\Avance
    */
-  function grabarAvance($avance_escpecifico= true) 
+  function grabarAvance($avance_escpecifico= true,$tipo) 
   {
     $proyecto    = $this->getProyecto();
     if (!$proyecto || !isset($proyecto->id))
@@ -446,7 +446,7 @@ and es.id='$this->id'";
     $avance->save();
     $avance->saveAllSonObjects(TRUE);
 
-    $this->notificarAvance($proyecto,$avance->id);
+    $this->notificarAvance($proyecto,$avance->id,$tipo);
     return $avance;
   }
 
@@ -454,19 +454,32 @@ and es.id='$this->id'";
    * Notificamos a todos los involucrados en el proyecto acerca del avance del proyecto
    * @param Proyecto $proyecto
    */
-  function notificarAvance($proyecto,$id_mensaje) 
+  function notificarAvance($proyecto,$id_mensaje,$tipo) 
   {
-    leerClase('Notificacion');
+          leerClase('Notificacion');
+      if($tipo=='CO'){
+    $notificacion              = new Notificacion();
+    $notificacion->proyecto_id = $proyecto->id;
+    $notificacion->tipo        = Notificacion::TIPO_MENSAJE;
+    $notificacion->fecha_envio = date('d/m/Y');
+    $notificacion->asunto      = "Correccion: {$this->getNombreCompleto()}";
+    $notificacion->detalle     = "El estudiante {$this->getNombreCompleto()} realizó una Correccion en su proyecto {$proyecto->nombre}, en la fecha {$notificacion->fecha_envio} ;SPT;".$id_mensaje.";SPT;".$tipo;
+    $notificacion->prioridad   = 3;
+    $notificacion->estado      = Objectbase::STATUS_AC;
+    
+    $notificacion->notificarTodos();
+          }else{
     $notificacion              = new Notificacion();
     $notificacion->proyecto_id = $proyecto->id;
     $notificacion->tipo        = Notificacion::TIPO_MENSAJE;
     $notificacion->fecha_envio = date('d/m/Y');
     $notificacion->asunto      = "Avance: {$this->getNombreCompleto()}";
-    $notificacion->detalle     = "El estudiante {$this->getNombreCompleto()} realizó un avance en su proyecto {$proyecto->nombre}, en la fecha {$notificacion->fecha_envio} ;SPT;".$id_mensaje;
+    $notificacion->detalle     = "El estudiante {$this->getNombreCompleto()} realizó un avance en su proyecto {$proyecto->nombre}, en la fecha {$notificacion->fecha_envio} ;SPT;".$id_mensaje.";SPT;".$tipo;
     $notificacion->prioridad   = 3;
     $notificacion->estado      = Objectbase::STATUS_AC;
     
     $notificacion->notificarTodos();
+          }
   }
   
   /**

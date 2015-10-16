@@ -204,6 +204,7 @@ while ($fila1 = mysql_fetch_array($sql, MYSQL_ASSOC)) {
            }else {
                    $revision1->estadoAprobado();
                    $avance->cambiarEstadoCorregido();
+                   $revision1->notificacionRevisionAP($estudiante->id, $proyecto->id, $docente->getNombreCompleto(), $revisionnuevo->id);
                    $ir = "Location: ../estudiante/estudiante.lista.php?iddicta=".$iddicta;
                    header($ir);
                 }

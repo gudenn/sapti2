@@ -15,28 +15,40 @@
     {if ($notificacion->tipo!=$tiponotificacion && $notificacion->tipo!=$tiponotificacion1)}
     {if $secionUser=='ES'}
         {if $tip=='CR'}
-            <a href="../proyecto-final/observacion.gestion.php?revision_id={$link1}" class="sendme">Enlace</a>
+            <a href="../proyecto-final/observacion.gestion.php?revision_id={$link1}" class="sendme">Corregir Observaciones</a>
         {else}
-            <a href="../proyecto-final/avance.detalle.php?avance_id={$link1}" class="sendme">Enlace</a>
+            <a href="../proyecto-final/avance.detalle.php?avance_id={$link1}" class="sendme">Ver Avance</a>
         {/if}
     {/if}
     {if $secionUserd=='DO'}
-        <a href="../revision/revision.lista.php?iddicta={$idicta}&estudiente_id={$estudiante->id}" class="sendme">Enlace Docente</a>
+        {if $tip=='CO'}
+        <a href="../revision/revision.lista.php?iddicta={$idicta}&estudiente_id={$estudiante->id}" class="sendme">Revisar Correcciones de Docente</a>
+        {else}
+            <a href="../revision/revision.lista.php?iddicta={$idicta}&estudiente_id={$estudiante->id}" class="sendme">Revicion Docente</a>
+            {/if}
     {/if}
     {if $secionUsert=='TU'}
-        <a href="../tutor/revision.lista.php?id_estudiante={$estudiante->id}" class="sendme">Enlace Tutor</a>
+        {if $tip=='CO'}
+        <a href="../tutor/revision.corregido.lista.php?estudiente_id={$estudiante->id}" class="sendme">Revisar Correcciones de Tutor</a>
+        {else}
+            <a href="../tutor/revision.lista.php?id_estudiante={$estudiante->id}" class="sendme">Revicion Tutor</a>
+            {/if}
     {/if}
     {if $secionUsertr=='TR'}
-        <a href="../tribunal/revision.lista.php?estudiente_id={$estudiante->id}" class="sendme">Enlace Tribunal</a>
+        {if $tip=='CO'}
+            <a href="../tribunal/revision.corregido.lista.php?estudiente_id={$estudiante->id}" class="sendme">Revisar Correcciones de Tribunal</a>
+        {else}
+            <a href="../tribunal/revision.lista.php?estudiente_id={$estudiante->id}" class="sendme">Revicion Tribunal</a>
+            {/if} 
     {/if}
     {/if}
-    
-{if ($estadonotificacion)=="Pendiente"}
-    {if ($notificacion->tipo)==$tiponotificacion}
+    {if ($notificacion->tipo)==$tiponotificacion && $secionUser!='ES'}
         {if $proyecto->tipo_proyecto=="PR"}
-                          <a href="../../autoridad/detalle/proyecto.pdf.php?estudiante_id={$estudiante->id}" target="_blank" >{icono('basicset/filepd.png','Descargar Pdf')} Pdf ver Tema</a>
-
-             {/if}
+           <a href="../../autoridad/detalle/proyecto.pdf.php?estudiante_id={$estudiante->id}" target="_blank" >{icono('basicset/filepd.png','Descargar Pdf')} Pdf ver Tema</a>
+        {/if}
+    {/if}
+{if ($estadonotificacion)=="Pendiente"}
+    {if ($notificacion->tipo)==$tiponotificacion && $secionUser!='ES'}
       <form action="" method="post" >
         <select name=accion>
           {html_options options=$accion}

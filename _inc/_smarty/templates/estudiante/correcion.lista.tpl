@@ -23,9 +23,9 @@
       <td>{$objs[ic]['fecha_revision_toshow']}</td>
       <td>
         {if ($objs[ic]['estado_revision']==$E1_CREADO)}
-        <a href="observacion.gestion.php?revision_id={$objs[ic]['id']}" target="_blank" >Ver Detalle {icono('basicset/search_48.png','Detalle')}</a>
+        <a href="observacion.gestion.php?revision_id={$objs[ic]['id']}" target="_self" >Ver Detalle {icono('basicset/search_48.png','Detalle')}</a>
         {else}
-        <a href="avance.detalle.php?avance_id={$objs[ic]['avance_id']}" target="_blank" >Ver Detalle {icono('basicset/search_48.png','Detalle')}</a>
+        <a href="avance.detalle.php?avance_id={$objs[ic]['avance_id']}" target="_self" >Ver Detalle {icono('basicset/search_48.png','Detalle')}</a>
         {/if}
       </td>
     </tr>

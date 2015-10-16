@@ -327,6 +327,19 @@ while ($fila1b = mysql_fetch_array($sqlbus, MYSQL_ASSOC)) {
     $usuarios['estudiantes'] = array($idest);
     $noti->enviarNotificaion($usuarios);
   }
+  function notificacionRevisionAP($idest,$idpro,$nomrev,$id_rev) {
+    leerClase('Notificacion');
+    $noti = new Notificacion();
+    $noti->detalle = 'Todas las Correcciones han sido Aprobadas por '.$nomrev.' sigue Avanzando. ;SPT;'.$id_rev.';SPT;'.'CR';
+    $noti->asunto  = 'Aprobacion de Avance';
+    $noti->tipo=  Notificacion::TIPO_NOTIFICACION;
+    $noti->fecha_envio=date("d/m/Y");
+    $noti->estado=  Objectbase::STATUS_AC;
+    $noti->proyecto_id=$idpro;
+    $noti->prioridad=3;
+    $usuarios['estudiantes'] = array($idest);
+    $noti->enviarNotificaion($usuarios);
+  }
   function getRevisorTipo(){
       $tipo=  $this->revisor_tipo;
       return $tipo;

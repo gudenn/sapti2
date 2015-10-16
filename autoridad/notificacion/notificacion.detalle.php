@@ -48,6 +48,7 @@ try {
     leerClase('html');
     leerClase("Semestre");
     leerClase('Docente');
+    leerClase('Dicta');
     //no hay error
     $ERROR = '';
 
@@ -91,21 +92,85 @@ try {
             $tribunal->accion = Tribunal::ACCION_AC;
             $tribunal->save();
         }
-
+function tipoconsulta($mat, $pro, $doc){
+   switch ($mat) {
+      case 'PR':
+  $resul = "
+SELECT av.id as id, pr.nombre as nombrep, av.descripcion as descripcion, av.fecha_avance as fecha, re.id as correcionrevision, av.estado_avance as estoavance
+FROM proyecto pr, avance av, revision re
+WHERE av.proyecto_id=pr.id
+AND av.id=re.avance_id
+AND re.estado_revision='RE'
+AND av.proyecto_id='".$pro."'
+AND re.revisor_tipo='DO'
+AND re.revisor='".$doc."'
+ORDER BY id DESC
+          ";
+        break;
+      case 'PE':
+  $resul = "
+SELECT av.id as id, pr.nombre as nombrep, av.descripcion as descripcion, av.fecha_avance as fecha, re.id as correcionrevision, av.estado_avance as estoavance
+FROM proyecto pr, avance av, revision re
+WHERE av.proyecto_id=pr.id
+AND av.id=re.avance_id
+AND re.estado_revision='RE'
+AND av.proyecto_id='".$pro."'
+AND re.revisor_tipo='DP'
+AND re.revisor='".$doc."'
+ORDER BY id DESC
+          ";
+        break;
+      default:
+        break;
+    } 
+    return $resul;
+}
         $array=  explode(';SPT;', $notificacion->detalle);
         $mensaje=$array[0];
         $link1=$array[1];
-        $tip=$array[2];
+        $tip='';
+
   if (getSessionEstudiante()){
 $user='ES';
+$tip=$array[2];
   }
-  if (getSessionTutor()){
+  if ($tutor1=getSessionTutor()){
 $usert='TU';
+  $resul_tu = "
+SELECT av.id as id, pr.nombre as nombrep, av.descripcion as descripcion, av.fecha_avance as fecha, re.id as correcionrevision, av.estado_avance as estoavance
+FROM proyecto pr, avance av, revision re
+WHERE av.proyecto_id=pr.id
+AND av.id=re.avance_id
+AND re.estado_revision='RE'
+AND av.proyecto_id='".$proyecto->id."'
+AND re.revisor_tipo='TU'
+AND re.revisor='".$tutor1->id."'
+ORDER BY id DESC
+          ";
+   $sql_tu = mysql_query($resul_tu);
+   if(mysql_num_rows($sql_tu)>0){
+       $tip=$array[2];
+   }
   }
-  if ($proyecto->getTribunal(getSessionDocente()->id)->id>0){
+  if ($tribunal1=$proyecto->getTribunal(getSessionDocente()->id)->id>0){
 $usertr='TR';
+  $resul_tr = "
+SELECT av.id as id, pr.nombre as nombrep, av.descripcion as descripcion, av.fecha_avance as fecha, re.id as correcionrevision, av.estado_avance as estoavance
+FROM proyecto pr, avance av, revision re
+WHERE av.proyecto_id=pr.id
+AND av.id=re.avance_id
+AND re.estado_revision='RE'
+AND av.proyecto_id='".$proyecto->id."'
+AND re.revisor_tipo='TR'
+AND re.revisor='".$tribunal1->id."'
+ORDER BY id DESC
+          ";
+   $sql_tr = mysql_query($resul_tr);
+      if(mysql_num_rows($sql_tu)>0){
+       $tip=$array[2];
+   }
   }
-  if(getSessionDocente()){      
+  if($docente=getSessionDocente()){      
     $resulrev = "SELECT di.id
 FROM proyecto_dicta pd, dicta di, semestre se
 WHERE pd.dicta_id=di.id
@@ -117,8 +182,13 @@ AND pd.proyecto_id=$proyecto->id
 while ($fila1rev = mysql_fetch_array($sqlrev, MYSQL_ASSOC)) {
    $iddicta=$fila1rev['id'];
  }
+ $dicta=new Dicta($iddicta);
  if($iddicta>0){
      $userd='DO';
+   $sql = mysql_query(tipoconsulta($dicta->getTipoMateria(), $proyecto->id,$docente->id));
+   if(mysql_num_rows($sql)>0){
+       $tip=$array[2];
+   }
  }
 }
         
