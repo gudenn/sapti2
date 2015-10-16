@@ -57,7 +57,7 @@ try {
   
   $menu = new Menu('Lista de Estudiantes Tutorados De Proyecto Final');
   $link = Tutor::URL."seguimiento.lista.php";
-  $menu->agregarItem('Estudiantes Tutoriados','Lista de Estudiantes Tutorados','basicset/user4.png',$link);
+  $menu->agregarItem('Estudiantes Tutorados','Lista de Estudiantes Tutorados','basicset/user4.png',$link);
   $link = Tutor::URL."estudiante.lista.php";
   $menu->agregarItem(' Dar Visto Bueno ','Visto Bueno a los Proyectos de los Estudiantes Tutorados','basicset/ok.png',$link);
    $link = Tutor::URL."proyecto.vistobueno.lista.php";
