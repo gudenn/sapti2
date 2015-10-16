@@ -208,7 +208,7 @@ function desplegar() {
 	</tr>
 	<tr valign="top">
 		<td width="50%" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none;"><b>Área:</b> {$area}</td>
-		<td width="50%" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right:  1px solid #000000;"><b>Subárea:</b> {$subarea}</td>
+		<td width="50%" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right:  1px solid #000000;"><b>Subárea:</b><span style="font-size:$font_esp;"> {$subarea}</span></td>
 	</tr>
 FORMULARIO;
   if ($modalidad->datos_adicionales){
