@@ -218,7 +218,7 @@ function pendiente(estid, dicta) {
 		},
 		success: function (response) 
 		{ 
-            alert(response);
+          
                if(response==3)
               {
                            $('#clave'+estid).html("<a    style=\"cursor:pointer\">" +"<img src=\"" + image("basicset/menos.png") + "\" border=\"0\" alt=\"evaluar\" title=\"Visto Bueno\" width='30px' height='30px' />Tiene observaciones Pendientes</a>");  
@@ -227,7 +227,7 @@ function pendiente(estid, dicta) {
                   if(response==1)
                   {
                  
-                  $('#clave'+estid).html("<a   onclick=document.location.href='vistobueno.php?id_estudiante="+estid+"&iddicta="+ dicta +"' style=\"cursor:pointer\">" +"<img src=\"" + image("basicset/ok.png") + "\" border=\"0\" alt=\"evaluar\" title=\"Visto Bueno\" width='30px' height='30px' />Dar Visto Bueno</a>");    
+                  $('#clave'+estid).html("<a   onclick=document.location.href='proyecto.vistobueno.php?id_estudiante="+estid+"' style=\"cursor:pointer\">" +"<img src=\"" + image("basicset/ok.png") + "\" border=\"0\" alt=\"evaluar\" title=\"Visto Bueno\" width='30px' height='30px' />Dar Visto Bueno</a>");    
                   }
                  if(response==2)
                   {
