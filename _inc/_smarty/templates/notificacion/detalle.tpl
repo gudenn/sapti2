@@ -24,21 +24,21 @@
         {if $tip=='CO'}
         <a href="../revision/revision.lista.php?iddicta={$idicta}&estudiente_id={$estudiante->id}" class="sendme">Revisar Correcciones de Docente</a>
         {else}
-            <a href="../revision/revision.lista.php?iddicta={$idicta}&estudiente_id={$estudiante->id}" class="sendme">Revicion Docente</a>
+            <a href="../revision/revision.lista.php?iddicta={$idicta}&estudiente_id={$estudiante->id}" class="sendme">Revisi&oacute;n Docente</a>
             {/if}
     {/if}
     {if $secionUsert=='TU'}
         {if $tip=='CO'}
         <a href="../tutor/revision.corregido.lista.php?estudiente_id={$estudiante->id}" class="sendme">Revisar Correcciones de Tutor</a>
         {else}
-            <a href="../tutor/revision.lista.php?id_estudiante={$estudiante->id}" class="sendme">Revicion Tutor</a>
+            <a href="../tutor/revision.lista.php?id_estudiante={$estudiante->id}" class="sendme">Revisi&oacute;n Tutor</a>
             {/if}
     {/if}
     {if $secionUsertr=='TR'}
         {if $tip=='CO'}
             <a href="../tribunal/revision.corregido.lista.php?estudiente_id={$estudiante->id}" class="sendme">Revisar Correcciones de Tribunal</a>
         {else}
-            <a href="../tribunal/revision.lista.php?estudiente_id={$estudiante->id}" class="sendme">Revicion Tribunal</a>
+            <a href="../tribunal/revision.lista.php?estudiente_id={$estudiante->id}" class="sendme">Revisi&oacute;n Tribunal</a>
             {/if} 
     {/if}
     {/if}
