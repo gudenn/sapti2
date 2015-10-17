@@ -21,6 +21,7 @@
               {if (isset($estudiante))}
               <input type="hidden" name="estudiante_id" id="estudiante_id" value="{$estudiante->id}" size="22">
               {/if}
+              <input type="hidden" name="usuario_id"    value="{$usuario->id}">
               <input type="hidden" name="id" value="{$tutor->id}">
               <input type="hidden" name="tarea" value="registrar">
               <input type="hidden" name="token" value="{$token}">

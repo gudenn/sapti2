@@ -105,6 +105,8 @@ try {
     $docente->usuario_id = $usuario->id;
     $docente->configuracion_area=0;
     $docente->configuracion_horario=0;
+    $es_nuevo                  = (!isset($_POST['usuario_id']) || trim($_POST['usuario_id']) == '' ) ? TRUE : FALSE;
+    $usuario->validar($es_nuevo);
     $docente->save();
 
     //tambien creamos su usuario docente

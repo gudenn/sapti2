@@ -75,7 +75,6 @@ try {
 
   if (isset($_POST['tarea']) && $_POST['tarea'] == 'registrar' && isset($_POST['token']) && $_SESSION['register'] == $_POST['token'])
   {
-    
     $EXITO = false;
     $stado=0;
     mysql_query("BEGIN");
@@ -86,6 +85,8 @@ try {
     $usuario->objBuidFromPost();
     $usuario->puede_ser_tutor = Usuario::PROFECIONAL;
     $usuario->estado = Objectbase::STATUS_AC;
+    $es_nuevo                  = (!isset($_POST['usuario_id']) || trim($_POST['usuario_id']) == '' ) ? TRUE : FALSE;
+    $usuario->validar($es_nuevo);
     $usuario->save();
     
     //usuario pertenece a un grupo
@@ -135,7 +136,7 @@ try {
   {
   if($stado==1){
        $_SESSION['estado']=$stado;
-          header("Location: tutor.gestion.php");
+       //   header("Location: tutor.gestion.php");
           
 
   }  else {
