@@ -44,11 +44,11 @@
             {/if}
             <div class="password-container">
             <p>
-              <input class="strong-password" type="password" name="clave" id="clave" value="" data-validation-engine="validate[required]"  size="22">
+              <input class="strong-password" type="password" name="clave" id="clave" value="" data-validation-engine="validate[required,minSize[6]] text-input"  size="22">
               <label for="clave"><small>Clave de Ingreso (*){getHelpTip('clave')}</small></label>
             </p>
             <p>
-              <input class="strong-password" type="password" name="clave2" id="clave2" value="" data-validation-engine="validate[equals[clave]]"   size="22">
+              <input class="strong-password" type="password" name="clave2" id="clave2" value="" data-validation-engine="validate[required,minSize[6]] text-input"    size="22">
               <label for="clave2"><small>Verifique Clave (*){getHelpTip('clave2')}</small></label>
            
                 <div class="meter">
