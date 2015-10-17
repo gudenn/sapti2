@@ -11,6 +11,7 @@
     <p>{$notificacion->asunto}</p>
 
     <p>Detalle</p>
+    
     <p>{$mensaje}</p>
     {if ($notificacion->tipo!=$tiponotificacion && $notificacion->tipo!=$tiponotificacion1)}
     {if $secionUser=='ES'}
@@ -35,6 +36,10 @@
             {/if}
     {/if}
     {if $secionUsertr=='TR'}
+        
+ 
+    
+        
         {if $tip=='CO'}
             <a href="../tribunal/revision.corregido.lista.php?estudiente_id={$estudiante->id}" class="sendme">Revisar Correcciones de Tribunal</a>
         {else}
@@ -68,6 +73,12 @@
       </form>
     {/if}
     {/if}
+    {if $notificacion->asunto=="Asignacion de Tribunales"}
+       {foreach from=$tribunales item=valor}
+         Nombre : {$valor->getDocente()->getNombreCompleto()}<br />
+        {/foreach}
+        {/if}
+  
   </div>
 </div>
 <p>{$ERROR}</p>

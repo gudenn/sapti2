@@ -212,6 +212,8 @@ while ($fila1rev = mysql_fetch_array($sqlrev, MYSQL_ASSOC)) {
         $smarty->assign("tiponotificacion", $tipo);
         $smarty->assign("tiponotificacion1", $tipo1);
         $smarty->assign("tip", $tip);
+         $smarty->assign("tribunales", $proyecto->getTribunalDocenteLista() );
+       
     }
 
 

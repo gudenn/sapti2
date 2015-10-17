@@ -72,7 +72,7 @@ $smarty->assign('arraytribunal'  , $arraytribunal);
    {
        $proyecto= new Proyecto($_GET['tribunaleliminar_id']);
  
-   $proyecto->estado_proyecto=  Proyecto::EST2_BUE;
+   $proyecto->estado_proyecto= 'VA';
    $proyecto->save();
    
     

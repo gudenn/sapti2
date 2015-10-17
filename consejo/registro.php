@@ -399,6 +399,9 @@ $fechaasignaciones= date("j/n/ H:i:s", $time);
     $notificacion->estado = Objectbase::STATUS_AC;
     $noticaciones= array('estudiantes'=>array($proyectos->getEstudiante()->id));
     $notificacion->enviarNotificaion( $noticaciones);
+    
+              
+    
     foreach ($_POST['ids'] as $id)
      {
   //  $actual= $semestre->getActivo();
@@ -420,16 +423,16 @@ $fechaasignaciones= date("j/n/ H:i:s", $time);
                 $tribunal->estado            = Objectbase::STATUS_AC;
                 $tribunal->save();
                 
-                
                 $notificacions= new Notificacion();
                 $notificacions->objBuidFromPost();
                 $notificacions->proyecto_id=$_POST['proyecto_id']; 
                 $notificacions->tipo=  Notificacion::TIPO_ASIGNACION;
                 $notificacions->fecha_envio= date("j/n/Y");
-                $notificacions->asunto="Asignacion de Tribunales";
+                $notificacions->asunto="Se le asigno como tribunal";
                 $notificacions->detalle=$_POST['detalle'];
                 $notificacions->prioridad=5;
                 $notificacions->estado = Objectbase::STATUS_AC;
+              
                 $noticaciones= array('tribunales'=>array( $tribunal->id));
               $notificacions->enviarNotificaion( $noticaciones);
         

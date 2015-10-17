@@ -50,7 +50,7 @@ try {
    if( mysql_query( $sqlss))
    {
   
-   $proyecto->estado_proyecto='VB';
+   $proyecto->estado_proyecto='VA';
    $proyecto->save();
    
     

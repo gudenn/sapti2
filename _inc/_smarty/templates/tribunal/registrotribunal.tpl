@@ -162,7 +162,7 @@
           </p>
      
         <textarea name="detalle" rows="5" style="width: 90%; color: #000">
-Se le Asignó  Tribunal  correspondientes al proyecto:{$proyectobuscado->nombre}  del UNIV.:  <p>{$usuariobuscado->getNombreCompleto()} </p>para que usted realize las funciones como tribunal al proyecto ya mencionado esperamos su pronta respuesta 
+Se le Asignó  Tribunal  correspondientes al proyecto:{$proyectobuscado->nombre}  del UNIV.:  {$usuariobuscado->getNombreCompleto()} para que usted realize las funciones como tribunal al proyecto ya mencionado esperamos su pronta respuesta 
       </textarea>
         <script>
           CKEDITOR.replace('detalle'{$editores});

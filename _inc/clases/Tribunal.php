@@ -70,6 +70,34 @@ class Tribunal extends Objectbase
     $usuario = new Docente($this->docente_id);
     return $usuario->getNombreCompleto($echo);
   }
+  
+  
+  /**
+   * 
+   * @return boolean|\Tribunal
+   *   retorna datos de los docentes
+   */
+   function getDocente() 
+  {
+    
+
+    leerClase('Usuario');
+    leerClase('Docente');
+     $activo = Objectbase::STATUS_AC;
+
+    $sql = "SELECT u.*
+FROM usuario u, docente d
+WHERE  u.id=d.usuario_id and  d.id=$this->docente_id";
+    //echo $sql;
+    $resultado = mysql_query($sql);
+    if (!$resultado)
+      return false;
+    $docente= mysql_fetch_array($resultado);
+    $docente = new Usuario($docente['id']);
+    return $docente;
+  }
+  
+  
    
 }
 

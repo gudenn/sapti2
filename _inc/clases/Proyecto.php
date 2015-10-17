@@ -642,6 +642,65 @@ class Proyecto extends Objectbase {
     return $tribuna;
   }
   
+   function getTribunalDocenteLista() 
+  {
+    
+    leerClase('Tribunal');
+    leerClase('Usuario');
+    leerClase('Docente');
+     $activo = Objectbase::STATUS_AC;
+
+   
+        $activo = Objectbase::STATUS_AC;
+        $sql = "select t.* from " . $this->getTableName('Tribunal') . " as t   where t.proyecto_id ='$this->id' and t.estado = '$activo'  ";
+    
+         $resultado= mysql_query($sql);
+       if (mysql_num_rows($resultado)==0)
+           return false;
+       
+              while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+      { 
+        $tribunales[] = new Tribunal($fila['id']);
+      }
+
+      
+       return  $tribunales;
+     
+ 
+   
+  }
+  
+  /**
+   * 
+   * @return boolean|\Tribunal
+   * mostrar notificacion
+   */
+   function getTribunalDocenteNotifiacion() 
+  {
+    
+    leerClase('Tribunal');
+    leerClase('Usuario');
+    leerClase('Docente');
+     $activo = Objectbase::STATUS_AC;
+
+   
+    $sql = "SELECT t.*
+FROM usuario u, docente d, tribunal t, notificacion_tribunal n
+WHERE  u.id=d.usuario_id and t.id=n.tribunal_id and  d.id=t.docente_id and t.proyecto_id=$this->id";
+    
+
+    //echo $sql;
+    $resultado = mysql_query($sql);
+    if (mysql_num_rows($resultado)==0)
+      return false;
+    $tribunales = array();
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC))
+    {
+      $tribunales[] = new Tribunal($fila['id']);
+    }
+    return  $tribunales;
+  }
+  
     /**
    * Crear un proyecto y verificar si el titulo ya fue registrado
    * 
