@@ -333,6 +333,26 @@ class Proyecto extends Objectbase {
     $proyecto = new Proyecto($proyecto);
     return $proyecto;
   }
+  
+    function getObservacionesPendientes() {
+    //leerClase('Proyecto');
+    $activo = Objectbase::STATUS_AC;
+
+    $sql = "SELECT o.*
+            FROM revision r, observacion o
+            WHERE  r.id=o.revision_id  and (o.estado_observacion='NP' or o.estado_observacion='CR') and r.proyecto_id=$this->id";
+
+
+    $resultado = mysql_query($sql);
+   if( mysql_num_rows($resultado)>0)
+   
+      return true;
+  else 
+    
+    return false;
+  }
+  
+  
 
   function getFolder() {
     return self::ARCHIVO_PREFOLDER . $this->id;

@@ -29,11 +29,17 @@ try {
   $dicta = new Dicta($iddicta);
   $estudiante     = new Estudiante($id_estudiante);
   $proyecto       = $estudiante->getProyecto();
-
-        if( sizeof($proyecto->getAvnces()) >=  $valorh)
+    if( sizeof($proyecto->getAvnces()) >=  $valorh)
         {
         
-            echo  1 ;
+            if($proyecto->getObservacionesPendientes())
+            {
+            
+            echo  3 ;
+            }  else {
+                echo 1;
+            }
+            
         } else
         {
             echo 2;
