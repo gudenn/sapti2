@@ -37,8 +37,10 @@ if(!isDocenteSession())
       /**
    * Menu superior
    */
-  
-  
+   $privada='';
+   $publica='';
+   $docente = getSessionDocente();
+  $publica=$docente->getTotalDefensasPublicas();
   $notificacion = new Notificacion();
 
   $menuList[]     = array('url'=>URL.Docente::URL.'tribunal','name'=>'Tribunal');
@@ -46,19 +48,20 @@ if(!isDocenteSession())
 
   $menu = new Menu('Lista de Estudiantes');
   $link = Tribunal::URL."seguimiento.lista.php";
-  $menu->agregarItem('Gesti&oacute;n de Estudiantes','Revisión y Vistos Buenos a los Proyectos','basicset/user4.png',$link);
+  $menu->agregarItem('Gesti&oacute;n de Estudiantes','Revisión y Vistos Buenos a los Proyectos','basicset/user4.png',$link,$docente->getTotalEstudiantesTribunal());
   $link = Tribunal::URL."estudiante.lista.php";
-  $menu->agregarItem('Dar Visto Bueno','Habilitar los Proyectos Para la Asignación de Defensa','basicset/ok.png',$link);
+  $menu->agregarItem('Dar Visto Bueno','Habilitar los Proyectos Para la Asignación de Defensa','basicset/ok.png',$link,$docente->getTotalEstudiantesSinVistoBueno());
  $link = Tribunal::URL."visto.estudiante.lista.php";
-  $menu->agregarItem('Lista de Visto Bueno','Habilitar los Proyectos Para la Asignación de Defensa','basicset/ok.png',$link);
+  $menu->agregarItem('Lista de Visto Bueno','Habilitar los Proyectos Para la Asignación de Defensa','basicset/ok.png',$link,$docente->getTotalEstudiantesConVistoBueno());
 
   $menus[] = $menu;
  
    $menu = new Menu('Defensas');
   $link = Tribunal::URL."privada.estudiante.lista.php";
-  $menu->agregarItem('Lista de Defensa  Privada','Revisión y modificación de Proyectos','tribunal.png',$link);
+  $menu->agregarItem('Lista de Defensa  Privada','Revisión y modificación de Proyectos','tribunal.png',$link,$privada);
   $link = Tribunal::URL."publica.estudiante.lista.php";
-  $menu->agregarItem('Lista de Defensa Publica ','Evaluaci&oacute;n de Proyecto','tribunal.png',$link);
+  
+  $menu->agregarItem('Lista de Defensa Publica ','Evaluaci&oacute;n de Proyecto','tribunal.png',$link, $publica);
 
   
     $menus[] = $menu;
@@ -66,7 +69,7 @@ if(!isDocenteSession())
     $smarty->assign("menus", $menus);
  
     
-    $docente = getSessionDocente();
+   
    
     $smarty->assign("docente", $docente);
     $smarty->assign("usuario", $usuario);

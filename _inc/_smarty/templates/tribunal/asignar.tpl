@@ -53,14 +53,14 @@
 </table>
          
          
-         <select name=lugar_id>
+              <select name=lugar_id required="">
          {html_options values=$lugar_id output=$lugar_nombre}
          </select>
          <label for="lugar"><small>Lugar</small></label>
          </p>
          
            <p>
-       <select name=accion>
+               <select name=accion required="">
    {html_options options=$accion}
   </select>
   
