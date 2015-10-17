@@ -784,8 +784,8 @@ class Notificacion extends Objectbase
       $filtro->order($_GET['order']);
     $filtro->nombres[] = 'Estado';
     $filtro->valores[] = array ('select','estado_notificacion'  ,$filtro->filtro('estado_notificacion'),
-        array(''      ,'SV'          , 'VI'       , 'AR'         ),
-        array('Todos' ,'Sin Revisar' , 'Revisados', 'Archivados' ));
+        array(''      ,'SV'          , 'VI'       /*, 'AR'         */), // falta implementar funcionalidad para archivo de notificaciones
+        array('Todos' ,'Sin Revisar' , 'Revisados'/*, 'Archivados' */));
     $filtro->nombres[] = 'Tipo Mensaje';
     $filtro->valores[] = array ('select','tipo'  ,$filtro->filtro('tipo'),
         array(''      , self::TIPO_MENSAJE  , self::TIPO_TIEMPO   , self::TIPO_ASIGNACION  ),

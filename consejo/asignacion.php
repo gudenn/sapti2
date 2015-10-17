@@ -267,7 +267,7 @@ WHERE  u.id= d.usuario_id and   d.id= t.docente_id and   t.estado='AC' and u.est
            $stado=1;
            
              }  else {
-            echo " El docente no tiene hoara disponible";
+            echo " El docente no tiene hora disponible";
              }
             }
 
@@ -284,7 +284,7 @@ WHERE  u.id= d.usuario_id and   d.id= t.docente_id and   t.estado='AC' and u.est
           
 
   }  else {
-          $mensaje = array('mensaje'=>'Hubo un problema, No se grab&oacute correctamente el Area','titulo'=>'Registro de Area' ,'icono'=> 'warning_48.png');
+          $mensaje = array('mensaje'=>'Hubo un problema, No se grab&oacute correctamente el Area','titulo'=>'Asignación de Defensa' ,'icono'=> 'warning_48.png');
           $ERROR = $html->getMessageBox ($mensaje);
   }
   }

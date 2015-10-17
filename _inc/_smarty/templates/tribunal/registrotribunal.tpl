@@ -83,8 +83,10 @@
  </a>
 </td>
 <td><div id="1{$listadocentes[ic][0]}">
-     <img src="{$URL}images/add.png" border="1" alt="Agregar" width="30"></td>
-     </div>
+     <img src="{$URL}images/add.png" border="1" alt="Agregar" width="30">
+      </div>
+     </td>
+   
     </tr>
     
   {/section}
@@ -137,8 +139,10 @@
 
    <td>
        <div id="1{$asignados[ic][0]}">
-       <img src="{$URL}images/remove.png" border="1" alt="Agregar" width="30"></td>
-       </div>
+       <img src="{$URL}images/remove.png" border="1" alt="Agregar" width="30">
+         </div>
+       </td>
+     
 
     </tr>
     

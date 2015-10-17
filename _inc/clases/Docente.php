@@ -172,7 +172,86 @@ class Docente extends Objectbase{
     }
     return $user;
   }
-
+  
+  
+  public function getTotalDefensasPublicas() {
+      $contador='';
+    $activo = Objectbase::STATUS_AC;
+    $sql = 'select DISTINCT (e.id), e.codigo_sis as codigosis, u.nombre as nombre, CONCAT(u.apellido_paterno," ",u.apellido_materno) apellidos, p.`nombre` as nombrep
+            from  usuario u , estudiante e, proyecto_estudiante pe, proyecto p, tribunal  t, docente  d, defensa  de
+            where   u.id=e.usuario_id and e.id=pe.estudiante_id and  de.tipo_defensa="DPU" and   de.proyecto_id=p.id and pe.proyecto_id=p.id  and p.estado_proyecto="LD" and p.id=t.proyecto_id and t.docente_id = d.id and d.id='.$this->id;
+    $resultado = mysql_query($sql);
+  
+    //var_dump($resultado);
+     if ($resultado)
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+      { 
+        $contador=$contador+1;
+      }
+   
+       return   $contador; 
+      
+  }
+  
+  public function getTotalEstudiantesTribunal() {
+       
+  $contador='';
+    $activo = Objectbase::STATUS_AC;
+    $sql = ' select DISTINCT (e.id), e.codigo_sis as codigosis, u.nombre as nombre, CONCAT(u.apellido_paterno," ",u.apellido_materno) apellidos, p.nombre as nombrep
+            from  usuario u , estudiante e, proyecto_estudiante pe, proyecto p, tribunal  t
+            where   u.id=e.usuario_id and e.id=pe.estudiante_id and pe.proyecto_id=p.id  and  t.accion="AC" and  t.accion="AC" and p.id=t.proyecto_id and t.docente_id='.$this->id;
+    $resultado = mysql_query($sql);
+  
+    //var_dump($resultado);
+     if ($resultado)
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+      { 
+        $contador=$contador+1;
+      }
+   
+       return   $contador; 
+}
+  public function getTotalEstudiantesSinVistoBueno() {
+      
+      
+        $contador='';
+    $activo = Objectbase::STATUS_AC;
+    $sql = '  select DISTINCT (e.id), e.codigo_sis as codigosis, u.nombre as nombre, CONCAT(u.apellido_paterno," ",u.apellido_materno) apellidos, p.nombre as nombrep
+from  usuario u , estudiante e, proyecto_estudiante pe, proyecto p, tribunal  t
+where   u.id=e.usuario_id and e.id=pe.estudiante_id and pe.proyecto_id=p.id  and  t.visto_bueno="VP" and  t.accion="AC" and p.id=t.proyecto_id and t.docente_id='.$this->id;
+    $resultado = mysql_query($sql);
+  
+    //var_dump($resultado);
+     if ($resultado)
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+      { 
+        $contador=$contador+1;
+      }
+   
+       return   $contador; 
+                      
+              
+  }
+public function getTotalEstudiantesConVistoBueno() {
+  
+                   
+        $contador='';
+    $activo = Objectbase::STATUS_AC;
+    $sql = 'select DISTINCT (e.id), e.codigo_sis as codigosis, u.nombre as nombre, CONCAT(u.apellido_paterno," ",u.apellido_materno) apellidos, p.nombre as nombrep
+            from  usuario u , estudiante e, proyecto_estudiante pe, proyecto p, tribunal  t
+            where   u.id=e.usuario_id and e.id=pe.estudiante_id and pe.proyecto_id=p.id  and t.visto_bueno="VB"  and t.accion="AC" and p.id=t.proyecto_id and t.docente_id='.$this->id;
+    $resultado = mysql_query($sql);
+  
+    //var_dump($resultado);
+     if ($resultado)
+    while ($fila = mysql_fetch_array($resultado, MYSQL_ASSOC)) 
+      { 
+        $contador=$contador+1;
+      }
+   
+       return   $contador;         
+              
+}
   function getOrderString(&$filtro) {
     $order_array = array();
     $order_array['codigo_sis'] = " {$this->getTableName()}.codigo_sis ";
