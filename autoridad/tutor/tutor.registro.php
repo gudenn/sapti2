@@ -136,7 +136,7 @@ try {
   {
   if($stado==1){
        $_SESSION['estado']=$stado;
-       //   header("Location: tutor.gestion.php");
+          header("Location: tutor.gestion.php");
           
 
   }  else {

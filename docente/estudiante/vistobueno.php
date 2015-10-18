@@ -191,8 +191,8 @@ try {
                 $notificacions->proyecto_id = $proyecto->id;
                 $notificacions->tipo = Notificacion::TIPO_NOTIFICACION;
                 $notificacions->fecha_envio = date("j/n/Y");
-                $notificacions->asunto = "Estas Habilitado para tus Defensas";
-                $notificacions->detalle = "Estas Habilitado para tus Defensas";
+                $notificacions->asunto = "Estas Habilitado para la Asignacion de Tribunales";
+                $notificacions->detalle = "Estas Habilitado para la Asignacion de Tribunales";
                 $notificacions->prioridad = 7;
                 $notificacions->estado = Objectbase::STATUS_AC;
 

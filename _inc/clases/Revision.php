@@ -317,8 +317,8 @@ while ($fila1b = mysql_fetch_array($sqlbus, MYSQL_ASSOC)) {
   function notificacionRevision($idest,$idpro,$nomrev,$id_rev) {
     leerClase('Notificacion');
     $noti = new Notificacion();
-    $noti->detalle = 'Revision de Avance con observaciones realizadas por '.$nomrev.' para su consideracion. ;SPT;'.$id_rev.';SPT;'.'CR';
-    $noti->asunto  = 'Revision de Avance';
+    $noti->detalle = 'Revisión de Avance con observaciones realizadas por '.$nomrev.' para su consideracion. ;SPT;'.$id_rev.';SPT;'.'CR';
+    $noti->asunto  = 'Revisión de Avance';
     $noti->tipo=  Notificacion::TIPO_MENSAJE;
     $noti->fecha_envio=date("d/m/Y");
     $noti->estado=  Objectbase::STATUS_AC;
