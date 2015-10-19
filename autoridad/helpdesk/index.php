@@ -85,9 +85,10 @@ try {
   $helpdesk   = new Helpdesk();
   $pendientes = Helpdesk::EST01_RECIEN;
   $pendientes = $helpdesk->contar(" estado_helpdesk = '{$pendientes}' ");
+
   // -CONTADOR //
   $menu->agregarItem('Temas de Ayuda Pedientes','Temas de ayuda que estan pendientes.','basicset/tag.png',$link,$pendientes);
-  $link = Administrador::URL."helpdesk/helpdesk.tooltips.php?todos";
+  $link = Administrador::URL."helpdesk/tooltip.gestion.php?estado_tooltip=".  Tooltip::EST01_RECIEN;
   // CONTADOR //
   leerClase('Tooltip');
   $tooltips   = new Tooltip();
