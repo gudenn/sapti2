@@ -217,13 +217,13 @@ WHERE  u.id= d.usuario_id and   d.id= t.docente_id and   t.estado='AC' and u.est
          }
       
         // echo  
-         
+         $detalle_mensaje='Se le asignó la fecha de defensa ';
             if($esiste==false)
              {
               $idproyecto= $_POST['proyecto_id'];
                $defensa= new Defensa();
               $defensa->objBuidFromPost();
-             
+                
               $defensa->fecha_asignacion= date("j/n/Y");
               $defensa->hora_asignacion=date("H:i:s");
               $defensa->fecha_defensa=$fecha;
@@ -234,7 +234,12 @@ WHERE  u.id= d.usuario_id and   d.id= t.docente_id and   t.estado='AC' and u.est
               $defensa->semestre= $semestreactual->codigo;
               $defensa->estado = Objectbase::STATUS_AC;
              $defensa->save();
-            
+             $lugar= new Lugar($defensa->lugar_id);
+            $detalle_mensaje .=  ' fecha : '.$defensa->fecha_asignacion;
+            $detalle_mensaje .=  ' hora  : '.$defensa->hora_inicio;
+            $detalle_mensaje .=  ' Lungar de defensa  : '.$lugar->nombre;
+                    
+                    $defensa->lugar_id;
              if($_POST['accion']==Defensa::DEFENSA_PUBLICA)
              {
         
@@ -258,7 +263,7 @@ WHERE  u.id= d.usuario_id and   d.id= t.docente_id and   t.estado='AC' and u.est
     $notificacion->tipo="Notificación";
     $notificacion->fecha_envio= date("j/n/Y");
     $notificacion->asunto= "Asignación de Fechas de Defensa";
-    $notificacion->detalle="Asignación de Fechas de Defensa";
+    $notificacion->detalle=$detalle_mensaje;
     $notificacion->prioridad=5;
     $notificacion->estado = Objectbase::STATUS_AC;
     $noticaciones= array('estudiantes'=>array($proyectos->getEstudiante()->id));
