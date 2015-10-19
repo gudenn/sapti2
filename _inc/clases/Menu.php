@@ -295,8 +295,13 @@ class Menu
     $thise = new Menu('Proyecto');
     $link = Estudiante::URL."proyecto-final/";
     $thise->agregarItem('Proyecto','Registro de avances y correcciones para el Proyecto Final','basicset/briefcase_48.png',$link);
+
+    $avances = $proyecto->getAvnces();
+    if (count($avances)){
     $link = Estudiante::URL."reporte.proyecto.php";
     $thise->agregarItem('Informe de Avance','Informe de avance para el Proyecto','basicset/project.png',$link);
+    }
+
     //revisar la esta linea la comparacion e fechas no sirve de esa manera
     if( is_object( $proyecto) && $proyecto->estado_proyecto==Proyecto::EST2_BUE )
     {
