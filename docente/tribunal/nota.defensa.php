@@ -78,7 +78,7 @@ try {
                             $notificacion->tipo=  Notificacion::TIPO_NOTIFICACION;
                             $notificacion->fecha_envio=date("j/n/Y");
                             $notificacion->asunto="Nota de la defensa";
-                             $notificacion->detalle="Su nota del docente ". $docente->getNombreCompleto()  .  ' es '.$tribunal->nota_tribunal;
+                             $notificacion->detalle="Su nota del tribunal ". $docente->getNombreCompleto()  .  ' es '.$tribunal->nota_tribunal;
                             $notificacion->prioridad=5;
                             $notificacion->estado = Objectbase::STATUS_AC;
                             $noticaciones= array('estudiantes'=>array($proyecto->getEstudiante()->id));
