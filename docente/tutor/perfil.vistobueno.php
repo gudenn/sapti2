@@ -3,7 +3,7 @@
 try {
     define("MODULO", "DOCENTE");
     require('../_start.php');
-    if (!isDocenteSession())
+ if(!isDocenteSession() && !isTutorSession() )
         header("Location: ../login.php");
     leerClase('Visto_bueno');
     leerClase('Visto_bueno_tutor');
@@ -95,7 +95,7 @@ try {
 
             $tipo = $proyecto->tipo_proyecto == Proyecto::TIPO_PERFIL ? 'Perfil' : 'Proyecto';
             $notificacions->asunto = "VoBo $tipo, Tutor";
-            $notificacions->detalle = "Aprobado por: " . $docente->getNombreCompleto();
+            $notificacions->detalle = "Aprobado por: " .  getSessionTutor()->getNombreCompleto();
 
             $notificacions->prioridad = 7;
             $notificacions->estado = Objectbase::STATUS_AC;
