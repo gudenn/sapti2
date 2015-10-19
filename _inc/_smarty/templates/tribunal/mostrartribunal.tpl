@@ -34,8 +34,17 @@
      <td>{$arraytribunal[ic][0]} </td>
      <td>{$arraytribunal[ic][1]} </td>
      <td>{$arraytribunal[ic][2]}</td>
-     <td>{($arraytribunal[ic][3])}</td>
-      <td>{($arraytribunal[ic][4])}</td>
+      <td>{($arraytribunal[ic][3])}</td>
+     {if $arraytribunal[ic][3]=='Aceptado'}
+         
+          <td></td>
+          {else}
+              
+               <td>{($arraytribunal[ic][4])}</td>
+                {/if}
+     
+    
+     
          </tr>
   {/section}
     </tbody> 
