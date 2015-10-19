@@ -221,7 +221,9 @@ WHERE  u.id= d.usuario_id and   d.id= t.docente_id and   t.estado='AC' and u.est
             if($esiste==false)
              {
               $idproyecto= $_POST['proyecto_id'];
-               $defensa= new Defensa();
+               $proyectosestado= new Proyecto($idproyecto);
+              
+               $defensa= new Defensa($proyectosestado->getDefensa()->id);
               $defensa->objBuidFromPost();
                 
               $defensa->fecha_asignacion= date("j/n/Y");
@@ -272,7 +274,11 @@ WHERE  u.id= d.usuario_id and   d.id= t.docente_id and   t.estado='AC' and u.est
            $stado=1;
            
              }  else {
-            echo " El docente no tiene hora disponible";
+                 
+                 $html = new Html();
+    $mensaje = array('mensaje' => ' El docente no tiene hora disponible', 'titulo' => 'Registro de defensa', 'icono' => 'warning_48.png');
+    $ERROR = $html->getMessageBox($mensaje);
+           
              }
             }
 
