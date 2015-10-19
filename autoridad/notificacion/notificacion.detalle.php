@@ -88,10 +88,10 @@ try {
         $horas = floor($diferencia / 60 / 60); //floor=redondea hacia arriba :D
 //echo $horas;
 //
-        if ($horas >= $valorh) {
-            $tribunal->accion = Tribunal::ACCION_AC;
-            $tribunal->save();
-        }
+      //  if ($horas >= $valorh) {
+       //     $tribunal->accion = Tribunal::ACCION_AC;
+       //     $tribunal->save();
+       // }
 function tipoconsulta($mat, $pro, $doc){
    switch ($mat) {
       case 'PR':
@@ -233,15 +233,17 @@ while ($fila1rev = mysql_fetch_array($sqlrev, MYSQL_ASSOC)) {
                 $tribunal->detalle = $_POST['detalle'];
                 $tribunal->fecha_aceptacion = date("j/n/Y");
                 $tribunal->save();
-
+                $action_trin='rechazo';
+      if($_POST['accion']=='AC')
+          $action_trin='acepto';
                 //Enviar notificacion
                 $notificacions = new Notificacion();
                 $notificacions->objBuidFromPost();
                 $notificacions->proyecto_id = $proyecto->id;
                 $notificacions->fecha_envio = date("j/n/Y");
                 $notificacions->prioridad = 7;
-                $notificacions->asunto = "Asignacion de Tribunales";
-                //$notificacions->detalle     =   $_POST['accion'] ;
+                $notificacions->asunto = "Tribunal";
+                $notificacions->detalle     =  ' Su solicitud fue '. $action_trin .' por '. getSessionUser()->getNombreCompleto() .'<br>'.$tribunal->detalle ;
                 $notificacions->tipo = Notificacion::TIPO_NOTIFICACION;
                 $notificacions->estado = Objectbase::STATUS_AC;
 

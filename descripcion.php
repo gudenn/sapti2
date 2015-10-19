@@ -2,6 +2,7 @@
 try {
   define ("MODULO", "VISITA");
   require('_start.php');
+  leerClase('Semestre');
 
   /** HEADER */
   $smarty->assign('title','Proyecto Final');
@@ -22,7 +23,9 @@ try {
   $smarty->assign('CSS',$CSS);
   $smarty->assign('JS',$JS);
   
-  
+  $semestre = new Semestre();
+  $director = $semestre->getValor('Director carrera Sistemas');
+  $smarty->assign('director'  , $director);
 
   $smarty->assign('listadefensas'  , "");
   

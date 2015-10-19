@@ -29,9 +29,7 @@
 
                             <tbody><tr class="letra_central">
                                 <td width="50%" align="right"><b>Director de Carrera: </b></td>
-                                <td width="50%" align="left">&nbsp;
-                                  <a href="rep_docente.jsp?codigo=24&amp;titulo=Director%20de%20Carrera" title="Director de Carrera: Lic. Yony Richard Montoya Burgos" onmouseover="window.status = 'Director de Carrera: Lic. Yony Richard Montoya Burgos'" onmouseout="window.status = '';
-                                    return true"> Lic. Yony Richard Montoya Burgos</a></td>
+                                <td width="50%" align="left">{$director}</td>
                               </tr>
 
                               <tr class="letra_central">

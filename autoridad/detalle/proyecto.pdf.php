@@ -119,11 +119,13 @@ function desplegar() {
 
   //Subarea
   $subarea = '';
+
   foreach ($proyecto->proyecto_sub_area_objs as $proyecto_sub_area){
     $subarea_obj = new Sub_area($proyecto_sub_area->sub_area_id);
     $subarea    .= $subarea_obj->nombre.'<br>';
   }
-  $subarea = rtrim($subarea, '<br>');
+ 
+  //$subarea = rtrim($subarea, '<br>');
 
   //MODALIDAD
   $modalidad = new Modalidad($proyecto->modalidad_id);
@@ -211,6 +213,8 @@ function desplegar() {
 		<td width="50%" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right:  1px solid #000000;"><b>Subárea:</b><span style="font-size:$font_esp;"> {$subarea}</span></td>
 	</tr>
 FORMULARIO;
+                
+              
   if ($modalidad->datos_adicionales){
     $institucion = new Institucion($proyecto->institucion_id);
   $formulario .= <<<FORMULARIO

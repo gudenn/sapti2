@@ -204,7 +204,8 @@ to.innerHTML="";
          
               changeMonth: true,
               changeYear: true,
-              yearRange: "1920:2013"
+               minDate: new Date
+             
             });
           });
           jQuery(document).ready(function(){

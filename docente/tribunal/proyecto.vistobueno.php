@@ -52,7 +52,8 @@ try {
    
   $smarty->assign("usuario", $usuario);
   $smarty->assign("proyecto", $proyecto);
-   date_default_timezone_set('America/La_Paz');
+    $smarty->assign("fecha_visto_bueno", date("j/n/Y"));
+
      // date_default_timezone_set('UTC');
     // $vistobueno->fecha_visto_buena=date("d/m/Y");
     //  $smarty->assign("vistobueno", $vistobueno);

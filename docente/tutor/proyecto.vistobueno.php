@@ -96,7 +96,7 @@ try {
                     $notificacions->fecha_envio =  date("j/n/Y");
                     $tipo = $proyecto->tipo_proyecto == Proyecto::TIPO_PERFIL ? 'Perfil' : 'Proyecto';
                     $notificacions->asunto = "VoBo $tipo, Tutor";
-                    $notificacions->detalle = "Aprobado por: " . $docente->getNombreCompleto();
+                    $notificacions->detalle = "Aprobado por: " . getSessionTutor()->getNombreCompleto();
                     $notificacions->prioridad   =  7;
                     $notificacions->estado      =   Objectbase::STATUS_AC;
                     $noticaciones = array('estudiantes'=>array($estudiante->id));
