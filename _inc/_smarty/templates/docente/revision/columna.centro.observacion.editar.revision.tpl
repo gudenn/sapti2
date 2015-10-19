@@ -1,10 +1,6 @@
         <div id="content" style="width:685px;min-height: 450px;">
         <h1 class="title">Edición De Observaciones</h1>
           <p>
-            <label for="revisor"><small>Nombre del Revisor: </small></label>
-            <span><i>{$arrayobser[0]['nom']}</i></b ><i>{$arrayobser[0]['ap']}</i></span>
-          </p>
-          <p>
             <label for="proyecto_id"><small>Nombres de Proyecto: </small></label>
             <span>{$arrayobser[0]['nomp']}</span>
           </p>
