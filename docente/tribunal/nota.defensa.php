@@ -78,7 +78,7 @@ try {
                             $notificacion->tipo=  Notificacion::TIPO_NOTIFICACION;
                             $notificacion->fecha_envio=date("j/n/Y");
                             $notificacion->asunto="Nota de la defensa";
-                             $notificacion->detalle="Su nota es : " . $tribunal->nota_tribunal;
+                             $notificacion->detalle="Su nota del docente ". $docente->getNombreCompleto()  .  ' es '.$tribunal->nota_tribunal;
                             $notificacion->prioridad=5;
                             $notificacion->estado = Objectbase::STATUS_AC;
                             $noticaciones= array('estudiantes'=>array($proyecto->getEstudiante()->id));
@@ -99,7 +99,7 @@ try {
                        if($notadefensaa!=0)
                        {
                     //   echo  $notadefensaa/$contador;
-                      $notapromediodefensa=(0.7)*($notadefensaa/$contador);
+                      $notapromediodefensa=(0.49)*($notadefensaa/$contador);
                        }
                      //  echo $notapromediodefensa;
                        $notafinal=0;
@@ -115,12 +115,12 @@ try {
                     {
                       $nota= new Nota();
                       $nota->proyecto_id     =  $proyecto->id;
-                      $nota->nota_proyecto   =  80;
+                      $nota->nota_proyecto   =  51;
                       $nota->nota_defensa    =  $notapromediodefensa;
                 
                       if($notapromediodefensa!=0 && $nota->nota_proyecto!=0)
                        {
-                          $nota->nota_final      =   ($nota->nota_proyecto+$notapromediodefensa)/2; 
+                          $nota->nota_final      =   $nota->nota_proyecto+$notapromediodefensa; 
                        }
                      
                       $nota->estado          =  Objectbase::STATUS_AC;
@@ -131,7 +131,7 @@ try {
                       $nota->nota_defensa    =  $notapromediodefensa;
                       if($notapromediodefensa!=0 && $nota->nota_proyecto!=0)
                        {
-                          $nota->nota_final      =   ($nota->nota_proyecto+$notapromediodefensa)/2; 
+                          $nota->nota_final      =   ($nota->nota_proyecto+$notapromediodefensa); 
                        }
                        
                       $nota->save();
