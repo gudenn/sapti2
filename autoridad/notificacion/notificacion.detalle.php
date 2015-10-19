@@ -134,7 +134,10 @@ ORDER BY id DESC
 $user='ES';
 $tip=$array[2];
   }
-  if ($tutor1=getSessionTutor()){
+  $tutor1=getSessionTutor();
+  $arrayTutor=$proyecto->getTutores();
+  foreach ( $arrayTutor as $tut){
+  if ($tut->id==$tutor1->id){
 $usert='TU';
   $resul_tu = "
 SELECT av.id as id, pr.nombre as nombrep, av.descripcion as descripcion, av.fecha_avance as fecha, re.id as correcionrevision, av.estado_avance as estoavance
@@ -151,7 +154,9 @@ ORDER BY id DESC
    if(mysql_num_rows($sql_tu)>0){
        $tip=$array[2];
    }
+  }  
   }
+
   if ($tribunal1=$proyecto->getTribunal(getSessionDocente()->id)->id>0){
 $usertr='TR';
   $resul_tr = "
