@@ -347,18 +347,22 @@ class Menu
    
     $thises = array();
     $thise = new Menu('Avances');
-    $link = Estudiante::URL."proyecto-final/avance.registro.php";
-    $thise->agregarItem('Registro de Avances','Registrar Archivos y la descripci&oacute;n del avance presentado','basicset/document_pencil.png',$link);
+    if ($proyecto->estado_proyecto != Proyecto::EST4_DEF){
+        $link = Estudiante::URL."proyecto-final/avance.registro.php";
+        $thise->agregarItem('Registro de Avances','Registrar Archivos y la descripci&oacute;n del avance presentado','basicset/document_pencil.png',$link);
+    }
     $avance = new Avance();
     $link = Estudiante::URL."proyecto-final/avance.gestion.php";
     $thise->agregarItem('Archivo de Avances','Compendio de todos los avances presentados','basicset/cabinet.png',$link,'',$avance->contar( " proyecto_id = '{$proyecto->id}'  " ));
     $thises[] = $thise;
     $thise = new Menu('Correcciones');
     $revision = new Revision();
+    if ($proyecto->estado_proyecto != Proyecto::EST4_DEF){
     $pendiente = Revision::E1_CREADO;
     $pendiente = $revision->contar( " proyecto_id = '{$proyecto->id}' AND estado_revision = '{$pendiente}'  " );
     $link = Estudiante::URL."proyecto-final/revision.gestion.php?estado_revision=CR";
     $thise->agregarItem('Correcciones Pendientes','Todas las correcciones pendientes presentadas por Tutor(es), Docente(s) y Tribunales','basicset/document_pencil.png',$link,$pendiente);
+    }
     $pendiente = $revision->contar( " proyecto_id = '{$proyecto->id}' " );
     $link = Estudiante::URL."proyecto-final/revision.gestion.php?estado_revision=";
     $thise->agregarItem('Archivo de Correcciones','Compendio de todas las correcciones presentadas','basicset/cabinet.png',$link,'',$pendiente);
