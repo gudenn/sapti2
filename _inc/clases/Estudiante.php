@@ -303,6 +303,21 @@ and es.id='$this->id'";
     return $usuario->getNombreCompleto($echo);
   }
 
+  
+  /**
+   * 
+   */
+  function getNombreSinTitulo() {
+  {
+    leerClase('Usuario');
+    if (!$this->usuario_id)
+      return false;
+    $usuario = new Usuario($this->usuario_id);
+     $nombreCompleto = trim(strtoupper("{$this->nombre} {$this->apellido_paterno} {$this->apellido_materno}"));
+    return  $nombreCompleto;
+  }
+      
+  }
   /**
    * Validamos al usuario ya sea para actualizar o para crear uno nuevo
    * @param type $es_nuevo

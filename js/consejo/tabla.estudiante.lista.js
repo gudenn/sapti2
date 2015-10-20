@@ -93,7 +93,7 @@ EditableGrid.prototype.initializeGrid = function(iddicta)
 };
 
 function deletete(obser){
-    alert(obser);
+
    ajax=objetoAjax();
    ajax.open("POST", "eliminar.tribunal.php?eliminar&tribunaleliminar_id="+obser);
    ajax.send(null);
