@@ -92,13 +92,14 @@ try {
     mysql_query("BEGIN");
     $usuario->objBuidFromPost();
     $usuario->estado           = Objectbase::STATUS_AC;
-    $usuario->puede_ser_tutor  = 1;
+    $usuario->puede_ser_tutor  = 0;
     $es_nuevo                  = (!isset($_POST['usuario_id']) || trim($_POST['usuario_id']) == '' ) ? TRUE : FALSE;
     $usuario->validar($es_nuevo);
     $usuario->tribunal=  Usuario::TRIBUNAL;
     $usuario->save();
 
     $usuario->asignarGrupo(Grupo::GR_DO);
+    $usuario->asignarGrupo(Grupo::GR_TR);
 
     $docente->objBuidFromPost();
     $docente->estado     = Objectbase::STATUS_AC;
@@ -106,7 +107,7 @@ try {
     $docente->configuracion_area=0;
     $docente->configuracion_horario=0;
     $es_nuevo                  = (!isset($_POST['usuario_id']) || trim($_POST['usuario_id']) == '' ) ? TRUE : FALSE;
-    $usuario->validar($es_nuevo);
+    //$usuario->validar($es_nuevo);
     $docente->save();
 
     //tambien creamos su usuario docente
