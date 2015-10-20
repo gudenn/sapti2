@@ -340,7 +340,7 @@ class Proyecto extends Objectbase {
 
     $sql = "SELECT o.*
             FROM revision r, observacion o
-            WHERE  r.id=o.revision_id  and (o.estado_observacion='NP' or o.estado_observacion='CR') and r.proyecto_id=$this->id";
+            WHERE  r.id=o.revision_id  and  or o.estado_observacion='CR' and r.proyecto_id=$this->id";
 
 
     $resultado = mysql_query($sql);
