@@ -41,7 +41,7 @@
               {/if}
  
     </tr>
-    <tr id="tr{$objs[ic][0]}">
+    <tr id="tr{$objs[ic][0]}" style="border: thick solid #EBEBEB">
         <td colspan="2"></td>
         <td colspan="5"> 
     <table id="tdesp{$objs[ic][0]}" style="display:none;">
@@ -105,7 +105,7 @@ break;
 
 if (visto != null){
 visto.style.display = 'none';
-document.getElementById(idtr).style.border = "thick solid #F7F7F7";}
+document.getElementById(idtr).style.border = "thick solid #EBEBEB";}
 visto = (tablA==visto) ? null : tablA;
 
 } 
