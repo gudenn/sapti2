@@ -459,13 +459,6 @@ AND dc.id=".$docente->id."
   $link = Docente::URL."tutor/index.php";
   $thise->agregarItem('Tutor','Lista De Estudiante','basicset/tutor.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
   $thises[] = $thise;      
-  }else{
-      if(getSessionTutor()->id>0){
-            $thise = new Menu('Tutor');
-  $link = Docente::URL."tutor/index.php";
-  $thise->agregarItem('Tutor','Lista De Estudiante','basicset/tutor.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
-  $thises[] = $thise;
-      }
   }
   $doctribunal = "SELECT *
 FROM tribunal tr, proyecto pr
@@ -492,7 +485,14 @@ AND tr.docente_id=".$docente->id."
   $link = Docente::URL."configuracion/configuracion.php";
   $thise->agregarItem('Agregar su especialidad en las  &Aacute;reas','Agregar  su especialidad en la  &Aacute;reas que tiene especialización ','basicset/add.png',$link,0, $docente->getAreaapoyo());
    $thises[] = $thise;
-     }
+     }else{
+      if(getSessionTutor()->id>0){
+            $thise = new Menu('Tutor');
+  $link = Docente::URL."tutor/index.php";
+  $thise->agregarItem('Tutor','Lista De Estudiante','basicset/tutor.png',$link,0,  sizeof($notificacion->getNotificacionTribunal(3)));
+  $thises[] = $thise;
+      }
+  }
    // Notificaciones 
   $usuario      = getSessionUser();
   $notificacion = new Notificacion();
