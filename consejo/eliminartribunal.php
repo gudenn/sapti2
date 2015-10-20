@@ -80,6 +80,7 @@ $smarty->assign('arraytribunal'  , $arraytribunal);
     $notificacion= new Notificacion();
     $notificacion->objBuidFromPost();
   // $notificacion->enviarNotificaion($usuarios);
+    $notificacion->tipo=  Notificacion::TIPO_NOTIFICACION;
     $notificacion->proyecto_id= $proyecto->id; 
     $notificacion->tipo="Notificación";
     $notificacion->fecha_envio= date("j/n/Y");

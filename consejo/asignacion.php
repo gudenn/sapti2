@@ -262,7 +262,8 @@ WHERE  u.id= d.usuario_id and   d.id= t.docente_id and   t.estado='AC' and u.est
     $notificacion->objBuidFromPost();
   // $notificacion->enviarNotificaion($usuarios);
     $notificacion->proyecto_id=$_POST['proyecto_id']; 
-    $notificacion->tipo="Notificación";
+   // $notificacion->tipo="Notificación";
+    $notificacion->tipo=  Notificacion::TIPO_NOTIFICACION;
     $notificacion->fecha_envio= date("j/n/Y");
     $notificacion->asunto= "Asignación de Fechas de Defensa";
     $notificacion->detalle=$detalle_mensaje;

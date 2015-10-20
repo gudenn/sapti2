@@ -42,6 +42,7 @@ if(!isDocenteSession())
    $docente = getSessionDocente();
   $publica=$docente->getTotalDefensasPublicas();
   $notificacion = new Notificacion();
+  $usuario= getSessionUser();
 
   $menuList[]     = array('url'=>URL.Docente::URL.'tribunal','name'=>'Tribunal');
   $smarty->assign("menuList", $menuList);
@@ -59,7 +60,7 @@ if(!isDocenteSession())
    $link = Docente::URL."notificacion/";
    $thise->agregarItem('Notificaciones','Gesti&oacute;n de Notificaciones','basicset/message-archived.png',$link);
    $link = Docente::URL."notificacion/notificacion.gestion.php?estado_notificacion=SV";
-   $counter = $notificaciones->getTodasNotificaciones($usuario->id, '', '', ' AND estado_notificacion="SV" ');
+   $counter = $notificacion->getTodasNotificaciones($usuario->id, '', '', ' AND estado_notificacion="SV" ');
    $thise->agregarItem('Notificaciones Pendientes','Todas las notificaciones no le&iacute;das','basicset/message-not-read.png',$link,$counter[1]);
    $menus[] = $thise;
    
