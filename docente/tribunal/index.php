@@ -55,7 +55,14 @@ if(!isDocenteSession())
   $menu->agregarItem('Lista de Visto Bueno','Habilitar los Proyectos Para la Asignación de Defensa','basicset/ok.png',$link,$docente->getTotalEstudiantesConVistoBueno());
 
   $menus[] = $menu;
- 
+  $thise = new Menu('Notificaciones y Mensajes');
+   $link = Docente::URL."notificacion/";
+   $thise->agregarItem('Notificaciones','Gesti&oacute;n de Notificaciones','basicset/message-archived.png',$link);
+   $link = Docente::URL."notificacion/notificacion.gestion.php?estado_notificacion=SV";
+   $counter = $notificaciones->getTodasNotificaciones($usuario->id, '', '', ' AND estado_notificacion="SV" ');
+   $thise->agregarItem('Notificaciones Pendientes','Todas las notificaciones no le&iacute;das','basicset/message-not-read.png',$link,$counter[1]);
+   $menus[] = $thise;
+   
    $menu = new Menu('Defensas');
   $link = Tribunal::URL."privada.estudiante.lista.php";
   $menu->agregarItem('Lista de Defensa  Privada','Revisión y modificación de Proyectos','tribunal.png',$link,$privada);

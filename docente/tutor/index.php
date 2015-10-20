@@ -38,6 +38,7 @@ try {
         /**
    * Menu superior
    */
+ $usuario      = getSessionUser();
 
   $menuList[]     = array('url'=>URL.Tutor::URL,'name'=>'Tutor');
   $smarty->assign("menuList", $menuList);
@@ -54,6 +55,13 @@ try {
   $menu->agregarItem('Lista  de  Visto Bueno  ','Lista de Proyectos Aprobados','basicset/ok.png',$link);
 
   $menus[] = $menu;
+   $thise = new Menu('Notificaciones y Mensajes');
+   $link = Docente::URL."notificacion/";
+   $thise->agregarItem('Notificaciones','Gesti&oacute;n de Notificaciones','basicset/message-archived.png',$link);
+   $link = Docente::URL."notificacion/notificacion.gestion.php?estado_notificacion=SV";
+   $counter = $notificaciones->getTodasNotificaciones($usuario->id, '', '', ' AND estado_notificacion="SV" ');
+   $thise->agregarItem('Notificaciones Pendientes','Todas las notificaciones no le&iacute;das','basicset/message-not-read.png',$link,$counter[1]);
+   $menus[] = $thise;
   
   $menu = new Menu('Lista de Estudiantes Tutorados De Proyecto Final');
   $link = Tutor::URL."seguimiento.lista.php";
@@ -82,6 +90,7 @@ try {
 } 
 catch(Exception $e) 
 {
+    echo $e;
   $smarty->assign("ERROR", handleError($e));
 }
 

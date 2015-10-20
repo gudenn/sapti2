@@ -66,6 +66,21 @@ try {
            $tribunal->visto_bueno         =  Tribunal::VISTO_BUENO;
            $tribunal->fecha_vistobueno    =    date("d/m/Y");
            $tribunal->save();
+           
+             $notificacions= new Notificacion();
+                    $notificacions->objBuidFromPost();
+                    $notificacions->proyecto_id = $proyecto->id; 
+                    $notificacions->tipo        =  Notificacion::TIPO_NOTIFICACION;
+                    $notificacions->fecha_envio =  date("j/n/Y");
+                    $tipo = $proyecto->tipo_proyecto == Proyecto::TIPO_PERFIL ? 'Perfil' : 'Proyecto';
+                    $notificacions->asunto = "VoBo $tipo, Tutor";
+                    $notificacions->detalle = "Aprobado por: " . getSessionUser()->getNombreCompleto();
+                    $notificacions->prioridad   =  7;
+                    $notificacions->estado      =   Objectbase::STATUS_AC;
+                    $noticaciones = array('estudiantes'=>array($estudiante->id));
+                    $notificacions->enviarNotificaion( $noticaciones);
+           
+           
            $bandera=true;
            
            if(sizeof($proyecto->getTribunalVisto())>0)
