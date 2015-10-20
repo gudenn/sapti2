@@ -132,7 +132,7 @@
         <div>
         Mensaje<br/>
         <textarea name="detalle" rows="5" style="width: 90%">
-Se le asigno como tribunal al proyecto: {$proyecto->nombre}  del Universitario: {$estudiante->getNombreSinTitulo()} para que usted realice las funciones como tribunal al proyecto ya mencionado, esperamos su pronta respuesta. 
+Se le asigno como tribunal del proyecto “{$proyecto->nombre}“  del universitario(a) {$estudiante->getNombreSinTitulo()} para que usted realice las funciones como tribunal al proyecto ya mencionado, esperamos su pronta respuesta. 
       </textarea>
         <script>
           CKEDITOR.replace('detalle'{$editores})
