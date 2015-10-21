@@ -335,14 +335,16 @@ class Proyecto extends Objectbase {
   }
   
     function getObservacionesPendientes() {
-    //leerClase('Proyecto');
+    leerClase('Observacion');
     $activo = Objectbase::STATUS_AC;
 
+    $creado = Observacion::E1_CREADO;
+    $pendiente = Observacion::E2_CORREGIDO;
     $sql = "SELECT o.*
             FROM revision r, observacion o
-            WHERE  r.id=o.revision_id  and  or o.estado_observacion='CR' and r.proyecto_id=$this->id";
+            WHERE  r.id=o.revision_id and r.proyecto_id={$this->id} and (o.estado_observacion = '$creado' OR o.estado_observacion = '$pendiente') ";
 
-
+            
     $resultado = mysql_query($sql);
    if( mysql_num_rows($resultado)>0)
    

@@ -8,7 +8,7 @@
                <b>Estudiante:</b> {$usuario->getNombreCompleto()|upper}
             </p>
         <div id="wrap">
-        <div style="height: 250px; width: 920px; font-size: 12px; overflow: auto; border-width: 4px; border-style: solid">
+        <div style="height: auto; width: 920px; font-size: 12px; overflow: auto; border-width: 4px; border-style: solid">
 <table class="tbl_lista">
   <thead>
     <tr>
@@ -41,7 +41,7 @@
               {/if}
  
     </tr>
-    <tr style="border:thick solid #969595">
+    <tr style="border: 2px dotted;">
         <td colspan="2"></td>
         <td colspan="5"> 
     <table id="tdesp{$objs[ic][0]}" style="display:none;">

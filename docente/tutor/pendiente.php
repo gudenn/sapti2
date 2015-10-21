@@ -8,6 +8,7 @@ try {
   leerClase('Estudiante');
   leerClase('Proyecto');
   leerClase('Semestre');
+  leerClase('Observacion');
    $semestre = new Semestre('',1);
 
    
@@ -31,7 +32,6 @@ try {
   $proyecto       = $estudiante->getProyecto();
     if( sizeof($proyecto->getAvnces()) >=  $valorh)
         {
-        
             if($proyecto->getObservacionesPendientes())
             {
             
