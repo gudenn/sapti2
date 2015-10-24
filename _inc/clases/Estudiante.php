@@ -308,14 +308,14 @@ and es.id='$this->id'";
    * 
    */
   function getNombreSinTitulo() {
-  {
+  
     leerClase('Usuario');
     if (!$this->usuario_id)
       return false;
     $usuario = new Usuario($this->usuario_id);
      $nombreCompleto = trim(strtoupper("{$this->nombre} {$this->apellido_paterno} {$this->apellido_materno}"));
     return  $nombreCompleto;
-  }
+  
       
   }
   /**

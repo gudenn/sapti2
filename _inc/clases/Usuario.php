@@ -160,6 +160,15 @@ class Usuario  extends Objectbase
     parent::save($table, $father_id_value, $base);
   }
   
+  function getNombreSinTitulo() {
+  
+    leerClase('Usuario');
+    if (!$this->id)
+      return false;
+    $usuario = new Usuario($this->id);
+     $nombreCompleto = trim(strtoupper("{$this->nombre} {$this->apellido_paterno} {$this->apellido_materno}"));
+    return  $nombreCompleto;
+  }
   function getNombreCompleto($echo = false , $id = false) 
   {
     if ($id){
@@ -173,6 +182,8 @@ class Usuario  extends Objectbase
     }
     return $nombreCompleto;
   }
+  
+  
 
   /**
    * get user if exist else return 0
