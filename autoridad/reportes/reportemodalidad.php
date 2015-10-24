@@ -1,7 +1,7 @@
 <?php
 try {
   define ("MODULO", "REPORTE");
-  require('_start.php');
+  require('../_start.php');
 
   leerClase("Usuario");
   leerClase("Formulario");

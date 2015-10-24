@@ -1,6 +1,6 @@
 <?php
 
-  require('_start.php');
+  require('../_start.php');
  
     
 require_once(DIR_LIB.'/tcpdf/config/lang/eng.php');

@@ -1,9 +1,7 @@
 <?php
-
- 
-   
-   require('../_start.php');
-   leerClase('Usuario');
+  define ("MODULO", "REPORTE");
+  require('../_start.php');
+  leerClase('Usuario');
  
 	
       	if(isset($_GET['sql']))

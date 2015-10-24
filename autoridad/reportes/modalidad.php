@@ -3,6 +3,7 @@ try {
   define ("MODULO", "REPORTE");
   require('../_start.php');
   if(!isUserSession())
+    require('_start.php');
      
 
   /** HEADER */

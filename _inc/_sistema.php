@@ -134,6 +134,7 @@ function leerClase($clase) {
  * @param String $clase
  * @author Guyen Campero <guyencu@gmail.com>
  */
+/**
   function __autoload($clase) {
     try {
       leerClase($clase);
@@ -146,7 +147,7 @@ function leerClase($clase) {
       }
     }
   }
-
+*/
 /**
  * Inicia una conexion a la DB
  *

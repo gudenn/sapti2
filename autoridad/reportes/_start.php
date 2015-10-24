@@ -1,11 +1,15 @@
 <?php
-  require_once "../../_inc/_sistema.php";
+  require_once dirname(dirname(__FILE__))."/_inc/_sistema.php";
   
   /** Smarty */
-  require(DIR_LIB.'/smarty/Smarty.class.php');
-   require (DIR_LIB.'/PHPExcel/PHPExcel.php');
+  require_once (DIR_LIB.'/smarty/Smarty.class.php');
   Smarty::muteExpectedErrors();
-
+  $nombre='';
+  if(isUserSession()){
+    leerClase('Usuario');
+    $usuario = getSessionUser();
+    $nombre  = $usuario->getNombreCompleto();
+  }
   
   $ERROR  = "";
   $smarty = new Smarty;
@@ -18,11 +22,13 @@
   $smarty->assign("URL_CSS",URL_CSS);  
   $smarty->assign("URL_IMG",URL_IMG);  
   $smarty->assign("URL_JS" ,URL_JS);  
-  
+  $smarty->assign("UsuarioSesion",$nombre);   
   
   //$smarty->force_compile = true;
   $smarty->debugging      = false;
   $smarty->caching        = false;
   $smarty->cache_lifetime = 120;
 
+  // El menu de la izquierda
+  require('menu.left.php');
 ?>
