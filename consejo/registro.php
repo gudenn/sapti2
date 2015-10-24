@@ -52,6 +52,7 @@ try {
   leerClase("Dia");
   leerClase('Html');
   
+ 
  //  no hay error
   
   $smarty->assign("ERROR", '');
@@ -80,17 +81,17 @@ try {
        $semestre->setValor('Cantidad máximo de asignación de tribunales a docentes',10);
     }
     
- $valorh = $semestre->getValor('Lapso de tiempo para el rechazo a ser tribunal hras.',73);
+ $valorh = $semestre->getValor('Lapso de tiempo para el rechazo a ser tribunal hras',73);
     if (!$valorh)
     {
       //  echo $valorh;
-  $semestre->setValor('Lapso de tiempo para el rechazo a ser tribunal hras.',73);
+  $semestre->setValor('Lapso de tiempo para el rechazo a ser tribunal hras',73);
     }
-    $valorh = $semestre->getValor('Tiempo de espera de revisión de tribunal  (Semanas).',3);
+    $valorh = $semestre->getValor('Tiempo de espera de revisión de tribunal Semanas.',3);
     if (!$valorh)
     {
       //  echo $valorh;
-  $semestre->setValor('Tiempo de espera de revisión de tribunal  (Semanas).',3);
+  $semestre->setValor('Tiempo de espera de revisión de tribunal',3);
     }
 
   if(isset($_GET['estudiante_id']))
@@ -98,7 +99,7 @@ try {
      $estudiante   = new Estudiante($_GET['estudiante_id']);
     
        $proyecto = $estudiante->getProyecto();
-    
+   
   
         $proyeareas  =  $proyecto->getArea();
         $tutores     =  $proyecto->getTutores();
@@ -464,7 +465,7 @@ $fechaasignaciones= date("j/n/ H:i:s", $time);
      }else
  {
    $mensaje = array('mensaje' => 'Error,La Cantidad minima de Tribunales debe Ser 3', 'titulo' => 'Numero De Tribunales', 'icono' => 'warning_48.png');
-    $ERROR = $html->getMessageBox($mensaje);;
+    $ERROR = $html->getMessageBox($mensaje);
  }
  }else
  {

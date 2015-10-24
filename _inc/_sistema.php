@@ -133,7 +133,8 @@ function leerClase($clase) {
  * por alguna razon no esta funcionando con la Clase Html
  * @param String $clase
  * @author Guyen Campero <guyencu@gmail.com>
- */
+ *
+ * Esta creando conflictos con los reportes de excel
   function __autoload($clase) {
     try {
       leerClase($clase);
@@ -146,6 +147,7 @@ function leerClase($clase) {
       }
     }
   }
+  */
 
 /**
  * Inicia una conexion a la DB
