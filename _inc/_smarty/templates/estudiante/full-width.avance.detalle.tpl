@@ -64,6 +64,9 @@
         <td>
             <span class="size">{%=o.formatFileSize(file.size)%}</span>
         </td>
+        <td>
+            <span class="size">{%=file.date%}</span>
+        </td>
     </tr>
 {% } %}
 </script>

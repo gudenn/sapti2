@@ -12,6 +12,8 @@
 
 class UploadHandler
 {
+    const date_format = "d/m/Y H:i:s.";
+
     protected $options;
     // PHP File Upload error message codes:
     // http://php.net/manual/en/features.file-upload.errors.php
@@ -268,6 +270,7 @@ class UploadHandler
             $file->size = $this->get_file_size(
                 $this->get_upload_path($file_name)
             );
+            $file->date = date(self::date_format,filemtime($this->get_upload_path($file_name)));
             $file->url = $this->get_download_url($file->name);
             foreach($this->options['image_versions'] as $version => $options) {
                 if (!empty($version)) {
@@ -677,12 +680,12 @@ class UploadHandler
         }
     }
 
-    protected function handle_file_upload($uploaded_file, $name, $size, $type, $error,
-        $index = null, $content_range = null) {
+    protected function handle_file_upload($uploaded_file, $name, $size, $type, $error,$index = null, $content_range = null) {
         $file = new stdClass();
         $file->name = $this->get_file_name($name, $type, $index, $content_range);
         $file->size = $this->fix_integer_overflow(intval($size));
         $file->type = $type;
+        $file->date = date ( self::date_format );
         if ($this->validate($uploaded_file, $file, $error, $index)) {
             $this->handle_form_data($file, $index);
             $upload_dir = $this->get_upload_path();
@@ -727,6 +730,7 @@ class UploadHandler
                 }
             }
             $this->set_additional_file_properties($file);
+            $file->date = date ( self::date_format , filemtime($file_path));
         }
         return $file;
     }
