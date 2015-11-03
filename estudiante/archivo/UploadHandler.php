@@ -512,7 +512,7 @@ class UploadHandler
     }
 
     protected function trim_file_name($name,
-            $type = null, $index = null, $content_range = null) {
+        $type = null, $index = null, $content_range = null) {
         // Remove path information and dots around the filename, to prevent uploading
         // into different directories or replacing hidden system files.
         // Also remove control characters and spaces (\x00..\x20) around the filename:
@@ -529,8 +529,8 @@ class UploadHandler
         return $name;
     }
 
-    protected function get_file_name($name,
-            $type = null, $index = null, $content_range = null) {
+    protected function get_file_name($name,$type = null, $index = null, $content_range = null) {
+        $name = str_replace(' ', '_', $name);
         return $this->get_unique_filename(
             $this->trim_file_name($name, $type, $index, $content_range),
             $type,
@@ -678,7 +678,7 @@ class UploadHandler
     }
 
     protected function handle_file_upload($uploaded_file, $name, $size, $type, $error,
-            $index = null, $content_range = null) {
+        $index = null, $content_range = null) {
         $file = new stdClass();
         $file->name = $this->get_file_name($name, $type, $index, $content_range);
         $file->size = $this->fix_integer_overflow(intval($size));
