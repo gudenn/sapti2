@@ -110,6 +110,7 @@ class Tutor extends Objectbase
    */
   function asignarTutoria($estudiante_id) 
   {
+    leerClase('Semestre');
     leerClase('Proyecto');
     leerClase('Estudiante');
     leerClase('Proyecto_tutor');
@@ -118,6 +119,24 @@ class Tutor extends Objectbase
     if ( $this->esTutorEnProyecto($proyecto) )// No se puede asignar porque ya  esta asignado
       return;
     
+    $semestre = new Semestre();
+    $maximo_tutores = $semestre->getValor('M&aacute;ximo Tutores Activos', Tutor::MAXIMO);
+
+    if ($proyecto->id) {
+        $proyecto->proyecto_tutor_objs = $proyecto->getThisObjects('proyecto_tutor', get_class($proyecto));
+        $total_asignados = 0;
+        foreach ($proyecto->proyecto_tutor_objs as $proyecto_tutor) {
+            // escluimos a los tutores actuales ACEPTADOS o PENDIENTES!!
+            if ($proyecto_tutor->estado_tutoria == Proyecto_tutor::ACEPTADO || $proyecto_tutor->estado_tutoria == Proyecto_tutor::PENDIENTE) {
+                $total_asignados ++;
+            }
+        }
+
+        if ( $maximo_tutores <= $total_asignados){
+            return false;
+        }
+    }
+
     $asignado   = new Proyecto_tutor();
     $asignado->proyecto_id      = $proyecto->id;
     $asignado->tutor_id         = $this->id;
@@ -126,7 +145,7 @@ class Tutor extends Objectbase
     $asignado->fecha_asignacion = date('d/m/Y');
     $asignado->save();
     $this->notificarAsignacionTutor($estudiante, $proyecto,$asignado);
-    
+    return true;
   }
 
   /**

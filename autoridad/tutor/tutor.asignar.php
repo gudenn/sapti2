@@ -87,7 +87,7 @@ try {
     {
       $nuevotutor = $usuario->tutor_objs[0];
     }
-    $nuevotutor->asignarTutoria($estudiante->id);
+    $se_asigno_correctamente = $nuevotutor->asignarTutoria($estudiante->id);
     
     $EXITO = TRUE;
     mysql_query("COMMIT");
@@ -151,14 +151,12 @@ try {
   //No hay ERROR
   leerClase('Html');
   $html  = new Html();
-  if (isset($EXITO))
-  {
-    $html = new Html();
-    if ($EXITO)
-      $mensaje = array('mensaje'=>'Se asign&oacute correctamente '. $nuevotutor->getNombreCompleto() .' como Tutor','titulo'=>'Registro de Tutor' ,'icono'=> 'tick_48.png');
-    else
-      $mensaje = array('mensaje'=>'Hubo un problema, No se grabo correctamente el Tutor','titulo'=>'Registro de Tutor' ,'icono'=> 'warning_48.png');
-   $ERROR = $html->getMessageBox ($mensaje);
+  if (isset($EXITO)) {
+    $ir = "tutor.gestion.php?estudiante_id=$estudiante_id";
+    $_SESSION['se_asigno_correctamente'] = $se_asigno_correctamente;
+    $_SESSION['nuevotutor'] = $nuevotutor->getNombreCompleto();
+    $_SESSION['estado'] = 1;
+    header("Location: $ir");  
   }
   $smarty->assign("ERROR",$ERROR);
 
