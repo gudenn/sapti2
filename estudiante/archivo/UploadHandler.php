@@ -263,6 +263,7 @@ class UploadHandler
         return false;
     }
 
+
     protected function get_file_object($file_name) {
         if ($this->is_valid_file_object($file_name)) {
             $file = new stdClass();
